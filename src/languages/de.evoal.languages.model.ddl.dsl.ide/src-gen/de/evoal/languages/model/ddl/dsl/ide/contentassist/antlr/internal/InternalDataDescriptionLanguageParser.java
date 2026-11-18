@@ -23,7 +23,7 @@ import java.util.HashMap;
 @SuppressWarnings("all")
 public class InternalDataDescriptionLanguageParser extends AbstractInternalContentAssistParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_QUOTED_ID", "RULE_ID", "RULE_DOUBLE", "RULE_INT", "RULE_STRING", "RULE_DIGIT", "RULE_EXPONENT", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'false'", "'nominal'", "'ordinal'", "'cardinal'", "'quotient'", "'real'", "'integer'", "'boolean'", "'string'", "'>='", "'>'", "'='", "'!='", "'<'", "'<='", "'+'", "'-'", "'*'", "'/'", "'%'", "'Y'", "'Z'", "'E'", "'P'", "'T'", "'G'", "'M'", "'k'", "'h'", "'da'", "'d'", "'c'", "'m'", "'\\u00B5'", "'n'", "'p'", "'f'", "'a'", "'z'", "'y'", "'module'", "'{'", "'}'", "'types'", "':'", "'data'", "'constraints'", "'type'", "';'", "'with'", "'enum'", "'('", "')'", "','", "'of'", "'instance'", "'OR'", "'XOR'", "'AND'", "'^'", "'['", "']'", "'self'", "'value'", "'.'", "'tree'", "':='", "'@'", "'literal'", "'expression'", "'int'", "'void'", "'array'", "'import'", "'from'", "'!'", "'true'", "'optional'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_QUOTED_ID", "RULE_ID", "RULE_DOUBLE", "RULE_INT", "RULE_STRING", "RULE_DIGIT", "RULE_EXPONENT", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'false'", "'nominal'", "'ordinal'", "'cardinal'", "'quotient'", "'real'", "'integer'", "'boolean'", "'string'", "'>'", "'>='", "'='", "'!='", "'<='", "'<'", "'+'", "'-'", "'*'", "'/'", "'%'", "'Y'", "'Z'", "'E'", "'P'", "'T'", "'G'", "'M'", "'k'", "'h'", "'da'", "'d'", "'c'", "'m'", "'\\u00B5'", "'n'", "'p'", "'f'", "'a'", "'z'", "'y'", "'module'", "'{'", "'}'", "'types'", "':'", "'data'", "'constraints'", "'type'", "';'", "'with'", "'enum'", "'('", "')'", "','", "'of'", "'instance'", "'OR'", "'XOR'", "'AND'", "'^'", "'['", "']'", "'self'", "'value'", "'.'", "'tree'", "':='", "'@'", "'literal'", "'expression'", "'int'", "'void'", "'array'", "'import'", "'from'", "'!'", "'true'", "'optional'"
     };
     public static final int T__50=50;
     public static final int T__59=59;
@@ -7541,13 +7541,13 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__ComparisonOperatorRule__Alternatives"
-    // InternalDataDescriptionLanguage.g:2085:1: rule__ComparisonOperatorRule__Alternatives : ( ( ( '>=' ) ) | ( ( '>' ) ) | ( ( '=' ) ) | ( ( '!=' ) ) | ( ( '<' ) ) | ( ( '<=' ) ) );
+    // InternalDataDescriptionLanguage.g:2085:1: rule__ComparisonOperatorRule__Alternatives : ( ( ( '>' ) ) | ( ( '>=' ) ) | ( ( '=' ) ) | ( ( '!=' ) ) | ( ( '<=' ) ) | ( ( '<' ) ) );
     public final void rule__ComparisonOperatorRule__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:2089:1: ( ( ( '>=' ) ) | ( ( '>' ) ) | ( ( '=' ) ) | ( ( '!=' ) ) | ( ( '<' ) ) | ( ( '<=' ) ) )
+            // InternalDataDescriptionLanguage.g:2089:1: ( ( ( '>' ) ) | ( ( '>=' ) ) | ( ( '=' ) ) | ( ( '!=' ) ) | ( ( '<=' ) ) | ( ( '<' ) ) )
             int alt16=6;
             switch ( input.LA(1) ) {
             case 24:
@@ -7590,16 +7590,16 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
             switch (alt16) {
                 case 1 :
-                    // InternalDataDescriptionLanguage.g:2090:2: ( ( '>=' ) )
+                    // InternalDataDescriptionLanguage.g:2090:2: ( ( '>' ) )
                     {
-                    // InternalDataDescriptionLanguage.g:2090:2: ( ( '>=' ) )
-                    // InternalDataDescriptionLanguage.g:2091:3: ( '>=' )
+                    // InternalDataDescriptionLanguage.g:2090:2: ( ( '>' ) )
+                    // InternalDataDescriptionLanguage.g:2091:3: ( '>' )
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getComparisonOperatorRuleAccess().getGreaterThanEnumLiteralDeclaration_0()); 
                     }
-                    // InternalDataDescriptionLanguage.g:2092:3: ( '>=' )
-                    // InternalDataDescriptionLanguage.g:2092:4: '>='
+                    // InternalDataDescriptionLanguage.g:2092:3: ( '>' )
+                    // InternalDataDescriptionLanguage.g:2092:4: '>'
                     {
                     match(input,24,FOLLOW_2); if (state.failed) return ;
 
@@ -7615,16 +7615,16 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
                     }
                     break;
                 case 2 :
-                    // InternalDataDescriptionLanguage.g:2096:2: ( ( '>' ) )
+                    // InternalDataDescriptionLanguage.g:2096:2: ( ( '>=' ) )
                     {
-                    // InternalDataDescriptionLanguage.g:2096:2: ( ( '>' ) )
-                    // InternalDataDescriptionLanguage.g:2097:3: ( '>' )
+                    // InternalDataDescriptionLanguage.g:2096:2: ( ( '>=' ) )
+                    // InternalDataDescriptionLanguage.g:2097:3: ( '>=' )
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getComparisonOperatorRuleAccess().getGreaterEqualEnumLiteralDeclaration_1()); 
                     }
-                    // InternalDataDescriptionLanguage.g:2098:3: ( '>' )
-                    // InternalDataDescriptionLanguage.g:2098:4: '>'
+                    // InternalDataDescriptionLanguage.g:2098:3: ( '>=' )
+                    // InternalDataDescriptionLanguage.g:2098:4: '>='
                     {
                     match(input,25,FOLLOW_2); if (state.failed) return ;
 
@@ -7690,16 +7690,16 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
                     }
                     break;
                 case 5 :
-                    // InternalDataDescriptionLanguage.g:2114:2: ( ( '<' ) )
+                    // InternalDataDescriptionLanguage.g:2114:2: ( ( '<=' ) )
                     {
-                    // InternalDataDescriptionLanguage.g:2114:2: ( ( '<' ) )
-                    // InternalDataDescriptionLanguage.g:2115:3: ( '<' )
+                    // InternalDataDescriptionLanguage.g:2114:2: ( ( '<=' ) )
+                    // InternalDataDescriptionLanguage.g:2115:3: ( '<=' )
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getComparisonOperatorRuleAccess().getLessEqualEnumLiteralDeclaration_4()); 
                     }
-                    // InternalDataDescriptionLanguage.g:2116:3: ( '<' )
-                    // InternalDataDescriptionLanguage.g:2116:4: '<'
+                    // InternalDataDescriptionLanguage.g:2116:3: ( '<=' )
+                    // InternalDataDescriptionLanguage.g:2116:4: '<='
                     {
                     match(input,28,FOLLOW_2); if (state.failed) return ;
 
@@ -7715,16 +7715,16 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
                     }
                     break;
                 case 6 :
-                    // InternalDataDescriptionLanguage.g:2120:2: ( ( '<=' ) )
+                    // InternalDataDescriptionLanguage.g:2120:2: ( ( '<' ) )
                     {
-                    // InternalDataDescriptionLanguage.g:2120:2: ( ( '<=' ) )
-                    // InternalDataDescriptionLanguage.g:2121:3: ( '<=' )
+                    // InternalDataDescriptionLanguage.g:2120:2: ( ( '<' ) )
+                    // InternalDataDescriptionLanguage.g:2121:3: ( '<' )
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getComparisonOperatorRuleAccess().getLessThanEnumLiteralDeclaration_5()); 
                     }
-                    // InternalDataDescriptionLanguage.g:2122:3: ( '<=' )
-                    // InternalDataDescriptionLanguage.g:2122:4: '<='
+                    // InternalDataDescriptionLanguage.g:2122:3: ( '<' )
+                    // InternalDataDescriptionLanguage.g:2122:4: '<'
                     {
                     match(input,29,FOLLOW_2); if (state.failed) return ;
 

@@ -289,13 +289,31 @@ public interface ModelPackage extends EPackage {
 	int TARGET_GOAL__VALUE = OPTIMISATION_GOAL_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>From Evaluation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TARGET_GOAL__FROM_EVALUATION = OPTIMISATION_GOAL_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Distance</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TARGET_GOAL__DISTANCE = OPTIMISATION_GOAL_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Target Goal</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TARGET_GOAL_FEATURE_COUNT = OPTIMISATION_GOAL_FEATURE_COUNT + 1;
+	int TARGET_GOAL_FEATURE_COUNT = OPTIMISATION_GOAL_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.models.v202704.optimisation.model.Direction <em>Direction</em>}' enum.
@@ -490,6 +508,28 @@ public interface ModelPackage extends EPackage {
 	EAttribute getTargetGoal_Value();
 
 	/**
+	 * Returns the meta object for the attribute '{@link de.evoal.models.v202704.optimisation.model.TargetGoal#isFromEvaluation <em>From Evaluation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>From Evaluation</em>'.
+	 * @see de.evoal.models.v202704.optimisation.model.TargetGoal#isFromEvaluation()
+	 * @see #getTargetGoal()
+	 * @generated
+	 */
+	EAttribute getTargetGoal_FromEvaluation();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link de.evoal.models.v202704.optimisation.model.TargetGoal#getDistance <em>Distance</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Distance</em>'.
+	 * @see de.evoal.models.v202704.optimisation.model.TargetGoal#getDistance()
+	 * @see #getTargetGoal()
+	 * @generated
+	 */
+	EReference getTargetGoal_Distance();
+
+	/**
 	 * Returns the meta object for enum '{@link de.evoal.models.v202704.optimisation.model.Direction <em>Direction</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -668,6 +708,22 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute TARGET_GOAL__VALUE = eINSTANCE.getTargetGoal_Value();
+
+		/**
+		 * The meta object literal for the '<em><b>From Evaluation</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TARGET_GOAL__FROM_EVALUATION = eINSTANCE.getTargetGoal_FromEvaluation();
+
+		/**
+		 * The meta object literal for the '<em><b>Distance</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TARGET_GOAL__DISTANCE = eINSTANCE.getTargetGoal_Distance();
 
 		/**
 		 * The meta object literal for the '{@link de.evoal.models.v202704.optimisation.model.Direction <em>Direction</em>}' enum.

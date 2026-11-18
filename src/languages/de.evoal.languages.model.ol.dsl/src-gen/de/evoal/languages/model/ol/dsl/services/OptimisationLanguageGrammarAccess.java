@@ -319,15 +319,25 @@ public class OptimisationLanguageGrammarAccess extends AbstractElementFinder.Abs
 		private final Assignment cDataAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cDataTypeDefinitionReferenceRuleParserRuleCall_1_0 = (RuleCall)cDataAssignment_1.eContents().get(0);
 		private final Keyword cTowardsKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Assignment cValueAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cValueLiteralRuleParserRuleCall_3_0 = (RuleCall)cValueAssignment_3.eContents().get(0);
+		private final Alternatives cAlternatives_3 = (Alternatives)cGroup.eContents().get(3);
+		private final Assignment cFromEvaluationAssignment_3_0 = (Assignment)cAlternatives_3.eContents().get(0);
+		private final Keyword cFromEvaluationTargetKeyword_3_0_0 = (Keyword)cFromEvaluationAssignment_3_0.eContents().get(0);
+		private final Assignment cValueAssignment_3_1 = (Assignment)cAlternatives_3.eContents().get(1);
+		private final RuleCall cValueLiteralRuleParserRuleCall_3_1_0 = (RuleCall)cValueAssignment_3_1.eContents().get(0);
+		private final Keyword cWithKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Assignment cDistanceAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final RuleCall cDistanceInstanceLiteralRuleParserRuleCall_5_0 = (RuleCall)cDistanceAssignment_5.eContents().get(0);
 		
 		//TargetGoalRule returns TargetGoal:
-		//    'optimise' data=TypeDefinitionReferenceRule 'towards' value=LiteralRule
+		//    'optimise' data=TypeDefinitionReferenceRule
+		//    'towards' (fromEvaluation?='target' | value=LiteralRule)
+		//    'with' distance=InstanceLiteralRule
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'optimise' data=TypeDefinitionReferenceRule 'towards' value=LiteralRule
+		//'optimise' data=TypeDefinitionReferenceRule
+		//'towards' (fromEvaluation?='target' | value=LiteralRule)
+		//'with' distance=InstanceLiteralRule
 		public Group getGroup() { return cGroup; }
 		
 		//'optimise'
@@ -342,11 +352,29 @@ public class OptimisationLanguageGrammarAccess extends AbstractElementFinder.Abs
 		//'towards'
 		public Keyword getTowardsKeyword_2() { return cTowardsKeyword_2; }
 		
+		//(fromEvaluation?='target' | value=LiteralRule)
+		public Alternatives getAlternatives_3() { return cAlternatives_3; }
+		
+		//fromEvaluation?='target'
+		public Assignment getFromEvaluationAssignment_3_0() { return cFromEvaluationAssignment_3_0; }
+		
+		//'target'
+		public Keyword getFromEvaluationTargetKeyword_3_0_0() { return cFromEvaluationTargetKeyword_3_0_0; }
+		
 		//value=LiteralRule
-		public Assignment getValueAssignment_3() { return cValueAssignment_3; }
+		public Assignment getValueAssignment_3_1() { return cValueAssignment_3_1; }
 		
 		//LiteralRule
-		public RuleCall getValueLiteralRuleParserRuleCall_3_0() { return cValueLiteralRuleParserRuleCall_3_0; }
+		public RuleCall getValueLiteralRuleParserRuleCall_3_1_0() { return cValueLiteralRuleParserRuleCall_3_1_0; }
+		
+		//'with'
+		public Keyword getWithKeyword_4() { return cWithKeyword_4; }
+		
+		//distance=InstanceLiteralRule
+		public Assignment getDistanceAssignment_5() { return cDistanceAssignment_5; }
+		
+		//InstanceLiteralRule
+		public RuleCall getDistanceInstanceLiteralRuleParserRuleCall_5_0() { return cDistanceInstanceLiteralRuleParserRuleCall_5_0; }
 	}
 	public class AlgorithmInstanceRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.ol.dsl.OptimisationLanguage.AlgorithmInstanceRule");
@@ -566,7 +594,9 @@ public class OptimisationLanguageGrammarAccess extends AbstractElementFinder.Abs
 	}
 	
 	//TargetGoalRule returns TargetGoal:
-	//    'optimise' data=TypeDefinitionReferenceRule 'towards' value=LiteralRule
+	//    'optimise' data=TypeDefinitionReferenceRule
+	//    'towards' (fromEvaluation?='target' | value=LiteralRule)
+	//    'with' distance=InstanceLiteralRule
 	//;
 	public TargetGoalRuleElements getTargetGoalRuleAccess() {
 		return pTargetGoalRule;
@@ -668,12 +698,12 @@ public class OptimisationLanguageGrammarAccess extends AbstractElementFinder.Abs
 	}
 	
 	//enum ComparisonOperatorRule returns ComparisonOperator :
-	//    GreaterThan = ">=" |
-	//    GreaterEqual = ">" |
+	//    GreaterThan = ">" |
+	//    GreaterEqual = ">=" |
 	//    Equal = "=" |
 	//    Unequal = "!=" |
-	//    LessEqual = "<" |
-	//    LessThan = "<="
+	//    LessEqual = "<=" |
+	//    LessThan = "<"
 	//;
 	public BaseLanguageGrammarAccess.ComparisonOperatorRuleElements getComparisonOperatorRuleAccess() {
 		return gaBaseLanguage.getComparisonOperatorRuleAccess();

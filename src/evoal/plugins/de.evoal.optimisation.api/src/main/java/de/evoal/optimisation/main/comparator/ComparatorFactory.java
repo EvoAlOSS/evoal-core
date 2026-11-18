@@ -1,59 +1,57 @@
 package de.evoal.optimisation.main.comparator;
 
-import de.evoal.core.api.cdi.ConfigurationValue;
-import de.evoal.core.api.dynamic.EAnnotationHelper;
-import de.evoal.languages.model.interpreter.numeric.ArithmeticNumberOperations;
-import de.evoal.languages.model.base.definitions.DataDescription;
-import de.evoal.models.core.ecore.Space;
-import de.evoal.models.v202704.optimisation.model.*;
-import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
-
-import lombok.extern.slf4j.Slf4j;
-
-import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.enterprise.context.Dependent;
-import jakarta.enterprise.inject.Produces;
-import jakarta.inject.Inject;
-import jakarta.inject.Named;
-import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EStructuralFeature;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.Dependent;
+import jakarta.enterprise.inject.Produces;
+import jakarta.inject.Named;
+
+import org.eclipse.emf.ecore.EStructuralFeature;
+
+import de.evoal.languages.model.interpreter.numeric.ArithmeticNumberOperations;
+import de.evoal.languages.model.interpreter.numeric.NumericConversions;
+
+import de.evoal.optimisation.api.fitness.Goal;
+import de.evoal.optimisation.api.fitness.Goals;
+
+/**
+ * Creates the value conversions of the comparators that still work on the objectives
+ *   (weighted sum, epsilon, EA): every objective is converted so that a larger value is
+ *   better.
+ */
 @ApplicationScoped
-@Slf4j
 public class ComparatorFactory {
-    @Inject
-    @ConfigurationValue(entry = OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "problem")
-    private EObject problem;
-
+    /**
+     * @param goals The goals of the current problem, with the targets resolved.
+     * @return The conversion of every objective, so that a larger value is better.
+     */
     @Produces @Dependent @Named("optimisation-value-conversions")
-    public Map<EStructuralFeature, Function<Number, Number>> createValueConversions(final @Named("optimisation-space") Space optimisationSpace, final EAnnotationHelper helper) {
+    public Map<EStructuralFeature, Function<Number, Number>> createValueConversions(final Goals goals) {
         final Map<EStructuralFeature, Function<Number, Number>> valueConversions = new HashMap<>();
-        final Map<DataDescription, EStructuralFeature> features = helper.featuresOf(optimisationSpace);
 
-        ((Problem)problem).getGoals()
-                    .forEach(goal -> {
-                        final EStructuralFeature feature = goal.getData();
-                        final EClassifier definition = feature.getEType();
-                        final Function<Number, Number> mapping = toFunction(goal);
-
-                        valueConversions.put(feature, mapping);
-                    });
+        for(final Goal goal : goals.goals()) {
+            final Function<Number, Number> conversion = toFunction(goal);
+            valueConversions.put(goal.objective(), conversion);
+        }
 
         return valueConversions;
     }
 
-    private Function<Number, Number> toFunction(final OptimisationGoal goal) {
-        return switch (goal) {
-            case MaximiseGoal max -> Function.identity();
-            case MinimiseGoal min -> value -> ArithmeticNumberOperations.multiply(value, -1);
-            case TargetGoal target ->
-                value -> ArithmeticNumberOperations.multiply(ArithmeticNumberOperations.abs(ArithmeticNumberOperations.minus(value, target.getValue())), -1);
-            default -> throw new IllegalArgumentException("Unsupported goal type: " + goal.getClass().getName());
+    private static Function<Number, Number> toFunction(final Goal goal) {
+        return switch(goal) {
+            case Goal.Maximise maximise -> Function.identity();
+            case Goal.Minimise minimise -> value -> ArithmeticNumberOperations.multiply(value, -1);
+            case Goal.Target target -> value -> toNegativeDistance(target, value);
         };
+    }
+
+    private static Number toNegativeDistance(final Goal.Target target, final Number value) {
+        final double objectiveValue = NumericConversions.toDouble(value);
+        final double distance = target.distanceOf(objectiveValue);
+
+        return 0.0 - distance;
     }
 }

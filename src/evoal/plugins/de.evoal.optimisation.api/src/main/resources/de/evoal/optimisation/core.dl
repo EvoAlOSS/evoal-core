@@ -32,55 +32,34 @@ module de.evoal.optimisation.core {
     type 'unknown-function' extends 'optimisation-function' {}
 
     /**
-     * Optimisation function that calculates the difference between a optimisation
-     *   value and a target value to optimise to:<br/>
-     *
-     * <mathml>
-     *   <math>
-     *     <mrow>
-     *       <mi>r</mi>
-     *       <mi>e</mi>
-     *       <mi>u</mi>
-     *       <mi>l</mi>
-     *       <mi>t</mi>
-     *       <mo>=</mo>
-     *       <mi>f</mi>
-     *       <mi>u</mi>
-     *       <mi>n</mi>
-     *       <mi>c</mi>
-     *       <mi>t</mi>
-     *       <mi>i</mi>
-     *       <mi>o</mi>
-     *       <mi>n</mi>
-     *       <mo form="prefix" stretchy="false">(</mo>
-     *       <mi>c</mi>
-     *       <mi>a</mi>
-     *       <mi>n</mi>
-     *       <mi>d</mi>
-     *       <mi>i</mi>
-     *       <mi>d</mi>
-     *       <mi>a</mi>
-     *       <mi>t</mi>
-     *       <mi>e</mi>
-     *       <mo form="postfix" stretchy="false">)</mo>
-     *       <mo>−</mo>
-     *       <mi>t</mi>
-     *       <mi>a</mi>
-     *       <mi>r</mi>
-     *       <mi>g</mi>
-     *       <mi>e</mi>
-     *       <mi>t</mi>
-     *     </mrow>
-     *   </math>
-     * </mathml>
+     * Abstract base type for the distance of a target goal ({@code optimise ... towards
+     *   ... with ...}). A distance measures how far an objective value {@code v} is from
+     *   the goal's target {@code t}. It is non-negative and 0 exactly at the target.
      */
-    type 'optimisation-distance' extends 'decorated-optimisation-function' {
+    abstract type 'target-distance' extends configuration {}
+
+    /**
+     * Absolute distance: {@code abs(v - t)}.
+     */
+    type distance extends 'target-distance' {}
+
+    /**
+     * Squared distance: {@code (v - t)^2}. Penalises large deviations more than small
+     *   ones.
+     */
+    type 'squared-distance' extends 'target-distance' {}
+
+    /**
+     * Relative distance: {@code abs(v - t) / max(abs(t), scale)}. For targets with
+     *   {@code abs(t) >= scale}, the deviation is measured relative to the target. Below,
+     *   including a target of 0, it is measured absolutely in units of {@code scale}.
+     */
+    type 'relative-distance' extends 'target-distance' {
         /**
-         * The target to search for. This value may be unset if the value is set
-         *   by EvoAl itself during evaluation.
+         * The smallest denominator.
          */
-        @MinimumNumberOfElements{ bound := 1; }
-        target : array instance variable;
+        @LowerBoundary{ boundary := 0.0; inclusive := false; }
+        scale : real := 1.0;
     }
 
     type 'search-space-distance' extends 'optimisation-function' {

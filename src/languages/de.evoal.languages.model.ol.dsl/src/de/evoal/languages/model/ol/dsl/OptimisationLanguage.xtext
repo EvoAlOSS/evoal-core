@@ -43,7 +43,9 @@ MinimiseGoalRule returns MinimiseGoal:
 
 
 TargetGoalRule returns TargetGoal:
-	'optimise' data=TypeDefinitionReferenceRule 'towards' value=LiteralRule
+	'optimise' data=TypeDefinitionReferenceRule
+	'towards' (fromEvaluation?='target' | value=LiteralRule)
+	'with' distance=InstanceLiteralRule
 ;
 
 AlgorithmInstanceRule returns AlgorithmInstance:

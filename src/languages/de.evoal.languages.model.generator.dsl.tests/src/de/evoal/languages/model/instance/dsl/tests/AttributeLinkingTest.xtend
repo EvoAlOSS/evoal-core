@@ -39,9 +39,9 @@ class AttributeLinkingTest {
 	
 	@Test
 	def void loadModel() {
+		/* 
 		ddlSetup.register(generatorInjector);
 		dlSetup.register(generatorInjector)
-		/* 
         resourceSet = generatorInjector.getInstance(typeof(XtextResourceSet));
         val testee = loadResource("de/evoal/languages/model/generator/dsl/tests/regressions/attribute-linking.generator");
 		

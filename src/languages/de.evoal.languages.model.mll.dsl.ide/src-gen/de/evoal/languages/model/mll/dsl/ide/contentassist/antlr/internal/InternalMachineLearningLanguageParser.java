@@ -23,7 +23,7 @@ import java.util.HashMap;
 @SuppressWarnings("all")
 public class InternalMachineLearningLanguageParser extends AbstractInternalContentAssistParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_QUOTED_ID", "RULE_ID", "RULE_STRING", "RULE_DOUBLE", "RULE_INT", "RULE_DIGIT", "RULE_EXPONENT", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'false'", "'>='", "'>'", "'='", "'!='", "'<'", "'<='", "'+'", "'-'", "'*'", "'/'", "'%'", "'Y'", "'Z'", "'E'", "'P'", "'T'", "'G'", "'M'", "'k'", "'h'", "'da'", "'d'", "'c'", "'m'", "'\\u00B5'", "'n'", "'p'", "'f'", "'a'", "'z'", "'y'", "'module'", "'{'", "'specify'", "'model'", "'}'", "'gof'", "'use'", "'cases'", "'end'", "';'", "'input'", "'features'", "'output'", "'learning'", "'from'", "'['", "']'", "'serialise'", "'to'", "','", "'testing'", "'with'", "'and'", "'steps'", "'begin'", "'pipeline'", "'step'", "'component'", "'reads'", "'writes'", "'for'", "'in'", "'increment'", "'by'", "'write'", "'samples'", "'executing'", "'('", "')'", "'OR'", "'XOR'", "'AND'", "'^'", "'self'", "'value'", "'data'", "'instance'", "':='", "'@'", "':'", "'enum'", "'literal'", "'string'", "'expression'", "'int'", "'real'", "'boolean'", "'void'", "'array'", "'import'", "'.'", "'learning-task'", "'validation'", "'preparation'", "'predicting'", "'!'", "'true'", "'optional'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_QUOTED_ID", "RULE_ID", "RULE_STRING", "RULE_DOUBLE", "RULE_INT", "RULE_DIGIT", "RULE_EXPONENT", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'false'", "'>'", "'>='", "'='", "'!='", "'<='", "'<'", "'+'", "'-'", "'*'", "'/'", "'%'", "'Y'", "'Z'", "'E'", "'P'", "'T'", "'G'", "'M'", "'k'", "'h'", "'da'", "'d'", "'c'", "'m'", "'\\u00B5'", "'n'", "'p'", "'f'", "'a'", "'z'", "'y'", "'module'", "'{'", "'specify'", "'model'", "'}'", "'gof'", "'use'", "'cases'", "'end'", "';'", "'input'", "'features'", "'output'", "'learning'", "'from'", "'['", "']'", "'serialise'", "'to'", "','", "'testing'", "'with'", "'and'", "'steps'", "'begin'", "'pipeline'", "'step'", "'component'", "'reads'", "'writes'", "'for'", "'in'", "'increment'", "'by'", "'write'", "'samples'", "'executing'", "'('", "')'", "'OR'", "'XOR'", "'AND'", "'^'", "'self'", "'value'", "'data'", "'instance'", "':='", "'@'", "':'", "'enum'", "'literal'", "'string'", "'expression'", "'int'", "'real'", "'boolean'", "'void'", "'array'", "'import'", "'.'", "'learning-task'", "'validation'", "'preparation'", "'predicting'", "'!'", "'true'", "'optional'"
     };
     public static final int T__50=50;
     public static final int T__59=59;
@@ -7765,13 +7765,13 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__ComparisonOperatorRule__Alternatives"
-    // InternalMachineLearningLanguage.g:2187:1: rule__ComparisonOperatorRule__Alternatives : ( ( ( '>=' ) ) | ( ( '>' ) ) | ( ( '=' ) ) | ( ( '!=' ) ) | ( ( '<' ) ) | ( ( '<=' ) ) );
+    // InternalMachineLearningLanguage.g:2187:1: rule__ComparisonOperatorRule__Alternatives : ( ( ( '>' ) ) | ( ( '>=' ) ) | ( ( '=' ) ) | ( ( '!=' ) ) | ( ( '<=' ) ) | ( ( '<' ) ) );
     public final void rule__ComparisonOperatorRule__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalMachineLearningLanguage.g:2191:1: ( ( ( '>=' ) ) | ( ( '>' ) ) | ( ( '=' ) ) | ( ( '!=' ) ) | ( ( '<' ) ) | ( ( '<=' ) ) )
+            // InternalMachineLearningLanguage.g:2191:1: ( ( ( '>' ) ) | ( ( '>=' ) ) | ( ( '=' ) ) | ( ( '!=' ) ) | ( ( '<=' ) ) | ( ( '<' ) ) )
             int alt14=6;
             switch ( input.LA(1) ) {
             case 16:
@@ -7814,16 +7814,16 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
 
             switch (alt14) {
                 case 1 :
-                    // InternalMachineLearningLanguage.g:2192:2: ( ( '>=' ) )
+                    // InternalMachineLearningLanguage.g:2192:2: ( ( '>' ) )
                     {
-                    // InternalMachineLearningLanguage.g:2192:2: ( ( '>=' ) )
-                    // InternalMachineLearningLanguage.g:2193:3: ( '>=' )
+                    // InternalMachineLearningLanguage.g:2192:2: ( ( '>' ) )
+                    // InternalMachineLearningLanguage.g:2193:3: ( '>' )
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getComparisonOperatorRuleAccess().getGreaterThanEnumLiteralDeclaration_0()); 
                     }
-                    // InternalMachineLearningLanguage.g:2194:3: ( '>=' )
-                    // InternalMachineLearningLanguage.g:2194:4: '>='
+                    // InternalMachineLearningLanguage.g:2194:3: ( '>' )
+                    // InternalMachineLearningLanguage.g:2194:4: '>'
                     {
                     match(input,16,FOLLOW_2); if (state.failed) return ;
 
@@ -7839,16 +7839,16 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
                     }
                     break;
                 case 2 :
-                    // InternalMachineLearningLanguage.g:2198:2: ( ( '>' ) )
+                    // InternalMachineLearningLanguage.g:2198:2: ( ( '>=' ) )
                     {
-                    // InternalMachineLearningLanguage.g:2198:2: ( ( '>' ) )
-                    // InternalMachineLearningLanguage.g:2199:3: ( '>' )
+                    // InternalMachineLearningLanguage.g:2198:2: ( ( '>=' ) )
+                    // InternalMachineLearningLanguage.g:2199:3: ( '>=' )
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getComparisonOperatorRuleAccess().getGreaterEqualEnumLiteralDeclaration_1()); 
                     }
-                    // InternalMachineLearningLanguage.g:2200:3: ( '>' )
-                    // InternalMachineLearningLanguage.g:2200:4: '>'
+                    // InternalMachineLearningLanguage.g:2200:3: ( '>=' )
+                    // InternalMachineLearningLanguage.g:2200:4: '>='
                     {
                     match(input,17,FOLLOW_2); if (state.failed) return ;
 
@@ -7914,16 +7914,16 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
                     }
                     break;
                 case 5 :
-                    // InternalMachineLearningLanguage.g:2216:2: ( ( '<' ) )
+                    // InternalMachineLearningLanguage.g:2216:2: ( ( '<=' ) )
                     {
-                    // InternalMachineLearningLanguage.g:2216:2: ( ( '<' ) )
-                    // InternalMachineLearningLanguage.g:2217:3: ( '<' )
+                    // InternalMachineLearningLanguage.g:2216:2: ( ( '<=' ) )
+                    // InternalMachineLearningLanguage.g:2217:3: ( '<=' )
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getComparisonOperatorRuleAccess().getLessEqualEnumLiteralDeclaration_4()); 
                     }
-                    // InternalMachineLearningLanguage.g:2218:3: ( '<' )
-                    // InternalMachineLearningLanguage.g:2218:4: '<'
+                    // InternalMachineLearningLanguage.g:2218:3: ( '<=' )
+                    // InternalMachineLearningLanguage.g:2218:4: '<='
                     {
                     match(input,20,FOLLOW_2); if (state.failed) return ;
 
@@ -7939,16 +7939,16 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
                     }
                     break;
                 case 6 :
-                    // InternalMachineLearningLanguage.g:2222:2: ( ( '<=' ) )
+                    // InternalMachineLearningLanguage.g:2222:2: ( ( '<' ) )
                     {
-                    // InternalMachineLearningLanguage.g:2222:2: ( ( '<=' ) )
-                    // InternalMachineLearningLanguage.g:2223:3: ( '<=' )
+                    // InternalMachineLearningLanguage.g:2222:2: ( ( '<' ) )
+                    // InternalMachineLearningLanguage.g:2223:3: ( '<' )
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getComparisonOperatorRuleAccess().getLessThanEnumLiteralDeclaration_5()); 
                     }
-                    // InternalMachineLearningLanguage.g:2224:3: ( '<=' )
-                    // InternalMachineLearningLanguage.g:2224:4: '<='
+                    // InternalMachineLearningLanguage.g:2224:3: ( '<' )
+                    // InternalMachineLearningLanguage.g:2224:4: '<'
                     {
                     match(input,21,FOLLOW_2); if (state.failed) return ;
 

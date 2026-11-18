@@ -183,6 +183,8 @@
       </genClasses>
       <genClasses ecoreClass="optimisation.ecore#//model/TargetGoal">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute optimisation.ecore#//model/TargetGoal/value"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute optimisation.ecore#//model/TargetGoal/fromEvaluation"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference optimisation.ecore#//model/TargetGoal/distance"/>
         <genOperations ecoreOperation="optimisation.ecore#//model/TargetGoal/getDirection"
             body="return Direction.TARGET;"/>
       </genClasses>

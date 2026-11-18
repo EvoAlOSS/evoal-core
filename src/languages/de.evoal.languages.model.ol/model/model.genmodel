@@ -36,6 +36,8 @@
     </genClasses>
     <genClasses ecoreClass="model.ecore#//TargetGoal">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//TargetGoal/value"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//TargetGoal/fromEvaluation"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//TargetGoal/distance"/>
       <genOperations ecoreOperation="model.ecore#//TargetGoal/getDirection" body="return Direction.TARGET;"/>
     </genClasses>
     <genClasses ecoreClass="model.ecore#//AlgorithmInstance">

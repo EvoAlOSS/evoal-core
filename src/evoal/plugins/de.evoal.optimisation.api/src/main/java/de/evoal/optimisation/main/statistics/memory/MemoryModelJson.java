@@ -46,13 +46,11 @@ import de.evoal.models.v202704.optimisation.memory.Rank;
 import de.evoal.models.v202704.optimisation.memory.Recombination;
 import de.evoal.models.v202704.optimisation.memory.Relationship;
 import de.evoal.models.v202704.optimisation.memory.UnorderedIterationStep;
-import de.evoal.models.v202704.optimisation.model.MaximiseGoal;
-import de.evoal.models.v202704.optimisation.model.MinimiseGoal;
-import de.evoal.models.v202704.optimisation.model.OptimisationGoal;
 import de.evoal.models.v202704.optimisation.model.Problem;
-import de.evoal.models.v202704.optimisation.model.TargetGoal;
 
 import de.evoal.optimisation.api.execution.EvaluationPosition;
+import de.evoal.optimisation.api.fitness.Goal;
+import de.evoal.optimisation.api.fitness.Goals;
 
 /**
  * Converts the memory model of a run into the JSON documents of the memory model format
@@ -302,17 +300,19 @@ public class MemoryModelJson {
      * @return The document {@code execution-information.json}.
      *
      * @param problem The optimisation problem.
+     * @param goals The goals of the problem, with the targets of the run resolved.
      * @param algorithmType The fully qualified DL type of the algorithm.
      * @param execution The execution with the complete metric definitions.
      * @param setup What is needed to repeat the run.
      */
     public ObjectNode toExecutionInformation(final Problem problem,
+                                             final Goals goals,
                                              final String algorithmType,
                                              final Execution execution,
                                              final RunSetup setup) {
         final ObjectNode document = newDocument();
 
-        final ObjectNode problemNode = toProblem(problem);
+        final ObjectNode problemNode = toProblem(problem, goals);
         document.set("problem", problemNode);
 
         final ObjectNode algorithm = document.putObject("algorithm");
@@ -386,20 +386,20 @@ public class MemoryModelJson {
     }
 
     /**
-     * @return The goal: its feature, direction and, for a target goal, the target value.
+     * @return The goal: its feature, direction and, for a target goal, the target value of
+     *   the run.
      */
-    private static ObjectNode toGoal(final OptimisationGoal goal) {
+    private static ObjectNode toGoal(final Goal goal) {
         final ObjectNode goalNode = NODES.objectNode();
-        goalNode.put("feature", goal.getData().getName());
+        goalNode.put("feature", goal.name());
 
         switch(goal) {
-            case MaximiseGoal maximise -> goalNode.put("direction", "maximise");
-            case MinimiseGoal minimise -> goalNode.put("direction", "minimise");
-            case TargetGoal target -> {
+            case Goal.Maximise maximise -> goalNode.put("direction", "maximise");
+            case Goal.Minimise minimise -> goalNode.put("direction", "minimise");
+            case Goal.Target target -> {
                 goalNode.put("direction", "target");
-                goalNode.set("target", toValue(target.getValue()));
+                goalNode.set("target", toValue(target.target()));
             }
-            default -> throw new IllegalStateException("Unsupported goal " + goal.eClass().getName() + ".");
         }
 
         return goalNode;
@@ -534,15 +534,15 @@ public class MemoryModelJson {
     /**
      * @return The problem with its name and goals.
      */
-    private static ObjectNode toProblem(final Problem problem) {
+    private static ObjectNode toProblem(final Problem problem, final Goals goals) {
         final ObjectNode problemNode = NODES.objectNode();
         problemNode.put("name", problem.getName());
 
-        final ArrayNode goals = problemNode.putArray("goals");
-        problem.getGoals()
-               .stream()
-               .map(MemoryModelJson::toGoal)
-               .forEach(goals::add);
+        final ArrayNode goalNodes = problemNode.putArray("goals");
+        goals.goals()
+             .stream()
+             .map(MemoryModelJson::toGoal)
+             .forEach(goalNodes::add);
 
         return problemNode;
     }

@@ -1929,13 +1929,13 @@ rule__ComparisonOperatorRule__Alternatives
 :
 	(
 		{ before(grammarAccess.getComparisonOperatorRuleAccess().getGreaterThanEnumLiteralDeclaration_0()); }
-		('>=')
+		('>')
 		{ after(grammarAccess.getComparisonOperatorRuleAccess().getGreaterThanEnumLiteralDeclaration_0()); }
 	)
 	|
 	(
 		{ before(grammarAccess.getComparisonOperatorRuleAccess().getGreaterEqualEnumLiteralDeclaration_1()); }
-		('>')
+		('>=')
 		{ after(grammarAccess.getComparisonOperatorRuleAccess().getGreaterEqualEnumLiteralDeclaration_1()); }
 	)
 	|
@@ -1953,13 +1953,13 @@ rule__ComparisonOperatorRule__Alternatives
 	|
 	(
 		{ before(grammarAccess.getComparisonOperatorRuleAccess().getLessEqualEnumLiteralDeclaration_4()); }
-		('<')
+		('<=')
 		{ after(grammarAccess.getComparisonOperatorRuleAccess().getLessEqualEnumLiteralDeclaration_4()); }
 	)
 	|
 	(
 		{ before(grammarAccess.getComparisonOperatorRuleAccess().getLessThanEnumLiteralDeclaration_5()); }
-		('<=')
+		('<')
 		{ after(grammarAccess.getComparisonOperatorRuleAccess().getLessThanEnumLiteralDeclaration_5()); }
 	)
 ;

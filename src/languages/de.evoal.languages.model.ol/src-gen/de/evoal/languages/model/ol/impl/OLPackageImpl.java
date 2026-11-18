@@ -315,6 +315,26 @@ public class OLPackageImpl extends EPackageImpl implements OLPackage {
 	 * @generated
 	 */
 	@Override
+	public EAttribute getTargetGoal_FromEvaluation() {
+		return (EAttribute)targetGoalEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getTargetGoal_Distance() {
+		return (EReference)targetGoalEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getAlgorithmInstance() {
 		return algorithmInstanceEClass;
 	}
@@ -398,6 +418,8 @@ public class OLPackageImpl extends EPackageImpl implements OLPackage {
 
 		targetGoalEClass = createEClass(TARGET_GOAL);
 		createEReference(targetGoalEClass, TARGET_GOAL__VALUE);
+		createEAttribute(targetGoalEClass, TARGET_GOAL__FROM_EVALUATION);
+		createEReference(targetGoalEClass, TARGET_GOAL__DISTANCE);
 
 		algorithmInstanceEClass = createEClass(ALGORITHM_INSTANCE);
 		createEReference(algorithmInstanceEClass, ALGORITHM_INSTANCE__PROBLEM);
@@ -472,7 +494,9 @@ public class OLPackageImpl extends EPackageImpl implements OLPackage {
 		addEOperation(minimiseGoalEClass, this.getDirection(), "getDirection", 1, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(targetGoalEClass, TargetGoal.class, "TargetGoal", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getTargetGoal_Value(), theExpressionsPackage.getLiteral(), null, "value", null, 1, 1, TargetGoal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTargetGoal_Value(), theExpressionsPackage.getLiteral(), null, "value", null, 0, 1, TargetGoal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTargetGoal_FromEvaluation(), ecorePackage.getEBoolean(), "fromEvaluation", null, 0, 1, TargetGoal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTargetGoal_Distance(), theExpressionsPackage.getInstance(), null, "distance", null, 1, 1, TargetGoal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(targetGoalEClass, this.getDirection(), "getDirection", 1, 1, IS_UNIQUE, IS_ORDERED);
 

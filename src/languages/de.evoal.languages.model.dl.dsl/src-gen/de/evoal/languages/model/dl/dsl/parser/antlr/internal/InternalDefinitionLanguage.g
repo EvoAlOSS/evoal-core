@@ -3554,7 +3554,7 @@ ruleComparisonOperatorRule returns [Enumerator current=null]
 }:
 	(
 		(
-			enumLiteral_0='>='
+			enumLiteral_0='>'
 			{
 				$current = grammarAccess.getComparisonOperatorRuleAccess().getGreaterThanEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
 				newLeafNode(enumLiteral_0, grammarAccess.getComparisonOperatorRuleAccess().getGreaterThanEnumLiteralDeclaration_0());
@@ -3562,7 +3562,7 @@ ruleComparisonOperatorRule returns [Enumerator current=null]
 		)
 		    |
 		(
-			enumLiteral_1='>'
+			enumLiteral_1='>='
 			{
 				$current = grammarAccess.getComparisonOperatorRuleAccess().getGreaterEqualEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
 				newLeafNode(enumLiteral_1, grammarAccess.getComparisonOperatorRuleAccess().getGreaterEqualEnumLiteralDeclaration_1());
@@ -3586,7 +3586,7 @@ ruleComparisonOperatorRule returns [Enumerator current=null]
 		)
 		    |
 		(
-			enumLiteral_4='<'
+			enumLiteral_4='<='
 			{
 				$current = grammarAccess.getComparisonOperatorRuleAccess().getLessEqualEnumLiteralDeclaration_4().getEnumLiteral().getInstance();
 				newLeafNode(enumLiteral_4, grammarAccess.getComparisonOperatorRuleAccess().getLessEqualEnumLiteralDeclaration_4());
@@ -3594,7 +3594,7 @@ ruleComparisonOperatorRule returns [Enumerator current=null]
 		)
 		    |
 		(
-			enumLiteral_5='<='
+			enumLiteral_5='<'
 			{
 				$current = grammarAccess.getComparisonOperatorRuleAccess().getLessThanEnumLiteralDeclaration_5().getEnumLiteral().getInstance();
 				newLeafNode(enumLiteral_5, grammarAccess.getComparisonOperatorRuleAccess().getLessThanEnumLiteralDeclaration_5());

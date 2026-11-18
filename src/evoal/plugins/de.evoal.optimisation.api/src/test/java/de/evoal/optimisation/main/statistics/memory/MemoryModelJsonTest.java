@@ -4,6 +4,8 @@ import java.util.List;
 
 import tools.jackson.databind.node.ObjectNode;
 
+import org.eclipse.emf.ecore.EStructuralFeature;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -16,11 +18,12 @@ import de.evoal.models.v202704.optimisation.memory.Iteration;
 import de.evoal.models.v202704.optimisation.memory.MemoryFactory;
 import de.evoal.models.v202704.optimisation.memory.Recombination;
 import de.evoal.models.v202704.optimisation.memory.UnorderedIterationStep;
-import de.evoal.models.v202704.optimisation.model.ModelFactory;
 import de.evoal.models.v202704.optimisation.model.Problem;
-import de.evoal.models.v202704.optimisation.model.TargetGoal;
 
 import de.evoal.optimisation.api.execution.EvaluationPosition;
+import de.evoal.optimisation.api.fitness.Goal;
+import de.evoal.optimisation.api.fitness.Goals;
+import de.evoal.optimisation.main.fitness.AbsoluteDistance;
 
 public class MemoryModelJsonTest {
     /**
@@ -38,6 +41,7 @@ public class MemoryModelJsonTest {
         public void featuresHaveTypeAndOnlyTheDeclaredScaleAndBounds() {
             // when
             final ObjectNode document = json.toExecutionInformation(MemoryModels.problem(),
+                                                                    MemoryModels.goals(MemoryModels.problem()),
                                                                     "de.evoal.test.algorithm",
                                                                     MemoryModels.execution(),
                                                                     SINGLE_RUN);
@@ -54,6 +58,7 @@ public class MemoryModelJsonTest {
         public void metricDefinitionsUseLowerCaseLiterals() {
             // when
             final ObjectNode document = json.toExecutionInformation(MemoryModels.problem(),
+                                                                    MemoryModels.goals(MemoryModels.problem()),
                                                                     "de.evoal.test.algorithm",
                                                                     MemoryModels.execution(),
                                                                     SINGLE_RUN);
@@ -69,6 +74,7 @@ public class MemoryModelJsonTest {
         public void problemAlgorithmAndSetupAreDescribed() {
             // when
             final ObjectNode document = json.toExecutionInformation(MemoryModels.problem(),
+                                                                    MemoryModels.goals(MemoryModels.problem()),
                                                                     "de.evoal.test.algorithm",
                                                                     MemoryModels.execution(),
                                                                     SINGLE_RUN);
@@ -86,13 +92,12 @@ public class MemoryModelJsonTest {
         public void targetGoalsWriteTheirTarget() {
             // given
             final Problem problem = MemoryModels.problem();
-            final TargetGoal goal = ModelFactory.eINSTANCE.createTargetGoal();
-            goal.setData(problem.getGoals().getFirst().getData());
-            goal.setValue(1.5);
-            problem.getGoals().set(0, goal);
+            final EStructuralFeature objective = problem.getGoals().getFirst().getData();
+            final Goals goals = new Goals(List.of(new Goal.Target(objective, 1.5, new AbsoluteDistance())));
 
             // when
             final ObjectNode document = json.toExecutionInformation(problem,
+                                                                    goals,
                                                                     "de.evoal.test.algorithm",
                                                                     MemoryModels.execution(),
                                                                     SINGLE_RUN);
@@ -110,6 +115,7 @@ public class MemoryModelJsonTest {
 
             // when
             final ObjectNode document = json.toExecutionInformation(MemoryModels.problem(),
+                                                                    MemoryModels.goals(MemoryModels.problem()),
                                                                     "de.evoal.test.algorithm",
                                                                     MemoryModels.execution(),
                                                                     setup);

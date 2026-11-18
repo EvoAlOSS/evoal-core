@@ -1,5 +1,6 @@
 package de.evoal.releng.regressions;
 
+import java.nio.file.Files;
 import java.nio.file.Path;
 
 /**
@@ -33,6 +34,11 @@ public record Regression(Path folder, String name, String runScript) {
     public static final String EXPECTED_FOLDER = "expected";
 
     /**
+     * The target points of a regression configuration that runs as an evaluation.
+     */
+    public static final String TARGET_POINTS_FILE = "targets.csv";
+
+    /**
      * Creates a regression configuration.
      */
     public static Regression configuration(final Path folder, final String name) {
@@ -51,6 +57,16 @@ public record Regression(Path folder, String name, String runScript) {
      */
     public Path expectedFolder() {
         return folder.resolve(EXPECTED_FOLDER);
+    }
+
+    /**
+     * @return {@code true} if this is a regression configuration with target points, which
+     *   runs as an evaluation with one repetition per target point.
+     */
+    public boolean hasTargetPoints() {
+        final Path targetPoints = folder.resolve(TARGET_POINTS_FILE);
+
+        return !isExample() && Files.exists(targetPoints);
     }
 
     /**

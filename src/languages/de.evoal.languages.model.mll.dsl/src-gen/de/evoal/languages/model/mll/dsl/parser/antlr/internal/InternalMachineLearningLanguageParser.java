@@ -23,7 +23,7 @@ import java.util.HashMap;
 @SuppressWarnings("all")
 public class InternalMachineLearningLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_STRING", "RULE_DOUBLE", "RULE_INT", "RULE_QUOTED_ID", "RULE_ID", "RULE_DIGIT", "RULE_EXPONENT", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'module'", "'{'", "'specify'", "'model'", "'gof'", "'use'", "'cases'", "';'", "'end'", "'}'", "'learning-task'", "'input'", "'features'", "','", "'output'", "'learning'", "'from'", "'['", "']'", "'testing'", "'with'", "'serialise'", "'to'", "'and'", "'validation'", "'steps'", "'preparation'", "'begin'", "'predicting'", "'pipeline'", "'step'", "'component'", "'reads'", "'writes'", "'for'", "'in'", "'increment'", "'by'", "'write'", "'samples'", "'executing'", "'('", "')'", "'OR'", "'XOR'", "'AND'", "'!'", "'^'", "'self'", "'value'", "'data'", "'instance'", "':='", "'true'", "'false'", "'@'", "':'", "'optional'", "'enum'", "'literal'", "'string'", "'expression'", "'int'", "'real'", "'boolean'", "'void'", "'array'", "'import'", "'.'", "'>='", "'>'", "'='", "'!='", "'<'", "'<='", "'+'", "'-'", "'*'", "'/'", "'%'", "'Y'", "'Z'", "'E'", "'P'", "'T'", "'G'", "'M'", "'k'", "'h'", "'da'", "'d'", "'c'", "'m'", "'\\u00B5'", "'n'", "'p'", "'f'", "'a'", "'z'", "'y'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_STRING", "RULE_DOUBLE", "RULE_INT", "RULE_QUOTED_ID", "RULE_ID", "RULE_DIGIT", "RULE_EXPONENT", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'module'", "'{'", "'specify'", "'model'", "'gof'", "'use'", "'cases'", "';'", "'end'", "'}'", "'learning-task'", "'input'", "'features'", "','", "'output'", "'learning'", "'from'", "'['", "']'", "'testing'", "'with'", "'serialise'", "'to'", "'and'", "'validation'", "'steps'", "'preparation'", "'begin'", "'predicting'", "'pipeline'", "'step'", "'component'", "'reads'", "'writes'", "'for'", "'in'", "'increment'", "'by'", "'write'", "'samples'", "'executing'", "'('", "')'", "'OR'", "'XOR'", "'AND'", "'!'", "'^'", "'self'", "'value'", "'data'", "'instance'", "':='", "'true'", "'false'", "'@'", "':'", "'optional'", "'enum'", "'literal'", "'string'", "'expression'", "'int'", "'real'", "'boolean'", "'void'", "'array'", "'import'", "'.'", "'>'", "'>='", "'='", "'!='", "'<='", "'<'", "'+'", "'-'", "'*'", "'/'", "'%'", "'Y'", "'Z'", "'E'", "'P'", "'T'", "'G'", "'M'", "'k'", "'h'", "'da'", "'d'", "'c'", "'m'", "'\\u00B5'", "'n'", "'p'", "'f'", "'a'", "'z'", "'y'"
     };
     public static final int T__50=50;
     public static final int T__59=59;
@@ -13049,7 +13049,7 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
 
 
     // $ANTLR start "ruleComparisonOperatorRule"
-    // InternalMachineLearningLanguage.g:4572:1: ruleComparisonOperatorRule returns [Enumerator current=null] : ( (enumLiteral_0= '>=' ) | (enumLiteral_1= '>' ) | (enumLiteral_2= '=' ) | (enumLiteral_3= '!=' ) | (enumLiteral_4= '<' ) | (enumLiteral_5= '<=' ) ) ;
+    // InternalMachineLearningLanguage.g:4572:1: ruleComparisonOperatorRule returns [Enumerator current=null] : ( (enumLiteral_0= '>' ) | (enumLiteral_1= '>=' ) | (enumLiteral_2= '=' ) | (enumLiteral_3= '!=' ) | (enumLiteral_4= '<=' ) | (enumLiteral_5= '<' ) ) ;
     public final Enumerator ruleComparisonOperatorRule() throws RecognitionException {
         Enumerator current = null;
 
@@ -13064,10 +13064,10 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
         	enterRule();
 
         try {
-            // InternalMachineLearningLanguage.g:4578:2: ( ( (enumLiteral_0= '>=' ) | (enumLiteral_1= '>' ) | (enumLiteral_2= '=' ) | (enumLiteral_3= '!=' ) | (enumLiteral_4= '<' ) | (enumLiteral_5= '<=' ) ) )
-            // InternalMachineLearningLanguage.g:4579:2: ( (enumLiteral_0= '>=' ) | (enumLiteral_1= '>' ) | (enumLiteral_2= '=' ) | (enumLiteral_3= '!=' ) | (enumLiteral_4= '<' ) | (enumLiteral_5= '<=' ) )
+            // InternalMachineLearningLanguage.g:4578:2: ( ( (enumLiteral_0= '>' ) | (enumLiteral_1= '>=' ) | (enumLiteral_2= '=' ) | (enumLiteral_3= '!=' ) | (enumLiteral_4= '<=' ) | (enumLiteral_5= '<' ) ) )
+            // InternalMachineLearningLanguage.g:4579:2: ( (enumLiteral_0= '>' ) | (enumLiteral_1= '>=' ) | (enumLiteral_2= '=' ) | (enumLiteral_3= '!=' ) | (enumLiteral_4= '<=' ) | (enumLiteral_5= '<' ) )
             {
-            // InternalMachineLearningLanguage.g:4579:2: ( (enumLiteral_0= '>=' ) | (enumLiteral_1= '>' ) | (enumLiteral_2= '=' ) | (enumLiteral_3= '!=' ) | (enumLiteral_4= '<' ) | (enumLiteral_5= '<=' ) )
+            // InternalMachineLearningLanguage.g:4579:2: ( (enumLiteral_0= '>' ) | (enumLiteral_1= '>=' ) | (enumLiteral_2= '=' ) | (enumLiteral_3= '!=' ) | (enumLiteral_4= '<=' ) | (enumLiteral_5= '<' ) )
             int alt61=6;
             switch ( input.LA(1) ) {
             case 84:
@@ -13110,10 +13110,10 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
 
             switch (alt61) {
                 case 1 :
-                    // InternalMachineLearningLanguage.g:4580:3: (enumLiteral_0= '>=' )
+                    // InternalMachineLearningLanguage.g:4580:3: (enumLiteral_0= '>' )
                     {
-                    // InternalMachineLearningLanguage.g:4580:3: (enumLiteral_0= '>=' )
-                    // InternalMachineLearningLanguage.g:4581:4: enumLiteral_0= '>='
+                    // InternalMachineLearningLanguage.g:4580:3: (enumLiteral_0= '>' )
+                    // InternalMachineLearningLanguage.g:4581:4: enumLiteral_0= '>'
                     {
                     enumLiteral_0=(Token)match(input,84,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -13129,10 +13129,10 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
                     }
                     break;
                 case 2 :
-                    // InternalMachineLearningLanguage.g:4588:3: (enumLiteral_1= '>' )
+                    // InternalMachineLearningLanguage.g:4588:3: (enumLiteral_1= '>=' )
                     {
-                    // InternalMachineLearningLanguage.g:4588:3: (enumLiteral_1= '>' )
-                    // InternalMachineLearningLanguage.g:4589:4: enumLiteral_1= '>'
+                    // InternalMachineLearningLanguage.g:4588:3: (enumLiteral_1= '>=' )
+                    // InternalMachineLearningLanguage.g:4589:4: enumLiteral_1= '>='
                     {
                     enumLiteral_1=(Token)match(input,85,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -13186,10 +13186,10 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
                     }
                     break;
                 case 5 :
-                    // InternalMachineLearningLanguage.g:4612:3: (enumLiteral_4= '<' )
+                    // InternalMachineLearningLanguage.g:4612:3: (enumLiteral_4= '<=' )
                     {
-                    // InternalMachineLearningLanguage.g:4612:3: (enumLiteral_4= '<' )
-                    // InternalMachineLearningLanguage.g:4613:4: enumLiteral_4= '<'
+                    // InternalMachineLearningLanguage.g:4612:3: (enumLiteral_4= '<=' )
+                    // InternalMachineLearningLanguage.g:4613:4: enumLiteral_4= '<='
                     {
                     enumLiteral_4=(Token)match(input,88,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -13205,10 +13205,10 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
                     }
                     break;
                 case 6 :
-                    // InternalMachineLearningLanguage.g:4620:3: (enumLiteral_5= '<=' )
+                    // InternalMachineLearningLanguage.g:4620:3: (enumLiteral_5= '<' )
                     {
-                    // InternalMachineLearningLanguage.g:4620:3: (enumLiteral_5= '<=' )
-                    // InternalMachineLearningLanguage.g:4621:4: enumLiteral_5= '<='
+                    // InternalMachineLearningLanguage.g:4620:3: (enumLiteral_5= '<' )
+                    // InternalMachineLearningLanguage.g:4621:4: enumLiteral_5= '<'
                     {
                     enumLiteral_5=(Token)match(input,89,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {

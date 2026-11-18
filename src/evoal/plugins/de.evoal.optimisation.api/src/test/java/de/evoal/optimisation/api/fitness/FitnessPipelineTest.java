@@ -1,6 +1,5 @@
 package de.evoal.optimisation.api.fitness;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -12,8 +11,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-import org.mockito.Mockito;
-
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
@@ -21,7 +18,6 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
 
-import de.evoal.core.api.dynamic.EAnnotationHelper;
 import de.evoal.models.core.ecore.Space;
 import de.evoal.models.core.ecore.TypedEObject;
 import de.evoal.models.v202704.optimisation.model.ModelFactory;
@@ -31,6 +27,8 @@ import de.evoal.models.v202704.optimisation.model.TargetGoal;
 
 import de.evoal.optimisation.main.comparator.ComparatorFactory;
 import de.evoal.optimisation.main.comparator.NumericOptimisationValue;
+import de.evoal.optimisation.main.fitness.AbsoluteDistance;
+import de.evoal.optimisation.main.fitness.SquaredDistance;
 
 public class FitnessPipelineTest {
     private static Space space(final EDataType type, final String... names) {
@@ -262,10 +260,17 @@ public class FitnessPipelineTest {
         }
 
         @Test
-        public void aTargetBecomesTheAbsoluteDistance() {
-            Assertions.assertEquals(1.5, fitnessOf(new Goal.Target(y, 4.0), 2.5).value(0));
-            Assertions.assertEquals(1.5, fitnessOf(new Goal.Target(y, 4.0), 5.5).value(0));
-            Assertions.assertEquals(0.0, fitnessOf(new Goal.Target(y, 4.0), 4.0).value(0));
+        public void aTargetBecomesTheDistanceOfTheGoal() {
+            // given
+            final Goal.Target absolute = new Goal.Target(y, 4.0, new AbsoluteDistance());
+            final Goal.Target squared = new Goal.Target(y, 4.0, new SquaredDistance());
+
+            // then
+            Assertions.assertEquals(1.5, fitnessOf(absolute, 2.5).value(0));
+            Assertions.assertEquals(1.5, fitnessOf(absolute, 5.5).value(0));
+            Assertions.assertEquals(0.0, fitnessOf(absolute, 4.0).value(0));
+            Assertions.assertEquals(2.25, fitnessOf(squared, 2.5).value(0));
+            Assertions.assertEquals(0.0, fitnessOf(squared, 4.0).value(0));
         }
     }
 
@@ -303,15 +308,14 @@ public class FitnessPipelineTest {
 
         private final EStructuralFeature y = space.getEClass().getEStructuralFeature("y");
 
-        private Map<EStructuralFeature, Function<Number, Number>> conversionsOf(final Problem problem) throws Exception {
+        private Map<EStructuralFeature, Function<Number, Number>> conversionsOf(final Goals goals) {
             final ComparatorFactory factory = new ComparatorFactory();
-            final Field field = ComparatorFactory.class.getDeclaredField("problem");
-            field.setAccessible(true);
-            field.set(factory, problem);
 
-            final EAnnotationHelper helper = Mockito.mock(EAnnotationHelper.class);
+            return factory.createValueConversions(goals);
+        }
 
-            return factory.createValueConversions(space, helper);
+        private static Goals goalsOf(final Problem problem) {
+            return Goals.of(problem, null, configuration -> new AbsoluteDistance());
         }
 
         private TypedEObject objectives(final double value) {
@@ -322,31 +326,32 @@ public class FitnessPipelineTest {
         }
 
         @Test
-        public void aMinimisedObjectiveIsOrderedOppositeToTheNumericComparator() throws Exception {
+        public void aMinimisedObjectiveIsOrderedOppositeToTheNumericComparator() {
             assertOppositeOrder(ModelFactory.eINSTANCE.createMinimiseGoal());
         }
 
         @Test
-        public void aMaximisedObjectiveIsOrderedOppositeToTheNumericComparator() throws Exception {
+        public void aMaximisedObjectiveIsOrderedOppositeToTheNumericComparator() {
             assertOppositeOrder(ModelFactory.eINSTANCE.createMaximiseGoal());
         }
 
         @Test
-        public void aTargetIsOrderedOppositeToTheNumericComparator() throws Exception {
+        public void aTargetIsOrderedOppositeToTheNumericComparator() {
             final TargetGoal target = ModelFactory.eINSTANCE.createTargetGoal();
             target.setValue(3.0);
 
             assertOppositeOrder(target);
         }
 
-        private void assertOppositeOrder(final OptimisationGoal goal) throws Exception {
+        private void assertOppositeOrder(final OptimisationGoal goal) {
             // given
             goal.setData(y);
             final Problem problem = ModelFactory.eINSTANCE.createProblem();
             problem.getGoals().add(goal);
 
-            final Map<EStructuralFeature, Function<Number, Number>> conversions = conversionsOf(problem);
-            final FitnessPipeline pipeline = new FitnessPipeline(Goals.of(problem), List.of());
+            final Goals goals = goalsOf(problem);
+            final Map<EStructuralFeature, Function<Number, Number>> conversions = conversionsOf(goals);
+            final FitnessPipeline pipeline = new FitnessPipeline(goals, List.of());
             final SplittableRandom random = new SplittableRandom(42);
 
             for(int pair = 0; pair < 1000; ++pair) {

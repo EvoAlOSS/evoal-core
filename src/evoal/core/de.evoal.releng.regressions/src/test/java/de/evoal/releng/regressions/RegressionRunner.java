@@ -13,10 +13,22 @@ import java.util.stream.Stream;
 
 /**
  * Runs a regression configuration with the search launcher of the release
- *   ({@code bin/evoal-search.sh}) and a fixed seed. The run takes place in a copy
- *   of the configuration folder, so the run does not change the repository.
+ *   ({@code bin/evoal-search.sh}) and a fixed seed. A configuration with target points
+ *   ({@value Regression#TARGET_POINTS_FILE}) runs as an evaluation with one repetition
+ *   per target point ({@code bin/evoal-evaluate-search.sh}). The run takes place in a
+ *   copy of the configuration folder, so the run does not change the repository.
  */
 public final class RegressionRunner {
+    /**
+     * The number of repetitions per target point of a configuration with target points.
+     */
+    private static final String EVALUATION_REPETITIONS = "1";
+
+    /**
+     * The evaluation launcher, relative to the release folder.
+     */
+    private static final String EVALUATION_SCRIPT = "bin/evoal-evaluate-search.sh";
+
     /**
      * The log of the run, next to the copied configuration.
      */
@@ -136,12 +148,26 @@ public final class RegressionRunner {
     }
 
     /**
-     * @return The command that runs the regression: the run script of an example, or the
-     *   search launcher of the release for a regression configuration.
+     * @return The command that runs the regression: the run script of an example, the
+     *   evaluation launcher for a regression configuration with target points, or the
+     *   search launcher of the release for other regression configurations.
      */
     private List<String> commandOf(final Regression regression) {
         if(regression.isExample()) {
             return List.of(shell, regression.runScript());
+        }
+
+        if(regression.hasTargetPoints()) {
+            final Path evaluationScript = release.resolve(EVALUATION_SCRIPT);
+            final String targetPoints = "-Boptimisation:target-points-file=" + Regression.TARGET_POINTS_FILE;
+
+            return List.of(shell,
+                           evaluationScript.toString(),
+                           ".",
+                           Regression.CONFIGURATION_FILE,
+                           OUTPUT_FOLDER,
+                           EVALUATION_REPETITIONS,
+                           targetPoints);
         }
 
         final Path searchScript = release.resolve(SEARCH_SCRIPT);

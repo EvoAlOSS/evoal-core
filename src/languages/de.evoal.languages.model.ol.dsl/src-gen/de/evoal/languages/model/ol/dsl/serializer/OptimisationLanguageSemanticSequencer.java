@@ -353,20 +353,11 @@ public class OptimisationLanguageSemanticSequencer extends BaseLanguageSemanticS
 	 *     TargetGoalRule returns TargetGoal
 	 *
 	 * Constraint:
-	 *     (data=TypeDefinitionReferenceRule value=LiteralRule)
+	 *     (data=TypeDefinitionReferenceRule (fromEvaluation?='target' | value=LiteralRule) distance=InstanceLiteralRule)
 	 * </pre>
 	 */
 	protected void sequence_TargetGoalRule(ISerializationContext context, TargetGoal semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, OLPackage.Literals.OPTIMISATION_GOAL__DATA) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, OLPackage.Literals.OPTIMISATION_GOAL__DATA));
-			if (transientValues.isValueTransient(semanticObject, OLPackage.Literals.TARGET_GOAL__VALUE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, OLPackage.Literals.TARGET_GOAL__VALUE));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getTargetGoalRuleAccess().getDataTypeDefinitionReferenceRuleParserRuleCall_1_0(), semanticObject.getData());
-		feeder.accept(grammarAccess.getTargetGoalRuleAccess().getValueLiteralRuleParserRuleCall_3_0(), semanticObject.getValue());
-		feeder.finish();
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	

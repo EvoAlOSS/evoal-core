@@ -583,19 +583,59 @@ ruleTargetGoalRule returns [EObject current=null]
 		}
 		(
 			(
+				(
+					lv_fromEvaluation_3_0='target'
+					{
+						newLeafNode(lv_fromEvaluation_3_0, grammarAccess.getTargetGoalRuleAccess().getFromEvaluationTargetKeyword_3_0_0());
+					}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getTargetGoalRuleRule());
+						}
+						setWithLastConsumed($current, "fromEvaluation", lv_fromEvaluation_3_0 != null, "target");
+					}
+				)
+			)
+			    |
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getTargetGoalRuleAccess().getValueLiteralRuleParserRuleCall_3_1_0());
+					}
+					lv_value_4_0=ruleLiteralRule
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getTargetGoalRuleRule());
+						}
+						set(
+							$current,
+							"value",
+							lv_value_4_0,
+							"de.evoal.languages.model.base.dsl.BaseLanguage.LiteralRule");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+		)
+		otherlv_5='with'
+		{
+			newLeafNode(otherlv_5, grammarAccess.getTargetGoalRuleAccess().getWithKeyword_4());
+		}
+		(
+			(
 				{
-					newCompositeNode(grammarAccess.getTargetGoalRuleAccess().getValueLiteralRuleParserRuleCall_3_0());
+					newCompositeNode(grammarAccess.getTargetGoalRuleAccess().getDistanceInstanceLiteralRuleParserRuleCall_5_0());
 				}
-				lv_value_3_0=ruleLiteralRule
+				lv_distance_6_0=ruleInstanceLiteralRule
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getTargetGoalRuleRule());
 					}
 					set(
 						$current,
-						"value",
-						lv_value_3_0,
-						"de.evoal.languages.model.base.dsl.BaseLanguage.LiteralRule");
+						"distance",
+						lv_distance_6_0,
+						"de.evoal.languages.model.base.dsl.BaseLanguage.InstanceLiteralRule");
 					afterParserOrEnumRuleCall();
 				}
 			)
@@ -3448,7 +3488,7 @@ ruleComparisonOperatorRule returns [Enumerator current=null]
 }:
 	(
 		(
-			enumLiteral_0='>='
+			enumLiteral_0='>'
 			{
 				$current = grammarAccess.getComparisonOperatorRuleAccess().getGreaterThanEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
 				newLeafNode(enumLiteral_0, grammarAccess.getComparisonOperatorRuleAccess().getGreaterThanEnumLiteralDeclaration_0());
@@ -3456,7 +3496,7 @@ ruleComparisonOperatorRule returns [Enumerator current=null]
 		)
 		    |
 		(
-			enumLiteral_1='>'
+			enumLiteral_1='>='
 			{
 				$current = grammarAccess.getComparisonOperatorRuleAccess().getGreaterEqualEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
 				newLeafNode(enumLiteral_1, grammarAccess.getComparisonOperatorRuleAccess().getGreaterEqualEnumLiteralDeclaration_1());
@@ -3480,7 +3520,7 @@ ruleComparisonOperatorRule returns [Enumerator current=null]
 		)
 		    |
 		(
-			enumLiteral_4='<'
+			enumLiteral_4='<='
 			{
 				$current = grammarAccess.getComparisonOperatorRuleAccess().getLessEqualEnumLiteralDeclaration_4().getEnumLiteral().getInstance();
 				newLeafNode(enumLiteral_4, grammarAccess.getComparisonOperatorRuleAccess().getLessEqualEnumLiteralDeclaration_4());
@@ -3488,7 +3528,7 @@ ruleComparisonOperatorRule returns [Enumerator current=null]
 		)
 		    |
 		(
-			enumLiteral_5='<='
+			enumLiteral_5='<'
 			{
 				$current = grammarAccess.getComparisonOperatorRuleAccess().getLessThanEnumLiteralDeclaration_5().getEnumLiteral().getInstance();
 				newLeafNode(enumLiteral_5, grammarAccess.getComparisonOperatorRuleAccess().getLessThanEnumLiteralDeclaration_5());

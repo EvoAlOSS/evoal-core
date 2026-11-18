@@ -6,7 +6,7 @@ package de.evoal.optimisation.api.fitness;
  * <ul>
  *   <li>minimise: {@code v}</li>
  *   <li>maximise: {@code -v}</li>
- *   <li>target {@code t}: {@code abs(v - t)}</li>
+ *   <li>target {@code t}: the goal's distance of {@code v} from {@code t}</li>
  * </ul>
  * The steps after it see canonical values only and do not need to know the goals'
  *   directions.
@@ -38,7 +38,7 @@ public final class DirectionStep implements FitnessStep {
             // 0.0 - v instead of -v, so that a value of 0 does not become -0.0, which
             //   Double.compare orders before 0.0
             case Goal.Maximise maximise -> 0.0 - value;
-            case Goal.Target target -> Math.abs(value - target.target());
+            case Goal.Target target -> target.distanceOf(value);
         };
     }
 }

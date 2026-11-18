@@ -23,7 +23,7 @@ import java.util.HashMap;
 @SuppressWarnings("all")
 public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_STRING", "RULE_DOUBLE", "RULE_INT", "RULE_QUOTED_ID", "RULE_ID", "RULE_DIGIT", "RULE_EXPONENT", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'module'", "'{'", "'}'", "'pipeline'", "'['", "']'", "'step'", "'component'", "'reads'", "','", "';'", "'writes'", "'begin'", "'end'", "'for'", "'in'", "'to'", "'increment'", "'by'", "'write'", "'with'", "'samples'", "'from'", "'executing'", "'('", "')'", "'OR'", "'XOR'", "'AND'", "'!'", "'^'", "'self'", "'value'", "'data'", "'instance'", "':='", "'true'", "'false'", "'@'", "':'", "'optional'", "'enum'", "'literal'", "'string'", "'expression'", "'int'", "'real'", "'boolean'", "'void'", "'array'", "'import'", "'.'", "'>='", "'>'", "'='", "'!='", "'<'", "'<='", "'+'", "'-'", "'*'", "'/'", "'%'", "'Y'", "'Z'", "'E'", "'P'", "'T'", "'G'", "'M'", "'k'", "'h'", "'da'", "'d'", "'c'", "'m'", "'\\u00B5'", "'n'", "'p'", "'f'", "'a'", "'z'", "'y'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_STRING", "RULE_DOUBLE", "RULE_INT", "RULE_QUOTED_ID", "RULE_ID", "RULE_DIGIT", "RULE_EXPONENT", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'module'", "'{'", "'}'", "'pipeline'", "'['", "']'", "'step'", "'component'", "'reads'", "','", "';'", "'writes'", "'begin'", "'end'", "'for'", "'in'", "'to'", "'increment'", "'by'", "'write'", "'with'", "'samples'", "'from'", "'executing'", "'('", "')'", "'OR'", "'XOR'", "'AND'", "'!'", "'^'", "'self'", "'value'", "'data'", "'instance'", "':='", "'true'", "'false'", "'@'", "':'", "'optional'", "'enum'", "'literal'", "'string'", "'expression'", "'int'", "'real'", "'boolean'", "'void'", "'array'", "'import'", "'.'", "'>'", "'>='", "'='", "'!='", "'<='", "'<'", "'+'", "'-'", "'*'", "'/'", "'%'", "'Y'", "'Z'", "'E'", "'P'", "'T'", "'G'", "'M'", "'k'", "'h'", "'da'", "'d'", "'c'", "'m'", "'\\u00B5'", "'n'", "'p'", "'f'", "'a'", "'z'", "'y'"
     };
     public static final int T__50=50;
     public static final int T__59=59;
@@ -11164,7 +11164,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleComparisonOperatorRule"
-    // InternalGeneratorDSL.g:3810:1: ruleComparisonOperatorRule returns [Enumerator current=null] : ( (enumLiteral_0= '>=' ) | (enumLiteral_1= '>' ) | (enumLiteral_2= '=' ) | (enumLiteral_3= '!=' ) | (enumLiteral_4= '<' ) | (enumLiteral_5= '<=' ) ) ;
+    // InternalGeneratorDSL.g:3810:1: ruleComparisonOperatorRule returns [Enumerator current=null] : ( (enumLiteral_0= '>' ) | (enumLiteral_1= '>=' ) | (enumLiteral_2= '=' ) | (enumLiteral_3= '!=' ) | (enumLiteral_4= '<=' ) | (enumLiteral_5= '<' ) ) ;
     public final Enumerator ruleComparisonOperatorRule() throws RecognitionException {
         Enumerator current = null;
 
@@ -11179,10 +11179,10 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalGeneratorDSL.g:3816:2: ( ( (enumLiteral_0= '>=' ) | (enumLiteral_1= '>' ) | (enumLiteral_2= '=' ) | (enumLiteral_3= '!=' ) | (enumLiteral_4= '<' ) | (enumLiteral_5= '<=' ) ) )
-            // InternalGeneratorDSL.g:3817:2: ( (enumLiteral_0= '>=' ) | (enumLiteral_1= '>' ) | (enumLiteral_2= '=' ) | (enumLiteral_3= '!=' ) | (enumLiteral_4= '<' ) | (enumLiteral_5= '<=' ) )
+            // InternalGeneratorDSL.g:3816:2: ( ( (enumLiteral_0= '>' ) | (enumLiteral_1= '>=' ) | (enumLiteral_2= '=' ) | (enumLiteral_3= '!=' ) | (enumLiteral_4= '<=' ) | (enumLiteral_5= '<' ) ) )
+            // InternalGeneratorDSL.g:3817:2: ( (enumLiteral_0= '>' ) | (enumLiteral_1= '>=' ) | (enumLiteral_2= '=' ) | (enumLiteral_3= '!=' ) | (enumLiteral_4= '<=' ) | (enumLiteral_5= '<' ) )
             {
-            // InternalGeneratorDSL.g:3817:2: ( (enumLiteral_0= '>=' ) | (enumLiteral_1= '>' ) | (enumLiteral_2= '=' ) | (enumLiteral_3= '!=' ) | (enumLiteral_4= '<' ) | (enumLiteral_5= '<=' ) )
+            // InternalGeneratorDSL.g:3817:2: ( (enumLiteral_0= '>' ) | (enumLiteral_1= '>=' ) | (enumLiteral_2= '=' ) | (enumLiteral_3= '!=' ) | (enumLiteral_4= '<=' ) | (enumLiteral_5= '<' ) )
             int alt48=6;
             switch ( input.LA(1) ) {
             case 67:
@@ -11225,10 +11225,10 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
 
             switch (alt48) {
                 case 1 :
-                    // InternalGeneratorDSL.g:3818:3: (enumLiteral_0= '>=' )
+                    // InternalGeneratorDSL.g:3818:3: (enumLiteral_0= '>' )
                     {
-                    // InternalGeneratorDSL.g:3818:3: (enumLiteral_0= '>=' )
-                    // InternalGeneratorDSL.g:3819:4: enumLiteral_0= '>='
+                    // InternalGeneratorDSL.g:3818:3: (enumLiteral_0= '>' )
+                    // InternalGeneratorDSL.g:3819:4: enumLiteral_0= '>'
                     {
                     enumLiteral_0=(Token)match(input,67,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -11244,10 +11244,10 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalGeneratorDSL.g:3826:3: (enumLiteral_1= '>' )
+                    // InternalGeneratorDSL.g:3826:3: (enumLiteral_1= '>=' )
                     {
-                    // InternalGeneratorDSL.g:3826:3: (enumLiteral_1= '>' )
-                    // InternalGeneratorDSL.g:3827:4: enumLiteral_1= '>'
+                    // InternalGeneratorDSL.g:3826:3: (enumLiteral_1= '>=' )
+                    // InternalGeneratorDSL.g:3827:4: enumLiteral_1= '>='
                     {
                     enumLiteral_1=(Token)match(input,68,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -11301,10 +11301,10 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 5 :
-                    // InternalGeneratorDSL.g:3850:3: (enumLiteral_4= '<' )
+                    // InternalGeneratorDSL.g:3850:3: (enumLiteral_4= '<=' )
                     {
-                    // InternalGeneratorDSL.g:3850:3: (enumLiteral_4= '<' )
-                    // InternalGeneratorDSL.g:3851:4: enumLiteral_4= '<'
+                    // InternalGeneratorDSL.g:3850:3: (enumLiteral_4= '<=' )
+                    // InternalGeneratorDSL.g:3851:4: enumLiteral_4= '<='
                     {
                     enumLiteral_4=(Token)match(input,71,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -11320,10 +11320,10 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 6 :
-                    // InternalGeneratorDSL.g:3858:3: (enumLiteral_5= '<=' )
+                    // InternalGeneratorDSL.g:3858:3: (enumLiteral_5= '<' )
                     {
-                    // InternalGeneratorDSL.g:3858:3: (enumLiteral_5= '<=' )
-                    // InternalGeneratorDSL.g:3859:4: enumLiteral_5= '<='
+                    // InternalGeneratorDSL.g:3858:3: (enumLiteral_5= '<' )
+                    // InternalGeneratorDSL.g:3859:4: enumLiteral_5= '<'
                     {
                     enumLiteral_5=(Token)match(input,72,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {

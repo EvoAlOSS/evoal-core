@@ -3,14 +3,17 @@
  */
 package de.evoal.models.v202704.optimisation.model.impl;
 
+import de.evoal.models.v202704.core.Configuration;
 import de.evoal.models.v202704.optimisation.model.Direction;
 import de.evoal.models.v202704.optimisation.model.ModelPackage;
 import de.evoal.models.v202704.optimisation.model.TargetGoal;
 
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
@@ -22,6 +25,8 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * </p>
  * <ul>
  *   <li>{@link de.evoal.models.v202704.optimisation.model.impl.TargetGoalImpl#getValue <em>Value</em>}</li>
+ *   <li>{@link de.evoal.models.v202704.optimisation.model.impl.TargetGoalImpl#isFromEvaluation <em>From Evaluation</em>}</li>
+ *   <li>{@link de.evoal.models.v202704.optimisation.model.impl.TargetGoalImpl#getDistance <em>Distance</em>}</li>
  * </ul>
  *
  * @generated
@@ -46,6 +51,36 @@ public class TargetGoalImpl extends OptimisationGoalImpl implements TargetGoal {
 	 * @ordered
 	 */
 	protected Object value = VALUE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isFromEvaluation() <em>From Evaluation</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isFromEvaluation()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean FROM_EVALUATION_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isFromEvaluation() <em>From Evaluation</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isFromEvaluation()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean fromEvaluation = FROM_EVALUATION_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getDistance() <em>Distance</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDistance()
+	 * @generated
+	 * @ordered
+	 */
+	protected Configuration distance;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -95,8 +130,90 @@ public class TargetGoalImpl extends OptimisationGoalImpl implements TargetGoal {
 	 * @generated
 	 */
 	@Override
+	public boolean isFromEvaluation() {
+		return fromEvaluation;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setFromEvaluation(boolean newFromEvaluation) {
+		boolean oldFromEvaluation = fromEvaluation;
+		fromEvaluation = newFromEvaluation;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.TARGET_GOAL__FROM_EVALUATION, oldFromEvaluation, fromEvaluation));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Configuration getDistance() {
+		return distance;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetDistance(Configuration newDistance, NotificationChain msgs) {
+		Configuration oldDistance = distance;
+		distance = newDistance;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.TARGET_GOAL__DISTANCE, oldDistance, newDistance);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setDistance(Configuration newDistance) {
+		if (newDistance != distance) {
+			NotificationChain msgs = null;
+			if (distance != null)
+				msgs = ((InternalEObject)distance).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ModelPackage.TARGET_GOAL__DISTANCE, null, msgs);
+			if (newDistance != null)
+				msgs = ((InternalEObject)newDistance).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ModelPackage.TARGET_GOAL__DISTANCE, null, msgs);
+			msgs = basicSetDistance(newDistance, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.TARGET_GOAL__DISTANCE, newDistance, newDistance));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Direction getDirection() {
 		return Direction.TARGET;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case ModelPackage.TARGET_GOAL__DISTANCE:
+				return basicSetDistance(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -109,6 +226,10 @@ public class TargetGoalImpl extends OptimisationGoalImpl implements TargetGoal {
 		switch (featureID) {
 			case ModelPackage.TARGET_GOAL__VALUE:
 				return getValue();
+			case ModelPackage.TARGET_GOAL__FROM_EVALUATION:
+				return isFromEvaluation();
+			case ModelPackage.TARGET_GOAL__DISTANCE:
+				return getDistance();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -123,6 +244,12 @@ public class TargetGoalImpl extends OptimisationGoalImpl implements TargetGoal {
 		switch (featureID) {
 			case ModelPackage.TARGET_GOAL__VALUE:
 				setValue(newValue);
+				return;
+			case ModelPackage.TARGET_GOAL__FROM_EVALUATION:
+				setFromEvaluation((Boolean)newValue);
+				return;
+			case ModelPackage.TARGET_GOAL__DISTANCE:
+				setDistance((Configuration)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -139,6 +266,12 @@ public class TargetGoalImpl extends OptimisationGoalImpl implements TargetGoal {
 			case ModelPackage.TARGET_GOAL__VALUE:
 				setValue(VALUE_EDEFAULT);
 				return;
+			case ModelPackage.TARGET_GOAL__FROM_EVALUATION:
+				setFromEvaluation(FROM_EVALUATION_EDEFAULT);
+				return;
+			case ModelPackage.TARGET_GOAL__DISTANCE:
+				setDistance((Configuration)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -153,6 +286,10 @@ public class TargetGoalImpl extends OptimisationGoalImpl implements TargetGoal {
 		switch (featureID) {
 			case ModelPackage.TARGET_GOAL__VALUE:
 				return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
+			case ModelPackage.TARGET_GOAL__FROM_EVALUATION:
+				return fromEvaluation != FROM_EVALUATION_EDEFAULT;
+			case ModelPackage.TARGET_GOAL__DISTANCE:
+				return distance != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -169,6 +306,8 @@ public class TargetGoalImpl extends OptimisationGoalImpl implements TargetGoal {
 		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (value: ");
 		result.append(value);
+		result.append(", fromEvaluation: ");
+		result.append(fromEvaluation);
 		result.append(')');
 		return result.toString();
 	}

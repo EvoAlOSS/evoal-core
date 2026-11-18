@@ -1,0 +1,28 @@
+{
+  "formatVersion" : "2027.4.0",
+  "number" : 6,
+  "individuals" : [ {
+    "id" : 6,
+    "input" : {
+      "x:0" : 2.0,
+      "x:1" : 4.400000000000002
+    },
+    "output" : {
+      "y:0" : 17.00000000000017
+    },
+    "relationships" : [ {
+      "kind" : "mutation",
+      "targets" : [ 5 ]
+    } ]
+  } ],
+  "steps" : [ ],
+  "ranks" : [ {
+    "number" : 0,
+    "members" : [ 6 ]
+  } ],
+  "bestSoFar" : 6,
+  "metrics" : {
+    "evaluations.real" : 7,
+    "evaluations.surrogate" : 0
+  }
+}

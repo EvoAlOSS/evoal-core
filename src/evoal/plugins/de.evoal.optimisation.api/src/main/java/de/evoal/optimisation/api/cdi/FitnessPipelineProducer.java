@@ -19,6 +19,7 @@ import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
 import de.evoal.optimisation.api.fitness.FitnessPipeline;
 import de.evoal.optimisation.api.fitness.FitnessStep;
 import de.evoal.optimisation.api.fitness.Goals;
+import de.evoal.optimisation.api.fitness.TargetDistance;
 
 /**
  * Creates the {@link FitnessPipeline} of the current optimisation configuration: the goals
@@ -33,18 +34,38 @@ public class FitnessPipelineProducer {
     private AttributeHelper helper;
 
     /**
+     * Creates the goals of the current problem. The target of a goal {@code towards target}
+     *   is the current target point of the evaluation. The goals are created for every
+     *   injection, i.e. for every run, so they follow the evaluation's target points.
+     *
+     * @return The goals of the current problem.
+     */
+    @Produces
+    @Dependent
+    public Goals createGoals() {
+        final EObject configuration = board.get(OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION);
+        final Problem problem = helper.lookup(configuration, "problem");
+        final EObject targetPoint = board.getOrNull(OptimisationBlackboardEntries.TARGET_PROPERTIES);
+
+        return Goals.of(problem, targetPoint, FitnessPipelineProducer::createDistance);
+    }
+
+    /**
+     * @param goals The goals of the current problem.
      * @return The fitness pipeline of the current optimisation configuration.
      */
     @Produces
     @Dependent
-    public FitnessPipeline create() {
+    public FitnessPipeline createPipeline(final Goals goals) {
         final EObject configuration = board.get(OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION);
-        final Problem problem = helper.lookup(configuration, "problem");
         final EObject algorithm = helper.lookup(configuration, "algorithm");
-        final Goals goals = Goals.of(problem);
         final List<FitnessStep> steps = createSteps(algorithm);
 
         return new FitnessPipeline(goals, steps);
+    }
+
+    private static TargetDistance createDistance(final Configuration configuration) {
+        return BeanFactory.createComponent(TargetDistance.class, configuration);
     }
 
     private List<FitnessStep> createSteps(final EObject algorithm) {

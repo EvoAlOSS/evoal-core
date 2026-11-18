@@ -105,6 +105,7 @@ public class MemoryModelWriterTest {
         final MemoryModelWriter writer = new MemoryModelWriter();
         inject(writer, "algorithm", algorithmConfiguration());
         inject(writer, "annotationHelper", new EAnnotationHelper());
+        inject(writer, "goals", MemoryModels.goals(MemoryModels.problem()));
         inject(writer, "outputFolder", output);
         inject(writer, "problem", MemoryModels.problem());
         inject(writer, "randomService", RandomService.withSeed(42));

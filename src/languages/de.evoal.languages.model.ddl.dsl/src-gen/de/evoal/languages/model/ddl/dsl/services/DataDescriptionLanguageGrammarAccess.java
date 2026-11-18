@@ -1085,12 +1085,12 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 	}
 	
 	//enum ComparisonOperatorRule returns ComparisonOperator :
-	//    GreaterThan = ">=" |
-	//    GreaterEqual = ">" |
+	//    GreaterThan = ">" |
+	//    GreaterEqual = ">=" |
 	//    Equal = "=" |
 	//    Unequal = "!=" |
-	//    LessEqual = "<" |
-	//    LessThan = "<="
+	//    LessEqual = "<=" |
+	//    LessThan = "<"
 	//;
 	public BaseLanguageGrammarAccess.ComparisonOperatorRuleElements getComparisonOperatorRuleAccess() {
 		return gaBaseLanguage.getComparisonOperatorRuleAccess();

@@ -135,11 +135,7 @@ public class OptimisationModelTransformer extends ModelTransformer {
         } else if(goal.getDirection().equals(Direction.MINIMISE)) {
             result = factory.createMinimiseGoal();
         } else if(goal.getDirection().equals(Direction.TARGET)) {
-            result = factory.createTargetGoal();
-            de.evoal.languages.model.ol.TargetGoal targetGoal = (de.evoal.languages.model.ol.TargetGoal) goal;
-
-
-            ((TargetGoal)result).setValue(targetGoal.getValue().getValue());
+            result = transform((de.evoal.languages.model.ol.TargetGoal) goal);
         } else {
             throw new InternalError();
         }
@@ -147,6 +143,26 @@ public class OptimisationModelTransformer extends ModelTransformer {
         final DataDescription description = (DataDescription) goal.getData().getDefinition();
         final EStructuralFeature feature = eAnnotationHelper.featureOf(classifier, description);
         result.setData(feature);
+
+        return result;
+    }
+
+    /**
+     * @return The target goal with its constant target or the marker that the target is
+     *   taken from the evaluation, and the configuration of its distance. The data is set
+     *   by the caller.
+     */
+    private TargetGoal transform(final de.evoal.languages.model.ol.TargetGoal goal) {
+        final TargetGoal result = factory.createTargetGoal();
+        result.setFromEvaluation(goal.isFromEvaluation());
+
+        if(!goal.isFromEvaluation()) {
+            final Object target = goal.getValue().getValue();
+            result.setValue(target);
+        }
+
+        final Configuration distance = createDynamic(goal.getDistance());
+        result.setDistance(distance);
 
         return result;
     }

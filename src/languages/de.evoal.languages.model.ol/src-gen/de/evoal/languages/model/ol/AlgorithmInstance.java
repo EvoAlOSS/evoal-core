@@ -13,7 +13,7 @@ import de.evoal.languages.model.base.expressions.Instance;
  *
  * <!-- begin-model-doc -->
  * 
- * An optimisation algirthm instance.
+ * An optimisation algorithm instance.
  * 
  * <!-- end-model-doc -->
  *

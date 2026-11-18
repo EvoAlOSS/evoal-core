@@ -227,11 +227,10 @@ public class InternalDefinitionLanguageLexer extends Lexer {
         try {
             int _type = T__20;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalDefinitionLanguage.g:16:7: ( '>=' )
-            // InternalDefinitionLanguage.g:16:9: '>='
+            // InternalDefinitionLanguage.g:16:7: ( '>' )
+            // InternalDefinitionLanguage.g:16:9: '>'
             {
-            match(">="); 
-
+            match('>'); 
 
             }
 
@@ -248,10 +247,11 @@ public class InternalDefinitionLanguageLexer extends Lexer {
         try {
             int _type = T__21;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalDefinitionLanguage.g:17:7: ( '>' )
-            // InternalDefinitionLanguage.g:17:9: '>'
+            // InternalDefinitionLanguage.g:17:7: ( '>=' )
+            // InternalDefinitionLanguage.g:17:9: '>='
             {
-            match('>'); 
+            match(">="); 
+
 
             }
 
@@ -309,10 +309,11 @@ public class InternalDefinitionLanguageLexer extends Lexer {
         try {
             int _type = T__24;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalDefinitionLanguage.g:20:7: ( '<' )
-            // InternalDefinitionLanguage.g:20:9: '<'
+            // InternalDefinitionLanguage.g:20:7: ( '<=' )
+            // InternalDefinitionLanguage.g:20:9: '<='
             {
-            match('<'); 
+            match("<="); 
+
 
             }
 
@@ -329,11 +330,10 @@ public class InternalDefinitionLanguageLexer extends Lexer {
         try {
             int _type = T__25;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalDefinitionLanguage.g:21:7: ( '<=' )
-            // InternalDefinitionLanguage.g:21:9: '<='
+            // InternalDefinitionLanguage.g:21:7: ( '<' )
+            // InternalDefinitionLanguage.g:21:9: '<'
             {
-            match("<="); 
-
+            match('<'); 
 
             }
 
@@ -3103,7 +3103,7 @@ public class InternalDefinitionLanguageLexer extends Lexer {
     static final String DFA17_maxS =
         "\1\uffff\2\172\1\162\1\172\1\165\1\75\1\uffff\2\75\1\uffff\1\71\1\uffff\1\57\1\uffff\13\172\1\uffff\4\172\2\uffff\1\170\4\uffff\1\151\1\75\1\122\1\117\1\116\1\172\2\uffff\1\164\1\157\1\uffff\1\171\1\156\1\uffff\1\151\1\145\1\157\1\145\2\uffff\3\uffff\1\154\1\157\2\uffff\1\155\1\uffff\1\144\1\164\1\162\1\156\1\uffff\1\157\11\uffff\1\145\16\uffff\1\172\1\146\1\uffff\1\144\3\uffff\1\162\1\163\5\uffff\1\165\1\164\4\uffff\1\164\2\uffff\1\172\1\122\1\104\3\uffff\1\154\1\162\1\154\1\151\1\uffff\1\165\1\160\1\164\1\160\1\uffff\1\164\1\141\1\157\5\uffff\1\163\1\155\3\151\1\144\1\163\1\164\1\141\1\uffff\1\172\1\165\1\141\1\164\1\155\1\145\1\162\1\150\1\uffff\2\172\1\146\1\151\1\165\1\144\3\145\1\164\1\172\1\157\1\145\2\154\1\145\1\172\2\156\1\157\1\151\1\164\1\151\1\172\1\uffff\1\154\1\171\1\162\1\172\1\156\1\145\1\172\2\uffff\1\172\1\156\1\145\4\172\1\141\1\uffff\2\162\1\172\1\145\1\172\1\uffff\2\141\2\156\1\172\1\145\1\uffff\1\145\1\172\1\141\1\uffff\1\144\1\163\2\uffff\1\147\1\172\4\uffff\1\156\1\164\1\141\1\uffff\1\141\1\uffff\2\154\3\141\1\uffff\1\156\1\172\1\uffff\1\143\2\163\1\172\1\uffff\1\143\1\172\1\154\1\156\2\172\2\154\1\151\1\164\1\uffff\1\164\1\172\1\151\1\uffff\1\145\1\uffff\2\172\2\uffff\2\172\1\156\2\172\1\uffff\1\157\1\172\4\uffff\1\164\2\uffff\1\156\1\uffff\1\163\2\172\2\uffff";
     static final String DFA17_acceptS =
-        "\7\uffff\1\10\2\uffff\1\14\1\uffff\1\16\1\uffff\1\20\13\uffff\1\36\4\uffff\1\46\1\47\1\uffff\1\51\1\52\1\53\1\54\6\uffff\1\64\1\65\2\uffff\1\70\2\uffff\1\77\6\uffff\1\124\1\127\1\130\2\uffff\1\41\1\124\1\uffff\1\37\4\uffff\1\34\1\uffff\1\6\1\7\1\10\1\11\1\114\1\13\1\12\1\14\1\15\1\uffff\1\16\1\125\1\126\1\17\1\20\1\21\1\22\1\23\1\24\1\25\1\26\1\27\1\30\1\31\2\uffff\1\33\1\uffff\1\35\1\36\1\40\2\uffff\1\42\1\43\1\44\1\46\1\47\2\uffff\1\51\1\52\1\53\1\54\1\uffff\1\74\1\57\3\uffff\1\63\1\64\1\65\4\uffff\1\70\4\uffff\1\77\3\uffff\1\120\1\121\1\122\1\123\1\127\11\uffff\1\32\10\uffff\1\60\30\uffff\1\110\7\uffff\1\61\1\62\10\uffff\1\103\5\uffff\1\113\6\uffff\1\72\3\uffff\1\50\2\uffff\1\55\1\66\2\uffff\1\106\1\71\1\115\1\75\3\uffff\1\104\1\uffff\1\1\5\uffff\1\111\2\uffff\1\107\4\uffff\1\67\12\uffff\1\45\3\uffff\1\101\1\uffff\1\112\2\uffff\1\2\1\3\5\uffff\1\76\2\uffff\1\100\1\105\1\117\1\4\1\uffff\1\5\1\116\1\uffff\1\73\3\uffff\1\102\1\56";
+        "\7\uffff\1\10\2\uffff\1\14\1\uffff\1\16\1\uffff\1\20\13\uffff\1\36\4\uffff\1\46\1\47\1\uffff\1\51\1\52\1\53\1\54\6\uffff\1\64\1\65\2\uffff\1\70\2\uffff\1\77\6\uffff\1\124\1\127\1\130\2\uffff\1\41\1\124\1\uffff\1\37\4\uffff\1\34\1\uffff\1\7\1\6\1\10\1\11\1\114\1\12\1\13\1\14\1\15\1\uffff\1\16\1\125\1\126\1\17\1\20\1\21\1\22\1\23\1\24\1\25\1\26\1\27\1\30\1\31\2\uffff\1\33\1\uffff\1\35\1\36\1\40\2\uffff\1\42\1\43\1\44\1\46\1\47\2\uffff\1\51\1\52\1\53\1\54\1\uffff\1\74\1\57\3\uffff\1\63\1\64\1\65\4\uffff\1\70\4\uffff\1\77\3\uffff\1\120\1\121\1\122\1\123\1\127\11\uffff\1\32\10\uffff\1\60\30\uffff\1\110\7\uffff\1\61\1\62\10\uffff\1\103\5\uffff\1\113\6\uffff\1\72\3\uffff\1\50\2\uffff\1\55\1\66\2\uffff\1\106\1\71\1\115\1\75\3\uffff\1\104\1\uffff\1\1\5\uffff\1\111\2\uffff\1\107\4\uffff\1\67\12\uffff\1\45\3\uffff\1\101\1\uffff\1\112\2\uffff\1\2\1\3\5\uffff\1\76\2\uffff\1\100\1\105\1\117\1\4\1\uffff\1\5\1\116\1\uffff\1\73\3\uffff\1\102\1\56";
     static final String DFA17_specialS =
         "\1\1\67\uffff\1\2\1\0\u00ee\uffff}>";
     static final String[] DFA17_transitionS = {

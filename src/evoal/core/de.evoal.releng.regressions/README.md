@@ -19,6 +19,12 @@ belong in `src/main/examples`.
 Every regression runs with `bin/evoal-search.sh` and `EVOAL_SEED=42` in a copy
 of its folder (`target/regressions/<plugin>/<name>/run-<n>`, including `run.log`).
 
+A regression whose folder contains `targets.csv` runs as an evaluation with
+`bin/evoal-evaluate-search.sh`, one repetition per target point
+(`-Boptimisation:target-points-file=targets.csv`). The file has a column for
+every feature of the search and the optimisation space; goals
+`optimise ... towards target` take their target from it.
+
 ## Examples
 
 The examples in `src/evoal/plugins/<plugin>/src/main/examples/<name>` are

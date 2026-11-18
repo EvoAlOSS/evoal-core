@@ -32,6 +32,7 @@ import de.evoal.models.v202704.optimisation.model.Problem;
 import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
 import de.evoal.optimisation.api.execution.EvaluationPosition;
 import de.evoal.optimisation.api.execution.ExecutionRecorder;
+import de.evoal.optimisation.api.fitness.Goals;
 import de.evoal.optimisation.api.statistics.writer.StatisticsWriter;
 
 /**
@@ -98,6 +99,12 @@ public class MemoryModelWriter implements StatisticsWriter {
      * The folder of the run, created when the run starts. {@code null} before.
      */
     private MemoryModelFolder folder;
+
+    /**
+     * The goals of the problem, with the targets of the run resolved.
+     */
+    @Inject
+    private Goals goals;
 
     /**
      * Converts the memory model to JSON, created when the run starts.
@@ -258,6 +265,7 @@ public class MemoryModelWriter implements StatisticsWriter {
         final RunSetup setup = toSetup();
 
         final ObjectNode document = json.toExecutionInformation(optimisationProblem,
+                                                                goals,
                                                                 algorithmType,
                                                                 execution,
                                                                 setup);

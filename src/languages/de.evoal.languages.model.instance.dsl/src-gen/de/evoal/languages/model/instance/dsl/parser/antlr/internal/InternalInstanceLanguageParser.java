@@ -23,7 +23,7 @@ import java.util.HashMap;
 @SuppressWarnings("all")
 public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_DOUBLE", "RULE_INT", "RULE_STRING", "RULE_QUOTED_ID", "RULE_ID", "RULE_DIGIT", "RULE_EXPONENT", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'instances'", "'='", "'['", "'instance'", "','", "']'", "';'", "'OR'", "'XOR'", "'AND'", "'!'", "'^'", "'('", "')'", "'self'", "'value'", "'.'", "'tree'", "'data'", "'{'", "'}'", "':='", "'true'", "'false'", "'@'", "':'", "'optional'", "'enum'", "'literal'", "'string'", "'expression'", "'int'", "'real'", "'boolean'", "'void'", "'array'", "'import'", "'from'", "'>='", "'>'", "'!='", "'<'", "'<='", "'+'", "'-'", "'*'", "'/'", "'%'", "'Y'", "'Z'", "'E'", "'P'", "'T'", "'G'", "'M'", "'k'", "'h'", "'da'", "'d'", "'c'", "'m'", "'\\u00B5'", "'n'", "'p'", "'f'", "'a'", "'z'", "'y'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_DOUBLE", "RULE_INT", "RULE_STRING", "RULE_QUOTED_ID", "RULE_ID", "RULE_DIGIT", "RULE_EXPONENT", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'instances'", "'='", "'['", "'instance'", "','", "']'", "';'", "'OR'", "'XOR'", "'AND'", "'!'", "'^'", "'('", "')'", "'self'", "'value'", "'.'", "'tree'", "'data'", "'{'", "'}'", "':='", "'true'", "'false'", "'@'", "':'", "'optional'", "'enum'", "'literal'", "'string'", "'expression'", "'int'", "'real'", "'boolean'", "'void'", "'array'", "'import'", "'from'", "'>'", "'>='", "'!='", "'<='", "'<'", "'+'", "'-'", "'*'", "'/'", "'%'", "'Y'", "'Z'", "'E'", "'P'", "'T'", "'G'", "'M'", "'k'", "'h'", "'da'", "'d'", "'c'", "'m'", "'\\u00B5'", "'n'", "'p'", "'f'", "'a'", "'z'", "'y'"
     };
     public static final int T__50=50;
     public static final int T__19=19;
@@ -8653,7 +8653,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "ruleComparisonOperatorRule"
-    // InternalInstanceLanguage.g:2904:1: ruleComparisonOperatorRule returns [Enumerator current=null] : ( (enumLiteral_0= '>=' ) | (enumLiteral_1= '>' ) | (enumLiteral_2= '=' ) | (enumLiteral_3= '!=' ) | (enumLiteral_4= '<' ) | (enumLiteral_5= '<=' ) ) ;
+    // InternalInstanceLanguage.g:2904:1: ruleComparisonOperatorRule returns [Enumerator current=null] : ( (enumLiteral_0= '>' ) | (enumLiteral_1= '>=' ) | (enumLiteral_2= '=' ) | (enumLiteral_3= '!=' ) | (enumLiteral_4= '<=' ) | (enumLiteral_5= '<' ) ) ;
     public final Enumerator ruleComparisonOperatorRule() throws RecognitionException {
         Enumerator current = null;
 
@@ -8668,10 +8668,10 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
         	enterRule();
 
         try {
-            // InternalInstanceLanguage.g:2910:2: ( ( (enumLiteral_0= '>=' ) | (enumLiteral_1= '>' ) | (enumLiteral_2= '=' ) | (enumLiteral_3= '!=' ) | (enumLiteral_4= '<' ) | (enumLiteral_5= '<=' ) ) )
-            // InternalInstanceLanguage.g:2911:2: ( (enumLiteral_0= '>=' ) | (enumLiteral_1= '>' ) | (enumLiteral_2= '=' ) | (enumLiteral_3= '!=' ) | (enumLiteral_4= '<' ) | (enumLiteral_5= '<=' ) )
+            // InternalInstanceLanguage.g:2910:2: ( ( (enumLiteral_0= '>' ) | (enumLiteral_1= '>=' ) | (enumLiteral_2= '=' ) | (enumLiteral_3= '!=' ) | (enumLiteral_4= '<=' ) | (enumLiteral_5= '<' ) ) )
+            // InternalInstanceLanguage.g:2911:2: ( (enumLiteral_0= '>' ) | (enumLiteral_1= '>=' ) | (enumLiteral_2= '=' ) | (enumLiteral_3= '!=' ) | (enumLiteral_4= '<=' ) | (enumLiteral_5= '<' ) )
             {
-            // InternalInstanceLanguage.g:2911:2: ( (enumLiteral_0= '>=' ) | (enumLiteral_1= '>' ) | (enumLiteral_2= '=' ) | (enumLiteral_3= '!=' ) | (enumLiteral_4= '<' ) | (enumLiteral_5= '<=' ) )
+            // InternalInstanceLanguage.g:2911:2: ( (enumLiteral_0= '>' ) | (enumLiteral_1= '>=' ) | (enumLiteral_2= '=' ) | (enumLiteral_3= '!=' ) | (enumLiteral_4= '<=' ) | (enumLiteral_5= '<' ) )
             int alt35=6;
             switch ( input.LA(1) ) {
             case 53:
@@ -8714,10 +8714,10 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
             switch (alt35) {
                 case 1 :
-                    // InternalInstanceLanguage.g:2912:3: (enumLiteral_0= '>=' )
+                    // InternalInstanceLanguage.g:2912:3: (enumLiteral_0= '>' )
                     {
-                    // InternalInstanceLanguage.g:2912:3: (enumLiteral_0= '>=' )
-                    // InternalInstanceLanguage.g:2913:4: enumLiteral_0= '>='
+                    // InternalInstanceLanguage.g:2912:3: (enumLiteral_0= '>' )
+                    // InternalInstanceLanguage.g:2913:4: enumLiteral_0= '>'
                     {
                     enumLiteral_0=(Token)match(input,53,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -8733,10 +8733,10 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 2 :
-                    // InternalInstanceLanguage.g:2920:3: (enumLiteral_1= '>' )
+                    // InternalInstanceLanguage.g:2920:3: (enumLiteral_1= '>=' )
                     {
-                    // InternalInstanceLanguage.g:2920:3: (enumLiteral_1= '>' )
-                    // InternalInstanceLanguage.g:2921:4: enumLiteral_1= '>'
+                    // InternalInstanceLanguage.g:2920:3: (enumLiteral_1= '>=' )
+                    // InternalInstanceLanguage.g:2921:4: enumLiteral_1= '>='
                     {
                     enumLiteral_1=(Token)match(input,54,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -8790,10 +8790,10 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 5 :
-                    // InternalInstanceLanguage.g:2944:3: (enumLiteral_4= '<' )
+                    // InternalInstanceLanguage.g:2944:3: (enumLiteral_4= '<=' )
                     {
-                    // InternalInstanceLanguage.g:2944:3: (enumLiteral_4= '<' )
-                    // InternalInstanceLanguage.g:2945:4: enumLiteral_4= '<'
+                    // InternalInstanceLanguage.g:2944:3: (enumLiteral_4= '<=' )
+                    // InternalInstanceLanguage.g:2945:4: enumLiteral_4= '<='
                     {
                     enumLiteral_4=(Token)match(input,56,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -8809,10 +8809,10 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 6 :
-                    // InternalInstanceLanguage.g:2952:3: (enumLiteral_5= '<=' )
+                    // InternalInstanceLanguage.g:2952:3: (enumLiteral_5= '<' )
                     {
-                    // InternalInstanceLanguage.g:2952:3: (enumLiteral_5= '<=' )
-                    // InternalInstanceLanguage.g:2953:4: enumLiteral_5= '<='
+                    // InternalInstanceLanguage.g:2952:3: (enumLiteral_5= '<' )
+                    // InternalInstanceLanguage.g:2953:4: enumLiteral_5= '<'
                     {
                     enumLiteral_5=(Token)match(input,57,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {

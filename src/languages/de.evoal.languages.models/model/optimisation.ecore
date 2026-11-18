@@ -584,10 +584,23 @@
           <details key="documentation" value="&#xA;Returns the optimisation direction&#xA;"/>
         </eAnnotations>
       </eOperations>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1"
-          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="&#xA;Target to optimise to.&#xA;"/>
+          <details key="documentation" value="&#xA;Constant target to optimise to. Unset if the target is taken from the evaluation.&#xA;"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="fromEvaluation" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="&#xA;If set, the target is the current target point of the evaluation instead of a constant value.&#xA;"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="distance" lowerBound="1"
+          eType="ecore:EClass core.ecore#//Configuration" containment="true">
+        <eAnnotations source="https://evoal.de/v202610/models/core/configured-by">
+          <details key="type" value="de.evoal.optimisation.core.target-distance"/>
+        </eAnnotations>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="&#xA;The target distance that measures how far an objective value is from the target.&#xA;"/>
         </eAnnotations>
       </eStructuralFeatures>
     </eClassifiers>

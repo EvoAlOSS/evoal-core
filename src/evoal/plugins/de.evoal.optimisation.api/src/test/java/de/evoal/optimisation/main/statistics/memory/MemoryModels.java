@@ -17,6 +17,7 @@ import de.evoal.languages.model.dynamic.DynamicFactory;
 import de.evoal.languages.model.dynamic.DynamicPackage;
 import de.evoal.models.core.ecore.Space;
 import de.evoal.models.core.ecore.TypedEObject;
+import de.evoal.models.v202704.core.Configuration;
 import de.evoal.models.v202704.optimisation.memory.Execution;
 import de.evoal.models.v202704.optimisation.memory.Individual;
 import de.evoal.models.v202704.optimisation.memory.Iteration;
@@ -30,6 +31,9 @@ import de.evoal.models.v202704.optimisation.memory.Relationship;
 import de.evoal.models.v202704.optimisation.model.MinimiseGoal;
 import de.evoal.models.v202704.optimisation.model.ModelFactory;
 import de.evoal.models.v202704.optimisation.model.Problem;
+
+import de.evoal.optimisation.api.fitness.Goals;
+import de.evoal.optimisation.api.fitness.TargetDistance;
 
 /**
  * Builds small memory models for the tests of the memory model writer: a problem with a
@@ -110,6 +114,14 @@ final class MemoryModels {
     }
 
     /**
+     * @return The goals of the problem; the problem must not contain target goals from the
+     *   evaluation.
+     */
+    static Goals goals(final Problem problem) {
+        return Goals.of(problem, null, MemoryModels::noDistance);
+    }
+
+    /**
      * @return An individual with the search space values {@code x} and the optimisation space
      *   value {@code y}.
      */
@@ -156,6 +168,13 @@ final class MemoryModels {
         definition.setDescription("Description of " + name + ".");
 
         return definition;
+    }
+
+    /**
+     * Fails: the goals of the tests have no distances to create.
+     */
+    private static TargetDistance noDistance(final Configuration configuration) {
+        throw new IllegalStateException("The test goals have no distance.");
     }
 
     /**
