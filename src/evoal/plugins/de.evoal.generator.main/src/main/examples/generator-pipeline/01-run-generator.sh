@@ -1,8 +1,11 @@
 #!/usr/bin/env bash
 
-if [ -z ${EVOAL_HOME+x} ]; then
-  export EVOAL_HOME=$( cd -- "$(dirname $0)/../../" >/dev/null 2>&1 ; pwd -P )
-fi
+# Samples the Ackley function into output/ackley.csv.
 
-$SHELL $EVOAL_HOME/bin/evoal-pipeline.sh . ackley.generator
+set -e
 
+export EVOAL_HOME=${EVOAL_HOME:-$( cd -- "$(dirname "$0")/../../" >/dev/null 2>&1 ; pwd -P )}
+export EVOAL_LOGGING=${EVOAL_LOGGING:-INFO}
+
+mkdir -p output
+"${SHELL:-bash}" "$EVOAL_HOME/bin/evoal-pipeline.sh" . ackley.generator

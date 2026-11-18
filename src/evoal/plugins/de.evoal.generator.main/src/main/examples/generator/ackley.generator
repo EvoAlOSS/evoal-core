@@ -37,6 +37,6 @@ module ackley {
 	]
 	
 	begin
-		write "ackley.json" with 1000 samples from executing [ 'main-pipeline'];
+		write "output/ackley.json" with 1000 samples from executing [ 'main-pipeline'];
 	end
 }

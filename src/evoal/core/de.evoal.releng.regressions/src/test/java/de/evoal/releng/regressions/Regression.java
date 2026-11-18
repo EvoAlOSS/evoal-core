@@ -6,6 +6,7 @@ import java.io.UncheckedIOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
 import java.util.Properties;
 
 /**
@@ -15,20 +16,22 @@ import java.util.Properties;
  *   <li>a regression configuration: a folder in {@code src/test/regressions} of a plugin
  *     that contains the configuration {@value #CONFIGURATION_FILE} and the files it
  *     imports. It runs with the search launcher of the release.</li>
- *   <li>an example: a folder in {@code src/main/examples} of a plugin that contains a
- *     run script ({@code 01-run-*.sh}). It runs with its own run script, as users
- *     run it.</li>
+ *   <li>an example: a folder in {@code src/main/examples} of a plugin that contains
+ *     numbered scripts ({@code 01-run-*.sh}, {@code 02-*.sh}, ...). Its scripts run in
+ *     order, as users run them.</li>
  * </ul>
- * The references of the output are in {@value #EXPECTED_FOLDER}. The optional file
- *   {@value #SETTINGS_FILE} sets the {@linkplain #tolerance() tolerance} of the comparison.
+ * The references of the output are in {@value #EXPECTED_FOLDER}. An example without
+ *   references is a smoke test: its scripts must succeed, but its output is not
+ *   compared. The optional file {@value #SETTINGS_FILE} sets the
+ *   {@linkplain #tolerance() tolerance} of the comparison.
  *
  * @param folder The folder of the configuration.
  * @param name The name, {@code <plugin>/<folder name>} for a regression configuration
  *   and {@code <plugin>/examples/<folder name>} for an example.
- * @param runScript The run script of an example, relative to {@link #folder()}, or
- *   {@code null} for a regression configuration.
+ * @param scripts The scripts of an example in the order they run, relative to
+ *   {@link #folder()}; empty for a regression configuration.
  */
-public record Regression(Path folder, String name, String runScript) {
+public record Regression(Path folder, String name, List<String> scripts) {
     /**
      * The optimisation configuration of a regression configuration.
      */
@@ -58,14 +61,29 @@ public record Regression(Path folder, String name, String runScript) {
      * Creates a regression configuration.
      */
     public static Regression configuration(final Path folder, final String name) {
-        return new Regression(folder, name, null);
+        return new Regression(folder, name, List.of());
     }
 
     /**
-     * Creates an example that runs with its own run script.
+     * Creates an example that runs its own scripts.
+     *
+     * @param scripts The scripts in the order they run, at least one.
      */
-    public static Regression example(final Path folder, final String name, final String runScript) {
-        return new Regression(folder, name, runScript);
+    public static Regression example(final Path folder, final String name, final List<String> scripts) {
+        if(scripts.isEmpty()) {
+            throw new IllegalArgumentException("The example " + name + " needs at least one script.");
+        }
+
+        return new Regression(folder, name, List.copyOf(scripts));
+    }
+
+    /**
+     * @return {@code true} if the output is compared with references, {@code false} for a
+     *   smoke test (an example without {@value #EXPECTED_FOLDER}). A regression
+     *   configuration always has references.
+     */
+    public boolean hasReferences() {
+        return !isExample() || Files.isDirectory(expectedFolder());
     }
 
     /**
@@ -133,10 +151,10 @@ public record Regression(Path folder, String name, String runScript) {
     }
 
     /**
-     * @return {@code true} if this is an example that runs with its own run script.
+     * @return {@code true} if this is an example that runs its own scripts.
      */
     public boolean isExample() {
-        return runScript != null;
+        return !scripts.isEmpty();
     }
 
     @Override

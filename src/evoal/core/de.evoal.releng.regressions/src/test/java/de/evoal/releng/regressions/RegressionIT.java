@@ -5,6 +5,10 @@ import java.io.UncheckedIOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Assertions;
@@ -13,20 +17,27 @@ import org.junit.jupiter.api.TestFactory;
 
 /**
  * Runs every regression configuration against the assembled release and compares
- *   its output with the references.
+ *   its output with the references. Examples run their scripts; an example without
+ *   references is a smoke test whose scripts only have to succeed.
+ * <p>
+ * The runs start in parallel on {@code evoal.regressions.parallelism} workers when the
+ *   tests are created; every test waits for the result of its run. The output of a run
+ *   does not depend on the parallelism, since every run has its own folder and process.
  * <p>
  * System properties:
  * <ul>
  *   <li>{@code evoal.regressions.root}: root folder of the repository (required).</li>
  *   <li>{@code evoal.regressions.update}: {@code true} rewrites the references
  *     instead of comparing against them.</li>
- *   <li>{@code evoal.regressions.examples}: {@code true} also checks the examples
- *     that have references (see {@link RegressionFinder}).</li>
+ *   <li>{@code evoal.regressions.examples}: {@code true} also runs the examples
+ *     (see {@link RegressionFinder}).</li>
  *   <li>{@code evoal.regressions.repetitions}: number of runs per regression
  *     (default 1); all runs must give the same output.</li>
  *   <li>{@code evoal.regressions.shell}: shell for the launcher (default {@code bash}).</li>
  *   <li>{@code evoal.regressions.threads}: number of threads that evaluate the candidates
  *     (default 1); the output does not depend on it.</li>
+ *   <li>{@code evoal.regressions.parallelism}: number of regressions that run at the same
+ *     time (default 1).</li>
  *   <li>{@code evoal.regressions.agent}: Java agent for the runs (set by JaCoCo).</li>
  * </ul>
  */
@@ -40,6 +51,11 @@ public class RegressionIT {
      * The working folders of the runs, kept for inspection.
      */
     private static final Path WORKING_FOLDER = Path.of("target", "regressions");
+
+    /**
+     * Number of regressions that run at the same time.
+     */
+    private final int parallelism;
 
     /**
      * Number of runs per regression. All runs must give the same output.
@@ -59,7 +75,7 @@ public class RegressionIT {
     private final boolean update;
 
     /**
-     * Also checks the examples that have references (nightly pipeline).
+     * Also runs the examples.
      */
     private final boolean withExamples;
 
@@ -79,13 +95,32 @@ public class RegressionIT {
         this.update = Boolean.getBoolean("evoal.regressions.update");
         this.withExamples = Boolean.getBoolean("evoal.regressions.examples");
         this.repetitions = Integer.getInteger("evoal.regressions.repetitions", 1);
+        this.parallelism = Integer.getInteger("evoal.regressions.parallelism", 1);
     }
 
     /**
-     * Compares the output with the references, or rewrites them in update mode.
+     * Waits for the check of a regression and rethrows its failure.
+     */
+    private static void await(final Future<?> check) throws Throwable {
+        try {
+            check.get();
+        } catch(final ExecutionException e) {
+            throw e.getCause();
+        }
+    }
+
+    /**
+     * Compares the output with the references, or rewrites them in update mode. A smoke
+     *   test runs once and is not compared.
      */
     private void check(final Regression regression) throws InterruptedException {
         final Path workingFolder = workingFolderOf(regression);
+
+        if(!regression.hasReferences()) {
+            runner.run(regression, workingFolder.resolve("run-1"));
+            return;
+        }
+
         final Path outputFolder = runRepeatedly(regression, workingFolder);
         final Path expectedFolder = regression.expectedFolder();
 
@@ -104,7 +139,7 @@ public class RegressionIT {
     }
 
     /**
-     * Creates one test per regression configuration.
+     * Starts the runs and creates one test per regression configuration and example.
      */
     @TestFactory
     public Stream<DynamicTest> outputMatchesTheReferences() {
@@ -113,9 +148,20 @@ public class RegressionIT {
         Assertions.assertFalse(regressions.isEmpty(), "No regressions found below " + absoluteRoot);
 
         final List<Regression> examples = withExamples ? RegressionFinder.findExamples(root) : List.of();
+        final List<Regression> all = Stream.concat(regressions.stream(), examples.stream())
+                                           .toList();
 
-        return Stream.concat(regressions.stream(), examples.stream())
-                     .map(this::toTest);
+        final ExecutorService workers = Executors.newFixedThreadPool(parallelism);
+        final List<Future<?>> checks = all.stream()
+                                          .<Future<?>>map(regression -> workers.submit(() -> {
+                                              check(regression);
+                                              return null;
+                                          }))
+                                          .toList();
+        workers.shutdown();
+
+        return Stream.iterate(0, index -> index < all.size(), index -> index + 1)
+                     .map(index -> toTest(all.get(index), checks.get(index)));
     }
 
     /**
@@ -140,8 +186,8 @@ public class RegressionIT {
         return firstOutput;
     }
 
-    private DynamicTest toTest(final Regression regression) {
-        return DynamicTest.dynamicTest(regression.name(), () -> check(regression));
+    private static DynamicTest toTest(final Regression regression, final Future<?> check) {
+        return DynamicTest.dynamicTest(regression.name(), () -> await(check));
     }
 
     /**

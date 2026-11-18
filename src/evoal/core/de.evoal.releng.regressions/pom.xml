@@ -22,10 +22,10 @@
         <!-- root folder of the repository, contains ci/ and the release folder evoal/ -->
         <evoal.regressions.root>${project.basedir}/../../../..</evoal.regressions.root>
 
-        <!-- number of runs per regression, all runs must give the same output (2 in the nightly pipeline) -->
+        <!-- number of runs per regression, all runs must give the same output -->
         <evoal.regressions.repetitions>1</evoal.regressions.repetitions>
 
-        <!-- true also checks the examples that have references (nightly pipeline) -->
+        <!-- true also runs the examples: examples with references are compared, the others are smoke tests -->
         <evoal.regressions.examples>false</evoal.regressions.examples>
 
         <!-- shell that executes the search launcher (bin/evoal-search.sh needs bash 4 or newer, or zsh) -->
@@ -33,6 +33,9 @@
 
         <!-- number of threads that evaluate the candidates of a run (EVOAL_THREADS); the output does not depend on it -->
         <evoal.regressions.threads>1</evoal.regressions.threads>
+
+        <!-- number of regressions that run at the same time; the output does not depend on it -->
+        <evoal.regressions.parallelism>1</evoal.regressions.parallelism>
 
         <!-- true rewrites the references instead of comparing against them -->
         <evoal.regressions.update>false</evoal.regressions.update>
@@ -191,6 +194,7 @@
                         <configuration>
                             <systemPropertyVariables>
                                 <evoal.regressions.examples>${evoal.regressions.examples}</evoal.regressions.examples>
+                                <evoal.regressions.parallelism>${evoal.regressions.parallelism}</evoal.regressions.parallelism>
                                 <evoal.regressions.repetitions>${evoal.regressions.repetitions}</evoal.regressions.repetitions>
                                 <evoal.regressions.root>${evoal.regressions.root}</evoal.regressions.root>
                                 <evoal.regressions.shell>${evoal.regressions.shell}</evoal.regressions.shell>

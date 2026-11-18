@@ -11,7 +11,7 @@ module training {
 		output features 'y:0'
 		
 		learning from [ "data.json" ] 
-		serialise to "gaussian-process.pson" 
+		serialise to "output/gaussian-process.pson" 
 	}
 	
 	specify validation steps []

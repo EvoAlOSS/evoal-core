@@ -17,3 +17,7 @@ xtend-gen
 /evoal/
 *.java._trace
 .flattened-pom.xml
+# backup and lock files of editors
+#*#
+.#*
+*~

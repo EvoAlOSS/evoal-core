@@ -11,7 +11,7 @@ module training {
 		output features 'y:0'
 		
 		learning from [ "data.json" ] 
-		serialise to "svr.pson" 
+		serialise to "output/svr.pson" 
 	}
 	
 	specify validation steps []

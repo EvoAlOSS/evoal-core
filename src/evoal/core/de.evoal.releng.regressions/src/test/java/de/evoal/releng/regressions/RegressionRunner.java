@@ -13,7 +13,8 @@ import java.util.stream.Stream;
 
 /**
  * Runs a regression configuration with the search launcher of the release
- *   ({@code bin/evoal-search.sh}) and a fixed seed. A configuration with target points
+ *   ({@code bin/evoal-search.sh}) and a fixed seed, or the scripts of an example in
+ *   their order. A configuration with target points
  *   ({@value Regression#TARGET_POINTS_FILE}) runs as an evaluation with one repetition
  *   per target point ({@code bin/evoal-evaluate-search.sh}). The run takes place in a
  *   copy of the configuration folder, so the run does not change the repository.
@@ -55,7 +56,7 @@ public final class RegressionRunner {
     private static final int SHOWN_LOG_LINES = 30;
 
     /**
-     * Maximum duration of a run in minutes.
+     * Maximum duration of a run (of each script of an example) in minutes.
      */
     private static final long TIMEOUT_IN_MINUTES = 10;
 
@@ -106,23 +107,34 @@ public final class RegressionRunner {
         copyConfiguration(regression.folder(), workingFolder);
 
         final Path logFile = workingFolder.resolve(LOG_FILE);
-        final Process process = start(regression, workingFolder, logFile);
+        for(final List<String> command : commandsOf(regression)) {
+            runCommand(regression, command, workingFolder, logFile);
+        }
+
+        return workingFolder.resolve(OUTPUT_FOLDER);
+    }
+
+    /**
+     * Runs one command of the regression and appends its output to the log.
+     *
+     * @throws IllegalStateException if the command fails or does not finish in time.
+     */
+    private void runCommand(final Regression regression, final List<String> command, final Path workingFolder, final Path logFile) throws InterruptedException {
+        final Process process = start(command, workingFolder, logFile);
         final boolean finished = process.waitFor(TIMEOUT_IN_MINUTES, TimeUnit.MINUTES);
 
         if(!finished) {
             process.destroyForcibly();
-            throw new IllegalStateException("The regression " + regression + " did not finish within "
+            throw new IllegalStateException("The regression " + regression + " did not finish " + command + " within "
                     + TIMEOUT_IN_MINUTES + " minutes. Log: " + logFile);
         }
 
         final int exitCode = process.exitValue();
         if(exitCode != 0) {
             final String logTail = tailOf(logFile);
-            throw new IllegalStateException("The regression " + regression + " failed with exit code " + exitCode
-                    + ". Log: " + logFile + "\n" + logTail);
+            throw new IllegalStateException("The regression " + regression + " failed in " + command + " with exit code "
+                    + exitCode + ". Log: " + logFile + "\n" + logTail);
         }
-
-        return workingFolder.resolve(OUTPUT_FOLDER);
     }
 
     /**
@@ -155,39 +167,42 @@ public final class RegressionRunner {
     }
 
     /**
-     * @return The command that runs the regression: the run script of an example, the
-     *   evaluation launcher for a regression configuration with target points, or the
-     *   search launcher of the release for other regression configurations.
+     * @return The commands that run the regression, in their order: the scripts of an
+     *   example, the evaluation launcher for a regression configuration with target
+     *   points, or the search launcher of the release for other regression configurations.
      */
-    private List<String> commandOf(final Regression regression) {
+    private List<List<String>> commandsOf(final Regression regression) {
         if(regression.isExample()) {
-            return List.of(shell, regression.runScript());
+            return regression.scripts()
+                             .stream()
+                             .map(script -> List.of(shell, script))
+                             .toList();
         }
 
         if(regression.hasTargetPoints()) {
             final Path evaluationScript = release.resolve(EVALUATION_SCRIPT);
             final String targetPoints = "-Boptimisation:target-points-file=" + Regression.TARGET_POINTS_FILE;
 
-            return List.of(shell,
-                           evaluationScript.toString(),
-                           ".",
-                           Regression.CONFIGURATION_FILE,
-                           OUTPUT_FOLDER,
-                           EVALUATION_REPETITIONS,
-                           targetPoints);
+            return List.of(List.of(shell,
+                                   evaluationScript.toString(),
+                                   ".",
+                                   Regression.CONFIGURATION_FILE,
+                                   OUTPUT_FOLDER,
+                                   EVALUATION_REPETITIONS,
+                                   targetPoints));
         }
 
         final Path searchScript = release.resolve(SEARCH_SCRIPT);
 
-        return List.of(shell, searchScript.toString(), ".", Regression.CONFIGURATION_FILE, OUTPUT_FOLDER);
+        return List.of(List.of(shell, searchScript.toString(), ".", Regression.CONFIGURATION_FILE, OUTPUT_FOLDER));
     }
 
-    private Process start(final Regression regression, final Path workingFolder, final Path logFile) {
-        final List<String> command = commandOf(regression);
+    private Process start(final List<String> command, final Path workingFolder, final Path logFile) {
         final ProcessBuilder builder = new ProcessBuilder(command);
 
         final Map<String, String> environment = builder.environment();
-        environment.put("EVOAL_HOME", release.toString());
+        environment.put("EVOAL_HOME", release.toAbsolutePath().toString());
+        environment.put("SHELL", shell);
         environment.put("EVOAL_SEED", SEED);
         environment.put("EVOAL_THREADS", Integer.toString(threads));
         environment.put("EVOAL_LOGGING", "WARN");
@@ -201,7 +216,7 @@ public final class RegressionRunner {
         final File log = logFile.toFile();
         builder.directory(workingFolder.toFile())
                .redirectErrorStream(true)
-               .redirectOutput(log);
+               .redirectOutput(ProcessBuilder.Redirect.appendTo(log));
 
         try {
             return builder.start();

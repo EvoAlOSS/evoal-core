@@ -46,23 +46,28 @@ into the release.
 
 ## Examples
 
-The examples in `src/evoal/plugins/<plugin>/src/main/examples/<name>` are
-checked as well if the property `evoal.regressions.examples` is `true` (nightly
-pipeline). An example takes part if its folder contains `expected/`; all other
-examples are left out. It must have exactly one run script `01-run-*.sh`, which
-is run as users run it, with `EVOAL_HOME` set to the release,
-`EVOAL_SEED=42` and `EVOAL_THREADS`. The script writes into `output/`. Its references are named
-`<plugin>/examples/<name>`.
+The examples in `src/evoal/plugins/<plugin>/src/main/examples/<name>` run as
+well if the property `evoal.regressions.examples` is `true`. An example has
+numbered scripts (`01-run-*.sh`, `02-*.sh`, ...), which run in this order as
+users run them, with `EVOAL_HOME` set to the release, `EVOAL_SEED=42`,
+`EVOAL_THREADS` and `EVOAL_LOGGING=WARN`. The scripts write their results into
+`output/`. The log of all scripts is `run.log`.
 
-To add an example, create an empty `expected/` folder and create the
-references as described under [References](#references) (with
-`-Devoal.regressions.examples=true`).
-`ci/create-release.sh` does not copy `expected/` into the release.
+- An example with `expected/` is compared with its references, named
+  `<plugin>/examples/<name>`.
+- An example without `expected/` is a smoke test: all scripts must finish with
+  exit code 0; the output is not compared and the example runs only once.
+
+To add references to an example, create an empty `expected/` folder and create
+the references as described under [References](#references) (with
+`-Devoal.regressions.examples=true`). Only deterministic examples get
+references. `ci/create-release.sh` does not copy `expected/` into the release.
 
 ## Running
 
-The regressions run with the profile `regressions` (in the merge request
-pipeline together with `jacoco`). The profile assembles the release with
+The regressions run with the profile `regressions`. Together with the profile
+`jacoco`, every run (also the examples) records its coverage in
+`target/jacoco-regressions.exec`. The profile assembles the release with
 `ci/create-release.sh` before the tests:
 
 ```sh
@@ -72,8 +77,9 @@ mvn -f src/evoal/pom.xml -Pregressions verify
 | Property | Meaning |
 |---|---|
 | `-Devoal.regressions.update=true` | rewrites the references instead of comparing |
-| `-Devoal.regressions.examples=true` | also runs the examples that have references |
-| `-Devoal.regressions.repetitions=2` | runs every regression twice; both outputs must be identical (nightly pipeline) |
+| `-Devoal.regressions.examples=true` | also runs the examples (see [Examples](#examples)) |
+| `-Devoal.regressions.repetitions=2` | runs every regression twice; both outputs must be identical |
+| `-Devoal.regressions.parallelism=2` | number of regressions that run at the same time (default 1) |
 | `-Devoal.regressions.shell=zsh` | shell for the launcher (default `bash`, version 4 or newer) |
 | `-Devoal.regressions.threads=4` | number of threads that evaluate the candidates (`EVOAL_THREADS`, default 1; merge request pipeline: 4) |
 

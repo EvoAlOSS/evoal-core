@@ -54,7 +54,7 @@ module prediction {
 		 */
 	    step {
 	        component 'trained-model' {
-	            'model-file' := "knn.pson";
+	            'model-file' := "output/knn.pson";
 	        }
 	
 	        reads [data 'x:0', data 'x:1', data 'x:2', data 'x:3', data 'x:4', data 'x:5'];
@@ -66,6 +66,6 @@ module prediction {
 	 * Execute the pipeline, generate 1000 samples, and store the generated data.
 	 */
 	begin
-		write "generated.json" with 1000 samples from executing [ 'main-pipeline'];
+		write "output/generated.json" with 1000 samples from executing [ 'main-pipeline'];
 	end
 }

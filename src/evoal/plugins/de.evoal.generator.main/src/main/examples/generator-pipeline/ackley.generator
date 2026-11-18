@@ -69,6 +69,6 @@ module ackley {
 	]
 	
 	begin
-		write "ackley.csv" with 1000 samples from executing [ 'main-pipeline'];
+		write "output/ackley.csv" with 1000 samples from executing [ 'main-pipeline'];
 	end
 }

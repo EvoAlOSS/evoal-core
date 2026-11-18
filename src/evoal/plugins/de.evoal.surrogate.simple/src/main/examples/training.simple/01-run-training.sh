@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
-export EVOAL_HOME=$( cd -- "$(dirname $0)/../../" >/dev/null 2>&1 ; pwd -P )
+# Trains the surrogate model output/simple.pson.
 
-$SHELL $EVOAL_HOME/bin/evoal-training.sh . training.mll
+set -e
+
+export EVOAL_HOME=${EVOAL_HOME:-$( cd -- "$(dirname "$0")/../../" >/dev/null 2>&1 ; pwd -P )}
+export EVOAL_LOGGING=${EVOAL_LOGGING:-INFO}
+
+mkdir -p output
+"${SHELL:-bash}" "$EVOAL_HOME/bin/evoal-training.sh" . training.mll

@@ -18,7 +18,7 @@ module recalculate {
 		 */ 
 		step {
 			component 'reader' {
-			  filename := "ackley-expanded.csv";
+			  filename := "output/ackley-expanded.csv";
 			}
 			
 			writes [
@@ -37,6 +37,6 @@ module recalculate {
 	]
 	
 	begin
-		write "ackley-recalc.csv" with 1000 samples from executing [ 'main-pipeline'];
+		write "output/ackley-recalc.csv" with 1000 samples from executing [ 'main-pipeline'];
 	end
 }

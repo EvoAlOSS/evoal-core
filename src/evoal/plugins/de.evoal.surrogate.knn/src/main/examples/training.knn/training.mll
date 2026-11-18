@@ -11,7 +11,7 @@ module training {
 		output features 'y:0'
 		
 		learning from ["data.json"]
-		serialise to "knn.pson"
+		serialise to "output/knn.pson"
 	}
 	
 	specify validation steps []

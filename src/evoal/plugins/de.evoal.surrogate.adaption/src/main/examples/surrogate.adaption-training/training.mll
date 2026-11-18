@@ -13,7 +13,7 @@ module 'training' {
 		output features 'y:0'
 		
 		learning from [ "data.csv" ] 
-		serialise to "model.pson" 
+		serialise to "output/model.pson" 
 	}
 	
 	specify validation steps []

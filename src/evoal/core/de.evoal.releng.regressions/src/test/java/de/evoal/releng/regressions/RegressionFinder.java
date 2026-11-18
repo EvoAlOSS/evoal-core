@@ -13,9 +13,10 @@ import java.util.stream.Stream;
  *   <li>A regression configuration is a folder
  *     {@code src/evoal/plugins/<plugin>/src/test/regressions/<name>} that contains
  *     the file {@value Regression#CONFIGURATION_FILE}.</li>
- *   <li>A checked example is a folder {@code src/evoal/plugins/<plugin>/src/main/examples/<name>}
- *     that contains the folder {@value Regression#EXPECTED_FOLDER} and exactly one run
- *     script {@code 01-run-*.sh}. Examples without references are not checked.</li>
+ *   <li>An example is a folder {@code src/evoal/plugins/<plugin>/src/main/examples/<name>}
+ *     with at least one numbered script ({@code 01-run-*.sh}, {@code 02-*.sh}, ...). An
+ *     example with the folder {@value Regression#EXPECTED_FOLDER} is compared with its
+ *     references, any other example is a smoke test.</li>
  * </ul>
  */
 public final class RegressionFinder {
@@ -40,9 +41,9 @@ public final class RegressionFinder {
     private static final String EXAMPLES_FOLDER = "src/main/examples";
 
     /**
-     * The pattern of the run script of an example.
+     * The pattern of the scripts of an example. The number gives their order.
      */
-    private static final String RUN_SCRIPT_PATTERN = "01-run-.*\\.sh";
+    private static final String SCRIPT_PATTERN = "[0-9]{2}-.*\\.sh";
 
     private RegressionFinder() {
     }
@@ -59,11 +60,11 @@ public final class RegressionFinder {
     }
 
     /**
-     * Finds the checked examples of all plugins, sorted by plugin and name.
+     * Finds the examples of all plugins, sorted by plugin and name.
      *
      * @param root The root folder of the repository.
-     * @return The examples.
-     * @throws IllegalStateException if an example with references has no or several run scripts.
+     * @return The examples, with and without references.
+     * @throws IllegalStateException if an example has no script.
      */
     public static List<Regression> findExamples(final Path root) {
         return pluginFolders(root).flatMap(RegressionFinder::examplesOf)
@@ -74,12 +75,6 @@ public final class RegressionFinder {
         final Path configuration = folder.resolve(Regression.CONFIGURATION_FILE);
 
         return Files.isRegularFile(configuration);
-    }
-
-    private static boolean isCheckedExample(final Path folder) {
-        final Path expectedFolder = folder.resolve(Regression.EXPECTED_FOLDER);
-
-        return Files.isDirectory(expectedFolder);
     }
 
     /**
@@ -130,23 +125,21 @@ public final class RegressionFinder {
 
         return list(examplesFolder).stream()
                                    .filter(Files::isDirectory)
-                                   .filter(RegressionFinder::isCheckedExample)
                                    .map(folder -> toExample(pluginName, folder));
     }
 
     private static Regression toExample(final String pluginName, final Path folder) {
-        final List<String> runScripts = list(folder).stream()
-                                                    .map(path -> path.getFileName().toString())
-                                                    .filter(name -> name.matches(RUN_SCRIPT_PATTERN))
-                                                    .toList();
+        final List<String> scripts = list(folder).stream()
+                                                 .map(path -> path.getFileName().toString())
+                                                 .filter(name -> name.matches(SCRIPT_PATTERN))
+                                                 .toList();
 
-        if(runScripts.size() != 1) {
-            throw new IllegalStateException("The example " + folder + " needs exactly one run script 01-run-*.sh, found "
-                    + runScripts + ".");
+        if(scripts.isEmpty()) {
+            throw new IllegalStateException("The example " + folder + " has no script 01-run-*.sh.");
         }
 
         final String name = pluginName + "/examples/" + folder.getFileName();
 
-        return Regression.example(folder, name, runScripts.getFirst());
+        return Regression.example(folder, name, scripts);
     }
 }

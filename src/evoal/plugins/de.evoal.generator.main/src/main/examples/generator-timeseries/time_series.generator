@@ -35,6 +35,6 @@ module 'time_series' {
     ]
 
 	begin
-    	write "time.json" with 25 samples from executing [ 'main-pipeline'];
+    	write "output/time.json" with 25 samples from executing [ 'main-pipeline'];
     end
 }
