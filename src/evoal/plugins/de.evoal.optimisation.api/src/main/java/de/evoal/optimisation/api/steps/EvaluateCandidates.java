@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BiPredicate;
 
+import de.evoal.models.core.ecore.TypedEObject;
+import de.evoal.optimisation.api.fitness.BatchEvaluation;
 import de.evoal.optimisation.api.fitness.Evaluation;
 import de.evoal.optimisation.api.fitness.Evaluator;
 import de.evoal.optimisation.api.run.Candidate;
@@ -12,7 +14,8 @@ import de.evoal.optimisation.api.run.Candidate;
  * Evaluates candidates in one of two modes:
  * <ul>
  *   <li><em>batch</em> ({@link #EvaluateCandidates(Evaluator)}): the current candidates
- *     that are not evaluated yet are evaluated in their order. Evaluated candidates are not
+ *     that are not evaluated yet are evaluated together, in parallel if the optimisation
+ *     function allows it ({@link Evaluator#evaluateAll(List)}). Evaluated candidates are not
  *     evaluated again.</li>
  *   <li><em>until accepted</em> ({@link #untilAccepted}): the offered candidates
  *     ({@link SearchState#getOffered()}) are evaluated one after the other until the first
@@ -86,12 +89,26 @@ public final class EvaluateCandidates implements FitnessCalculation {
         }
     }
 
+    /**
+     * If the budget runs out, the first unevaluated candidates that it covers keep their
+     *   evaluation, as in a sequential evaluation.
+     */
     private void evaluateBatch(final SearchState state) {
-        for(final Candidate candidate : state.getCandidates()) {
-            if(!candidate.isEvaluated()) {
-                evaluate(candidate);
-            }
+        final List<Candidate> unevaluated = state.getCandidates()
+                                                 .stream()
+                                                 .filter(candidate -> !candidate.isEvaluated())
+                                                 .toList();
+        final List<TypedEObject> inputs = unevaluated.stream()
+                                                     .map(Candidate::input)
+                                                     .toList();
+
+        final BatchEvaluation batch = evaluator.evaluateAll(inputs);
+        final List<Evaluation> evaluations = batch.evaluations();
+        for(int i = 0; i < evaluations.size(); ++i) {
+            unevaluated.get(i).evaluate(evaluations.get(i));
         }
+
+        batch.rethrowExhaustion();
     }
 
     /**

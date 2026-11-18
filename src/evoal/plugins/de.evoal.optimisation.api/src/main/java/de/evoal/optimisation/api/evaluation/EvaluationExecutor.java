@@ -1,6 +1,9 @@
 package de.evoal.optimisation.api.evaluation;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -17,7 +20,8 @@ import de.evoal.core.api.board.CoreBlackboardEntries;
 import de.evoal.core.api.cdi.RunScoped;
 
 /**
- * The threads that evaluate the candidates of a run in parallel.
+ * The threads that evaluate the candidates of a run in parallel. The algorithms also use them
+ *   for other independent work per candidate, e.g., the moves of the particles of a swarm.
  * <p>
  * The number of threads is read from {@link CoreBlackboardEntries#EVALUATION_THREADS}
  *   ({@code -Bcore:evaluation-threads=...}; the start scripts pass the environment variable
@@ -75,17 +79,78 @@ public class EvaluationExecutor {
     }
 
     /**
-     * Submits a task to the threads.
+     * Submits a task to the threads, which are created on the first submission.
      *
      * @param task The task.
      * @return The future of the task.
      */
-    public <T> Future<T> submit(final Callable<T> task) {
+    private <T> Future<T> submit(final Callable<T> task) {
         if(executor == null) {
             executor = Executors.newFixedThreadPool(threads(), new EvaluationThreadFactory());
         }
 
         return executor.submit(task);
+    }
+
+    /**
+     * Runs the tasks and waits until all of them have ended. With one thread, the tasks run
+     *   one after another on the calling thread, otherwise on the threads of the run.
+     *
+     * @param tasks The independent tasks.
+     * @return The results of the tasks, in the order of the tasks.
+     * @throws RuntimeException the failure of the task with the lowest index, after all tasks
+     *   have ended. The failures of the other tasks are suppressed exceptions of it. A
+     *   checked exception is wrapped in an {@link IllegalStateException}.
+     */
+    public <T> List<T> invokeAll(final List<? extends Callable<T>> tasks) {
+        final List<Result<T>> results = new ArrayList<>(tasks.size());
+
+        if(tasks.size() <= 1 || threads() <= 1) {
+            tasks.forEach(task -> results.add(Result.of(task)));
+        } else {
+            final List<Future<Result<T>>> futures = new ArrayList<>(tasks.size());
+            tasks.forEach(task -> futures.add(submit(() -> Result.of(task))));
+            futures.forEach(future -> results.add(await(future)));
+        }
+
+        Throwable failure = null;
+        final List<T> values = new ArrayList<>(results.size());
+        for(final Result<T> result : results) {
+            if(result.failure() == null) {
+                values.add(result.value());
+            } else if(failure == null) {
+                failure = result.failure();
+            } else {
+                failure.addSuppressed(result.failure());
+            }
+        }
+
+        if(failure instanceof RuntimeException exception) {
+            throw exception;
+        }
+        if(failure instanceof Error error) {
+            throw error;
+        }
+        if(failure != null) {
+            throw new IllegalStateException("A task failed.", failure);
+        }
+
+        return values;
+    }
+
+    /**
+     * Waits for a task. The tasks catch their failures, so the future only fails if the
+     *   thread is interrupted.
+     */
+    private static <T> Result<T> await(final Future<Result<T>> future) {
+        try {
+            return future.get();
+        } catch(final InterruptedException e) {
+            Thread.currentThread().interrupt();
+            throw new IllegalStateException("Interrupted while waiting for a task.", e);
+        } catch(final ExecutionException e) {
+            throw new IllegalStateException("A task ended unexpectedly.", e.getCause());
+        }
     }
 
     /**
@@ -127,6 +192,19 @@ public class EvaluationExecutor {
         }
 
         return value;
+    }
+
+    /**
+     * The result of a task: either its value or its failure.
+     */
+    private record Result<T>(T value, Throwable failure) {
+        static <T> Result<T> of(final Callable<T> task) {
+            try {
+                return new Result<>(task.call(), null);
+            } catch(final Exception | Error e) {
+                return new Result<>(null, e);
+            }
+        }
     }
 
     /**

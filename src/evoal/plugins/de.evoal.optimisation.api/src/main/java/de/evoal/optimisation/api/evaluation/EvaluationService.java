@@ -8,8 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.OptionalLong;
 import java.util.Set;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
+import java.util.concurrent.Callable;
 
 import org.eclipse.emf.ecore.EClass;
 
@@ -276,17 +275,14 @@ public class EvaluationService implements MetricContributor {
             preparedForThreads = true;
         }
 
-        final List<Future<Outcome>> futures = new ArrayList<>(candidates.size() - first);
+        final List<Callable<Outcome>> evaluations = new ArrayList<>(candidates.size() - first);
         for(int i = first; i < candidates.size(); ++i) {
             final EvaluationTask task = tasks.get(i);
             final TypedEObject candidate = candidates.get(i);
 
-            futures.add(executor.submit(() -> Outcome.of(task, currentFunction, candidate)));
+            evaluations.add(() -> Outcome.of(task, currentFunction, candidate));
         }
-
-        for(final Future<Outcome> future : futures) {
-            outcomes.add(await(future));
-        }
+        outcomes.addAll(executor.invokeAll(evaluations));
 
         return outcomes;
     }
@@ -323,21 +319,6 @@ public class EvaluationService implements MetricContributor {
             if(eClass != null && classes.add(eClass)) {
                 ConcurrentEClassAccess.prepare(eClass);
             }
-        }
-    }
-
-    /**
-     * Waits for an evaluation. The evaluations catch their failures, so the future only
-     *   fails if the thread is interrupted.
-     */
-    private static Outcome await(final Future<Outcome> future) {
-        try {
-            return future.get();
-        } catch(final InterruptedException e) {
-            Thread.currentThread().interrupt();
-            throw new IllegalStateException("Interrupted while waiting for an evaluation.", e);
-        } catch(final ExecutionException e) {
-            throw new IllegalStateException("An evaluation ended unexpectedly.", e.getCause());
         }
     }
 

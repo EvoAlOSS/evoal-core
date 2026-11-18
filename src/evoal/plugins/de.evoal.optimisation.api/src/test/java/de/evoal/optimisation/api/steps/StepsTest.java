@@ -11,7 +11,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-import org.mockito.InOrder;
 import org.mockito.Mockito;
 
 import de.evoal.models.core.ecore.TypedEObject;
@@ -61,7 +60,11 @@ public class StepsTest {
 
         @BeforeEach
         public void evaluateToAnOutput() {
-            Mockito.when(evaluationService.evaluate(Mockito.any())).thenAnswer(invocation -> input());
+            Mockito.when(evaluationService.remainingEvaluations()).thenReturn(java.util.OptionalLong.empty());
+            Mockito.when(evaluationService.evaluateAll(Mockito.any())).thenAnswer(invocation -> {
+                final List<TypedEObject> inputs = invocation.getArgument(0);
+                return inputs.stream().map(i -> input()).toList();
+            });
         }
 
         @Test
@@ -80,10 +83,8 @@ public class StepsTest {
             step.execute(state);
 
             // then
-            final InOrder order = Mockito.inOrder(evaluationService);
-            order.verify(evaluationService).evaluate(first);
-            order.verify(evaluationService).evaluate(second);
-            order.verifyNoMoreInteractions();
+            Mockito.verify(evaluationService).evaluateAll(List.of(first, second));
+            Mockito.verify(evaluationService, Mockito.never()).evaluate(Mockito.any());
 
             Assertions.assertTrue(state.getCandidates().stream().allMatch(Candidate::isEvaluated));
             Assertions.assertTrue(state.getCandidates().stream().allMatch(candidate -> candidate.fitness() != null));
@@ -97,7 +98,8 @@ public class StepsTest {
             final List<Candidate> candidates = List.of(new Candidate(input(), Lineage.NONE), new Candidate(input(), Lineage.NONE));
             state.setCandidates(candidates);
             Mockito.when(comparator.toValue(Mockito.any(), Mockito.any())).thenReturn(new TestValue(2.0));
-            Mockito.when(evaluationService.evaluate(candidates.get(1).input()))
+            Mockito.when(evaluationService.remainingEvaluations()).thenReturn(java.util.OptionalLong.of(1));
+            Mockito.when(evaluationService.evaluateAll(List.of(candidates.get(1).input())))
                    .thenThrow(new EvaluationBudgetExhaustedException(EvaluationSource.REAL, 1));
 
             // when

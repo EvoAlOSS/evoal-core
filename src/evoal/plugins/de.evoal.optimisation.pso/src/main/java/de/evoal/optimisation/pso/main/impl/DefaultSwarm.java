@@ -17,6 +17,7 @@
  */
 package de.evoal.optimisation.pso.main.impl;
 
+import de.evoal.core.api.ecore.misc.ConcurrentEClassAccess;
 import de.evoal.core.api.random.RandomService;
 import de.evoal.core.api.cdi.Component;
 import de.evoal.core.api.cdi.ConfigurationValue;
@@ -28,7 +29,8 @@ import de.evoal.optimisation.pso.api.optimiser.Swarm;
 import de.evoal.optimisation.pso.api.swarm.Particle;
 import de.evoal.optimisation.pso.api.swarm.State;
 import de.evoal.optimisation.api.model.InitialCandidatesProvider;
-import de.evoal.optimisation.api.evaluation.EvaluationBudgetExhaustedException;
+import de.evoal.optimisation.api.evaluation.EvaluationExecutor;
+import de.evoal.optimisation.api.fitness.BatchEvaluation;
 import de.evoal.optimisation.api.fitness.Evaluation;
 import de.evoal.optimisation.api.fitness.Evaluator;
 import lombok.Getter;
@@ -40,16 +42,17 @@ import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.Callable;
 import java.util.random.RandomGenerator;
-import java.util.stream.IntStream;
 
 /**
  * The swarm of the basic particle swarm optimisation (DL type {@code 'default-swarm'}): a
  *   fixed number of particles that move in parallel, each towards its personal best and the
- *   best of its neighbourhood ({@link NeighborhoodTopology}), and are evaluated one after
- *   another.
+ *   best of its neighbourhood ({@link NeighborhoodTopology}), and are evaluated in parallel
+ *   if the optimisation function allows it. Both use the threads of the run
+ *   ({@link EvaluationExecutor}); since every particle draws from its own random stream and
+ *   the evaluations from their task streams, the results do not depend on the threads.
  */
 @Dependent
 @Named("de.evoal.optimisation.pso.optimisation.default-swarm")
@@ -79,18 +82,42 @@ public class DefaultSwarm implements Swarm {
     @Inject
     private RandomService randomService;
 
+    /**
+     * The threads of the run.
+     */
+    @Inject
+    private EvaluationExecutor executor;
+
+    /**
+     * Whether the class of the positions has been prepared for the moves on several threads.
+     */
+    private boolean preparedForThreads;
+
     @Inject
     @ConfigurationValue(entry = OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.size-of-population")
     private int sizeOfPopulation;
 
     /**
-     * Moves the particles in the swarm.
+     * Moves the particles in the swarm, in parallel on the threads of the run.
      */
     @Override
     public void move(final int iteration) {
-        IntStream.range(0, particles.length)
-                 .parallel()
-                 .forEach(i -> particles[i].moveParticle(getNeighbors(i), iteration));
+        if(!preparedForThreads && particles.length > 0) {
+            ConcurrentEClassAccess.prepare(particles[0].getCurrentPosition().eClass());
+            preparedForThreads = true;
+        }
+
+        final List<Callable<Void>> moves = new ArrayList<>(particles.length);
+        for(int i = 0; i < particles.length; ++i) {
+            final int index = i;
+
+            moves.add(() -> {
+                particles[index].moveParticle(getNeighbors(index), iteration);
+                return null;
+            });
+        }
+
+        executor.invokeAll(moves);
     }
 
     /**
@@ -114,27 +141,28 @@ public class DefaultSwarm implements Swarm {
     }
 
     /**
-     * Evaluates the particles in the swarm, one after another in the order of the swarm, and
-     *   sets their current evaluation. If the evaluation budget runs out, the particles that are
-     *   not evaluated undo their last move.
+     * Evaluates the particles in the swarm as one batch and sets their current evaluation. If
+     *   the evaluation budget runs out, the first particles that it covers keep their
+     *   evaluation and the others undo their last move, as in a sequential evaluation.
      *
-     * @throws EvaluationBudgetExhaustedException if the evaluation budget runs out.
+     * @throws de.evoal.optimisation.api.evaluation.EvaluationBudgetExhaustedException if the
+     *   evaluation budget runs out.
      */
     @Override
     public void evaluate() {
-        for(int index = 0; index < particles.length; ++index) {
-            final Particle particle = particles[index];
-            final TypedEObject candidate = particle.getCurrentPosition();
+        final List<TypedEObject> positions = Arrays.stream(particles)
+                                                   .map(Particle::getCurrentPosition)
+                                                   .toList();
 
-            final Evaluation evaluation;
-            try {
-                evaluation = evaluator.evaluate(candidate);
-            } catch(final EvaluationBudgetExhaustedException e) {
-                undoMoves(index);
-                throw e;
-            }
+        final BatchEvaluation batch = evaluator.evaluateAll(positions);
+        final List<Evaluation> evaluations = batch.evaluations();
+        for(int index = 0; index < evaluations.size(); ++index) {
+            particles[index].setCurrentEvaluation(evaluations.get(index));
+        }
 
-            particle.setCurrentEvaluation(evaluation);
+        if(batch.isExhausted()) {
+            undoMoves(evaluations.size());
+            batch.rethrowExhaustion();
         }
     }
 
@@ -152,41 +180,41 @@ public class DefaultSwarm implements Swarm {
     }
 
     /**
-     * Creates and evaluates the particles of the initial swarm, one after another. If the
-     *   evaluation budget runs out, the swarm consists of the particles created so far.
+     * Creates the start positions of the initial swarm, evaluates them as one batch and
+     *   creates a particle per evaluated position. If the evaluation budget runs out, the swarm
+     *   consists of the particles of the first positions that it covers.
      *
-     * @throws EvaluationBudgetExhaustedException if the evaluation budget runs out.
+     * @throws de.evoal.optimisation.api.evaluation.EvaluationBudgetExhaustedException if the
+     *   evaluation budget runs out.
      */
     @Override
     public void initialise() {
         log.info("Initializing swarm with {} members.", sizeOfPopulation);
 
-        final Iterator<TypedEObject> candidates = provider.create()
-                .limit(sizeOfPopulation)
-                .iterator();
-        final List<Particle> created = new ArrayList<>();
+        final List<TypedEObject> positions = provider.create()
+                                                     .limit(sizeOfPopulation)
+                                                     .toList();
 
-        try {
-            while(candidates.hasNext()) {
-                final TypedEObject candidate = candidates.next();
-                final Particle particle = toParticle(created.size(), candidate);
-
-                created.add(particle);
-            }
-        } finally {
-            particles = created.toArray(Particle[]::new);
+        final BatchEvaluation batch = evaluator.evaluateAll(positions);
+        final List<Evaluation> evaluations = batch.evaluations();
+        final List<Particle> created = new ArrayList<>(evaluations.size());
+        for(int id = 0; id < evaluations.size(); ++id) {
+            created.add(toParticle(id, positions.get(id), evaluations.get(id)));
         }
+        particles = created.toArray(Particle[]::new);
+
+        batch.rethrowExhaustion();
     }
 
     /**
-     * Evaluates a candidate and creates a particle at its position.
+     * Creates a particle at an evaluated position.
      *
      * @param id The id of the particle (its index in the swarm).
      * @param candidate The start position of the particle.
+     * @param evaluation The evaluation of the start position.
      * @return The new particle.
      */
-    private Particle toParticle(final int id, final TypedEObject candidate) {
-        final Evaluation evaluation = evaluator.evaluate(candidate);
+    private Particle toParticle(final int id, final TypedEObject candidate, final Evaluation evaluation) {
         final State start = new State(candidate, evaluation);
         final RandomGenerator random = randomService.random("de.evoal.optimisation.pso/particle-" + id);
 
