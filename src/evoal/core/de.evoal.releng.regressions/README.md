@@ -81,7 +81,16 @@ mvn -f src/evoal/pom.xml -Pregressions verify
 | `-Devoal.regressions.repetitions=2` | runs every regression twice; both outputs must be identical |
 | `-Devoal.regressions.parallelism=2` | number of regressions that run at the same time (default 1) |
 | `-Devoal.regressions.shell=zsh` | shell for the launcher (default `bash`, version 4 or newer) |
-| `-Devoal.regressions.threads=4` | number of threads that evaluate the candidates (`EVOAL_THREADS`, default 1; merge request pipeline: 4) |
+| `-Devoal.regressions.threads=4` | number of threads that evaluate the candidates (`EVOAL_THREADS`, default 1) |
+
+In the pipeline (see the comment at the top of `.gitlab-ci.yml`), all runs use 4
+threads and a parallelism of 2:
+
+| Pipeline | Runs |
+|---|---|
+| merge request into `develop` | regressions, with coverage |
+| `develop` after a merge | regressions and examples, with coverage |
+| merge request `develop` → `release` | regressions and examples, 2 repetitions |
 
 ## References
 
@@ -101,9 +110,8 @@ mvn -f src/evoal/pom.xml -Pregressions -Devoal.regressions.update=true -Devoal.r
 EvoAl CI image, e.g., to reproduce a pipeline failure.
 
 The references do not depend on the number of threads either (see "Parallel evaluation"
-in the README of `de.evoal.optimisation.api`). They are created with one thread; the merge
-request pipeline checks them with 4 threads (`-Devoal.regressions.threads=4`), the nightly
-pipeline with one.
+in the README of `de.evoal.optimisation.api`). They are created with one thread; the pipeline checks them
+with 4 threads (`-Devoal.regressions.threads=4`).
 
 The only value that is not compared is the EvoAl version in the memory model
 (`"evoalVersion"`): it is stored as `${evoal.version}` and masked in the output,

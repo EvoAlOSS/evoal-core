@@ -21,7 +21,6 @@ SECTIONS = [
     { "name" : "Official Releases",  "matches" : lambda x : x in tags },
     { "name" : "Rolling Release",    "matches" : lambda x : x == "release" },
     { "name" : "Nightly Build",      "matches" : lambda x : x == "develop" },
-    { "name" : "Developer Versions", "matches" : lambda x : x not in ["develop", "release"] and x in branches }
 ]
 
 connection = http.client.HTTPSConnection(SERVER)
@@ -34,11 +33,12 @@ else:
 if not os.path.exists("public"):
     os.makedirs("public")
 
-# collect list of all available branches
+# collect the branches that have update sites (only develop and release deploy)
 connection.request("GET", BASE_URL + "branches", headers = headers)
 response = connection.getresponse()
 for branch in json.loads(response.read()):
-    branches.append(branch['name'])
+    if branch['name'] in ["develop", "release"]:
+        branches.append(branch['name'])
 
 # collect list of all available tags
 connection.request("GET", BASE_URL + "tags", headers = headers)
@@ -113,7 +113,7 @@ f.write("""
         <title>EvoAl Releases</title>
     </head>
     <body>
-        <h1>Available EvoAl Releases, Nightly Builds, and CI Builds</h1>
+        <h1>Available EvoAl Releases and Nightly Builds</h1>
         <p>
           In the following, we provide update sites, releases and Eclipse update sites for different EvoAl builds.
           The most safe version is to use an official release version. If you need some of the more recent changes in EvoAl, you can use the Nightly build.

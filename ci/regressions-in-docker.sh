@@ -2,15 +2,15 @@
 
 ###############################################################################
 # Builds EvoAl and runs the regressions in the EvoAl CI image, i.e., in the
-#   same environment as the merge request pipeline, e.g., to reproduce a
+#   same environment as the pipeline, e.g., to reproduce a
 #   pipeline failure. The results do not depend on the platform, so
 #   `mvn -f src/evoal/pom.xml -Pregressions verify` gives the same results
 #   locally.
 #
 # Usage: ci/regressions-in-docker.sh [--update] [--examples]
 #   --update    rewrites the references (expected/) instead of comparing.
-#   --examples  also runs the examples that have references (as the nightly
-#               pipeline does).
+#   --examples  also runs the examples (as the pipelines of develop and of
+#               the merge request into release do).
 #
 # Requirements:
 #   - a running Docker daemon, logged in to the GitLab registry

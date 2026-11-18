@@ -123,25 +123,6 @@
                                     <goal>report-aggregate</goal>
                                 </goals>
                             </execution>
-
-                            <execution>
-                                <id>merge-results</id>
-                                <phase>post-integration-test</phase>
-                                <goals>
-                                <goal>merge</goal>
-                                </goals>
-                                <configuration>
-                                <fileSets>
-                                    <fileSet>
-                                        <directory>${project.basedir}/../../../../evoal/examples</directory>
-                                        <includes>
-                                            <include>**/jacoco.exec</include>
-                                        </includes>
-                                    </fileSet>
-                                </fileSets>
-                                <destFile>target/regression.exec</destFile>
-                                </configuration>
-                            </execution>
                         </executions>
                     </plugin>
                 </plugins>

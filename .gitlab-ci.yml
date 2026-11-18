@@ -1,22 +1,59 @@
+###############################################################################
+# EvoAl pipeline
+#
+# Pipelines (one per commit, see workflow):
+#
+#   feature branch push,     dsl:build (only if src/languages changed) and
+#   draft merge request      evoal:unit (build and unit tests)
+#
+#   merge request into       dsl:build (only if src/languages changed),
+#   develop                  evoal:regressions (unit tests and regressions with
+#                            4 threads, coverage), evoal:coverage, dependency
+#                            scanning
+#
+#   merge request develop    dsl:build (only if src/languages changed),
+#   into release (nightly    evoal:release-check (unit tests, regressions and
+#   auto merge)              all examples, 4 threads, 2 repetitions); the
+#                            merge only happens if it succeeds
+#
+#   develop, release, tags   dsl:deploy, evoal:release (one build: deploy and
+#                            the four platform packages; on develop also unit
+#                            tests, regressions and examples with coverage),
+#                            pages; tags also release-notes and publish
+#
+#   schedule                 auto merge (AUTOMATIC_MERGE == "true")
+#
+# Feature branches and merge requests take the DSLs from the develop registry
+#   unless they change src/languages; then dsl:build builds and passes them on.
+###############################################################################
+
 # include pre-defined templates for dependency scanning
 include:
   - local: ci/Dependency-Scanning.gitlab-ci.yml
 
-# set variables depending on the build process
 workflow:
+  auto_cancel:
+    on_new_commit: interruptible
   rules:
-    - if: $CI_COMMIT_TAG == null
-      variables:
-        MAVEN_VERSION: "2026.10.0-rc1-SNAPSHOT"
-        TYCHO_VERSION: "2026.10.0-SNAPSHOT"
-        EVOAL_LANGUAGES_VERSION: "2026.10.0-SNAPSHOT"
-    - if: $CI_COMMIT_TAG != null
+    - if: $CI_COMMIT_TAG
       variables:
         MAVEN_VERSION: "2026.10.0"
         TYCHO_VERSION: "2026.10.0"
         EVOAL_LANGUAGES_VERSION: "2026.10.0"
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_PIPELINE_SOURCE == "schedule" || $CI_PIPELINE_SOURCE == "web"
+    - if: $CI_COMMIT_BRANCH == "develop" || $CI_COMMIT_BRANCH == "release"
+    # a branch with an open merge request is tested by the merge request pipeline
+    - if: $CI_COMMIT_BRANCH && $CI_OPEN_MERGE_REQUESTS
+      when: never
+    - if: $CI_COMMIT_BRANCH
 
 variables:
+  # versions of snapshot builds, the workflow sets the release versions for tags
+  MAVEN_VERSION: "2026.10.0-rc1-SNAPSHOT"
+  TYCHO_VERSION: "2026.10.0-SNAPSHOT"
+  EVOAL_LANGUAGES_VERSION: "2026.10.0-SNAPSHOT"
+
   # This will supress any download for dependencies and plugins or upload messages,
   #   which would clutter the console log. `showDateTime` will show the passed time
   #   in milliseconds. You need to specify `--batch-mode` to make this work.
@@ -26,12 +63,11 @@ variables:
     -Dorg.slf4j.simpleLogger.showDateTime=true
     -Djava.awt.headless=true
 
-  # As of Maven 3.3.0 instead of this you may define these options in `.mvn/maven.config`
-  #   so the same config is used when running from the command line. `installAtEnd` and
-  #   `deployAtEnd` are only effective with recent version of the corresponding plugins.
+  # The registry path is set per job with -Dbranch: develop for feature branches and
+  #   merge requests (where the DSLs come from), the ref for develop, release and tags.
+  #   -nsu keeps DSL snapshots that dsl:build passed on.
   MAVEN_CLI_OPTS: >-
     -s ${CI_PROJECT_DIR}/ci/settings.xml
-    -Dbranch=$CI_COMMIT_REF_NAME
     -Drevision=${MAVEN_VERSION}
     -Devoal.languages.version=${EVOAL_LANGUAGES_VERSION}
     --batch-mode
@@ -39,12 +75,12 @@ variables:
     -T2.0C
     --fail-at-end
     --show-version
+    --no-snapshot-updates
     -DinstallAtEnd=true
     -DdeployAtEnd=true
 
   TYCHO_CLI_OPTS: >-
     -s ${CI_PROJECT_DIR}/ci/settings.xml
-    -Dbranch=$CI_COMMIT_REF_NAME
     -Drevision=${TYCHO_VERSION}
     -DforceContextQualifier=${CI_PIPELINE_IID}
     --batch-mode
@@ -54,6 +90,11 @@ variables:
     --show-version
     -DinstallAtEnd=true
     -DdeployAtEnd=true
+
+  # options of the regression runner (see src/evoal/core/de.evoal.releng.regressions)
+  REGRESSION_OPTS: >-
+    -Devoal.regressions.threads=4
+    -Devoal.regressions.parallelism=2
 
   # custom docker image for building our Java stuff
   ECLIPSE_IMAGE: gitlab.informatik.uni-bremen.de:5005/evoal/source/evoal-core/evoal/eclipse-mirror:2025-12
@@ -66,29 +107,15 @@ variables:
   EVOAL_POM: "src/evoal/pom.xml"
   MIRROR_POM: "src/mirror/pom.xml"
 
-# copy target folder and .m2 repository
-#default:
-#  tags: ["docker"]
-#  cache:
-#    - key:
-#        files:
-#          - $LANGUAGES_POM
-#          - $EVOAL_POM
-#      paths: # We exclude de/evoal and org/b* ... 
-#        - .m2/repository/[a-c]*
-#        - .m2/repository/d[!e]*
-#        - .m2/repository/[e-n]*
-#        - .m2/repository/oro/*
-#        - .m2/repository/org/a*
-#        - .m2/repository/org/[c-z]*
-#        - .m2/repository/[p-z]*
-
-#  cache:
-#    key: "$CI_PIPELINE_ID" # bind cache to pipeline
-#    paths:
-#      - .m2
-#      - src/languages/*/target/
-#      - src/evoal/*/*/target/
+default:
+  interruptible: true
+  timeout: 30m
+  retry:
+    max: 2
+    when:
+      - runner_system_failure
+      - stuck_or_timeout_failure
+      - scheduler_failure
 
 stages:
   - Maintenance
@@ -98,333 +125,255 @@ stages:
   - Release
   - Pages
 
+###############################################################################
+# Rules shared by the jobs
+###############################################################################
+
+# A merge request is a draft if its title starts with "Draft:", "[Draft]" or "(Draft)"
+#   (as GitLab detects drafts). Drafts run the feature branch jobs only.
+.rules-not-draft:
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event" &&
+          $CI_MERGE_REQUEST_TITLE =~ /^(\[draft\]|\(draft\)|draft:)/i
+      when: never
+
+.rules-feature:
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event" &&
+          $CI_MERGE_REQUEST_TITLE =~ /^(\[draft\]|\(draft\)|draft:)/i
+    - if: ($CI_PIPELINE_SOURCE == "push" || $CI_PIPELINE_SOURCE == "web") &&
+          $CI_COMMIT_BRANCH && $CI_COMMIT_BRANCH != "develop" && $CI_COMMIT_BRANCH != "release"
+
+.rules-merge-request-develop:
+  rules:
+    - !reference [.rules-not-draft, rules]
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event" &&
+          $CI_MERGE_REQUEST_TARGET_BRANCH_NAME != "release"
+
+.rules-merge-request-release:
+  rules:
+    - !reference [.rules-not-draft, rules]
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event" &&
+          $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "release"
+
+.rules-deploy:
+  rules:
+    - if: ($CI_PIPELINE_SOURCE == "push" || $CI_PIPELINE_SOURCE == "web") &&
+          ($CI_COMMIT_BRANCH == "develop" || $CI_COMMIT_BRANCH == "release")
+    - if: $CI_COMMIT_TAG
 
 ###############################################################################
-###############################################################################
-###############################################################################
-####
-#### Feature branch steps
-####
-#### TODO: We have to decide which condition to use. push only matches pushes
-####   What about other sources: https://i.sstatic.net/amICY.png
-###############################################################################
-###############################################################################
+# Domain specific languages
 ###############################################################################
 
 #############################################################
-## Compile, test, and install DSL for compilation of EvoAl
+## Build and test the DSLs, install them for the EvoAl jobs
 ##
 ## Situations
-##   - push to non-protected branches
-##   - merge_request to any branch build
-##   - creation of tag
+##   - feature branch, draft and merge request pipelines that
+##     change src/languages (otherwise the EvoAl jobs take the
+##     DSLs from the develop registry)
 ##
-##  Requirements
-##    - none
-##
-dsl:compile-and-install:
+dsl:build:
   stage: Domain Specific Languages
   image: $ECLIPSE_IMAGE
   rules:
-    - if: $CI_PIPELINE_SOURCE == "push" &&
-          $CI_COMMIT_TAG == null
-    - if: $CI_MERGE_REQUEST_TITLE =~ /^Draft/
-      when: never
-    - if: $CI_PIPELINE_SOURCE == "merge_request_event" &&
-          $CI_COMMIT_TAG == null
-    - if: $CI_COMMIT_TAG
-    - if: $CI_PIPELINE_SOURCE == "schedule" &&
-          $NIGHTLY_REGRESSIONS == "true"
-    - when: never
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event" ||
+          (($CI_PIPELINE_SOURCE == "push" || $CI_PIPELINE_SOURCE == "web") &&
+           $CI_COMMIT_BRANCH && $CI_COMMIT_BRANCH != "develop" && $CI_COMMIT_BRANCH != "release")
+      changes:
+        paths:
+          - src/languages/**/*
+        compare_to: refs/heads/develop
+  timeout: 20m
   script:
-    - >-
-      if [ "$CI_COMMIT_TAG" ]; then
-        ci/change-version-number.sh
-      fi
-    - mvn $TYCHO_CLI_OPTS -f $LANGUAGES_POM -Dbranch=$CI_COMMIT_REF_NAME flatten:flatten install
+    - mvn $TYCHO_CLI_OPTS -f $LANGUAGES_POM flatten:flatten install
   artifacts:
-    untracked: false
     when: on_success
-    expire_in: "14 days"
+    expire_in: "1 day"
     paths:
       - src/languages/de.evoal.languages.releng.site/target/de.evoal.languages.releng.site-*.zip
       - .m2/repository/de/evoal
-      - src/languages/*/target/
 
 #############################################################
-## Compile and test EvoAl
+## Deploy the DSLs to the package registry of the ref
 ##
 ## Situations
-##   - push to non-protected branches
-##   - creation of tag
-##
-##  Requirements
-##    - mvn install of DSLs
-##
-evoal:compile-and-test:
-  stage: EvoAl
-  image: $EVOAL_IMAGE
-  rules:
-    - if: $CI_PIPELINE_SOURCE == "push" &&
-          $CI_COMMIT_TAG == null
-    - if: $CI_COMMIT_TAG
-    - when: never
-  dependencies: ["dsl:compile-and-install"]
-  needs:
-    - job: "dsl:compile-and-install"
-      artifacts: true
-  script:
-    - mvn $MAVEN_CLI_OPTS -f $EVOAL_POM -Dbranch=$CI_COMMIT_REF_NAME -pl "!de.evoal:releng.jacoco" flatten:flatten compile
-    - find . -name target | xargs du -ch
-  artifacts:
-    untracked: false
-    when: on_success
-    access: all
-    expire_in: "14 days"
-    reports:
-      junit: src/evoal/*/*/target/surefire-reports/TEST-*.xml
-    paths:
-      - src/languages/*/target/
-      - src/evoal/*/*/target/
-
-#############################################################
-## Deploy DSL to package registry
-##
-## Situations
-##   - push to non-protected branches
-##   - creation of tag
-##
-##  Requirements
-##    - none
+##   - develop, release, tags
 ##
 dsl:deploy:
-  stage: Release
+  stage: Domain Specific Languages
   image: $ECLIPSE_IMAGE
+  interruptible: false
   rules:
-    - if: $CI_PIPELINE_SOURCE == "push" &&
-          $CI_COMMIT_TAG == null
-    - if: $CI_COMMIT_TAG
-    - when: never
-  dependencies: ["dsl:compile-and-install"]
-  needs:
-    - job: "dsl:compile-and-install"
-      artifacts: true
+    - !reference [.rules-deploy, rules]
+  timeout: 20m
   script:
     - >-
       if [ "$CI_COMMIT_TAG" ]; then
         ci/change-version-number.sh
       fi
-    - mvn $TYCHO_CLI_OPTS -f $LANGUAGES_POM -Dbranch=$CI_COMMIT_REF_NAME -pl "!de.evoal.languages:de.evoal.languages.model.dl.dsl.tests,!de.evoal.languages:de.evoal.languages.model.generator.dsl.tests"  -DskipTests flatten:flatten deploy
+    - mvn $TYCHO_CLI_OPTS -f $LANGUAGES_POM -Dbranch=$CI_COMMIT_REF_NAME -pl "!de.evoal.languages:de.evoal.languages.model.dl.dsl.tests,!de.evoal.languages:de.evoal.languages.model.generator.dsl.tests" -DskipTests flatten:flatten deploy
+  artifacts:
+    when: on_success
+    expire_in: "1 day"
+    paths:
+      - src/languages/de.evoal.languages.releng.site/target/de.evoal.languages.releng.site-*.zip
+      - .m2/repository/de/evoal
 
+###############################################################################
+# EvoAl
+###############################################################################
+
+.evoal:test-reports:
+  artifacts:
+    when: always
+    expire_in: "7 days"
+    reports:
+      junit:
+        - src/evoal/*/*/target/surefire-reports/TEST-*.xml
+        - src/evoal/*/*/target/failsafe-reports/TEST-*.xml
 
 #############################################################
-## Deploy EvoAl to package registry
+## Build EvoAl and run the unit tests
 ##
 ## Situations
-##   - push to non-protected branches
-##   - creation of tag
-##
-##  Requirements
-##    - mvn install of DSLs
-##
-evoal:deploy:
-  stage: Release
-  image: $EVOAL_IMAGE
-  rules:
-    - if: $CI_PIPELINE_SOURCE == "push" &&
-          $CI_COMMIT_TAG == null
-    - if: $CI_COMMIT_TAG
-    - when: never
-  dependencies: ["dsl:compile-and-install", "evoal:compile-and-test"]
-  needs:
-    - job: "dsl:compile-and-install"
-      artifacts: true
-    - job: "evoal:compile-and-test"
-      artifacts: true
-  script:
-    - mvn $MAVEN_CLI_OPTS -f $EVOAL_POM -Dbranch=$CI_COMMIT_REF_NAME -pl "!de.evoal:releng.jacoco" -DskipTests flatten:flatten deploy
-
-#############################################################
-## Create EvoAl release package
-##
-## Situations
-##   - push to non-protected branches
-##   - creation of tag
-##
-##  Requirements
-##    - mvn package of DSLs
-##    - mvn package of EvoAl
-##
-.all:package:
-  stage: Release
-  image: $EVOAL_IMAGE
-  dependencies: ["dsl:compile-and-install", "evoal:compile-and-test"]
-  needs:
-    - job: "dsl:compile-and-install"
-      artifacts: true
-    - job: "evoal:compile-and-test"
-      artifacts: true
-  script:
-    - mvn $MAVEN_CLI_OPTS -f $EVOAL_POM -Dbranch=$CI_COMMIT_REF_NAME -DskipTests -pl "!de.evoal:releng.jacoco" flatten:flatten install
-    - ci/create-release.sh "$CI_JOB_NAME"
-  rules:
-    - if: $CI_PIPELINE_SOURCE == "push" &&
-          $CI_COMMIT_TAG == null
-    - if: $CI_COMMIT_TAG
-    - when: never
-
-all:package:linux-x86_64:
-  extends: .all:package
-  after_script:
-    - ci/create-and-upload-release.sh linux-x86_64
-  artifacts:
-    name: "evoal-$CI_COMMIT_REF_NAME-$CI_COMMIT_SHORT_SHA-release-linux-x86_64"
-    when: on_success
-    expire_in: "7 days"
-    paths:
-      - evoal-linux-x86_64.zip
-
-all:package:macosx-arm64:
-  extends: .all:package
-  after_script:
-    - ci/create-and-upload-release.sh macosx-arm64
-  artifacts:
-    name: "evoal-$CI_COMMIT_REF_NAME-$CI_COMMIT_SHORT_SHA-release-macosx-arm64"
-    when: on_success
-    expire_in: "7 days"
-    paths:
-      - evoal-macosx-arm64.zip
-
-all:package:macosx-x86_64:
-  extends: .all:package
-  after_script:
-    - ci/create-and-upload-release.sh macosx-x86_64
-  artifacts:
-    name: "evoal-$CI_COMMIT_REF_NAME-$CI_COMMIT_SHORT_SHA-release-macosx-x86_64"
-    when: on_success
-    expire_in: "7 days"
-    paths:
-      - evoal-macosx-x86_64.zip
-
-all:package:windows-x86_64:
-  extends: .all:package
-  after_script:
-    - ci/create-and-upload-release.sh windows-x86_64    
-  artifacts:
-    name: "evoal-$CI_COMMIT_REF_NAME-$CI_COMMIT_SHORT_SHA-release-windows-x86_64"
-    when: on_success
-    expire_in: "7 days"
-    paths:
-      - evoal-windows-x86_64.zip
-
-#############################################################
-## Create Gitlab Page with Update Sites 
-##
-## Situations
-##   - push to non-protected branches
-##   - creation of tag
-##
-##  Requirements
-##    - none
-##
-pages:
-  stage: Pages
-  image: python:3.10-alpine
-  dependencies: ["dsl:deploy"]
-  cache: []
-  rules:
-    - if: $CI_PIPELINE_SOURCE == "push" &&
-          $CI_COMMIT_TAG == null
-    - if: $CI_COMMIT_TAG
-    - when: never
-  script:
-    - python3 ci/create-pages.py
-  artifacts:
-    paths:
-      - public
-
-###############################################################################
-###############################################################################
-###############################################################################
-####
-#### Merge feature branch to develop steps. Executes only on merge request into
-####   develop (will be executed on feature branch when Draft: label is not)
-####
-###############################################################################
-###############################################################################
-###############################################################################
-
-
-#############################################################
-## Measure code coverage of EvoAl
-##
-## Situations
-##   - merge request to any branch (not draft)
-##
-##  Requirements
-##    - none
+##   - feature branch pushes, draft merge requests
 ##
 evoal:unit:
   stage: EvoAl
   image: $EVOAL_IMAGE
+  extends: .evoal:test-reports
   rules:
-    - if: $CI_MERGE_REQUEST_TITLE =~ /^Draft/
-      when: never
-    - if: $CI_PIPELINE_SOURCE == "merge_request_event" &&
-          $CI_COMMIT_TAG == null
-    - when: never
-  dependencies: ["dsl:compile-and-install"]
+    - !reference [.rules-feature, rules]
   needs:
-    - job: "dsl:compile-and-install"
-      artifacts: true
+    - job: dsl:build
+      optional: true
+  timeout: 20m
   script:
-    # builds, assembles the release (ci/create-release.sh) and runs the regressions against it,
-    #   with 4 threads (the references are created with one; the nightly pipeline checks one)
-    - mvn $MAVEN_CLI_OPTS -f $EVOAL_POM -Dbranch=$CI_COMMIT_REF_NAME -Pjacoco,regressions -Devoal.regressions.threads=4 verify package
-    - /bin/bash ci/regression-coverage.sh
-    - cat src/evoal/core/de.evoal.releng.jacoco/target/site/jacoco-aggregate/index.html | grep -o '<tfoot>.*</tfoot>'
+    - mvn $MAVEN_CLI_OPTS -f $EVOAL_POM -Dbranch=develop flatten:flatten verify
+
+#############################################################
+## Unit tests and regressions with coverage
+##
+## Situations
+##   - merge requests into develop (not draft)
+##
+evoal:regressions:
+  stage: EvoAl
+  image: $EVOAL_IMAGE
+  extends: .evoal:test-reports
+  rules:
+    - !reference [.rules-merge-request-develop, rules]
+  needs:
+    - job: dsl:build
+      optional: true
+  script:
+    - mvn $MAVEN_CLI_OPTS -f $EVOAL_POM -Dbranch=develop -Pjacoco,regressions $REGRESSION_OPTS flatten:flatten verify
+    - grep -o '<tfoot>.*</tfoot>' src/evoal/core/de.evoal.releng.jacoco/target/site/jacoco-aggregate/index.html
   coverage: /Total.*?([0-9]{1,3})%/
   artifacts:
+    paths:
+      - src/evoal/core/de.evoal.releng.jacoco/target/site/jacoco-aggregate/jacoco.xml
+      - src/evoal/core/de.evoal.releng.regressions/target/regressions
+
+#############################################################
+## Release check: unit tests, regressions and all examples,
+##   every regression twice (both runs must be identical)
+##
+## Situations
+##   - merge request into release (the nightly develop -> release
+##     merge request is merged only if this succeeds)
+##
+evoal:release-check:
+  stage: EvoAl
+  image: $EVOAL_IMAGE
+  extends: .evoal:test-reports
+  rules:
+    - !reference [.rules-merge-request-release, rules]
+  needs:
+    - job: dsl:build
+      optional: true
+  timeout: 45m
+  script:
+    - mvn $MAVEN_CLI_OPTS -f $EVOAL_POM -Dbranch=develop -Pregressions $REGRESSION_OPTS -Devoal.regressions.examples=true -Devoal.regressions.repetitions=2 flatten:flatten verify
+  artifacts:
+    paths:
+      - src/evoal/core/de.evoal.releng.regressions/target/regressions
+
+#############################################################
+## Deploy EvoAl and build the platform packages, from one build
+##
+## Situations
+##   - develop: also unit tests, regressions and examples with
+##     coverage (badge and coverage history)
+##   - release, tags: without tests (tested by the merge request)
+##
+evoal:release:
+  stage: EvoAl
+  image: $EVOAL_IMAGE
+  interruptible: false
+  rules:
+    - if: ($CI_PIPELINE_SOURCE == "push" || $CI_PIPELINE_SOURCE == "web") &&
+          $CI_COMMIT_BRANCH == "develop"
+      variables:
+        EVOAL_BUILD_OPTS: -Pjacoco,regressions $REGRESSION_OPTS -Devoal.regressions.examples=true
+    - !reference [.rules-deploy, rules]
+  variables:
+    EVOAL_BUILD_OPTS: -DskipTests
+  needs:
+    - job: dsl:deploy
+  timeout: 45m
+  script:
+    - mvn $MAVEN_CLI_OPTS -f $EVOAL_POM -Dbranch=$CI_COMMIT_REF_NAME $EVOAL_BUILD_OPTS flatten:flatten deploy
+    - sh ci/create-release.sh
+    - >-
+      for PLATFORM in linux-x86_64 macosx-arm64 macosx-x86_64 windows-x86_64; do
+        ci/create-and-upload-release.sh "$PLATFORM"
+      done
+    - >-
+      if [ -e src/evoal/core/de.evoal.releng.jacoco/target/site/jacoco-aggregate/index.html ]; then
+        grep -o '<tfoot>.*</tfoot>' src/evoal/core/de.evoal.releng.jacoco/target/site/jacoco-aggregate/index.html
+      fi
+  coverage: /Total.*?([0-9]{1,3})%/
+  # the packages are about 200 MB each; tags upload theirs to the package registry
+  artifacts:
     when: always
-    expire_in: "14 days"
+    expire_in: "1 day"
     reports:
       junit:
         - src/evoal/*/*/target/surefire-reports/TEST-*.xml
         - src/evoal/*/*/target/failsafe-reports/TEST-*.xml
     paths:
-      - src/evoal/*/*/target/site/jacoco-aggregate/jacoco.xml
-      - src/evoal/*/*/target/surefire-reports/TEST-*.xml
-      - src/evoal/*/*/target/failsafe-reports/TEST-*.xml
-      - src/evoal/core/de.evoal.releng.regressions/target/regressions
-      - src/evoal/core/de.evoal.releng.jacoco/target/site/jacoco-aggregate
+      - evoal-*-linux-x86_64.zip
+      - evoal-*-macosx-arm64.zip
+      - evoal-*-macosx-x86_64.zip
+      - evoal-*-windows-x86_64.zip
+
+###############################################################################
+# Quality
+###############################################################################
 
 #############################################################
-## Fix file paths in code coverage reports
+## Convert the coverage report for the merge request diff
 ##
 ## Situations
-##   - merge request to any branch (not draft)
-##
-##  Requirements
-##    - code coverage reports need to be present 
+##   - merge requests into develop (not draft)
 ##
 evoal:coverage:
   stage: Quality
   image: haynes/jacoco2cobertura:1.0.11
   rules:
-    - if: $CI_MERGE_REQUEST_TITLE =~ /^Draft/
-      when: never
-    - if: $CI_PIPELINE_SOURCE == "merge_request_event" &&
-          $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "develop" &&
-          $CI_COMMIT_TAG == null
-    - when: never
-  dependencies: ["evoal:unit"]
+    - !reference [.rules-merge-request-develop, rules]
   needs:
-    - job: evoal:unit
+    - job: evoal:regressions
       artifacts: true
+  timeout: 10m
   script:
     - jacoco_paths=`find src -path "**/src/main/java" -type d | sed -e 's@^@'"$CI_PROJECT_DIR"'/@'`
     - python /opt/cover2cover.py src/evoal/core/de.evoal.releng.jacoco/target/site/jacoco-aggregate/jacoco.xml $jacoco_paths > src/evoal/core/de.evoal.releng.jacoco/target/site/coverage.xml
   artifacts:
+    expire_in: "7 days"
     reports:
       coverage_report:
         coverage_format: cobertura
@@ -434,15 +383,13 @@ evoal:coverage:
 ## Dependency scanning (vulnerability and license)
 ##
 ## Situations
-##   - merge request to any branch (not draft)
-##
-##  Requirements
-##    - none
+##   - merge request into develop (not draft), see
+##     ci/Dependency-Scanning.gitlab-ci.yml
 ##
 dependency_scanning:
   stage: Quality
   dependencies: []
-  cache: [] 
+  cache: []
   variables:
     DS_JAVA_VERSION: 17
     DS_MAX_DEPTH: 3
@@ -455,74 +402,58 @@ dependency_scanning:
         mv $FILE `echo "./$FILE" | sed -e "s;/gemnasium-maven-plugin.json;-gemnasium-maven-plugin.json;g"`;
       done
 
-
 ###############################################################################
-###############################################################################
-###############################################################################
-####
-#### Tag steps
-####
-###############################################################################
-###############################################################################
+# Release
 ###############################################################################
 
 #############################################################
 ## Generate release notes
 ##
 ## Situations
-##   - tag creation
-##
-##  Requirements
-##    - none
+##   - tags
 ##
 release-notes:
   stage: Release
   image: gitlab.informatik.uni-bremen.de:5005/evoal/source/evoal-core/evoal/alpine-with-jq:latest
+  interruptible: false
   rules:
     - if: $CI_COMMIT_TAG
-    - when: never
+  needs: []
+  timeout: 10m
   script:
-    - 'curl -H "PRIVATE-TOKEN: $CI_API_TOKEN" "$CI_API_V4_URL/projects/$CI_PROJECT_ID/repository/changelog?version=$CI_COMMIT_TAG"'
-    - 'curl -H "PRIVATE-TOKEN: $CI_API_TOKEN" "$CI_API_V4_URL/projects/$CI_PROJECT_ID/repository/changelog?version=$CI_COMMIT_TAG" | jq -r .notes > release_notes.md'
+    - 'curl --fail --silent --show-error -H "PRIVATE-TOKEN: $CI_API_TOKEN" "$CI_API_V4_URL/projects/$CI_PROJECT_ID/repository/changelog?version=$CI_COMMIT_TAG" | jq -r .notes > release_notes.md'
+    - cat release_notes.md
   artifacts:
+    expire_in: "1 day"
     paths:
     - release_notes.md
 
 #############################################################
-## Create release in GitLab
+## Create the release in GitLab, linking the packages that
+##   evoal:release uploaded
 ##
 ## Situations
-##   - tag creation
-##
-##  Requirements
-##    - release notes
+##   - tags
 ##
 publish:
   stage: Release
-  dependencies:
-    - all:package:linux-x86_64
-    - all:package:macosx-arm64
-    - all:package:macosx-x86_64
-    - all:package:windows-x86_64
-    - release-notes
+  image: registry.gitlab.com/gitlab-org/release-cli:latest
+  interruptible: false
+  rules:
+    - if: $CI_COMMIT_TAG
   needs:
     - job: release-notes
       artifacts: true
-    - job: all:package:linux-x86_64
-    - job: all:package:macosx-arm64
-    - job: all:package:macosx-x86_64
-    - job: all:package:windows-x86_64
-  image: registry.gitlab.com/gitlab-org/release-cli:latest
-  rules:
-    - if: $CI_COMMIT_TAG
-    - when: never
+    - job: evoal:release
+      artifacts: false
+  timeout: 10m
   script:
     - cat release_notes.md
   release:
     tag_name: $CI_COMMIT_TAG
     name: "EvoAl Release $CI_COMMIT_TAG"
     description: release_notes.md
-    ref: '$CI_COMMIT_SHA'    
+    ref: '$CI_COMMIT_SHA'
     assets:
       links:
         - name: 'EvoAl - $CI_COMMIT_TAG - Linux x86_64'
@@ -539,85 +470,52 @@ publish:
           link_type: package
 
 ###############################################################################
-###############################################################################
-###############################################################################
-####
-#### Nightly steps (pipeline schedule with NIGHTLY_REGRESSIONS == "true")
-####
-###############################################################################
-###############################################################################
+# Pages
 ###############################################################################
 
 #############################################################
-## Cancel the nightly pipeline if nothing was merged since
-##   the last successful nightly regression run
+## GitLab Pages with the Eclipse update sites of develop,
+##   release and the tags
 ##
 ## Situations
-##   - nightly pipeline schedule
+##   - develop, release, tags
 ##
-##  Requirements
-##    - CI_API_TOKEN
-##
-nightly:check-changes:
-  stage: Maintenance
-  image: gitlab.informatik.uni-bremen.de:5005/evoal/source/evoal-core/evoal/alpine-with-jq:latest
+pages:
+  stage: Pages
+  image: python:3.10-alpine
+  interruptible: false
   rules:
-    - if: $CI_PIPELINE_SOURCE == "schedule" &&
-          $NIGHTLY_REGRESSIONS == "true"
-    - when: never
-  script:
-    - ci/cancel-unchanged-nightly.sh
-
-#############################################################
-## Run every regression and every example with references twice with one thread:
-##   both runs must give the same output, which must equal the references
-##
-## Situations
-##   - nightly pipeline schedule
-##
-##  Requirements
-##    - mvn install of DSLs
-##
-evoal:nightly-regressions:
-  stage: EvoAl
-  image: $EVOAL_IMAGE
-  rules:
-    - if: $CI_PIPELINE_SOURCE == "schedule" &&
-          $NIGHTLY_REGRESSIONS == "true"
-    - when: never
-  dependencies: ["dsl:compile-and-install"]
+    - !reference [.rules-deploy, rules]
   needs:
-    - job: "dsl:compile-and-install"
-      artifacts: true
+    - job: dsl:deploy
+      artifacts: false
+  cache: []
+  timeout: 10m
   script:
-    - mvn $MAVEN_CLI_OPTS -f $EVOAL_POM -Dbranch=$CI_COMMIT_REF_NAME -Pregressions -Devoal.regressions.repetitions=2 -Devoal.regressions.examples=true verify
+    - python3 ci/create-pages.py
   artifacts:
-    when: always
-    expire_in: "14 days"
-    reports:
-      junit: src/evoal/*/*/target/failsafe-reports/TEST-*.xml
+    expire_in: "1 day"
     paths:
-      - src/evoal/core/de.evoal.releng.regressions/target/regressions
+      - public
 
-package cleanup:
-  stage: Maintenance
-  image: library/python:3.10-alpine
-  rules:
-    - if: $CI_PIPELINE_SOURCE == "schedule" &&
-          $MAINTENANCE_CLEANUP == "true"
-      when: always
-    - when: never
-  script:
-    - python3 ci/clean-packages.py
+###############################################################################
+# Maintenance
+###############################################################################
 
-
+#############################################################
+## Open the merge request develop -> release and merge it when
+##   its pipeline (evoal:release-check) succeeds
+##
+## Situations
+##   - pipeline schedule with AUTOMATIC_MERGE == "true"
+##
 auto merge:
   stage: Maintenance
   image: gitlab.informatik.uni-bremen.de:5005/evoal/source/evoal-core/evoal/alpine-with-jq:latest
+  interruptible: false
   rules:
     - if: $CI_PIPELINE_SOURCE == "schedule" &&
           $AUTOMATIC_MERGE == "true"
-      when: always
-    - when: never
+  timeout: 30m
   script:
     - 'ci/auto-merge-branches.sh develop release'
