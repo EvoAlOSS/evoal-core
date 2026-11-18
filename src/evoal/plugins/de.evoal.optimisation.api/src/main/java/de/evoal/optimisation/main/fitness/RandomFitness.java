@@ -18,9 +18,18 @@ import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
+import java.util.function.BiConsumer;
 import java.util.random.RandomGenerator;
-import java.util.function.Consumer;
 
+/**
+ * Optimisation function that assigns random values within their boundaries to the features
+ *   of the optimisation space, e.g., for testing algorithms or as a baseline.
+ * <p>
+ * The values are drawn from the task stream of the evaluation
+ *   ({@link RandomService#taskRandom(String)}), so they depend only on the seed, the run and
+ *   the index of the evaluation, not on the evaluations before it or on the thread that
+ *   computes it. The function keeps no generator and can be evaluated in parallel.
+ */
 @Dependent
 @Named("de.evoal.optimisation.core.random-fitness")
 public class RandomFitness extends OptimisationFunctionImpl {
@@ -32,11 +41,14 @@ public class RandomFitness extends OptimisationFunctionImpl {
     private RandomService randomService;
 
     /**
-     * Random generator.
+     * The name of the task stream.
      */
-    private RandomGenerator randomness;
+    private static final String STREAM = "de.evoal.optimisation.core.random-fitness";
 
-    private Consumer<TypedEObject> randomOptimisationValueProducer;
+    /**
+     * Sets random values for all features of the optimisation space.
+     */
+    private BiConsumer<TypedEObject, RandomGenerator> randomOptimisationValueProducer;
 
     @Inject
     @Named("optimisation-space")
@@ -46,7 +58,7 @@ public class RandomFitness extends OptimisationFunctionImpl {
     public final TypedEObject evaluate(final TypedEObject candidate) {
         final TypedEObject optimisationValue = optimisationSpace.newEObject();
 
-        randomOptimisationValueProducer.accept(optimisationValue);
+        randomOptimisationValueProducer.accept(optimisationValue, randomService.taskRandom(STREAM));
 
         return optimisationValue;
     }
@@ -54,9 +66,8 @@ public class RandomFitness extends OptimisationFunctionImpl {
     @Override
     public RandomFitness init(final EObject configuration) {
         checkFeatureTypes();
-        randomness = randomService.random("de.evoal.optimisation.core.random-fitness");
 
-        randomOptimisationValueProducer = (object) -> {};
+        randomOptimisationValueProducer = (object, randomness) -> {};
 
         for(final EStructuralFeature feature : optimisationSpace) {
             randomOptimisationValueProducer = randomOptimisationValueProducer.andThen(producerFor(feature));
@@ -68,11 +79,11 @@ public class RandomFitness extends OptimisationFunctionImpl {
     /**
      * Creates a producer that sets a random value within the boundaries of the feature.
      */
-    private Consumer<TypedEObject> producerFor(final EStructuralFeature feature) {
+    private BiConsumer<TypedEObject, RandomGenerator> producerFor(final EStructuralFeature feature) {
         final EClassifier classifier = feature.getEType();
 
         if(EClassifierHelper.isBoolean(classifier)) {
-            return (object) -> object.eSet(feature, randomness.nextBoolean());
+            return (object, randomness) -> object.eSet(feature, randomness.nextBoolean());
         }
 
         final FeatureBoundaries.Boundaries bounds = boundaries.get(feature);
@@ -81,7 +92,7 @@ public class RandomFitness extends OptimisationFunctionImpl {
             final double lower = bounds.lower().doubleValue();
             final double upper = bounds.upper().doubleValue();
 
-            return (object) -> {
+            return (object, randomness) -> {
                 // interpolation does not overflow, even for the full range of double
                 final double ratio = randomness.nextDouble();
                 final double value = ratio * upper + (1.0 - ratio) * lower;
@@ -98,7 +109,7 @@ public class RandomFitness extends OptimisationFunctionImpl {
         final long upper = bounds.upper().longValue() - (bounds.UpperIncluded() ? 0 : 1);
         Requirements.requireTrue(lower <= upper, "Feature '" + feature.getName() + "' has no valid value.");
 
-        return (object) -> {
+        return (object, randomness) -> {
             final long value;
             if(upper < Long.MAX_VALUE) {
                 value = randomness.nextLong(lower, upper + 1);

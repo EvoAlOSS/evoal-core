@@ -8,6 +8,9 @@ import jakarta.inject.Inject;
 
 import lombok.extern.slf4j.Slf4j;
 
+import de.evoal.core.api.random.EvaluationTask;
+import de.evoal.core.api.random.RandomService;
+
 import de.evoal.models.core.ecore.TypedEObject;
 import de.evoal.models.v202704.optimisation.execution.OptimisationFunction;
 import de.evoal.models.v202704.optimisation.memory.Iteration;
@@ -36,6 +39,11 @@ import de.evoal.optimisation.api.execution.MetricContributor;
  *   {@link ExhaustionPolicy#CUT_OFF}, the service throws an
  *   {@link EvaluationBudgetExhaustedException} instead of exceeding the limit.
  * <p>
+ * Every evaluation gets an index, assigned in call order across all sources and starting
+ *   at 0 in every run. The service binds the {@link EvaluationTask} (run and index) around the
+ *   call of the optimisation function, so that the function can draw its random numbers
+ *   from {@link RandomService#taskRandom(String)}.
+ * <p>
  * The counters and limits are reset in every run ({@link ExecutionRecorder#startRun()}).
  *   The service is not thread-safe: the algorithms evaluate their candidates one after
  *   another, so that the counter values do not depend on the thread scheduling.
@@ -50,6 +58,17 @@ public class EvaluationService implements MetricContributor {
      * The number of evaluations per source in the current run.
      */
     private final Map<EvaluationSource, Long> counters = new EnumMap<>(EvaluationSource.class);
+
+    /**
+     * The index of the next evaluation in the current run.
+     */
+    private long nextIndex;
+
+    /**
+     * Provides the run of the evaluation tasks.
+     */
+    @Inject
+    private RandomService randomService;
 
     /**
      * Publishes an {@link IndividualEvaluated} for every successful evaluation.
@@ -127,7 +146,8 @@ public class EvaluationService implements MetricContributor {
         requireBudgetLeft(source);
         counters.merge(source, 1L, Long::sum);
 
-        final TypedEObject output = currentFunction.evaluate(candidate);
+        final EvaluationTask task = new EvaluationTask(randomService.getRun(), nextIndex++);
+        final TypedEObject output = task.call(() -> currentFunction.evaluate(candidate));
         events.publish(new IndividualEvaluated(candidate, output, source));
 
         return output;
@@ -209,6 +229,7 @@ public class EvaluationService implements MetricContributor {
         counters.clear();
         limits.clear();
         function = null;
+        nextIndex = 0;
 
         for(final EvaluationSource source : EvaluationSource.values()) {
             final MetricDefinition definition = toMetricDefinition(source.getMetricName(),

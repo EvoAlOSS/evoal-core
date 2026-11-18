@@ -3,6 +3,7 @@ package de.evoal.core.main.fitness;
 import de.evoal.core.api.ecore.info.BoundaryExtractor.Bound;
 import de.evoal.core.api.ecore.info.BoundaryExtractor.Extracted;
 import de.evoal.core.api.ecore.info.FeatureBoundaries;
+import de.evoal.core.api.random.EvaluationTask;
 import de.evoal.core.api.random.RandomService;
 import de.evoal.models.core.ecore.Space;
 import de.evoal.models.core.ecore.TypedEObject;
@@ -65,9 +66,16 @@ class RandomFitnessTest {
         testee.init(null);
     }
 
+    /**
+     * Evaluates the function as the evaluation with the given index.
+     */
+    private static TypedEObject evaluate(final RandomFitness fitness, final long index) {
+        return new EvaluationTask(0, index).call(() -> fitness.evaluate(null));
+    }
+
     @Test
     void testEvaluate_setsPlausibleValuesForAllFeatures() {
-        final TypedEObject result = testee.evaluate(null);
+        final TypedEObject result = evaluate(testee, 0);
 
         assertNotNull(result);
 
@@ -85,8 +93,8 @@ class RandomFitnessTest {
 
     @Test
     void testEvaluate_producesDifferentValuesBetweenCalls() {
-        final TypedEObject result1 = testee.evaluate(null);
-        final TypedEObject result2 = testee.evaluate(null);
+        final TypedEObject result1 = evaluate(testee, 0);
+        final TypedEObject result2 = evaluate(testee, 1);
 
         boolean areDifferent = false;
         for (final org.eclipse.emf.ecore.EStructuralFeature feature : space) {
@@ -129,9 +137,28 @@ class RandomFitnessTest {
         randomFieldfitness.set(fitness, RandomService.withSeed(42));
         fitness.init(null);
 
-        final TypedEObject result = fitness.evaluate(null);
+        final TypedEObject result = evaluate(fitness, 0);
         assertTrue(Double.isFinite((double) result.eGet(real)));
         assertInstanceOf(Long.class, result.eGet(integer));
         assertInstanceOf(Boolean.class, result.eGet(flag));
+    }
+
+    @Test
+    void testEvaluate_dependsOnlyOnTheIndexOfTheEvaluation() {
+        final TypedEObject expected = evaluate(testee, 5);
+
+        // other evaluations before it do not change the values of evaluation 5
+        evaluate(testee, 0);
+        evaluate(testee, 7);
+        final TypedEObject again = evaluate(testee, 5);
+
+        for (final org.eclipse.emf.ecore.EStructuralFeature feature : space) {
+            assertEquals(expected.eGet(feature), again.eGet(feature));
+        }
+    }
+
+    @Test
+    void testEvaluate_failsOutsideAnEvaluation() {
+        assertThrows(IllegalStateException.class, () -> testee.evaluate(null));
     }
 }

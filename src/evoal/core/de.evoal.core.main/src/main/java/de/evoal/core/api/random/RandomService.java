@@ -37,10 +37,26 @@ import lombok.extern.slf4j.Slf4j;
  *   {@link #startRun(long)} before each run. Each run gets different, but reproducible,
  *   random numbers.
  *
+ * <h2>Task streams</h2>
+ * Random numbers drawn during an evaluation (e.g., by a random or noisy optimisation
+ *   function) come from {@link #taskRandom(String)}. Its generator is derived from the
+ *   seed, the run, the name, and the index of the evaluation ({@link EvaluationTask}).
+ *   Therefore, the values of an evaluation depend neither on the evaluations before it nor
+ *   on the thread that computes it.
+ *
+ * <h2>Which stream to use</h2>
+ * <ul>
+ *   <li>Decisions of the algorithm (initial candidates, mutations, neighbour order,
+ *     acceptance) use a named component stream ({@link #random(String)}). The algorithm
+ *     makes them on its own thread in a fixed order.</li>
+ *   <li>Everything drawn while a candidate is evaluated uses a task stream
+ *     ({@link #taskRandom(String)}), since evaluations may run in parallel.</li>
+ * </ul>
+ *
  * <h2>Threads</h2>
  * The generators are not thread-safe. A generator must only be used by one thread at a
- *   time. Parallel code requests one generator per processed entity (e.g., per particle),
- *   which also keeps the results independent of the thread scheduling.
+ *   time. Parallel code requests one generator per processed entity (e.g., per particle or
+ *   per evaluation), which also keeps the results independent of the thread scheduling.
  */
 @ApplicationScoped
 @Slf4j
@@ -141,6 +157,22 @@ public class RandomService {
     }
 
     /**
+     * Returns a new generator for the given name and the current evaluation
+     *   ({@link EvaluationTask#current()}). The generator is not cached: each call returns a
+     *   new generator that starts at the beginning of the stream, so a component calls it
+     *   once per evaluation and draws all its values from the returned generator.
+     *
+     * @param name A stable name, e.g., the CDI name of the component.
+     * @throws IllegalStateException if the current thread does not evaluate a candidate.
+     */
+    public RandomGenerator taskRandom(final @NonNull String name) {
+        final EvaluationTask task = EvaluationTask.current()
+                                                  .orElseThrow(() -> new IllegalStateException("The task stream '" + name + "' is only available during an evaluation."));
+
+        return FACTORY.create(deriveTask(seed, task.run(), name, task.index()));
+    }
+
+    /**
      * Returns the seed for the given name, e.g., for libraries that need a seed instead of a generator.
      */
     public long seedFor(final @NonNull String name) {
@@ -152,6 +184,15 @@ public class RandomService {
      */
     static long derive(final long seed, final long run, final String name) {
         return mix(mix(mix(seed) ^ run) ^ hash(name));
+    }
+
+    /**
+     * Derives the seed of a task generator from the seed of the named generator and the index
+     *   of the evaluation. The extra mixing step separates the task streams from the named
+     *   stream of the same name.
+     */
+    static long deriveTask(final long seed, final long run, final String name, final long index) {
+        return mix(mix(derive(seed, run, name)) ^ index);
     }
 
     /**

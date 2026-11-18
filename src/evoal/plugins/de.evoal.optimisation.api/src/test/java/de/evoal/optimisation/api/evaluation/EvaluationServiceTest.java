@@ -14,6 +14,8 @@ import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentMatchers;
 import org.mockito.Mockito;
 
+import de.evoal.core.api.random.EvaluationTask;
+import de.evoal.core.api.random.RandomService;
 import de.evoal.core.api.reproducibility.ReproducibilityProtocol;
 import de.evoal.models.core.ecore.TypedEObject;
 import de.evoal.models.v202704.optimisation.execution.OptimisationFunction;
@@ -47,6 +49,8 @@ public class EvaluationServiceTest {
 
     private final EvaluationService service = new EvaluationService();
 
+    private final RandomService randomService = RandomService.withSeed(42);
+
     private final RunEventDispatcher events = new RunEventDispatcher(recorder);
 
     private final RunListener listener = Mockito.mock(RunListener.class);
@@ -67,6 +71,10 @@ public class EvaluationServiceTest {
         eventsField.setAccessible(true);
         eventsField.set(service, events);
         events.startRun(List.of(listener));
+
+        final Field randomField = EvaluationService.class.getDeclaredField("randomService");
+        randomField.setAccessible(true);
+        randomField.set(service, randomService);
 
         // the recorder starts the service in every run
         @SuppressWarnings("unchecked")
@@ -214,6 +222,26 @@ public class EvaluationServiceTest {
                    .create(OptimisationFunction.class,
                            OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION,
                            "algorithm.optimisation-function");
+        }
+
+        @Test
+        public void bindsTheTaskOfEachEvaluation() {
+            // given
+            final List<EvaluationTask> tasks = new java.util.ArrayList<>();
+            Mockito.when(function.evaluate(ArgumentMatchers.any())).thenAnswer(invocation -> {
+                tasks.add(EvaluationTask.current().orElseThrow());
+                return output;
+            });
+            randomService.startRun(3);
+
+            // when
+            evaluateTimes(2);
+            recorder.startRun();
+            evaluateTimes(1);
+
+            // then
+            Assertions.assertEquals(List.of(new EvaluationTask(3, 0), new EvaluationTask(3, 1), new EvaluationTask(3, 0)), tasks);
+            Assertions.assertTrue(EvaluationTask.current().isEmpty());
         }
     }
 

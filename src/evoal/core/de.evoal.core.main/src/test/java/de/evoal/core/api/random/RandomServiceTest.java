@@ -63,4 +63,64 @@ public class RandomServiceTest {
         Assertions.assertNotEquals(RandomService.derive(42, 0, "a"), RandomService.derive(42, 0, "b"));
         Assertions.assertNotEquals(RandomService.derive(42, 0, "a"), RandomService.derive(42, 1, "a"));
     }
+
+    private static double[] drawTask(final RandomService service, final long run, final long index, final String name) {
+        return new EvaluationTask(run, index).call(() -> draw(service.taskRandom(name)));
+    }
+
+    @Test
+    public void taskStreamsAreReproducible() {
+        Assertions.assertArrayEquals(drawTask(RandomService.withSeed(42), 0, 3, "a"),
+                                     drawTask(RandomService.withSeed(42), 0, 3, "a"));
+    }
+
+    @Test
+    public void taskStreamsAreNotCached() {
+        final RandomService service = RandomService.withSeed(42);
+        final double[] first = drawTask(service, 0, 3, "a");
+
+        // drawing from the same task again starts at the beginning of the stream
+        Assertions.assertArrayEquals(first, drawTask(service, 0, 3, "a"));
+    }
+
+    @Test
+    public void taskStreamsDifferPerIndexRunNameAndSeed() {
+        final double[] expected = drawTask(RandomService.withSeed(42), 0, 3, "a");
+
+        Assertions.assertFalse(java.util.Arrays.equals(expected, drawTask(RandomService.withSeed(42), 0, 4, "a")));
+        Assertions.assertFalse(java.util.Arrays.equals(expected, drawTask(RandomService.withSeed(42), 1, 3, "a")));
+        Assertions.assertFalse(java.util.Arrays.equals(expected, drawTask(RandomService.withSeed(42), 0, 3, "b")));
+        Assertions.assertFalse(java.util.Arrays.equals(expected, drawTask(RandomService.withSeed(43), 0, 3, "a")));
+    }
+
+    @Test
+    public void taskStreamsDifferFromTheNamedStream() {
+        final RandomService service = RandomService.withSeed(42);
+
+        Assertions.assertFalse(java.util.Arrays.equals(draw(service.random("a")), drawTask(service, 0, 0, "a")));
+    }
+
+    @Test
+    public void taskStreamsAreIndependentOfTheCurrentRunOfTheService() {
+        final RandomService service = RandomService.withSeed(42);
+        final double[] expected = drawTask(service, 0, 3, "a");
+
+        // the run is taken from the task, not from the service
+        service.startRun(5);
+        Assertions.assertArrayEquals(expected, drawTask(service, 0, 3, "a"));
+    }
+
+    @Test
+    public void taskStreamsAreUnavailableOutsideAnEvaluation() {
+        final RandomService service = RandomService.withSeed(42);
+
+        Assertions.assertThrows(IllegalStateException.class, () -> service.taskRandom("a"));
+    }
+
+    @Test
+    public void taskDerivationIsStable() {
+        Assertions.assertEquals(RandomService.deriveTask(42, 0, "a", 0), RandomService.deriveTask(42, 0, "a", 0));
+        Assertions.assertNotEquals(RandomService.deriveTask(42, 0, "a", 0), RandomService.deriveTask(42, 0, "a", 1));
+        Assertions.assertNotEquals(RandomService.deriveTask(42, 0, "a", 0), RandomService.derive(42, 0, "a"));
+    }
 }
