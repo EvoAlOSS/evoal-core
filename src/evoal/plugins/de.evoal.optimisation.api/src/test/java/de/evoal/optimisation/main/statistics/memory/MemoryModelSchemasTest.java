@@ -32,6 +32,66 @@ public class MemoryModelSchemasTest {
     }
 
     @Nested
+    @DisplayName("given an individual with a non-finite fitness")
+    class NonFiniteFitness {
+        /**
+         * Writes iteration 0 with one individual of the given fitness.
+         */
+        private Path iterationWithFitness(final String fitness) throws Exception {
+            final Path file = folder.resolve("iteration-0.json");
+            Files.writeString(file, """
+                    {"formatVersion":"2027.4.0","number":0,
+                     "individuals":[{"id":0,"input":{"x":1.0},"output":{"y":"Infinity"},
+                                     "fitness":%s,"relationships":[]}],
+                     "steps":[],"ranks":[{"number":0,"members":[0]}],"metrics":{}}
+                    """.formatted(fitness));
+
+            return file;
+        }
+
+        @Test
+        public void theStringsAreValid() throws Exception {
+            // given
+            final Path file = iterationWithFitness("[\"Infinity\",\"NaN\",-1.5]");
+
+            // when
+            final List<String> violations = MemoryModelSchemas.violationsOf(file);
+
+            // then
+            Assertions.assertEquals(List.of(), violations);
+        }
+
+        @Test
+        public void otherStringsAreInvalid() throws Exception {
+            // given
+            final Path file = iterationWithFitness("[\"many\"]");
+
+            // when
+            final List<String> violations = MemoryModelSchemas.violationsOf(file);
+
+            // then
+            Assertions.assertFalse(violations.isEmpty());
+        }
+
+        @Test
+        public void aMissingFitnessIsInvalid() throws Exception {
+            // given
+            final Path file = folder.resolve("iteration-0.json");
+            Files.writeString(file, """
+                    {"formatVersion":"2027.4.0","number":0,
+                     "individuals":[{"id":0,"input":{},"output":{},"relationships":[]}],
+                     "steps":[],"ranks":[],"metrics":{}}
+                    """);
+
+            // when
+            final List<String> violations = MemoryModelSchemas.violationsOf(file);
+
+            // then
+            Assertions.assertFalse(violations.isEmpty());
+        }
+    }
+
+    @Nested
     @DisplayName("given metrics with non-finite values")
     class NonFiniteMetrics {
         @Test

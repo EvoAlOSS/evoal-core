@@ -14,6 +14,7 @@ import de.evoal.models.v202704.optimisation.execution.impl.ExecutionPackageImpl;
 import de.evoal.models.v202704.optimisation.impl.OptimisationPackageImpl;
 
 import de.evoal.models.v202704.optimisation.memory.Execution;
+import de.evoal.models.v202704.optimisation.memory.FitnessComponentDefinition;
 import de.evoal.models.v202704.optimisation.memory.Identity;
 import de.evoal.models.v202704.optimisation.memory.Individual;
 import de.evoal.models.v202704.optimisation.memory.Iteration;
@@ -61,6 +62,13 @@ public class MemoryPackageImpl extends EPackageImpl implements MemoryPackage {
 	 * @generated
 	 */
 	private EClass executionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass fitnessComponentDefinitionEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -317,6 +325,46 @@ public class MemoryPackageImpl extends EPackageImpl implements MemoryPackage {
 	 * @generated
 	 */
 	@Override
+	public EReference getExecution_FitnessComponents() {
+		return (EReference)executionEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getFitnessComponentDefinition() {
+		return fitnessComponentDefinitionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getFitnessComponentDefinition_Name() {
+		return (EAttribute)fitnessComponentDefinitionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getFitnessComponentDefinition_Objective() {
+		return (EReference)fitnessComponentDefinitionEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getState() {
 		return stateEClass;
 	}
@@ -517,8 +565,18 @@ public class MemoryPackageImpl extends EPackageImpl implements MemoryPackage {
 	 * @generated
 	 */
 	@Override
+	public EAttribute getIndividual_Fitness() {
+		return (EAttribute)individualEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EReference getIndividual_Relationships() {
-		return (EReference)individualEClass.getEStructuralFeatures().get(3);
+		return (EReference)individualEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -736,6 +794,11 @@ public class MemoryPackageImpl extends EPackageImpl implements MemoryPackage {
 		createEReference(executionEClass, EXECUTION__STATES);
 		createEReference(executionEClass, EXECUTION__METRIC_DEFINITIONS);
 		createEReference(executionEClass, EXECUTION__METRICS);
+		createEReference(executionEClass, EXECUTION__FITNESS_COMPONENTS);
+
+		fitnessComponentDefinitionEClass = createEClass(FITNESS_COMPONENT_DEFINITION);
+		createEAttribute(fitnessComponentDefinitionEClass, FITNESS_COMPONENT_DEFINITION__NAME);
+		createEReference(fitnessComponentDefinitionEClass, FITNESS_COMPONENT_DEFINITION__OBJECTIVE);
 
 		stateEClass = createEClass(STATE);
 
@@ -763,6 +826,7 @@ public class MemoryPackageImpl extends EPackageImpl implements MemoryPackage {
 		createEAttribute(individualEClass, INDIVIDUAL__ID);
 		createEAttribute(individualEClass, INDIVIDUAL__INPUT);
 		createEAttribute(individualEClass, INDIVIDUAL__OUTPUT);
+		createEAttribute(individualEClass, INDIVIDUAL__FITNESS);
 		createEReference(individualEClass, INDIVIDUAL__RELATIONSHIPS);
 
 		relationshipEClass = createEClass(RELATIONSHIP);
@@ -837,6 +901,11 @@ public class MemoryPackageImpl extends EPackageImpl implements MemoryPackage {
 		initEReference(getExecution_States(), this.getState(), null, "states", null, 0, -1, Execution.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getExecution_MetricDefinitions(), this.getMetricDefinition(), null, "metricDefinitions", null, 0, -1, Execution.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getExecution_Metrics(), this.getMetricEntry(), null, "metrics", null, 0, -1, Execution.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getExecution_FitnessComponents(), this.getFitnessComponentDefinition(), null, "fitnessComponents", null, 0, -1, Execution.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(fitnessComponentDefinitionEClass, FitnessComponentDefinition.class, "FitnessComponentDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getFitnessComponentDefinition_Name(), ecorePackage.getEString(), "name", null, 1, 1, FitnessComponentDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getFitnessComponentDefinition_Objective(), ecorePackage.getEStructuralFeature(), null, "objective", null, 0, 1, FitnessComponentDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(stateEClass, State.class, "State", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -878,6 +947,7 @@ public class MemoryPackageImpl extends EPackageImpl implements MemoryPackage {
 		initEAttribute(getIndividual_Id(), ecorePackage.getEInt(), "id", null, 1, 1, Individual.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getIndividual_Input(), theOptimisationPackage.getTypedEObject(), "input", null, 1, 1, Individual.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getIndividual_Output(), theOptimisationPackage.getTypedEObject(), "output", null, 1, 1, Individual.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getIndividual_Fitness(), ecorePackage.getEDouble(), "fitness", null, 0, -1, Individual.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getIndividual_Relationships(), this.getRelationship(), null, "relationships", null, 0, -1, Individual.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		initEClass(relationshipEClass, Relationship.class, "Relationship", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

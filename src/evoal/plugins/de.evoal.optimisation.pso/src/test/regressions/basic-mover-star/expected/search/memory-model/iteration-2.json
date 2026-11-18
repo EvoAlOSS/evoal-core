@@ -10,6 +10,7 @@
     "output" : {
       "y:0" : 7.205408847850407
     },
+    "fitness" : [ 7.205408847850407 ],
     "relationships" : [ {
       "kind" : "identity",
       "targets" : [ 15 ]
@@ -23,6 +24,7 @@
     "output" : {
       "y:0" : 7.688988530334566
     },
+    "fitness" : [ 7.688988530334566 ],
     "relationships" : [ {
       "kind" : "identity",
       "targets" : [ 16 ]
@@ -36,6 +38,7 @@
     "output" : {
       "y:0" : 8.229961581044495
     },
+    "fitness" : [ 8.229961581044495 ],
     "relationships" : [ {
       "kind" : "mutation",
       "targets" : [ 9 ]
@@ -49,6 +52,7 @@
     "output" : {
       "y:0" : 9.08445857049153
     },
+    "fitness" : [ 9.08445857049153 ],
     "relationships" : [ {
       "kind" : "mutation",
       "targets" : [ 11 ]
@@ -62,6 +66,7 @@
     "output" : {
       "y:0" : 9.207468989216444
     },
+    "fitness" : [ 9.207468989216444 ],
     "relationships" : [ {
       "kind" : "mutation",
       "targets" : [ 14 ]
@@ -75,6 +80,7 @@
     "output" : {
       "y:0" : 9.248569826162424
     },
+    "fitness" : [ 9.248569826162424 ],
     "relationships" : [ {
       "kind" : "identity",
       "targets" : [ 10 ]
@@ -88,6 +94,7 @@
     "output" : {
       "y:0" : 9.39408409368437
     },
+    "fitness" : [ 9.39408409368437 ],
     "relationships" : [ {
       "kind" : "mutation",
       "targets" : [ 12 ]
@@ -101,6 +108,7 @@
     "output" : {
       "y:0" : 9.874317310711442
     },
+    "fitness" : [ 9.874317310711442 ],
     "relationships" : [ {
       "kind" : "mutation",
       "targets" : [ 13 ]
@@ -114,6 +122,7 @@
     "output" : {
       "y:0" : 12.166371843784683
     },
+    "fitness" : [ 12.166371843784683 ],
     "relationships" : [ {
       "kind" : "mutation",
       "targets" : [ 17 ]

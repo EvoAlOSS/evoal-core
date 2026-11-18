@@ -10,6 +10,7 @@
     "output" : {
       "y:0" : 50.00000000000015
     },
+    "fitness" : [ 2.9842794901924207E-15 ],
     "relationships" : [ {
       "kind" : "identity",
       "targets" : [ 3 ]

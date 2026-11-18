@@ -35,6 +35,7 @@ import de.evoal.languages.model.base.definitions.DataDescription;
 import de.evoal.languages.model.base.definitions.ScaleType;
 import de.evoal.models.core.ecore.TypedEObject;
 import de.evoal.models.v202704.optimisation.memory.Execution;
+import de.evoal.models.v202704.optimisation.memory.FitnessComponentDefinition;
 import de.evoal.models.v202704.optimisation.memory.Identity;
 import de.evoal.models.v202704.optimisation.memory.Individual;
 import de.evoal.models.v202704.optimisation.memory.Iteration;
@@ -47,6 +48,7 @@ import de.evoal.models.v202704.optimisation.memory.Recombination;
 import de.evoal.models.v202704.optimisation.memory.Relationship;
 import de.evoal.models.v202704.optimisation.memory.UnorderedIterationStep;
 import de.evoal.models.v202704.optimisation.model.Problem;
+import de.evoal.models.v202704.optimisation.model.TargetGoal;
 
 import de.evoal.optimisation.api.execution.EvaluationPosition;
 import de.evoal.optimisation.api.fitness.Goal;
@@ -78,10 +80,18 @@ public class MemoryModelJson {
     private final EAnnotationHelper annotationHelper;
 
     /**
-     * @param annotationHelper Finds the data descriptions of the features.
+     * Converts the configurations of target distances and fitness steps.
      */
-    public MemoryModelJson(final @NonNull EAnnotationHelper annotationHelper) {
+    private final ConfigurationJson configurations;
+
+    /**
+     * @param annotationHelper Finds the data descriptions of the features.
+     * @param configurations Converts the configurations of target distances and fitness steps.
+     */
+    public MemoryModelJson(final @NonNull EAnnotationHelper annotationHelper,
+                           final @NonNull ConfigurationJson configurations) {
         this.annotationHelper = annotationHelper;
+        this.configurations = configurations;
     }
 
     /**
@@ -124,7 +134,8 @@ public class MemoryModelJson {
 
         final boolean sameInput = haveSameValues(collected.getInput(), individual.getInput());
         final boolean sameOutput = haveSameValues(collected.getOutput(), individual.getOutput());
-        if(!sameInput || !sameOutput) {
+        final boolean sameFitness = collected.getFitness().equals(individual.getFitness());
+        if(!sameInput || !sameOutput || !sameFitness) {
             throw new IllegalStateException("The iteration contains two different individuals with the id "
                                             + individual.getId() + ".");
         }
@@ -302,12 +313,16 @@ public class MemoryModelJson {
      * @param problem The optimisation problem.
      * @param goals The goals of the problem, with the targets of the run resolved.
      * @param algorithmType The fully qualified DL type of the algorithm.
-     * @param execution The execution with the complete metric definitions.
+     * @param fitnessSteps The configurations of the steps in {@code 'fitness-pipeline'}, in
+     *   their order.
+     * @param execution The execution with the complete metric definitions and the fitness
+     *   components.
      * @param setup What is needed to repeat the run.
      */
     public ObjectNode toExecutionInformation(final Problem problem,
                                              final Goals goals,
                                              final String algorithmType,
+                                             final List<? extends EObject> fitnessSteps,
                                              final Execution execution,
                                              final RunSetup setup) {
         final ObjectNode document = newDocument();
@@ -323,6 +338,9 @@ public class MemoryModelJson {
 
         final ArrayNode optimisationSpace = toFeatures(problem.getOptimisationSpace());
         document.set("optimisationSpace", optimisationSpace);
+
+        final ObjectNode fitness = toFitness(execution.getFitnessComponents(), fitnessSteps);
+        document.set("fitness", fitness);
 
         final ArrayNode metricDefinitions = document.putArray("metricDefinitions");
         execution.getMetricDefinitions()
@@ -386,10 +404,64 @@ public class MemoryModelJson {
     }
 
     /**
-     * @return The goal: its feature, direction and, for a target goal, the target value of
-     *   the run.
+     * @return The configuration of the distance of the target goal.
+     * @throws IllegalStateException if the problem has no target goal for the objective.
      */
-    private static ObjectNode toGoal(final Goal goal) {
+    private static EObject distanceOf(final Problem problem, final Goal.Target target) {
+        return problem.getGoals()
+                      .stream()
+                      .filter(goal -> goal.getData() == target.objective())
+                      .filter(TargetGoal.class::isInstance)
+                      .map(TargetGoal.class::cast)
+                      .map(TargetGoal::getDistance)
+                      .findFirst()
+                      .orElseThrow(() -> new IllegalStateException("The problem has no target goal for '"
+                                                                   + target.name() + "'."));
+    }
+
+    /**
+     * @return The component with its name and, if it was derived from a goal, the goal's
+     *   objective.
+     */
+    private static ObjectNode toFitnessComponent(final FitnessComponentDefinition component) {
+        final ObjectNode componentNode = NODES.objectNode();
+        componentNode.put("name", component.getName());
+
+        final EStructuralFeature objective = component.getObjective();
+        if(objective != null) {
+            componentNode.put("goal", objective.getName());
+        }
+
+        return componentNode;
+    }
+
+    /**
+     * @return The fitness description: the components in the order of the fitness values
+     *   and the configured steps. The direction step always runs first and follows from the
+     *   goals, so it is not listed.
+     */
+    private ObjectNode toFitness(final List<FitnessComponentDefinition> components,
+                                 final List<? extends EObject> steps) {
+        final ObjectNode fitnessNode = NODES.objectNode();
+
+        final ArrayNode componentNodes = fitnessNode.putArray("components");
+        components.stream()
+                  .map(MemoryModelJson::toFitnessComponent)
+                  .forEach(componentNodes::add);
+
+        final ArrayNode stepNodes = fitnessNode.putArray("steps");
+        steps.stream()
+             .map(configurations::toConfiguration)
+             .forEach(stepNodes::add);
+
+        return fitnessNode;
+    }
+
+    /**
+     * @return The goal: its feature, direction and, for a target goal, the target value of
+     *   the run and the configuration of its distance.
+     */
+    private ObjectNode toGoal(final Goal goal, final Problem problem) {
         final ObjectNode goalNode = NODES.objectNode();
         goalNode.put("feature", goal.name());
 
@@ -399,6 +471,9 @@ public class MemoryModelJson {
             case Goal.Target target -> {
                 goalNode.put("direction", "target");
                 goalNode.set("target", toValue(target.target()));
+
+                final EObject distance = distanceOf(problem, target);
+                goalNode.set("distance", configurations.toConfiguration(distance));
             }
         }
 
@@ -418,7 +493,7 @@ public class MemoryModelJson {
     }
 
     /**
-     * @return The individual with its id, values and relationships.
+     * @return The individual with its id, values, fitness and relationships.
      */
     private ObjectNode toIndividual(final Individual individual) {
         final ObjectNode individualNode = NODES.objectNode();
@@ -429,6 +504,12 @@ public class MemoryModelJson {
 
         final ObjectNode output = toValues(individual.getOutput());
         individualNode.set("output", output);
+
+        final ArrayNode fitness = individualNode.putArray("fitness");
+        individual.getFitness()
+                  .stream()
+                  .map(MemoryModelJson::toNumber)
+                  .forEach(fitness::add);
 
         final ArrayNode relationships = individualNode.putArray("relationships");
         individual.getRelationships()
@@ -517,7 +598,7 @@ public class MemoryModelJson {
     /**
      * @return The number as a JSON number, or as a string if it is not finite.
      */
-    private static JsonNode toNumber(final Number number) {
+    static JsonNode toNumber(final Number number) {
         return switch(number) {
             case Double value when !Double.isFinite(value) -> NODES.stringNode(nonFiniteLiteral(value));
             case Float value when !Float.isFinite(value) -> NODES.stringNode(nonFiniteLiteral(value));
@@ -534,14 +615,14 @@ public class MemoryModelJson {
     /**
      * @return The problem with its name and goals.
      */
-    private static ObjectNode toProblem(final Problem problem, final Goals goals) {
+    private ObjectNode toProblem(final Problem problem, final Goals goals) {
         final ObjectNode problemNode = NODES.objectNode();
         problemNode.put("name", problem.getName());
 
         final ArrayNode goalNodes = problemNode.putArray("goals");
         goals.goals()
              .stream()
-             .map(MemoryModelJson::toGoal)
+             .map(goal -> toGoal(goal, problem))
              .forEach(goalNodes::add);
 
         return problemNode;

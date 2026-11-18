@@ -5,6 +5,9 @@ import java.util.List;
 
 import jakarta.enterprise.inject.Instance;
 
+import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EcoreFactory;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -14,12 +17,17 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import de.evoal.models.v202704.optimisation.memory.Execution;
+import de.evoal.models.v202704.optimisation.memory.FitnessComponentDefinition;
 import de.evoal.models.v202704.optimisation.memory.Iteration;
 import de.evoal.models.v202704.optimisation.memory.MemoryFactory;
 import de.evoal.models.v202704.optimisation.memory.MetricDefinition;
 import de.evoal.models.v202704.optimisation.memory.MetricKind;
 import de.evoal.models.v202704.optimisation.memory.MetricScope;
 import de.evoal.models.v202704.optimisation.memory.MetricValueType;
+
+import de.evoal.optimisation.api.fitness.FitnessComponent;
+import de.evoal.optimisation.api.fitness.FitnessLayout;
+import de.evoal.optimisation.api.fitness.Goal;
 
 public class ExecutionRecorderTest {
     private final FakeContributor contributor = new FakeContributor();
@@ -48,6 +56,18 @@ public class ExecutionRecorderTest {
         final Field field = ExecutionRecorder.class.getDeclaredField("contributors");
         field.setAccessible(true);
         field.set(recorder, contributors);
+    }
+
+    /**
+     * @return A layout with the component of a goal for the objective {@code y} and the
+     *   component {@code violation} without goal.
+     */
+    private static FitnessLayout layout() {
+        final EAttribute objective = EcoreFactory.eINSTANCE.createEAttribute();
+        objective.setName("y");
+
+        return new FitnessLayout(List.of(FitnessComponent.of(new Goal.Minimise(objective)),
+                                         FitnessComponent.named("violation")));
     }
 
     private static Iteration iteration() {
@@ -158,6 +178,31 @@ public class ExecutionRecorderTest {
         public void theRunCannotBeFinished() {
             Assertions.assertThrows(IllegalStateException.class, recorder::finishRun);
         }
+
+        @Test
+        public void theFitnessComponentsAreRecordedInTheirOrder() {
+            // when
+            recorder.defineFitness(layout());
+
+            // then
+            final List<FitnessComponentDefinition> components = recorder.getExecution().getFitnessComponents();
+            Assertions.assertEquals(List.of("y", "violation"),
+                                    components.stream().map(FitnessComponentDefinition::getName).toList());
+            Assertions.assertEquals("y", components.get(0).getObjective().getName());
+            Assertions.assertNull(components.get(1).getObjective());
+        }
+
+        @Test
+        public void aNewFitnessDefinitionReplacesTheOldOne() {
+            // given
+            recorder.defineFitness(layout());
+
+            // when
+            recorder.defineFitness(FitnessLayout.EMPTY);
+
+            // then
+            Assertions.assertTrue(recorder.getExecution().getFitnessComponents().isEmpty());
+        }
     }
 
     @Nested
@@ -167,6 +212,15 @@ public class ExecutionRecorderTest {
         public void beginExecution() {
             recorder.startRun();
             recorder.beginExecution();
+        }
+
+        @Test
+        public void theFitnessCannotBeDefined() {
+            // given
+            final FitnessLayout layout = layout();
+
+            // when, then
+            Assertions.assertThrows(IllegalStateException.class, () -> recorder.defineFitness(layout));
         }
 
         @Test

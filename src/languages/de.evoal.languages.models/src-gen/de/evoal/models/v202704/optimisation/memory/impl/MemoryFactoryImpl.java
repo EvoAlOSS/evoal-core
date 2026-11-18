@@ -61,6 +61,7 @@ public class MemoryFactoryImpl extends EFactoryImpl implements MemoryFactory {
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case MemoryPackage.EXECUTION: return createExecution();
+			case MemoryPackage.FITNESS_COMPONENT_DEFINITION: return createFitnessComponentDefinition();
 			case MemoryPackage.ITERATION: return createIteration();
 			case MemoryPackage.ORDERED_ITERATION_STEP: return createOrderedIterationStep();
 			case MemoryPackage.UNORDERED_ITERATION_STEP: return createUnorderedIterationStep();
@@ -123,6 +124,17 @@ public class MemoryFactoryImpl extends EFactoryImpl implements MemoryFactory {
 	public Execution createExecution() {
 		ExecutionImpl execution = new ExecutionImpl();
 		return execution;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public FitnessComponentDefinition createFitnessComponentDefinition() {
+		FitnessComponentDefinitionImpl fitnessComponentDefinition = new FitnessComponentDefinitionImpl();
+		return fitnessComponentDefinition;
 	}
 
 	/**

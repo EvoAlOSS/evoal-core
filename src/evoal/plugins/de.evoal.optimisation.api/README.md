@@ -36,9 +36,14 @@ swarm optimisation are written the same way.
 4. `RunFinished`, then ends the context.
 
 Recording an iteration means: every member of the population becomes an `Individual`
-with the next id, its lineage becomes a relationship to the individuals of the previous
-iteration, the ranks are added, and the best individual so far (`Iteration.bestSoFar`) is
-updated. On an equal optimisation value, the earlier individual stays the best.
+with the next id, its objectives (`output`) and its fitness (`fitness`, one value per
+component, canonical minimisation), its lineage becomes a relationship to the individuals
+of the previous iteration, the ranks are added, and the best individual so far
+(`Iteration.bestSoFar`) is updated. On an equal optimisation value, the earlier
+individual stays the best. The components of the fitness are recorded once per run in
+`Execution.fitnessComponents`; the applications define them from the fitness pipeline
+before the run (`ExecutionRecorder.defineFitness`). The `'memory-model'` writer writes
+both; CSV writers and reports show the objectives only.
 
 An algorithm therefore does not number iterations, check the criterion, assign ids,
 build the memory model or call the statistics writers.

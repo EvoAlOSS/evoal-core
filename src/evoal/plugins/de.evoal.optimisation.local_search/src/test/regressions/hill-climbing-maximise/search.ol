@@ -1,4 +1,5 @@
-// Regression: hill climbing that maximises, from fixed start candidates.
+// Regression: hill climbing that maximises, from fixed start candidates. The memory
+// model shows the negated objective as fitness.
 import "definitions" from de.evoal.core.math;
 
 import "definitions" from de.evoal.optimisation.core;
@@ -25,7 +26,7 @@ module 'search' {
 
         and maximise data 'y:0'
 
-        document ['candidates-per-iteration' {}, 'best-candidate-per-iteration' {}].
+        document ['candidates-per-iteration' {}, 'best-candidate-per-iteration' {}, 'memory-model' {}].
     }
 
     configure 'local-search' for 'regression' {

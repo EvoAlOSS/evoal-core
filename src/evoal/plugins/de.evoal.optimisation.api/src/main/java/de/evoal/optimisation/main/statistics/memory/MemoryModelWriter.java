@@ -19,10 +19,12 @@ import org.eclipse.emf.ecore.EObject;
 import de.evoal.core.api.cdi.BlackboardValue;
 import de.evoal.core.api.cdi.ConfigurationValue;
 import de.evoal.core.api.dynamic.EAnnotationHelper;
+import de.evoal.core.api.languages.AttributeEvaluator;
 import de.evoal.core.api.random.RandomService;
 import de.evoal.core.api.utils.AttributeHelper;
 import de.evoal.core.api.utils.EvoalIOException;
 import de.evoal.models.core.utils.FQNProvider;
+import de.evoal.models.v202704.core.Configuration;
 import de.evoal.models.v202704.optimisation.memory.Execution;
 import de.evoal.models.v202704.optimisation.memory.Individual;
 import de.evoal.models.v202704.optimisation.memory.Iteration;
@@ -79,10 +81,16 @@ public class MemoryModelWriter implements StatisticsWriter {
     private EAnnotationHelper annotationHelper;
 
     /**
-     * Reads the configuration of the writer.
+     * Reads the configuration of the writer and of the fitness steps.
      */
     @Inject
     private AttributeHelper attributes;
+
+    /**
+     * Reads the attribute values of target distances and fitness steps, with their defaults.
+     */
+    @Inject
+    private AttributeEvaluator evaluator;
 
     /**
      * The ids of the best individuals (rank 0) of the last written iteration.
@@ -256,17 +264,19 @@ public class MemoryModelWriter implements StatisticsWriter {
                                             + problem + ".");
         }
 
-        json = new MemoryModelJson(annotationHelper);
+        json = new MemoryModelJson(annotationHelper, ConfigurationJson.of(evaluator));
         folder = new MemoryModelFolder(runFolder());
         folder.prepare();
 
         final String algorithmType = new FQNProvider().get(algorithm);
+        final List<Configuration> fitnessSteps = attributes.lookup(algorithm, "fitness-pipeline");
         final Execution execution = recorder.getExecution();
         final RunSetup setup = toSetup();
 
         final ObjectNode document = json.toExecutionInformation(optimisationProblem,
                                                                 goals,
                                                                 algorithmType,
+                                                                fitnessSteps,
                                                                 execution,
                                                                 setup);
         folder.write("execution-information.json", document);

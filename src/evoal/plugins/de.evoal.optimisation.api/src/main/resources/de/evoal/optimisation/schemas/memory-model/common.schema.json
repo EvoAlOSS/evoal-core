@@ -183,6 +183,13 @@
         "output": {
           "$ref": "#/$defs/values"
         },
+        "fitness": {
+          "description": "The fitness computed from the output, one value per component, in the order of 'fitness.components' of execution-information.json. Smaller values are better. Empty if the individual is not evaluated.",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/number"
+          }
+        },
         "relationships": {
           "type": "array",
           "items": {
@@ -194,7 +201,26 @@
         "id",
         "input",
         "output",
+        "fitness",
         "relationships"
+      ],
+      "additionalProperties": false
+    },
+    "configuration": {
+      "description": "An instance of a DL type, e.g., a target distance or a fitness step: its fully qualified type and its attribute values (with defaults applied). Nested instances are configurations, data is written by name.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "attributes": {
+          "type": "object"
+        }
+      },
+      "required": [
+        "type",
+        "attributes"
       ],
       "additionalProperties": false
     },

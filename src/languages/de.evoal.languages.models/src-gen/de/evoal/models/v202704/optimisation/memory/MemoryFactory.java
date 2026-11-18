@@ -32,6 +32,15 @@ public interface MemoryFactory extends EFactory {
 	Execution createExecution();
 
 	/**
+	 * Returns a new object of class '<em>Fitness Component Definition</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Fitness Component Definition</em>'.
+	 * @generated
+	 */
+	FitnessComponentDefinition createFitnessComponentDefinition();
+
+	/**
 	 * Returns a new object of class '<em>Iteration</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

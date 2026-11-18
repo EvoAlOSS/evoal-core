@@ -4,6 +4,7 @@ import java.util.List;
 
 import tools.jackson.databind.node.ObjectNode;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
 import org.junit.jupiter.api.Assertions;
@@ -13,6 +14,9 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import de.evoal.core.api.dynamic.EAnnotationHelper;
+import de.evoal.models.v202704.core.Configuration;
+import de.evoal.models.v202704.optimisation.memory.Execution;
+import de.evoal.models.v202704.optimisation.memory.FitnessComponentDefinition;
 import de.evoal.models.v202704.optimisation.memory.Individual;
 import de.evoal.models.v202704.optimisation.memory.Iteration;
 import de.evoal.models.v202704.optimisation.memory.MemoryFactory;
@@ -23,7 +27,7 @@ import de.evoal.models.v202704.optimisation.model.Problem;
 import de.evoal.optimisation.api.execution.EvaluationPosition;
 import de.evoal.optimisation.api.fitness.Goal;
 import de.evoal.optimisation.api.fitness.Goals;
-import de.evoal.optimisation.main.fitness.AbsoluteDistance;
+import de.evoal.optimisation.main.fitness.RelativeDistance;
 
 public class MemoryModelJsonTest {
     /**
@@ -32,7 +36,7 @@ public class MemoryModelJsonTest {
      */
     private static final RunSetup SINGLE_RUN = new RunSetup("2027.4.0", 9_007_199_254_740_993L, 0, null);
 
-    private final MemoryModelJson json = new MemoryModelJson(new EAnnotationHelper());
+    private final MemoryModelJson json = new MemoryModelJson(new EAnnotationHelper(), new ConfigurationJson(EObject::eGet));
 
     @Nested
     @DisplayName("given a problem with declared bounds and scales")
@@ -43,6 +47,7 @@ public class MemoryModelJsonTest {
             final ObjectNode document = json.toExecutionInformation(MemoryModels.problem(),
                                                                     MemoryModels.goals(MemoryModels.problem()),
                                                                     "de.evoal.test.algorithm",
+                                                                    List.of(),
                                                                     MemoryModels.execution(),
                                                                     SINGLE_RUN);
 
@@ -60,6 +65,7 @@ public class MemoryModelJsonTest {
             final ObjectNode document = json.toExecutionInformation(MemoryModels.problem(),
                                                                     MemoryModels.goals(MemoryModels.problem()),
                                                                     "de.evoal.test.algorithm",
+                                                                    List.of(),
                                                                     MemoryModels.execution(),
                                                                     SINGLE_RUN);
 
@@ -76,6 +82,7 @@ public class MemoryModelJsonTest {
             final ObjectNode document = json.toExecutionInformation(MemoryModels.problem(),
                                                                     MemoryModels.goals(MemoryModels.problem()),
                                                                     "de.evoal.test.algorithm",
+                                                                    List.of(),
                                                                     MemoryModels.execution(),
                                                                     SINGLE_RUN);
 
@@ -89,22 +96,50 @@ public class MemoryModelJsonTest {
         }
 
         @Test
-        public void targetGoalsWriteTheirTarget() {
+        public void targetGoalsWriteTheirTargetAndDistance() {
             // given
-            final Problem problem = MemoryModels.problem();
+            final Problem problem = MemoryModels.targetProblem(1.0, MemoryModels.distance(0.5));
             final EStructuralFeature objective = problem.getGoals().getFirst().getData();
-            final Goals goals = new Goals(List.of(new Goal.Target(objective, 1.5, new AbsoluteDistance())));
+            final Goals goals = new Goals(List.of(new Goal.Target(objective, 1.5, new RelativeDistance())));
 
             // when
             final ObjectNode document = json.toExecutionInformation(problem,
                                                                     goals,
                                                                     "de.evoal.test.algorithm",
+                                                                    List.of(),
                                                                     MemoryModels.execution(),
                                                                     SINGLE_RUN);
 
             // then
-            Assertions.assertEquals("[{\"feature\":\"y:0\",\"direction\":\"target\",\"target\":1.5}]",
+            Assertions.assertEquals("[{\"feature\":\"y:0\",\"direction\":\"target\",\"target\":1.5,"
+                                    + "\"distance\":{\"type\":\"de.evoal.test.relative-distance\","
+                                    + "\"attributes\":{\"scale\":0.5}}}]",
                                     document.get("problem").get("goals").toString());
+        }
+
+        @Test
+        public void theFitnessComponentsAndConfiguredStepsAreDescribed() {
+            // given
+            final Execution execution = MemoryModels.execution();
+            final FitnessComponentDefinition violation = MemoryFactory.eINSTANCE.createFitnessComponentDefinition();
+            violation.setName("violation");
+            execution.getFitnessComponents().add(violation);
+
+            final Configuration step = MemoryModels.distance(2.0);
+
+            // when
+            final ObjectNode document = json.toExecutionInformation(MemoryModels.problem(),
+                                                                    MemoryModels.goals(MemoryModels.problem()),
+                                                                    "de.evoal.test.algorithm",
+                                                                    List.of(step),
+                                                                    execution,
+                                                                    SINGLE_RUN);
+
+            // then
+            Assertions.assertEquals("{\"components\":[{\"name\":\"y:0\",\"goal\":\"y:0\"},{\"name\":\"violation\"}],"
+                                    + "\"steps\":[{\"type\":\"de.evoal.test.relative-distance\","
+                                    + "\"attributes\":{\"scale\":2.0}}]}",
+                                    document.get("fitness").toString());
         }
 
         @Test
@@ -117,6 +152,7 @@ public class MemoryModelJsonTest {
             final ObjectNode document = json.toExecutionInformation(MemoryModels.problem(),
                                                                     MemoryModels.goals(MemoryModels.problem()),
                                                                     "de.evoal.test.algorithm",
+                                                                    List.of(),
                                                                     MemoryModels.execution(),
                                                                     setup);
 
@@ -153,9 +189,9 @@ public class MemoryModelJsonTest {
 
             // then
             final String expectedIndividuals = "[{\"id\":3,\"input\":{\"x:0\":0.5,\"x:1\":1.0},\"output\":{\"y:0\":2.0},"
-                    + "\"relationships\":[]},"
+                    + "\"fitness\":[2.0],\"relationships\":[]},"
                     + "{\"id\":4,\"input\":{\"x:0\":1.5,\"x:1\":2.0},\"output\":{\"y:0\":1.0},"
-                    + "\"relationships\":[]}]";
+                    + "\"fitness\":[1.0],\"relationships\":[]}]";
             Assertions.assertEquals(expectedIndividuals, document.get("individuals").toString());
         }
 
@@ -175,6 +211,17 @@ public class MemoryModelJsonTest {
         public void anIdWithOtherValuesIsRejected() {
             // given
             final Individual different = MemoryModels.individual(4, new double[] {9.0, 9.0}, 9.0);
+            iteration.getRanks().getFirst().getMembers().add(different);
+
+            // when / then
+            Assertions.assertThrows(IllegalStateException.class, () -> json.toIteration(iteration));
+        }
+
+        @Test
+        public void anIdWithAnotherFitnessIsRejected() {
+            // given
+            final Individual different = MemoryModels.individual(4, new double[] {1.5, 2.0}, 1.0);
+            different.getFitness().set(0, -1.0);
             iteration.getRanks().getFirst().getMembers().add(different);
 
             // when / then
@@ -265,6 +312,7 @@ public class MemoryModelJsonTest {
             final ObjectNode written = (ObjectNode) document.get("individuals").get(0);
             Assertions.assertEquals("{\"x:0\":\"NaN\",\"x:1\":\"-Infinity\"}", written.get("input").toString());
             Assertions.assertEquals("{\"y:0\":\"Infinity\"}", written.get("output").toString());
+            Assertions.assertEquals("[\"Infinity\"]", written.get("fitness").toString());
         }
 
         @Test
@@ -281,16 +329,18 @@ public class MemoryModelJsonTest {
         }
 
         @Test
-        public void unevaluatedIndividualsHaveNoOutputValues() {
+        public void unevaluatedIndividualsHaveNoOutputValuesAndNoFitness() {
             // given
             final Individual individual = MemoryModels.individual(0, new double[] {1.0, 1.0}, 0.0);
             individual.setOutput(null);
+            individual.getFitness().clear();
 
             // when
             final ObjectNode document = json.toIteration(MemoryModels.iteration(0, individual));
 
             // then
             Assertions.assertEquals("{}", document.get("individuals").get(0).get("output").toString());
+            Assertions.assertEquals("[]", document.get("individuals").get(0).get("fitness").toString());
         }
     }
 

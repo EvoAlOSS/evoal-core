@@ -118,13 +118,59 @@ public interface MemoryPackage extends EPackage {
 	int EXECUTION__METRICS = 4;
 
 	/**
+	 * The feature id for the '<em><b>Fitness Components</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION__FITNESS_COMPONENTS = 5;
+
+	/**
 	 * The number of structural features of the '<em>Execution</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_FEATURE_COUNT = 5;
+	int EXECUTION_FEATURE_COUNT = 6;
+
+	/**
+	 * The meta object id for the '{@link de.evoal.models.v202704.optimisation.memory.impl.FitnessComponentDefinitionImpl <em>Fitness Component Definition</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.evoal.models.v202704.optimisation.memory.impl.FitnessComponentDefinitionImpl
+	 * @see de.evoal.models.v202704.optimisation.memory.impl.MemoryPackageImpl#getFitnessComponentDefinition()
+	 * @generated
+	 */
+	int FITNESS_COMPONENT_DEFINITION = 1;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FITNESS_COMPONENT_DEFINITION__NAME = 0;
+
+	/**
+	 * The feature id for the '<em><b>Objective</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FITNESS_COMPONENT_DEFINITION__OBJECTIVE = 1;
+
+	/**
+	 * The number of structural features of the '<em>Fitness Component Definition</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FITNESS_COMPONENT_DEFINITION_FEATURE_COUNT = 2;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.models.v202704.optimisation.memory.impl.StateImpl <em>State</em>}' class.
@@ -134,7 +180,7 @@ public interface MemoryPackage extends EPackage {
 	 * @see de.evoal.models.v202704.optimisation.memory.impl.MemoryPackageImpl#getState()
 	 * @generated
 	 */
-	int STATE = 1;
+	int STATE = 2;
 
 	/**
 	 * The number of structural features of the '<em>State</em>' class.
@@ -153,7 +199,7 @@ public interface MemoryPackage extends EPackage {
 	 * @see de.evoal.models.v202704.optimisation.memory.impl.MemoryPackageImpl#getIteration()
 	 * @generated
 	 */
-	int ITERATION = 2;
+	int ITERATION = 3;
 
 	/**
 	 * The feature id for the '<em><b>Number</b></em>' attribute.
@@ -217,7 +263,7 @@ public interface MemoryPackage extends EPackage {
 	 * @see de.evoal.models.v202704.optimisation.memory.impl.MemoryPackageImpl#getIterationStep()
 	 * @generated
 	 */
-	int ITERATION_STEP = 3;
+	int ITERATION_STEP = 4;
 
 	/**
 	 * The feature id for the '<em><b>Description</b></em>' attribute.
@@ -245,7 +291,7 @@ public interface MemoryPackage extends EPackage {
 	 * @see de.evoal.models.v202704.optimisation.memory.impl.MemoryPackageImpl#getOrderedIterationStep()
 	 * @generated
 	 */
-	int ORDERED_ITERATION_STEP = 4;
+	int ORDERED_ITERATION_STEP = 5;
 
 	/**
 	 * The feature id for the '<em><b>Description</b></em>' attribute.
@@ -282,7 +328,7 @@ public interface MemoryPackage extends EPackage {
 	 * @see de.evoal.models.v202704.optimisation.memory.impl.MemoryPackageImpl#getUnorderedIterationStep()
 	 * @generated
 	 */
-	int UNORDERED_ITERATION_STEP = 5;
+	int UNORDERED_ITERATION_STEP = 6;
 
 	/**
 	 * The feature id for the '<em><b>Description</b></em>' attribute.
@@ -319,7 +365,7 @@ public interface MemoryPackage extends EPackage {
 	 * @see de.evoal.models.v202704.optimisation.memory.impl.MemoryPackageImpl#getRank()
 	 * @generated
 	 */
-	int RANK = 6;
+	int RANK = 7;
 
 	/**
 	 * The feature id for the '<em><b>Number</b></em>' attribute.
@@ -356,7 +402,7 @@ public interface MemoryPackage extends EPackage {
 	 * @see de.evoal.models.v202704.optimisation.memory.impl.MemoryPackageImpl#getIndividual()
 	 * @generated
 	 */
-	int INDIVIDUAL = 7;
+	int INDIVIDUAL = 8;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -386,13 +432,22 @@ public interface MemoryPackage extends EPackage {
 	int INDIVIDUAL__OUTPUT = 2;
 
 	/**
+	 * The feature id for the '<em><b>Fitness</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INDIVIDUAL__FITNESS = 3;
+
+	/**
 	 * The feature id for the '<em><b>Relationships</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INDIVIDUAL__RELATIONSHIPS = 3;
+	int INDIVIDUAL__RELATIONSHIPS = 4;
 
 	/**
 	 * The number of structural features of the '<em>Individual</em>' class.
@@ -401,7 +456,7 @@ public interface MemoryPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INDIVIDUAL_FEATURE_COUNT = 4;
+	int INDIVIDUAL_FEATURE_COUNT = 5;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.models.v202704.optimisation.memory.impl.RelationshipImpl <em>Relationship</em>}' class.
@@ -411,7 +466,7 @@ public interface MemoryPackage extends EPackage {
 	 * @see de.evoal.models.v202704.optimisation.memory.impl.MemoryPackageImpl#getRelationship()
 	 * @generated
 	 */
-	int RELATIONSHIP = 8;
+	int RELATIONSHIP = 9;
 
 	/**
 	 * The feature id for the '<em><b>Target</b></em>' reference list.
@@ -439,7 +494,7 @@ public interface MemoryPackage extends EPackage {
 	 * @see de.evoal.models.v202704.optimisation.memory.impl.MemoryPackageImpl#getIdentity()
 	 * @generated
 	 */
-	int IDENTITY = 9;
+	int IDENTITY = 10;
 
 	/**
 	 * The feature id for the '<em><b>Target</b></em>' reference list.
@@ -467,7 +522,7 @@ public interface MemoryPackage extends EPackage {
 	 * @see de.evoal.models.v202704.optimisation.memory.impl.MemoryPackageImpl#getMutation()
 	 * @generated
 	 */
-	int MUTATION = 10;
+	int MUTATION = 11;
 
 	/**
 	 * The feature id for the '<em><b>Target</b></em>' reference list.
@@ -495,7 +550,7 @@ public interface MemoryPackage extends EPackage {
 	 * @see de.evoal.models.v202704.optimisation.memory.impl.MemoryPackageImpl#getRecombination()
 	 * @generated
 	 */
-	int RECOMBINATION = 11;
+	int RECOMBINATION = 12;
 
 	/**
 	 * The feature id for the '<em><b>Target</b></em>' reference list.
@@ -532,7 +587,7 @@ public interface MemoryPackage extends EPackage {
 	 * @see de.evoal.models.v202704.optimisation.memory.impl.MemoryPackageImpl#getMetricEntry()
 	 * @generated
 	 */
-	int METRIC_ENTRY = 12;
+	int METRIC_ENTRY = 13;
 
 	/**
 	 * The feature id for the '<em><b>Key</b></em>' attribute.
@@ -569,7 +624,7 @@ public interface MemoryPackage extends EPackage {
 	 * @see de.evoal.models.v202704.optimisation.memory.impl.MemoryPackageImpl#getMetricDefinition()
 	 * @generated
 	 */
-	int METRIC_DEFINITION = 13;
+	int METRIC_DEFINITION = 14;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -633,7 +688,7 @@ public interface MemoryPackage extends EPackage {
 	 * @see de.evoal.models.v202704.optimisation.memory.impl.MemoryPackageImpl#getMetricKind()
 	 * @generated
 	 */
-	int METRIC_KIND = 14;
+	int METRIC_KIND = 15;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.models.v202704.optimisation.memory.MetricValueType <em>Metric Value Type</em>}' enum.
@@ -643,7 +698,7 @@ public interface MemoryPackage extends EPackage {
 	 * @see de.evoal.models.v202704.optimisation.memory.impl.MemoryPackageImpl#getMetricValueType()
 	 * @generated
 	 */
-	int METRIC_VALUE_TYPE = 15;
+	int METRIC_VALUE_TYPE = 16;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.models.v202704.optimisation.memory.MetricScope <em>Metric Scope</em>}' enum.
@@ -653,7 +708,7 @@ public interface MemoryPackage extends EPackage {
 	 * @see de.evoal.models.v202704.optimisation.memory.impl.MemoryPackageImpl#getMetricScope()
 	 * @generated
 	 */
-	int METRIC_SCOPE = 16;
+	int METRIC_SCOPE = 17;
 
 
 	/**
@@ -720,6 +775,49 @@ public interface MemoryPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getExecution_Metrics();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link de.evoal.models.v202704.optimisation.memory.Execution#getFitnessComponents <em>Fitness Components</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Fitness Components</em>'.
+	 * @see de.evoal.models.v202704.optimisation.memory.Execution#getFitnessComponents()
+	 * @see #getExecution()
+	 * @generated
+	 */
+	EReference getExecution_FitnessComponents();
+
+	/**
+	 * Returns the meta object for class '{@link de.evoal.models.v202704.optimisation.memory.FitnessComponentDefinition <em>Fitness Component Definition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Fitness Component Definition</em>'.
+	 * @see de.evoal.models.v202704.optimisation.memory.FitnessComponentDefinition
+	 * @generated
+	 */
+	EClass getFitnessComponentDefinition();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.evoal.models.v202704.optimisation.memory.FitnessComponentDefinition#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see de.evoal.models.v202704.optimisation.memory.FitnessComponentDefinition#getName()
+	 * @see #getFitnessComponentDefinition()
+	 * @generated
+	 */
+	EAttribute getFitnessComponentDefinition_Name();
+
+	/**
+	 * Returns the meta object for the reference '{@link de.evoal.models.v202704.optimisation.memory.FitnessComponentDefinition#getObjective <em>Objective</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Objective</em>'.
+	 * @see de.evoal.models.v202704.optimisation.memory.FitnessComponentDefinition#getObjective()
+	 * @see #getFitnessComponentDefinition()
+	 * @generated
+	 */
+	EReference getFitnessComponentDefinition_Objective();
 
 	/**
 	 * Returns the meta object for class '{@link de.evoal.models.v202704.optimisation.memory.State <em>State</em>}'.
@@ -933,6 +1031,17 @@ public interface MemoryPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getIndividual_Output();
+
+	/**
+	 * Returns the meta object for the attribute list '{@link de.evoal.models.v202704.optimisation.memory.Individual#getFitness <em>Fitness</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Fitness</em>'.
+	 * @see de.evoal.models.v202704.optimisation.memory.Individual#getFitness()
+	 * @see #getIndividual()
+	 * @generated
+	 */
+	EAttribute getIndividual_Fitness();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link de.evoal.models.v202704.optimisation.memory.Individual#getRelationships <em>Relationships</em>}'.
@@ -1209,6 +1318,40 @@ public interface MemoryPackage extends EPackage {
 		EReference EXECUTION__METRICS = eINSTANCE.getExecution_Metrics();
 
 		/**
+		 * The meta object literal for the '<em><b>Fitness Components</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EXECUTION__FITNESS_COMPONENTS = eINSTANCE.getExecution_FitnessComponents();
+
+		/**
+		 * The meta object literal for the '{@link de.evoal.models.v202704.optimisation.memory.impl.FitnessComponentDefinitionImpl <em>Fitness Component Definition</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.evoal.models.v202704.optimisation.memory.impl.FitnessComponentDefinitionImpl
+		 * @see de.evoal.models.v202704.optimisation.memory.impl.MemoryPackageImpl#getFitnessComponentDefinition()
+		 * @generated
+		 */
+		EClass FITNESS_COMPONENT_DEFINITION = eINSTANCE.getFitnessComponentDefinition();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute FITNESS_COMPONENT_DEFINITION__NAME = eINSTANCE.getFitnessComponentDefinition_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Objective</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference FITNESS_COMPONENT_DEFINITION__OBJECTIVE = eINSTANCE.getFitnessComponentDefinition_Objective();
+
+		/**
 		 * The meta object literal for the '{@link de.evoal.models.v202704.optimisation.memory.impl.StateImpl <em>State</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1381,6 +1524,14 @@ public interface MemoryPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute INDIVIDUAL__OUTPUT = eINSTANCE.getIndividual_Output();
+
+		/**
+		 * The meta object literal for the '<em><b>Fitness</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute INDIVIDUAL__FITNESS = eINSTANCE.getIndividual_Fitness();
 
 		/**
 		 * The meta object literal for the '<em><b>Relationships</b></em>' containment reference list feature.

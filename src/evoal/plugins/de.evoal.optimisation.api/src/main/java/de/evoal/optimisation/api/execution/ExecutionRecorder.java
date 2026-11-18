@@ -10,22 +10,29 @@ import jakarta.inject.Inject;
 import lombok.Getter;
 
 import de.evoal.models.v202704.optimisation.memory.Execution;
+import de.evoal.models.v202704.optimisation.memory.FitnessComponentDefinition;
 import de.evoal.models.v202704.optimisation.memory.Iteration;
 import de.evoal.models.v202704.optimisation.memory.MemoryFactory;
 import de.evoal.models.v202704.optimisation.memory.MetricDefinition;
 import de.evoal.models.v202704.optimisation.memory.MetricScope;
 
+import de.evoal.optimisation.api.fitness.FitnessComponent;
+import de.evoal.optimisation.api.fitness.FitnessLayout;
+import de.evoal.optimisation.api.fitness.Goal;
+
 /**
  * Records the description of the current run: the metrics it records
- *   ({@link Execution#getMetricDefinitions()}) and the values of its execution metrics
- *   ({@link Execution#getMetrics()}).
+ *   ({@link Execution#getMetricDefinitions()}), the values of its execution metrics
+ *   ({@link Execution#getMetrics()}) and the components of the fitness of its individuals
+ *   ({@link Execution#getFitnessComponents()}).
  * <p>
  * A run passes through three phases, and the recorder rejects calls in the wrong phase:
  * <ol>
  *   <li>{@link #startRun()} opens the <em>definition phase</em>. The applications call it
  *     before they create the algorithm. The {@link MetricContributor}s and the components
  *     of the algorithm (e.g., stopping criteria) define all metrics
- *     ({@link #define(MetricDefinition)}).</li>
+ *     ({@link #define(MetricDefinition)}). The applications define the components of the
+ *     fitness ({@link #defineFitness(FitnessLayout)}).</li>
  *   <li>{@link #beginExecution()} closes the definitions. The applications call it after
  *     they created the algorithm and before they run it. From now on, the definitions are
  *     complete and can be written, e.g., to the description of the run. The algorithm
@@ -87,6 +94,23 @@ public class ExecutionRecorder {
         }
 
         execution.getMetricDefinitions().add(definition);
+    }
+
+    /**
+     * Defines the components of the fitness of the current run, in the order of the fitness
+     *   values of its individuals. Replaces earlier definitions of the run.
+     *
+     * @param layout The components of the fitness the algorithm computes.
+     * @throws IllegalStateException if the run is not in the definition phase.
+     */
+    public void defineFitness(final FitnessLayout layout) {
+        requirePhase(Phase.DEFINITION, "define the fitness components");
+
+        execution.getFitnessComponents().clear();
+        layout.components()
+              .stream()
+              .map(ExecutionRecorder::toDefinition)
+              .forEach(execution.getFitnessComponents()::add);
     }
 
     /**
@@ -198,6 +222,19 @@ public class ExecutionRecorder {
         phase = Phase.DEFINITION;
 
         contributors.forEach(contributor -> contributor.startRun(this));
+    }
+
+    /**
+     * @return The definition of the fitness component for the memory model.
+     */
+    private static FitnessComponentDefinition toDefinition(final FitnessComponent component) {
+        final FitnessComponentDefinition definition = MemoryFactory.eINSTANCE.createFitnessComponentDefinition();
+        definition.setName(component.name());
+        component.goal()
+                 .map(Goal::objective)
+                 .ifPresent(definition::setObjective);
+
+        return definition;
     }
 
     /**

@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
+import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -36,6 +37,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link de.evoal.models.v202704.optimisation.memory.impl.IndividualImpl#getId <em>Id</em>}</li>
  *   <li>{@link de.evoal.models.v202704.optimisation.memory.impl.IndividualImpl#getInput <em>Input</em>}</li>
  *   <li>{@link de.evoal.models.v202704.optimisation.memory.impl.IndividualImpl#getOutput <em>Output</em>}</li>
+ *   <li>{@link de.evoal.models.v202704.optimisation.memory.impl.IndividualImpl#getFitness <em>Fitness</em>}</li>
  *   <li>{@link de.evoal.models.v202704.optimisation.memory.impl.IndividualImpl#getRelationships <em>Relationships</em>}</li>
  * </ul>
  *
@@ -101,6 +103,16 @@ public class IndividualImpl extends MinimalEObjectImpl.Container implements Indi
 	 * @ordered
 	 */
 	protected TypedEObject output = OUTPUT_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getFitness() <em>Fitness</em>}' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getFitness()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Double> fitness;
 
 	/**
 	 * The cached value of the '{@link #getRelationships() <em>Relationships</em>}' containment reference list.
@@ -206,6 +218,19 @@ public class IndividualImpl extends MinimalEObjectImpl.Container implements Indi
 	 * @generated
 	 */
 	@Override
+	public EList<Double> getFitness() {
+		if (fitness == null) {
+			fitness = new EDataTypeUniqueEList<Double>(Double.class, this, MemoryPackage.INDIVIDUAL__FITNESS);
+		}
+		return fitness;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EList<Relationship> getRelationships() {
 		if (relationships == null) {
 			relationships = new EObjectContainmentEList<Relationship>(Relationship.class, this, MemoryPackage.INDIVIDUAL__RELATIONSHIPS);
@@ -241,6 +266,8 @@ public class IndividualImpl extends MinimalEObjectImpl.Container implements Indi
 				return getInput();
 			case MemoryPackage.INDIVIDUAL__OUTPUT:
 				return getOutput();
+			case MemoryPackage.INDIVIDUAL__FITNESS:
+				return getFitness();
 			case MemoryPackage.INDIVIDUAL__RELATIONSHIPS:
 				return getRelationships();
 		}
@@ -264,6 +291,10 @@ public class IndividualImpl extends MinimalEObjectImpl.Container implements Indi
 				return;
 			case MemoryPackage.INDIVIDUAL__OUTPUT:
 				setOutput((TypedEObject)newValue);
+				return;
+			case MemoryPackage.INDIVIDUAL__FITNESS:
+				getFitness().clear();
+				getFitness().addAll((Collection<? extends Double>)newValue);
 				return;
 			case MemoryPackage.INDIVIDUAL__RELATIONSHIPS:
 				getRelationships().clear();
@@ -290,6 +321,9 @@ public class IndividualImpl extends MinimalEObjectImpl.Container implements Indi
 			case MemoryPackage.INDIVIDUAL__OUTPUT:
 				setOutput(OUTPUT_EDEFAULT);
 				return;
+			case MemoryPackage.INDIVIDUAL__FITNESS:
+				getFitness().clear();
+				return;
 			case MemoryPackage.INDIVIDUAL__RELATIONSHIPS:
 				getRelationships().clear();
 				return;
@@ -311,6 +345,8 @@ public class IndividualImpl extends MinimalEObjectImpl.Container implements Indi
 				return INPUT_EDEFAULT == null ? input != null : !INPUT_EDEFAULT.equals(input);
 			case MemoryPackage.INDIVIDUAL__OUTPUT:
 				return OUTPUT_EDEFAULT == null ? output != null : !OUTPUT_EDEFAULT.equals(output);
+			case MemoryPackage.INDIVIDUAL__FITNESS:
+				return fitness != null && !fitness.isEmpty();
 			case MemoryPackage.INDIVIDUAL__RELATIONSHIPS:
 				return relationships != null && !relationships.isEmpty();
 		}
@@ -333,6 +369,8 @@ public class IndividualImpl extends MinimalEObjectImpl.Container implements Indi
 		result.append(input);
 		result.append(", output: ");
 		result.append(output);
+		result.append(", fitness: ");
+		result.append(fitness);
 		result.append(')');
 		return result.toString();
 	}

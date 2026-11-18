@@ -5,7 +5,13 @@
     "goals" : [ {
       "feature" : "y:0",
       "direction" : "target",
-      "target" : 50.0
+      "target" : 50.0,
+      "distance" : {
+        "type" : "de.evoal.optimisation.core.relative-distance",
+        "attributes" : {
+          "scale" : 2.0
+        }
+      }
     } ]
   },
   "algorithm" : {
@@ -41,6 +47,13 @@
     "type" : "real",
     "scale" : "quotient"
   } ],
+  "fitness" : {
+    "components" : [ {
+      "name" : "y:0",
+      "goal" : "y:0"
+    } ],
+    "steps" : [ ]
+  },
   "metricDefinitions" : [ {
     "name" : "evaluations.real",
     "kind" : "counter",

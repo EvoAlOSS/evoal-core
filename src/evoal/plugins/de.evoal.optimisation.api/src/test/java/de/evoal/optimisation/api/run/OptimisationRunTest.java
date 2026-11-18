@@ -31,6 +31,7 @@ import de.evoal.optimisation.api.events.RunEventDispatcher;
 import de.evoal.optimisation.api.execution.ExecutionRecorder;
 import de.evoal.optimisation.api.fitness.Evaluation;
 import de.evoal.optimisation.api.fitness.Fitness;
+import de.evoal.optimisation.api.fitness.FitnessComponent;
 import de.evoal.optimisation.api.fitness.FitnessLayout;
 import de.evoal.optimisation.api.model.IndividualIDGenerator;
 import de.evoal.optimisation.api.statistics.writer.StatisticsWriter;
@@ -103,10 +104,14 @@ public class OptimisationRunTest {
                .thenAnswer(invocation -> invocation.<Iteration>getArgument(0).getNumber() < lastIteration);
     }
 
+    /**
+     * @return An evaluated member whose fitness and optimisation value are {@code value}.
+     */
     private static Candidate member(final double value, final Lineage lineage) {
         final TypedEObject input = Mockito.mock(TypedEObject.class);
         final TypedEObject output = Mockito.mock(TypedEObject.class);
-        final Fitness fitness = new Fitness(FitnessLayout.EMPTY, new double[0]);
+        final FitnessLayout layout = new FitnessLayout(List.of(FitnessComponent.named("f")));
+        final Fitness fitness = new Fitness(layout, new double[] {value});
         final Evaluation evaluation = new Evaluation(output, fitness, new Value(value));
 
         return Candidate.evaluated(input, evaluation, lineage);
@@ -177,6 +182,16 @@ public class OptimisationRunTest {
             Assertions.assertEquals(List.of(0, 1), idsOf(iterations.get(0)));
             Assertions.assertEquals(List.of(2, 3), idsOf(iterations.get(1)));
             Assertions.assertEquals(List.of(4, 5), idsOf(iterations.get(2)));
+        }
+
+        @Test
+        public void theIndividualsHaveTheFitnessOfTheirMembers() {
+            // when
+            kernel.execute(criterion, procedure);
+
+            // then
+            Assertions.assertEquals(List.of(1.0), individual(iterations.get(1), 2).getFitness());
+            Assertions.assertEquals(List.of(-1.0), individual(iterations.get(1), 3).getFitness());
         }
 
         @Test

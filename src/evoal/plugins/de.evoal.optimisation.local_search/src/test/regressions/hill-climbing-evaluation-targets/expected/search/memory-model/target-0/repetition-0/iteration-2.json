@@ -10,6 +10,7 @@
     "output" : {
       "y:0" : 65.00000000000011
     },
+    "fitness" : [ 32.50000000000006 ],
     "relationships" : [ {
       "kind" : "mutation",
       "targets" : [ 1 ]

@@ -4,6 +4,7 @@ import java.io.File;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import jakarta.inject.Provider;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -16,6 +17,7 @@ import de.evoal.models.v202704.optimisation.model.OptimisationModule;
 
 import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
 import de.evoal.optimisation.api.execution.ExecutionRecorder;
+import de.evoal.optimisation.api.fitness.FitnessPipeline;
 import de.evoal.optimisation.api.model.IndividualIDGenerator;
 import de.evoal.optimisation.api.model.OptimisationAlgorithm;
 
@@ -38,6 +40,12 @@ public class HeuristicSearchMain implements MainClass {
 
     @Inject
     private ExecutionRecorder executionRecorder;
+
+    /**
+     * Creates the fitness pipeline of the run, whose components are recorded.
+     */
+    @Inject
+    private Provider<FitnessPipeline> fitnessPipelines;
 
     @Inject
     private IndividualIDGenerator idGenerator;
@@ -70,6 +78,7 @@ public class HeuristicSearchMain implements MainClass {
         final OptimisationAlgorithm algorithm =
                 BeanFactory.createComponent(OptimisationAlgorithm.class, configuration.getAlgorithm());
 
+        executionRecorder.defineFitness(fitnessPipelines.get().layout());
         executionRecorder.beginExecution();
         algorithm.run();
         executionRecorder.finishRun();

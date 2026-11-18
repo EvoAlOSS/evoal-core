@@ -13,7 +13,7 @@ files stay small enough to read.
 | `'best-candidate-so-far'` | `best-candidate-so-far.csv` | the best individual found up to every iteration |
 | `'candidates-per-iteration'` | `candidates-per-iteration.csv` | all individuals of every iteration |
 | `'metrics-per-iteration'` | `metrics-per-iteration.csv` | the metrics of every iteration, e.g., the number of evaluations |
-| `'memory-model'` | `memory-model/*.json` | the whole run: individuals, their origin, ranks and metrics |
+| `'memory-model'` | `memory-model/*.json` | the whole run: individuals with objectives and fitness, their origin, ranks and metrics |
 | `none` | nothing | disables the output |
 
 ## Files
@@ -56,10 +56,12 @@ All files are in `output/search/`.
 - `memory-model/`: the memory model of the run, written while the run is executed.
   - `execution-information.json` (before the first iteration): the problem, the
     configuration of the algorithm, the search and optimisation space, the
-    definitions of the metrics, and what is needed to repeat the run (EvoAl
-    version, seed).
+    components of the fitness (`fitness`), the definitions of the metrics, and
+    what is needed to repeat the run (EvoAl version, seed).
   - `iteration-<n>.json`: the individuals of iteration `n` with their values
-    (`input`, `output`) and their origin (`relationships`), their ranks
+    (`input`, `output`), their fitness (`fitness`, one value per component of
+    `execution-information.json`; smaller is better, so a maximised objective
+    appears negated) and their origin (`relationships`), their ranks
     (`ranks`) and the metrics. A particle that moved has the relationship
     `mutation` to its individual of the previous iteration. A particle whose
     position did not change has the relationship `identity`. Following the

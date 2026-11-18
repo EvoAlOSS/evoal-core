@@ -4,6 +4,7 @@
 package de.evoal.models.v202704.optimisation.memory.impl;
 
 import de.evoal.models.v202704.optimisation.memory.Execution;
+import de.evoal.models.v202704.optimisation.memory.FitnessComponentDefinition;
 import de.evoal.models.v202704.optimisation.memory.MemoryPackage;
 import de.evoal.models.v202704.optimisation.memory.MetricDefinition;
 import de.evoal.models.v202704.optimisation.memory.State;
@@ -40,6 +41,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link de.evoal.models.v202704.optimisation.memory.impl.ExecutionImpl#getStates <em>States</em>}</li>
  *   <li>{@link de.evoal.models.v202704.optimisation.memory.impl.ExecutionImpl#getMetricDefinitions <em>Metric Definitions</em>}</li>
  *   <li>{@link de.evoal.models.v202704.optimisation.memory.impl.ExecutionImpl#getMetrics <em>Metrics</em>}</li>
+ *   <li>{@link de.evoal.models.v202704.optimisation.memory.impl.ExecutionImpl#getFitnessComponents <em>Fitness Components</em>}</li>
  * </ul>
  *
  * @generated
@@ -94,6 +96,16 @@ public class ExecutionImpl extends MinimalEObjectImpl.Container implements Execu
 	 * @ordered
 	 */
 	protected EMap<String, Number> metrics;
+
+	/**
+	 * The cached value of the '{@link #getFitnessComponents() <em>Fitness Components</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getFitnessComponents()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<FitnessComponentDefinition> fitnessComponents;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -239,6 +251,19 @@ public class ExecutionImpl extends MinimalEObjectImpl.Container implements Execu
 	 * @generated
 	 */
 	@Override
+	public EList<FitnessComponentDefinition> getFitnessComponents() {
+		if (fitnessComponents == null) {
+			fitnessComponents = new EObjectContainmentEList<FitnessComponentDefinition>(FitnessComponentDefinition.class, this, MemoryPackage.EXECUTION__FITNESS_COMPONENTS);
+		}
+		return fitnessComponents;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case MemoryPackage.EXECUTION__STATES:
@@ -247,6 +272,8 @@ public class ExecutionImpl extends MinimalEObjectImpl.Container implements Execu
 				return ((InternalEList<?>)getMetricDefinitions()).basicRemove(otherEnd, msgs);
 			case MemoryPackage.EXECUTION__METRICS:
 				return ((InternalEList<?>)getMetrics()).basicRemove(otherEnd, msgs);
+			case MemoryPackage.EXECUTION__FITNESS_COMPONENTS:
+				return ((InternalEList<?>)getFitnessComponents()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -272,6 +299,8 @@ public class ExecutionImpl extends MinimalEObjectImpl.Container implements Execu
 			case MemoryPackage.EXECUTION__METRICS:
 				if (coreType) return getMetrics();
 				else return getMetrics().map();
+			case MemoryPackage.EXECUTION__FITNESS_COMPONENTS:
+				return getFitnessComponents();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -302,6 +331,10 @@ public class ExecutionImpl extends MinimalEObjectImpl.Container implements Execu
 			case MemoryPackage.EXECUTION__METRICS:
 				((EStructuralFeature.Setting)getMetrics()).set(newValue);
 				return;
+			case MemoryPackage.EXECUTION__FITNESS_COMPONENTS:
+				getFitnessComponents().clear();
+				getFitnessComponents().addAll((Collection<? extends FitnessComponentDefinition>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -329,6 +362,9 @@ public class ExecutionImpl extends MinimalEObjectImpl.Container implements Execu
 			case MemoryPackage.EXECUTION__METRICS:
 				getMetrics().clear();
 				return;
+			case MemoryPackage.EXECUTION__FITNESS_COMPONENTS:
+				getFitnessComponents().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -351,6 +387,8 @@ public class ExecutionImpl extends MinimalEObjectImpl.Container implements Execu
 				return metricDefinitions != null && !metricDefinitions.isEmpty();
 			case MemoryPackage.EXECUTION__METRICS:
 				return metrics != null && !metrics.isEmpty();
+			case MemoryPackage.EXECUTION__FITNESS_COMPONENTS:
+				return fitnessComponents != null && !fitnessComponents.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

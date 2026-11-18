@@ -18,13 +18,17 @@
             "properties": {
               "feature": { "$ref": "common.schema.json#/$defs/featureName" },
               "direction": { "enum": ["maximise", "minimise", "target"] },
-              "target": { "$ref": "common.schema.json#/$defs/value" }
+              "target": { "$ref": "common.schema.json#/$defs/value" },
+              "distance": {
+                "description": "Target goals only: measures how far an objective value is from the target.",
+                "$ref": "common.schema.json#/$defs/configuration"
+              }
             },
             "required": ["feature", "direction"],
             "additionalProperties": false,
             "if": { "properties": { "direction": { "const": "target" } } },
-            "then": { "required": ["target"] },
-            "else": { "not": { "required": ["target"] } }
+            "then": { "required": ["target", "distance"] },
+            "else": { "allOf": [{ "not": { "required": ["target"] } }, { "not": { "required": ["distance"] } }] }
           }
         }
       },
@@ -51,6 +55,35 @@
       "description": "Features in declaration order.",
       "type": "array",
       "items": { "$ref": "common.schema.json#/$defs/feature" }
+    },
+    "fitness": {
+      "description": "How the fitness of the individuals is computed from their output. The direction step (minimise: v, maximise: -v, target: the goal's distance) always runs first and follows from the goals, so it is not listed in 'steps'.",
+      "type": "object",
+      "properties": {
+        "components": {
+          "description": "The components of the fitness, in the order of the fitness values of the individuals.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string", "minLength": 1 },
+              "goal": {
+                "description": "The objective of the goal the component was derived from; missing for components without a goal.",
+                "$ref": "common.schema.json#/$defs/featureName"
+              }
+            },
+            "required": ["name"],
+            "additionalProperties": false
+          }
+        },
+        "steps": {
+          "description": "The steps configured in 'fitness-pipeline', in the order in which they run after the direction step.",
+          "type": "array",
+          "items": { "$ref": "common.schema.json#/$defs/configuration" }
+        }
+      },
+      "required": ["components", "steps"],
+      "additionalProperties": false
     },
     "metricDefinitions": {
       "description": "All metrics of the run, in definition order.",
@@ -92,6 +125,6 @@
       "additionalProperties": false
     }
   },
-  "required": ["formatVersion", "problem", "algorithm", "searchSpace", "optimisationSpace", "metricDefinitions", "setup"],
+  "required": ["formatVersion", "problem", "algorithm", "searchSpace", "optimisationSpace", "fitness", "metricDefinitions", "setup"],
   "additionalProperties": false
 }

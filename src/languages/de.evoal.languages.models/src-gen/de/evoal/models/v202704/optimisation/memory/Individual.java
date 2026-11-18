@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link de.evoal.models.v202704.optimisation.memory.Individual#getId <em>Id</em>}</li>
  *   <li>{@link de.evoal.models.v202704.optimisation.memory.Individual#getInput <em>Input</em>}</li>
  *   <li>{@link de.evoal.models.v202704.optimisation.memory.Individual#getOutput <em>Output</em>}</li>
+ *   <li>{@link de.evoal.models.v202704.optimisation.memory.Individual#getFitness <em>Fitness</em>}</li>
  *   <li>{@link de.evoal.models.v202704.optimisation.memory.Individual#getRelationships <em>Relationships</em>}</li>
  * </ul>
  *
@@ -119,6 +120,27 @@ public interface Individual extends EObject {
 	 * @generated
 	 */
 	void setOutput(TypedEObject value);
+
+	/**
+	 * Returns the value of the '<em><b>Fitness</b></em>' attribute list.
+	 * The list contents are of type {@link java.lang.Double}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * *
+	 * The fitness computed from the output: one value per fitness component, in the
+	 *   order of {@link Execution#getFitnessComponents()}. The fitness is canonical,
+	 *   i.e., smaller values are better. Empty if the algorithm computes no fitness.
+	 * 
+	 * @constraint individual.fitness.isEmpty() || individual.fitness.size() == execution.fitnessComponents.size()
+	 * 
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Fitness</em>' attribute list.
+	 * @see de.evoal.models.v202704.optimisation.memory.MemoryPackage#getIndividual_Fitness()
+	 * @model
+	 * @generated
+	 */
+	EList<Double> getFitness();
 
 	/**
 	 * Returns the value of the '<em><b>Relationships</b></em>' containment reference list.

@@ -5,8 +5,10 @@ import java.util.List;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import de.evoal.core.api.ecore.info.FeatureBoundaries;
 import de.evoal.languages.model.base.definitions.DefinitionsFactory;
@@ -18,7 +20,9 @@ import de.evoal.languages.model.dynamic.DynamicPackage;
 import de.evoal.models.core.ecore.Space;
 import de.evoal.models.core.ecore.TypedEObject;
 import de.evoal.models.v202704.core.Configuration;
+import de.evoal.models.v202704.core.CorePackage;
 import de.evoal.models.v202704.optimisation.memory.Execution;
+import de.evoal.models.v202704.optimisation.memory.FitnessComponentDefinition;
 import de.evoal.models.v202704.optimisation.memory.Individual;
 import de.evoal.models.v202704.optimisation.memory.Iteration;
 import de.evoal.models.v202704.optimisation.memory.MemoryFactory;
@@ -31,6 +35,7 @@ import de.evoal.models.v202704.optimisation.memory.Relationship;
 import de.evoal.models.v202704.optimisation.model.MinimiseGoal;
 import de.evoal.models.v202704.optimisation.model.ModelFactory;
 import de.evoal.models.v202704.optimisation.model.Problem;
+import de.evoal.models.v202704.optimisation.model.TargetGoal;
 
 import de.evoal.optimisation.api.fitness.Goals;
 import de.evoal.optimisation.api.fitness.TargetDistance;
@@ -38,7 +43,8 @@ import de.evoal.optimisation.api.fitness.TargetDistance;
 /**
  * Builds small memory models for the tests of the memory model writer: a problem with a
  *   two-dimensional real search space ({@code x:0} with declared bounds and scale,
- *   {@code x:1} without) and a real optimisation space ({@code y:0}) that is minimised.
+ *   {@code x:1} without) and a real optimisation space ({@code y:0}) that is minimised, so
+ *   the fitness of an individual is its objective.
  */
 final class MemoryModels {
     /**
@@ -82,8 +88,35 @@ final class MemoryModels {
     }
 
     /**
-     * @return An execution with the evaluation counters (iteration scope) and the budget
-     *   (execution scope, recorded as 20).
+     * @return The configuration of the DL type {@code de.evoal.test.relative-distance} with
+     *   the attribute {@code scale}.
+     */
+    static Configuration distance(final double scale) {
+        final EPackage root = EcoreFactory.eINSTANCE.createEPackage();
+        final EPackage module = EcoreFactory.eINSTANCE.createEPackage();
+        module.setName("de.evoal.test");
+        root.getESubpackages().add(module);
+
+        final EClass type = EcoreFactory.eINSTANCE.createEClass();
+        type.setName("relative-distance");
+        type.getESuperTypes().add(CorePackage.Literals.CONFIGURATION);
+        module.getEClassifiers().add(type);
+
+        final EAttribute scaleAttribute = EcoreFactory.eINSTANCE.createEAttribute();
+        scaleAttribute.setName("scale");
+        scaleAttribute.setEType(EcorePackage.Literals.EDOUBLE);
+        type.getEStructuralFeatures().add(scaleAttribute);
+
+        final Configuration distance = (Configuration) EcoreUtil.create(type);
+        distance.eSet(scaleAttribute, scale);
+
+        return distance;
+    }
+
+    /**
+     * @return An execution with the evaluation counters (iteration scope), the budget
+     *   (execution scope, recorded as 20) and the fitness component of the goal for
+     *   {@code y:0}.
      */
     static Execution execution() {
         final Execution execution = MemoryFactory.eINSTANCE.createExecution();
@@ -92,6 +125,11 @@ final class MemoryModels {
         execution.getMetricDefinitions()
                  .add(metricDefinition("evaluations.real.budget", MetricKind.MEASURE, MetricScope.EXECUTION));
         execution.getMetrics().put("evaluations.real.budget", 20);
+
+        final FitnessComponentDefinition component = MemoryFactory.eINSTANCE.createFitnessComponentDefinition();
+        component.setName("y:0");
+        component.setObjective(OPTIMISATION_SPACE.getEClass().getEAllAttributes().getFirst());
+        execution.getFitnessComponents().add(component);
 
         return execution;
     }
@@ -122,8 +160,8 @@ final class MemoryModels {
     }
 
     /**
-     * @return An individual with the search space values {@code x} and the optimisation space
-     *   value {@code y}.
+     * @return An individual with the search space values {@code x}, the optimisation space
+     *   value {@code y} and the fitness {@code y}.
      */
     static Individual individual(final int id, final double[] x, final double y) {
         final TypedEObject input = SEARCH_SPACE.newEObject();
@@ -140,6 +178,7 @@ final class MemoryModels {
         individual.setId(id);
         individual.setInput(input);
         individual.setOutput(output);
+        individual.getFitness().add(y);
 
         return individual;
     }
@@ -188,6 +227,23 @@ final class MemoryModels {
         problem.setName("sphere");
         problem.setSearchSpace(SEARCH_SPACE.getEClass());
         problem.setOptimisationSpace(OPTIMISATION_SPACE.getEClass());
+        problem.getGoals().add(goal);
+
+        return problem;
+    }
+
+    /**
+     * @return The problem {@code sphere} whose goal optimises {@code y:0} towards the target
+     *   with the distance.
+     */
+    static Problem targetProblem(final double target, final Configuration distance) {
+        final TargetGoal goal = ModelFactory.eINSTANCE.createTargetGoal();
+        goal.setData(OPTIMISATION_SPACE.getEClass().getEAllAttributes().getFirst());
+        goal.setValue(target);
+        goal.setDistance(distance);
+
+        final Problem problem = problem();
+        problem.getGoals().clear();
         problem.getGoals().add(goal);
 
         return problem;

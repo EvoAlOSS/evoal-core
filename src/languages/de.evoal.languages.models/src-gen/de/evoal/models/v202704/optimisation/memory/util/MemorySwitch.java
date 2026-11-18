@@ -75,6 +75,12 @@ public class MemorySwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case MemoryPackage.FITNESS_COMPONENT_DEFINITION: {
+				FitnessComponentDefinition fitnessComponentDefinition = (FitnessComponentDefinition)theEObject;
+				T result = caseFitnessComponentDefinition(fitnessComponentDefinition);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case MemoryPackage.STATE: {
 				State state = (State)theEObject;
 				T result = caseState(state);
@@ -175,6 +181,21 @@ public class MemorySwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseExecution(Execution object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Fitness Component Definition</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Fitness Component Definition</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseFitnessComponentDefinition(FitnessComponentDefinition object) {
 		return null;
 	}
 

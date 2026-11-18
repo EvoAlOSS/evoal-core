@@ -1,0 +1,29 @@
+{
+  "formatVersion" : "2027.4.0",
+  "number" : 9,
+  "individuals" : [ {
+    "id" : 9,
+    "input" : {
+      "x:0" : 1.0999999999999992,
+      "x:1" : 5.0
+    },
+    "output" : {
+      "y:0" : 1436.4200000000012
+    },
+    "fitness" : [ -1436.4200000000012 ],
+    "relationships" : [ {
+      "kind" : "mutation",
+      "targets" : [ 8 ]
+    } ]
+  } ],
+  "steps" : [ ],
+  "ranks" : [ {
+    "number" : 0,
+    "members" : [ 9 ]
+  } ],
+  "bestSoFar" : 9,
+  "metrics" : {
+    "evaluations.real" : 28,
+    "evaluations.surrogate" : 0
+  }
+}

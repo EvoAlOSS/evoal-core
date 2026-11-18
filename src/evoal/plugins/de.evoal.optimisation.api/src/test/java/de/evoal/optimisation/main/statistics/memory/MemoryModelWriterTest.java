@@ -26,6 +26,7 @@ import org.junit.jupiter.api.io.TempDir;
 import org.mockito.Mockito;
 
 import de.evoal.core.api.dynamic.EAnnotationHelper;
+import de.evoal.core.api.languages.AttributeEvaluator;
 import de.evoal.core.api.utils.AttributeHelper;
 import de.evoal.core.api.random.RandomService;
 import de.evoal.models.v202704.optimisation.memory.Execution;
@@ -34,10 +35,15 @@ import de.evoal.models.v202704.optimisation.memory.Iteration;
 import de.evoal.models.v202704.optimisation.memory.Mutation;
 import de.evoal.models.v202704.optimisation.memory.MemoryFactory;
 import de.evoal.models.v202704.optimisation.memory.UnorderedIterationStep;
+import de.evoal.models.v202704.optimisation.model.Problem;
 
 import de.evoal.optimisation.api.execution.EvaluationPosition;
 import de.evoal.optimisation.api.execution.ExecutionRecorder;
 import de.evoal.optimisation.api.execution.MetricContributor;
+import de.evoal.optimisation.api.fitness.FitnessLayout;
+import de.evoal.optimisation.api.fitness.Goal;
+import de.evoal.optimisation.api.fitness.Goals;
+import de.evoal.optimisation.main.fitness.RelativeDistance;
 
 public class MemoryModelWriterTest {
     @TempDir
@@ -89,7 +95,8 @@ public class MemoryModelWriterTest {
     }
 
     /**
-     * Starts a run whose execution has the metrics of {@link MemoryModels#execution()}.
+     * Starts a run whose execution has the metrics and fitness components of
+     *   {@link MemoryModels#execution()}.
      */
     private void startRun(final EvaluationPosition position) {
         recorder.startRun(position);
@@ -98,13 +105,28 @@ public class MemoryModelWriterTest {
         List.copyOf(metrics.getMetricDefinitions())
             .forEach(recorder::define);
         recorder.recordExecutionMetric("evaluations.real.budget", 20);
+        recorder.defineFitness(FitnessLayout.of(MemoryModels.goals(MemoryModels.problem())));
         recorder.beginExecution();
+    }
+
+    /**
+     * @return Attributes of an algorithm without fitness steps that writes its steps if
+     *   {@code writeSteps} is set.
+     */
+    private static AttributeHelper attributes(final Boolean writeSteps) {
+        final AttributeHelper attributes = Mockito.mock(AttributeHelper.class);
+        Mockito.when(attributes.lookup(Mockito.any(EObject.class), Mockito.eq("steps"))).thenReturn(writeSteps);
+        Mockito.when(attributes.lookup(Mockito.any(EObject.class), Mockito.eq("fitness-pipeline"))).thenReturn(List.of());
+
+        return attributes;
     }
 
     private MemoryModelWriter writer(final File output) throws Exception {
         final MemoryModelWriter writer = new MemoryModelWriter();
         inject(writer, "algorithm", algorithmConfiguration());
         inject(writer, "annotationHelper", new EAnnotationHelper());
+        inject(writer, "attributes", attributes(null));
+        inject(writer, "evaluator", Mockito.mock(AttributeEvaluator.class));
         inject(writer, "goals", MemoryModels.goals(MemoryModels.problem()));
         inject(writer, "outputFolder", output);
         inject(writer, "problem", MemoryModels.problem());
@@ -161,6 +183,32 @@ public class MemoryModelWriterTest {
                 final Path path = memoryModel.resolve(file);
                 Assertions.assertEquals(List.of(), MemoryModelSchemas.violationsOf(path));
             }
+        }
+
+        @Test
+        public void aTargetGoalWithItsDistanceIsValid() throws Exception {
+            // given
+            final Problem problem = MemoryModels.targetProblem(1.0, MemoryModels.distance(2.0));
+            final Goal.Target goal = new Goal.Target(problem.getGoals().getFirst().getData(), 1.0, new RelativeDistance());
+            inject(writer, "problem", problem);
+            inject(writer, "goals", new Goals(List.of(goal)));
+
+            final AttributeEvaluator evaluator = Mockito.mock(AttributeEvaluator.class);
+            Mockito.when(evaluator.attributeToJava(Mockito.any(), Mockito.anyString(), Mockito.any()))
+                   .thenAnswer(invocation -> {
+                       final EObject configuration = invocation.getArgument(0);
+                       final String name = invocation.getArgument(1);
+                       return configuration.eGet(configuration.eClass().getEStructuralFeature(name));
+                   });
+            inject(writer, "evaluator", evaluator);
+
+            // when
+            writer.start();
+
+            // then
+            final Path information = memoryModel.resolve("execution-information.json");
+            Assertions.assertEquals(List.of(), MemoryModelSchemas.violationsOf(information));
+            Assertions.assertTrue(Files.readString(information).contains("\"scale\" : 2.0"));
         }
 
         @Test
@@ -239,9 +287,7 @@ public class MemoryModelWriterTest {
         private String writeIteration(final boolean writeSteps) throws Exception {
             startRun(null);
             final MemoryModelWriter writer = writer(outputFolder.toFile());
-            final AttributeHelper attributes = Mockito.mock(AttributeHelper.class);
-            Mockito.when(attributes.lookup(Mockito.any(EObject.class), Mockito.eq("steps"))).thenReturn(writeSteps);
-            inject(writer, "attributes", attributes);
+            inject(writer, "attributes", attributes(writeSteps));
             writer.init(algorithmConfiguration());
 
             final Iteration iteration = MemoryModels.iteration(0, MemoryModels.individual(0, new double[] {1.0, 1.0}, 2.0));

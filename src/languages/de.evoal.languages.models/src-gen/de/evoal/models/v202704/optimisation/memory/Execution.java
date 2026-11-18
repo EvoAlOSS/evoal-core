@@ -29,6 +29,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link de.evoal.models.v202704.optimisation.memory.Execution#getStates <em>States</em>}</li>
  *   <li>{@link de.evoal.models.v202704.optimisation.memory.Execution#getMetricDefinitions <em>Metric Definitions</em>}</li>
  *   <li>{@link de.evoal.models.v202704.optimisation.memory.Execution#getMetrics <em>Metrics</em>}</li>
+ *   <li>{@link de.evoal.models.v202704.optimisation.memory.Execution#getFitnessComponents <em>Fitness Components</em>}</li>
  * </ul>
  *
  * @see de.evoal.models.v202704.optimisation.memory.MemoryPackage#getExecution()
@@ -146,5 +147,23 @@ public interface Execution extends EObject {
 	 * @generated
 	 */
 	EMap<String, Number> getMetrics();
+
+	/**
+	 * Returns the value of the '<em><b>Fitness Components</b></em>' containment reference list.
+	 * The list contents are of type {@link de.evoal.models.v202704.optimisation.memory.FitnessComponentDefinition}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * *
+	 * The components of the fitness, in the order of the values of
+	 *   {@link Individual#getFitness()}. The same for all individuals of the execution.
+	 * 
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Fitness Components</em>' containment reference list.
+	 * @see de.evoal.models.v202704.optimisation.memory.MemoryPackage#getExecution_FitnessComponents()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<FitnessComponentDefinition> getFitnessComponents();
 
 } // Execution

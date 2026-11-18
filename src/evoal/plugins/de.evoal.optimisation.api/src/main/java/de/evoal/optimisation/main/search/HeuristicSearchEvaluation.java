@@ -10,6 +10,7 @@ import de.evoal.core.api.cdi.*;
 import de.evoal.optimisation.api.cdi.TargetPointLoader;
 import de.evoal.optimisation.api.execution.EvaluationPosition;
 import de.evoal.optimisation.api.execution.ExecutionRecorder;
+import de.evoal.optimisation.api.fitness.FitnessPipeline;
 import de.evoal.optimisation.api.model.IndividualIDGenerator;
 import de.evoal.optimisation.api.model.OptimisationAlgorithm;
 
@@ -56,6 +57,12 @@ public class HeuristicSearchEvaluation implements MainClass {
 
     @Inject
     private ExecutionRecorder executionRecorder;
+
+    /**
+     * Creates the fitness pipeline of the run, whose components are recorded.
+     */
+    @Inject
+    private Provider<FitnessPipeline> fitnessPipelines;
 
     @Inject
     private IndividualIDGenerator idGenerator;
@@ -169,6 +176,7 @@ public class HeuristicSearchEvaluation implements MainClass {
             final OptimisationAlgorithm algorithm =
                     BeanFactory.createComponent(OptimisationAlgorithm.class, algorithmConfiguration.getAlgorithm());
 
+            executionRecorder.defineFitness(fitnessPipelines.get().layout());
             executionRecorder.beginExecution();
             algorithm.run();
             executionRecorder.finishRun();

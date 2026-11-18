@@ -40,6 +40,13 @@
     "type" : "real",
     "scale" : "quotient"
   } ],
+  "fitness" : {
+    "components" : [ {
+      "name" : "y:0",
+      "goal" : "y:0"
+    } ],
+    "steps" : [ ]
+  },
   "metricDefinitions" : [ {
     "name" : "evaluations.real",
     "kind" : "counter",

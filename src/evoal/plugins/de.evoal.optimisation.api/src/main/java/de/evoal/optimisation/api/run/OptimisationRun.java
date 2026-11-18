@@ -1,6 +1,7 @@
 package de.evoal.optimisation.api.run;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,6 +27,7 @@ import de.evoal.optimisation.api.events.RunEventDispatcher;
 import de.evoal.optimisation.api.events.RunFinished;
 import de.evoal.optimisation.api.events.RunStarted;
 import de.evoal.optimisation.api.execution.ExecutionRecorder;
+import de.evoal.optimisation.api.fitness.Fitness;
 import de.evoal.optimisation.api.model.IndividualIDGenerator;
 import de.evoal.optimisation.api.statistics.writer.StatisticsWriter;
 import de.evoal.optimisation.api.statistics.writer.StatisticsWriterListener;
@@ -195,13 +197,20 @@ public class OptimisationRun {
     }
 
     /**
-     * @return The individual of the member with the next id, related to its predecessors.
+     * @return The individual of the member with the next id, its objectives and fitness,
+     *   related to its predecessors.
      */
     private Individual toIndividual(final Candidate member) {
         final Individual individual = MemoryFactory.eINSTANCE.createIndividual();
         individual.setId(idGenerator.nextId());
         individual.setInput(member.input());
         individual.setOutput(member.output());
+
+        final Fitness fitness = member.fitness();
+        if(fitness != null) {
+            Arrays.stream(fitness.values())
+                  .forEach(individual.getFitness()::add);
+        }
 
         // on an equal value, the earlier individual stays the best
         if(bestValue == null || member.value().isBetter(bestValue)) {
