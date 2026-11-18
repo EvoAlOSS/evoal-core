@@ -9,7 +9,7 @@
 #   merge request into       dsl:build (only if src/languages changed),
 #   develop                  evoal:regressions (unit tests and regressions with
 #                            4 threads, coverage), evoal:coverage, dependency
-#                            scanning
+#                            scanning, secret detection
 #
 #   merge request develop    dsl:build (only if src/languages changed),
 #   into release (nightly    evoal:release-check (unit tests, regressions and
@@ -21,7 +21,8 @@
 #                            tests, regressions and examples with coverage),
 #                            pages; release and tags also
 #                            evoal:package-smoke-test and image:evoal; tags
-#                            also release-notes and publish
+#                            also release-notes, publish:check-packages and
+#                            publish
 #
 #   schedule                 auto merge (AUTOMATIC_MERGE == "true")
 #
@@ -46,6 +47,7 @@
 # include pre-defined templates for dependency scanning
 include:
   - local: ci/Dependency-Scanning.gitlab-ci.yml
+  - template: Jobs/Secret-Detection.gitlab-ci.yml
 
 workflow:
   auto_cancel:
@@ -422,6 +424,19 @@ dependency_scanning:
         mv $FILE `echo "./$FILE" | sed -e "s;/gemnasium-maven-plugin.json;-gemnasium-maven-plugin.json;g"`;
       done
 
+#############################################################
+## Secret detection (GitLab template) of the commits of the
+##   merge request
+##
+## Situations
+##   - merge request into develop (not draft)
+##
+secret_detection:
+  stage: Quality
+  needs: []
+  rules:
+    - !reference [.rules-merge-request-develop, rules]
+
 ###############################################################################
 # Release
 ###############################################################################
@@ -441,12 +456,37 @@ release-notes:
   needs: []
   timeout: 10m
   script:
-    - 'curl --fail --silent --show-error -H "PRIVATE-TOKEN: $CI_API_TOKEN" "$CI_API_V4_URL/projects/$CI_PROJECT_ID/repository/changelog?version=$CI_COMMIT_TAG" | jq -r .notes > release_notes.md'
+    - 'curl --fail --silent --show-error -H "PRIVATE-TOKEN: $PROJECT_ACCESS_TOKEN" "$CI_API_V4_URL/projects/$CI_PROJECT_ID/repository/changelog?version=$CI_COMMIT_TAG" | jq -r .notes > release_notes.md'
     - cat release_notes.md
   artifacts:
     expire_in: "1 day"
     paths:
     - release_notes.md
+
+#############################################################
+## Check that the four packages the release links exist in
+##   the package registry
+##
+## Situations
+##   - tags
+##
+publish:check-packages:
+  stage: Release
+  image: $API_IMAGE
+  interruptible: false
+  rules:
+    - if: $CI_COMMIT_TAG
+  needs:
+    - job: evoal:release
+      artifacts: false
+  timeout: 10m
+  script:
+    - >-
+      for PLATFORM in linux-x86_64 macosx-arm64 macosx-x86_64 windows-x86_64; do
+        URL="$CI_API_V4_URL/projects/$CI_PROJECT_ID/packages/generic/evoal-release/$CI_COMMIT_TAG/evoal-$CI_COMMIT_TAG-$PLATFORM.zip";
+        curl --fail --silent --show-error --head --location --header "JOB-TOKEN: $CI_JOB_TOKEN" --output /dev/null "$URL";
+        echo "found $URL";
+      done
 
 #############################################################
 ## Create the release in GitLab, linking the packages that
@@ -464,7 +504,7 @@ publish:
   needs:
     - job: release-notes
       artifacts: true
-    - job: evoal:release
+    - job: publish:check-packages
       artifacts: false
   timeout: 10m
   script:
