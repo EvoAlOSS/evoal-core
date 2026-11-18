@@ -1,0 +1,9 @@
+# Build context of src/docker/maven-with-bash (the root of the repository): the
+#   image only needs the sources and poms of src/evoal and the ci scripts.
+.git
+**/target
+evoal
+evoal-*.zip
+src/docker
+src/languages
+src/mirror

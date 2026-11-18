@@ -19,16 +19,28 @@
 #   develop, release, tags   dsl:deploy, evoal:release (one build: deploy and
 #                            the four platform packages; on develop also unit
 #                            tests, regressions and examples with coverage),
-#                            pages; tags also release-notes and publish
-#
-# Platform packages (ci/create-and-upload-release.sh) go to the generic package
-#   registry: tags as evoal-release/<tag>, the branch release as
-#   evoal-nightly/nightly (replaced every night). develop only creates them.
+#                            pages; release and tags also
+#                            evoal:package-smoke-test and image:evoal; tags
+#                            also release-notes and publish
 #
 #   schedule                 auto merge (AUTOMATIC_MERGE == "true")
 #
 # Feature branches and merge requests take the DSLs from the develop registry
 #   unless they change src/languages; then dsl:build builds and passes them on.
+#
+# Platform packages (ci/create-and-upload-release.sh) go to the generic package
+#   registry: tags as evoal-release/<tag>, the branch release as
+#   evoal-nightly/nightly (replaced every night). develop only creates them.
+#
+# Images (src/docker, built with Kaniko, which needs no privileges):
+#   - maven-with-bash (EVOAL_IMAGE) contains the third-party dependencies as
+#     read-only tail repository /opt/m2-tail; rebuilt on develop when its folder
+#     or a pom of src/evoal changes,
+#   - alpine-with-jq (API_IMAGE), rebuilt on develop when its folder changes,
+#   - evoal, the runtime image (e.g., for GitLab workspaces): nightly and
+#     nightly-<commit> from release, <version> and latest from tags.
+#   Branches that change maven-with-bash or alpine-with-jq push the tag
+#   <version>-<branch> for testing.
 ###############################################################################
 
 # include pre-defined templates for dependency scanning
@@ -69,7 +81,8 @@ variables:
 
   # The registry path is set per job with -Dbranch: develop for feature branches and
   #   merge requests (where the DSLs come from), the ref for develop, release and tags.
-  #   -nsu keeps DSL snapshots that dsl:build passed on.
+  #   --no-snapshot-updates keeps DSL snapshots that dsl:build passed on.
+  #   /opt/m2-tail in EVOAL_IMAGE holds the third-party dependencies (read-only).
   MAVEN_CLI_OPTS: >-
     -s ${CI_PROJECT_DIR}/ci/settings.xml
     -Drevision=${MAVEN_VERSION}
@@ -80,6 +93,7 @@ variables:
     --fail-at-end
     --show-version
     --no-snapshot-updates
+    -Dmaven.repo.local.tail=/opt/m2-tail
     -DinstallAtEnd=true
     -DdeployAtEnd=true
 
@@ -103,6 +117,8 @@ variables:
   # custom docker image for building our Java stuff
   ECLIPSE_IMAGE: gitlab.informatik.uni-bremen.de:5005/evoal/source/evoal-core/evoal/eclipse-mirror:2025-12
   EVOAL_IMAGE: gitlab.informatik.uni-bremen.de:5005/evoal/source/evoal-core/evoal/maven-with-bash:3.9.15
+  API_IMAGE: gitlab.informatik.uni-bremen.de:5005/evoal/source/evoal-core/evoal/alpine-with-jq:3.22
+  KANIKO_IMAGE: gcr.io/kaniko-project/executor:v1.23.2-debug
   SECURE_LOG_LEVEL: "debug"
 
   ######################
@@ -127,6 +143,7 @@ stages:
   - EvoAl
   - Quality
   - Release
+  - Images
   - Pages
 
 ###############################################################################
@@ -417,7 +434,7 @@ dependency_scanning:
 ##
 release-notes:
   stage: Release
-  image: gitlab.informatik.uni-bremen.de:5005/evoal/source/evoal-core/evoal/alpine-with-jq:latest
+  image: $API_IMAGE
   interruptible: false
   rules:
     - if: $CI_COMMIT_TAG
@@ -440,7 +457,7 @@ release-notes:
 ##
 publish:
   stage: Release
-  image: registry.gitlab.com/gitlab-org/release-cli:latest
+  image: registry.gitlab.com/gitlab-org/release-cli:v0.24.0
   interruptible: false
   rules:
     - if: $CI_COMMIT_TAG
@@ -485,7 +502,7 @@ publish:
 ##
 pages:
   stage: Pages
-  image: python:3.10-alpine
+  image: python:3.12-alpine3.22
   interruptible: false
   rules:
     - !reference [.rules-deploy, rules]
@@ -514,7 +531,7 @@ pages:
 ##
 auto merge:
   stage: Maintenance
-  image: gitlab.informatik.uni-bremen.de:5005/evoal/source/evoal-core/evoal/alpine-with-jq:latest
+  image: $API_IMAGE
   interruptible: false
   rules:
     - if: $CI_PIPELINE_SOURCE == "schedule" &&
@@ -522,3 +539,156 @@ auto merge:
   timeout: 30m
   script:
     - 'ci/auto-merge-branches.sh develop release'
+
+###############################################################################
+# Images (built with Kaniko, which runs without privileges)
+###############################################################################
+
+.image:kaniko:
+  stage: Images
+  image:
+    name: $KANIKO_IMAGE
+    entrypoint: [""]
+  interruptible: false
+  timeout: 60m
+  before_script:
+    - mkdir -p /kaniko/.docker
+    - echo "{\"auths\":{\"${CI_REGISTRY}\":{\"auth\":\"$(printf "%s:%s" "${CI_REGISTRY_USER}" "${CI_REGISTRY_PASSWORD}" | base64 | tr -d '\n')\"}}}" > /kaniko/.docker/config.json
+
+# Build images: develop pushes the version tag that the pipeline uses (IMAGE_TAG);
+#   a feature branch or merge request that changes the image pushes
+#   <version>-<branch> for testing. The jobs set IMAGE_TAG in their rules.
+.image:build-image:
+  extends: .image:kaniko
+  needs: []
+  script:
+    - /kaniko/executor
+      --context "$CI_PROJECT_DIR/$IMAGE_CONTEXT"
+      --dockerfile "$CI_PROJECT_DIR/$IMAGE_DOCKERFILE"
+      --build-arg "EVOAL_LANGUAGES_VERSION=$EVOAL_LANGUAGES_VERSION"
+      --destination "$IMAGE_NAME:$IMAGE_TAG"
+
+#############################################################
+## Maven image with the third-party dependencies as tail
+##   repository (src/docker/maven-with-bash)
+##
+image:maven-with-bash:
+  extends: .image:build-image
+  rules:
+    - if: ($CI_PIPELINE_SOURCE == "push" || $CI_PIPELINE_SOURCE == "web") &&
+          $CI_COMMIT_BRANCH == "develop"
+      changes:
+        paths:
+          - src/docker/maven-with-bash/**/*
+          - src/evoal/**/pom.xml
+          - .dockerignore
+      variables:
+        IMAGE_TAG: "3.9.15"
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event" ||
+          (($CI_PIPELINE_SOURCE == "push" || $CI_PIPELINE_SOURCE == "web") &&
+           $CI_COMMIT_BRANCH && $CI_COMMIT_BRANCH != "develop" && $CI_COMMIT_BRANCH != "release")
+      changes:
+        paths:
+          - src/docker/maven-with-bash/**/*
+          - .dockerignore
+        compare_to: refs/heads/develop
+      variables:
+        IMAGE_TAG: "3.9.15-$CI_COMMIT_REF_SLUG"
+  variables:
+    IMAGE_NAME: $CI_REGISTRY_IMAGE/evoal/maven-with-bash
+    IMAGE_CONTEXT: "."
+    IMAGE_DOCKERFILE: src/docker/maven-with-bash/Dockerfile
+
+#############################################################
+## Image of the jobs that call the GitLab API
+##   (src/docker/alpine-with-jq)
+##
+image:alpine-with-jq:
+  extends: .image:build-image
+  rules:
+    - if: ($CI_PIPELINE_SOURCE == "push" || $CI_PIPELINE_SOURCE == "web") &&
+          $CI_COMMIT_BRANCH == "develop"
+      changes:
+        paths:
+          - src/docker/alpine-with-jq/**/*
+      variables:
+        IMAGE_TAG: "3.22"
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event" ||
+          (($CI_PIPELINE_SOURCE == "push" || $CI_PIPELINE_SOURCE == "web") &&
+           $CI_COMMIT_BRANCH && $CI_COMMIT_BRANCH != "develop" && $CI_COMMIT_BRANCH != "release")
+      changes:
+        paths:
+          - src/docker/alpine-with-jq/**/*
+        compare_to: refs/heads/develop
+      variables:
+        IMAGE_TAG: "3.22-$CI_COMMIT_REF_SLUG"
+  timeout: 15m
+  variables:
+    IMAGE_NAME: $CI_REGISTRY_IMAGE/evoal/alpine-with-jq
+    IMAGE_CONTEXT: src/docker/alpine-with-jq
+    IMAGE_DOCKERFILE: src/docker/alpine-with-jq/Dockerfile
+
+# The Linux package that evoal:release uploaded: the nightly package for the
+#   branch release, the release package for tags.
+.image:evoal-package:
+  rules:
+    - if: ($CI_PIPELINE_SOURCE == "push" || $CI_PIPELINE_SOURCE == "web") &&
+          $CI_COMMIT_BRANCH == "release"
+      variables:
+        PACKAGE_URL: ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/evoal-nightly/nightly/evoal-nightly-linux-x86_64.zip
+        IMAGE_TAGS: nightly nightly-$CI_COMMIT_SHORT_SHA
+    - if: $CI_COMMIT_TAG
+      variables:
+        PACKAGE_URL: ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/evoal-release/${CI_COMMIT_TAG}/evoal-${CI_COMMIT_TAG}-linux-x86_64.zip
+        IMAGE_TAGS: $CI_COMMIT_TAG latest
+
+#############################################################
+## Smoke test of the Linux package: unpack it on the base of
+##   the EvoAl image and run the random search example
+##
+## Situations
+##   - release, tags
+##
+evoal:package-smoke-test:
+  stage: Release
+  extends: .image:evoal-package
+  image: docker.io/library/eclipse-temurin:25-jre-noble
+  needs:
+    - job: evoal:release
+      artifacts: false
+  variables:
+    GIT_STRATEGY: none
+  timeout: 15m
+  script:
+    - apt-get update && apt-get install --yes --no-install-recommends ca-certificates curl libopenblas0 unzip
+    - 'curl --fail --silent --show-error --location --header "JOB-TOKEN: $CI_JOB_TOKEN" --output evoal.zip "$PACKAGE_URL"'
+    - unzip -q evoal.zip
+    - cd evoal-linux-x86_64/examples/random-search
+    - EVOAL_HOME="$(cd ../.. && pwd)" EVOAL_LOGGING=WARN bash 01-run-search.sh
+    - test -n "$(find output -type f)"
+
+#############################################################
+## EvoAl runtime image (src/docker/evoal), e.g., for GitLab
+##   workspaces, from the Linux package
+##
+## Situations
+##   - release: tags nightly and nightly-<commit>
+##   - tags: tags <version> and latest
+##
+image:evoal:
+  extends:
+    - .image:kaniko
+    - .image:evoal-package
+  needs:
+    - job: evoal:package-smoke-test
+      artifacts: false
+  timeout: 30m
+  variables:
+    IMAGE_NAME: $CI_REGISTRY_IMAGE/evoal/evoal
+  script:
+    - 'wget --header "JOB-TOKEN: $CI_JOB_TOKEN" -O src/docker/evoal/evoal.zip "$PACKAGE_URL"'
+    - DESTINATIONS=""; for TAG in $IMAGE_TAGS; do DESTINATIONS="$DESTINATIONS --destination $IMAGE_NAME:$TAG"; done
+    - /kaniko/executor
+      --context "$CI_PROJECT_DIR/src/docker/evoal"
+      --dockerfile "$CI_PROJECT_DIR/src/docker/evoal/Dockerfile"
+      $DESTINATIONS
