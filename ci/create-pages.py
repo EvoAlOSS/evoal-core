@@ -19,8 +19,8 @@ tags = []
 
 SECTIONS = [
     { "name" : "Official Releases",  "matches" : lambda x : x in tags },
-    { "name" : "Rolling Release",    "matches" : lambda x : x == "release" },
-    { "name" : "Nightly Build",      "matches" : lambda x : x == "develop" },
+    { "name" : "Nightly Build",      "matches" : lambda x : x == "release" },
+    { "name" : "Development Build",  "matches" : lambda x : x == "develop" },
 ]
 
 connection = http.client.HTTPSConnection(SERVER)
@@ -117,7 +117,24 @@ f.write("""
         <p>
           In the following, we provide update sites, releases and Eclipse update sites for different EvoAl builds.
           The most safe version is to use an official release version. If you need some of the more recent changes in EvoAl, you can use the Nightly build.
+          The Nightly build is the branch release, which is updated every night with the changes of develop that pass all tests.
+          The Development build is the branch develop after every merge.
         </p>
+
+        <h2>Nightly Packages</h2>
+        <ul>
+""")
+
+# the nightly packages of the branch release, see ci/create-and-upload-release.sh
+NIGHTLY_URL = "https://gitlab.informatik.uni-bremen.de/api/v4/projects/30380/packages/generic/evoal-nightly/nightly/evoal-nightly-%s.zip"
+for platform in ["linux-x86_64", "macosx-arm64", "macosx-x86_64", "windows-x86_64"]:
+    f.write(f"""
+            <li>
+                <a href="{NIGHTLY_URL % (platform,)}">EvoAl Nightly Build for {platform}</a>
+            </li>""")
+
+f.write("""
+        </ul>
 """)
 
 for section in SECTIONS:

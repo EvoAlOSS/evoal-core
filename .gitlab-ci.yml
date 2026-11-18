@@ -21,6 +21,10 @@
 #                            tests, regressions and examples with coverage),
 #                            pages; tags also release-notes and publish
 #
+# Platform packages (ci/create-and-upload-release.sh) go to the generic package
+#   registry: tags as evoal-release/<tag>, the branch release as
+#   evoal-nightly/nightly (replaced every night). develop only creates them.
+#
 #   schedule                 auto merge (AUTOMATIC_MERGE == "true")
 #
 # Feature branches and merge requests take the DSLs from the develop registry
@@ -306,8 +310,11 @@ evoal:release-check:
 ##
 ## Situations
 ##   - develop: also unit tests, regressions and examples with
-##     coverage (badge and coverage history)
-##   - release, tags: without tests (tested by the merge request)
+##     coverage (badge and coverage history); the packages are only
+##     created
+##   - release: without tests (tested by the merge request), uploads
+##     the nightly packages
+##   - tags: without tests, uploads the release packages
 ##
 evoal:release:
   stage: EvoAl
@@ -336,19 +343,15 @@ evoal:release:
         grep -o '<tfoot>.*</tfoot>' src/evoal/core/de.evoal.releng.jacoco/target/site/jacoco-aggregate/index.html
       fi
   coverage: /Total.*?([0-9]{1,3})%/
-  # the packages are about 200 MB each; tags upload theirs to the package registry
+  # the packages (about 200 MB each) are too large for job artifacts, they go
+  #   to the package registry (release, tags) instead
   artifacts:
     when: always
-    expire_in: "1 day"
+    expire_in: "7 days"
     reports:
       junit:
         - src/evoal/*/*/target/surefire-reports/TEST-*.xml
         - src/evoal/*/*/target/failsafe-reports/TEST-*.xml
-    paths:
-      - evoal-*-linux-x86_64.zip
-      - evoal-*-macosx-arm64.zip
-      - evoal-*-macosx-x86_64.zip
-      - evoal-*-windows-x86_64.zip
 
 ###############################################################################
 # Quality
