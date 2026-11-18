@@ -4,6 +4,7 @@ import de.evoal.core.api.math.EvoalMath;
 import de.evoal.core.api.utils.Requirements;
 import de.evoal.models.core.ecore.Space;
 import de.evoal.models.v202704.optimisation.execution.OptimisationValue;
+import de.evoal.models.v202704.optimisation.execution.OptimisationValueWithDistance;
 import de.evoal.optimisation.local_search.api.probability.AcceptanceProbabilityFunction;
 import de.evoal.core.api.languages.AttributeEvaluator;
 import lombok.extern.slf4j.Slf4j;
@@ -45,13 +46,25 @@ public class ExponentialProbabilityFunction implements AcceptanceProbabilityFunc
             return 0.0;
         }
 
-        // TODO What about multi-dimensional problems
-        // the neighbour is not better, so the probability is exp(-|delta| / T) which is in (0, 1]
-        final double delta = Math.abs((double)neighbourFitness.toStatistics().getFirst() - (double)currentFitness.toStatistics().getFirst());
+        // the neighbour is not better, so the probability is exp(-delta / T) which is in (0, 1];
+        //   delta is the (non-negative) distance of the fitness values
+        final double delta = distanceBetween(neighbourFitness, currentFitness);
         final double probability = EvoalMath.exp(-delta / temperature);
         log.info("Acceptance probability is {}", probability);
 
         return probability;
+    }
+
+    /**
+     * @return The distance between the two optimisation values.
+     * @throws IllegalArgumentException if the comparator's values have no distance.
+     */
+    private static double distanceBetween(final OptimisationValue neighbourValue, final OptimisationValue currentValue) {
+        if(!(neighbourValue instanceof OptimisationValueWithDistance withDistance)) {
+            throw new IllegalArgumentException("The optimisation value " + neighbourValue + " has no distance.");
+        }
+
+        return withDistance.distanceFrom(currentValue);
     }
 
     @Override

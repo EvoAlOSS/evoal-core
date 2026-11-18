@@ -13,7 +13,9 @@
  * <p>
  * An {@link de.evoal.optimisation.api.fitness.Evaluator} evaluates a candidate and returns
  *   an {@link de.evoal.optimisation.api.fitness.Evaluation}: the objectives, the fitness and
- *   the optimisation value of the comparator. The comparators still compute the
- *   optimisation value from the objectives; they switch to the fitness with #280.
+ *   the optimisation value of the comparator
+ *   ({@link de.evoal.optimisation.api.model.OptimisationValueComparator#toValue(de.evoal.models.core.ecore.TypedEObject, Fitness)}).
+ *   The numeric and the hierarchical comparator compare the fitness; the weighted-sum and
+ *   the epsilon comparator still compare the objectives.
  */
 package de.evoal.optimisation.api.fitness;

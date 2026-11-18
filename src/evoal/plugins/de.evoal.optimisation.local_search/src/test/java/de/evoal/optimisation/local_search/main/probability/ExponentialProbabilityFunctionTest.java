@@ -8,14 +8,26 @@ import org.mockito.Mockito;
 
 import de.evoal.core.api.math.EvoalMath;
 import de.evoal.models.v202704.optimisation.execution.OptimisationValue;
+import de.evoal.models.v202704.optimisation.execution.OptimisationValueWithDistance;
 
 public class ExponentialProbabilityFunctionTest {
     private final ExponentialProbabilityFunction testee = new ExponentialProbabilityFunction();
 
+    /**
+     * @return A value whose distance to another value is the absolute difference of their
+     *   fitness.
+     */
     private static OptimisationValue value(final double fitness, final boolean betterThanOther) {
-        final OptimisationValue value = Mockito.mock(OptimisationValue.class);
+        final OptimisationValueWithDistance value = Mockito.mock(OptimisationValueWithDistance.class);
         Mockito.when(value.toStatistics()).thenReturn(List.of(fitness));
         Mockito.when(value.isBetter(Mockito.any())).thenReturn(betterThanOther);
+        Mockito.when(value.distanceFrom(Mockito.any())).thenAnswer(invocation -> {
+            final OptimisationValue other = invocation.getArgument(0);
+            final double otherFitness = (Double) other.toStatistics().getFirst();
+
+            return Math.abs(fitness - otherFitness);
+        });
+
         return value;
     }
 

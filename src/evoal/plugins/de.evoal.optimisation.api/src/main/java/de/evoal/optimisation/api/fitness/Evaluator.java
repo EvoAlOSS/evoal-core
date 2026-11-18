@@ -19,7 +19,7 @@ import de.evoal.optimisation.api.model.OptimisationValueComparator;
 @Dependent
 public class Evaluator {
     /**
-     * Computes the optimisation value from the objectives.
+     * Computes the optimisation value from the objectives and the fitness.
      */
     @Inject @Dependent @Component
     private OptimisationValueComparator comparator;
@@ -47,7 +47,7 @@ public class Evaluator {
      *
      * @param evaluationService Evaluates and counts the candidates.
      * @param pipeline Computes the fitness from the objectives.
-     * @param comparator Computes the optimisation value from the objectives.
+     * @param comparator Computes the optimisation value from the objectives and the fitness.
      */
     public Evaluator(final EvaluationService evaluationService,
                      final FitnessPipeline pipeline,
@@ -68,7 +68,7 @@ public class Evaluator {
     public Evaluation evaluate(final TypedEObject input) {
         final TypedEObject output = evaluationService.evaluate(input);
         final Fitness fitness = pipeline.apply(input, output);
-        final OptimisationValue value = comparator.apply(output);
+        final OptimisationValue value = comparator.toValue(output, fitness);
 
         return new Evaluation(output, fitness, value);
     }
