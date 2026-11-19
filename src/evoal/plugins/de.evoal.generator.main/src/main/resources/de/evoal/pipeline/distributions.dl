@@ -5,7 +5,9 @@ import "definitions" from 'de.evoal.core.base';
 
 module 'de.evoal.pipeline.distributions' {
     /**
-     * Base type for all distributions.
+     * Base type for all distributions. The samples are drawn from EvoAl's random
+     *   numbers, so two executions with the same seed ('core:seed', or the environment
+     *   variable EVOAL_SEED) generate the same data.
      */
 	abstract type distribution extends configuration {}
 
