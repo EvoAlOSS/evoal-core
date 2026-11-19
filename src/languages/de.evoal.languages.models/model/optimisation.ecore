@@ -300,10 +300,9 @@
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="*&#xA;The source is a recombined version of the target individuals.&#xA;"/>
       </eAnnotations>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="other" lowerBound="1"
-          eType="#//memory/Recombination">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="other" eType="#//memory/Recombination">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="*&#xA;The recombination that is the related one.&#xA;"/>
+          <details key="documentation" value="*&#xA;The recombination of the sibling: the other child of the same recombination.&#xA;  Not set if the sibling is not recorded, e.g., because it did not survive the&#xA;  replacement.&#xA;"/>
         </eAnnotations>
       </eStructuralFeatures>
     </eClassifiers>

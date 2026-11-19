@@ -375,6 +375,79 @@ public class OptimisationRunTest {
         }
     }
 
+    @Nested
+    @DisplayName("given two children of the same recombination")
+    class Siblings {
+        @Test
+        public void theirRecombinationsReferToEachOther() {
+            // given
+            final FakeProcedure procedure = new FakeProcedure((number, previous) -> {
+                if(number == 0) {
+                    return new Population(List.of(member(1, Lineage.NONE), member(2, Lineage.NONE)), List.of(List.of(0, 1)));
+                }
+                final Object pair = new Object();
+                return new Population(List.of(member(3, Lineage.recombination(previous, pair)),
+                                              member(4, Lineage.recombination(previous.reversed(), pair))),
+                                      List.of(List.of(0, 1)));
+            });
+            lastIteration = 1;
+
+            // when
+            kernel.execute(criterion, procedure);
+
+            // then
+            final Recombination first = (Recombination) individual(iterations.get(1), 2).getRelationships().getFirst();
+            final Recombination second = (Recombination) individual(iterations.get(1), 3).getRelationships().getFirst();
+            Assertions.assertSame(second, first.getOther());
+            Assertions.assertSame(first, second.getOther());
+        }
+
+        @Test
+        public void aChildWithoutRecordedSiblingHasNoSibling() {
+            // given
+            final FakeProcedure procedure = new FakeProcedure((number, previous) -> {
+                if(number == 0) {
+                    return new Population(List.of(member(1, Lineage.NONE), member(2, Lineage.NONE)), List.of(List.of(0, 1)));
+                }
+                return Population.of(member(3, Lineage.recombination(previous, new Object())));
+            });
+            lastIteration = 1;
+
+            // when
+            kernel.execute(criterion, procedure);
+
+            // then
+            final Recombination recombination = (Recombination) individual(iterations.get(1), 2).getRelationships().getFirst();
+            Assertions.assertNull(recombination.getOther());
+        }
+
+        @Test
+        public void aChildThatIsAMemberTwiceIsLinkedOnce() {
+            // given: a selection with replacement kept the first child twice
+            final FakeProcedure procedure = new FakeProcedure((number, previous) -> {
+                if(number == 0) {
+                    return new Population(List.of(member(1, Lineage.NONE), member(2, Lineage.NONE)), List.of(List.of(0, 1)));
+                }
+                final Object pair = new Object();
+                final Candidate first = member(3, Lineage.recombination(previous, pair));
+                final Candidate second = member(4, Lineage.recombination(previous.reversed(), pair));
+                return new Population(List.of(first, first, second), List.of(List.of(0, 1, 2)));
+            });
+            lastIteration = 1;
+
+            // when
+            kernel.execute(criterion, procedure);
+
+            // then
+            final Recombination first = (Recombination) individual(iterations.get(1), 2).getRelationships().getFirst();
+            final Recombination duplicate = (Recombination) individual(iterations.get(1), 3).getRelationships().getFirst();
+            final Recombination second = (Recombination) individual(iterations.get(1), 4).getRelationships().getFirst();
+            Assertions.assertSame(second, first.getOther());
+            Assertions.assertSame(first, second.getOther());
+            Assertions.assertNull(duplicate.getOther());
+        }
+    }
+
     @Test
     public void aLineageMustFitItsKind() {
         Assertions.assertThrows(IllegalArgumentException.class,
@@ -385,6 +458,8 @@ public class OptimisationRunTest {
                                 () -> new Lineage(Lineage.Kind.REPLACEMENT, List.of()));
         Assertions.assertThrows(IllegalArgumentException.class,
                                 () -> Lineage.NONE.withProperty("reason", "none"));
+        Assertions.assertThrows(IllegalArgumentException.class,
+                                () -> new Lineage(Lineage.Kind.MUTATION, List.of(member(1, Lineage.NONE)), java.util.Map.of(), new Object()));
     }
 
     @Test

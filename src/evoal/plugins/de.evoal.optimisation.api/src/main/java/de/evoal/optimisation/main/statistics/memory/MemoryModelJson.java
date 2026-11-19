@@ -718,8 +718,8 @@ public class MemoryModelJson {
     }
 
     /**
-     * @return The relationship with its kind, the ids of its targets and, for a recombination,
-     *   the id of its partner.
+     * @return The relationship with its kind, the ids of its targets and, for a recombination
+     *   with a recorded sibling, the id of its partner.
      */
     private static ObjectNode toRelationship(final Relationship relationship) {
         final ObjectNode relationshipNode = NODES.objectNode();
@@ -735,7 +735,7 @@ public class MemoryModelJson {
 
         relationshipNode.set("targets", toIds(relationship.getTarget()));
 
-        if(relationship instanceof Recombination recombination) {
+        if(relationship instanceof Recombination recombination && recombination.getOther() != null) {
             final int partner = partnerOf(recombination);
             relationshipNode.put("partner", partner);
         }

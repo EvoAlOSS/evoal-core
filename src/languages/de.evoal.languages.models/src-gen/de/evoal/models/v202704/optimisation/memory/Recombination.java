@@ -33,13 +33,15 @@ public interface Recombination extends Relationship {
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * *
-	 * The recombination that is the related one.
+	 * The recombination of the sibling: the other child of the same recombination.
+	 *   Not set if the sibling is not recorded, e.g., because it did not survive the
+	 *   replacement.
 	 * 
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Other</em>' reference.
 	 * @see #setOther(Recombination)
 	 * @see de.evoal.models.v202704.optimisation.memory.MemoryPackage#getRecombination_Other()
-	 * @model required="true"
+	 * @model
 	 * @generated
 	 */
 	Recombination getOther();

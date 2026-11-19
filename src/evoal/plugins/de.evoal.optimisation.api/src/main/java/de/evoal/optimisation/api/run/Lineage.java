@@ -15,8 +15,10 @@ import java.util.Objects;
  *   by property name, in insertion order. The kernel records them on the relationship of the memory model; every
  *   name has to be defined with the scope {@code RELATIONSHIP}
  *   ({@link de.evoal.optimisation.api.execution.ExecutionRecorder#defineProperty}).
+ * @param pair For a recombination: an object shared by the lineages of the children of the
+ *   same recombination, so the kernel can link them as siblings; {@code null} otherwise.
  */
-public record Lineage(Kind kind, List<Candidate> predecessors, Map<String, Object> properties) {
+public record Lineage(Kind kind, List<Candidate> predecessors, Map<String, Object> properties, Object pair) {
     /**
      * A candidate without predecessors, e.g., an initial or sampled candidate.
      */
@@ -41,6 +43,10 @@ public record Lineage(Kind kind, List<Candidate> predecessors, Map<String, Objec
                                                + predecessors.size() + " predecessors.");
         }
 
+        if(pair != null && kind != Kind.RECOMBINATION) {
+            throw new IllegalArgumentException("Only a recombination has siblings, not a lineage of kind " + kind + ".");
+        }
+
         if(kind == Kind.NONE && !properties.isEmpty()) {
             throw new IllegalArgumentException("A lineage without predecessors has no relationship for the properties "
                                                + properties.keySet() + ".");
@@ -54,7 +60,18 @@ public record Lineage(Kind kind, List<Candidate> predecessors, Map<String, Objec
      * @param predecessors The predecessors.
      */
     public Lineage(final Kind kind, final List<Candidate> predecessors) {
-        this(kind, predecessors, Map.of());
+        this(kind, predecessors, Map.of(), null);
+    }
+
+    /**
+     * Creates a lineage without siblings.
+     *
+     * @param kind The kind of the relationship.
+     * @param predecessors The predecessors.
+     * @param properties Further details of the relationship.
+     */
+    public Lineage(final Kind kind, final List<Candidate> predecessors, final Map<String, Object> properties) {
+        this(kind, predecessors, properties, null);
     }
 
     /**
@@ -82,6 +99,15 @@ public record Lineage(Kind kind, List<Candidate> predecessors, Map<String, Objec
     }
 
     /**
+     * @param predecessors The parents.
+     * @param pair An object shared by the lineages of both children of the recombination.
+     * @return The lineage of a child that combines its predecessors and has a sibling.
+     */
+    public static Lineage recombination(final List<Candidate> predecessors, final Object pair) {
+        return new Lineage(Kind.RECOMBINATION, predecessors, Map.of(), pair);
+    }
+
+    /**
      * @param replaced The candidate that failed a check.
      * @return The lineage of a candidate that took the place of the replaced one; it is not
      *   derived from it.
@@ -99,7 +125,7 @@ public record Lineage(Kind kind, List<Candidate> predecessors, Map<String, Objec
         final Map<String, Object> extended = new LinkedHashMap<>(properties);
         extended.put(name, value);
 
-        return new Lineage(kind, predecessors, extended);
+        return new Lineage(kind, predecessors, extended, pair);
     }
 
     /**

@@ -476,9 +476,8 @@ module de.evoal.optimisation.core {
     type 'memory-model' extends 'statistics-writer' {
         /**
          * Whether the executed steps of every iteration (e.g. "Initialization: sample 10
-         *   candidates") are written into <tt>iteration-&lt;n&gt;.json</tt>. Random search,
-         *   local search and particle swarm optimisation record their steps; the
-         *   evolutionary algorithm does not.
+         *   candidates") are written into <tt>iteration-&lt;n&gt;.json</tt>. All algorithms
+         *   record their steps.
          */
         'steps' : boolean := false;
     }

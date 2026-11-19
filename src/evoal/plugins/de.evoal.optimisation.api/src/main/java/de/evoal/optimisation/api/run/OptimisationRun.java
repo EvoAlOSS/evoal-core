@@ -19,6 +19,7 @@ import de.evoal.models.v202704.optimisation.memory.Iteration;
 import de.evoal.models.v202704.optimisation.memory.MemoryFactory;
 import de.evoal.models.v202704.optimisation.memory.PropertyScope;
 import de.evoal.models.v202704.optimisation.memory.Rank;
+import de.evoal.models.v202704.optimisation.memory.Recombination;
 import de.evoal.models.v202704.optimisation.memory.Relationship;
 
 import de.evoal.optimisation.api.evaluation.EvaluationBudgetExhaustedException;
@@ -49,7 +50,9 @@ import de.evoal.optimisation.api.statistics.writer.StatisticsWriterListener;
  *   by its {@link Lineage}. A predecessor that is not a member of the previous iteration,
  *   but an unchanged copy of one ({@link Lineage.Kind#IDENTITY}), stands for its original.
  *   The properties of the member and of its lineage become the properties of the individual
- *   and of its relationship; they have to be defined in the {@link ExecutionRecorder}.
+ *   and of its relationship; they have to be defined in the {@link ExecutionRecorder}. The
+ *   recombinations of two members whose lineages share a pair ({@link Lineage#pair()}) refer
+ *   to each other as siblings ({@code other}).
  *   The best individual so far is the first individual whose
  *   optimisation value is better than the values of all earlier ones.
  * <p>
@@ -97,6 +100,12 @@ public class OptimisationRun {
     private Map<Candidate, Individual> previousIndividuals = new IdentityHashMap<>();
 
     /**
+     * The recombinations of the current iteration by the pair of their lineage, the first one
+     *   per member.
+     */
+    private final Map<Object, Map<Candidate, Recombination>> pairs = new IdentityHashMap<>();
+
+    /**
      * @param events Publishes the events of the run.
      * @param idGenerator Creates the ids of the individuals.
      * @param recorder Provides the execution of the run.
@@ -129,6 +138,7 @@ public class OptimisationRun {
             bestIndividual = null;
             bestValue = null;
             previousIndividuals = new IdentityHashMap<>();
+            pairs.clear();
 
             events.startRun(List.of(new StatisticsWriterListener(statistics)));
             events.publish(new RunStarted(recorder.getExecution()));
@@ -186,6 +196,8 @@ public class OptimisationRun {
             individualsOfMembers.put(member, individual);
         }
 
+        linkSiblings();
+
         final Iteration iteration = MemoryFactory.eINSTANCE.createIteration();
         iteration.setNumber(number);
         iteration.getRanks().addAll(toRanks(population.ranks(), individuals));
@@ -230,10 +242,32 @@ public class OptimisationRun {
 
         final Lineage lineage = member.lineage();
         if(lineage.kind() != Lineage.Kind.NONE) {
-            individual.getRelationships().add(toRelationship(lineage));
+            individual.getRelationships().add(toRelationship(member, lineage));
         }
 
         return individual;
+    }
+
+    /**
+     * Links the recombinations of the siblings of the current iteration. A member that occurs
+     *   several times is linked with its first individual. A recombination whose sibling is not
+     *   a member keeps no sibling.
+     *
+     * @throws IllegalStateException if more than two members share a pair.
+     */
+    private void linkSiblings() {
+        for(final Map<Candidate, Recombination> siblings : pairs.values()) {
+            if(siblings.size() > 2) {
+                throw new IllegalStateException(siblings.size() + " members share the pair of a recombination.");
+            }
+            if(siblings.size() == 2) {
+                final List<Recombination> recombinations = List.copyOf(siblings.values());
+                recombinations.get(0).setOther(recombinations.get(1));
+                recombinations.get(1).setOther(recombinations.get(0));
+            }
+        }
+
+        pairs.clear();
     }
 
     /**
@@ -258,7 +292,7 @@ public class OptimisationRun {
      * @throws IllegalStateException if a predecessor does not belong to the previous iteration,
      *   or if a property is not defined or does not match its definition.
      */
-    private Relationship toRelationship(final Lineage lineage) {
+    private Relationship toRelationship(final Candidate member, final Lineage lineage) {
         final Relationship relationship = switch(lineage.kind()) {
             case IDENTITY -> MemoryFactory.eINSTANCE.createIdentity();
             case MUTATION -> MemoryFactory.eINSTANCE.createMutation();
@@ -271,6 +305,11 @@ public class OptimisationRun {
             recorder.requireProperty(name, PropertyScope.RELATIONSHIP, value);
             relationship.getProperties().put(name, value);
         });
+
+        if(lineage.pair() != null) {
+            pairs.computeIfAbsent(lineage.pair(), pair -> new IdentityHashMap<>())
+                 .putIfAbsent(member, (Recombination) relationship);
+        }
 
         for(final Candidate predecessor : lineage.predecessors()) {
             relationship.getTarget().add(individualOf(predecessor));

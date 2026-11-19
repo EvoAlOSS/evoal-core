@@ -1,0 +1,267 @@
+{
+  "formatVersion" : "2027.4.0",
+  "number" : 5,
+  "individuals" : [ {
+    "id" : 75,
+    "input" : {
+      "x:0" : 1.0276856484796868,
+      "x:1" : -1.8994207834850236,
+      "x:2" : -0.9287584263107433
+    },
+    "output" : {
+      "y:0" : 8.593942909701997
+    },
+    "fitness" : [ 8.593942909701997 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 68 ]
+    } ]
+  }, {
+    "id" : 76,
+    "input" : {
+      "x:0" : 1.0276856484796868,
+      "x:1" : -1.8994207834850236,
+      "x:2" : -0.9287584263107433
+    },
+    "output" : {
+      "y:0" : 8.593942909701997
+    },
+    "fitness" : [ 8.593942909701997 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 68 ]
+    } ]
+  }, {
+    "id" : 77,
+    "input" : {
+      "x:0" : 1.0276856484796868,
+      "x:1" : -1.8994207834850236,
+      "x:2" : -0.9287584263107433
+    },
+    "output" : {
+      "y:0" : 8.593942909701997
+    },
+    "fitness" : [ 8.593942909701997 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 68 ]
+    } ]
+  }, {
+    "id" : 78,
+    "input" : {
+      "x:0" : 1.0276856484796868,
+      "x:1" : -1.8994207834850236,
+      "x:2" : -0.9287584263107433
+    },
+    "output" : {
+      "y:0" : 8.593942909701997
+    },
+    "fitness" : [ 8.593942909701997 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 68 ]
+    } ]
+  }, {
+    "id" : 79,
+    "input" : {
+      "x:0" : 1.0276856484796868,
+      "x:1" : -1.8994207834850236,
+      "x:2" : -0.9287584263107433
+    },
+    "output" : {
+      "y:0" : 8.593942909701997
+    },
+    "fitness" : [ 8.593942909701997 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 68 ]
+    } ]
+  }, {
+    "id" : 80,
+    "input" : {
+      "x:0" : 1.0276856484796868,
+      "x:1" : -1.8994207834850236,
+      "x:2" : -0.9287584263107433
+    },
+    "output" : {
+      "y:0" : 8.593942909701997
+    },
+    "fitness" : [ 8.593942909701997 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 68 ]
+    } ]
+  }, {
+    "id" : 81,
+    "input" : {
+      "x:0" : 1.0276856484796868,
+      "x:1" : -1.8994207834850236,
+      "x:2" : -0.9287584263107433
+    },
+    "output" : {
+      "y:0" : 8.593942909701997
+    },
+    "fitness" : [ 8.593942909701997 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 68 ]
+    } ]
+  }, {
+    "id" : 82,
+    "input" : {
+      "x:0" : 1.0276856484796868,
+      "x:1" : -1.8994207834850236,
+      "x:2" : -0.9287584263107433
+    },
+    "output" : {
+      "y:0" : 8.593942909701997
+    },
+    "fitness" : [ 8.593942909701997 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 68 ]
+    } ]
+  }, {
+    "id" : 83,
+    "input" : {
+      "x:0" : 1.0276856484796868,
+      "x:1" : -1.8994207834850236,
+      "x:2" : -0.9287584263107433
+    },
+    "output" : {
+      "y:0" : 8.593942909701997
+    },
+    "fitness" : [ 8.593942909701997 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 68 ]
+    } ]
+  }, {
+    "id" : 84,
+    "input" : {
+      "x:0" : 1.0276856484796868,
+      "x:1" : -1.8994207834850236,
+      "x:2" : -0.9287584263107433
+    },
+    "output" : {
+      "y:0" : 8.593942909701997
+    },
+    "fitness" : [ 8.593942909701997 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 68 ]
+    } ]
+  }, {
+    "id" : 85,
+    "input" : {
+      "x:0" : 1.0276856484796868,
+      "x:1" : -1.8994207834850236,
+      "x:2" : -0.9287584263107433
+    },
+    "output" : {
+      "y:0" : 8.593942909701997
+    },
+    "fitness" : [ 8.593942909701997 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 68 ]
+    } ]
+  }, {
+    "id" : 86,
+    "input" : {
+      "x:0" : 1.0276856484796868,
+      "x:1" : -1.8994207834850236,
+      "x:2" : -0.9287584263107433
+    },
+    "output" : {
+      "y:0" : 8.593942909701997
+    },
+    "fitness" : [ 8.593942909701997 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 68 ]
+    } ]
+  }, {
+    "id" : 87,
+    "input" : {
+      "x:0" : 1.0276856484796868,
+      "x:1" : -1.8994207834850236,
+      "x:2" : -0.9287584263107433
+    },
+    "output" : {
+      "y:0" : 8.593942909701997
+    },
+    "fitness" : [ 8.593942909701997 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 68 ]
+    } ]
+  }, {
+    "id" : 88,
+    "input" : {
+      "x:0" : 1.0276856484796868,
+      "x:1" : -1.8994207834850236,
+      "x:2" : -0.9287584263107433
+    },
+    "output" : {
+      "y:0" : 8.593942909701997
+    },
+    "fitness" : [ 8.593942909701997 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 68 ]
+    } ]
+  }, {
+    "id" : 89,
+    "input" : {
+      "x:0" : 1.0276856484796868,
+      "x:1" : -1.8994207834850236,
+      "x:2" : 2.091018348930338
+    },
+    "output" : {
+      "y:0" : 12.709666859813655
+    },
+    "fitness" : [ 12.709666859813655 ],
+    "relationships" : [ {
+      "kind" : "mutation",
+      "targets" : [ 71 ],
+      "properties" : {
+        "operators" : [ "random-reset-mutation" ],
+        "changed-features" : [ "x:2" ]
+      }
+    } ]
+  } ],
+  "steps" : [ {
+    "kind" : "unordered",
+    "description" : "Selection: select 30 parents by exponential-ranking-selection",
+    "individuals" : [ ]
+  }, {
+    "kind" : "unordered",
+    "description" : "Adaption: recombine 15 pairs",
+    "individuals" : [ ]
+  }, {
+    "kind" : "unordered",
+    "description" : "Adaption: mutate 30 children",
+    "individuals" : [ ]
+  }, {
+    "kind" : "unordered",
+    "description" : "FitnessCalculation: evaluate the candidates",
+    "individuals" : [ ]
+  }, {
+    "kind" : "unordered",
+    "description" : "Acceptance: comma-replacement by boltzmann-selection",
+    "individuals" : [ ]
+  } ],
+  "ranks" : [ {
+    "number" : 0,
+    "members" : [ 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88 ]
+  }, {
+    "number" : 1,
+    "members" : [ 89 ]
+  } ],
+  "bestSoFar" : 66,
+  "metrics" : {
+    "evaluations.real" : 96,
+    "evaluations.surrogate" : 0
+  }
+}

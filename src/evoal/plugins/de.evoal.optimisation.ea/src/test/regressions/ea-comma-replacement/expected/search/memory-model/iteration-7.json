@@ -1,0 +1,263 @@
+{
+  "formatVersion" : "2027.4.0",
+  "number" : 7,
+  "individuals" : [ {
+    "id" : 106,
+    "input" : {
+      "x:0" : 1.0276856484796868,
+      "x:1" : -0.9332931171063263,
+      "x:2" : -0.9287584263107433
+    },
+    "output" : {
+      "y:0" : 4.791478122505827
+    },
+    "fitness" : [ 4.791478122505827 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 99 ]
+    } ]
+  }, {
+    "id" : 111,
+    "input" : {
+      "x:0" : 1.0276856484796868,
+      "x:1" : -0.9332931171063263,
+      "x:2" : -0.9287584263107433
+    },
+    "output" : {
+      "y:0" : 4.791478122505827
+    },
+    "fitness" : [ 4.791478122505827 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 99 ]
+    } ]
+  }, {
+    "id" : 112,
+    "input" : {
+      "x:0" : 1.0276856484796868,
+      "x:1" : -0.9332931171063263,
+      "x:2" : -0.9287584263107433
+    },
+    "output" : {
+      "y:0" : 4.791478122505827
+    },
+    "fitness" : [ 4.791478122505827 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 99 ]
+    } ]
+  }, {
+    "id" : 114,
+    "input" : {
+      "x:0" : 1.0276856484796868,
+      "x:1" : -0.9332931171063263,
+      "x:2" : -0.9287584263107433
+    },
+    "output" : {
+      "y:0" : 4.791478122505827
+    },
+    "fitness" : [ 4.791478122505827 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 99 ]
+    } ]
+  }, {
+    "id" : 116,
+    "input" : {
+      "x:0" : 1.0276856484796868,
+      "x:1" : -0.9332931171063263,
+      "x:2" : -0.9287584263107433
+    },
+    "output" : {
+      "y:0" : 4.791478122505827
+    },
+    "fitness" : [ 4.791478122505827 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 99 ]
+    } ]
+  }, {
+    "id" : 117,
+    "input" : {
+      "x:0" : 1.0276856484796868,
+      "x:1" : -0.9332931171063263,
+      "x:2" : -0.9287584263107433
+    },
+    "output" : {
+      "y:0" : 4.791478122505827
+    },
+    "fitness" : [ 4.791478122505827 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 99 ]
+    } ]
+  }, {
+    "id" : 119,
+    "input" : {
+      "x:0" : 1.0276856484796868,
+      "x:1" : -0.9332931171063263,
+      "x:2" : -0.9287584263107433
+    },
+    "output" : {
+      "y:0" : 4.791478122505827
+    },
+    "fitness" : [ 4.791478122505827 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 99 ]
+    } ]
+  }, {
+    "id" : 105,
+    "input" : {
+      "x:0" : 1.0276856484796868,
+      "x:1" : -1.8994207834850236,
+      "x:2" : -0.9287584263107433
+    },
+    "output" : {
+      "y:0" : 8.593942909701997
+    },
+    "fitness" : [ 8.593942909701997 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 95 ]
+    } ]
+  }, {
+    "id" : 107,
+    "input" : {
+      "x:0" : 1.0276856484796868,
+      "x:1" : -1.8994207834850236,
+      "x:2" : -0.9287584263107433
+    },
+    "output" : {
+      "y:0" : 8.593942909701997
+    },
+    "fitness" : [ 8.593942909701997 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 93 ]
+    } ]
+  }, {
+    "id" : 108,
+    "input" : {
+      "x:0" : 1.0276856484796868,
+      "x:1" : -1.8994207834850236,
+      "x:2" : -0.9287584263107433
+    },
+    "output" : {
+      "y:0" : 8.593942909701997
+    },
+    "fitness" : [ 8.593942909701997 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 95 ]
+    } ]
+  }, {
+    "id" : 109,
+    "input" : {
+      "x:0" : 1.0276856484796868,
+      "x:1" : -1.8994207834850236,
+      "x:2" : -0.9287584263107433
+    },
+    "output" : {
+      "y:0" : 8.593942909701997
+    },
+    "fitness" : [ 8.593942909701997 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 91 ]
+    } ]
+  }, {
+    "id" : 110,
+    "input" : {
+      "x:0" : 1.0276856484796868,
+      "x:1" : -1.8994207834850236,
+      "x:2" : -0.9287584263107433
+    },
+    "output" : {
+      "y:0" : 8.593942909701997
+    },
+    "fitness" : [ 8.593942909701997 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 102 ]
+    } ]
+  }, {
+    "id" : 113,
+    "input" : {
+      "x:0" : 1.0276856484796868,
+      "x:1" : -1.8994207834850236,
+      "x:2" : -0.9287584263107433
+    },
+    "output" : {
+      "y:0" : 8.593942909701997
+    },
+    "fitness" : [ 8.593942909701997 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 100 ]
+    } ]
+  }, {
+    "id" : 115,
+    "input" : {
+      "x:0" : 1.0276856484796868,
+      "x:1" : -1.8994207834850236,
+      "x:2" : -0.9287584263107433
+    },
+    "output" : {
+      "y:0" : 8.593942909701997
+    },
+    "fitness" : [ 8.593942909701997 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 91 ]
+    } ]
+  }, {
+    "id" : 118,
+    "input" : {
+      "x:0" : 1.0276856484796868,
+      "x:1" : -1.8994207834850236,
+      "x:2" : -0.9287584263107433
+    },
+    "output" : {
+      "y:0" : 8.593942909701997
+    },
+    "fitness" : [ 8.593942909701997 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 90 ]
+    } ]
+  } ],
+  "steps" : [ {
+    "kind" : "unordered",
+    "description" : "Selection: select 30 parents by exponential-ranking-selection",
+    "individuals" : [ ]
+  }, {
+    "kind" : "unordered",
+    "description" : "Adaption: recombine 15 pairs",
+    "individuals" : [ ]
+  }, {
+    "kind" : "unordered",
+    "description" : "Adaption: mutate 30 children",
+    "individuals" : [ ]
+  }, {
+    "kind" : "unordered",
+    "description" : "FitnessCalculation: evaluate the candidates",
+    "individuals" : [ ]
+  }, {
+    "kind" : "unordered",
+    "description" : "Acceptance: comma-replacement by boltzmann-selection",
+    "individuals" : [ ]
+  } ],
+  "ranks" : [ {
+    "number" : 0,
+    "members" : [ 106, 111, 112, 114, 116, 117, 119 ]
+  }, {
+    "number" : 1,
+    "members" : [ 105, 107, 108, 109, 110, 113, 115, 118 ]
+  } ],
+  "bestSoFar" : 99,
+  "metrics" : {
+    "evaluations.real" : 119,
+    "evaluations.surrogate" : 0
+  }
+}

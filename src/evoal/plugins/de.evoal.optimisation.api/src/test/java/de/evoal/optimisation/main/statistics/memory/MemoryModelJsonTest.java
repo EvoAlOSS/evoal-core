@@ -385,6 +385,23 @@ public class MemoryModelJsonTest {
         }
 
         @Test
+        public void aRecombinationWithoutRecordedSiblingHasNoPartner() throws Exception {
+            // given
+            final Individual father = MemoryModels.individual(0, new double[] {0.0, 0.0}, 0.0);
+            final Individual mother = MemoryModels.individual(1, new double[] {1.0, 1.0}, 2.0);
+            final Individual son = MemoryModels.individual(2, new double[] {0.0, 1.0}, 1.0);
+            MemoryModels.relate(son, MemoryFactory.eINSTANCE.createRecombination(), father, mother);
+
+            // when
+            final ObjectNode document = json.toIteration(MemoryModels.iteration(1, son));
+
+            // then
+            Assertions.assertEquals("[{\"kind\":\"recombination\",\"targets\":[0,1]}]",
+                                    document.get("individuals").get(0).get("relationships").toString());
+            Assertions.assertEquals(List.of(), violationsOf(document, "iteration-1.json"));
+        }
+
+        @Test
         public void theBestSoFarIsWrittenAsIdEvenFromAnEarlierIteration() {
             // given
             final Individual best = MemoryModels.individual(0, new double[] {0.0, 0.0}, 0.0);

@@ -143,7 +143,7 @@
           "minItems": 1
         },
         "partner": {
-          "description": "Recombination only: the individual that was created by the same recombination (holder of the 'other' relationship).",
+          "description": "Recombination only: the sibling, i.e. the individual that was created by the same recombination (holder of the 'other' relationship). Missing if the sibling is not recorded, e.g. because it did not survive the replacement.",
           "$ref": "#/$defs/individualId"
         },
         "properties": {
@@ -157,18 +157,15 @@
       ],
       "additionalProperties": false,
       "if": {
-        "properties": {
-          "kind": {
-            "const": "recombination"
+        "not": {
+          "properties": {
+            "kind": {
+              "const": "recombination"
+            }
           }
         }
       },
       "then": {
-        "required": [
-          "partner"
-        ]
-      },
-      "else": {
         "not": {
           "required": [
             "partner"

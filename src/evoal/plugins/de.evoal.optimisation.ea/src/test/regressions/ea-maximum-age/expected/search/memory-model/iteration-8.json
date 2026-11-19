@@ -1,0 +1,239 @@
+{
+  "formatVersion" : "2027.4.0",
+  "number" : 8,
+  "individuals" : [ {
+    "id" : 80,
+    "input" : {
+      "x:0" : 1.108976670250753,
+      "x:1" : -1.9030285831239875,
+      "x:2" : 1.0203274414799073
+    },
+    "output" : {
+      "y:0" : 10.027360906501993
+    },
+    "fitness" : [ 10.027360906501993 ],
+    "relationships" : [ {
+      "kind" : "recombination",
+      "targets" : [ 70, 79 ],
+      "properties" : {
+        "operators" : [ "sbx-crossover", "polynomial-mutation" ],
+        "changed-features" : [ "x:1", "x:2" ]
+      }
+    } ]
+  }, {
+    "id" : 81,
+    "input" : {
+      "x:0" : 1.108976670250753,
+      "x:1" : -1.905243644111745,
+      "x:2" : 1.943499446550357
+    },
+    "output" : {
+      "y:0" : 13.2351612552755
+    },
+    "fitness" : [ 13.2351612552755 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 70 ]
+    } ]
+  }, {
+    "id" : 82,
+    "input" : {
+      "x:0" : 0.8825866120005302,
+      "x:1" : -2.166818463858662,
+      "x:2" : 1.9437887363082544
+    },
+    "output" : {
+      "y:0" : 17.47791032676637
+    },
+    "fitness" : [ 17.47791032676637 ],
+    "relationships" : [ {
+      "kind" : "mutation",
+      "targets" : [ 78 ],
+      "properties" : {
+        "operators" : [ "polynomial-mutation" ],
+        "changed-features" : [ "x:0" ]
+      }
+    } ]
+  }, {
+    "id" : 83,
+    "input" : {
+      "x:0" : 1.109097128351447,
+      "x:1" : -2.05713879965516,
+      "x:2" : 3.0161267845114885
+    },
+    "output" : {
+      "y:0" : 17.506622718125605
+    },
+    "fitness" : [ 17.506622718125605 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 72 ]
+    } ]
+  }, {
+    "id" : 84,
+    "input" : {
+      "x:0" : 1.109097128351447,
+      "x:1" : -2.166818463858662,
+      "x:2" : 1.9437887363082544
+    },
+    "output" : {
+      "y:0" : 17.587851282950364
+    },
+    "fitness" : [ 17.587851282950364 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 78 ]
+    } ]
+  }, {
+    "id" : 86,
+    "input" : {
+      "x:0" : 2.2544786035679394,
+      "x:1" : 2.3000502135999525,
+      "x:2" : -3.0631978002072637
+    },
+    "output" : {
+      "y:0" : 43.908689556202745
+    },
+    "fitness" : [ 43.908689556202745 ],
+    "relationships" : [ {
+      "kind" : "replacement",
+      "targets" : [ 76 ],
+      "properties" : {
+        "reason" : "maximum-age: age 4 exceeds 3 iterations"
+      }
+    } ]
+  }, {
+    "id" : 89,
+    "input" : {
+      "x:0" : -1.324214104297903,
+      "x:1" : -0.01623810386464708,
+      "x:2" : 4.306196867801099
+    },
+    "output" : {
+      "y:0" : 48.303031449732714
+    },
+    "fitness" : [ 48.303031449732714 ],
+    "relationships" : [ {
+      "kind" : "replacement",
+      "targets" : [ 79 ],
+      "properties" : {
+        "reason" : "maximum-age: age 4 exceeds 3 iterations"
+      }
+    } ]
+  }, {
+    "id" : 88,
+    "input" : {
+      "x:0" : -3.333108020751562,
+      "x:1" : -1.3171152067601204,
+      "x:2" : 2.109469395603149
+    },
+    "output" : {
+      "y:0" : 48.64875329551934
+    },
+    "fitness" : [ 48.64875329551934 ],
+    "relationships" : [ {
+      "kind" : "replacement",
+      "targets" : [ 76 ],
+      "properties" : {
+        "reason" : "maximum-age: age 4 exceeds 3 iterations"
+      }
+    } ]
+  }, {
+    "id" : 85,
+    "input" : {
+      "x:0" : -4.004873845060495,
+      "x:1" : 1.5147959365466581,
+      "x:2" : 0.41870856201992623
+    },
+    "output" : {
+      "y:0" : 57.19413233959592
+    },
+    "fitness" : [ 57.19413233959592 ],
+    "relationships" : [ {
+      "kind" : "replacement",
+      "targets" : [ 76 ],
+      "properties" : {
+        "reason" : "maximum-age: age 4 exceeds 3 iterations"
+      }
+    } ]
+  }, {
+    "id" : 87,
+    "input" : {
+      "x:0" : 1.0397993324912704,
+      "x:1" : -4.52156332462419,
+      "x:2" : -2.567804883639078
+    },
+    "output" : {
+      "y:0" : 67.44487045337203
+    },
+    "fitness" : [ 67.44487045337203 ],
+    "relationships" : [ {
+      "kind" : "replacement",
+      "targets" : [ 76 ],
+      "properties" : {
+        "reason" : "maximum-age: age 4 exceeds 3 iterations"
+      }
+    } ]
+  } ],
+  "steps" : [ {
+    "kind" : "unordered",
+    "description" : "Selection: select 10 parents by linear-ranking-selection",
+    "individuals" : [ ]
+  }, {
+    "kind" : "unordered",
+    "description" : "Adaption: recombine 5 pairs",
+    "individuals" : [ ]
+  }, {
+    "kind" : "unordered",
+    "description" : "Adaption: mutate 10 children",
+    "individuals" : [ ]
+  }, {
+    "kind" : "unordered",
+    "description" : "FitnessCalculation: evaluate the candidates",
+    "individuals" : [ ]
+  }, {
+    "kind" : "unordered",
+    "description" : "Acceptance: plus-replacement by elite-selection",
+    "individuals" : [ ]
+  }, {
+    "kind" : "unordered",
+    "description" : "Check: maximum-age (replace): 5 of 10 candidates failed",
+    "individuals" : [ ]
+  } ],
+  "ranks" : [ {
+    "number" : 0,
+    "members" : [ 80 ]
+  }, {
+    "number" : 1,
+    "members" : [ 81 ]
+  }, {
+    "number" : 2,
+    "members" : [ 82 ]
+  }, {
+    "number" : 3,
+    "members" : [ 83 ]
+  }, {
+    "number" : 4,
+    "members" : [ 84 ]
+  }, {
+    "number" : 5,
+    "members" : [ 86 ]
+  }, {
+    "number" : 6,
+    "members" : [ 89 ]
+  }, {
+    "number" : 7,
+    "members" : [ 88 ]
+  }, {
+    "number" : 8,
+    "members" : [ 85 ]
+  }, {
+    "number" : 9,
+    "members" : [ 87 ]
+  } ],
+  "bestSoFar" : 80,
+  "metrics" : {
+    "evaluations.real" : 91,
+    "evaluations.surrogate" : 0
+  }
+}

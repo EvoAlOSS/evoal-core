@@ -1,0 +1,208 @@
+{
+  "formatVersion" : "2027.4.0",
+  "number" : 6,
+  "individuals" : [ {
+    "id" : 60,
+    "input" : {
+      "x:0" : 1.0744534057111976,
+      "x:1" : -2.166818463858662,
+      "x:2" : 1.943499446550357
+    },
+    "output" : {
+      "y:0" : 16.33294742941564
+    },
+    "fitness" : [ 16.33294742941564 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 50 ]
+    } ]
+  }, {
+    "id" : 61,
+    "input" : {
+      "x:0" : 1.109097128351447,
+      "x:1" : -2.166818463858662,
+      "x:2" : 1.9437887363082544
+    },
+    "output" : {
+      "y:0" : 17.587851282950364
+    },
+    "fitness" : [ 17.587851282950364 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 52 ]
+    } ]
+  }, {
+    "id" : 66,
+    "input" : {
+      "x:0" : 1.109097128351447,
+      "x:1" : -2.166818463858662,
+      "x:2" : 1.9437887363082544
+    },
+    "output" : {
+      "y:0" : 17.587851282950364
+    },
+    "fitness" : [ 17.587851282950364 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 52 ]
+    } ]
+  }, {
+    "id" : 67,
+    "input" : {
+      "x:0" : 1.109097128351447,
+      "x:1" : -2.166818463858662,
+      "x:2" : 1.9437887363082544
+    },
+    "output" : {
+      "y:0" : 17.587851282950364
+    },
+    "fitness" : [ 17.587851282950364 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 52 ]
+    } ]
+  }, {
+    "id" : 63,
+    "input" : {
+      "x:0" : 1.109097128351447,
+      "x:1" : -2.166818463858662,
+      "x:2" : 1.943499446550357
+    },
+    "output" : {
+      "y:0" : 17.59302931122893
+    },
+    "fitness" : [ 17.59302931122893 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 58 ]
+    } ]
+  }, {
+    "id" : 65,
+    "input" : {
+      "x:0" : 1.109097128351447,
+      "x:1" : -2.166818463858662,
+      "x:2" : 1.943499446550357
+    },
+    "output" : {
+      "y:0" : 17.59302931122893
+    },
+    "fitness" : [ 17.59302931122893 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 58 ]
+    } ]
+  }, {
+    "id" : 69,
+    "input" : {
+      "x:0" : 1.109097128351447,
+      "x:1" : -2.166818463858662,
+      "x:2" : 1.943499446550357
+    },
+    "output" : {
+      "y:0" : 17.59302931122893
+    },
+    "fitness" : [ 17.59302931122893 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 58 ]
+    } ]
+  }, {
+    "id" : 62,
+    "input" : {
+      "x:0" : 1.0209874577929365,
+      "x:1" : -2.166818463858662,
+      "x:2" : 1.838388154915611
+    },
+    "output" : {
+      "y:0" : 18.939785722616982
+    },
+    "fitness" : [ 18.939785722616982 ],
+    "relationships" : [ {
+      "kind" : "mutation",
+      "targets" : [ 59 ],
+      "properties" : {
+        "operators" : [ "polynomial-mutation" ],
+        "changed-features" : [ "x:0" ]
+      }
+    } ]
+  }, {
+    "id" : 68,
+    "input" : {
+      "x:0" : 1.89986466746817,
+      "x:1" : -2.166818463858662,
+      "x:2" : 1.912304882695409
+    },
+    "output" : {
+      "y:0" : 20.364601545382214
+    },
+    "fitness" : [ 20.364601545382214 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 56 ]
+    } ]
+  }, {
+    "id" : 64,
+    "input" : {
+      "x:0" : 1.109097128351447,
+      "x:1" : -2.166818463858662,
+      "x:2" : 1.838388154915611
+    },
+    "output" : {
+      "y:0" : 21.299477993303213
+    },
+    "fitness" : [ 21.299477993303213 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 53 ]
+    } ]
+  } ],
+  "steps" : [ {
+    "kind" : "unordered",
+    "description" : "Selection: select 10 parents by linear-ranking-selection",
+    "individuals" : [ ]
+  }, {
+    "kind" : "unordered",
+    "description" : "Adaption: recombine 5 pairs",
+    "individuals" : [ ]
+  }, {
+    "kind" : "unordered",
+    "description" : "Adaption: mutate 10 children",
+    "individuals" : [ ]
+  }, {
+    "kind" : "unordered",
+    "description" : "FitnessCalculation: evaluate the candidates",
+    "individuals" : [ ]
+  }, {
+    "kind" : "unordered",
+    "description" : "Acceptance: plus-replacement by elite-selection",
+    "individuals" : [ ]
+  }, {
+    "kind" : "unordered",
+    "description" : "Check: maximum-age (replace): 0 of 10 candidates failed",
+    "individuals" : [ ]
+  } ],
+  "ranks" : [ {
+    "number" : 0,
+    "members" : [ 60 ]
+  }, {
+    "number" : 1,
+    "members" : [ 61, 66, 67 ]
+  }, {
+    "number" : 2,
+    "members" : [ 63, 65, 69 ]
+  }, {
+    "number" : 3,
+    "members" : [ 62 ]
+  }, {
+    "number" : 4,
+    "members" : [ 68 ]
+  }, {
+    "number" : 5,
+    "members" : [ 64 ]
+  } ],
+  "bestSoFar" : 50,
+  "metrics" : {
+    "evaluations.real" : 67,
+    "evaluations.surrogate" : 0
+  }
+}
