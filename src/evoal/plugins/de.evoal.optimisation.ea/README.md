@@ -20,7 +20,9 @@ N is `'size-of-population'`, lambda is `'number-of-offspring'`.
 | replacement | `Acceptance` | `replacement` forms the next population of N candidates |
 | population checks | `Check` | only if `'candidate-checks'` has such checks, e.g. `'maximum-age'` |
 
-The initialisation samples N candidates from `'initialisation'` and evaluates them.
+The initialisation samples N candidates from `'initialisation'`, applies the checks of new
+candidates to them (with the same replacement sources as in the generations; `resample` takes
+the next candidate of `'initialisation'`) and evaluates them.
 
 ## Representation
 
@@ -148,6 +150,8 @@ In `src/main/examples`, each with a README:
 - `ea-mixed-genotype`: a Gray chromosome and an integer chromosome with its own operators,
   roulette wheel selection and the memory model.
 - `ea-nsga2`: NSGA-II on ZDT1 with 30 variables (benchmark `zdt1` of the generator).
+- `ea-constraints`: two constraint groups, one repaired by `'projection-repair'` before the
+  evaluation, one penalised by `'constraint-penalty'`; `'constraint-statistics'`.
 
 The surrogate plugins have examples that search on a trained model with the EA
 (`surrogate.simple`, `surrogate.svr`, `surrogate.gaussianprocess`, `surrogate.onnx.simple`,

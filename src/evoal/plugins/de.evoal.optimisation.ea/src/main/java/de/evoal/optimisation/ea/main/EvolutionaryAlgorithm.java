@@ -56,6 +56,8 @@ import de.evoal.optimisation.ea.main.selection.Nsga2Selection;
  * Initialisation:
  * <ol>
  *   <li>Initialization: take N candidates of the {@code 'initialisation'},</li>
+ *   <li>Check: the checks of new candidates, if any are configured; {@code resample} takes
+ *     the next candidate of the {@code 'initialisation'},</li>
  *   <li>FitnessCalculation: evaluate them,</li>
  *   <li>Acceptance: they become the population.</li>
  * </ol>
@@ -274,9 +276,14 @@ public class EvolutionaryAlgorithm extends TemplateAlgorithm {
     protected Template template() {
         final Variation variation = new Variation(genotype, plan, boundaryHandling, randomService);
 
-        final List<Step> initialisationSteps = new ArrayList<>(List.of(new SampleCandidates(initialisation, size),
-                                                                       new EvaluateCandidates(evaluator),
-                                                                       new ReplacePopulation()));
+        final SampleCandidates sample = new SampleCandidates(initialisation, size);
+        final List<Step> childChecks = newCandidateChecks(GenerationSteps.resampler(variation));
+
+        final List<Step> initialisationSteps = new ArrayList<>();
+        initialisationSteps.add(sample);
+        initialisationSteps.addAll(sharingSources(childChecks, sample));
+        initialisationSteps.add(new EvaluateCandidates(evaluator));
+        initialisationSteps.add(new ReplacePopulation());
         final String constraintGroup = constraintGroup();
         if(crowded) {
             initialisationSteps.add(GenerationSteps.sortIntoFronts(constraintGroup));
@@ -287,7 +294,7 @@ public class EvolutionaryAlgorithm extends TemplateAlgorithm {
                                                      randomService.random(OperatorPlan.STREAM + "/parent-selection")));
         generation.add(GenerationSteps.recombine(variation, offspring));
         generation.add(GenerationSteps.mutate(variation, offspring));
-        generation.addAll(newCandidateChecks(GenerationSteps.resampler(variation)));
+        generation.addAll(childChecks);
         generation.add(new EvaluateCandidates(evaluator));
         generation.add(GenerationSteps.replace(replacement, size, order,
                                                randomService.random(OperatorPlan.STREAM + "/replacement")));

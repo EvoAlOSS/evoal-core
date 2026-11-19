@@ -226,6 +226,25 @@ public class StepsTest {
         }
 
         @Test
+        public void resamplingContinuesTheStreamOfTheProvider() {
+            // given
+            final List<TypedEObject> inputs = Stream.generate(StepsTest::input).limit(3).toList();
+            final InitialCandidatesProvider provider = Mockito.mock(InitialCandidatesProvider.class);
+            Mockito.when(provider.create()).thenAnswer(invocation -> inputs.stream());
+            final SampleCandidates step = new SampleCandidates(provider, 2);
+            final SearchState state = new SearchState();
+
+            // when
+            step.execute(state);
+            final Candidate resampled = step.resample(state, 1);
+
+            // then
+            Assertions.assertSame(inputs.get(2), resampled.input());
+            Assertions.assertEquals(Lineage.NONE, resampled.lineage());
+            Mockito.verify(provider, Mockito.times(1)).create();
+        }
+
+        @Test
         public void anExhaustedProviderIsReported() {
             // given
             final InitialCandidatesProvider provider = Mockito.mock(InitialCandidatesProvider.class);

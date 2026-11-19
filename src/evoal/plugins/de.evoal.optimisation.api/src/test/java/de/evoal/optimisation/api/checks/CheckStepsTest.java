@@ -300,6 +300,26 @@ public class CheckStepsTest {
         }
 
         @Test
+        public void aStepWithAnotherResamplerSharesTheReplacementSource() {
+            // given: the initial candidates and the children are checked by two steps
+            final CheckNewCandidates children = new CheckNewCandidates(List.of(check("test", CheckPoint.NEW_CANDIDATES,
+                                                                                     CheckReaction.REPLACE, candidate -> candidate == failing)));
+            final CheckNewCandidates initial = children.withResampler((searchState, index) -> failing);
+
+            // when
+            initial.execute(state);
+            final TypedEObject first = state.getCandidates().get(1).input();
+            state.setCandidates(List.of(passing, failing));
+            children.execute(state);
+            final TypedEObject second = state.getCandidates().get(1).input();
+
+            // then: one stream for both steps
+            Assertions.assertSame(replacements.get(0), first);
+            Assertions.assertSame(replacements.get(1), second);
+            Mockito.verify(provider, Mockito.times(1)).create();
+        }
+
+        @Test
         public void aFailedCandidateIsReplacedByAnUnevaluatedOneWithTheReason() {
             // given
             final CheckNewCandidates step = new CheckNewCandidates(List.of(check("test", CheckPoint.NEW_CANDIDATES,

@@ -31,6 +31,20 @@ public final class CheckNewCandidates extends CheckStep {
         super(checks, resampler);
     }
 
+    private CheckNewCandidates(final List<RunCheck> checks, final Resampler resampler, final boolean shared) {
+        super(checks, resampler, shared);
+    }
+
+    /**
+     * @param resampler Creates a new candidate for {@code resample} at the other place.
+     * @return A step with the same checks and replacement sources and another resampler, e.g.,
+     *   for the initial candidates and the children of an algorithm. A replacing check takes
+     *   its candidates from one stream at both places.
+     */
+    public CheckNewCandidates withResampler(final Resampler resampler) {
+        return new CheckNewCandidates(runChecks(), resampler, true);
+    }
+
     @Override
     public void execute(final SearchState state) {
         final List<Candidate> checked = apply(state, state.getCandidates(), CheckNewCandidates::replacementOf);

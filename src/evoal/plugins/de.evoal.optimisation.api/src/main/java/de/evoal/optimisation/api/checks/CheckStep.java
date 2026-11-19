@@ -62,10 +62,30 @@ abstract class CheckStep implements Check {
      *   cannot resample.
      */
     CheckStep(final List<ConfiguredCheck> checks, final Resampler resampler) {
-        this.checks = checks.stream()
-                            .map(RunCheck::new)
-                            .toList();
+        this(checks.stream()
+                   .map(RunCheck::new)
+                   .toList(),
+             resampler, true);
+    }
+
+    /**
+     * Creates a step that shares the checks and their replacement sources with another step.
+     *
+     * @param checks The checks with their replacement sources.
+     * @param resampler Redoes the variation for {@code resample}, {@code null} if the step
+     *   cannot resample.
+     * @param shared Distinguishes the constructor.
+     */
+    CheckStep(final List<RunCheck> checks, final Resampler resampler, final boolean shared) {
+        this.checks = List.copyOf(checks);
         this.resampler = resampler;
+    }
+
+    /**
+     * @return The checks with the replacement sources of the current run.
+     */
+    final List<RunCheck> runChecks() {
+        return checks;
     }
 
     @Override
@@ -253,7 +273,7 @@ abstract class CheckStep implements Check {
      * @param check The check.
      * @param source The replacement source, {@code null} if the check does not replace.
      */
-    private record RunCheck(CandidateCheck check, ReplacementSource source) {
+    record RunCheck(CandidateCheck check, ReplacementSource source) {
         RunCheck(final ConfiguredCheck configured) {
             this(configured.check(), configured.sources() == null ? null : configured.sources().get());
         }

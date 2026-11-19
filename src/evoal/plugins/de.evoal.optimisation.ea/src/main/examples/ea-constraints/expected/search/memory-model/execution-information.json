@@ -1,0 +1,147 @@
+{
+  "formatVersion" : "2027.4.0",
+  "problem" : {
+    "name" : "example-search-with-constraints",
+    "goals" : [ {
+      "feature" : "y:0",
+      "direction" : "minimise"
+    } ]
+  },
+  "algorithm" : {
+    "type" : "de.evoal.optimisation.ea.optimisation.evolutionary-algorithm"
+  },
+  "searchSpace" : [ {
+    "name" : "x:0",
+    "type" : "real",
+    "scale" : "quotient",
+    "lowerBound" : {
+      "value" : -5.12,
+      "inclusive" : true
+    },
+    "upperBound" : {
+      "value" : 5.12,
+      "inclusive" : true
+    }
+  }, {
+    "name" : "x:1",
+    "type" : "real",
+    "scale" : "quotient",
+    "lowerBound" : {
+      "value" : -5.12,
+      "inclusive" : true
+    },
+    "upperBound" : {
+      "value" : 5.12,
+      "inclusive" : true
+    }
+  }, {
+    "name" : "x:2",
+    "type" : "real",
+    "scale" : "quotient",
+    "lowerBound" : {
+      "value" : -5.12,
+      "inclusive" : true
+    },
+    "upperBound" : {
+      "value" : 5.12,
+      "inclusive" : true
+    }
+  } ],
+  "optimisationSpace" : [ {
+    "name" : "y:0",
+    "type" : "real",
+    "scale" : "quotient"
+  } ],
+  "fitness" : {
+    "components" : [ {
+      "name" : "y:0",
+      "goal" : "y:0"
+    } ],
+    "steps" : [ {
+      "type" : "de.evoal.optimisation.core.constraint-penalty",
+      "attributes" : {
+        "group" : "vague",
+        "weight" : 10.0
+      }
+    } ]
+  },
+  "metricDefinitions" : [ {
+    "name" : "constraint-evaluations",
+    "kind" : "counter",
+    "valueType" : "integer",
+    "scope" : "iteration",
+    "description" : "Number of constraint measurements, including the repeated measurements of candidate checks that repair candidates; they do not use the evaluation budget."
+  }, {
+    "name" : "evaluations.real",
+    "kind" : "counter",
+    "valueType" : "integer",
+    "scope" : "iteration",
+    "description" : "Number of evaluations of the real optimisation function."
+  }, {
+    "name" : "evaluations.surrogate",
+    "kind" : "counter",
+    "valueType" : "integer",
+    "scope" : "iteration",
+    "description" : "Number of predictions of a surrogate model."
+  } ],
+  "propertyDefinitions" : [ {
+    "name" : "violation-1",
+    "scope" : "individual",
+    "valueType" : "real",
+    "list" : false,
+    "description" : "Degree of violation of the constraint 1 of the group 'strict': data 'x:0' < data 'x:1' (0 if satisfied)."
+  }, {
+    "name" : "violation-2",
+    "scope" : "individual",
+    "valueType" : "real",
+    "list" : false,
+    "description" : "Degree of violation of the constraint 2 of the group 'vague': data 'x:0' + data 'x:1' < data 'x:2' (0 if satisfied)."
+  }, {
+    "name" : "attempts",
+    "scope" : "relationship",
+    "valueType" : "integer",
+    "list" : false,
+    "description" : "The number of variations of a candidate that a candidate check resampled, or the number of attempts of the repair of a repaired candidate."
+  }, {
+    "name" : "attempts",
+    "scope" : "individual",
+    "valueType" : "integer",
+    "list" : false,
+    "description" : "Like the property of the relationship, for a candidate without predecessor."
+  }, {
+    "name" : "repair",
+    "scope" : "relationship",
+    "valueType" : "text",
+    "list" : false,
+    "description" : "The repair strategy that repaired the candidate after a failed candidate check."
+  }, {
+    "name" : "repair",
+    "scope" : "individual",
+    "valueType" : "text",
+    "list" : false,
+    "description" : "Like the property of the relationship, for a candidate without predecessor."
+  }, {
+    "name" : "reason",
+    "scope" : "individual",
+    "valueType" : "text",
+    "list" : false,
+    "description" : "Why the candidate this individual replaced failed a candidate check; set if the replaced candidate is not recorded."
+  }, {
+    "name" : "operators",
+    "scope" : "relationship",
+    "valueType" : "text",
+    "list" : true,
+    "description" : "The recombinations and mutations that changed the child, in their order."
+  }, {
+    "name" : "changed-features",
+    "scope" : "relationship",
+    "valueType" : "text",
+    "list" : true,
+    "description" : "The features whose genes differ from the parent whose place the child takes."
+  } ],
+  "setup" : {
+    "evoalVersion" : "${evoal.version}",
+    "seed" : "42",
+    "run" : 0
+  }
+}

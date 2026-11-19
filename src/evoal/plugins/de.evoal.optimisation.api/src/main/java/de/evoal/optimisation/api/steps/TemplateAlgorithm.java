@@ -100,6 +100,19 @@ public abstract class TemplateAlgorithm implements OptimisationAlgorithm {
     }
 
     /**
+     * @param checks The steps of {@link #newCandidateChecks(Resampler)}.
+     * @param resampler Creates a new candidate for {@code resample} at another place, e.g.,
+     *   the initialisation.
+     * @return Steps with the same checks and replacement sources and the other resampler, so
+     *   a replacing check takes its candidates from one stream at both places.
+     */
+    protected static List<Step> sharingSources(final List<Step> checks, final Resampler resampler) {
+        return checks.stream()
+                     .map(step -> (Step) ((CheckNewCandidates) step).withResampler(resampler))
+                     .toList();
+    }
+
+    /**
      * @return Whether the algorithm can redo the variation of a new candidate and passes a
      *   {@link Resampler} to {@link #newCandidateChecks(Resampler)}; {@code false} by default.
      */

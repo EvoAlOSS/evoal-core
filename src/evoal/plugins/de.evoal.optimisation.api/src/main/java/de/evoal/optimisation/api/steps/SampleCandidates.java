@@ -6,6 +6,7 @@ import java.util.stream.Stream;
 
 import de.evoal.models.core.ecore.TypedEObject;
 
+import de.evoal.optimisation.api.checks.Resampler;
 import de.evoal.optimisation.api.model.InitialCandidatesProvider;
 import de.evoal.optimisation.api.run.Candidate;
 import de.evoal.optimisation.api.run.Lineage;
@@ -14,8 +15,11 @@ import de.evoal.optimisation.api.run.Lineage;
  * Takes the next candidates from a candidate provider, e.g., random points of the search
  *   space. All executions of the step take their candidates from the same stream of the
  *   provider. The candidates have no predecessors.
+ * <p>
+ * As {@link Resampler}, the step gives the next candidate of the same stream, e.g., for the
+ *   check reaction {@code resample} of an initial candidate, which has no variation to redo.
  */
-public final class SampleCandidates implements Initialization {
+public final class SampleCandidates implements Initialization, Resampler {
     /**
      * The number of candidates per execution.
      */
@@ -55,11 +59,6 @@ public final class SampleCandidates implements Initialization {
      */
     @Override
     public void execute(final SearchState state) {
-        if(source == null) {
-            final Stream<TypedEObject> candidates = provider.create();
-            source = candidates.iterator();
-        }
-
         final List<Candidate> sampled = Stream.generate(this::next)
                                               .limit(count)
                                               .map(input -> new Candidate(input, Lineage.NONE))
@@ -68,7 +67,20 @@ public final class SampleCandidates implements Initialization {
         state.setCandidates(sampled);
     }
 
+    /**
+     * @return The next candidate of the provider, without predecessor.
+     * @throws IllegalStateException if the provider has no further candidates.
+     */
+    @Override
+    public Candidate resample(final SearchState state, final int index) {
+        return new Candidate(next(), Lineage.NONE);
+    }
+
     private TypedEObject next() {
+        if(source == null) {
+            source = provider.create().iterator();
+        }
+
         if(!source.hasNext()) {
             throw new IllegalStateException("The candidate provider has no further candidates.");
         }

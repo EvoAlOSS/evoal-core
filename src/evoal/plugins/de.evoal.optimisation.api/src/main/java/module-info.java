@@ -103,6 +103,7 @@ module de.evoal.optimisation.api {
     opens de.evoal.optimisation.main.producer to weld.core.impl;
     opens de.evoal.optimisation.main.search to weld.core.impl;
     opens de.evoal.optimisation.main.statistics to weld.core.impl;
+    opens de.evoal.optimisation.main.statistics.constraints to weld.core.impl;
     opens de.evoal.optimisation.main.statistics.individuals to weld.core.impl;
     opens de.evoal.optimisation.main.statistics.memory to weld.core.impl;
     opens de.evoal.optimisation.main.statistics.metrics to weld.core.impl;

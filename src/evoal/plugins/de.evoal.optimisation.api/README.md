@@ -1,7 +1,7 @@
 # Optimisation API: steps, run kernel, fitness pipeline and run events
 
 This module holds what all optimisation algorithms share. This README describes the
-five parts an algorithm, step, function or listener author works with:
+six parts an algorithm, step, function or listener author works with:
 
 - the **step model** (`de.evoal.optimisation.api.steps`): an algorithm is a template of
   steps after the unified meta-algorithm model (Berger, Plump, Drechsler:
@@ -10,6 +10,8 @@ five parts an algorithm, step, function or listener author works with:
   the memory model,
 - the **fitness pipeline** (`de.evoal.optimisation.api.fitness`): turns the objectives of
   a candidate into the fitness the comparator compares,
+- the **constraints** (`de.evoal.optimisation.api.constraints`): how the constraints of
+  the DDL are measured and handled,
 - **parallel evaluation** (`de.evoal.optimisation.api.evaluation`): how the candidates of
   a batch are evaluated on several threads without changing the result,
 - the **run events** (`de.evoal.optimisation.api.events`): what a run publishes to its
@@ -229,15 +231,17 @@ See [Candidate checks](#candidate-checks): state the check points the algorithm 
 
 A candidate check (`api.checks.CandidateCheck`, DL type `'candidate-check'`) tests
 candidates and reacts to the ones that fail (`'check-reaction'`): `warn` reports the
-failure, `replace` puts a new candidate in place of the failed one. `resample` and
-`repair` are declared, but no check supports them yet. The checks are configured in
-`'candidate-checks'` of every algorithm and run in their configured order.
+failure, `replace` puts a new candidate in place of the failed one, `resample` redoes the
+variation of a failed new candidate (algorithms with a `Resampler`), and `repair` changes
+the candidate with the repair strategy of the check (`CandidateCheck.repair()`). The checks
+are configured in `'candidate-checks'` of every algorithm and run in their configured
+order.
 
 Every check type defines its check point:
 
 | Check point | Step | When | Replacement |
 |---|---|---|---|
-| `NEW_CANDIDATES` | `CheckNewCandidates` | after the variation, before the evaluation; a failed candidate costs no evaluation | not evaluated; no predecessor, the property `reason` on the individual |
+| `NEW_CANDIDATES` | `CheckNewCandidates` | after the variation, before the evaluation; a failed candidate costs no evaluation. Algorithms with an initial population also check the initial candidates | not evaluated; no predecessor, the property `reason` on the individual |
 | `POPULATION` | `CheckPopulation(evaluator)` | as the last step of an iteration | evaluated by the step; `Lineage.replacement(member)` with the property `reason`, or, for a member that is new in the iteration, no predecessor and `reason` on the individual |
 
 A replaced candidate that is not recorded in the memory model has no individual, so the
@@ -249,7 +253,17 @@ or if the algorithm does not offer its check point (`checkPoints()`, none by def
 algorithm places the steps of `populationChecks(evaluator)` and `newCandidateChecks()` at
 its check points; both are empty if no check is configured, so the recorded steps do not
 change. Local search offers `POPULATION`; random search and particle swarm optimisation
-offer none.
+offer none; the evolutionary algorithm offers both and checks its initial candidates with
+`sharingSources(childChecks, sample)`: the same checks with the same replacement sources,
+and the `SampleCandidates` step of the initialisation as `Resampler` (`resample` of an
+initial candidate takes the next candidate of the `'initialisation'`).
+
+`resample` and `repair` try at most `'maximum-attempts'` times. A resampled candidate has
+the property `attempts` (number of variations); a repaired candidate keeps the lineage of
+the failed one with the properties `repair` (strategy) and `attempts` (number of repair
+attempts), or has them itself without a predecessor. If the repair fails, the fallback of
+the repair (`Repair.fallback()`: `warn`, `replace` or `resample`) reacts to the original
+candidate.
 
 Replacements come from the `'replacement-source'` of the check or from the
 `'initialisation'` of the algorithm. Each check takes them from one stream of its source
@@ -262,11 +276,98 @@ Checks in this module:
   age (`Candidate.age()`, the number of iterations it was carried over unchanged) exceeds
   `iterations`. In a local search, this is a random restart after `iterations + 1`
   iterations without an accepted neighbour.
+- `'constraint-check' { group; repair; 'repair-fallback'; }` (`NEW_CANDIDATES`; all
+  reactions): fails a candidate that violates a constraint of the group, see
+  [Constraints](#constraints).
 
 A new check type extends `AbstractCandidateCheck` (reads `reaction` and
 `'replacement-source'`), is a `@Dependent` bean named after its DL type, and declares its
 check point, its supported reactions and `test(candidate)`, which returns why the
 candidate failed.
+
+## Constraints
+
+### Declaration
+
+The constraints are declared in the `constraints` section of the DDL with
+`constraint(comparison, "group")` (`de.evoal.optimisation.constraint`). A comparison
+compares two arithmetic expressions over the search features and the objectives with
+`<`, `<=`, `>`, `>=` or `=`. The `ConstraintCompiler` brings it into the normal form
+g >= 0 (inequality) or g = 0 (equality) (`api.constraints.Constraint`) and keeps the
+linear form if g is affine in the search features (`LinearForm`, needed by the repairs).
+`'standard-deviation'(data 'x', sigma)` declares the measurement uncertainty of a feature.
+The constraints are numbered from 1 in the order of the DDL.
+
+### Measurement
+
+The `ConstraintEvaluation` measures every constraint of an evaluated candidate with the
+`'constraint-measure'` of the algorithm and stores the degrees in the
+`ViolationRecord` of its `Evaluation`:
+
+- the degree of an inequality is max(0, -g), of an equality max(0, |g| - tolerance)
+  (`'equality-tolerance'`, default 1e-4); 0 means satisfied. Strict and non-strict
+  inequalities are measured alike;
+- `'exact-measure'` measures at the values of the candidate, `'tolerance-measure' {
+  factor }` takes the smallest degree when every feature with a standard deviation sigma
+  is moved by -factor * sigma, 0 or +factor * sigma;
+- the violation of a group is the sum of the degrees of its constraints; a candidate is
+  feasible in the group if the violation is 0.
+
+The optimisation function is never called for a constraint, so the evaluation budget does
+not change. The metric `constraint-evaluations` counts every measurement. A
+`'constraint-check'` measures its group before the evaluation and keeps the degrees on the
+candidate (`Candidate.measuredViolations()`); the evaluation does not measure them again
+(`Evaluator.evaluateAll(inputs, known)`). The memory model records the degree of every
+constraint as the individual property `violation-<n>`; `'constraint-statistics'` writes per
+iteration and group the number of infeasible members and the sum of their violations.
+
+### Handling
+
+Every group is handled by the algorithm configuration; a configuration that names a group
+the DDL does not declare is rejected, a group that nothing handles is reported as a warning
+(`ConstraintGroupCheck`).
+
+| Handling | When | What happens |
+|---|---|---|
+| `'constraint-check' { group; reaction; ... }` | before the evaluation | `warn`, `replace`, `resample` or `repair` a candidate that violates the group; only groups without constraints on objectives |
+| `'constraint-penalty' { group; weight }` | fitness pipeline | adds weight times the violation to every fitness component (static penalty) |
+| `'feasibility-comparator' { group }` | comparison | feasible before infeasible, then fitness, two infeasible by violation (Deb 2000) |
+| `'epsilon-comparator' { group; epsilon }` | comparison | like the feasibility rules, but a violation up to epsilon counts as feasible (Takahama and Sakai 2006) |
+| `'nsga2-selection' { group }` | non-dominated sorting | constrained domination (Deb et al. 2002, section VI-A) |
+
+The repairs of `'constraint-check'` (`api.constraints.ConstraintRepair`) are deterministic;
+every attempt starts from the previous result, rounds integer features and moves the values
+into the bounds of the DDL:
+
+- `'saturation-repair'` (`main.constraints.SaturationRepair`): constraints linear in one
+  search feature are bounds; a violated bound sets the feature to it, for integer features
+  the nearest integer on the feasible side, one step inside a strict bound. The name
+  follows Kononova et al. (2024).
+- `'projection-repair'` (`main.constraints.ProjectionRepair`): every violated linear
+  constraint once per attempt, in DDL order, x + t * a with t = -g(x) / |a|^2, the
+  systematic projection of Agmon (1954).
+
+Examples: `ea-constraints` (EA plugin: repair and penalty), `search-with-benchmark`,
+`search-with-benchmark-and-training` and `search-with-benchmark-and-target` (generator
+plugin: saturation, replacement from training data, feasibility rules with targets).
+
+References:
+
+- S. Agmon: The relaxation method for linear inequalities. Canadian Journal of
+  Mathematics 6, 1954, pp. 382-392.
+- K. Deb: An efficient constraint handling method for genetic algorithms. Computer Methods
+  in Applied Mechanics and Engineering 186(2-4), 2000, pp. 311-338.
+- K. Deb, A. Pratap, S. Agarwal, T. Meyarivan: A fast and elitist multiobjective genetic
+  algorithm: NSGA-II. IEEE Transactions on Evolutionary Computation 6(2), 2002, section VI-A.
+- A. V. Kononova, D. Vermetten, F. Caraffini, M.-A. Mitran, D. Zaharie: The importance of
+  being constrained: dealing with infeasible solutions in Differential Evolution and
+  beyond. Evolutionary Computation, 2024, doi 10.1162/evco_a_00333.
+- J. J. Liang et al.: Problem definitions and evaluation criteria for the CEC 2006 special
+  session on constrained real-parameter optimization. Technical report, 2006 (equality
+  tolerance 1e-4).
+- T. Takahama, S. Sakai: Constrained optimization by the epsilon constrained differential
+  evolution with gradient-based mutation and feasible elites. IEEE Congress on
+  Evolutionary Computation 2006, pp. 1-8.
 
 ## The fitness pipeline
 
@@ -285,7 +386,7 @@ input ──optimisation function──▶ objectives ──FitnessPipeline─�
 
 ### Order of the steps
 
-`FitnessPipeline.apply(input, objectives)` runs:
+`FitnessPipeline.apply(input, objectives, violations)` runs:
 
 1. one component per goal of the problem, the objective value as `double` (integers up to
    2^53 are exact),
@@ -311,6 +412,7 @@ rejects, when it is built:
 | `scaling` | `ScalingStep` | `ChangesUnits` | divides listed components by a reference value |
 | `'objective-selection'` | `ObjectiveSelectionStep` | | keeps one component |
 | `'weighted-sum'` | `WeightedSumStep` | `Scalarisation` | one component `weighted-sum` |
+| `'constraint-penalty'` | `ConstraintPenaltyStep` | `ChangesUnits` | adds weight times the violation of a constraint group to every component |
 | `'prediction-interval'` | `PredictionIntervalStep` (surrogate.adaption) | `RequiresObjectiveUnits` | adapts predicted objectives by the width of their prediction interval |
 | `'gaussian-density'`, `'kernel-density'` | `GaussianDensityStep`, `KernelDensityStep` (surrogate.adaption) | `RequiresObjectiveUnits` | adapts predicted objectives by the density of the training data around the candidate |
 

@@ -129,7 +129,8 @@ module de.evoal.optimisation.core {
         /**
          * Tests on candidates, each with a reaction to a failed test. A check type
          *   defines its check point: checks on new candidates run after the variation
-         *   and before the evaluation, so a failed candidate costs no evaluation; checks
+         *   and before the evaluation, so a failed candidate costs no evaluation; they also
+         *   test the initial candidates of algorithms with an initial population; checks
          *   on the population run at the end of every iteration. An algorithm that does
          *   not offer the check point of a configured check rejects the configuration.
          */
@@ -201,8 +202,9 @@ module de.evoal.optimisation.core {
      *     'replacement-source' of the check, or from the 'initialisation' of the algorithm.
      *   'resample': the variation of the failed candidate is redone until the candidate
      *     passes the check, at most 'maximum-attempts' times; then the last candidate is
-     *     kept and a warning is reported. Only for checks of new candidates in algorithms
-     *     with a variation (the evolutionary algorithm).
+     *     kept and a warning is reported. An initial candidate has no variation; it is
+     *     resampled by the next candidate of the 'initialisation'. Only for checks of new
+     *     candidates in algorithms with a variation (the evolutionary algorithm).
      *   'repair': the candidate is repaired, at most 'maximum-attempts' times; then the
      *     fallback reaction of the check applies. Only checks that offer a repair
      *     strategy ('constraint-check').
@@ -265,8 +267,8 @@ module de.evoal.optimisation.core {
     }
 
     /**
-     * Tests the constraints of a group on every new candidate, before its evaluation, so a
-     *   failed candidate costs no evaluation. The constraints are measured with the
+     * Tests the constraints of a group on every new candidate (including the initial
+     *   candidates), before its evaluation, so a failed candidate costs no evaluation. The constraints are measured with the
      *   'constraint-measure' of the algorithm; a candidate fails if the violation of the
      *   group is greater than 0. The degrees are kept for the candidate's violation record,
      *   so the evaluation does not measure these constraints again.
@@ -641,6 +643,19 @@ module de.evoal.optimisation.core {
      *   <tt>target</tt>. All runs append to the same file.
      */
     type 'metrics-per-iteration' extends 'statistics-writer' {}
+
+    /**
+     * Writes the constraint violations of every iteration.
+     *   File: <tt>constraint-statistics.csv</tt> in the output folder.
+     *   Columns: iteration, then for every constraint group of the DDL, in the order of
+     *   the DDL, <tt>infeasible-&lt;group&gt;</tt>, the number of individuals that survive
+     *   the iteration (the population) and violate the group, and
+     *   <tt>violation-&lt;group&gt;</tt>, the sum of their violations of the group (see
+     *   'constraint-measure').
+     *
+     * A problem without constraints is rejected.
+     */
+    type 'constraint-statistics' extends 'statistics-writer' {}
 
     /**
      * Writes the memory model of every run as JSON files into the folder
