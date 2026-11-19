@@ -150,8 +150,11 @@ final class GenerationSteps {
      *   distance of every member ({@link CrowdedOrder#assign}), if a member has none: after
      *   the initialisation, and after a population check replaced a member. Otherwise the
      *   members keep the values of {@code 'nsga2-selection'}.
+     *
+     * @param constraintGroup The constraint group of the constrained domination, {@code null}
+     *   for plain Pareto dominance.
      */
-    static Acceptance sortIntoFronts() {
+    static Acceptance sortIntoFronts(final String constraintGroup) {
         return new Acceptance() {
             @Override
             public String description() {
@@ -163,7 +166,7 @@ final class GenerationSteps {
                 final List<Candidate> population = state.getPopulation();
 
                 if(!population.stream().allMatch(CrowdedOrder::isRanked)) {
-                    CrowdedOrder.assign(population);
+                    CrowdedOrder.assign(population, constraintGroup);
                 }
             }
         };

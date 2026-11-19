@@ -1,10 +1,13 @@
 package de.evoal.optimisation.ea.main.comparator;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import de.evoal.models.v202704.optimisation.execution.OptimisationValue;
+import de.evoal.optimisation.api.fitness.Fitness;
 import de.evoal.optimisation.ea.Candidates;
 
 /**
@@ -33,5 +36,17 @@ class ParetoValueTest {
     @DisplayName("the distance is the sum of the absolute differences")
     void distance() {
         Assertions.assertEquals(3.0, ((ParetoValue) value(1, 3)).distanceFrom(value(2, 1)), 1e-12);
+    }
+
+    @Test
+    @DisplayName("with violations, a feasible value is better than a dominating infeasible one")
+    void constrainedDominance() {
+        final Fitness dominated = Candidates.withTwoComponents(5, 5).fitness();
+        final Fitness dominating = Candidates.withTwoComponents(1, 1).fitness();
+        final OptimisationValue feasible = new ParetoValue(null, dominated, List.of(), 0.0);
+        final OptimisationValue infeasible = new ParetoValue(null, dominating, List.of(), 0.5);
+
+        Assertions.assertTrue(feasible.isBetter(infeasible));
+        Assertions.assertTrue(infeasible.isWorse(feasible));
     }
 }

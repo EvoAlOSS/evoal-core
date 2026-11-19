@@ -83,4 +83,36 @@ class ParetoFrontsTest {
         Assertions.assertEquals((2.0 - 0.0) / 2.0, distances[1], 1e-12);
         Assertions.assertEquals(Double.POSITIVE_INFINITY, distances[2]);
     }
+
+    @Test
+    @DisplayName("constrained domination: feasible beats infeasible, the smaller violation beats the larger")
+    void constrainedDomination() {
+        final double[] good = {1.0, 1.0};
+        final double[] bad = {2.0, 2.0};
+
+        Assertions.assertTrue(ParetoFronts.constrainedDominates(bad, 0.0, good, 0.5));
+        Assertions.assertFalse(ParetoFronts.constrainedDominates(good, 0.5, bad, 0.0));
+        Assertions.assertTrue(ParetoFronts.constrainedDominates(bad, 0.25, good, 0.5));
+        Assertions.assertFalse(ParetoFronts.constrainedDominates(good, 0.5, bad, 0.5));
+        Assertions.assertTrue(ParetoFronts.constrainedDominates(good, 0.0, bad, 0.0));
+    }
+
+    @Test
+    @DisplayName("with violations, the feasible points form the first fronts, the infeasible ones follow by violation")
+    void frontsWithViolations() {
+        final List<double[]> fitness = List.of(new double[] {1, 1}, new double[] {2, 2}, new double[] {3, 0},
+                                               new double[] {0, 0}, new double[] {0, 3});
+        final double[] violations = {0.0, 0.0, 0.0, 0.5, 0.25};
+
+        Assertions.assertEquals(List.of(List.of(0, 2), List.of(1), List.of(4), List.of(3)),
+                                ParetoFronts.fronts(fitness, violations));
+    }
+
+    @Test
+    @DisplayName("without violations, the fronts are the plain Pareto fronts")
+    void frontsWithoutViolations() {
+        final List<double[]> fitness = List.of(new double[] {1, 1}, new double[] {2, 2}, new double[] {0, 3});
+
+        Assertions.assertEquals(ParetoFronts.fronts(fitness), ParetoFronts.fronts(fitness, new double[3]));
+    }
 }

@@ -258,6 +258,18 @@ public class EvolutionaryAlgorithm extends TemplateAlgorithm {
         }
     }
 
+    /**
+     * @return The constraint group of the constrained domination of {@code 'nsga2-selection'};
+     *   {@code null} without NSGA-II or without a group.
+     */
+    private String constraintGroup() {
+        if(replacement.selection() instanceof Nsga2Selection nsga2) {
+            return nsga2.group().orElse(null);
+        }
+
+        return null;
+    }
+
     @Override
     protected Template template() {
         final Variation variation = new Variation(genotype, plan, boundaryHandling, randomService);
@@ -265,8 +277,9 @@ public class EvolutionaryAlgorithm extends TemplateAlgorithm {
         final List<Step> initialisationSteps = new ArrayList<>(List.of(new SampleCandidates(initialisation, size),
                                                                        new EvaluateCandidates(evaluator),
                                                                        new ReplacePopulation()));
+        final String constraintGroup = constraintGroup();
         if(crowded) {
-            initialisationSteps.add(GenerationSteps.sortIntoFronts());
+            initialisationSteps.add(GenerationSteps.sortIntoFronts(constraintGroup));
         }
 
         final List<Step> generation = new ArrayList<>();
@@ -282,7 +295,7 @@ public class EvolutionaryAlgorithm extends TemplateAlgorithm {
         final List<Step> checks = populationChecks(evaluator);
         generation.addAll(checks);
         if(crowded && !checks.isEmpty()) {
-            generation.add(GenerationSteps.sortIntoFronts());
+            generation.add(GenerationSteps.sortIntoFronts(constraintGroup));
         }
 
         if(!crowded) {
@@ -293,9 +306,12 @@ public class EvolutionaryAlgorithm extends TemplateAlgorithm {
         return new Template(initialisationSteps, generation) {
             @Override
             protected List<List<Integer>> ranks(final List<Candidate> members) {
-                return ParetoFronts.fronts(members.stream()
-                                                  .map(member -> member.fitness().values())
-                                                  .toList());
+                final List<double[]> fitness = members.stream()
+                                                      .map(member -> member.fitness().values())
+                                                      .toList();
+                final double[] violations = CrowdedOrder.violationsOf(members, constraintGroup);
+
+                return ParetoFronts.fronts(fitness, violations);
             }
         };
     }

@@ -48,6 +48,7 @@ module de.evoal.optimisation.api {
     exports de.evoal.optimisation.api.board;
     exports de.evoal.optimisation.api.cdi;
     exports de.evoal.optimisation.api.checks;
+    exports de.evoal.optimisation.api.constraints;
     exports de.evoal.optimisation.api.evaluation;
     exports de.evoal.optimisation.api.events;
     exports de.evoal.optimisation.api.execution;
@@ -71,6 +72,7 @@ module de.evoal.optimisation.api {
     opens de.evoal.optimisation.api.board to weld.core.impl;
     opens de.evoal.optimisation.api.cdi to weld.core.impl;
     opens de.evoal.optimisation.api.checks to weld.core.impl;
+    opens de.evoal.optimisation.api.constraints to weld.core.impl;
     opens de.evoal.optimisation.api.evaluation to weld.core.impl;
     opens de.evoal.optimisation.api.events to weld.core.impl;
     opens de.evoal.optimisation.api.execution to weld.core.impl;
@@ -89,6 +91,7 @@ module de.evoal.optimisation.api {
 
     opens de.evoal.optimisation.main.checks to weld.core.impl;
     opens de.evoal.optimisation.main.comparator to weld.core.impl;
+    opens de.evoal.optimisation.main.constraints to weld.core.impl;
 //    opens de.evoal.optimisation.main.constraints.constraint to weld.core.impl;
 //    opens de.evoal.optimisation.main.constraints.constraint.strategies.calculations to weld.core.impl;
 //    opens de.evoal.optimisation.main.constraints.constraint.strategies.constraint to weld.core.impl;

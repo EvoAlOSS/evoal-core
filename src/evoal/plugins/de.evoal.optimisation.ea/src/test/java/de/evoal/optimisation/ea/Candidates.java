@@ -2,6 +2,7 @@ package de.evoal.optimisation.ea;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -16,6 +17,10 @@ import de.evoal.models.core.ecore.Space;
 import de.evoal.models.core.ecore.TypedEObject;
 import de.evoal.models.v202704.optimisation.execution.OptimisationValue;
 
+import de.evoal.optimisation.api.constraints.Constraint;
+import de.evoal.optimisation.api.constraints.ConstraintKind;
+import de.evoal.optimisation.api.constraints.Constraints;
+import de.evoal.optimisation.api.constraints.ViolationRecord;
 import de.evoal.optimisation.api.fitness.Evaluation;
 import de.evoal.optimisation.api.fitness.Fitness;
 import de.evoal.optimisation.api.fitness.FitnessComponent;
@@ -23,6 +28,7 @@ import de.evoal.optimisation.api.fitness.FitnessLayout;
 import de.evoal.optimisation.api.run.Candidate;
 import de.evoal.optimisation.api.run.Lineage;
 import de.evoal.optimisation.ea.main.comparator.CrowdedComparator;
+import de.evoal.optimisation.ea.main.comparator.ParetoValue;
 
 /**
  * Candidates and search spaces for the tests.
@@ -55,6 +61,32 @@ public final class Candidates {
         final Fitness fitness = new Fitness(TWO_COMPONENTS, new double[] {f1, f2});
         final TypedEObject objectives = Mockito.mock(TypedEObject.class);
         final Evaluation evaluation = new Evaluation(objectives, fitness, new CrowdedComparator().toValue(objectives, fitness));
+
+        return Candidate.evaluated(Mockito.mock(TypedEObject.class), evaluation, Lineage.NONE);
+    }
+
+    /**
+     * The name of the constraint group of {@link #withTwoComponents(double, double, double)}.
+     */
+    public static final String GROUP = "g";
+
+    /**
+     * The single constraint of the group {@link #GROUP}.
+     */
+    private static final Constraints CONSTRAINTS = new Constraints(List.of(
+            new Constraint(1, GROUP, "c", ConstraintKind.INEQUALITY, List.of(), List.of(), Map.of(), values -> 0.0,
+                           null)));
+
+    /**
+     * @return An evaluated candidate like {@link #withTwoComponents(double, double)} whose
+     *   violation of the constraint group {@link #GROUP} is {@code violation}.
+     */
+    public static Candidate withTwoComponents(final double f1, final double f2, final double violation) {
+        final Fitness fitness = new Fitness(TWO_COMPONENTS, new double[] {f1, f2});
+        final TypedEObject objectives = Mockito.mock(TypedEObject.class);
+        final ViolationRecord violations = new ViolationRecord(CONSTRAINTS, new double[] {violation});
+        final ParetoValue value = new CrowdedComparator().toValue(objectives, fitness);
+        final Evaluation evaluation = new Evaluation(objectives, fitness, value, violations);
 
         return Candidate.evaluated(Mockito.mock(TypedEObject.class), evaluation, Lineage.NONE);
     }

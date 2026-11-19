@@ -15,12 +15,14 @@ import de.evoal.models.v202704.optimisation.model.OptimisationModule;
 
 import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
 import de.evoal.optimisation.api.producer.SpaceProducer;
+import de.evoal.optimisation.main.constraints.ConstraintGroupCheck;
 import de.evoal.optimisation.main.producer.OptimisationModuleLoader;
 
 /**
  * Prepares the optimisation configuration of an OL file for the search applications:
  *   it loads the file, sets up the search and optimisation space, transforms the OL
- *   model into the runtime model and binds the runtime model to
+ *   model into the runtime model, checks its constraint groups
+ *   ({@link ConstraintGroupCheck}) and binds the runtime model to
  *   {@link OptimisationBlackboardEntries#OPTIMISATION_CONFIGURATION}.
  */
 @ApplicationScoped
@@ -28,6 +30,12 @@ import de.evoal.optimisation.main.producer.OptimisationModuleLoader;
 public class OptimisationConfigurationSetup {
     @Inject
     private Blackboard board;
+
+    /**
+     * Checks the constraint groups of the configuration.
+     */
+    @Inject
+    private ConstraintGroupCheck constraintGroups;
 
     @Inject
     private EClassProvider eClassProvider;
@@ -55,6 +63,7 @@ public class OptimisationConfigurationSetup {
                                           .merge(spaceProducer.searchSpace());
 
         final OptimisationModule runtimeModel = transformer.transform(configurationModel, merged);
+        constraintGroups.check(runtimeModel);
         board.bind(OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION, runtimeModel);
 
         return runtimeModel;

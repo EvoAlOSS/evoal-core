@@ -10,9 +10,42 @@ import java.util.List;
  *   A. Pratap, S. Agarwal, T. Meyarivan: A fast and elitist multiobjective genetic algorithm:
  *   NSGA-II. IEEE Transactions on Evolutionary Computation 6(2), 2002, pp. 182-197). All
  *   fitness components are minimised (canonical fitness).
+ * <p>
+ * With constraints, the sorting uses constrained domination (ibid., section VI-A,
+ *   Definition 1): a feasible solution (violation 0) constrained-dominates an infeasible
+ *   one; of two infeasible solutions, the one with the smaller overall violation
+ *   constrained-dominates the other; two feasible solutions are compared by Pareto
+ *   dominance.
  */
 public final class ParetoFronts {
     private ParetoFronts() {
+    }
+
+    /**
+     * Constrained domination (Deb et al. 2002, section VI-A, Definition 1).
+     *
+     * @param first The fitness of the first solution.
+     * @param firstViolation The overall constraint violation of the first solution, 0 if it is
+     *   feasible.
+     * @param second The fitness of the second solution.
+     * @param secondViolation The overall constraint violation of the second solution.
+     * @return Whether the first solution constrained-dominates the second.
+     * @throws IllegalArgumentException if the fitness vectors differ in length.
+     */
+    public static boolean constrainedDominates(final double[] first, final double firstViolation,
+                                               final double[] second, final double secondViolation) {
+        final boolean firstFeasible = firstViolation == 0.0;
+        final boolean secondFeasible = secondViolation == 0.0;
+
+        if(firstFeasible && secondFeasible) {
+            return dominates(first, second);
+        }
+
+        if(firstFeasible != secondFeasible) {
+            return firstFeasible;
+        }
+
+        return firstViolation < secondViolation;
     }
 
     /**
@@ -49,6 +82,30 @@ public final class ParetoFronts {
      *   are ascending.
      */
     public static List<List<Integer>> fronts(final List<double[]> fitness) {
+        final double[] noViolations = new double[fitness.size()];
+
+        return fronts(fitness, noViolations);
+    }
+
+    /**
+     * Fast non-dominated sorting with constrained domination: like {@link #fronts(List)}, but
+     *   a solution dominates another if it constrained-dominates it
+     *   ({@link #constrainedDominates}). The infeasible solutions therefore follow all feasible
+     *   ones, ordered by their violation.
+     *
+     * @param fitness The fitness vectors.
+     * @param violations The overall constraint violation of every solution, 0 if it is feasible.
+     * @return The indices of every front, the first front first; within a front, the indices
+     *   are ascending.
+     * @throws IllegalArgumentException if the number of violations differs from the number of
+     *   fitness vectors.
+     */
+    public static List<List<Integer>> fronts(final List<double[]> fitness, final double[] violations) {
+        if(violations.length != fitness.size()) {
+            throw new IllegalArgumentException(violations.length + " violations for " + fitness.size()
+                                               + " fitness vectors.");
+        }
+
         final int n = fitness.size();
         final List<List<Integer>> dominated = new ArrayList<>(n);
         final int[] dominatedBy = new int[n];
@@ -59,10 +116,10 @@ public final class ParetoFronts {
 
         for(int p = 0; p < n; ++p) {
             for(int q = p + 1; q < n; ++q) {
-                if(dominates(fitness.get(p), fitness.get(q))) {
+                if(constrainedDominates(fitness.get(p), violations[p], fitness.get(q), violations[q])) {
                     dominated.get(p).add(q);
                     ++dominatedBy[q];
-                } else if(dominates(fitness.get(q), fitness.get(p))) {
+                } else if(constrainedDominates(fitness.get(q), violations[q], fitness.get(p), violations[p])) {
                     dominated.get(q).add(p);
                     ++dominatedBy[p];
                 }

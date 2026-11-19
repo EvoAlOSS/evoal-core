@@ -1,5 +1,6 @@
 package de.evoal.optimisation.api.execution;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -272,6 +273,17 @@ public class ExecutionRecorder {
     }
 
     /**
+     * @return The contributors, ordered by the name of their class. CDI does not define the
+     *   order of the beans, so the order of the metric definitions and values in the memory
+     *   model would otherwise change from run to run.
+     */
+    private List<MetricContributor> orderedContributors() {
+        return contributors.stream()
+                           .sorted(Comparator.comparing(contributor -> contributor.getClass().getName()))
+                           .toList();
+    }
+
+    /**
      * Records the value of an execution metric, e.g., a limit.
      *
      * @param name The name of the metric.
@@ -301,7 +313,7 @@ public class ExecutionRecorder {
     public void recordMetrics(final Iteration iteration) {
         requirePhase(Phase.EXECUTION, "record the metrics of iteration " + iteration.getNumber());
 
-        contributors.forEach(contributor -> contributor.contributeTo(iteration));
+        orderedContributors().forEach(contributor -> contributor.contributeTo(iteration));
 
         iteration.getMetrics()
                  .keySet()
@@ -350,7 +362,7 @@ public class ExecutionRecorder {
         execution = MemoryFactory.eINSTANCE.createExecution();
         phase = Phase.DEFINITION;
 
-        contributors.forEach(contributor -> contributor.startRun(this));
+        orderedContributors().forEach(contributor -> contributor.startRun(this));
     }
 
     /**

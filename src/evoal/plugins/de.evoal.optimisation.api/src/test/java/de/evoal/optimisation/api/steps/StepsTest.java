@@ -77,7 +77,7 @@ public class StepsTest {
             final Candidate done = Candidate.evaluated(input(), evaluation, Lineage.NONE);
             state.setCandidates(List.of(new Candidate(first, Lineage.NONE), done, new Candidate(second, Lineage.NONE)));
             final OptimisationValue value = new TestValue(2.0);
-            Mockito.when(comparator.toValue(Mockito.any(), Mockito.any())).thenReturn(value);
+            Mockito.when(comparator.toValue(Mockito.any(), Mockito.any(), Mockito.any())).thenReturn(value);
 
             // when
             step.execute(state);
@@ -97,7 +97,8 @@ public class StepsTest {
             // given
             final List<Candidate> candidates = List.of(new Candidate(input(), Lineage.NONE), new Candidate(input(), Lineage.NONE));
             state.setCandidates(candidates);
-            Mockito.when(comparator.toValue(Mockito.any(), Mockito.any())).thenReturn(new TestValue(2.0));
+            Mockito.when(comparator.toValue(Mockito.any(), Mockito.any(), Mockito.any()))
+                   .thenReturn(new TestValue(2.0));
             Mockito.when(evaluationService.remainingEvaluations()).thenReturn(java.util.OptionalLong.of(1));
             Mockito.when(evaluationService.evaluateAll(List.of(candidates.get(1).input())))
                    .thenThrow(new EvaluationBudgetExhaustedException(EvaluationSource.REAL, 1));
@@ -146,7 +147,8 @@ public class StepsTest {
             Mockito.when(evaluationService.evaluate(Mockito.any())).thenAnswer(invocation -> input());
 
             final Iterator<Double> results = values.iterator();
-            Mockito.when(comparator.toValue(Mockito.any(), Mockito.any())).thenAnswer(invocation -> new TestValue(results.next()));
+            Mockito.when(comparator.toValue(Mockito.any(), Mockito.any(), Mockito.any()))
+                   .thenAnswer(invocation -> new TestValue(results.next()));
 
             state.setOffered(Stream.generate(() -> {
                                        created += 1;

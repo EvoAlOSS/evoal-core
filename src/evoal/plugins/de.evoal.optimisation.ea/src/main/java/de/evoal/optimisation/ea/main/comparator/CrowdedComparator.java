@@ -16,6 +16,7 @@ import de.evoal.core.api.utils.AttributeHelper;
 import de.evoal.models.core.ecore.TypedEObject;
 import de.evoal.models.core.exceptions.InitializationException;
 import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
+import de.evoal.optimisation.api.constraints.ViolationRecord;
 import de.evoal.optimisation.api.fitness.Fitness;
 import de.evoal.optimisation.api.fitness.FitnessComponent;
 import de.evoal.optimisation.api.fitness.Goal;
@@ -29,7 +30,9 @@ import de.evoal.optimisation.api.model.OptimisationValueComparator;
  *   crowding distance that {@code 'nsga2-selection'} computes.
  * <p>
  * Only the evolutionary algorithm can use it; its configuration checks that
- *   {@code 'nsga2-selection'} is configured as well.
+ *   {@code 'nsga2-selection'} is configured as well. If the selection has a constraint
+ *   {@code group}, the values compare by constrained domination on the violation of the group,
+ *   as the selection does.
  */
 @Dependent
 @Named(CrowdedComparator.TYPE)
@@ -50,8 +53,26 @@ public class CrowdedComparator implements OptimisationValueComparator {
     @Inject
     private Blackboard board;
 
+    /**
+     * The constraint group of {@code 'nsga2-selection'}; {@code null} if there is none.
+     */
+    private String group;
+
     @Inject
     private AttributeHelper helper;
+
+    /**
+     * @return The constraint group of the selection of the replacement, if it is set;
+     *   otherwise {@code null}.
+     */
+    private String groupOfSelection(final EObject algorithm) {
+        final EObject replacement = helper.lookup(algorithm, "replacement");
+        final EObject selection = helper.lookup(replacement, "selection");
+        final EStructuralFeature groupFeature = selection.eClass().getEStructuralFeature("group");
+        final boolean hasGroup = groupFeature != null && selection.eIsSet(groupFeature);
+
+        return hasGroup ? helper.lookup(selection, "group") : null;
+    }
 
     /**
      * @throws InitializationException if the comparator is not configured in an evolutionary
@@ -68,6 +89,8 @@ public class CrowdedComparator implements OptimisationValueComparator {
                                               + "'nsga2-selection'; only 'evolutionary-algorithm' can use it, not '" + type + "'.");
         }
 
+        group = groupOfSelection(algorithm);
+
         return this;
     }
 
@@ -82,5 +105,21 @@ public class CrowdedComparator implements OptimisationValueComparator {
                                                                    .toList();
 
         return new ParetoValue(objectives, fitness, statisticsFeatures);
+    }
+
+    /**
+     * @throws IllegalArgumentException if the problem has no constraint in the group of the
+     *   selection.
+     */
+    @Override
+    public ParetoValue toValue(final TypedEObject objectives, final Fitness fitness, final ViolationRecord violations) {
+        final ParetoValue value = toValue(objectives, fitness);
+        if(group == null) {
+            return value;
+        }
+
+        final double violation = violations.violation(group);
+
+        return new ParetoValue(objectives, fitness, value.statisticsFeatures(), violation);
     }
 }

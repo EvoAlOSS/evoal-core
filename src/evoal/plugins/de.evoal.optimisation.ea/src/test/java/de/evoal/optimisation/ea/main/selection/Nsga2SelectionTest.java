@@ -66,4 +66,19 @@ class Nsga2SelectionTest {
         Assertions.assertTrue(new EliteSelection(1, new Nsga2Selection()).sortsIntoFronts());
         Assertions.assertFalse(new TournamentSelection(2).sortsIntoFronts());
     }
+
+    @Test
+    @DisplayName("with a constraint group, a dominated feasible candidate comes before a dominating infeasible one")
+    void constrainedDomination() {
+        final Candidate dominatingInfeasible = Candidates.withTwoComponents(0, 0, 1.0);
+        final Candidate lessViolating = Candidates.withTwoComponents(1, 1, 0.5);
+        final Candidate feasible = Candidates.withTwoComponents(5, 5, 0.0);
+        final List<Candidate> candidates = List.of(dominatingInfeasible, lessViolating, feasible);
+
+        final Nsga2Selection selection = new Nsga2Selection(Candidates.GROUP);
+        final List<Candidate> selected = selection.select(candidates, 2, CandidateOrder.BY_VALUE, random);
+
+        Assertions.assertEquals(List.of(feasible, lessViolating), selected);
+        Assertions.assertEquals(2L, dominatingInfeasible.properties().get(CrowdedOrder.FRONT));
+    }
 }

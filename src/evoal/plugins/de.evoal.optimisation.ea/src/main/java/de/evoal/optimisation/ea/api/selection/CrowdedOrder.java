@@ -57,10 +57,26 @@ public final class CrowdedOrder implements CandidateOrder {
      * @return The indices of the candidates in every front, the first front first.
      */
     public static List<List<Integer>> assign(final List<Candidate> candidates) {
+        return assign(candidates, null);
+    }
+
+    /**
+     * Sorts the candidates into non-dominated fronts on their canonical fitness and sets the
+     *   properties {@value #FRONT} and {@value #CROWDING_DISTANCE} of every candidate. With a
+     *   constraint group, the sorting uses constrained domination on the violation of the group
+     *   ({@link ParetoFronts#fronts(List, double[])}).
+     *
+     * @param candidates The evaluated candidates.
+     * @param group The constraint group, {@code null} for plain Pareto dominance.
+     * @return The indices of the candidates in every front, the first front first.
+     * @throws IllegalArgumentException if the problem has no constraint in the group.
+     */
+    public static List<List<Integer>> assign(final List<Candidate> candidates, final String group) {
         final List<double[]> fitness = candidates.stream()
                                                  .map(candidate -> candidate.fitness().values())
                                                  .toList();
-        final List<List<Integer>> fronts = ParetoFronts.fronts(fitness);
+        final double[] violations = violationsOf(candidates, group);
+        final List<List<Integer>> fronts = ParetoFronts.fronts(fitness, violations);
 
         for(int f = 0; f < fronts.size(); ++f) {
             final List<Integer> front = fronts.get(f);
@@ -96,6 +112,22 @@ public final class CrowdedOrder implements CandidateOrder {
         }
 
         return Optional.empty();
+    }
+
+    /**
+     * @param candidates The evaluated candidates.
+     * @param group The constraint group, {@code null} if there is none.
+     * @return The violation of the group of every candidate; all 0 without a group.
+     * @throws IllegalArgumentException if the problem has no constraint in the group.
+     */
+    public static double[] violationsOf(final List<Candidate> candidates, final String group) {
+        if(group == null) {
+            return new double[candidates.size()];
+        }
+
+        return candidates.stream()
+                         .mapToDouble(candidate -> candidate.evaluation().violations().violation(group))
+                         .toArray();
     }
 
     private record Ranked(int front, double distance) {

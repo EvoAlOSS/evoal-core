@@ -3,572 +3,595 @@ import "definitions" from 'de.evoal.core.base';
 import "definitions" from de.evoal.optimisation.core;
 
 module de.evoal.optimisation.ea.optimisation {
-	/**
-	 * The representations of the genes of a chromosome.
-	 *   'double':  one real gene per real feature.
-	 *   'integer': one integer gene per integer feature.
-	 *   'bit':     bits; a boolean feature is one bit, a real or integer feature
-	 *              'precision' bits in standard binary code.
-	 *   'gray':    like 'bit', but real and integer features in Gray code.
-	 */
-	nominal enum representation ( 'double', 'integer', 'bit', 'gray' );
+    /**
+     * The representations of the genes of a chromosome.
+     *   'double':  one real gene per real feature.
+     *   'integer': one integer gene per integer feature.
+     *   'bit':     bits; a boolean feature is one bit, a real or integer feature
+     *              'precision' bits in standard binary code.
+     *   'gray':    like 'bit', but real and integer features in Gray code.
+     */
+    nominal enum representation ( 'double', 'integer', 'bit', 'gray' );
 
-	/**
-	 * The scales of measurement of the DDL, from the weakest to the strongest:
-	 *   'nominal' < 'ordinal' < 'cardinal' < 'quotient'.
-	 */
-	nominal enum 'measurement-scale' ( 'nominal', 'ordinal', 'cardinal', 'quotient' );
+    /**
+     * The scales of measurement of the DDL, from the weakest to the strongest:
+     *   'nominal' < 'ordinal' < 'cardinal' < 'quotient'.
+     */
+    nominal enum 'measurement-scale' ( 'nominal', 'ordinal', 'cardinal', 'quotient' );
 
-	/**
-	 * What happens to a gene value outside the boundaries of its feature after a
-	 *   recombination or mutation.
-	 *   wrap:   the value enters the range from the other side (periodic boundaries).
-	 *   bounce: the value is reflected at the boundary, as often as needed.
-	 *   stick:  the value is set to the nearest boundary.
-	 */
-	nominal enum 'boundary-handling' ( wrap, bounce, stick );
+    /**
+     * What happens to a gene value outside the boundaries of its feature after a
+     *   recombination or mutation.
+     *   wrap:   the value enters the range from the other side (periodic boundaries).
+     *   bounce: the value is reflected at the boundary, as often as needed.
+     *   stick:  the value is set to the nearest boundary.
+     */
+    nominal enum 'boundary-handling' ( wrap, bounce, stick );
 
-	/**
-	 * States to which chromosomes a recombination or mutation applies: the
-	 *   representations it supports and the weakest scale of measurement the features
-	 *   of the chromosome may have. A feature without a declared scale is accepted. An
-	 *   operator of the algorithm skips the chromosomes it does not apply to; the skips
-	 *   are reported when the algorithm starts.
-	 */
-	type Applicability extends Constraint {
-		/**
-		 * The supported representations.
-		 */
-		@MinimumNumberOfElements { bound := 1; }
-		representations : array enum representation;
+    /**
+     * States to which chromosomes a recombination or mutation applies: the
+     *   representations it supports and the weakest scale of measurement the features
+     *   of the chromosome may have. A feature without a declared scale is accepted. An
+     *   operator of the algorithm skips the chromosomes it does not apply to; the skips
+     *   are reported when the algorithm starts.
+     */
+    type Applicability extends Constraint {
+        /**
+         * The supported representations.
+         */
+        @MinimumNumberOfElements { bound := 1; }
+        representations : array enum representation;
 
-		/**
-		 * The weakest scale of measurement of the features.
-		 */
-		'minimum-scale' : enum 'measurement-scale' := 'measurement-scale.nominal';
-	}
+        /**
+         * The weakest scale of measurement of the features.
+         */
+        'minimum-scale' : enum 'measurement-scale' := 'measurement-scale.nominal';
+    }
 
-	/**
-	 * An evolutionary algorithm (EA) on tabular search spaces. Every generation:
-	 *
-	 * <ol>
-	 *   <li>the 'parent-selection' selects 2 * ceil(n / 2) parents of the population
-	 *     ('number-of-offspring' n); consecutive parents form a pair,</li>
-	 *   <li>the recombinations recombine every pair into two children; a pair that is not
-	 *     recombined passes on two copies,</li>
-	 *   <li>the mutations mutate the first n children,</li>
-	 *   <li>the 'candidate-checks' of new candidates test the children,</li>
-	 *   <li>the children are evaluated; unchanged copies keep the evaluation of their
-	 *     parent,</li>
-	 *   <li>the 'replacement' forms the next population of 'size-of-population'
-	 *     candidates,</li>
-	 *   <li>the 'candidate-checks' of the population test it.</li>
-	 * </ol>
-	 *
-	 * Every search variable that is not boolean needs a lower and an upper boundary.
-	 */
-	type 'evolutionary-algorithm' extends algorithm {
-		/**
-		 * The number of candidates in the population (N).
-		 */
-		@LowerBoundary { boundary := 1; }
-		'size-of-population' : int;
+    /**
+     * An evolutionary algorithm (EA) on tabular search spaces. Every generation:
+     *
+     * <ol>
+     *   <li>the 'parent-selection' selects 2 * ceil(n / 2) parents of the population
+     *     ('number-of-offspring' n); consecutive parents form a pair,</li>
+     *   <li>the recombinations recombine every pair into two children; a pair that is not
+     *     recombined passes on two copies,</li>
+     *   <li>the mutations mutate the first n children,</li>
+     *   <li>the 'candidate-checks' of new candidates test the children,</li>
+     *   <li>the children are evaluated; unchanged copies keep the evaluation of their
+     *     parent,</li>
+     *   <li>the 'replacement' forms the next population of 'size-of-population'
+     *     candidates,</li>
+     *   <li>the 'candidate-checks' of the population test it.</li>
+     * </ol>
+     *
+     * Every search variable that is not boolean needs a lower and an upper boundary.
+     */
+    type 'evolutionary-algorithm' extends algorithm {
+        /**
+         * The number of candidates in the population (N).
+         */
+        @LowerBoundary { boundary := 1; }
+        'size-of-population' : int;
 
-		/**
-		 * The number of children per generation (lambda).
-		 */
-		@LowerBoundary { boundary := 1; }
-		'number-of-offspring' : int;
+        /**
+         * The number of children per generation (lambda).
+         */
+        @LowerBoundary { boundary := 1; }
+        'number-of-offspring' : int;
 
-		/**
-		 * How the features are mapped to chromosomes. If it is not set, every
-		 *   representation gets one chromosome: real features a 'double-chromosome',
-		 *   integer features an 'integer-chromosome', and boolean features a
-		 *   'bit-chromosome'.
-		 */
-		genotype : optional instance genotype;
+        /**
+         * How the features are mapped to chromosomes. If it is not set, every
+         *   representation gets one chromosome: real features a 'double-chromosome',
+         *   integer features an 'integer-chromosome', and boolean features a
+         *   'bit-chromosome'.
+         */
+        genotype : optional instance genotype;
 
-		/**
-		 * Selects the parents from the population.
-		 */
-		'parent-selection' : instance selection;
+        /**
+         * Selects the parents from the population.
+         */
+        'parent-selection' : instance selection;
 
-		/**
-		 * The recombinations of every chromosome that has no recombinations of its own,
-		 *   in their order. They skip chromosomes they do not apply to.
-		 */
-		recombination : array instance recombination := [];
+        /**
+         * The recombinations of every chromosome that has no recombinations of its own,
+         *   in their order. They skip chromosomes they do not apply to.
+         */
+        recombination : array instance recombination := [];
 
-		/**
-		 * The mutations of every chromosome that has no mutations of its own, in their
-		 *   order. They skip chromosomes they do not apply to.
-		 */
-		mutation : array instance mutation := [];
+        /**
+         * The mutations of every chromosome that has no mutations of its own, in their
+         *   order. They skip chromosomes they do not apply to.
+         */
+        mutation : array instance mutation := [];
 
-		/**
-		 * Forms the next population from the parents and the children.
-		 */
-		replacement : instance replacement;
+        /**
+         * Forms the next population from the parents and the children.
+         */
+        replacement : instance replacement;
 
-		/**
-		 * What happens to gene values outside the boundaries of their feature.
-		 */
-		'boundary-handling' : enum 'boundary-handling' := 'boundary-handling.stick';
-	}
+        /**
+         * What happens to gene values outside the boundaries of their feature.
+         */
+        'boundary-handling' : enum 'boundary-handling' := 'boundary-handling.stick';
+    }
 
-	/**
-	 * Maps the features to chromosomes. Every search variable belongs to exactly one
-	 *   chromosome.
-	 */
-	type genotype {
-		@MinimumNumberOfElements { bound := 1; }
-		chromosomes : array instance chromosome;
-	}
+    /**
+     * Maps the features to chromosomes. Every search variable belongs to exactly one
+     *   chromosome.
+     */
+    type genotype {
+        @MinimumNumberOfElements { bound := 1; }
+        chromosomes : array instance chromosome;
+    }
 
-	/**
-	 * Abstract base type of the chromosomes. If a chromosome has no operators of its own
-	 *   and none of the operators of the algorithm applies to it, it gets the default
-	 *   operators of its representation.
-	 */
-	abstract type chromosome {
-		/**
-		 * The features of the chromosome, in the order of its genes.
-		 */
-		@MinimumNumberOfElements { bound := 1; }
-		features : array data;
+    /**
+     * Abstract base type of the chromosomes. If a chromosome has no operators of its own
+     *   and none of the operators of the algorithm applies to it, it gets the default
+     *   operators of its representation.
+     */
+    abstract type chromosome {
+        /**
+         * The features of the chromosome, in the order of its genes.
+         */
+        @MinimumNumberOfElements { bound := 1; }
+        features : array data;
 
-		/**
-		 * The recombinations of the chromosome; replace the recombinations of the
-		 *   algorithm for this chromosome.
-		 */
-		recombination : array instance recombination := [];
+        /**
+         * The recombinations of the chromosome; replace the recombinations of the
+         *   algorithm for this chromosome.
+         */
+        recombination : array instance recombination := [];
 
-		/**
-		 * The mutations of the chromosome; replace the mutations of the algorithm for
-		 *   this chromosome.
-		 */
-		mutation : array instance mutation := [];
-	}
+        /**
+         * The mutations of the chromosome; replace the mutations of the algorithm for
+         *   this chromosome.
+         */
+        mutation : array instance mutation := [];
+    }
 
-	/**
-	 * Real features, one gene each. Default operators: 'sbx-crossover' with probability
-	 *   0.9 and 'polynomial-mutation'.
-	 */
-	type 'double-chromosome' extends chromosome {}
+    /**
+     * Real features, one gene each. Default operators: 'sbx-crossover' with probability
+     *   0.9 and 'polynomial-mutation'.
+     */
+    type 'double-chromosome' extends chromosome {}
 
-	/**
-	 * Integer features, one gene each. Default operators: 'uniform-crossover' and
-	 *   'random-reset-mutation'.
-	 */
-	type 'integer-chromosome' extends chromosome {}
+    /**
+     * Integer features, one gene each. Default operators: 'uniform-crossover' and
+     *   'random-reset-mutation'.
+     */
+    type 'integer-chromosome' extends chromosome {}
 
-	/**
-	 * Features as bits in standard binary code: a boolean feature is one bit, a real or
-	 *   integer feature 'precision' bits. The bits k of a feature with the boundaries l
-	 *   and u stand for l + k * (u - l) / (2^precision - 1); integers are rounded, and
-	 *   every integer of the range must be reachable. Default operators:
-	 *   'single-point-crossover' and 'bit-flip-mutation'.
-	 */
-	type 'bit-chromosome' extends chromosome {
-		/**
-		 * The number of bits of a real or integer feature.
-		 */
-		@LowerBoundary { boundary := 1; }
-		@UpperBoundary { boundary := 52; }
-		precision : int := 16;
-	}
+    /**
+     * Features as bits in standard binary code: a boolean feature is one bit, a real or
+     *   integer feature 'precision' bits. The bits k of a feature with the boundaries l
+     *   and u stand for l + k * (u - l) / (2^precision - 1); integers are rounded, and
+     *   every integer of the range must be reachable. Default operators:
+     *   'single-point-crossover' and 'bit-flip-mutation'.
+     */
+    type 'bit-chromosome' extends chromosome {
+        /**
+         * The number of bits of a real or integer feature.
+         */
+        @LowerBoundary { boundary := 1; }
+        @UpperBoundary { boundary := 52; }
+        precision : int := 16;
+    }
 
-	/**
-	 * Like 'bit-chromosome', but real and integer features are in Gray code, so
-	 *   neighbouring values differ in one bit (reflected binary code, Gray 1953).
-	 */
-	type 'gray-chromosome' extends chromosome {
-		/**
-		 * The number of bits of a real or integer feature.
-		 */
-		@LowerBoundary { boundary := 1; }
-		@UpperBoundary { boundary := 52; }
-		precision : int := 16;
-	}
+    /**
+     * Like 'bit-chromosome', but real and integer features are in Gray code, so
+     *   neighbouring values differ in one bit (reflected binary code, Gray 1953).
+     */
+    type 'gray-chromosome' extends chromosome {
+        /**
+         * The number of bits of a real or integer feature.
+         */
+        @LowerBoundary { boundary := 1; }
+        @UpperBoundary { boundary := 52; }
+        precision : int := 16;
+    }
 
-	/**
-	 * Abstract base type of the recombinations. A recombination is applied to a pair of
-	 *   parents with 'probability' (one draw per pair) and then changes every chromosome
-	 *   it applies to. It creates two children.
-	 */
-	abstract type recombination extends configuration {
-		/**
-		 * The probability that the recombination is applied to a pair.
-		 */
-		@LowerBoundary { boundary := 0.0; }
-		@UpperBoundary { boundary := 1.0; }
-		probability : real := 1.0;
-	}
+    /**
+     * Abstract base type of the recombinations. A recombination is applied to a pair of
+     *   parents with 'probability' (one draw per pair) and then changes every chromosome
+     *   it applies to. It creates two children.
+     */
+    abstract type recombination extends configuration {
+        /**
+         * The probability that the recombination is applied to a pair.
+         */
+        @LowerBoundary { boundary := 0.0; }
+        @UpperBoundary { boundary := 1.0; }
+        probability : real := 1.0;
+    }
 
-	/**
-	 * Abstract base type of the mutations. A mutation is applied to a child with
-	 *   'probability' (one draw per child) and then changes every gene of the chromosomes
-	 *   it applies to with 'gene-probability' (one draw per gene).
-	 */
-	abstract type mutation extends configuration {
-		/**
-		 * The probability that the mutation is applied to a child.
-		 */
-		@LowerBoundary { boundary := 0.0; }
-		@UpperBoundary { boundary := 1.0; }
-		probability : real := 1.0;
+    /**
+     * Abstract base type of the mutations. A mutation is applied to a child with
+     *   'probability' (one draw per child) and then changes every gene of the chromosomes
+     *   it applies to with 'gene-probability' (one draw per gene).
+     */
+    abstract type mutation extends configuration {
+        /**
+         * The probability that the mutation is applied to a child.
+         */
+        @LowerBoundary { boundary := 0.0; }
+        @UpperBoundary { boundary := 1.0; }
+        probability : real := 1.0;
 
-		/**
-		 * The probability that a gene is changed. If it is not set, it is 1 / n, where n
-		 *   is the number of genes of the chromosomes the mutation applies to.
-		 */
-		@LowerBoundary { boundary := 0.0; }
-		@UpperBoundary { boundary := 1.0; }
-		'gene-probability' : optional real;
-	}
+        /**
+         * The probability that a gene is changed. If it is not set, it is 1 / n, where n
+         *   is the number of genes of the chromosomes the mutation applies to.
+         */
+        @LowerBoundary { boundary := 0.0; }
+        @UpperBoundary { boundary := 1.0; }
+        'gene-probability' : optional real;
+    }
 
-	/**
-	 * One-point crossover: a cut point is chosen uniformly between two
-	 *   genes, and the children exchange the genes after it.
-	 */
-	@Applicability { representations := ['representation.double', 'representation.integer', 'representation.bit', 'representation.gray']; }
-	type 'single-point-crossover' extends recombination {}
+    /**
+     * One-point crossover: a cut point is chosen uniformly between two
+     *   genes, and the children exchange the genes after it.
+     */
+    @Applicability {
+        representations := ['representation.double', 'representation.integer', 'representation.bit',
+                            'representation.gray'];
+    }
+    type 'single-point-crossover' extends recombination {}
 
-	/**
-	 * Multi-point crossover: 'points' different cut points are chosen
-	 *   uniformly between two genes, and the children exchange every second segment.
-	 */
-	@Applicability { representations := ['representation.double', 'representation.integer', 'representation.bit', 'representation.gray']; }
-	type 'multi-point-crossover' extends recombination {
-		/**
-		 * The number of cut points; at most the number of genes minus 1.
-		 */
-		@LowerBoundary { boundary := 1; }
-		points : int := 2;
-	}
+    /**
+     * Multi-point crossover: 'points' different cut points are chosen
+     *   uniformly between two genes, and the children exchange every second segment.
+     */
+    @Applicability {
+        representations := ['representation.double', 'representation.integer', 'representation.bit',
+                            'representation.gray'];
+    }
+    type 'multi-point-crossover' extends recombination {
+        /**
+         * The number of cut points; at most the number of genes minus 1.
+         */
+        @LowerBoundary { boundary := 1; }
+        points : int := 2;
+    }
 
-	/**
-	 * Uniform crossover (Syswerda 1989): the children exchange every gene with
-	 *   'swap-probability'.
-	 */
-	@Applicability { representations := ['representation.double', 'representation.integer', 'representation.bit', 'representation.gray']; }
-	type 'uniform-crossover' extends recombination {
-		/**
-		 * The probability that a gene is exchanged.
-		 */
-		@LowerBoundary { boundary := 0.0; }
-		@UpperBoundary { boundary := 1.0; }
-		'swap-probability' : real := 0.5;
-	}
+    /**
+     * Uniform crossover (Syswerda 1989): the children exchange every gene with
+     *   'swap-probability'.
+     */
+    @Applicability {
+        representations := ['representation.double', 'representation.integer', 'representation.bit',
+                            'representation.gray'];
+    }
+    type 'uniform-crossover' extends recombination {
+        /**
+         * The probability that a gene is exchanged.
+         */
+        @LowerBoundary { boundary := 0.0; }
+        @UpperBoundary { boundary := 1.0; }
+        'swap-probability' : real := 0.5;
+    }
 
-	/**
-	 * Simulated binary crossover (SBX; Deb and Agrawal 1995) in the bounded form of the
-	 *   NSGA-II reference implementation, revision 1.1.6 (Deb et al. 2002): the
-	 *   children of two parent values are spread around them with the spread factor of
-	 *   the polynomial distribution with 'distribution-index'; a larger index keeps the
-	 *   children closer to the parents. Every gene is recombined with probability 0.5.
-	 */
-	@Applicability { representations := ['representation.double']; 'minimum-scale' := 'measurement-scale.cardinal'; }
-	type 'sbx-crossover' extends recombination {
-		/**
-		 * The distribution index (eta_c).
-		 */
-		@LowerBoundary { boundary := 0.0; }
-		'distribution-index' : real := 15.0;
-	}
+    /**
+     * Simulated binary crossover (SBX; Deb and Agrawal 1995) in the bounded form of the
+     *   NSGA-II reference implementation, revision 1.1.6 (Deb et al. 2002): the
+     *   children of two parent values are spread around them with the spread factor of
+     *   the polynomial distribution with 'distribution-index'; a larger index keeps the
+     *   children closer to the parents. Every gene is recombined with probability 0.5.
+     */
+    @Applicability { representations := ['representation.double']; 'minimum-scale' := 'measurement-scale.cardinal'; }
+    type 'sbx-crossover' extends recombination {
+        /**
+         * The distribution index (eta_c).
+         */
+        @LowerBoundary { boundary := 0.0; }
+        'distribution-index' : real := 15.0;
+    }
 
-	/**
-	 * Line recombination (the extended line recombination of the breeder genetic
-	 *   algorithm, Muehlenbein and Schlierkamp-Voosen 1993): every child lies on the line
-	 *   through its parents, z = x + a (y - x), where x is the parent whose place it takes,
-	 *   y the other parent, and a is drawn uniformly from [-d, 1 + d] (d = 'extension'),
-	 *   once per child and chromosome.
-	 */
-	@Applicability { representations := ['representation.double']; 'minimum-scale' := 'measurement-scale.cardinal'; }
-	type 'line-crossover' extends recombination {
-		/**
-		 * How far a child may lie beyond its parents, relative to their distance (d).
-		 */
-		@LowerBoundary { boundary := 0.0; }
-		extension : real := 0.25;
-	}
+    /**
+     * Line recombination (the extended line recombination of the breeder genetic
+     *   algorithm, Muehlenbein and Schlierkamp-Voosen 1993): every child lies on the line
+     *   through its parents, z = x + a (y - x), where x is the parent whose place it takes,
+     *   y the other parent, and a is drawn uniformly from [-d, 1 + d] (d = 'extension'),
+     *   once per child and chromosome.
+     */
+    @Applicability { representations := ['representation.double']; 'minimum-scale' := 'measurement-scale.cardinal'; }
+    type 'line-crossover' extends recombination {
+        /**
+         * How far a child may lie beyond its parents, relative to their distance (d).
+         */
+        @LowerBoundary { boundary := 0.0; }
+        extension : real := 0.25;
+    }
 
-	/**
-	 * Arithmetic crossover: the children are the weighted means alpha x + (1 - alpha) y
-	 *   and (1 - alpha) x + alpha y of the parents x and y, gene by gene; x is the parent
-	 *   whose place the first child takes. With alpha = 0.5 both children are the mean of
-	 *   the parents.
-	 */
-	@Applicability { representations := ['representation.double']; 'minimum-scale' := 'measurement-scale.cardinal'; }
-	type 'arithmetic-crossover' extends recombination {
-		/**
-		 * The weight of the parent whose place a child takes.
-		 */
-		@LowerBoundary { boundary := 0.0; }
-		@UpperBoundary { boundary := 1.0; }
-		alpha : real := 0.5;
-	}
+    /**
+     * Arithmetic crossover: the children are the weighted means alpha x + (1 - alpha) y
+     *   and (1 - alpha) x + alpha y of the parents x and y, gene by gene; x is the parent
+     *   whose place the first child takes. With alpha = 0.5 both children are the mean of
+     *   the parents.
+     */
+    @Applicability { representations := ['representation.double']; 'minimum-scale' := 'measurement-scale.cardinal'; }
+    type 'arithmetic-crossover' extends recombination {
+        /**
+         * The weight of the parent whose place a child takes.
+         */
+        @LowerBoundary { boundary := 0.0; }
+        @UpperBoundary { boundary := 1.0; }
+        alpha : real := 0.5;
+    }
 
-	/**
-	 * Blend crossover BLX-alpha (Eshelman and Schaffer 1993): every gene of every child is
-	 *   drawn uniformly from [min - alpha I, max + alpha I], where min and max are the
-	 *   parent values and I = max - min.
-	 */
-	@Applicability { representations := ['representation.double']; 'minimum-scale' := 'measurement-scale.cardinal'; }
-	type 'blx-alpha-crossover' extends recombination {
-		/**
-		 * How far the interval reaches beyond the parents, relative to their distance.
-		 */
-		@LowerBoundary { boundary := 0.0; }
-		alpha : real := 0.5;
-	}
+    /**
+     * Blend crossover BLX-alpha (Eshelman and Schaffer 1993): every gene of every child is
+     *   drawn uniformly from [min - alpha I, max + alpha I], where min and max are the
+     *   parent values and I = max - min.
+     */
+    @Applicability { representations := ['representation.double']; 'minimum-scale' := 'measurement-scale.cardinal'; }
+    type 'blx-alpha-crossover' extends recombination {
+        /**
+         * How far the interval reaches beyond the parents, relative to their distance.
+         */
+        @LowerBoundary { boundary := 0.0; }
+        alpha : real := 0.5;
+    }
 
-	/**
-	 * Random reset mutation: a mutated gene gets a value drawn uniformly from the
-	 *   boundaries of its feature.
-	 */
-	@Applicability { representations := ['representation.double', 'representation.integer']; }
-	type 'random-reset-mutation' extends mutation {}
+    /**
+     * Random reset mutation: a mutated gene gets a value drawn uniformly from the
+     *   boundaries of its feature.
+     */
+    @Applicability { representations := ['representation.double', 'representation.integer']; }
+    type 'random-reset-mutation' extends mutation {}
 
-	/**
-	 * Gaussian mutation: a normally distributed value with mean 0 and the standard
-	 *   deviation 'sigma' times the range of the feature is added to a mutated gene.
-	 */
-	@Applicability { representations := ['representation.double']; 'minimum-scale' := 'measurement-scale.cardinal'; }
-	type 'gaussian-mutation' extends mutation {
-		/**
-		 * The standard deviation relative to the range of the feature.
-		 */
-		@LowerBoundary { boundary := 0.0; inclusive := false; }
-		sigma : real := 0.1;
-	}
+    /**
+     * Gaussian mutation: a normally distributed value with mean 0 and the standard
+     *   deviation 'sigma' times the range of the feature is added to a mutated gene.
+     */
+    @Applicability { representations := ['representation.double']; 'minimum-scale' := 'measurement-scale.cardinal'; }
+    type 'gaussian-mutation' extends mutation {
+        /**
+         * The standard deviation relative to the range of the feature.
+         */
+        @LowerBoundary { boundary := 0.0; inclusive := false; }
+        sigma : real := 0.1;
+    }
 
-	/**
-	 * Bit-flip mutation: a mutated bit is inverted.
-	 */
-	@Applicability { representations := ['representation.bit', 'representation.gray']; }
-	type 'bit-flip-mutation' extends mutation {}
+    /**
+     * Bit-flip mutation: a mutated bit is inverted.
+     */
+    @Applicability { representations := ['representation.bit', 'representation.gray']; }
+    type 'bit-flip-mutation' extends mutation {}
 
-	/**
-	 * Polynomial mutation in the bounded form of the NSGA-II reference implementation,
-	 *   revision 1.1.6 (Deb et al. 2002): a mutated gene is moved
-	 *   by a perturbation of the polynomial distribution with 'distribution-index'; a
-	 *   larger index gives smaller changes.
-	 */
-	@Applicability { representations := ['representation.double']; 'minimum-scale' := 'measurement-scale.cardinal'; }
-	type 'polynomial-mutation' extends mutation {
-		/**
-		 * The distribution index (eta_m).
-		 */
-		@LowerBoundary { boundary := 0.0; }
-		'distribution-index' : real := 20.0;
-	}
+    /**
+     * Polynomial mutation in the bounded form of the NSGA-II reference implementation,
+     *   revision 1.1.6 (Deb et al. 2002): a mutated gene is moved
+     *   by a perturbation of the polynomial distribution with 'distribution-index'; a
+     *   larger index gives smaller changes.
+     */
+    @Applicability { representations := ['representation.double']; 'minimum-scale' := 'measurement-scale.cardinal'; }
+    type 'polynomial-mutation' extends mutation {
+        /**
+         * The distribution index (eta_m).
+         */
+        @LowerBoundary { boundary := 0.0; }
+        'distribution-index' : real := 20.0;
+    }
 
-	/**
-	 * Creep mutation: a mutated gene changes by a value drawn uniformly from -step, ...,
-	 *   -1, 1, ..., step.
-	 */
-	@Applicability { representations := ['representation.integer']; 'minimum-scale' := 'measurement-scale.ordinal'; }
-	type 'creep-mutation' extends mutation {
-		/**
-		 * The largest change of a gene.
-		 */
-		@LowerBoundary { boundary := 1; }
-		step : int := 1;
-	}
+    /**
+     * Creep mutation: a mutated gene changes by a value drawn uniformly from -step, ...,
+     *   -1, 1, ..., step.
+     */
+    @Applicability { representations := ['representation.integer']; 'minimum-scale' := 'measurement-scale.ordinal'; }
+    type 'creep-mutation' extends mutation {
+        /**
+         * The largest change of a gene.
+         */
+        @LowerBoundary { boundary := 1; }
+        step : int := 1;
+    }
 
-	/**
-	 * Single-choice mutation (specific to EvoAl): if it fires ('probability', one draw per
-	 *   child), exactly one of its 'children' is chosen with the given 'weights' and
-	 *   applied with its own 'gene-probability'; the 'probability' of the chosen mutation is
-	 *   not used. Its own 'gene-probability' is not used either. It applies to the
-	 *   chromosomes that all its children apply to.
-	 */
-	@Applicability { representations := ['representation.double', 'representation.integer', 'representation.bit', 'representation.gray']; }
-	type 'single-choice-mutation' extends mutation {
-		/**
-		 * The mutations to choose from.
-		 */
-		@MinimumNumberOfElements { bound := 1; }
-		children : array instance mutation;
+    /**
+     * Single-choice mutation (specific to EvoAl): if it fires ('probability', one draw per
+     *   child), exactly one of its 'children' is chosen with the given 'weights' and
+     *   applied with its own 'gene-probability'; the 'probability' of the chosen mutation is
+     *   not used. Its own 'gene-probability' is not used either. It applies to the
+     *   chromosomes that all its children apply to.
+     */
+    @Applicability {
+        representations := ['representation.double', 'representation.integer', 'representation.bit',
+                            'representation.gray'];
+    }
+    type 'single-choice-mutation' extends mutation {
+        /**
+         * The mutations to choose from.
+         */
+        @MinimumNumberOfElements { bound := 1; }
+        children : array instance mutation;
 
-		/**
-		 * The weight of every child, in their order; not negative, at least one greater
-		 *   than 0. Empty for equal weights.
-		 */
-		weights : array real := [];
-	}
+        /**
+         * The weight of every child, in their order; not negative, at least one greater
+         *   than 0. Empty for equal weights.
+         */
+        weights : array real := [];
+    }
 
-	/**
-	 * Abstract base type of the selections. A selection chooses a number of candidates
-	 *   from a list; a candidate can be chosen more than once. The selections compare by
-	 *   the 'comparator' of the algorithm, except the ones that use the fitness itself.
-	 */
-	abstract type selection extends configuration {}
+    /**
+     * Abstract base type of the selections. A selection chooses a number of candidates
+     *   from a list; a candidate can be chosen more than once. The selections compare by
+     *   the 'comparator' of the algorithm, except the ones that use the fitness itself.
+     */
+    abstract type selection extends configuration {}
 
-	/**
-	 * Tournament selection (analysed by Goldberg and Deb 1991): every selected candidate is
-	 *   the best of 'size'
-	 *   candidates drawn uniformly with replacement.
-	 */
-	type 'tournament-selection' extends selection {
-		/**
-		 * The number of candidates in a tournament.
-		 */
-		@LowerBoundary { boundary := 1; }
-		size : int := 2;
-	}
+    /**
+     * Tournament selection (analysed by Goldberg and Deb 1991): every selected candidate is
+     *   the best of 'size'
+     *   candidates drawn uniformly with replacement.
+     */
+    type 'tournament-selection' extends selection {
+        /**
+         * The number of candidates in a tournament.
+         */
+        @LowerBoundary { boundary := 1; }
+        size : int := 2;
+    }
 
-	/**
-	 * Elitism: the 'count' best candidates are selected first, the
-	 *   remaining ones by 'rest' from all candidates.
-	 */
-	type 'elite-selection' extends selection {
-		/**
-		 * The number of best candidates that are always selected.
-		 */
-		@LowerBoundary { boundary := 0; }
-		count : int;
+    /**
+     * Elitism: the 'count' best candidates are selected first, the
+     *   remaining ones by 'rest' from all candidates.
+     */
+    type 'elite-selection' extends selection {
+        /**
+         * The number of best candidates that are always selected.
+         */
+        @LowerBoundary { boundary := 0; }
+        count : int;
 
-		/**
-		 * Selects the remaining candidates.
-		 */
-		rest : instance selection;
-	}
+        /**
+         * Selects the remaining candidates.
+         */
+        rest : instance selection;
+    }
 
-	/**
-	 * Truncation selection (Muehlenbein and Schlierkamp-Voosen 1993): every selected
-	 *   candidate is drawn uniformly from the best ceil('threshold' * n) of the n
-	 *   candidates.
-	 */
-	type 'truncation-selection' extends selection {
-		/**
-		 * The fraction of the candidates that can be selected.
-		 */
-		@LowerBoundary { boundary := 0.0; inclusive := false; }
-		@UpperBoundary { boundary := 1.0; }
-		threshold : real;
-	}
+    /**
+     * Truncation selection (Muehlenbein and Schlierkamp-Voosen 1993): every selected
+     *   candidate is drawn uniformly from the best ceil('threshold' * n) of the n
+     *   candidates.
+     */
+    type 'truncation-selection' extends selection {
+        /**
+         * The fraction of the candidates that can be selected.
+         */
+        @LowerBoundary { boundary := 0.0; inclusive := false; }
+        @UpperBoundary { boundary := 1.0; }
+        threshold : real;
+    }
 
-	/**
-	 * Random selection: every selected candidate is drawn uniformly.
-	 */
-	type 'random-selection' extends selection {}
+    /**
+     * Random selection: every selected candidate is drawn uniformly.
+     */
+    type 'random-selection' extends selection {}
 
-	/**
-	 * Linear ranking selection (ranking selection: Baker 1985): the candidates are ranked
-	 *   from the worst
-	 *   (rank 1) to the best (rank n); a candidate of rank i is selected with probability
-	 *   (eta- + (eta+ - eta-) (i - 1) / (n - 1)) / n with eta+ = 2 - eta-.
-	 */
-	type 'linear-ranking-selection' extends selection {
-		/**
-		 * The expected number of selections of the worst candidate per n selections.
-		 */
-		@LowerBoundary { boundary := 0.0; }
-		@UpperBoundary { boundary := 1.0; }
-		'eta-minus' : real;
-	}
+    /**
+     * Linear ranking selection (ranking selection: Baker 1985): the candidates are ranked
+     *   from the worst
+     *   (rank 1) to the best (rank n); a candidate of rank i is selected with probability
+     *   (eta- + (eta+ - eta-) (i - 1) / (n - 1)) / n with eta+ = 2 - eta-.
+     */
+    type 'linear-ranking-selection' extends selection {
+        /**
+         * The expected number of selections of the worst candidate per n selections.
+         */
+        @LowerBoundary { boundary := 0.0; }
+        @UpperBoundary { boundary := 1.0; }
+        'eta-minus' : real;
+    }
 
-	/**
-	 * Exponential ranking selection (analysed by Blickle and Thiele 1995): the candidates are
-	 *   ranked
-	 *   from the worst (rank 1) to the best (rank n); a candidate of rank i is selected
-	 *   with a probability proportional to c^(n - i). c = 1 selects uniformly.
-	 */
-	type 'exponential-ranking-selection' extends selection {
-		/**
-		 * The base of the probabilities.
-		 */
-		@LowerBoundary { boundary := 0.0; inclusive := false; }
-		@UpperBoundary { boundary := 1.0; }
-		'c' : real;
-	}
+    /**
+     * Exponential ranking selection (analysed by Blickle and Thiele 1995): the candidates are
+     *   ranked
+     *   from the worst (rank 1) to the best (rank n); a candidate of rank i is selected
+     *   with a probability proportional to c^(n - i). c = 1 selects uniformly.
+     */
+    type 'exponential-ranking-selection' extends selection {
+        /**
+         * The base of the probabilities.
+         */
+        @LowerBoundary { boundary := 0.0; inclusive := false; }
+        @UpperBoundary { boundary := 1.0; }
+        'c' : real;
+    }
 
-	/**
-	 * Roulette wheel selection, fitness-proportional for minimisation
-	 *   with windowing: a candidate with fitness f is selected with a probability
-	 *   proportional to f_max - f, where f_max is the largest fitness of the candidates.
-	 *   If all have the same fitness, it selects uniformly. Needs a fitness with one
-	 *   component.
-	 */
-	type 'roulette-wheel-selection' extends selection {}
+    /**
+     * Roulette wheel selection, fitness-proportional for minimisation
+     *   with windowing: a candidate with fitness f is selected with a probability
+     *   proportional to f_max - f, where f_max is the largest fitness of the candidates.
+     *   If all have the same fitness, it selects uniformly. Needs a fitness with one
+     *   component.
+     */
+    type 'roulette-wheel-selection' extends selection {}
 
-	/**
-	 * Stochastic universal sampling (Baker 1987): the probabilities of the roulette wheel
-	 *   selection, but all candidates are selected with one spin and equally spaced
-	 *   pointers, so a candidate is selected floor or ceil of its expected number of
-	 *   times. Needs a fitness with one component.
-	 */
-	type 'stochastic-universal-sampling' extends selection {}
+    /**
+     * Stochastic universal sampling (Baker 1987): the probabilities of the roulette wheel
+     *   selection, but all candidates are selected with one spin and equally spaced
+     *   pointers, so a candidate is selected floor or ceil of its expected number of
+     *   times. Needs a fitness with one component.
+     */
+    type 'stochastic-universal-sampling' extends selection {}
 
-	/**
-	 * Boltzmann selection: a candidate with fitness f is selected with a probability
-	 *   proportional to exp(-(f - f_min) / temperature), where f_min is the smallest
-	 *   fitness of the candidates. Needs a fitness with one component.
-	 */
-	type 'boltzmann-selection' extends selection {
-		/**
-		 * The temperature; a larger temperature selects more uniformly.
-		 */
-		@LowerBoundary { boundary := 0.0; inclusive := false; }
-		temperature : real;
-	}
+    /**
+     * Boltzmann selection: a candidate with fitness f is selected with a probability
+     *   proportional to exp(-(f - f_min) / temperature), where f_min is the smallest
+     *   fitness of the candidates. Needs a fitness with one component.
+     */
+    type 'boltzmann-selection' extends selection {
+        /**
+         * The temperature; a larger temperature selects more uniformly.
+         */
+        @LowerBoundary { boundary := 0.0; inclusive := false; }
+        temperature : real;
+    }
 
-	/**
-	 * The survivor selection of NSGA-II (K. Deb, A. Pratap, S. Agarwal, T. Meyarivan: A fast
-	 *   and elitist multiobjective genetic algorithm: NSGA-II. IEEE Transactions on
-	 *   Evolutionary Computation 6(2), 2002, pp. 182-197): the candidates are sorted into
-	 *   non-dominated fronts on the canonical fitness (all components minimised), and the
-	 *   crowding distance is computed in every front. The fronts are selected in their order;
-	 *   of the first front that does not fit completely, the candidates with the largest
-	 *   crowding distance are selected. Unlike the other selections, it selects without
-	 *   replacement. Every candidate gets the properties 'front' and 'crowding-distance'.
-	 *   Needs 'crowded-comparator', a fitness with at least two components, and
-	 *   'plus-replacement' (NSGA-II) or 'comma-replacement'.
-	 */
-	type 'nsga2-selection' extends selection {}
+    /**
+     * The survivor selection of NSGA-II (K. Deb, A. Pratap, S. Agarwal, T. Meyarivan: A fast
+     *   and elitist multiobjective genetic algorithm: NSGA-II. IEEE Transactions on
+     *   Evolutionary Computation 6(2), 2002, pp. 182-197): the candidates are sorted into
+     *   non-dominated fronts on the canonical fitness (all components minimised), and the
+     *   crowding distance is computed in every front. The fronts are selected in their order;
+     *   of the first front that does not fit completely, the candidates with the largest
+     *   crowding distance are selected. Unlike the other selections, it selects without
+     *   replacement. Every candidate gets the properties 'front' and 'crowding-distance'.
+     *   Needs 'crowded-comparator', a fitness with at least two components, and
+     *   'plus-replacement' (NSGA-II) or 'comma-replacement'.
+     *
+     *   With a constraint group, the sorting uses constrained domination (ibid., section
+     *   VI-A, Definition 1): a feasible candidate dominates an infeasible one, of two
+     *   infeasible candidates the one with the smaller violation of the group dominates,
+     *   and two feasible candidates are compared by Pareto dominance. 'crowded-comparator'
+     *   then compares by constrained domination, too.
+     */
+    type 'nsga2-selection' extends selection {
+        /**
+         * The constraint group of the constrained domination, as named in the DDL.
+         */
+        group : optional string;
+    }
 
-	/**
-	 * Abstract base type of the replacements: they form the next population of N
-	 *   candidates ('size-of-population') from the N parents of the population and the
-	 *   lambda children ('number-of-offspring').
-	 */
-	abstract type replacement extends configuration {
-		/**
-		 * Selects the candidates that survive.
-		 */
-		selection : instance selection;
-	}
+    /**
+     * Abstract base type of the replacements: they form the next population of N
+     *   candidates ('size-of-population') from the N parents of the population and the
+     *   lambda children ('number-of-offspring').
+     */
+    abstract type replacement extends configuration {
+        /**
+         * Selects the candidates that survive.
+         */
+        selection : instance selection;
+    }
 
-	/**
-	 * N - lambda survivors are selected from the parents, and all lambda children
-	 *   survive. Needs lambda <= N.
-	 */
-	type 'survivor-replacement' extends replacement {}
+    /**
+     * N - lambda survivors are selected from the parents, and all lambda children
+     *   survive. Needs lambda <= N.
+     */
+    type 'survivor-replacement' extends replacement {}
 
-	/**
-	 * N candidates are selected from the parents and the children together, the
-	 *   (mu + lambda) strategy (Schwefel 1977).
-	 */
-	type 'plus-replacement' extends replacement {}
+    /**
+     * N candidates are selected from the parents and the children together, the
+     *   (mu + lambda) strategy (Schwefel 1977).
+     */
+    type 'plus-replacement' extends replacement {}
 
-	/**
-	 * N candidates are selected from the children only, the (mu, lambda) strategy
-	 *   (Schwefel 1977). Needs lambda >= N.
-	 */
-	type 'comma-replacement' extends replacement {}
+    /**
+     * N candidates are selected from the children only, the (mu, lambda) strategy
+     *   (Schwefel 1977). Needs lambda >= N.
+     */
+    type 'comma-replacement' extends replacement {}
 
-	/**
-	 * The comparator of NSGA-II (Deb et al. 2002): the selections of the algorithm compare
-	 *   candidates by the crowded-comparison operator: a lower front is better, and in the
-	 *   same front a larger crowding distance. Front and crowding distance are computed by
-	 *   'nsga2-selection', which must be the selection of the replacement. With
-	 *   'tournament-selection' { size := 2; } as 'parent-selection', it gives the parent
-	 *   selection of NSGA-II; on equal front and crowding distance the first drawn candidate
-	 *   wins, while the reference implementation chooses at random. Elsewhere (e.g. for the
-	 *   best candidate so far), candidates are compared by Pareto dominance. Only the
-	 *   evolutionary algorithm can use it.
-	 */
-	type 'crowded-comparator' extends comparator {}
+    /**
+     * The comparator of NSGA-II (Deb et al. 2002): the selections of the algorithm compare
+     *   candidates by the crowded-comparison operator: a lower front is better, and in the
+     *   same front a larger crowding distance. Front and crowding distance are computed by
+     *   'nsga2-selection', which must be the selection of the replacement. With
+     *   'tournament-selection' { size := 2; } as 'parent-selection', it gives the parent
+     *   selection of NSGA-II; on equal front and crowding distance the first drawn candidate
+     *   wins, while the reference implementation chooses at random. Elsewhere (e.g. for the
+     *   best candidate so far), candidates are compared by Pareto dominance. Only the
+     *   evolutionary algorithm can use it.
+     */
+    type 'crowded-comparator' extends comparator {}
 }

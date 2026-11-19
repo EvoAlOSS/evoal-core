@@ -1,0 +1,33 @@
+{
+  "formatVersion" : "2027.4.0",
+  "number" : 19,
+  "individuals" : [ {
+    "id" : 19,
+    "input" : {
+      "x:0" : 2.0,
+      "x:1" : 0.25
+    },
+    "output" : {
+      "y:0" : 1407.25
+    },
+    "fitness" : [ 1407.25 ],
+    "relationships" : [ {
+      "kind" : "mutation",
+      "targets" : [ 18 ]
+    } ],
+    "properties" : {
+      "violation-1" : 0.0625
+    }
+  } ],
+  "steps" : [ ],
+  "ranks" : [ {
+    "number" : 0,
+    "members" : [ 19 ]
+  } ],
+  "bestSoFar" : 19,
+  "metrics" : {
+    "constraint-evaluations" : 20,
+    "evaluations.real" : 20,
+    "evaluations.surrogate" : 0
+  }
+}

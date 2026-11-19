@@ -6,6 +6,8 @@ import java.util.stream.Stream;
 
 import de.evoal.models.core.ecore.TypedEObject;
 
+import de.evoal.optimisation.api.constraints.ViolationRecord;
+
 /**
  * Computes the fitness of a candidate from its objectives.
  * <p>
@@ -66,7 +68,21 @@ public final class FitnessPipeline {
      *   it declared.
      */
     public Fitness apply(final TypedEObject input, final TypedEObject objectives) {
-        final FitnessContext context = new FitnessContext(input, objectives, goals);
+        return apply(input, objectives, ViolationRecord.NONE);
+    }
+
+    /**
+     * Computes the fitness of a candidate.
+     *
+     * @param input The candidate (a point of the search space).
+     * @param objectives The result of the optimisation function for the candidate.
+     * @param violations How far the candidate violates the constraints of the problem.
+     * @return The fitness.
+     * @throws IllegalStateException if a step returns a fitness with other components than
+     *   it declared.
+     */
+    public Fitness apply(final TypedEObject input, final TypedEObject objectives, final ViolationRecord violations) {
+        final FitnessContext context = new FitnessContext(input, objectives, goals, violations);
         Fitness fitness = toInitialFitness(objectives);
 
         for(final FitnessStep step : steps) {

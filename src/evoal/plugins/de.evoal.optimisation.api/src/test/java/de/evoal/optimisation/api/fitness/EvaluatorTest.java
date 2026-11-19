@@ -11,6 +11,10 @@ import org.mockito.Mockito;
 
 import de.evoal.models.core.ecore.TypedEObject;
 import de.evoal.models.v202704.optimisation.execution.OptimisationValue;
+import de.evoal.optimisation.api.constraints.ConstraintEvaluation;
+import de.evoal.optimisation.api.constraints.Constraints;
+import de.evoal.optimisation.api.constraints.TestConstraints;
+import de.evoal.optimisation.api.constraints.ViolationRecord;
 import de.evoal.optimisation.api.evaluation.EvaluationBudgetExhaustedException;
 import de.evoal.optimisation.api.evaluation.EvaluationService;
 import de.evoal.optimisation.api.evaluation.EvaluationSource;
@@ -43,7 +47,7 @@ public class EvaluatorTest {
             final List<TypedEObject> batch = invocation.getArgument(0);
             return batch.stream().map(input -> outputs.get(inputs.indexOf(input))).toList();
         });
-        Mockito.when(comparator.toValue(Mockito.any(), Mockito.any()))
+        Mockito.when(comparator.toValue(Mockito.any(), Mockito.any(), Mockito.any()))
                .thenAnswer(invocation -> Mockito.mock(OptimisationValue.class));
     }
 
@@ -91,5 +95,33 @@ public class EvaluatorTest {
         // then
         Assertions.assertTrue(batch.evaluations().isEmpty());
         Assertions.assertSame(exhaustion, batch.exhaustion());
+    }
+
+    @Test
+    public void theViolationRecordReachesThePipelineTheComparatorAndTheEvaluation() {
+        // given
+        final Constraints constraints = TestConstraints.constraints("g");
+        final ConstraintEvaluation constraintEvaluation = new ConstraintEvaluation();
+        constraintEvaluation.setUp(constraints, (constraint, input, objectives) -> 2.0);
+
+        final List<ViolationRecord> seenByPipeline = new ArrayList<>();
+        final FitnessStep recordingStep = (context, current) -> {
+            seenByPipeline.add(context.violations());
+            return current;
+        };
+        final FitnessPipeline pipeline = new FitnessPipeline(new Goals(List.of()), List.of(recordingStep));
+        final Evaluator withConstraints = new Evaluator(evaluationService, constraintEvaluation, pipeline, comparator);
+        Mockito.when(evaluationService.evaluate(inputs.get(0))).thenReturn(outputs.get(0));
+
+        // when
+        final Evaluation evaluation = withConstraints.evaluate(inputs.get(0));
+
+        // then
+        Assertions.assertEquals(2.0, evaluation.violations().violation("g"));
+        Assertions.assertSame(evaluation.violations(), seenByPipeline.get(0));
+        Mockito.verify(comparator)
+               .toValue(Mockito.eq(outputs.get(0)), Mockito.any(), Mockito.same(evaluation.violations()));
+        Assertions.assertEquals(1, constraintEvaluation.numberOfEvaluations());
+        Mockito.verify(evaluationService).evaluate(inputs.get(0));
     }
 }

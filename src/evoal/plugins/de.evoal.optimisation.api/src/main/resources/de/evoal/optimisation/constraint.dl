@@ -1,21 +1,34 @@
 module de.evoal.optimisation.constraint {
-	/**
-	 * Sets the variance of some data.
-	 *
-	 * <b>Parameters:</b>
-	 * <ol>
-	 *   <li>Reference to the data ...</li>
-	 * </ol> 
-	 */
-	def void variance(data reference, real variance);
-	
-	def void connection(data ref1, data ref2, real connection);
+    /**
+     * Declares the standard deviation of the measurements of a feature. The
+     *   'tolerance-measure' moves the feature by a multiple of it when it measures a
+     *   constraint violation.
+     *
+     * <b>Parameters:</b>
+     * <ol>
+     *   <li>The feature.</li>
+     *   <li>Its standard deviation, not negative.</li>
+     * </ol>
+     */
+    def void 'standard-deviation'(data reference, real deviation);
 
-	def void range (real lower, real upper);
+    def void connection(data ref1, data ref2, real connection);
 
-	def void 'ranged-connection'(data ref1, expression range1, data ref2, expression range2, real connection);
+    def void 'ranged-connection'(data ref1, expression range1, data ref2, expression range2, real connection);
 
-	def void constraint(expression exp, string category);
+    /**
+     * Declares a constraint of the optimisation problem, a comparison of two arithmetic
+     *   expressions over search features, objectives and numbers with one of the
+     *   operators {@code <}, {@code <=}, {@code >}, {@code >=} or {@code =}.
+     *
+     * <b>Parameters:</b>
+     * <ol>
+     *   <li>The comparison.</li>
+     *   <li>The group of the constraint. A group is handled as a whole, e.g., by
+     *     'constraint-penalty' or 'feasibility-comparator'.</li>
+     * </ol>
+     */
+    def void constraint(expression exp, string category);
 
-	def void range(real lower, real upper);
+    def void range(real lower, real upper);
 }

@@ -11,19 +11,21 @@ import de.evoal.core.api.cdi.Component;
 import de.evoal.models.core.ecore.TypedEObject;
 import de.evoal.models.v202704.optimisation.execution.OptimisationValue;
 
+import de.evoal.optimisation.api.constraints.ConstraintEvaluation;
+import de.evoal.optimisation.api.constraints.ViolationRecord;
 import de.evoal.optimisation.api.evaluation.EvaluationBudgetExhaustedException;
 import de.evoal.optimisation.api.evaluation.EvaluationService;
 import de.evoal.optimisation.api.model.OptimisationValueComparator;
 
 /**
  * Evaluates a candidate: the {@link EvaluationService} computes the objectives, the
- *   {@link FitnessPipeline} the fitness and the comparator the optimisation value. Every
- *   algorithm evaluates its candidates with an evaluator, so the three always belong
- *   together.
+ *   {@link ConstraintEvaluation} the violation record, the {@link FitnessPipeline} the fitness
+ *   and the comparator the optimisation value. Every algorithm evaluates its candidates with
+ *   an evaluator, so the four always belong together.
  * <p>
  * {@link #evaluateAll(List)} computes the objectives of a batch in parallel
- *   ({@link EvaluationService#evaluateAll(List)}); the fitness and the optimisation values are
- *   computed afterwards on the calling thread, in input order.
+ *   ({@link EvaluationService#evaluateAll(List)}); the violation records, the fitness and the
+ *   optimisation values are computed afterwards on the calling thread, in input order.
  */
 @Dependent
 public class Evaluator {
@@ -32,6 +34,13 @@ public class Evaluator {
      */
     @Inject @Dependent @Component
     private OptimisationValueComparator comparator;
+
+    /**
+     * Measures the constraints; {@code null} for an evaluator of a problem without
+     *   constraints that is created from its parts.
+     */
+    @Inject
+    private ConstraintEvaluation constraintEvaluation;
 
     /**
      * Evaluates and counts the candidates.
@@ -67,19 +76,33 @@ public class Evaluator {
     }
 
     /**
+     * Creates an evaluator from its parts.
+     *
+     * @param evaluationService Evaluates and counts the candidates.
+     * @param constraintEvaluation Measures the constraints.
+     * @param pipeline Computes the fitness from the objectives.
+     * @param comparator Computes the optimisation value from the objectives and the fitness.
+     */
+    public Evaluator(final EvaluationService evaluationService,
+                     final ConstraintEvaluation constraintEvaluation,
+                     final FitnessPipeline pipeline,
+                     final OptimisationValueComparator comparator) {
+        this(evaluationService, pipeline, comparator);
+        this.constraintEvaluation = constraintEvaluation;
+    }
+
+    /**
      * Evaluates a candidate.
      *
      * @param input The candidate (a point of the search space).
-     * @return The objectives, the fitness and the optimisation value.
+     * @return The objectives, the violation record, the fitness and the optimisation value.
      * @throws de.evoal.optimisation.api.evaluation.EvaluationBudgetExhaustedException if the
      *   evaluation budget is exhausted.
      */
     public Evaluation evaluate(final TypedEObject input) {
         final TypedEObject output = evaluationService.evaluate(input);
-        final Fitness fitness = pipeline.apply(input, output);
-        final OptimisationValue value = comparator.toValue(output, fitness);
 
-        return new Evaluation(output, fitness, value);
+        return toEvaluation(input, output);
     }
 
     /**
@@ -103,12 +126,15 @@ public class Evaluator {
         for(int i = 0; i < covered; ++i) {
             final TypedEObject input = evaluated.get(i);
             final TypedEObject output = outputs.get(i);
-            final Fitness fitness = pipeline.apply(input, output);
+            final Evaluation evaluation = toEvaluation(input, output);
 
-            evaluations.add(new Evaluation(output, fitness, comparator.toValue(output, fitness)));
+            evaluations.add(evaluation);
         }
 
-        return new BatchEvaluation(evaluations, covered < inputs.size() ? exhaustionFor(inputs.subList(covered, inputs.size())) : null);
+        final List<TypedEObject> beyondBudget = inputs.subList(covered, inputs.size());
+        final EvaluationBudgetExhaustedException exhaustion = beyondBudget.isEmpty() ? null : exhaustionFor(beyondBudget);
+
+        return new BatchEvaluation(evaluations, exhaustion);
     }
 
     /**
@@ -123,5 +149,18 @@ public class Evaluator {
         }
 
         throw new IllegalStateException("The budget allowed more evaluations than reported.");
+    }
+
+    /**
+     * @return The evaluation of a candidate whose objectives are computed.
+     */
+    private Evaluation toEvaluation(final TypedEObject input, final TypedEObject output) {
+        final ViolationRecord violations = constraintEvaluation == null
+                ? ViolationRecord.NONE
+                : constraintEvaluation.measure(input, output);
+        final Fitness fitness = pipeline.apply(input, output, violations);
+        final OptimisationValue value = comparator.toValue(output, fitness, violations);
+
+        return new Evaluation(output, fitness, value, violations);
     }
 }

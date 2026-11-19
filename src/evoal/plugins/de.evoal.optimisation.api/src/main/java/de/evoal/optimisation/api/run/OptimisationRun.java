@@ -212,8 +212,8 @@ public class OptimisationRun {
     }
 
     /**
-     * @return The individual of the member with the next id, its objectives, fitness and
-     *   properties, related to its predecessors.
+     * @return The individual of the member with the next id, its objectives, fitness,
+     *   properties and degrees of constraint violation, related to its predecessors.
      * @throws IllegalStateException if a property is not defined or does not match its
      *   definition.
      */
@@ -238,6 +238,14 @@ public class OptimisationRun {
         member.properties().forEach((name, value) -> {
             recorder.requireProperty(name, PropertyScope.INDIVIDUAL, value);
             individual.getProperties().put(name, value);
+        });
+
+        final Map<String, Double> violations = member.isEvaluated()
+                ? member.evaluation().violations().toProperties()
+                : Map.of();
+        violations.forEach((name, degree) -> {
+            recorder.requireProperty(name, PropertyScope.INDIVIDUAL, degree);
+            individual.getProperties().put(name, degree);
         });
 
         final Lineage lineage = member.lineage();
