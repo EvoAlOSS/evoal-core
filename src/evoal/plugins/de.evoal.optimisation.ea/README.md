@@ -104,6 +104,19 @@ recorded too, to its sibling (`partner`); a child that was only mutated refers t
 properties `operators` (the operators that changed the child) and `changed-features` (the
 features whose genes differ from the parent whose place the child takes).
 
+## Examples
+
+In `src/main/examples`, each with a README:
+
+- `ea-basic`: a real-valued benchmark with the default mapping and the default operators,
+  tournament selection and a (mu + lambda) replacement.
+- `ea-mixed-genotype`: a Gray chromosome and an integer chromosome with its own operators,
+  roulette wheel selection and the memory model.
+
+The surrogate plugins have examples that search on a trained model with the EA
+(`surrogate.simple`, `surrogate.svr`, `surrogate.gaussianprocess`, `surrogate.onnx.simple`,
+`surrogate.onnx.multi`).
+
 ## Tests
 
 - `OperatorStatisticsTest` and `SelectionStatisticsTest`: with a fixed seed and many trials,
