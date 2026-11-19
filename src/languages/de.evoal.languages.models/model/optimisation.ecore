@@ -67,6 +67,12 @@
           <details key="documentation" value="*&#xA;The values of the metrics that describe the whole execution, e.g.,&#xA;  limits, by metric name. The metrics are defined in&#xA;  {@link #getMetricDefinitions()} with the scope {@link MetricScope#EXECUTION}.&#xA;"/>
         </eAnnotations>
       </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="propertyDefinitions"
+          upperBound="-1" eType="#//memory/PropertyDefinition" containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="*&#xA;The properties the individuals and relationships of this execution record. Every&#xA;  key of {@link Individual#getProperties()} and of {@link Relationship#getProperties()}&#xA;  is defined here.&#xA;"/>
+        </eAnnotations>
+      </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EReference" name="fitnessComponents" upperBound="-1"
           eType="#//memory/FitnessComponentDefinition" containment="true">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -256,6 +262,12 @@
           <details key="documentation" value="*&#xA;The relations to other individuals.&#xA;"/>
         </eAnnotations>
       </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="properties" upperBound="-1"
+          eType="#//memory/PropertyEntry" containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="*&#xA;Further details of the individual, e.g., its age, by property name. The properties&#xA;  are defined in {@link Execution#getPropertyDefinitions()} with the scope&#xA;  {@link PropertyScope#INDIVIDUAL}.&#xA;"/>
+        </eAnnotations>
+      </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Relationship" abstract="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -265,6 +277,12 @@
           lowerBound="1" upperBound="-1" eType="#//memory/Individual">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
           <details key="documentation" value="*&#xA;The relationship targets.&#xA;"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="properties" upperBound="-1"
+          eType="#//memory/PropertyEntry" containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="*&#xA;Further details of the relationship, e.g., the reason of a replacement, by property&#xA;  name. The properties are defined in {@link Execution#getPropertyDefinitions()} with&#xA;  the scope {@link PropertyScope#RELATIONSHIP}.&#xA;"/>
         </eAnnotations>
       </eStructuralFeatures>
     </eClassifiers>
@@ -288,6 +306,102 @@
           <details key="documentation" value="*&#xA;The recombination that is the related one.&#xA;"/>
         </eAnnotations>
       </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Replacement" eSuperTypes="#//memory/Relationship">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="*&#xA;The source individual took the place of the target individual, e.g., because the&#xA;  target failed a candidate check. The source is not derived from the target.&#xA;"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="PropertyEntry" instanceClassName="java.util.Map$Entry">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="*&#xA;A property value of an individual or a relationship, by property name.&#xA;"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="*&#xA;The name of the property.&#xA;"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="*&#xA;The value of the property: a {@link Long}, {@link Double}, {@link String} or&#xA;  {@link Boolean}, or a {@link java.util.List} of one of these, as defined by its&#xA;  {@link PropertyDefinition}.&#xA;"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="PropertyDefinition">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="*&#xA;Defines a property the individuals or relationships of an execution record.&#xA;"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="*&#xA;The name of the property, unique within its scope, e.g., &lt;code>reason&lt;/code>.&#xA;"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="scope" lowerBound="1"
+          eType="#//memory/PropertyScope">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="*&#xA;Where the values of the property are recorded.&#xA;"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="valueType" lowerBound="1"
+          eType="#//memory/PropertyValueType">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="*&#xA;The type of the property's values, or of their elements if {@link #isList()}.&#xA;"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="list" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="*&#xA;Whether a value is a list of values of the {@link #getValueType()}.&#xA;"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="*&#xA;What the property describes.&#xA;"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="PropertyScope">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="*&#xA;Where the values of a property are recorded.&#xA;"/>
+      </eAnnotations>
+      <eLiterals name="Individual">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="*&#xA;On individuals ({@link Individual#getProperties()}).&#xA;"/>
+        </eAnnotations>
+      </eLiterals>
+      <eLiterals name="Relationship" value="1">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="*&#xA;On relationships ({@link Relationship#getProperties()}).&#xA;"/>
+        </eAnnotations>
+      </eLiterals>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="PropertyValueType">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="*&#xA;The type of a property's values.&#xA;"/>
+      </eAnnotations>
+      <eLiterals name="Integer">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="*&#xA;Integral values, stored as {@link Long}.&#xA;"/>
+        </eAnnotations>
+      </eLiterals>
+      <eLiterals name="Real" value="1">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="*&#xA;Real values, stored as {@link Double}.&#xA;"/>
+        </eAnnotations>
+      </eLiterals>
+      <eLiterals name="Text" value="2">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="*&#xA;Texts, stored as {@link String}.&#xA;"/>
+        </eAnnotations>
+      </eLiterals>
+      <eLiterals name="Boolean" value="3">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="*&#xA;Truth values, stored as {@link Boolean}.&#xA;"/>
+        </eAnnotations>
+      </eLiterals>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="MetricEntry" instanceClassName="java.util.Map$Entry">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">

@@ -43,10 +43,12 @@ import de.evoal.models.v202704.optimisation.memory.IterationStep;
 import de.evoal.models.v202704.optimisation.memory.MetricDefinition;
 import de.evoal.models.v202704.optimisation.memory.Mutation;
 import de.evoal.models.v202704.optimisation.memory.OrderedIterationStep;
+import de.evoal.models.v202704.optimisation.memory.PropertyDefinition;
 import de.evoal.models.v202704.optimisation.memory.Rank;
 import de.evoal.models.v202704.optimisation.memory.ReproducibilityNote;
 import de.evoal.models.v202704.optimisation.memory.Recombination;
 import de.evoal.models.v202704.optimisation.memory.Relationship;
+import de.evoal.models.v202704.optimisation.memory.Replacement;
 import de.evoal.models.v202704.optimisation.memory.UnorderedIterationStep;
 import de.evoal.models.v202704.optimisation.model.Problem;
 import de.evoal.models.v202704.optimisation.model.TargetGoal;
@@ -349,6 +351,14 @@ public class MemoryModelJson {
                  .map(MemoryModelJson::toMetricDefinition)
                  .forEach(metricDefinitions::add);
 
+        if(!execution.getPropertyDefinitions().isEmpty()) {
+            final ArrayNode propertyDefinitions = document.putArray("propertyDefinitions");
+            execution.getPropertyDefinitions()
+                     .stream()
+                     .map(MemoryModelJson::toPropertyDefinition)
+                     .forEach(propertyDefinitions::add);
+        }
+
         final ObjectNode setupNode = toSetup(setup);
         addReproducibility(setupNode, execution.getReproducibilityNotes());
         document.set("setup", setupNode);
@@ -519,6 +529,8 @@ public class MemoryModelJson {
                   .map(MemoryModelJson::toRelationship)
                   .forEach(relationships::add);
 
+        addProperties(individualNode, individual.getProperties());
+
         return individualNode;
     }
 
@@ -585,6 +597,58 @@ public class MemoryModelJson {
         definitionNode.put("description", description);
 
         return definitionNode;
+    }
+
+    /**
+     * @return The definition of a property.
+     */
+    private static ObjectNode toPropertyDefinition(final PropertyDefinition definition) {
+        final ObjectNode definitionNode = NODES.objectNode();
+        definitionNode.put("name", definition.getName());
+
+        final String scope = lowerCaseNameOf(definition.getScope());
+        definitionNode.put("scope", scope);
+
+        final String valueType = lowerCaseNameOf(definition.getValueType());
+        definitionNode.put("valueType", valueType);
+        definitionNode.put("list", definition.isList());
+
+        final String description = Objects.requireNonNullElse(definition.getDescription(), "");
+        definitionNode.put("description", description);
+
+        return definitionNode;
+    }
+
+    /**
+     * Adds the properties, keyed by property name in the order they were recorded, as
+     *   {@code "properties"}. Nothing is added if there are none.
+     */
+    private static void addProperties(final ObjectNode node, final EMap<String, Object> properties) {
+        if(properties.isEmpty()) {
+            return;
+        }
+
+        final ObjectNode propertiesNode = node.putObject("properties");
+        properties.forEach(entry -> propertiesNode.set(entry.getKey(), toPropertyValue(entry.getValue())));
+    }
+
+    /**
+     * @return The property value as a JSON value; a list becomes an array.
+     */
+    private static JsonNode toPropertyValue(final Object value) {
+        return switch(value) {
+            case Number number -> toNumber(number);
+            case String text -> NODES.stringNode(text);
+            case Boolean truth -> NODES.booleanNode(truth);
+            case List<?> values -> {
+                final ArrayNode array = NODES.arrayNode();
+                values.stream()
+                      .map(MemoryModelJson::toPropertyValue)
+                      .forEach(array::add);
+                yield array;
+            }
+            default -> throw new IllegalStateException("Unsupported property value type " + value.getClass().getName() + ".");
+        };
     }
 
     /**
@@ -664,6 +728,7 @@ public class MemoryModelJson {
             case Identity identity -> relationshipNode.put("kind", "identity");
             case Mutation mutation -> relationshipNode.put("kind", "mutation");
             case Recombination recombination -> relationshipNode.put("kind", "recombination");
+            case Replacement replacement -> relationshipNode.put("kind", "replacement");
             default -> throw new IllegalStateException("Unsupported relationship "
                                                        + relationship.eClass().getName() + ".");
         }
@@ -674,6 +739,8 @@ public class MemoryModelJson {
             final int partner = partnerOf(recombination);
             relationshipNode.put("partner", partner);
         }
+
+        addProperties(relationshipNode, relationship.getProperties());
 
         return relationshipNode;
     }

@@ -143,6 +143,19 @@ public class TemplateTest {
         }
 
         @Test
+        public void aMemberThatStaysIsOneIterationOlder() {
+            // when
+            template.initialise(events);
+            template.population();
+            template.iterate(1);
+            final Population population = template.population();
+
+            // then
+            Assertions.assertEquals(List.of(1, 1, 1), population.members().stream().map(Candidate::age).toList());
+            Assertions.assertEquals(List.of(2, 2, 2), template.state().getPopulation().stream().map(Candidate::age).toList());
+        }
+
+        @Test
         public void aStepCanStopTheSearch() {
             // when
             template.initialise(events);

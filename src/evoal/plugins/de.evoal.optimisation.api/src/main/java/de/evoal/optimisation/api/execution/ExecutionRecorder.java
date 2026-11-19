@@ -1,5 +1,6 @@
 package de.evoal.optimisation.api.execution;
 
+import java.util.List;
 import java.util.Optional;
 
 import jakarta.enterprise.context.ApplicationScoped;
@@ -17,6 +18,9 @@ import de.evoal.models.v202704.optimisation.memory.Iteration;
 import de.evoal.models.v202704.optimisation.memory.MemoryFactory;
 import de.evoal.models.v202704.optimisation.memory.MetricDefinition;
 import de.evoal.models.v202704.optimisation.memory.MetricScope;
+import de.evoal.models.v202704.optimisation.memory.PropertyDefinition;
+import de.evoal.models.v202704.optimisation.memory.PropertyScope;
+import de.evoal.models.v202704.optimisation.memory.PropertyValueType;
 import de.evoal.models.v202704.optimisation.memory.ReproducibilityNote;
 
 import de.evoal.optimisation.api.fitness.FitnessComponent;
@@ -26,16 +30,18 @@ import de.evoal.optimisation.api.fitness.Goal;
 /**
  * Records the description of the current run: the metrics it records
  *   ({@link Execution#getMetricDefinitions()}), the values of its execution metrics
- *   ({@link Execution#getMetrics()}) and the components of the fitness of its individuals
- *   ({@link Execution#getFitnessComponents()}).
+ *   ({@link Execution#getMetrics()}), the properties of its individuals and relationships
+ *   ({@link Execution#getPropertyDefinitions()}) and the components of the fitness of its
+ *   individuals ({@link Execution#getFitnessComponents()}).
  * <p>
  * A run passes through three phases, and the recorder rejects calls in the wrong phase:
  * <ol>
  *   <li>{@link #startRun()} opens the <em>definition phase</em>. The applications call it
  *     before they create the algorithm. The {@link MetricContributor}s and the components
  *     of the algorithm (e.g., stopping criteria) define all metrics
- *     ({@link #define(MetricDefinition)}). The applications define the components of the
- *     fitness ({@link #defineFitness(FitnessLayout)}).</li>
+ *     ({@link #define(MetricDefinition)}) and properties
+ *     ({@link #defineProperty(PropertyDefinition)}). The applications define the components
+ *     of the fitness ({@link #defineFitness(FitnessLayout)}).</li>
  *   <li>{@link #beginExecution()} closes the definitions and records the notes of the
  *     {@link ReproducibilityProtocol}. The applications call it after
  *     they created the algorithm and before they run it. From now on, the definitions are
@@ -125,6 +131,98 @@ public class ExecutionRecorder {
         }
 
         execution.getMetricDefinitions().add(definition);
+    }
+
+    /**
+     * Defines a property of the individuals or relationships of the current run.
+     *
+     * @param definition The definition of the property.
+     * @throws IllegalStateException if the run is not in the definition phase.
+     * @throws IllegalArgumentException if a property with the same name and scope is already
+     *   defined.
+     */
+    public void defineProperty(final PropertyDefinition definition) {
+        final String name = definition.getName();
+        requirePhase(Phase.DEFINITION, "define the property '" + name + "'");
+
+        final boolean alreadyDefined = findPropertyDefinition(name, definition.getScope()).isPresent();
+        if(alreadyDefined) {
+            throw new IllegalArgumentException("The property '" + name + "' is already defined with the scope "
+                                               + definition.getScope() + ".");
+        }
+
+        execution.getPropertyDefinitions().add(definition);
+    }
+
+    /**
+     * Defines a property of the current run, see {@link #defineProperty(PropertyDefinition)}.
+     *
+     * @param name The name of the property.
+     * @param scope Where the property is recorded.
+     * @param valueType The type of the values, or of their elements for a list.
+     * @param list Whether a value is a list.
+     * @param description What the property describes.
+     */
+    public void defineProperty(final String name,
+                               final PropertyScope scope,
+                               final PropertyValueType valueType,
+                               final boolean list,
+                               final String description) {
+        final PropertyDefinition definition = MemoryFactory.eINSTANCE.createPropertyDefinition();
+        definition.setName(name);
+        definition.setScope(scope);
+        definition.setValueType(valueType);
+        definition.setList(list);
+        definition.setDescription(description);
+
+        defineProperty(definition);
+    }
+
+    /**
+     * @param name The name of the property.
+     * @param scope Where the property is recorded.
+     * @return The definition of the property in the current run, if there is one.
+     */
+    public Optional<PropertyDefinition> findPropertyDefinition(final String name, final PropertyScope scope) {
+        return execution.getPropertyDefinitions()
+                        .stream()
+                        .filter(definition -> definition.getName().equals(name) && definition.getScope() == scope)
+                        .findFirst();
+    }
+
+    /**
+     * Checks a property value before it is recorded.
+     *
+     * @param name The name of the property.
+     * @param scope Where the property is recorded.
+     * @param value The value of the property.
+     * @throws IllegalStateException if the property is not defined with the scope, or if the
+     *   value does not match its definition.
+     */
+    public void requireProperty(final String name, final PropertyScope scope, final Object value) {
+        final PropertyDefinition definition = findPropertyDefinition(name, scope).orElseThrow(
+                () -> new IllegalStateException("The property '" + name + "' is not defined with the scope " + scope + "."));
+
+        final boolean matches = definition.isList()
+                ? value instanceof List<?> values && values.stream().allMatch(element -> hasType(element, definition.getValueType()))
+                : hasType(value, definition.getValueType());
+
+        if(!matches) {
+            throw new IllegalStateException("The value " + value + " of the property '" + name + "' is not "
+                                            + (definition.isList() ? "a list of " : "a ") + definition.getValueType() + ".");
+        }
+    }
+
+    /**
+     * @return Whether the value is stored as the value type requires.
+     */
+    private static boolean hasType(final Object value, final PropertyValueType valueType) {
+        return switch(valueType) {
+            case INTEGER -> value instanceof Long;
+            case REAL -> value instanceof Double;
+            case TEXT -> value instanceof String;
+            case BOOLEAN -> value instanceof Boolean;
+        };
     }
 
     /**

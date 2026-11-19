@@ -16,7 +16,9 @@ import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
 
+import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -24,6 +26,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EcoreEMap;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
@@ -39,6 +42,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link de.evoal.models.v202704.optimisation.memory.impl.IndividualImpl#getOutput <em>Output</em>}</li>
  *   <li>{@link de.evoal.models.v202704.optimisation.memory.impl.IndividualImpl#getFitness <em>Fitness</em>}</li>
  *   <li>{@link de.evoal.models.v202704.optimisation.memory.impl.IndividualImpl#getRelationships <em>Relationships</em>}</li>
+ *   <li>{@link de.evoal.models.v202704.optimisation.memory.impl.IndividualImpl#getProperties <em>Properties</em>}</li>
  * </ul>
  *
  * @generated
@@ -123,6 +127,16 @@ public class IndividualImpl extends MinimalEObjectImpl.Container implements Indi
 	 * @ordered
 	 */
 	protected EList<Relationship> relationships;
+
+	/**
+	 * The cached value of the '{@link #getProperties() <em>Properties</em>}' map.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getProperties()
+	 * @generated
+	 * @ordered
+	 */
+	protected EMap<String, Object> properties;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -244,10 +258,25 @@ public class IndividualImpl extends MinimalEObjectImpl.Container implements Indi
 	 * @generated
 	 */
 	@Override
+	public EMap<String, Object> getProperties() {
+		if (properties == null) {
+			properties = new EcoreEMap<String,Object>(MemoryPackage.Literals.PROPERTY_ENTRY, PropertyEntryImpl.class, this, MemoryPackage.INDIVIDUAL__PROPERTIES);
+		}
+		return properties;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case MemoryPackage.INDIVIDUAL__RELATIONSHIPS:
 				return ((InternalEList<?>)getRelationships()).basicRemove(otherEnd, msgs);
+			case MemoryPackage.INDIVIDUAL__PROPERTIES:
+				return ((InternalEList<?>)getProperties()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -270,6 +299,9 @@ public class IndividualImpl extends MinimalEObjectImpl.Container implements Indi
 				return getFitness();
 			case MemoryPackage.INDIVIDUAL__RELATIONSHIPS:
 				return getRelationships();
+			case MemoryPackage.INDIVIDUAL__PROPERTIES:
+				if (coreType) return getProperties();
+				else return getProperties().map();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -300,6 +332,9 @@ public class IndividualImpl extends MinimalEObjectImpl.Container implements Indi
 				getRelationships().clear();
 				getRelationships().addAll((Collection<? extends Relationship>)newValue);
 				return;
+			case MemoryPackage.INDIVIDUAL__PROPERTIES:
+				((EStructuralFeature.Setting)getProperties()).set(newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -327,6 +362,9 @@ public class IndividualImpl extends MinimalEObjectImpl.Container implements Indi
 			case MemoryPackage.INDIVIDUAL__RELATIONSHIPS:
 				getRelationships().clear();
 				return;
+			case MemoryPackage.INDIVIDUAL__PROPERTIES:
+				getProperties().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -349,6 +387,8 @@ public class IndividualImpl extends MinimalEObjectImpl.Container implements Indi
 				return fitness != null && !fitness.isEmpty();
 			case MemoryPackage.INDIVIDUAL__RELATIONSHIPS:
 				return relationships != null && !relationships.isEmpty();
+			case MemoryPackage.INDIVIDUAL__PROPERTIES:
+				return properties != null && !properties.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

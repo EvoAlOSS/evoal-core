@@ -125,6 +125,68 @@ module de.evoal.optimisation.core {
          *   the objectives into the canonical direction (minimisation).
          */
         'fitness-pipeline' : array instance 'fitness-step' := [];
+
+        /**
+         * Tests on candidates, each with a reaction to a failed test. A check type
+         *   defines its check point: checks on new candidates run after the variation
+         *   and before the evaluation, so a failed candidate costs no evaluation; checks
+         *   on the population run at the end of every iteration. An algorithm that does
+         *   not offer the check point of a configured check rejects the configuration.
+         */
+        'candidate-checks' : array instance 'candidate-check' := [];
+    }
+
+    /**
+     * The reaction to a candidate that fails a check.
+     *   'warn': the failure is reported; the candidate stays unchanged.
+     *   'replace': a new candidate takes the place of the failed one. It comes from the
+     *     'replacement-source' of the check, or from the 'initialisation' of the algorithm.
+     *   'resample': the variation is redone, with a bounded number of attempts.
+     *   'repair': the candidate is repaired; only checks that offer a repair strategy.
+     *
+     * Every check type states the reactions it supports; a configuration with an
+     *   unsupported reaction is rejected.
+     */
+    nominal enum 'check-reaction' ( warn, replace, resample, repair );
+
+    /**
+     * Abstract base type for tests on candidates (see {@code 'candidate-checks'} of
+     *   {@code algorithm}). Every reaction is recorded in the memory model as a step of
+     *   the kind {@code Check}. A replacement is linked to the candidate it replaces by a
+     *   relationship of the kind {@code replacement} with the property {@code reason}.
+     *   A replaced candidate that is not recorded (a new candidate, which is not evaluated,
+     *   or a population member that is new in the iteration) has no individual, so its
+     *   replacement has the property {@code reason} itself.
+     */
+    abstract type 'candidate-check' extends configuration {
+        /**
+         * The reaction to a failed candidate.
+         */
+        reaction : enum 'check-reaction';
+
+        /**
+         * The source of new candidates for the reaction 'replace'. If it is not set, the
+         *   'initialisation' of the algorithm is used. A 'specify-candidates' source
+         *   repeats its candidates, which is reported as a warning.
+         */
+        'replacement-source' : optional instance 'initial-population';
+    }
+
+    /**
+     * Fails a candidate of the population that is older than the given number of
+     *   iterations. The age of a candidate is the number of iterations it was carried over
+     *   into unchanged; a new candidate, e.g., a mutated one, has age 0. In a local search,
+     *   the age counts the iterations without an accepted neighbour, so 'replace' gives a
+     *   random restart after {@code iterations + 1} such iterations.
+     *
+     * Check point: the population. Reactions: 'warn', 'replace'.
+     */
+    type 'maximum-age' extends 'candidate-check' {
+        /**
+         * The highest age a candidate may have.
+         */
+        @LowerBoundary { boundary := 0; }
+        iterations : int;
     }
 
     /**
@@ -390,10 +452,12 @@ module de.evoal.optimisation.core {
      *
      * <ul>
      *   <li><tt>execution-information.json</tt> before the first iteration: problem,
-     *     goals, algorithm, search and optimisation space, metric definitions, and what is
-     *     needed to repeat the run (EvoAl version, seed, run).</li>
+     *     goals, algorithm, search and optimisation space, metric definitions, property
+     *     definitions (if any), and what is needed to repeat the run (EvoAl version, seed,
+     *     run).</li>
      *   <li><tt>iteration-&lt;n&gt;.json</tt> for every iteration: its individuals with
-     *     their values and origin (relationships), its steps, ranks and metrics.</li>
+     *     their values, origin (relationships) and properties (e.g. the reason of a
+     *     replacement), its steps, ranks and metrics.</li>
      *   <li><tt>execution-finished.json</tt> after the last iteration: the number of
      *     iterations, the best individuals and the execution metrics. Signals that no
      *     further files follow.</li>

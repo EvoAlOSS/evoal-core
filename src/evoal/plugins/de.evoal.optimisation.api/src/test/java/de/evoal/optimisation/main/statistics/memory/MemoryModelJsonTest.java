@@ -1,5 +1,7 @@
 package de.evoal.optimisation.main.statistics.memory;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
 
 import tools.jackson.databind.node.ObjectNode;
@@ -12,6 +14,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 import de.evoal.core.api.dynamic.EAnnotationHelper;
 import de.evoal.models.v202704.core.Configuration;
@@ -20,7 +23,11 @@ import de.evoal.models.v202704.optimisation.memory.FitnessComponentDefinition;
 import de.evoal.models.v202704.optimisation.memory.Individual;
 import de.evoal.models.v202704.optimisation.memory.Iteration;
 import de.evoal.models.v202704.optimisation.memory.MemoryFactory;
+import de.evoal.models.v202704.optimisation.memory.PropertyDefinition;
+import de.evoal.models.v202704.optimisation.memory.PropertyScope;
+import de.evoal.models.v202704.optimisation.memory.PropertyValueType;
 import de.evoal.models.v202704.optimisation.memory.Recombination;
+import de.evoal.models.v202704.optimisation.memory.Replacement;
 import de.evoal.models.v202704.optimisation.memory.UnorderedIterationStep;
 import de.evoal.models.v202704.optimisation.model.Problem;
 
@@ -37,6 +44,113 @@ public class MemoryModelJsonTest {
     private static final RunSetup SINGLE_RUN = new RunSetup("2027.4.0", 9_007_199_254_740_993L, 0, null);
 
     private final MemoryModelJson json = new MemoryModelJson(new EAnnotationHelper(), new ConfigurationJson(EObject::eGet));
+
+    @TempDir
+    private Path folder;
+
+    /**
+     * @return The violations of the document against the schema of the file name.
+     */
+    private List<String> violationsOf(final ObjectNode document, final String fileName) throws Exception {
+        final Path file = folder.resolve(fileName);
+        Files.writeString(file, document.toString());
+
+        return MemoryModelSchemas.violationsOf(file);
+    }
+
+    private static PropertyDefinition propertyDefinition(final String name, final PropertyScope scope,
+                                                         final PropertyValueType valueType, final boolean list) {
+        final PropertyDefinition definition = MemoryFactory.eINSTANCE.createPropertyDefinition();
+        definition.setName(name);
+        definition.setScope(scope);
+        definition.setValueType(valueType);
+        definition.setList(list);
+        definition.setDescription("Description of " + name + ".");
+
+        return definition;
+    }
+
+    @Nested
+    @DisplayName("given properties of individuals and relationships")
+    class Properties {
+        @Test
+        public void theDefinitionsAreWrittenAndValid() throws Exception {
+            // given
+            final Execution execution = MemoryModels.execution();
+            execution.getPropertyDefinitions().add(propertyDefinition("reason", PropertyScope.RELATIONSHIP,
+                                                                      PropertyValueType.TEXT, false));
+            execution.getPropertyDefinitions().add(propertyDefinition("sizes", PropertyScope.INDIVIDUAL,
+                                                                      PropertyValueType.INTEGER, true));
+
+            // when
+            final ObjectNode document = json.toExecutionInformation(MemoryModels.problem(),
+                                                                    MemoryModels.goals(MemoryModels.problem()),
+                                                                    "de.evoal.test.algorithm",
+                                                                    List.of(),
+                                                                    execution,
+                                                                    SINGLE_RUN);
+
+            // then
+            Assertions.assertEquals("[{\"name\":\"reason\",\"scope\":\"relationship\",\"valueType\":\"text\","
+                                    + "\"list\":false,\"description\":\"Description of reason.\"},"
+                                    + "{\"name\":\"sizes\",\"scope\":\"individual\",\"valueType\":\"integer\","
+                                    + "\"list\":true,\"description\":\"Description of sizes.\"}]",
+                                    document.get("propertyDefinitions").toString());
+            Assertions.assertEquals(List.of(), violationsOf(document, "execution-information.json"));
+        }
+
+        @Test
+        public void withoutDefinitionsThereIsNoSuchField() {
+            // when
+            final ObjectNode document = json.toExecutionInformation(MemoryModels.problem(),
+                                                                    MemoryModels.goals(MemoryModels.problem()),
+                                                                    "de.evoal.test.algorithm",
+                                                                    List.of(),
+                                                                    MemoryModels.execution(),
+                                                                    SINGLE_RUN);
+
+            // then
+            Assertions.assertFalse(document.has("propertyDefinitions"));
+        }
+
+        @Test
+        public void replacementsAreWrittenWithTheirProperties() throws Exception {
+            // given
+            final Individual replaced = MemoryModels.individual(0, new double[] {0.0, 0.0}, 0.0);
+            final Individual replacement = MemoryModels.individual(1, new double[] {0.5, 0.0}, 0.25);
+            final Replacement relationship = MemoryModels.relate(replacement, MemoryFactory.eINSTANCE.createReplacement(), replaced);
+            relationship.getProperties().put("reason", "maximum-age: age 3 exceeds 2 iterations");
+
+            // when
+            final ObjectNode document = json.toIteration(MemoryModels.iteration(1, replacement));
+
+            // then
+            Assertions.assertEquals("[{\"kind\":\"replacement\",\"targets\":[0],"
+                                    + "\"properties\":{\"reason\":\"maximum-age: age 3 exceeds 2 iterations\"}}]",
+                                    document.get("individuals").get(0).get("relationships").toString());
+            Assertions.assertEquals(List.of(), violationsOf(document, "iteration-1.json"));
+        }
+
+        @Test
+        public void individualPropertiesAreWrittenInOrderAndEmptyOnesAreLeftOut() throws Exception {
+            // given
+            final Individual withProperties = MemoryModels.individual(0, new double[] {0.0, 0.0}, 0.0);
+            withProperties.getProperties().put("reason", "too old");
+            withProperties.getProperties().put("sizes", List.of(1L, 2L));
+            withProperties.getProperties().put("valid", true);
+            withProperties.getProperties().put("share", 0.5);
+            final Individual without = MemoryModels.individual(1, new double[] {0.5, 0.0}, 0.25);
+
+            // when
+            final ObjectNode document = json.toIteration(MemoryModels.iteration(0, withProperties, without));
+
+            // then
+            Assertions.assertEquals("{\"reason\":\"too old\",\"sizes\":[1,2],\"valid\":true,\"share\":0.5}",
+                                    document.get("individuals").get(0).get("properties").toString());
+            Assertions.assertFalse(document.get("individuals").get(1).has("properties"));
+            Assertions.assertEquals(List.of(), violationsOf(document, "iteration-0.json"));
+        }
+    }
 
     @Nested
     @DisplayName("given a problem with declared bounds and scales")

@@ -17,6 +17,7 @@ import de.evoal.models.v202704.optimisation.execution.TerminationCriterion;
 import de.evoal.models.v202704.optimisation.memory.Individual;
 import de.evoal.models.v202704.optimisation.memory.Iteration;
 import de.evoal.models.v202704.optimisation.memory.MemoryFactory;
+import de.evoal.models.v202704.optimisation.memory.PropertyScope;
 import de.evoal.models.v202704.optimisation.memory.Rank;
 import de.evoal.models.v202704.optimisation.memory.Relationship;
 
@@ -47,6 +48,8 @@ import de.evoal.optimisation.api.statistics.writer.StatisticsWriterListener;
  *   individual with the next id, related to the individuals of the previous iteration
  *   by its {@link Lineage}. A predecessor that is not a member of the previous iteration,
  *   but an unchanged copy of one ({@link Lineage.Kind#IDENTITY}), stands for its original.
+ *   The properties of the member and of its lineage become the properties of the individual
+ *   and of its relationship; they have to be defined in the {@link ExecutionRecorder}.
  *   The best individual so far is the first individual whose
  *   optimisation value is better than the values of all earlier ones.
  * <p>
@@ -197,8 +200,10 @@ public class OptimisationRun {
     }
 
     /**
-     * @return The individual of the member with the next id, its objectives and fitness,
-     *   related to its predecessors.
+     * @return The individual of the member with the next id, its objectives, fitness and
+     *   properties, related to its predecessors.
+     * @throws IllegalStateException if a property is not defined or does not match its
+     *   definition.
      */
     private Individual toIndividual(final Candidate member) {
         final Individual individual = MemoryFactory.eINSTANCE.createIndividual();
@@ -217,6 +222,11 @@ public class OptimisationRun {
             bestIndividual = individual;
             bestValue = member.value();
         }
+
+        member.properties().forEach((name, value) -> {
+            recorder.requireProperty(name, PropertyScope.INDIVIDUAL, value);
+            individual.getProperties().put(name, value);
+        });
 
         final Lineage lineage = member.lineage();
         if(lineage.kind() != Lineage.Kind.NONE) {
@@ -245,15 +255,22 @@ public class OptimisationRun {
 
     /**
      * @return The relationship of the lineage to the individuals of the previous iteration.
-     * @throws IllegalStateException if a predecessor does not belong to the previous iteration.
+     * @throws IllegalStateException if a predecessor does not belong to the previous iteration,
+     *   or if a property is not defined or does not match its definition.
      */
     private Relationship toRelationship(final Lineage lineage) {
         final Relationship relationship = switch(lineage.kind()) {
             case IDENTITY -> MemoryFactory.eINSTANCE.createIdentity();
             case MUTATION -> MemoryFactory.eINSTANCE.createMutation();
             case RECOMBINATION -> MemoryFactory.eINSTANCE.createRecombination();
+            case REPLACEMENT -> MemoryFactory.eINSTANCE.createReplacement();
             case NONE -> throw new IllegalArgumentException("A lineage without predecessors has no relationship.");
         };
+
+        lineage.properties().forEach((name, value) -> {
+            recorder.requireProperty(name, PropertyScope.RELATIONSHIP, value);
+            relationship.getProperties().put(name, value);
+        });
 
         for(final Candidate predecessor : lineage.predecessors()) {
             relationship.getTarget().add(individualOf(predecessor));

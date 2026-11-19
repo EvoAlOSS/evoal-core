@@ -39,6 +39,16 @@
         <genEnumLiterals ecoreEnumLiteral="optimisation.ecore#//memory/MetricScope/Execution"/>
         <genEnumLiterals ecoreEnumLiteral="optimisation.ecore#//memory/MetricScope/Iteration"/>
       </genEnums>
+      <genEnums typeSafeEnumCompatible="false" ecoreEnum="optimisation.ecore#//memory/PropertyScope">
+        <genEnumLiterals ecoreEnumLiteral="optimisation.ecore#//memory/PropertyScope/Individual"/>
+        <genEnumLiterals ecoreEnumLiteral="optimisation.ecore#//memory/PropertyScope/Relationship"/>
+      </genEnums>
+      <genEnums typeSafeEnumCompatible="false" ecoreEnum="optimisation.ecore#//memory/PropertyValueType">
+        <genEnumLiterals ecoreEnumLiteral="optimisation.ecore#//memory/PropertyValueType/Integer"/>
+        <genEnumLiterals ecoreEnumLiteral="optimisation.ecore#//memory/PropertyValueType/Real"/>
+        <genEnumLiterals ecoreEnumLiteral="optimisation.ecore#//memory/PropertyValueType/Text"/>
+        <genEnumLiterals ecoreEnumLiteral="optimisation.ecore#//memory/PropertyValueType/Boolean"/>
+      </genEnums>
       <genClasses ecoreClass="optimisation.ecore#//memory/Execution">
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference optimisation.ecore#//memory/Execution/inputSpace"/>
@@ -47,6 +57,7 @@
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference optimisation.ecore#//memory/Execution/states"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference optimisation.ecore#//memory/Execution/metricDefinitions"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference optimisation.ecore#//memory/Execution/metrics"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference optimisation.ecore#//memory/Execution/propertyDefinitions"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference optimisation.ecore#//memory/Execution/fitnessComponents"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference optimisation.ecore#//memory/Execution/reproducibilityNotes"/>
       </genClasses>
@@ -95,16 +106,30 @@
             ecoreFeature="ecore:EAttribute optimisation.ecore#//memory/Individual/output"/>
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute optimisation.ecore#//memory/Individual/fitness"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference optimisation.ecore#//memory/Individual/relationships"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference optimisation.ecore#//memory/Individual/properties"/>
       </genClasses>
       <genClasses ecoreClass="optimisation.ecore#//memory/Relationship">
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference optimisation.ecore#//memory/Relationship/target"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference optimisation.ecore#//memory/Relationship/properties"/>
       </genClasses>
       <genClasses ecoreClass="optimisation.ecore#//memory/Identity"/>
       <genClasses ecoreClass="optimisation.ecore#//memory/Mutation"/>
       <genClasses ecoreClass="optimisation.ecore#//memory/Recombination">
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference optimisation.ecore#//memory/Recombination/other"/>
+      </genClasses>
+      <genClasses ecoreClass="optimisation.ecore#//memory/Replacement"/>
+      <genClasses ecoreClass="optimisation.ecore#//memory/PropertyEntry">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute optimisation.ecore#//memory/PropertyEntry/key"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute optimisation.ecore#//memory/PropertyEntry/value"/>
+      </genClasses>
+      <genClasses ecoreClass="optimisation.ecore#//memory/PropertyDefinition">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute optimisation.ecore#//memory/PropertyDefinition/name"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute optimisation.ecore#//memory/PropertyDefinition/scope"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute optimisation.ecore#//memory/PropertyDefinition/valueType"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute optimisation.ecore#//memory/PropertyDefinition/list"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute optimisation.ecore#//memory/PropertyDefinition/description"/>
       </genClasses>
       <genClasses ecoreClass="optimisation.ecore#//memory/MetricEntry">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute optimisation.ecore#//memory/MetricEntry/key"/>

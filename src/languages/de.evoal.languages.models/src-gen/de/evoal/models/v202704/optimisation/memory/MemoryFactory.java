@@ -122,6 +122,24 @@ public interface MemoryFactory extends EFactory {
 	Recombination createRecombination();
 
 	/**
+	 * Returns a new object of class '<em>Replacement</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Replacement</em>'.
+	 * @generated
+	 */
+	Replacement createReplacement();
+
+	/**
+	 * Returns a new object of class '<em>Property Definition</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Property Definition</em>'.
+	 * @generated
+	 */
+	PropertyDefinition createPropertyDefinition();
+
+	/**
 	 * Returns a new object of class '<em>Metric Definition</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

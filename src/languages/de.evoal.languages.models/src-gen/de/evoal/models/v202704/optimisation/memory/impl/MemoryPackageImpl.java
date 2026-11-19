@@ -27,9 +27,13 @@ import de.evoal.models.v202704.optimisation.memory.MetricScope;
 import de.evoal.models.v202704.optimisation.memory.MetricValueType;
 import de.evoal.models.v202704.optimisation.memory.Mutation;
 import de.evoal.models.v202704.optimisation.memory.OrderedIterationStep;
+import de.evoal.models.v202704.optimisation.memory.PropertyDefinition;
+import de.evoal.models.v202704.optimisation.memory.PropertyScope;
+import de.evoal.models.v202704.optimisation.memory.PropertyValueType;
 import de.evoal.models.v202704.optimisation.memory.Rank;
 import de.evoal.models.v202704.optimisation.memory.Recombination;
 import de.evoal.models.v202704.optimisation.memory.Relationship;
+import de.evoal.models.v202704.optimisation.memory.Replacement;
 import de.evoal.models.v202704.optimisation.memory.ReproducibilityNote;
 import de.evoal.models.v202704.optimisation.memory.State;
 import de.evoal.models.v202704.optimisation.memory.UnorderedIterationStep;
@@ -160,6 +164,27 @@ public class MemoryPackageImpl extends EPackageImpl implements MemoryPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass replacementEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass propertyEntryEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass propertyDefinitionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass metricEntryEClass = null;
 
 	/**
@@ -168,6 +193,20 @@ public class MemoryPackageImpl extends EPackageImpl implements MemoryPackage {
 	 * @generated
 	 */
 	private EClass metricDefinitionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum propertyScopeEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum propertyValueTypeEEnum = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -333,7 +372,7 @@ public class MemoryPackageImpl extends EPackageImpl implements MemoryPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getExecution_FitnessComponents() {
+	public EReference getExecution_PropertyDefinitions() {
 		return (EReference)executionEClass.getEStructuralFeatures().get(5);
 	}
 
@@ -343,8 +382,18 @@ public class MemoryPackageImpl extends EPackageImpl implements MemoryPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getExecution_ReproducibilityNotes() {
+	public EReference getExecution_FitnessComponents() {
 		return (EReference)executionEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getExecution_ReproducibilityNotes() {
+		return (EReference)executionEClass.getEStructuralFeatures().get(7);
 	}
 
 	/**
@@ -633,6 +682,16 @@ public class MemoryPackageImpl extends EPackageImpl implements MemoryPackage {
 	 * @generated
 	 */
 	@Override
+	public EReference getIndividual_Properties() {
+		return (EReference)individualEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getRelationship() {
 		return relationshipEClass;
 	}
@@ -645,6 +704,16 @@ public class MemoryPackageImpl extends EPackageImpl implements MemoryPackage {
 	@Override
 	public EReference getRelationship_Target() {
 		return (EReference)relationshipEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getRelationship_Properties() {
+		return (EReference)relationshipEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -685,6 +754,106 @@ public class MemoryPackageImpl extends EPackageImpl implements MemoryPackage {
 	@Override
 	public EReference getRecombination_Other() {
 		return (EReference)recombinationEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getReplacement() {
+		return replacementEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getPropertyEntry() {
+		return propertyEntryEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getPropertyEntry_Key() {
+		return (EAttribute)propertyEntryEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getPropertyEntry_Value() {
+		return (EAttribute)propertyEntryEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getPropertyDefinition() {
+		return propertyDefinitionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getPropertyDefinition_Name() {
+		return (EAttribute)propertyDefinitionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getPropertyDefinition_Scope() {
+		return (EAttribute)propertyDefinitionEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getPropertyDefinition_ValueType() {
+		return (EAttribute)propertyDefinitionEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getPropertyDefinition_List() {
+		return (EAttribute)propertyDefinitionEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getPropertyDefinition_Description() {
+		return (EAttribute)propertyDefinitionEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -783,6 +952,26 @@ public class MemoryPackageImpl extends EPackageImpl implements MemoryPackage {
 	 * @generated
 	 */
 	@Override
+	public EEnum getPropertyScope() {
+		return propertyScopeEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EEnum getPropertyValueType() {
+		return propertyValueTypeEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EEnum getMetricKind() {
 		return metricKindEEnum;
 	}
@@ -842,6 +1031,7 @@ public class MemoryPackageImpl extends EPackageImpl implements MemoryPackage {
 		createEReference(executionEClass, EXECUTION__STATES);
 		createEReference(executionEClass, EXECUTION__METRIC_DEFINITIONS);
 		createEReference(executionEClass, EXECUTION__METRICS);
+		createEReference(executionEClass, EXECUTION__PROPERTY_DEFINITIONS);
 		createEReference(executionEClass, EXECUTION__FITNESS_COMPONENTS);
 		createEReference(executionEClass, EXECUTION__REPRODUCIBILITY_NOTES);
 
@@ -881,9 +1071,11 @@ public class MemoryPackageImpl extends EPackageImpl implements MemoryPackage {
 		createEAttribute(individualEClass, INDIVIDUAL__OUTPUT);
 		createEAttribute(individualEClass, INDIVIDUAL__FITNESS);
 		createEReference(individualEClass, INDIVIDUAL__RELATIONSHIPS);
+		createEReference(individualEClass, INDIVIDUAL__PROPERTIES);
 
 		relationshipEClass = createEClass(RELATIONSHIP);
 		createEReference(relationshipEClass, RELATIONSHIP__TARGET);
+		createEReference(relationshipEClass, RELATIONSHIP__PROPERTIES);
 
 		identityEClass = createEClass(IDENTITY);
 
@@ -891,6 +1083,19 @@ public class MemoryPackageImpl extends EPackageImpl implements MemoryPackage {
 
 		recombinationEClass = createEClass(RECOMBINATION);
 		createEReference(recombinationEClass, RECOMBINATION__OTHER);
+
+		replacementEClass = createEClass(REPLACEMENT);
+
+		propertyEntryEClass = createEClass(PROPERTY_ENTRY);
+		createEAttribute(propertyEntryEClass, PROPERTY_ENTRY__KEY);
+		createEAttribute(propertyEntryEClass, PROPERTY_ENTRY__VALUE);
+
+		propertyDefinitionEClass = createEClass(PROPERTY_DEFINITION);
+		createEAttribute(propertyDefinitionEClass, PROPERTY_DEFINITION__NAME);
+		createEAttribute(propertyDefinitionEClass, PROPERTY_DEFINITION__SCOPE);
+		createEAttribute(propertyDefinitionEClass, PROPERTY_DEFINITION__VALUE_TYPE);
+		createEAttribute(propertyDefinitionEClass, PROPERTY_DEFINITION__LIST);
+		createEAttribute(propertyDefinitionEClass, PROPERTY_DEFINITION__DESCRIPTION);
 
 		metricEntryEClass = createEClass(METRIC_ENTRY);
 		createEAttribute(metricEntryEClass, METRIC_ENTRY__KEY);
@@ -904,6 +1109,8 @@ public class MemoryPackageImpl extends EPackageImpl implements MemoryPackage {
 		createEAttribute(metricDefinitionEClass, METRIC_DEFINITION__DESCRIPTION);
 
 		// Create enums
+		propertyScopeEEnum = createEEnum(PROPERTY_SCOPE);
+		propertyValueTypeEEnum = createEEnum(PROPERTY_VALUE_TYPE);
 		metricKindEEnum = createEEnum(METRIC_KIND);
 		metricValueTypeEEnum = createEEnum(METRIC_VALUE_TYPE);
 		metricScopeEEnum = createEEnum(METRIC_SCOPE);
@@ -946,6 +1153,7 @@ public class MemoryPackageImpl extends EPackageImpl implements MemoryPackage {
 		identityEClass.getESuperTypes().add(this.getRelationship());
 		mutationEClass.getESuperTypes().add(this.getRelationship());
 		recombinationEClass.getESuperTypes().add(this.getRelationship());
+		replacementEClass.getESuperTypes().add(this.getRelationship());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(executionEClass, Execution.class, "Execution", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -954,6 +1162,7 @@ public class MemoryPackageImpl extends EPackageImpl implements MemoryPackage {
 		initEReference(getExecution_States(), this.getState(), null, "states", null, 0, -1, Execution.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getExecution_MetricDefinitions(), this.getMetricDefinition(), null, "metricDefinitions", null, 0, -1, Execution.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getExecution_Metrics(), this.getMetricEntry(), null, "metrics", null, 0, -1, Execution.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getExecution_PropertyDefinitions(), this.getPropertyDefinition(), null, "propertyDefinitions", null, 0, -1, Execution.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getExecution_FitnessComponents(), this.getFitnessComponentDefinition(), null, "fitnessComponents", null, 0, -1, Execution.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getExecution_ReproducibilityNotes(), this.getReproducibilityNote(), null, "reproducibilityNotes", null, 0, -1, Execution.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -1007,9 +1216,11 @@ public class MemoryPackageImpl extends EPackageImpl implements MemoryPackage {
 		initEAttribute(getIndividual_Output(), theOptimisationPackage.getTypedEObject(), "output", null, 1, 1, Individual.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getIndividual_Fitness(), ecorePackage.getEDouble(), "fitness", null, 0, -1, Individual.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getIndividual_Relationships(), this.getRelationship(), null, "relationships", null, 0, -1, Individual.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getIndividual_Properties(), this.getPropertyEntry(), null, "properties", null, 0, -1, Individual.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(relationshipEClass, Relationship.class, "Relationship", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getRelationship_Target(), this.getIndividual(), null, "target", null, 1, -1, Relationship.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getRelationship_Properties(), this.getPropertyEntry(), null, "properties", null, 0, -1, Relationship.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(identityEClass, Identity.class, "Identity", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1017,6 +1228,19 @@ public class MemoryPackageImpl extends EPackageImpl implements MemoryPackage {
 
 		initEClass(recombinationEClass, Recombination.class, "Recombination", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getRecombination_Other(), this.getRecombination(), null, "other", null, 1, 1, Recombination.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(replacementEClass, Replacement.class, "Replacement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(propertyEntryEClass, Map.Entry.class, "PropertyEntry", !IS_ABSTRACT, !IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getPropertyEntry_Key(), ecorePackage.getEString(), "key", null, 1, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPropertyEntry_Value(), ecorePackage.getEJavaObject(), "value", null, 1, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(propertyDefinitionEClass, PropertyDefinition.class, "PropertyDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getPropertyDefinition_Name(), ecorePackage.getEString(), "name", null, 1, 1, PropertyDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPropertyDefinition_Scope(), this.getPropertyScope(), "scope", null, 1, 1, PropertyDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPropertyDefinition_ValueType(), this.getPropertyValueType(), "valueType", null, 1, 1, PropertyDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPropertyDefinition_List(), ecorePackage.getEBoolean(), "list", null, 1, 1, PropertyDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPropertyDefinition_Description(), ecorePackage.getEString(), "description", null, 1, 1, PropertyDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(metricEntryEClass, Map.Entry.class, "MetricEntry", !IS_ABSTRACT, !IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getMetricEntry_Key(), ecorePackage.getEString(), "key", null, 1, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1030,6 +1254,16 @@ public class MemoryPackageImpl extends EPackageImpl implements MemoryPackage {
 		initEAttribute(getMetricDefinition_Description(), ecorePackage.getEString(), "description", null, 1, 1, MetricDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
+		initEEnum(propertyScopeEEnum, PropertyScope.class, "PropertyScope");
+		addEEnumLiteral(propertyScopeEEnum, PropertyScope.INDIVIDUAL);
+		addEEnumLiteral(propertyScopeEEnum, PropertyScope.RELATIONSHIP);
+
+		initEEnum(propertyValueTypeEEnum, PropertyValueType.class, "PropertyValueType");
+		addEEnumLiteral(propertyValueTypeEEnum, PropertyValueType.INTEGER);
+		addEEnumLiteral(propertyValueTypeEEnum, PropertyValueType.REAL);
+		addEEnumLiteral(propertyValueTypeEEnum, PropertyValueType.TEXT);
+		addEEnumLiteral(propertyValueTypeEEnum, PropertyValueType.BOOLEAN);
+
 		initEEnum(metricKindEEnum, MetricKind.class, "MetricKind");
 		addEEnumLiteral(metricKindEEnum, MetricKind.COUNTER);
 		addEEnumLiteral(metricKindEEnum, MetricKind.MEASURE);

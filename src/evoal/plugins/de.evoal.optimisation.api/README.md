@@ -71,7 +71,8 @@ module de.evoal.optimisation.random_search.optimisation {
 ```
 
 `'algorithm'` already brings `'initialisation'`, `'comparator'`,
-`'optimisation-function'`, `'stopping-criteria'` and `'fitness-pipeline'`.
+`'optimisation-function'`, `'stopping-criteria'`, `'fitness-pipeline'` and
+`'candidate-checks'`.
 
 ### 2. The algorithm class
 
@@ -108,8 +109,9 @@ public class RandomSearchAlgorithm extends TemplateAlgorithm {
 }
 ```
 
-`TemplateAlgorithm` creates the termination criterion from `'stopping-criteria'`, then
-calls `configure`. Throw an `InitializationException` there if the configuration cannot
+`TemplateAlgorithm` creates the termination criterion from `'stopping-criteria'` and the
+candidate checks from `'candidate-checks'` (see [Candidate checks](#candidate-checks)),
+then calls `configure`. Throw an `InitializationException` there if the configuration cannot
 be used, e.g. because the search space has variables the algorithm cannot handle.
 `template()` is called once per run and must return a new template.
 
@@ -127,6 +129,7 @@ memory model (e.g. `Initialization: sample 20 candidates`).
 | `FitnessCalculation` | evaluates candidates | `EvaluateCandidates` |
 | `Acceptance` | decides which candidates form the population | `ReplacePopulation`, `AcceptNeighbour` (local search) |
 | `ParameterAdjustment` | changes the parameters of the strategy | `AdjustAcceptingStrategy` (local search), ARPSO direction |
+| `Check` | tests candidates and reacts to failures | `CheckPopulation`, `CheckNewCandidates` |
 
 The `Loop` and the `Generation Increment` of the meta-model are the kernel's main loop.
 
@@ -175,13 +178,20 @@ kernel maps it to its individual.
   `Candidate.evaluated(input, evaluation, lineage)` an evaluated one. The evaluation is
   set once; `output()`, `fitness()` and `value()` read its parts.
 - `Lineage.NONE` for initial or sampled candidates, `Lineage.identity(c)` for an
-  unchanged candidate, `Lineage.mutation(c)` for a changed one, and
-  `Lineage.recombination(parents)` for a combination.
+  unchanged candidate, `Lineage.mutation(c)` for a changed one,
+  `Lineage.recombination(parents)` for a combination, and `Lineage.replacement(c)` for a
+  candidate that took the place of `c` (e.g. after a failed check).
 - Every member of a population must be evaluated.
-- After every iteration the template replaces each member by a `copy()` with an identity
-  lineage. A member that no step replaces is therefore recorded as the same candidate in
-  the next iteration. Steps create new candidates with a lineage to the members they come
-  from.
+- After every iteration the template replaces each member by a `survivor()`: a copy with
+  an identity lineage whose age is one higher. A member that no step replaces is therefore
+  recorded as the same candidate in the next iteration. Steps create new candidates with a
+  lineage to the members they come from; a new candidate has age 0.
+- Further details go into properties: `candidate.setProperty(name, value)` for the
+  individual, `lineage.withProperty(name, value)` for the relationship. A value is a
+  `Long`, `Double`, `String` or `Boolean`, or a `List` of one of these. Every name is
+  defined once per run with `ExecutionRecorder.defineProperty` (name, scope, value type,
+  list, description), while the algorithm is created; the kernel rejects undefined names and
+  values of another type.
 
 The population of an iteration is ranked by optimisation value (`Ranking.byValue`).
 
@@ -195,7 +205,13 @@ is at that point, and ends the run. A step that changes the population or the st
 state before the evaluation has to leave both consistent; e.g. particles that were not
 evaluated undo their move.
 
-### 7. The plugin
+### 7. Candidate checks
+
+See [Candidate checks](#candidate-checks): state the check points the algorithm offers in
+`checkPoints()` and place the steps of `populationChecks(evaluator)` and
+`newCandidateChecks()` at them.
+
+### 8. The plugin
 
 - `module-info.java`: `requires de.evoal.core.main`, `de.evoal.languages.models`,
   `de.evoal.optimisation.api`, `jakarta.inject`, `jakarta.cdi`, `org.eclipse.emf.ecore`;
@@ -208,6 +224,49 @@ evaluated undo their move.
 - Regressions go to `src/test/regressions/<name>/` (`search.ol`, `search.ddl`,
   `expected/`), see the README of `de.evoal.releng.regressions`. Examples go to
   `src/main/examples/<name>/`.
+
+## Candidate checks
+
+A candidate check (`api.checks.CandidateCheck`, DL type `'candidate-check'`) tests
+candidates and reacts to the ones that fail (`'check-reaction'`): `warn` reports the
+failure, `replace` puts a new candidate in place of the failed one. `resample` and
+`repair` are declared, but no check supports them yet. The checks are configured in
+`'candidate-checks'` of every algorithm and run in their configured order.
+
+Every check type defines its check point:
+
+| Check point | Step | When | Replacement |
+|---|---|---|---|
+| `NEW_CANDIDATES` | `CheckNewCandidates` | after the variation, before the evaluation; a failed candidate costs no evaluation | not evaluated; no predecessor, the property `reason` on the individual |
+| `POPULATION` | `CheckPopulation(evaluator)` | as the last step of an iteration | evaluated by the step; `Lineage.replacement(member)` with the property `reason`, or, for a member that is new in the iteration, no predecessor and `reason` on the individual |
+
+A replaced candidate that is not recorded in the memory model has no individual, so the
+replacement cannot refer to it.
+
+`TemplateAlgorithm` creates the checks with the `CandidateCheckProducer`. It rejects the
+configuration with an `InitializationException` if a check does not support its reaction
+or if the algorithm does not offer its check point (`checkPoints()`, none by default). An
+algorithm places the steps of `populationChecks(evaluator)` and `newCandidateChecks()` at
+its check points; both are empty if no check is configured, so the recorded steps do not
+change. Local search offers `POPULATION`; random search and particle swarm optimisation
+offer none.
+
+Replacements come from the `'replacement-source'` of the check or from the
+`'initialisation'` of the algorithm. Each check takes them from one stream of its source
+per run, so `'random-population'` continues to draw new candidates; `'specify-candidates'`
+repeats its candidates, which is logged as a warning.
+
+Checks in this module:
+
+- `'maximum-age' { iterations; }` (`POPULATION`; `warn`, `replace`): fails a member whose
+  age (`Candidate.age()`, the number of iterations it was carried over unchanged) exceeds
+  `iterations`. In a local search, this is a random restart after `iterations + 1`
+  iterations without an accepted neighbour.
+
+A new check type extends `AbstractCandidateCheck` (reads `reaction` and
+`'replacement-source'`), is a `@Dependent` bean named after its DL type, and declares its
+check point, its supported reactions and `test(candidate)`, which returns why the
+candidate failed.
 
 ## The fitness pipeline
 

@@ -1,0 +1,38 @@
+{
+  "formatVersion" : "2027.4.0",
+  "number" : 0,
+  "individuals" : [ {
+    "id" : 0,
+    "input" : {
+      "x:0" : 1.0,
+      "x:1" : 1.0
+    },
+    "output" : {
+      "y:0" : 0.0
+    },
+    "fitness" : [ 0.0 ],
+    "relationships" : [ ]
+  } ],
+  "steps" : [ {
+    "kind" : "unordered",
+    "description" : "Initialization: sample 1 candidates",
+    "individuals" : [ ]
+  }, {
+    "kind" : "unordered",
+    "description" : "FitnessCalculation: evaluate the candidates",
+    "individuals" : [ ]
+  }, {
+    "kind" : "unordered",
+    "description" : "Acceptance: replace the population by the candidates",
+    "individuals" : [ ]
+  } ],
+  "ranks" : [ {
+    "number" : 0,
+    "members" : [ 0 ]
+  } ],
+  "bestSoFar" : 0,
+  "metrics" : {
+    "evaluations.real" : 1,
+    "evaluations.surrogate" : 0
+  }
+}

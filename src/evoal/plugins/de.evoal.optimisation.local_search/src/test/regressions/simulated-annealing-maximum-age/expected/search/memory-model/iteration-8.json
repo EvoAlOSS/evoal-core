@@ -1,0 +1,52 @@
+{
+  "formatVersion" : "2027.4.0",
+  "number" : 8,
+  "individuals" : [ {
+    "id" : 8,
+    "input" : {
+      "x:0" : 3.896479442898308,
+      "x:1" : 1.109097128351447
+    },
+    "output" : {
+      "y:0" : 19814.602933316295
+    },
+    "fitness" : [ 19814.602933316295 ],
+    "relationships" : [ {
+      "kind" : "replacement",
+      "targets" : [ 7 ],
+      "properties" : {
+        "reason" : "maximum-age: age 4 exceeds 3 iterations"
+      }
+    } ]
+  } ],
+  "steps" : [ {
+    "kind" : "unordered",
+    "description" : "Adaption: offer a random neighbour",
+    "individuals" : [ ]
+  }, {
+    "kind" : "unordered",
+    "description" : "FitnessCalculation: evaluate the offered candidates until one is accepted",
+    "individuals" : [ ]
+  }, {
+    "kind" : "unordered",
+    "description" : "Acceptance: move to the accepted neighbour",
+    "individuals" : [ ]
+  }, {
+    "kind" : "unordered",
+    "description" : "ParameterAdjustment: adjust the accepting strategy",
+    "individuals" : [ ]
+  }, {
+    "kind" : "unordered",
+    "description" : "Check: maximum-age (replace): 1 of 1 candidates failed",
+    "individuals" : [ ]
+  } ],
+  "ranks" : [ {
+    "number" : 0,
+    "members" : [ 8 ]
+  } ],
+  "bestSoFar" : 0,
+  "metrics" : {
+    "evaluations.real" : 11,
+    "evaluations.surrogate" : 0
+  }
+}

@@ -7,6 +7,7 @@ import de.evoal.models.core.ecore.TypedEObject;
 
 import org.eclipse.emf.common.util.EList;
 
+import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -29,6 +30,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link de.evoal.models.v202704.optimisation.memory.Individual#getOutput <em>Output</em>}</li>
  *   <li>{@link de.evoal.models.v202704.optimisation.memory.Individual#getFitness <em>Fitness</em>}</li>
  *   <li>{@link de.evoal.models.v202704.optimisation.memory.Individual#getRelationships <em>Relationships</em>}</li>
+ *   <li>{@link de.evoal.models.v202704.optimisation.memory.Individual#getProperties <em>Properties</em>}</li>
  * </ul>
  *
  * @see de.evoal.models.v202704.optimisation.memory.MemoryPackage#getIndividual()
@@ -158,5 +160,25 @@ public interface Individual extends EObject {
 	 * @generated
 	 */
 	EList<Relationship> getRelationships();
+
+	/**
+	 * Returns the value of the '<em><b>Properties</b></em>' map.
+	 * The key is of type {@link java.lang.String},
+	 * and the value is of type {@link java.lang.Object},
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * *
+	 * Further details of the individual, e.g., its age, by property name. The properties
+	 *   are defined in {@link Execution#getPropertyDefinitions()} with the scope
+	 *   {@link PropertyScope#INDIVIDUAL}.
+	 * 
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Properties</em>' map.
+	 * @see de.evoal.models.v202704.optimisation.memory.MemoryPackage#getIndividual_Properties()
+	 * @model mapType="de.evoal.models.v202704.optimisation.memory.PropertyEntry&lt;org.eclipse.emf.ecore.EString, org.eclipse.emf.ecore.EJavaObject&gt;"
+	 * @generated
+	 */
+	EMap<String, Object> getProperties();
 
 } // Individual

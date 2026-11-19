@@ -71,6 +71,9 @@ public class MemoryFactoryImpl extends EFactoryImpl implements MemoryFactory {
 			case MemoryPackage.IDENTITY: return createIdentity();
 			case MemoryPackage.MUTATION: return createMutation();
 			case MemoryPackage.RECOMBINATION: return createRecombination();
+			case MemoryPackage.REPLACEMENT: return createReplacement();
+			case MemoryPackage.PROPERTY_ENTRY: return (EObject)createPropertyEntry();
+			case MemoryPackage.PROPERTY_DEFINITION: return createPropertyDefinition();
 			case MemoryPackage.METRIC_ENTRY: return (EObject)createMetricEntry();
 			case MemoryPackage.METRIC_DEFINITION: return createMetricDefinition();
 			default:
@@ -86,6 +89,10 @@ public class MemoryFactoryImpl extends EFactoryImpl implements MemoryFactory {
 	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
 		switch (eDataType.getClassifierID()) {
+			case MemoryPackage.PROPERTY_SCOPE:
+				return createPropertyScopeFromString(eDataType, initialValue);
+			case MemoryPackage.PROPERTY_VALUE_TYPE:
+				return createPropertyValueTypeFromString(eDataType, initialValue);
 			case MemoryPackage.METRIC_KIND:
 				return createMetricKindFromString(eDataType, initialValue);
 			case MemoryPackage.METRIC_VALUE_TYPE:
@@ -105,6 +112,10 @@ public class MemoryFactoryImpl extends EFactoryImpl implements MemoryFactory {
 	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
 		switch (eDataType.getClassifierID()) {
+			case MemoryPackage.PROPERTY_SCOPE:
+				return convertPropertyScopeToString(eDataType, instanceValue);
+			case MemoryPackage.PROPERTY_VALUE_TYPE:
+				return convertPropertyValueTypeToString(eDataType, instanceValue);
 			case MemoryPackage.METRIC_KIND:
 				return convertMetricKindToString(eDataType, instanceValue);
 			case MemoryPackage.METRIC_VALUE_TYPE:
@@ -242,6 +253,38 @@ public class MemoryFactoryImpl extends EFactoryImpl implements MemoryFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
+	public Replacement createReplacement() {
+		ReplacementImpl replacement = new ReplacementImpl();
+		return replacement;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Map.Entry<String, Object> createPropertyEntry() {
+		PropertyEntryImpl propertyEntry = new PropertyEntryImpl();
+		return propertyEntry;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public PropertyDefinition createPropertyDefinition() {
+		PropertyDefinitionImpl propertyDefinition = new PropertyDefinitionImpl();
+		return propertyDefinition;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public Map.Entry<String, Number> createMetricEntry() {
 		MetricEntryImpl metricEntry = new MetricEntryImpl();
 		return metricEntry;
@@ -256,6 +299,46 @@ public class MemoryFactoryImpl extends EFactoryImpl implements MemoryFactory {
 	public MetricDefinition createMetricDefinition() {
 		MetricDefinitionImpl metricDefinition = new MetricDefinitionImpl();
 		return metricDefinition;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public PropertyScope createPropertyScopeFromString(EDataType eDataType, String initialValue) {
+		PropertyScope result = PropertyScope.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertPropertyScopeToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public PropertyValueType createPropertyValueTypeFromString(EDataType eDataType, String initialValue) {
+		PropertyValueType result = PropertyValueType.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertPropertyValueTypeToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
 	}
 
 	/**

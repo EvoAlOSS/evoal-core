@@ -21,9 +21,11 @@ import de.evoal.models.v202704.optimisation.memory.Identity;
 import de.evoal.models.v202704.optimisation.memory.Individual;
 import de.evoal.models.v202704.optimisation.memory.Iteration;
 import de.evoal.models.v202704.optimisation.memory.Mutation;
+import de.evoal.models.v202704.optimisation.memory.PropertyScope;
 import de.evoal.models.v202704.optimisation.memory.Rank;
 import de.evoal.models.v202704.optimisation.memory.Recombination;
 import de.evoal.models.v202704.optimisation.memory.Relationship;
+import de.evoal.models.v202704.optimisation.memory.Replacement;
 
 import de.evoal.optimisation.api.evaluation.EvaluationBudgetExhaustedException;
 import de.evoal.optimisation.api.evaluation.EvaluationSource;
@@ -48,6 +50,11 @@ public class OptimisationRunTest {
      * The iterations the statistics writer received.
      */
     private final List<Iteration> iterations = new ArrayList<>();
+
+    /**
+     * Checks the properties; accepts every property unless a test says otherwise.
+     */
+    private final ExecutionRecorder recorder = Mockito.mock(ExecutionRecorder.class);
 
     private final OptimisationRun kernel = kernel();
 
@@ -94,8 +101,7 @@ public class OptimisationRunTest {
             }
         };
 
-        return new OptimisationRun(events, new IndividualIDGenerator(), Mockito.mock(ExecutionRecorder.class),
-                                   scope, statistics);
+        return new OptimisationRun(events, new IndividualIDGenerator(), recorder, scope, statistics);
     }
 
     @BeforeEach
@@ -375,6 +381,10 @@ public class OptimisationRunTest {
                                 () -> new Lineage(Lineage.Kind.MUTATION, List.of(member(1, Lineage.NONE), member(2, Lineage.NONE))));
         Assertions.assertThrows(IllegalArgumentException.class,
                                 () -> new Lineage(Lineage.Kind.NONE, List.of(member(1, Lineage.NONE))));
+        Assertions.assertThrows(IllegalArgumentException.class,
+                                () -> new Lineage(Lineage.Kind.REPLACEMENT, List.of()));
+        Assertions.assertThrows(IllegalArgumentException.class,
+                                () -> Lineage.NONE.withProperty("reason", "none"));
     }
 
     @Test
@@ -389,6 +399,61 @@ public class OptimisationRunTest {
 
         Assertions.assertThrows(IllegalArgumentException.class,
                                 () -> new Population(List.of(unevaluated), List.of(List.of(0))));
+    }
+
+    @Nested
+    @DisplayName("given a member that replaces a previous member")
+    class Replacing {
+        private final FakeProcedure procedure = new FakeProcedure((number, previous) -> {
+            if(number == 0) {
+                return Population.of(member(1, Lineage.NONE));
+            }
+
+            final Candidate survivor = previous.getFirst().survivor();
+            final Candidate replacement = member(2, Lineage.replacement(survivor).withProperty("reason", "too old"));
+            replacement.setProperty("age", 0L);
+            return Population.of(replacement);
+        });
+
+        @BeforeEach
+        public void lastIterationIsOne() {
+            lastIteration = 1;
+        }
+
+        @Test
+        public void theReplacementRefersToTheReplacedIndividualWithItsProperties() {
+            // when
+            kernel.execute(criterion, procedure);
+
+            // then
+            final Individual replacement = individual(iterations.get(1), 1);
+            final Relationship relationship = replacement.getRelationships().getFirst();
+            Assertions.assertInstanceOf(Replacement.class, relationship);
+            Assertions.assertEquals(List.of(0), targetIds(relationship));
+            Assertions.assertEquals("too old", relationship.getProperties().get("reason"));
+            Assertions.assertEquals(0L, replacement.getProperties().get("age"));
+        }
+
+        @Test
+        public void thePropertiesAreCheckedByTheRecorder() {
+            // when
+            kernel.execute(criterion, procedure);
+
+            // then
+            Mockito.verify(recorder).requireProperty("reason", PropertyScope.RELATIONSHIP, "too old");
+            Mockito.verify(recorder).requireProperty("age", PropertyScope.INDIVIDUAL, 0L);
+        }
+
+        @Test
+        public void anUndefinedPropertyIsRejected() {
+            // given
+            Mockito.doThrow(new IllegalStateException("not defined"))
+                   .when(recorder)
+                   .requireProperty("reason", PropertyScope.RELATIONSHIP, "too old");
+
+            // when, then
+            Assertions.assertThrows(IllegalStateException.class, () -> kernel.execute(criterion, procedure));
+        }
     }
 
     @Nested

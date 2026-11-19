@@ -1,0 +1,324 @@
+package de.evoal.optimisation.api.checks;
+
+import java.util.EnumSet;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+import java.util.function.Predicate;
+import java.util.stream.Stream;
+
+import org.eclipse.emf.ecore.EObject;
+
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
+
+import org.mockito.Mockito;
+
+import de.evoal.models.core.ecore.TypedEObject;
+import de.evoal.models.core.exceptions.InitializationException;
+import de.evoal.models.v202704.optimisation.execution.OptimisationValue;
+
+import de.evoal.optimisation.api.evaluation.EvaluationBudgetExhaustedException;
+import de.evoal.optimisation.api.evaluation.EvaluationSource;
+import de.evoal.optimisation.api.fitness.BatchEvaluation;
+import de.evoal.optimisation.api.fitness.Evaluation;
+import de.evoal.optimisation.api.fitness.Evaluator;
+import de.evoal.optimisation.api.fitness.Fitness;
+import de.evoal.optimisation.api.fitness.FitnessLayout;
+import de.evoal.optimisation.api.model.InitialCandidatesProvider;
+import de.evoal.optimisation.api.run.Candidate;
+import de.evoal.optimisation.api.run.Lineage;
+import de.evoal.optimisation.api.steps.SearchState;
+
+public class CheckStepsTest {
+    /**
+     * The candidates of the replacement source, in order.
+     */
+    private final List<TypedEObject> replacements = List.of(Mockito.mock(TypedEObject.class),
+                                                            Mockito.mock(TypedEObject.class),
+                                                            Mockito.mock(TypedEObject.class));
+
+    /**
+     * Provides {@link #replacements}; counts how often a stream is created.
+     */
+    private final InitialCandidatesProvider provider = Mockito.mock(InitialCandidatesProvider.class);
+
+    /**
+     * Evaluates every input, unless {@link #budget} is smaller than the batch.
+     */
+    private final Evaluator evaluator = Mockito.mock(Evaluator.class);
+
+    private int budget = Integer.MAX_VALUE;
+
+    private final SearchState state = new SearchState();
+
+    @BeforeEach
+    public void mockProviderAndEvaluator() {
+        Mockito.when(provider.create()).thenAnswer(invocation -> replacements.stream());
+        Mockito.when(evaluator.evaluateAll(Mockito.anyList())).thenAnswer(invocation -> {
+            final List<TypedEObject> inputs = invocation.getArgument(0);
+            final List<Evaluation> evaluations = inputs.stream()
+                                                       .limit(budget)
+                                                       .map(input -> evaluation())
+                                                       .toList();
+            final EvaluationBudgetExhaustedException exhaustion = evaluations.size() < inputs.size()
+                    ? new EvaluationBudgetExhaustedException(EvaluationSource.REAL, budget)
+                    : null;
+
+            return new BatchEvaluation(evaluations, exhaustion);
+        });
+    }
+
+    private static Evaluation evaluation() {
+        return new Evaluation(Mockito.mock(TypedEObject.class),
+                              new Fitness(FitnessLayout.EMPTY, new double[0]),
+                              Mockito.mock(OptimisationValue.class));
+    }
+
+    private static Candidate member() {
+        return Candidate.evaluated(Mockito.mock(TypedEObject.class), evaluation(), Lineage.NONE).survivor();
+    }
+
+    private ConfiguredCheck check(final String name, final CheckPoint point, final CheckReaction reaction,
+                                  final Predicate<Candidate> fails) {
+        final TestCheck check = new TestCheck(name, point, reaction, fails);
+
+        return reaction == CheckReaction.REPLACE
+                ? new ConfiguredCheck(check, () -> new ReplacementSource(provider))
+                : ConfiguredCheck.withoutSource(check);
+    }
+
+    @Nested
+    @DisplayName("given a population check")
+    class PopulationChecks {
+        private final Candidate passing = member();
+        private final Candidate failing = member();
+
+        @BeforeEach
+        public void population() {
+            state.setPopulation(List.of(passing, failing));
+        }
+
+        @Test
+        public void aWarningKeepsThePopulation() {
+            // given
+            final CheckPopulation step = new CheckPopulation(List.of(check("test", CheckPoint.POPULATION, CheckReaction.WARN,
+                                                                           candidate -> candidate == failing)),
+                                                             evaluator);
+
+            // when
+            step.execute(state);
+
+            // then
+            Assertions.assertEquals(List.of(passing, failing), state.getPopulation());
+            Assertions.assertEquals("test (warn): 1 of 2 candidates failed", step.description());
+            Assertions.assertEquals("Check", step.kind());
+            Mockito.verify(evaluator).evaluateAll(List.of());
+        }
+
+        @Test
+        public void aFailedMemberIsReplacedByAnEvaluatedCandidateThatRefersToIt() {
+            // given
+            final CheckPopulation step = new CheckPopulation(List.of(check("test", CheckPoint.POPULATION, CheckReaction.REPLACE,
+                                                                           candidate -> candidate == failing)),
+                                                             evaluator);
+
+            // when
+            step.execute(state);
+
+            // then
+            final Candidate replacement = state.getPopulation().get(1);
+            Assertions.assertSame(passing, state.getPopulation().getFirst());
+            Assertions.assertSame(replacements.getFirst(), replacement.input());
+            Assertions.assertTrue(replacement.isEvaluated());
+            Assertions.assertEquals(0, replacement.age());
+            Assertions.assertEquals(Lineage.replacement(failing).withProperty("reason", "test: failed"),
+                                    replacement.lineage());
+        }
+
+        @Test
+        public void aMemberThatIsNewInTheIterationIsReplacedWithoutPredecessor() {
+            // given: the failing member is not carried over, so it is not recorded
+            final Candidate parent = member();
+            final Candidate offspring = Candidate.evaluated(Mockito.mock(TypedEObject.class), evaluation(),
+                                                            Lineage.mutation(parent));
+            state.setPopulation(List.of(passing, offspring));
+            final CheckPopulation step = new CheckPopulation(List.of(check("test", CheckPoint.POPULATION, CheckReaction.REPLACE,
+                                                                           candidate -> candidate == offspring)),
+                                                             evaluator);
+
+            // when
+            step.execute(state);
+
+            // then
+            final Candidate replacement = state.getPopulation().get(1);
+            Assertions.assertEquals(Lineage.NONE, replacement.lineage());
+            Assertions.assertEquals("test: failed", replacement.properties().get("reason"));
+            Assertions.assertTrue(replacement.isEvaluated());
+        }
+
+        @Test
+        public void replacementsContinueTheStreamOfTheSource() {
+            // given
+            final CheckPopulation step = new CheckPopulation(List.of(check("test", CheckPoint.POPULATION, CheckReaction.REPLACE,
+                                                                           candidate -> candidate == failing)),
+                                                             evaluator);
+            step.execute(state);
+            state.setPopulation(List.of(passing, failing));
+
+            // when
+            step.execute(state);
+
+            // then
+            Assertions.assertSame(replacements.get(1), state.getPopulation().get(1).input());
+            Mockito.verify(provider, Mockito.times(1)).create();
+        }
+
+        @Test
+        public void aReplacementThatFailsALaterCheckIsReplacedAgainAndRefersToTheMember() {
+            // given: the second check fails everything that is not passing
+            final CheckPopulation step = new CheckPopulation(List.of(check("first", CheckPoint.POPULATION, CheckReaction.REPLACE,
+                                                                           candidate -> candidate == failing),
+                                                                     check("second", CheckPoint.POPULATION, CheckReaction.REPLACE,
+                                                                           candidate -> candidate != passing)),
+                                                             evaluator);
+
+            // when
+            step.execute(state);
+
+            // then: every check has its own source
+            final Candidate replacement = state.getPopulation().get(1);
+            Assertions.assertSame(replacements.getFirst(), replacement.input());
+            Assertions.assertEquals(Lineage.replacement(failing).withProperty("reason", "second: failed"),
+                                    replacement.lineage());
+            Assertions.assertEquals("first (replace): 1 of 2 candidates failed; second (replace): 1 of 2 candidates failed",
+                                    step.description());
+        }
+
+        @Test
+        public void aMemberStaysIfTheBudgetDoesNotCoverItsReplacement() {
+            // given
+            budget = 0;
+            final CheckPopulation step = new CheckPopulation(List.of(check("test", CheckPoint.POPULATION, CheckReaction.REPLACE,
+                                                                           candidate -> candidate == failing)),
+                                                             evaluator);
+
+            // when
+            Assertions.assertThrows(EvaluationBudgetExhaustedException.class, () -> step.execute(state));
+
+            // then
+            Assertions.assertEquals(List.of(passing, failing), state.getPopulation());
+        }
+    }
+
+    @Nested
+    @DisplayName("given a check of new candidates")
+    class NewCandidateChecks {
+        private final Candidate passing = new Candidate(Mockito.mock(TypedEObject.class), Lineage.NONE);
+        private final Candidate failing = new Candidate(Mockito.mock(TypedEObject.class), Lineage.NONE);
+
+        @BeforeEach
+        public void candidates() {
+            state.setCandidates(List.of(passing, failing));
+        }
+
+        @Test
+        public void aWarningKeepsTheCandidates() {
+            // given
+            final CheckNewCandidates step = new CheckNewCandidates(List.of(check("test", CheckPoint.NEW_CANDIDATES,
+                                                                                 CheckReaction.WARN, candidate -> candidate == failing)));
+
+            // when
+            step.execute(state);
+
+            // then
+            Assertions.assertEquals(List.of(passing, failing), state.getCandidates());
+            Assertions.assertEquals("test (warn): 1 of 2 candidates failed", step.description());
+        }
+
+        @Test
+        public void aFailedCandidateIsReplacedByAnUnevaluatedOneWithTheReason() {
+            // given
+            final CheckNewCandidates step = new CheckNewCandidates(List.of(check("test", CheckPoint.NEW_CANDIDATES,
+                                                                                 CheckReaction.REPLACE, candidate -> candidate == failing)));
+
+            // when
+            step.execute(state);
+
+            // then
+            final Candidate replacement = state.getCandidates().get(1);
+            Assertions.assertSame(passing, state.getCandidates().getFirst());
+            Assertions.assertSame(replacements.getFirst(), replacement.input());
+            Assertions.assertFalse(replacement.isEvaluated());
+            Assertions.assertEquals(Lineage.NONE, replacement.lineage());
+            Assertions.assertEquals("test: failed", replacement.properties().get("reason"));
+            Mockito.verifyNoInteractions(evaluator);
+        }
+    }
+
+    @Nested
+    @DisplayName("given the checks of an algorithm")
+    class Validation {
+        @Test
+        public void supportedReactionsAtOfferedCheckPointsAreAccepted() {
+            final List<CandidateCheck> checks = List.of(new TestCheck("test", CheckPoint.POPULATION, CheckReaction.REPLACE, candidate -> false));
+
+            Assertions.assertDoesNotThrow(() -> CandidateCheckProducer.validate(checks, Set.of(CheckPoint.POPULATION), "algorithm"));
+        }
+
+        @Test
+        public void anUnsupportedReactionIsRejected() {
+            final List<CandidateCheck> checks = List.of(new TestCheck("test", CheckPoint.POPULATION, CheckReaction.REPAIR, candidate -> false));
+
+            Assertions.assertThrows(InitializationException.class,
+                                    () -> CandidateCheckProducer.validate(checks, Set.of(CheckPoint.POPULATION), "algorithm"));
+        }
+
+        @Test
+        public void aCheckPointThatTheAlgorithmDoesNotOfferIsRejected() {
+            final List<CandidateCheck> checks = List.of(new TestCheck("test", CheckPoint.NEW_CANDIDATES, CheckReaction.WARN, candidate -> false));
+
+            Assertions.assertThrows(InitializationException.class,
+                                    () -> CandidateCheckProducer.validate(checks, Set.of(CheckPoint.POPULATION), "algorithm"));
+        }
+
+        @Test
+        public void aReplacingCheckNeedsASource() {
+            final TestCheck check = new TestCheck("test", CheckPoint.POPULATION, CheckReaction.REPLACE, candidate -> false);
+
+            Assertions.assertThrows(IllegalArgumentException.class, () -> ConfiguredCheck.withoutSource(check));
+        }
+
+        @Test
+        public void theReactionsAreReadFromTheirLiterals() {
+            Assertions.assertEquals(List.of(CheckReaction.WARN, CheckReaction.REPLACE, CheckReaction.RESAMPLE, CheckReaction.REPAIR),
+                                    Stream.of("warn", "replace", "resample", "repair").map(CheckReaction::of).toList());
+            Assertions.assertThrows(IllegalArgumentException.class, () -> CheckReaction.of("ignore"));
+        }
+    }
+
+    /**
+     * A check that fails the candidates of a predicate with the reason "failed". It supports
+     *   {@code warn} and {@code replace}.
+     */
+    private record TestCheck(String name, CheckPoint checkPoint, CheckReaction reaction, Predicate<Candidate> fails)
+            implements CandidateCheck {
+        @Override
+        public Optional<EObject> replacementSource() {
+            return Optional.empty();
+        }
+
+        @Override
+        public Set<CheckReaction> supportedReactions() {
+            return EnumSet.of(CheckReaction.WARN, CheckReaction.REPLACE);
+        }
+
+        @Override
+        public Optional<String> test(final Candidate candidate) {
+            return fails.test(candidate) ? Optional.of("failed") : Optional.empty();
+        }
+    }
+}

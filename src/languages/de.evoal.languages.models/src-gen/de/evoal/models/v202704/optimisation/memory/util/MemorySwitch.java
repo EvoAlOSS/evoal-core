@@ -159,6 +159,25 @@ public class MemorySwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case MemoryPackage.REPLACEMENT: {
+				Replacement replacement = (Replacement)theEObject;
+				T result = caseReplacement(replacement);
+				if (result == null) result = caseRelationship(replacement);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case MemoryPackage.PROPERTY_ENTRY: {
+				@SuppressWarnings("unchecked") Map.Entry<String, Object> propertyEntry = (Map.Entry<String, Object>)theEObject;
+				T result = casePropertyEntry(propertyEntry);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case MemoryPackage.PROPERTY_DEFINITION: {
+				PropertyDefinition propertyDefinition = (PropertyDefinition)theEObject;
+				T result = casePropertyDefinition(propertyDefinition);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case MemoryPackage.METRIC_ENTRY: {
 				@SuppressWarnings("unchecked") Map.Entry<String, Number> metricEntry = (Map.Entry<String, Number>)theEObject;
 				T result = caseMetricEntry(metricEntry);
@@ -382,6 +401,51 @@ public class MemorySwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseRecombination(Recombination object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Replacement</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Replacement</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseReplacement(Replacement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Property Entry</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Property Entry</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePropertyEntry(Map.Entry<String, Object> object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Property Definition</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Property Definition</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePropertyDefinition(PropertyDefinition object) {
 		return null;
 	}
 

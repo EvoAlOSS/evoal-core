@@ -131,7 +131,8 @@
           "enum": [
             "identity",
             "mutation",
-            "recombination"
+            "recombination",
+            "replacement"
           ]
         },
         "targets": {
@@ -144,6 +145,10 @@
         "partner": {
           "description": "Recombination only: the individual that was created by the same recombination (holder of the 'other' relationship).",
           "$ref": "#/$defs/individualId"
+        },
+        "properties": {
+          "description": "Further details of the relationship, e.g. the reason of a replacement. Defined in 'propertyDefinitions' of execution-information.json with the scope 'relationship'. Missing if there are none.",
+          "$ref": "#/$defs/properties"
         }
       },
       "required": [
@@ -195,6 +200,10 @@
           "items": {
             "$ref": "#/$defs/relationship"
           }
+        },
+        "properties": {
+          "description": "Further details of the individual. Defined in 'propertyDefinitions' of execution-information.json with the scope 'individual'. Missing if there are none.",
+          "$ref": "#/$defs/properties"
         }
       },
       "required": [
@@ -221,6 +230,76 @@
       "required": [
         "type",
         "attributes"
+      ],
+      "additionalProperties": false
+    },
+    "propertyName": {
+      "description": "Name of a property, unique within its scope, e.g. 'reason'.",
+      "type": "string",
+      "minLength": 1
+    },
+    "propertyValue": {
+      "description": "A single property value: an integer, a real number, a text or a truth value.",
+      "anyOf": [
+        { "$ref": "#/$defs/number" },
+        { "type": "string" },
+        { "type": "boolean" }
+      ]
+    },
+    "properties": {
+      "description": "Values of properties, keyed by property name. A value is a single value or a list of values, as given by its definition.",
+      "type": "object",
+      "minProperties": 1,
+      "propertyNames": {
+        "$ref": "#/$defs/propertyName"
+      },
+      "additionalProperties": {
+        "anyOf": [
+          { "$ref": "#/$defs/propertyValue" },
+          {
+            "type": "array",
+            "items": { "$ref": "#/$defs/propertyValue" }
+          }
+        ]
+      }
+    },
+    "propertyDefinition": {
+      "description": "Defines a property of the individuals or relationships of the run (PropertyDefinition). Every key of a 'properties' object is defined with the matching scope.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "$ref": "#/$defs/propertyName"
+        },
+        "scope": {
+          "description": "'individual': recorded on individuals; 'relationship': recorded on relationships.",
+          "enum": [
+            "individual",
+            "relationship"
+          ]
+        },
+        "valueType": {
+          "description": "'integer' values are JSON integers, 'real' values JSON numbers, 'text' values strings and 'boolean' values true or false.",
+          "enum": [
+            "integer",
+            "real",
+            "text",
+            "boolean"
+          ]
+        },
+        "list": {
+          "description": "Whether a value is a list of values of the value type.",
+          "type": "boolean"
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "scope",
+        "valueType",
+        "list",
+        "description"
       ],
       "additionalProperties": false
     },

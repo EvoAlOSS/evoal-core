@@ -127,6 +127,18 @@ public class MemoryAdapterFactory extends AdapterFactoryImpl {
 				return createRecombinationAdapter();
 			}
 			@Override
+			public Adapter caseReplacement(Replacement object) {
+				return createReplacementAdapter();
+			}
+			@Override
+			public Adapter casePropertyEntry(Map.Entry<String, Object> object) {
+				return createPropertyEntryAdapter();
+			}
+			@Override
+			public Adapter casePropertyDefinition(PropertyDefinition object) {
+				return createPropertyDefinitionAdapter();
+			}
+			@Override
 			public Adapter caseMetricEntry(Map.Entry<String, Number> object) {
 				return createMetricEntryAdapter();
 			}
@@ -347,6 +359,48 @@ public class MemoryAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createRecombinationAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.evoal.models.v202704.optimisation.memory.Replacement <em>Replacement</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.evoal.models.v202704.optimisation.memory.Replacement
+	 * @generated
+	 */
+	public Adapter createReplacementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link java.util.Map.Entry <em>Property Entry</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see java.util.Map.Entry
+	 * @generated
+	 */
+	public Adapter createPropertyEntryAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.evoal.models.v202704.optimisation.memory.PropertyDefinition <em>Property Definition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.evoal.models.v202704.optimisation.memory.PropertyDefinition
+	 * @generated
+	 */
+	public Adapter createPropertyDefinitionAdapter() {
 		return null;
 	}
 

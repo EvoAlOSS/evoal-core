@@ -26,9 +26,9 @@ import de.evoal.optimisation.api.run.SearchProcedure;
  * <p>
  * The population of an iteration consists of the {@link #members()}, by default the
  *   population of the search state, ranked by the optimisation values. Afterwards, every member is replaced by a copy that is an
- *   identity of it ({@link Candidate#copy()}): a member that no step replaces is recorded as
+ *   identity of it ({@link Candidate#survivor()}): a member that no step replaces is recorded as
  *   the same candidate in the next iteration, also if the next iteration is interrupted by
- *   an exhausted evaluation budget.
+ *   an exhausted evaluation budget. Its age grows by one.
  */
 public class Template implements SearchProcedure {
     /**
@@ -112,9 +112,10 @@ public class Template implements SearchProcedure {
         final Population population = new Population(candidates, Ranking.byValue(values), executedSteps);
         executedSteps.clear();
 
-        // a member that stays in the population is the same candidate in the next iteration
+        // a member that stays in the population is the same, one iteration older candidate in
+        // the next iteration
         final List<Candidate> unchanged = candidates.stream()
-                                                    .map(Candidate::copy)
+                                                    .map(Candidate::survivor)
                                                     .toList();
         state.setPopulation(unchanged);
 

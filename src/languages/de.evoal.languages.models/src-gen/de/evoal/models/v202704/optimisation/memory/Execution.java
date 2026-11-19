@@ -29,6 +29,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link de.evoal.models.v202704.optimisation.memory.Execution#getStates <em>States</em>}</li>
  *   <li>{@link de.evoal.models.v202704.optimisation.memory.Execution#getMetricDefinitions <em>Metric Definitions</em>}</li>
  *   <li>{@link de.evoal.models.v202704.optimisation.memory.Execution#getMetrics <em>Metrics</em>}</li>
+ *   <li>{@link de.evoal.models.v202704.optimisation.memory.Execution#getPropertyDefinitions <em>Property Definitions</em>}</li>
  *   <li>{@link de.evoal.models.v202704.optimisation.memory.Execution#getFitnessComponents <em>Fitness Components</em>}</li>
  *   <li>{@link de.evoal.models.v202704.optimisation.memory.Execution#getReproducibilityNotes <em>Reproducibility Notes</em>}</li>
  * </ul>
@@ -148,6 +149,25 @@ public interface Execution extends EObject {
 	 * @generated
 	 */
 	EMap<String, Number> getMetrics();
+
+	/**
+	 * Returns the value of the '<em><b>Property Definitions</b></em>' containment reference list.
+	 * The list contents are of type {@link de.evoal.models.v202704.optimisation.memory.PropertyDefinition}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * *
+	 * The properties the individuals and relationships of this execution record. Every
+	 *   key of {@link Individual#getProperties()} and of {@link Relationship#getProperties()}
+	 *   is defined here.
+	 * 
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Property Definitions</em>' containment reference list.
+	 * @see de.evoal.models.v202704.optimisation.memory.MemoryPackage#getExecution_PropertyDefinitions()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<PropertyDefinition> getPropertyDefinitions();
 
 	/**
 	 * Returns the value of the '<em><b>Fitness Components</b></em>' containment reference list.

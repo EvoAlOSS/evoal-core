@@ -118,13 +118,22 @@ public interface MemoryPackage extends EPackage {
 	int EXECUTION__METRICS = 4;
 
 	/**
+	 * The feature id for the '<em><b>Property Definitions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION__PROPERTY_DEFINITIONS = 5;
+
+	/**
 	 * The feature id for the '<em><b>Fitness Components</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION__FITNESS_COMPONENTS = 5;
+	int EXECUTION__FITNESS_COMPONENTS = 6;
 
 	/**
 	 * The feature id for the '<em><b>Reproducibility Notes</b></em>' containment reference list.
@@ -133,7 +142,7 @@ public interface MemoryPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION__REPRODUCIBILITY_NOTES = 6;
+	int EXECUTION__REPRODUCIBILITY_NOTES = 7;
 
 	/**
 	 * The number of structural features of the '<em>Execution</em>' class.
@@ -142,7 +151,7 @@ public interface MemoryPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_FEATURE_COUNT = 7;
+	int EXECUTION_FEATURE_COUNT = 8;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.models.v202704.optimisation.memory.impl.FitnessComponentDefinitionImpl <em>Fitness Component Definition</em>}' class.
@@ -496,13 +505,22 @@ public interface MemoryPackage extends EPackage {
 	int INDIVIDUAL__RELATIONSHIPS = 4;
 
 	/**
+	 * The feature id for the '<em><b>Properties</b></em>' map.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INDIVIDUAL__PROPERTIES = 5;
+
+	/**
 	 * The number of structural features of the '<em>Individual</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INDIVIDUAL_FEATURE_COUNT = 5;
+	int INDIVIDUAL_FEATURE_COUNT = 6;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.models.v202704.optimisation.memory.impl.RelationshipImpl <em>Relationship</em>}' class.
@@ -524,13 +542,22 @@ public interface MemoryPackage extends EPackage {
 	int RELATIONSHIP__TARGET = 0;
 
 	/**
+	 * The feature id for the '<em><b>Properties</b></em>' map.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATIONSHIP__PROPERTIES = 1;
+
+	/**
 	 * The number of structural features of the '<em>Relationship</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RELATIONSHIP_FEATURE_COUNT = 1;
+	int RELATIONSHIP_FEATURE_COUNT = 2;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.models.v202704.optimisation.memory.impl.IdentityImpl <em>Identity</em>}' class.
@@ -550,6 +577,15 @@ public interface MemoryPackage extends EPackage {
 	 * @ordered
 	 */
 	int IDENTITY__TARGET = RELATIONSHIP__TARGET;
+
+	/**
+	 * The feature id for the '<em><b>Properties</b></em>' map.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IDENTITY__PROPERTIES = RELATIONSHIP__PROPERTIES;
 
 	/**
 	 * The number of structural features of the '<em>Identity</em>' class.
@@ -580,6 +616,15 @@ public interface MemoryPackage extends EPackage {
 	int MUTATION__TARGET = RELATIONSHIP__TARGET;
 
 	/**
+	 * The feature id for the '<em><b>Properties</b></em>' map.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MUTATION__PROPERTIES = RELATIONSHIP__PROPERTIES;
+
+	/**
 	 * The number of structural features of the '<em>Mutation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -608,6 +653,15 @@ public interface MemoryPackage extends EPackage {
 	int RECOMBINATION__TARGET = RELATIONSHIP__TARGET;
 
 	/**
+	 * The feature id for the '<em><b>Properties</b></em>' map.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RECOMBINATION__PROPERTIES = RELATIONSHIP__PROPERTIES;
+
+	/**
 	 * The feature id for the '<em><b>Other</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -626,6 +680,144 @@ public interface MemoryPackage extends EPackage {
 	int RECOMBINATION_FEATURE_COUNT = RELATIONSHIP_FEATURE_COUNT + 1;
 
 	/**
+	 * The meta object id for the '{@link de.evoal.models.v202704.optimisation.memory.impl.ReplacementImpl <em>Replacement</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.evoal.models.v202704.optimisation.memory.impl.ReplacementImpl
+	 * @see de.evoal.models.v202704.optimisation.memory.impl.MemoryPackageImpl#getReplacement()
+	 * @generated
+	 */
+	int REPLACEMENT = 14;
+
+	/**
+	 * The feature id for the '<em><b>Target</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REPLACEMENT__TARGET = RELATIONSHIP__TARGET;
+
+	/**
+	 * The feature id for the '<em><b>Properties</b></em>' map.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REPLACEMENT__PROPERTIES = RELATIONSHIP__PROPERTIES;
+
+	/**
+	 * The number of structural features of the '<em>Replacement</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REPLACEMENT_FEATURE_COUNT = RELATIONSHIP_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link de.evoal.models.v202704.optimisation.memory.impl.PropertyEntryImpl <em>Property Entry</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.evoal.models.v202704.optimisation.memory.impl.PropertyEntryImpl
+	 * @see de.evoal.models.v202704.optimisation.memory.impl.MemoryPackageImpl#getPropertyEntry()
+	 * @generated
+	 */
+	int PROPERTY_ENTRY = 15;
+
+	/**
+	 * The feature id for the '<em><b>Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_ENTRY__KEY = 0;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_ENTRY__VALUE = 1;
+
+	/**
+	 * The number of structural features of the '<em>Property Entry</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_ENTRY_FEATURE_COUNT = 2;
+
+	/**
+	 * The meta object id for the '{@link de.evoal.models.v202704.optimisation.memory.impl.PropertyDefinitionImpl <em>Property Definition</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.evoal.models.v202704.optimisation.memory.impl.PropertyDefinitionImpl
+	 * @see de.evoal.models.v202704.optimisation.memory.impl.MemoryPackageImpl#getPropertyDefinition()
+	 * @generated
+	 */
+	int PROPERTY_DEFINITION = 16;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_DEFINITION__NAME = 0;
+
+	/**
+	 * The feature id for the '<em><b>Scope</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_DEFINITION__SCOPE = 1;
+
+	/**
+	 * The feature id for the '<em><b>Value Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_DEFINITION__VALUE_TYPE = 2;
+
+	/**
+	 * The feature id for the '<em><b>List</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_DEFINITION__LIST = 3;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_DEFINITION__DESCRIPTION = 4;
+
+	/**
+	 * The number of structural features of the '<em>Property Definition</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_DEFINITION_FEATURE_COUNT = 5;
+
+	/**
 	 * The meta object id for the '{@link de.evoal.models.v202704.optimisation.memory.impl.MetricEntryImpl <em>Metric Entry</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -633,7 +825,7 @@ public interface MemoryPackage extends EPackage {
 	 * @see de.evoal.models.v202704.optimisation.memory.impl.MemoryPackageImpl#getMetricEntry()
 	 * @generated
 	 */
-	int METRIC_ENTRY = 14;
+	int METRIC_ENTRY = 17;
 
 	/**
 	 * The feature id for the '<em><b>Key</b></em>' attribute.
@@ -670,7 +862,7 @@ public interface MemoryPackage extends EPackage {
 	 * @see de.evoal.models.v202704.optimisation.memory.impl.MemoryPackageImpl#getMetricDefinition()
 	 * @generated
 	 */
-	int METRIC_DEFINITION = 15;
+	int METRIC_DEFINITION = 18;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -727,6 +919,26 @@ public interface MemoryPackage extends EPackage {
 	int METRIC_DEFINITION_FEATURE_COUNT = 5;
 
 	/**
+	 * The meta object id for the '{@link de.evoal.models.v202704.optimisation.memory.PropertyScope <em>Property Scope</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.evoal.models.v202704.optimisation.memory.PropertyScope
+	 * @see de.evoal.models.v202704.optimisation.memory.impl.MemoryPackageImpl#getPropertyScope()
+	 * @generated
+	 */
+	int PROPERTY_SCOPE = 19;
+
+	/**
+	 * The meta object id for the '{@link de.evoal.models.v202704.optimisation.memory.PropertyValueType <em>Property Value Type</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.evoal.models.v202704.optimisation.memory.PropertyValueType
+	 * @see de.evoal.models.v202704.optimisation.memory.impl.MemoryPackageImpl#getPropertyValueType()
+	 * @generated
+	 */
+	int PROPERTY_VALUE_TYPE = 20;
+
+	/**
 	 * The meta object id for the '{@link de.evoal.models.v202704.optimisation.memory.MetricKind <em>Metric Kind</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -734,7 +946,7 @@ public interface MemoryPackage extends EPackage {
 	 * @see de.evoal.models.v202704.optimisation.memory.impl.MemoryPackageImpl#getMetricKind()
 	 * @generated
 	 */
-	int METRIC_KIND = 16;
+	int METRIC_KIND = 21;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.models.v202704.optimisation.memory.MetricValueType <em>Metric Value Type</em>}' enum.
@@ -744,7 +956,7 @@ public interface MemoryPackage extends EPackage {
 	 * @see de.evoal.models.v202704.optimisation.memory.impl.MemoryPackageImpl#getMetricValueType()
 	 * @generated
 	 */
-	int METRIC_VALUE_TYPE = 17;
+	int METRIC_VALUE_TYPE = 22;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.models.v202704.optimisation.memory.MetricScope <em>Metric Scope</em>}' enum.
@@ -754,7 +966,7 @@ public interface MemoryPackage extends EPackage {
 	 * @see de.evoal.models.v202704.optimisation.memory.impl.MemoryPackageImpl#getMetricScope()
 	 * @generated
 	 */
-	int METRIC_SCOPE = 18;
+	int METRIC_SCOPE = 23;
 
 
 	/**
@@ -821,6 +1033,17 @@ public interface MemoryPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getExecution_Metrics();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link de.evoal.models.v202704.optimisation.memory.Execution#getPropertyDefinitions <em>Property Definitions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Property Definitions</em>'.
+	 * @see de.evoal.models.v202704.optimisation.memory.Execution#getPropertyDefinitions()
+	 * @see #getExecution()
+	 * @generated
+	 */
+	EReference getExecution_PropertyDefinitions();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link de.evoal.models.v202704.optimisation.memory.Execution#getFitnessComponents <em>Fitness Components</em>}'.
@@ -1144,6 +1367,17 @@ public interface MemoryPackage extends EPackage {
 	EReference getIndividual_Relationships();
 
 	/**
+	 * Returns the meta object for the map '{@link de.evoal.models.v202704.optimisation.memory.Individual#getProperties <em>Properties</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the map '<em>Properties</em>'.
+	 * @see de.evoal.models.v202704.optimisation.memory.Individual#getProperties()
+	 * @see #getIndividual()
+	 * @generated
+	 */
+	EReference getIndividual_Properties();
+
+	/**
 	 * Returns the meta object for class '{@link de.evoal.models.v202704.optimisation.memory.Relationship <em>Relationship</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1163,6 +1397,17 @@ public interface MemoryPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getRelationship_Target();
+
+	/**
+	 * Returns the meta object for the map '{@link de.evoal.models.v202704.optimisation.memory.Relationship#getProperties <em>Properties</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the map '<em>Properties</em>'.
+	 * @see de.evoal.models.v202704.optimisation.memory.Relationship#getProperties()
+	 * @see #getRelationship()
+	 * @generated
+	 */
+	EReference getRelationship_Properties();
 
 	/**
 	 * Returns the meta object for class '{@link de.evoal.models.v202704.optimisation.memory.Identity <em>Identity</em>}'.
@@ -1204,6 +1449,115 @@ public interface MemoryPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getRecombination_Other();
+
+	/**
+	 * Returns the meta object for class '{@link de.evoal.models.v202704.optimisation.memory.Replacement <em>Replacement</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Replacement</em>'.
+	 * @see de.evoal.models.v202704.optimisation.memory.Replacement
+	 * @generated
+	 */
+	EClass getReplacement();
+
+	/**
+	 * Returns the meta object for class '{@link java.util.Map.Entry <em>Property Entry</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Property Entry</em>'.
+	 * @see java.util.Map.Entry
+	 * @model keyDataType="org.eclipse.emf.ecore.EString" keyRequired="true"
+	 *        valueDataType="org.eclipse.emf.ecore.EJavaObject" valueRequired="true"
+	 * @generated
+	 */
+	EClass getPropertyEntry();
+
+	/**
+	 * Returns the meta object for the attribute '{@link java.util.Map.Entry <em>Key</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Key</em>'.
+	 * @see java.util.Map.Entry
+	 * @see #getPropertyEntry()
+	 * @generated
+	 */
+	EAttribute getPropertyEntry_Key();
+
+	/**
+	 * Returns the meta object for the attribute '{@link java.util.Map.Entry <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Value</em>'.
+	 * @see java.util.Map.Entry
+	 * @see #getPropertyEntry()
+	 * @generated
+	 */
+	EAttribute getPropertyEntry_Value();
+
+	/**
+	 * Returns the meta object for class '{@link de.evoal.models.v202704.optimisation.memory.PropertyDefinition <em>Property Definition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Property Definition</em>'.
+	 * @see de.evoal.models.v202704.optimisation.memory.PropertyDefinition
+	 * @generated
+	 */
+	EClass getPropertyDefinition();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.evoal.models.v202704.optimisation.memory.PropertyDefinition#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see de.evoal.models.v202704.optimisation.memory.PropertyDefinition#getName()
+	 * @see #getPropertyDefinition()
+	 * @generated
+	 */
+	EAttribute getPropertyDefinition_Name();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.evoal.models.v202704.optimisation.memory.PropertyDefinition#getScope <em>Scope</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Scope</em>'.
+	 * @see de.evoal.models.v202704.optimisation.memory.PropertyDefinition#getScope()
+	 * @see #getPropertyDefinition()
+	 * @generated
+	 */
+	EAttribute getPropertyDefinition_Scope();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.evoal.models.v202704.optimisation.memory.PropertyDefinition#getValueType <em>Value Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Value Type</em>'.
+	 * @see de.evoal.models.v202704.optimisation.memory.PropertyDefinition#getValueType()
+	 * @see #getPropertyDefinition()
+	 * @generated
+	 */
+	EAttribute getPropertyDefinition_ValueType();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.evoal.models.v202704.optimisation.memory.PropertyDefinition#isList <em>List</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>List</em>'.
+	 * @see de.evoal.models.v202704.optimisation.memory.PropertyDefinition#isList()
+	 * @see #getPropertyDefinition()
+	 * @generated
+	 */
+	EAttribute getPropertyDefinition_List();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.evoal.models.v202704.optimisation.memory.PropertyDefinition#getDescription <em>Description</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Description</em>'.
+	 * @see de.evoal.models.v202704.optimisation.memory.PropertyDefinition#getDescription()
+	 * @see #getPropertyDefinition()
+	 * @generated
+	 */
+	EAttribute getPropertyDefinition_Description();
 
 	/**
 	 * Returns the meta object for class '{@link java.util.Map.Entry <em>Metric Entry</em>}'.
@@ -1303,6 +1657,26 @@ public interface MemoryPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getMetricDefinition_Description();
+
+	/**
+	 * Returns the meta object for enum '{@link de.evoal.models.v202704.optimisation.memory.PropertyScope <em>Property Scope</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Property Scope</em>'.
+	 * @see de.evoal.models.v202704.optimisation.memory.PropertyScope
+	 * @generated
+	 */
+	EEnum getPropertyScope();
+
+	/**
+	 * Returns the meta object for enum '{@link de.evoal.models.v202704.optimisation.memory.PropertyValueType <em>Property Value Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Property Value Type</em>'.
+	 * @see de.evoal.models.v202704.optimisation.memory.PropertyValueType
+	 * @generated
+	 */
+	EEnum getPropertyValueType();
 
 	/**
 	 * Returns the meta object for enum '{@link de.evoal.models.v202704.optimisation.memory.MetricKind <em>Metric Kind</em>}'.
@@ -1405,6 +1779,14 @@ public interface MemoryPackage extends EPackage {
 		 * @generated
 		 */
 		EReference EXECUTION__METRICS = eINSTANCE.getExecution_Metrics();
+
+		/**
+		 * The meta object literal for the '<em><b>Property Definitions</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EXECUTION__PROPERTY_DEFINITIONS = eINSTANCE.getExecution_PropertyDefinitions();
 
 		/**
 		 * The meta object literal for the '<em><b>Fitness Components</b></em>' containment reference list feature.
@@ -1665,6 +2047,14 @@ public interface MemoryPackage extends EPackage {
 		EReference INDIVIDUAL__RELATIONSHIPS = eINSTANCE.getIndividual_Relationships();
 
 		/**
+		 * The meta object literal for the '<em><b>Properties</b></em>' map feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference INDIVIDUAL__PROPERTIES = eINSTANCE.getIndividual_Properties();
+
+		/**
 		 * The meta object literal for the '{@link de.evoal.models.v202704.optimisation.memory.impl.RelationshipImpl <em>Relationship</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1681,6 +2071,14 @@ public interface MemoryPackage extends EPackage {
 		 * @generated
 		 */
 		EReference RELATIONSHIP__TARGET = eINSTANCE.getRelationship_Target();
+
+		/**
+		 * The meta object literal for the '<em><b>Properties</b></em>' map feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference RELATIONSHIP__PROPERTIES = eINSTANCE.getRelationship_Properties();
 
 		/**
 		 * The meta object literal for the '{@link de.evoal.models.v202704.optimisation.memory.impl.IdentityImpl <em>Identity</em>}' class.
@@ -1719,6 +2117,92 @@ public interface MemoryPackage extends EPackage {
 		 * @generated
 		 */
 		EReference RECOMBINATION__OTHER = eINSTANCE.getRecombination_Other();
+
+		/**
+		 * The meta object literal for the '{@link de.evoal.models.v202704.optimisation.memory.impl.ReplacementImpl <em>Replacement</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.evoal.models.v202704.optimisation.memory.impl.ReplacementImpl
+		 * @see de.evoal.models.v202704.optimisation.memory.impl.MemoryPackageImpl#getReplacement()
+		 * @generated
+		 */
+		EClass REPLACEMENT = eINSTANCE.getReplacement();
+
+		/**
+		 * The meta object literal for the '{@link de.evoal.models.v202704.optimisation.memory.impl.PropertyEntryImpl <em>Property Entry</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.evoal.models.v202704.optimisation.memory.impl.PropertyEntryImpl
+		 * @see de.evoal.models.v202704.optimisation.memory.impl.MemoryPackageImpl#getPropertyEntry()
+		 * @generated
+		 */
+		EClass PROPERTY_ENTRY = eINSTANCE.getPropertyEntry();
+
+		/**
+		 * The meta object literal for the '<em><b>Key</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PROPERTY_ENTRY__KEY = eINSTANCE.getPropertyEntry_Key();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PROPERTY_ENTRY__VALUE = eINSTANCE.getPropertyEntry_Value();
+
+		/**
+		 * The meta object literal for the '{@link de.evoal.models.v202704.optimisation.memory.impl.PropertyDefinitionImpl <em>Property Definition</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.evoal.models.v202704.optimisation.memory.impl.PropertyDefinitionImpl
+		 * @see de.evoal.models.v202704.optimisation.memory.impl.MemoryPackageImpl#getPropertyDefinition()
+		 * @generated
+		 */
+		EClass PROPERTY_DEFINITION = eINSTANCE.getPropertyDefinition();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PROPERTY_DEFINITION__NAME = eINSTANCE.getPropertyDefinition_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Scope</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PROPERTY_DEFINITION__SCOPE = eINSTANCE.getPropertyDefinition_Scope();
+
+		/**
+		 * The meta object literal for the '<em><b>Value Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PROPERTY_DEFINITION__VALUE_TYPE = eINSTANCE.getPropertyDefinition_ValueType();
+
+		/**
+		 * The meta object literal for the '<em><b>List</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PROPERTY_DEFINITION__LIST = eINSTANCE.getPropertyDefinition_List();
+
+		/**
+		 * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PROPERTY_DEFINITION__DESCRIPTION = eINSTANCE.getPropertyDefinition_Description();
 
 		/**
 		 * The meta object literal for the '{@link de.evoal.models.v202704.optimisation.memory.impl.MetricEntryImpl <em>Metric Entry</em>}' class.
@@ -1795,6 +2279,26 @@ public interface MemoryPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute METRIC_DEFINITION__DESCRIPTION = eINSTANCE.getMetricDefinition_Description();
+
+		/**
+		 * The meta object literal for the '{@link de.evoal.models.v202704.optimisation.memory.PropertyScope <em>Property Scope</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.evoal.models.v202704.optimisation.memory.PropertyScope
+		 * @see de.evoal.models.v202704.optimisation.memory.impl.MemoryPackageImpl#getPropertyScope()
+		 * @generated
+		 */
+		EEnum PROPERTY_SCOPE = eINSTANCE.getPropertyScope();
+
+		/**
+		 * The meta object literal for the '{@link de.evoal.models.v202704.optimisation.memory.PropertyValueType <em>Property Value Type</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.evoal.models.v202704.optimisation.memory.PropertyValueType
+		 * @see de.evoal.models.v202704.optimisation.memory.impl.MemoryPackageImpl#getPropertyValueType()
+		 * @generated
+		 */
+		EEnum PROPERTY_VALUE_TYPE = eINSTANCE.getPropertyValueType();
 
 		/**
 		 * The meta object literal for the '{@link de.evoal.models.v202704.optimisation.memory.MetricKind <em>Metric Kind</em>}' enum.

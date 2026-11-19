@@ -1,5 +1,9 @@
 package de.evoal.optimisation.api.run;
 
+import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 import lombok.NonNull;
 
 import de.evoal.models.core.ecore.TypedEObject;
@@ -16,8 +20,17 @@ import de.evoal.optimisation.api.fitness.Fitness;
  *   candidates refers to it, and the kernel maps it to its individual. A candidate that
  *   stays unchanged in the next step or iteration is therefore a {@link #copy()} that refers
  *   to it as identity.
+ * <p>
+ * The <em>age</em> of a candidate is the number of iterations it was carried over into
+ *   unchanged ({@link #survivor()}). A new candidate, e.g., a mutated, recombined or
+ *   replacing one, has age 0.
  */
 public final class Candidate {
+    /**
+     * The number of iterations the candidate was carried over into unchanged.
+     */
+    private final int age;
+
     /**
      * The evaluation of the candidate, {@code null} before the evaluation.
      */
@@ -34,25 +47,73 @@ public final class Candidate {
     private final Lineage lineage;
 
     /**
+     * Further details of the candidate, by property name, in insertion order.
+     */
+    private final Map<String, Object> properties = new LinkedHashMap<>();
+
+    /**
      * Creates a candidate that is not evaluated yet.
      *
      * @param input The candidate (a point of the search space).
      * @param lineage How the candidate came from other candidates.
      */
     public Candidate(final TypedEObject input, final Lineage lineage) {
+        this(input, lineage, 0);
+    }
+
+    private Candidate(final TypedEObject input, final Lineage lineage, final int age) {
         this.input = input;
         this.lineage = lineage;
+        this.age = age;
     }
 
     /**
-     * @return A new candidate with the same values and evaluation that is an identity of
-     *   this candidate.
+     * @return The number of iterations the candidate was carried over into unchanged.
+     */
+    public int age() {
+        return age;
+    }
+
+    /**
+     * @return A new candidate with the same values, evaluation and age that is an identity of
+     *   this candidate. Its properties are not copied.
      */
     public Candidate copy() {
-        final Candidate copy = new Candidate(input, Lineage.identity(this));
+        final Candidate copy = new Candidate(input, Lineage.identity(this), age);
         copy.evaluation = evaluation;
 
         return copy;
+    }
+
+    /**
+     * @return Further details of the candidate, by property name, in insertion order. The
+     *   kernel records them on the individual of the memory model; every name has to be
+     *   defined with the scope {@code INDIVIDUAL}
+     *   ({@link de.evoal.optimisation.api.execution.ExecutionRecorder#defineProperty}).
+     */
+    public Map<String, Object> properties() {
+        return Collections.unmodifiableMap(properties);
+    }
+
+    /**
+     * Sets a property of the candidate.
+     *
+     * @param name The name of the property.
+     * @param value The value of the property.
+     */
+    public void setProperty(final @NonNull String name, final @NonNull Object value) {
+        properties.put(name, value);
+    }
+
+    /**
+     * @return A {@link #copy()} for the next iteration: the candidate was carried over
+     *   unchanged, so its age grows by one.
+     */
+    public Candidate survivor() {
+        final Candidate survivor = new Candidate(input, Lineage.identity(this), age + 1);
+        survivor.evaluation = evaluation;
+
+        return survivor;
     }
 
     /**

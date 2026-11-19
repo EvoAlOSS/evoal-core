@@ -7,6 +7,7 @@ import de.evoal.models.v202704.optimisation.memory.Execution;
 import de.evoal.models.v202704.optimisation.memory.FitnessComponentDefinition;
 import de.evoal.models.v202704.optimisation.memory.MemoryPackage;
 import de.evoal.models.v202704.optimisation.memory.MetricDefinition;
+import de.evoal.models.v202704.optimisation.memory.PropertyDefinition;
 import de.evoal.models.v202704.optimisation.memory.ReproducibilityNote;
 import de.evoal.models.v202704.optimisation.memory.State;
 
@@ -42,6 +43,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link de.evoal.models.v202704.optimisation.memory.impl.ExecutionImpl#getStates <em>States</em>}</li>
  *   <li>{@link de.evoal.models.v202704.optimisation.memory.impl.ExecutionImpl#getMetricDefinitions <em>Metric Definitions</em>}</li>
  *   <li>{@link de.evoal.models.v202704.optimisation.memory.impl.ExecutionImpl#getMetrics <em>Metrics</em>}</li>
+ *   <li>{@link de.evoal.models.v202704.optimisation.memory.impl.ExecutionImpl#getPropertyDefinitions <em>Property Definitions</em>}</li>
  *   <li>{@link de.evoal.models.v202704.optimisation.memory.impl.ExecutionImpl#getFitnessComponents <em>Fitness Components</em>}</li>
  *   <li>{@link de.evoal.models.v202704.optimisation.memory.impl.ExecutionImpl#getReproducibilityNotes <em>Reproducibility Notes</em>}</li>
  * </ul>
@@ -98,6 +100,16 @@ public class ExecutionImpl extends MinimalEObjectImpl.Container implements Execu
 	 * @ordered
 	 */
 	protected EMap<String, Number> metrics;
+
+	/**
+	 * The cached value of the '{@link #getPropertyDefinitions() <em>Property Definitions</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPropertyDefinitions()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<PropertyDefinition> propertyDefinitions;
 
 	/**
 	 * The cached value of the '{@link #getFitnessComponents() <em>Fitness Components</em>}' containment reference list.
@@ -263,6 +275,19 @@ public class ExecutionImpl extends MinimalEObjectImpl.Container implements Execu
 	 * @generated
 	 */
 	@Override
+	public EList<PropertyDefinition> getPropertyDefinitions() {
+		if (propertyDefinitions == null) {
+			propertyDefinitions = new EObjectContainmentEList<PropertyDefinition>(PropertyDefinition.class, this, MemoryPackage.EXECUTION__PROPERTY_DEFINITIONS);
+		}
+		return propertyDefinitions;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EList<FitnessComponentDefinition> getFitnessComponents() {
 		if (fitnessComponents == null) {
 			fitnessComponents = new EObjectContainmentEList<FitnessComponentDefinition>(FitnessComponentDefinition.class, this, MemoryPackage.EXECUTION__FITNESS_COMPONENTS);
@@ -297,6 +322,8 @@ public class ExecutionImpl extends MinimalEObjectImpl.Container implements Execu
 				return ((InternalEList<?>)getMetricDefinitions()).basicRemove(otherEnd, msgs);
 			case MemoryPackage.EXECUTION__METRICS:
 				return ((InternalEList<?>)getMetrics()).basicRemove(otherEnd, msgs);
+			case MemoryPackage.EXECUTION__PROPERTY_DEFINITIONS:
+				return ((InternalEList<?>)getPropertyDefinitions()).basicRemove(otherEnd, msgs);
 			case MemoryPackage.EXECUTION__FITNESS_COMPONENTS:
 				return ((InternalEList<?>)getFitnessComponents()).basicRemove(otherEnd, msgs);
 			case MemoryPackage.EXECUTION__REPRODUCIBILITY_NOTES:
@@ -326,6 +353,8 @@ public class ExecutionImpl extends MinimalEObjectImpl.Container implements Execu
 			case MemoryPackage.EXECUTION__METRICS:
 				if (coreType) return getMetrics();
 				else return getMetrics().map();
+			case MemoryPackage.EXECUTION__PROPERTY_DEFINITIONS:
+				return getPropertyDefinitions();
 			case MemoryPackage.EXECUTION__FITNESS_COMPONENTS:
 				return getFitnessComponents();
 			case MemoryPackage.EXECUTION__REPRODUCIBILITY_NOTES:
@@ -359,6 +388,10 @@ public class ExecutionImpl extends MinimalEObjectImpl.Container implements Execu
 				return;
 			case MemoryPackage.EXECUTION__METRICS:
 				((EStructuralFeature.Setting)getMetrics()).set(newValue);
+				return;
+			case MemoryPackage.EXECUTION__PROPERTY_DEFINITIONS:
+				getPropertyDefinitions().clear();
+				getPropertyDefinitions().addAll((Collection<? extends PropertyDefinition>)newValue);
 				return;
 			case MemoryPackage.EXECUTION__FITNESS_COMPONENTS:
 				getFitnessComponents().clear();
@@ -395,6 +428,9 @@ public class ExecutionImpl extends MinimalEObjectImpl.Container implements Execu
 			case MemoryPackage.EXECUTION__METRICS:
 				getMetrics().clear();
 				return;
+			case MemoryPackage.EXECUTION__PROPERTY_DEFINITIONS:
+				getPropertyDefinitions().clear();
+				return;
 			case MemoryPackage.EXECUTION__FITNESS_COMPONENTS:
 				getFitnessComponents().clear();
 				return;
@@ -423,6 +459,8 @@ public class ExecutionImpl extends MinimalEObjectImpl.Container implements Execu
 				return metricDefinitions != null && !metricDefinitions.isEmpty();
 			case MemoryPackage.EXECUTION__METRICS:
 				return metrics != null && !metrics.isEmpty();
+			case MemoryPackage.EXECUTION__PROPERTY_DEFINITIONS:
+				return propertyDefinitions != null && !propertyDefinitions.isEmpty();
 			case MemoryPackage.EXECUTION__FITNESS_COMPONENTS:
 				return fitnessComponents != null && !fitnessComponents.isEmpty();
 			case MemoryPackage.EXECUTION__REPRODUCIBILITY_NOTES:

@@ -25,6 +25,8 @@ import de.evoal.models.v202704.optimisation.memory.MetricDefinition;
 import de.evoal.models.v202704.optimisation.memory.MetricKind;
 import de.evoal.models.v202704.optimisation.memory.MetricScope;
 import de.evoal.models.v202704.optimisation.memory.MetricValueType;
+import de.evoal.models.v202704.optimisation.memory.PropertyScope;
+import de.evoal.models.v202704.optimisation.memory.PropertyValueType;
 import de.evoal.models.v202704.optimisation.memory.ReproducibilityNote;
 
 import de.evoal.optimisation.api.fitness.FitnessComponent;
@@ -336,6 +338,73 @@ public class ExecutionRecorderTest {
 
             // when, then
             Assertions.assertThrows(IllegalStateException.class, () -> recorder.recordMetrics(iteration));
+        }
+    }
+
+    @Nested
+    @DisplayName("given properties of individuals and relationships")
+    class Properties {
+        @BeforeEach
+        public void defineProperties() {
+            recorder.startRun();
+            recorder.defineProperty("reason", PropertyScope.RELATIONSHIP, PropertyValueType.TEXT, false, "Why.");
+            recorder.defineProperty("sizes", PropertyScope.INDIVIDUAL, PropertyValueType.INTEGER, true, "Sizes.");
+        }
+
+        @Test
+        public void theDefinitionsAreRecordedInOrder() {
+            Assertions.assertEquals(List.of("reason", "sizes"),
+                                    recorder.getExecution()
+                                            .getPropertyDefinitions()
+                                            .stream()
+                                            .map(definition -> definition.getName())
+                                            .toList());
+        }
+
+        @Test
+        public void aNameCanBeDefinedOncePerScope() {
+            // when
+            recorder.defineProperty("reason", PropertyScope.INDIVIDUAL, PropertyValueType.TEXT, false, "Why.");
+
+            // then
+            Assertions.assertThrows(IllegalArgumentException.class,
+                                    () -> recorder.defineProperty("reason", PropertyScope.RELATIONSHIP,
+                                                                  PropertyValueType.TEXT, false, "Again."));
+        }
+
+        @Test
+        public void propertiesCannotBeDefinedDuringTheExecution() {
+            // given
+            recorder.beginExecution();
+
+            // when, then
+            Assertions.assertThrows(IllegalStateException.class,
+                                    () -> recorder.defineProperty("age", PropertyScope.INDIVIDUAL,
+                                                                  PropertyValueType.INTEGER, false, "Age."));
+        }
+
+        @Test
+        public void valuesOfTheDefinedTypeAreAccepted() {
+            Assertions.assertDoesNotThrow(() -> recorder.requireProperty("reason", PropertyScope.RELATIONSHIP, "too old"));
+            Assertions.assertDoesNotThrow(() -> recorder.requireProperty("sizes", PropertyScope.INDIVIDUAL, List.of(1L, 2L)));
+        }
+
+        @Test
+        public void undefinedPropertiesAreRejected() {
+            Assertions.assertThrows(IllegalStateException.class,
+                                    () -> recorder.requireProperty("reason", PropertyScope.INDIVIDUAL, "too old"));
+            Assertions.assertThrows(IllegalStateException.class,
+                                    () -> recorder.requireProperty("age", PropertyScope.INDIVIDUAL, 1L));
+        }
+
+        @Test
+        public void valuesOfAnotherTypeAreRejected() {
+            Assertions.assertThrows(IllegalStateException.class,
+                                    () -> recorder.requireProperty("reason", PropertyScope.RELATIONSHIP, 1L));
+            Assertions.assertThrows(IllegalStateException.class,
+                                    () -> recorder.requireProperty("sizes", PropertyScope.INDIVIDUAL, 1L));
+            Assertions.assertThrows(IllegalStateException.class,
+                                    () -> recorder.requireProperty("sizes", PropertyScope.INDIVIDUAL, List.of(1, 2)));
         }
     }
 }
