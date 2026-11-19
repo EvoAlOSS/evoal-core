@@ -98,7 +98,7 @@
     "kind" : "counter",
     "valueType" : "integer",
     "scope" : "iteration",
-    "description" : "Number of measured constraints, one per constraint and candidate; they do not use the evaluation budget."
+    "description" : "Number of constraint measurements, including the repeated measurements of candidate checks that repair candidates; they do not use the evaluation budget."
   }, {
     "name" : "evaluations.real",
     "kind" : "counter",

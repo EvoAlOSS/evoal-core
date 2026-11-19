@@ -30,7 +30,7 @@ module 'search' {
 		'maximum-age' := 20;
 	    'offspring-fraction' := 0.6;
 
-		'initialisation' := 'training' { 'training-file' := "training.json"; };
+		'initialisation' := 'training-population' { 'training-file' := "training.json"; };
 		
 		'comparator' := 'numeric-comparator' {};
 	

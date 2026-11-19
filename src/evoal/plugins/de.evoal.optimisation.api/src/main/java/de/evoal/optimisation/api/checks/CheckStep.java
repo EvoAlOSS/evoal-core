@@ -6,6 +6,8 @@ import java.util.Optional;
 
 import lombok.extern.slf4j.Slf4j;
 
+import de.evoal.models.core.ecore.TypedEObject;
+
 import de.evoal.optimisation.api.run.Candidate;
 import de.evoal.optimisation.api.run.Lineage;
 import de.evoal.optimisation.api.steps.Check;
@@ -24,9 +26,15 @@ abstract class CheckStep implements Check {
     static final String REASON = CandidateCheckProducer.REASON;
 
     /**
-     * The name of the property with the number of variations of a resampled candidate.
+     * The name of the property with the number of variations of a resampled candidate, or the
+     *   number of repair attempts of a repaired candidate.
      */
     static final String ATTEMPTS = CandidateCheckProducer.ATTEMPTS;
+
+    /**
+     * The name of the property with the repair strategy of a repaired candidate.
+     */
+    static final String REPAIR = CandidateCheckProducer.REPAIR;
 
     /**
      * The checks with the sources of the current run.
@@ -106,8 +114,7 @@ abstract class CheckStep implements Check {
                         result.set(i, replace.replace(candidate, reason, runCheck.source()));
                     }
                     case RESAMPLE -> result.set(i, resample(state, i, check, reason));
-                    default -> throw new IllegalStateException("The reaction '" + check.reaction() + "' of the check '"
-                                                               + check.name() + "' is not supported.");
+                    case REPAIR -> result.set(i, repair(state, i, runCheck, candidate, reason, replace));
                 }
             }
 
@@ -118,6 +125,68 @@ abstract class CheckStep implements Check {
         failures = List.copyOf(counts);
 
         return result;
+    }
+
+    /**
+     * Repairs a failed candidate until it passes the check, at most
+     *   {@link CandidateCheck#maximumAttempts()} times. Every attempt changes the result of
+     *   the previous one. If the candidate still fails, the fallback of the repair reacts to
+     *   the original candidate.
+     *
+     * @return The repaired candidate: the lineage of the failed candidate with the properties
+     *   {@code repair} and {@code attempts} (on itself if it has no predecessor), or the result
+     *   of the fallback.
+     */
+    private Candidate repair(final SearchState state, final int index, final RunCheck runCheck, final Candidate failed,
+                             final String reason, final Replacer replace) {
+        final CandidateCheck check = runCheck.check();
+        final Repair repair = check.repair()
+                                   .orElseThrow(() -> new IllegalStateException("The check '" + check.name()
+                                                                                + "' repairs, but has no repair strategy."));
+
+        TypedEObject input = failed.input();
+        for(int attempt = 1; attempt <= check.maximumAttempts(); ++attempt) {
+            input = repair.attempt().apply(input);
+
+            final Candidate repaired = repaired(failed, input, repair.name(), attempt);
+            if(check.test(repaired).isEmpty()) {
+                return repaired;
+            }
+        }
+
+        log.warn("Iteration {}: the candidate {} still fails the check {} after {} attempts of {}; reacting with '{}'.",
+                 state.getIteration(), failed.input(), reason, check.maximumAttempts(), repair.name(), repair.fallback());
+
+        return switch(repair.fallback()) {
+            case WARN -> failed;
+            case REPLACE -> replace.replace(failed, reason, runCheck.source());
+            case RESAMPLE -> resample(state, index, check, reason);
+            case REPAIR -> throw new IllegalStateException("The fallback of the repair '" + repair.name()
+                                                           + "' cannot be 'repair'.");
+        };
+    }
+
+    /**
+     * @return A new candidate with the repaired values and the lineage of the failed candidate,
+     *   with the properties {@code repair} and {@code attempts}: on its relationship, or on
+     *   itself if it has no predecessor.
+     */
+    private static Candidate repaired(final Candidate failed, final TypedEObject input, final String strategy,
+                                      final int attempts) {
+        final Lineage lineage = failed.lineage();
+        if(lineage.kind() == Lineage.Kind.NONE) {
+            final Candidate repaired = new Candidate(input, Lineage.NONE);
+            failed.properties().forEach(repaired::setProperty);
+            repaired.setProperty(REPAIR, strategy);
+            repaired.setProperty(ATTEMPTS, (long) attempts);
+
+            return repaired;
+        }
+
+        final Lineage recorded = lineage.withProperty(REPAIR, strategy)
+                                        .withProperty(ATTEMPTS, (long) attempts);
+
+        return new Candidate(input, recorded);
     }
 
     /**

@@ -74,7 +74,7 @@ public final class Candidates {
      * The single constraint of the group {@link #GROUP}.
      */
     private static final Constraints CONSTRAINTS = new Constraints(List.of(
-            new Constraint(1, GROUP, "c", ConstraintKind.INEQUALITY, List.of(), List.of(), Map.of(), values -> 0.0,
+            new Constraint(1, GROUP, "c", ConstraintKind.INEQUALITY, false, List.of(), List.of(), Map.of(), values -> 0.0,
                            null)));
 
     /**

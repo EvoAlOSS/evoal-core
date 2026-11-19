@@ -7,8 +7,8 @@ import java.util.function.Supplier;
  * A check of an algorithm together with the source of its replacements.
  *
  * @param check The check.
- * @param sources Creates the replacement source for a run; {@code null} if the reaction is
- *   not {@link CheckReaction#REPLACE}.
+ * @param sources Creates the replacement source for a run; {@code null} if the check does
+ *   not react with {@link CheckReaction#REPLACE} (as reaction or as fallback of a repair).
  */
 public record ConfiguredCheck(CandidateCheck check, Supplier<ReplacementSource> sources) {
     /**
@@ -17,13 +17,13 @@ public record ConfiguredCheck(CandidateCheck check, Supplier<ReplacementSource> 
     public ConfiguredCheck {
         Objects.requireNonNull(check);
 
-        if(check.reaction() == CheckReaction.REPLACE && sources == null) {
+        if(check.reactsWith(CheckReaction.REPLACE) && sources == null) {
             throw new IllegalArgumentException("The check '" + check.name() + "' replaces candidates, but has no source.");
         }
     }
 
     /**
-     * @param check A check whose reaction is not {@link CheckReaction#REPLACE}.
+     * @param check A check that does not react with {@link CheckReaction#REPLACE}.
      * @return The check without replacement source.
      */
     public static ConfiguredCheck withoutSource(final CandidateCheck check) {

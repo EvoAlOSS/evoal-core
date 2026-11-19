@@ -76,6 +76,11 @@ final class ConditionCompiler extends ExpressionsSwitch<ConditionCompiler.Term> 
     private final Set<EStructuralFeature> searchFeaturesUsed = new LinkedHashSet<>();
 
     /**
+     * Whether the comparison is strict ({@code <} or {@code >}).
+     */
+    private boolean strict;
+
+    /**
      * @param searchByData The search features of the problem by their data description.
      * @param objectivesByData The objectives of the problem by their data description.
      */
@@ -128,6 +133,7 @@ final class ConditionCompiler extends ExpressionsSwitch<ConditionCompiler.Term> 
         final Term right = doSwitch(comparison.getSubExpression());
 
         kind = operator == ComparisonOperator.EQUAL ? ConstraintKind.EQUALITY : ConstraintKind.INEQUALITY;
+        strict = operator == ComparisonOperator.LESS_THAN || operator == ComparisonOperator.GREATER_THAN;
 
         return switch(operator) {
             case GREATER_THAN, GREATER_EQUAL, EQUAL -> left.minus(right);
@@ -277,6 +283,7 @@ final class ConditionCompiler extends ExpressionsSwitch<ConditionCompiler.Term> 
                               group,
                               text,
                               kind,
+                              strict,
                               List.copyOf(searchFeaturesUsed),
                               List.copyOf(objectivesUsed),
                               constraintDeviations,

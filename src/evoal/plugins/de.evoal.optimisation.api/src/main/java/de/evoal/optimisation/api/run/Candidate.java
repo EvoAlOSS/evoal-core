@@ -9,6 +9,7 @@ import lombok.NonNull;
 import de.evoal.models.core.ecore.TypedEObject;
 import de.evoal.models.v202704.optimisation.execution.OptimisationValue;
 
+import de.evoal.optimisation.api.constraints.PartialViolationRecord;
 import de.evoal.optimisation.api.fitness.Evaluation;
 import de.evoal.optimisation.api.fitness.Fitness;
 
@@ -47,6 +48,11 @@ public final class Candidate {
     private final Lineage lineage;
 
     /**
+     * The degrees of the constraints measured before the evaluation.
+     */
+    private PartialViolationRecord measuredViolations = PartialViolationRecord.EMPTY;
+
+    /**
      * Further details of the candidate, by property name, in insertion order.
      */
     private final Map<String, Object> properties = new LinkedHashMap<>();
@@ -83,6 +89,31 @@ public final class Candidate {
         copy.evaluation = evaluation;
 
         return copy;
+    }
+
+    /**
+     * Adds degrees of constraints measured before the evaluation, e.g., by a
+     *   {@code 'constraint-check'}. The evaluation takes them over instead of measuring the
+     *   constraints again.
+     *
+     * @param measured The measured degrees; they replace earlier degrees of the same
+     *   constraints.
+     * @throws IllegalStateException if the candidate is already evaluated.
+     */
+    public void addMeasuredViolations(final @NonNull PartialViolationRecord measured) {
+        if(isEvaluated()) {
+            throw new IllegalStateException("The candidate " + input + " is already evaluated.");
+        }
+
+        measuredViolations = measuredViolations.merge(measured);
+    }
+
+    /**
+     * @return The degrees of the constraints measured before the evaluation; empty if none
+     *   were measured.
+     */
+    public PartialViolationRecord measuredViolations() {
+        return measuredViolations;
     }
 
     /**

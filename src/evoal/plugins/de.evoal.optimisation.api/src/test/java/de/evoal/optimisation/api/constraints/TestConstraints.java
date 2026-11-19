@@ -35,7 +35,7 @@ public final class TestConstraints {
     }
 
     private static Constraint constraint(final int number, final String group) {
-        return new Constraint(number, group, "c" + number, ConstraintKind.INEQUALITY, List.of(), List.of(), Map.of(),
+        return new Constraint(number, group, "c" + number, ConstraintKind.INEQUALITY, false, List.of(), List.of(), Map.of(),
                               values -> 0.0, null);
     }
 }

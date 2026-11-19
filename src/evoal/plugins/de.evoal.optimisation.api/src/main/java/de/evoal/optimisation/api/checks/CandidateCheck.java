@@ -25,7 +25,7 @@ public interface CandidateCheck extends EvoalComponent<CandidateCheck> {
 
     /**
      * @return The maximum number of times the variation is redone for
-     *   {@link CheckReaction#RESAMPLE}.
+     *   {@link CheckReaction#RESAMPLE}, or the repair is tried for {@link CheckReaction#REPAIR}.
      */
     int maximumAttempts();
 
@@ -40,7 +40,32 @@ public interface CandidateCheck extends EvoalComponent<CandidateCheck> {
     CheckReaction reaction();
 
     /**
-     * @return The configuration of the source of new candidates for {@link CheckReaction#REPLACE},
+     * @return The repair for the reaction {@link CheckReaction#REPAIR}, empty if the check
+     *   has none.
+     */
+    default Optional<Repair> repair() {
+        return Optional.empty();
+    }
+
+    /**
+     * @param candidateReaction A reaction.
+     * @return Whether the check reacts with it: as its reaction, or as the fallback of its
+     *   repair.
+     */
+    default boolean reactsWith(final CheckReaction candidateReaction) {
+        if(reaction() == candidateReaction) {
+            return true;
+        }
+
+        return reaction() == CheckReaction.REPAIR
+            && repair().map(Repair::fallback)
+                       .filter(candidateReaction::equals)
+                       .isPresent();
+    }
+
+    /**
+     * @return The configuration of the source of new candidates for {@link CheckReaction#REPLACE}
+     *   (also as the fallback of a repair),
      *   empty if the {@code 'initialisation'} of the algorithm is used.
      */
     Optional<EObject> replacementSource();

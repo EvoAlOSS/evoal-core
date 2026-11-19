@@ -51,9 +51,10 @@ module de.evoal.surrogate.optimisation {
 	}
 	
 	/**
-	 * Use training data as initial population.
+	 * Initial candidates drawn at random (with repetition) from the training data. Also
+	 *   a 'replacement-source' of candidate checks.
 	 */
-	type training extends 'initial-population' {
+	type 'training-population' extends 'initial-population' {
 	    'training-file' : optional string;
 	}
 	

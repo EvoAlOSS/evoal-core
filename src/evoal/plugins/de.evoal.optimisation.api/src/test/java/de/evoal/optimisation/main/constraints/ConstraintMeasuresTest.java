@@ -57,7 +57,7 @@ public class ConstraintMeasuresTest {
      * @return The constraint {@code x >= 1}, in normal form {@code x - 1 >= 0}.
      */
     private Constraint xAtLeastOne(final Map<EStructuralFeature, Double> deviations) {
-        return new Constraint(1, "g", "x >= 1", ConstraintKind.INEQUALITY, List.of(x), List.of(), deviations,
+        return new Constraint(1, "g", "x >= 1", ConstraintKind.INEQUALITY, false, List.of(x), List.of(), deviations,
                               values -> values.valueOf(x) - 1.0, null);
     }
 
@@ -65,7 +65,7 @@ public class ConstraintMeasuresTest {
      * @return The constraint {@code x = y}, in normal form {@code x - y = 0}.
      */
     private Constraint xEqualsY(final Map<EStructuralFeature, Double> deviations) {
-        return new Constraint(1, "g", "x = y", ConstraintKind.EQUALITY, List.of(x, y), List.of(), deviations,
+        return new Constraint(1, "g", "x = y", ConstraintKind.EQUALITY, false, List.of(x, y), List.of(), deviations,
                               values -> values.valueOf(x) - values.valueOf(y), null);
     }
 

@@ -26,7 +26,7 @@ import java.util.random.RandomGenerator;
 import java.util.stream.Stream;
 
 @Slf4j
-@Named("de.evoal.surrogate.optimisation.training")
+@Named("de.evoal.surrogate.optimisation.training-population")
 @Dependent
 public class TrainingInitialCandidates implements InitialCandidatesProvider {
     @Inject
@@ -54,7 +54,7 @@ public class TrainingInitialCandidates implements InitialCandidatesProvider {
         final List<TypedEObject> properties = streamSupplier.apply(mergedSpace)
                         .toList();
         final int upperLimit = properties.size();
-        final RandomGenerator random = randomService.random("de.evoal.surrogate.optimisation.training");
+        final RandomGenerator random = randomService.random("de.evoal.surrogate.optimisation.training-population");
         final Supplier<TypedEObject> chooseRandomly = () -> {
             int index = random.nextInt(upperLimit);
             return properties.get(index);

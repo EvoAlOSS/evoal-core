@@ -1,6 +1,7 @@
 package de.evoal.optimisation.api.fitness;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.OptionalLong;
 
@@ -12,6 +13,7 @@ import de.evoal.models.core.ecore.TypedEObject;
 import de.evoal.models.v202704.optimisation.execution.OptimisationValue;
 
 import de.evoal.optimisation.api.constraints.ConstraintEvaluation;
+import de.evoal.optimisation.api.constraints.PartialViolationRecord;
 import de.evoal.optimisation.api.constraints.ViolationRecord;
 import de.evoal.optimisation.api.evaluation.EvaluationBudgetExhaustedException;
 import de.evoal.optimisation.api.evaluation.EvaluationService;
@@ -100,9 +102,23 @@ public class Evaluator {
      *   evaluation budget is exhausted.
      */
     public Evaluation evaluate(final TypedEObject input) {
+        return evaluate(input, PartialViolationRecord.EMPTY);
+    }
+
+    /**
+     * Evaluates a candidate whose constraints are partly measured.
+     *
+     * @param input The candidate (a point of the search space).
+     * @param known The degrees of the constraints measured before the evaluation; they are
+     *   not measured again.
+     * @return The objectives, the violation record, the fitness and the optimisation value.
+     * @throws de.evoal.optimisation.api.evaluation.EvaluationBudgetExhaustedException if the
+     *   evaluation budget is exhausted.
+     */
+    public Evaluation evaluate(final TypedEObject input, final PartialViolationRecord known) {
         final TypedEObject output = evaluationService.evaluate(input);
 
-        return toEvaluation(input, output);
+        return toEvaluation(input, output, known);
     }
 
     /**
@@ -116,6 +132,27 @@ public class Evaluator {
      *   evaluations of the batch have ended.
      */
     public BatchEvaluation evaluateAll(final List<TypedEObject> inputs) {
+        return evaluateAll(inputs, Collections.nCopies(inputs.size(), PartialViolationRecord.EMPTY));
+    }
+
+    /**
+     * Evaluates a batch of candidates whose constraints are partly measured, like
+     *   {@link #evaluateAll(List)}.
+     *
+     * @param inputs The candidates (points of the search space).
+     * @param known The degrees of the constraints of every candidate measured before the
+     *   evaluation, in the order of the candidates; they are not measured again.
+     * @return The evaluations of the first candidates and the exhaustion of the budget, if any.
+     * @throws IllegalArgumentException if the lists differ in size.
+     * @throws RuntimeException the failure of the evaluation with the lowest index, after all
+     *   evaluations of the batch have ended.
+     */
+    public BatchEvaluation evaluateAll(final List<TypedEObject> inputs, final List<PartialViolationRecord> known) {
+        if(inputs.size() != known.size()) {
+            throw new IllegalArgumentException("The batch has " + inputs.size() + " candidates, but " + known.size()
+                                               + " partial violation records.");
+        }
+
         final OptionalLong remaining = evaluationService.remainingEvaluations();
         final int covered = (int) Math.min(inputs.size(), remaining.orElse(Long.MAX_VALUE));
 
@@ -126,7 +163,7 @@ public class Evaluator {
         for(int i = 0; i < covered; ++i) {
             final TypedEObject input = evaluated.get(i);
             final TypedEObject output = outputs.get(i);
-            final Evaluation evaluation = toEvaluation(input, output);
+            final Evaluation evaluation = toEvaluation(input, output, known.get(i));
 
             evaluations.add(evaluation);
         }
@@ -154,10 +191,11 @@ public class Evaluator {
     /**
      * @return The evaluation of a candidate whose objectives are computed.
      */
-    private Evaluation toEvaluation(final TypedEObject input, final TypedEObject output) {
+    private Evaluation toEvaluation(final TypedEObject input, final TypedEObject output,
+                                    final PartialViolationRecord known) {
         final ViolationRecord violations = constraintEvaluation == null
                 ? ViolationRecord.NONE
-                : constraintEvaluation.measure(input, output);
+                : constraintEvaluation.measure(input, output, known);
         final Fitness fitness = pipeline.apply(input, output, violations);
         final OptimisationValue value = comparator.toValue(output, fitness, violations);
 

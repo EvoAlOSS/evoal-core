@@ -64,6 +64,11 @@ public final class Constraint {
     private final Set<EStructuralFeature> searchFeatureSet;
 
     /**
+     * Whether the comparison is strict ({@code <} or {@code >}).
+     */
+    private final boolean strict;
+
+    /**
      * The constraint as written in the DDL, for reports.
      */
     private final String text;
@@ -73,6 +78,7 @@ public final class Constraint {
      * @param group The name of the group.
      * @param text The constraint as written in the DDL.
      * @param kind Whether the constraint is an equality or an inequality.
+     * @param strict Whether the comparison is strict ({@code <} or {@code >}).
      * @param searchFeatures The search features the constraint reads.
      * @param objectives The objectives the constraint reads.
      * @param deviations The standard deviation of every feature of the constraint that has one.
@@ -84,6 +90,7 @@ public final class Constraint {
                       final String group,
                       final String text,
                       final ConstraintKind kind,
+                      final boolean strict,
                       final List<EStructuralFeature> searchFeatures,
                       final List<EStructuralFeature> objectives,
                       final Map<EStructuralFeature, Double> deviations,
@@ -93,6 +100,7 @@ public final class Constraint {
         this.group = Objects.requireNonNull(group, "group");
         this.text = Objects.requireNonNull(text, "text");
         this.kind = Objects.requireNonNull(kind, "kind");
+        this.strict = strict;
         this.searchFeatures = List.copyOf(searchFeatures);
         this.searchFeatureSet = new HashSet<>(searchFeatures);
         this.objectives = List.copyOf(objectives);
@@ -148,6 +156,15 @@ public final class Constraint {
      */
     public List<EStructuralFeature> searchFeatures() {
         return searchFeatures;
+    }
+
+    /**
+     * @return Whether the comparison is strict ({@code <} or {@code >}). A strict inequality
+     *   is measured like a non-strict one; only repairs of integer features keep a distance
+     *   of one to its bound.
+     */
+    public boolean isStrict() {
+        return strict;
     }
 
     /**

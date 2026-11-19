@@ -27,7 +27,8 @@ import de.evoal.optimisation.api.model.InitialCandidatesProvider;
  * Creates the {@code 'candidate-checks'} of an algorithm configuration:
  * <ul>
  *   <li>rejects a check whose reaction the check type does not support, or whose check
- *     point the algorithm does not offer, and {@code resample} for population checks or
+ *     point the algorithm does not offer, {@code repair} without a repair strategy, and
+ *     {@code resample} (also as the fallback of a repair) for population checks or
  *     algorithms that cannot redo their variation;</li>
  *   <li>creates the replacement source of every replacing check: its
  *     {@code 'replacement-source'}, or the {@code 'initialisation'} of the algorithm. A
@@ -36,8 +37,9 @@ import de.evoal.optimisation.api.model.InitialCandidatesProvider;
  *   <li>defines the property {@link #REASON} of replacements in the
  *     {@link ExecutionRecorder}: on relationships for population checks, on individuals for
  *     checks of new candidates and for population checks (a replaced member that is new in
- *     the iteration is not recorded), and the property {@link #ATTEMPTS} of resampled
- *     candidates in both scopes.</li>
+ *     the iteration is not recorded), the property {@link #ATTEMPTS} of resampled and
+ *     repaired candidates and the property {@link #REPAIR} of repaired candidates, both in
+ *     both scopes.</li>
  * </ul>
  */
 @ApplicationScoped
@@ -52,6 +54,11 @@ public class CandidateCheckProducer {
      * The name of the property with the number of variations of a resampled candidate.
      */
     public static final String ATTEMPTS = "attempts";
+
+    /**
+     * The name of the property with the repair strategy of a repaired candidate.
+     */
+    public static final String REPAIR = "repair";
 
     /**
      * The DL type of the initial population source that repeats its candidates.
@@ -89,7 +96,7 @@ public class CandidateCheckProducer {
         final EObject initialisation = helper.lookup(algorithm, "initialisation");
         final List<ConfiguredCheck> configured = new ArrayList<>();
         for(final CandidateCheck check : checks) {
-            if(check.reaction() != CheckReaction.REPLACE) {
+            if(!check.reactsWith(CheckReaction.REPLACE)) {
                 configured.add(ConfiguredCheck.withoutSource(check));
                 continue;
             }
@@ -112,7 +119,7 @@ public class CandidateCheckProducer {
      */
     private void defineProperties(final List<CandidateCheck> checks) {
         final Set<CheckPoint> replacing = checks.stream()
-                                                .filter(check -> check.reaction() == CheckReaction.REPLACE)
+                                                .filter(check -> check.reactsWith(CheckReaction.REPLACE))
                                                 .map(CandidateCheck::checkPoint)
                                                 .collect(Collectors.toSet());
 
@@ -121,11 +128,21 @@ public class CandidateCheckProducer {
                                     "Why the target of a replacement failed a candidate check.");
         }
 
-        if(checks.stream().anyMatch(check -> check.reaction() == CheckReaction.RESAMPLE)) {
+        final boolean resampling = checks.stream().anyMatch(check -> check.reactsWith(CheckReaction.RESAMPLE));
+        final boolean repairing = checks.stream().anyMatch(check -> check.reaction() == CheckReaction.REPAIR);
+        if(resampling || repairing) {
             recorder.defineProperty(ATTEMPTS, PropertyScope.RELATIONSHIP, PropertyValueType.INTEGER, false,
-                                    "The number of variations of a candidate that a candidate check resampled.");
+                                    "The number of variations of a candidate that a candidate check resampled, or the "
+                                    + "number of attempts of the repair of a repaired candidate.");
             recorder.defineProperty(ATTEMPTS, PropertyScope.INDIVIDUAL, PropertyValueType.INTEGER, false,
-                                    "The number of variations of a resampled candidate without predecessor.");
+                                    "Like the property of the relationship, for a candidate without predecessor.");
+        }
+
+        if(repairing) {
+            recorder.defineProperty(REPAIR, PropertyScope.RELATIONSHIP, PropertyValueType.TEXT, false,
+                                    "The repair strategy that repaired the candidate after a failed candidate check.");
+            recorder.defineProperty(REPAIR, PropertyScope.INDIVIDUAL, PropertyValueType.TEXT, false,
+                                    "Like the property of the relationship, for a candidate without predecessor.");
         }
 
         if(!replacing.isEmpty()) {
@@ -152,7 +169,12 @@ public class CandidateCheckProducer {
                                                   + check.reaction() + "'; it supports " + check.supportedReactions() + ".");
             }
 
-            final boolean resamples = check.reaction() == CheckReaction.RESAMPLE;
+            if(check.reaction() == CheckReaction.REPAIR && check.repair().isEmpty()) {
+                throw new InitializationException("The check '" + check.name() + "' has the reaction 'repair', but no "
+                                                  + "repair strategy.");
+            }
+
+            final boolean resamples = check.reactsWith(CheckReaction.RESAMPLE);
             if(resamples && check.checkPoint() != CheckPoint.NEW_CANDIDATES) {
                 throw new InitializationException("The check '" + check.name() + "' cannot resample: only checks of new "
                                                   + "candidates can redo their variation.");

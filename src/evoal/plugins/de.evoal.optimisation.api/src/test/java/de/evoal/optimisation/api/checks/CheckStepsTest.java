@@ -320,6 +320,147 @@ public class CheckStepsTest {
     }
 
     @Nested
+    @DisplayName("given a repairing check of new candidates")
+    class RepairingChecks {
+        private final Candidate parent = member();
+
+        private final Candidate passing = new Candidate(Mockito.mock(TypedEObject.class), Lineage.mutation(parent));
+
+        private final Candidate failing = new Candidate(Mockito.mock(TypedEObject.class), Lineage.mutation(parent)
+                                                                                                .withProperty("operators", "gaussian"));
+
+        /**
+         * The results of the repair attempts, in order.
+         */
+        private final List<TypedEObject> repaired = new java.util.ArrayList<>();
+
+        @BeforeEach
+        public void candidates() {
+            state.setCandidates(List.of(passing, failing));
+        }
+
+        /**
+         * @param failedAttempts The number of repair results that still fail.
+         */
+        private RepairingCheck check(final int failedAttempts, final CheckReaction fallback) {
+            final Repair repair = new Repair("test-repair", input -> {
+                final TypedEObject result = Mockito.mock(TypedEObject.class);
+                repaired.add(result);
+                return result;
+            }, fallback);
+
+            return new RepairingCheck(candidate -> candidate.input() == failing.input()
+                                                   || repaired.indexOf(candidate.input()) >= 0
+                                                      && repaired.indexOf(candidate.input()) < failedAttempts,
+                                      repair);
+        }
+
+        @Test
+        public void aRepairedCandidateKeepsTheLineageOfTheFailedOneWithRepairAndAttempts() {
+            // given: the first repair result still fails
+            final CheckNewCandidates step = new CheckNewCandidates(List.of(ConfiguredCheck.withoutSource(check(1, CheckReaction.WARN))));
+
+            // when
+            step.execute(state);
+
+            // then
+            final Candidate result = state.getCandidates().get(1);
+            Assertions.assertSame(passing, state.getCandidates().getFirst());
+            Assertions.assertSame(repaired.get(1), result.input());
+            Assertions.assertEquals(Lineage.mutation(parent)
+                                           .withProperty("operators", "gaussian")
+                                           .withProperty("repair", "test-repair")
+                                           .withProperty("attempts", 2L),
+                                    result.lineage());
+            Assertions.assertFalse(result.isEvaluated());
+            Assertions.assertEquals("test (repair): 1 of 2 candidates failed", step.description());
+        }
+
+        @Test
+        public void aRepairedCandidateWithoutPredecessorHasRepairAndAttemptsItself() {
+            // given
+            final Candidate initial = new Candidate(failing.input(), Lineage.NONE);
+            state.setCandidates(List.of(initial));
+            final CheckNewCandidates step = new CheckNewCandidates(List.of(ConfiguredCheck.withoutSource(check(0, CheckReaction.WARN))));
+
+            // when
+            step.execute(state);
+
+            // then
+            final Candidate result = state.getCandidates().getFirst();
+            Assertions.assertEquals(Lineage.NONE, result.lineage());
+            Assertions.assertEquals("test-repair", result.properties().get("repair"));
+            Assertions.assertEquals(1L, result.properties().get("attempts"));
+        }
+
+        @Test
+        public void theFallbackWarnKeepsTheUnrepairedCandidate() {
+            // given: every repair result fails
+            final CheckNewCandidates step = new CheckNewCandidates(List.of(ConfiguredCheck.withoutSource(check(3, CheckReaction.WARN))));
+
+            // when
+            step.execute(state);
+
+            // then
+            Assertions.assertEquals(3, repaired.size());
+            Assertions.assertSame(failing, state.getCandidates().get(1));
+        }
+
+        @Test
+        public void theFallbackReplaceTakesACandidateFromTheSource() {
+            // given
+            final RepairingCheck check = check(3, CheckReaction.REPLACE);
+            final CheckNewCandidates step = new CheckNewCandidates(List.of(new ConfiguredCheck(check, () -> new ReplacementSource(provider))));
+
+            // when
+            step.execute(state);
+
+            // then
+            final Candidate replacement = state.getCandidates().get(1);
+            Assertions.assertSame(replacements.getFirst(), replacement.input());
+            Assertions.assertEquals("test: failed", replacement.properties().get("reason"));
+        }
+
+        @Test
+        public void theFallbackResampleRedoesTheVariation() {
+            // given
+            final Candidate resampled = new Candidate(Mockito.mock(TypedEObject.class), Lineage.mutation(parent));
+            final CheckNewCandidates step = new CheckNewCandidates(List.of(ConfiguredCheck.withoutSource(check(3, CheckReaction.RESAMPLE))),
+                                                                   (searchState, index) -> resampled);
+
+            // when
+            step.execute(state);
+
+            // then
+            final Candidate result = state.getCandidates().get(1);
+            Assertions.assertSame(resampled.input(), result.input());
+            Assertions.assertEquals(2L, result.lineage().properties().get("attempts"));
+        }
+
+        @Test
+        public void aReplacingFallbackNeedsASource() {
+            final RepairingCheck check = check(0, CheckReaction.REPLACE);
+
+            Assertions.assertThrows(IllegalArgumentException.class, () -> ConfiguredCheck.withoutSource(check));
+        }
+
+        @Test
+        public void aResamplingFallbackNeedsAnAlgorithmThatCanResample() {
+            final List<CandidateCheck> checks = List.of(check(0, CheckReaction.RESAMPLE));
+
+            Assertions.assertThrows(InitializationException.class,
+                                    () -> CandidateCheckProducer.validate(checks, Set.of(CheckPoint.NEW_CANDIDATES), false, "algorithm"));
+            Assertions.assertDoesNotThrow(() -> CandidateCheckProducer.validate(checks, Set.of(CheckPoint.NEW_CANDIDATES), true, "algorithm"));
+        }
+
+        @Test
+        public void theRepairCannotFallBackToRepair() {
+            Assertions.assertThrows(IllegalArgumentException.class,
+                                    () -> new Repair("test-repair", input -> input, CheckReaction.REPAIR));
+        }
+    }
+
+    @Nested
     @DisplayName("given the checks of an algorithm")
     class Validation {
         @Test
@@ -346,6 +487,49 @@ public class CheckStepsTest {
 
             Assertions.assertThrows(InitializationException.class,
                                     () -> CandidateCheckProducer.validate(checks, Set.of(CheckPoint.POPULATION), false, "algorithm"));
+        }
+
+        @Test
+        public void theReactionRepairNeedsARepairStrategy() {
+            final CandidateCheck check = new CandidateCheck() {
+                @Override
+                public CheckPoint checkPoint() {
+                    return CheckPoint.NEW_CANDIDATES;
+                }
+
+                @Override
+                public int maximumAttempts() {
+                    return 3;
+                }
+
+                @Override
+                public String name() {
+                    return "test";
+                }
+
+                @Override
+                public CheckReaction reaction() {
+                    return CheckReaction.REPAIR;
+                }
+
+                @Override
+                public Optional<EObject> replacementSource() {
+                    return Optional.empty();
+                }
+
+                @Override
+                public Set<CheckReaction> supportedReactions() {
+                    return EnumSet.allOf(CheckReaction.class);
+                }
+
+                @Override
+                public Optional<String> test(final Candidate candidate) {
+                    return Optional.empty();
+                }
+            };
+
+            Assertions.assertThrows(InitializationException.class,
+                                    () -> CandidateCheckProducer.validate(List.of(check), Set.of(CheckPoint.NEW_CANDIDATES), true, "algorithm"));
         }
 
         @Test
@@ -390,6 +574,52 @@ public class CheckStepsTest {
         @Override
         public Set<CheckReaction> supportedReactions() {
             return EnumSet.of(CheckReaction.WARN, CheckReaction.REPLACE, CheckReaction.RESAMPLE);
+        }
+
+        @Override
+        public Optional<String> test(final Candidate candidate) {
+            return fails.test(candidate) ? Optional.of("failed") : Optional.empty();
+        }
+    }
+
+    /**
+     * A check of new candidates with the reaction {@code repair} that fails the candidates of
+     *   a predicate with the reason "failed", with at most 3 attempts.
+     */
+    private record RepairingCheck(Predicate<Candidate> fails, Repair repairOfCheck) implements CandidateCheck {
+        @Override
+        public CheckPoint checkPoint() {
+            return CheckPoint.NEW_CANDIDATES;
+        }
+
+        @Override
+        public int maximumAttempts() {
+            return 3;
+        }
+
+        @Override
+        public String name() {
+            return "test";
+        }
+
+        @Override
+        public CheckReaction reaction() {
+            return CheckReaction.REPAIR;
+        }
+
+        @Override
+        public Optional<Repair> repair() {
+            return Optional.of(repairOfCheck);
+        }
+
+        @Override
+        public Optional<EObject> replacementSource() {
+            return Optional.empty();
+        }
+
+        @Override
+        public Set<CheckReaction> supportedReactions() {
+            return EnumSet.allOf(CheckReaction.class);
         }
 
         @Override

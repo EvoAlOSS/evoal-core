@@ -1,5 +1,9 @@
 package de.evoal.optimisation.api.constraints;
 
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
 
 import jakarta.enterprise.context.ApplicationScoped;
@@ -33,8 +37,10 @@ import de.evoal.optimisation.main.constraints.ConstraintCompiler;
  *   candidate with the {@code 'constraint-measure'} of the algorithm and returns its
  *   {@link ViolationRecord}. It never calls the optimisation function: constraints on
  *   objectives read the result of the evaluation, so constraint evaluations do not use the
- *   evaluation budget. Every measured constraint of a candidate counts once in the metric
- *   {@value #METRIC}.
+ *   evaluation budget. Every measurement of a constraint counts in the metric
+ *   {@value #METRIC}: a constraint that a {@code 'constraint-check'} measured before the
+ *   evaluation is not measured again, but a repaired candidate is measured after every
+ *   attempt.
  * <p>
  * At the start of every run, the constraints and the measure are read from the
  *   optimisation configuration. If the problem has constraints, the metric and the
@@ -98,8 +104,8 @@ public class ConstraintEvaluation implements MetricContributor {
         metric.setKind(MetricKind.COUNTER);
         metric.setValueType(MetricValueType.INTEGER);
         metric.setScope(MetricScope.ITERATION);
-        metric.setDescription("Number of measured constraints, one per constraint and candidate; they do not use the "
-                              + "evaluation budget.");
+        metric.setDescription("Number of constraint measurements, including the repeated measurements of candidate "
+                              + "checks that repair candidates; they do not use the evaluation budget.");
         recorder.define(metric);
 
         for(final Constraint constraint : constraints.all()) {
@@ -120,18 +126,62 @@ public class ConstraintEvaluation implements MetricContributor {
      * @return The violation record.
      */
     public ViolationRecord measure(final TypedEObject input, final TypedEObject objectives) {
+        return measure(input, objectives, PartialViolationRecord.EMPTY);
+    }
+
+    /**
+     * Measures the constraints of a candidate that are not measured yet.
+     *
+     * @param input The candidate (a point of the search space).
+     * @param objectives The result of the optimisation function for the candidate.
+     * @param known The degrees measured before the evaluation, e.g., by a
+     *   {@code 'constraint-check'}; they are taken over and not counted again.
+     * @return The violation record.
+     */
+    public ViolationRecord measure(final TypedEObject input, final TypedEObject objectives,
+                                   final PartialViolationRecord known) {
         if(constraints.isEmpty()) {
             return ViolationRecord.NONE;
         }
 
         final double[] degrees = new double[constraints.size()];
+        int measured = 0;
         for(final Constraint constraint : constraints.all()) {
+            final Optional<Double> knownDegree = known.degree(constraint);
+            if(knownDegree.isPresent()) {
+                degrees[constraint.number() - 1] = knownDegree.get();
+                continue;
+            }
+
             degrees[constraint.number() - 1] = measure.degreeOf(constraint, input, objectives);
+            measured += 1;
         }
 
-        evaluations.addAndGet(degrees.length);
+        evaluations.addAndGet(measured);
 
         return new ViolationRecord(constraints, degrees);
+    }
+
+    /**
+     * Measures some constraints of a candidate before its evaluation, e.g., for a
+     *   {@code 'constraint-check'}. Every call counts in the metric {@value #METRIC}, also
+     *   repeated measurements of a repaired candidate.
+     *
+     * @param input The candidate (a point of the search space).
+     * @param measured Constraints of the problem that read no objectives.
+     * @return The degrees of the constraints.
+     * @throws IllegalArgumentException if a constraint reads objectives.
+     */
+    public PartialViolationRecord measure(final TypedEObject input, final List<Constraint> measured) {
+        final Map<Integer, Double> degrees = new LinkedHashMap<>();
+
+        for(final Constraint constraint : measured) {
+            degrees.put(constraint.number(), measure.degreeOf(constraint, input, null));
+        }
+
+        evaluations.addAndGet(degrees.size());
+
+        return PartialViolationRecord.of(degrees);
     }
 
     /**

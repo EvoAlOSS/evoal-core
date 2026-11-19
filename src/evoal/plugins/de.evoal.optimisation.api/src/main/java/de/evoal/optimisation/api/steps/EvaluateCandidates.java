@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.function.BiPredicate;
 
 import de.evoal.models.core.ecore.TypedEObject;
+import de.evoal.optimisation.api.constraints.PartialViolationRecord;
 import de.evoal.optimisation.api.fitness.BatchEvaluation;
 import de.evoal.optimisation.api.fitness.Evaluation;
 import de.evoal.optimisation.api.fitness.Evaluator;
@@ -24,8 +25,9 @@ import de.evoal.optimisation.api.run.Candidate;
  *     current candidates, the acceptable one the accepted candidate
  *     ({@link SearchState#getAccepted()}). No further candidate is created or evaluated.</li>
  * </ul>
- * The {@link Evaluator} computes the objectives, the fitness and the optimisation value of
- *   each candidate.
+ * The {@link Evaluator} computes the objectives, the violation record, the fitness and the
+ *   optimisation value of each candidate; constraints that a check measured before
+ *   ({@link Candidate#measuredViolations()}) are not measured again.
  */
 public final class EvaluateCandidates implements FitnessCalculation {
     /**
@@ -71,7 +73,7 @@ public final class EvaluateCandidates implements FitnessCalculation {
     }
 
     private void evaluate(final Candidate candidate) {
-        final Evaluation evaluation = evaluator.evaluate(candidate.input());
+        final Evaluation evaluation = evaluator.evaluate(candidate.input(), candidate.measuredViolations());
         candidate.evaluate(evaluation);
     }
 
@@ -102,7 +104,11 @@ public final class EvaluateCandidates implements FitnessCalculation {
                                                      .map(Candidate::input)
                                                      .toList();
 
-        final BatchEvaluation batch = evaluator.evaluateAll(inputs);
+        final List<PartialViolationRecord> known = unevaluated.stream()
+                                                              .map(Candidate::measuredViolations)
+                                                              .toList();
+
+        final BatchEvaluation batch = evaluator.evaluateAll(inputs, known);
         final List<Evaluation> evaluations = batch.evaluations();
         for(int i = 0; i < evaluations.size(); ++i) {
             unevaluated.get(i).evaluate(evaluations.get(i));

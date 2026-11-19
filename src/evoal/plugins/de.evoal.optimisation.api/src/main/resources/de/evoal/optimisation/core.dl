@@ -144,9 +144,9 @@ module de.evoal.optimisation.core {
          *   called again. The record is stored in the memory model (properties
          *   {@code violation-<n>}, n is the position of the constraint in the DDL, from 1),
          *   and the measured constraints are counted in the metric
-         *   {@code constraint-evaluations}. A group is handled by 'constraint-penalty',
-         *   'feasibility-comparator', 'epsilon-comparator' or 'nsga2-selection'; a group
-         *   that nothing handles is reported as a warning.
+         *   {@code constraint-evaluations}. A group is handled by 'constraint-check',
+         *   'constraint-penalty', 'feasibility-comparator', 'epsilon-comparator' or
+         *   'nsga2-selection'; a group that nothing handles is reported as a warning.
          */
         'constraint-measure' : instance 'constraint-measure' := 'exact-measure' {};
     }
@@ -203,7 +203,9 @@ module de.evoal.optimisation.core {
      *     passes the check, at most 'maximum-attempts' times; then the last candidate is
      *     kept and a warning is reported. Only for checks of new candidates in algorithms
      *     with a variation (the evolutionary algorithm).
-     *   'repair': the candidate is repaired; only checks that offer a repair strategy.
+     *   'repair': the candidate is repaired, at most 'maximum-attempts' times; then the
+     *     fallback reaction of the check applies. Only checks that offer a repair
+     *     strategy ('constraint-check').
      *
      * Every check type states the reactions it supports; a configuration with an
      *   unsupported reaction is rejected.
@@ -219,7 +221,10 @@ module de.evoal.optimisation.core {
      *   or a population member that is new in the iteration) has no individual, so its
      *   replacement has the property {@code reason} itself. A resampled candidate has
      *   the property {@code attempts}, the number of variations it took, on its
-     *   relationship.
+     *   relationship. A repaired candidate keeps the relationship of the failed
+     *   candidate (e.g., to its parents) with the properties {@code repair}, the repair
+     *   strategy, and {@code attempts}, the number of repair attempts. A candidate without
+     *   relationship has these properties itself.
      */
     abstract type 'candidate-check' extends configuration {
         /**
@@ -235,7 +240,8 @@ module de.evoal.optimisation.core {
         'replacement-source' : optional instance 'initial-population';
 
         /**
-         * The maximum number of times the variation is redone for the reaction 'resample'.
+         * The maximum number of times the variation is redone for the reaction 'resample',
+         *   or the repair is tried for the reaction 'repair'.
          */
         @LowerBoundary { boundary := 1; }
         'maximum-attempts' : int := 10;
@@ -257,6 +263,70 @@ module de.evoal.optimisation.core {
         @LowerBoundary { boundary := 0; }
         iterations : int;
     }
+
+    /**
+     * Tests the constraints of a group on every new candidate, before its evaluation, so a
+     *   failed candidate costs no evaluation. The constraints are measured with the
+     *   'constraint-measure' of the algorithm; a candidate fails if the violation of the
+     *   group is greater than 0. The degrees are kept for the candidate's violation record,
+     *   so the evaluation does not measure these constraints again.
+     *
+     * The group must not contain constraints on objectives, since they can only be measured
+     *   after the evaluation. 'repair' is required for the reaction 'repair' and not allowed
+     *   for the other reactions.
+     *
+     * Check point: new candidates. Reactions: 'warn', 'replace', 'resample', 'repair'.
+     */
+    type 'constraint-check' extends 'candidate-check' {
+        /**
+         * The constraint group, as named in the DDL.
+         */
+        group : string;
+
+        /**
+         * The repair strategy for the reaction 'repair'. It must handle every constraint of
+         *   the group.
+         */
+        repair : optional instance 'constraint-repair';
+
+        /**
+         * The reaction if the candidate still fails after 'maximum-attempts' repairs:
+         *   'warn' keeps the unrepaired candidate, 'replace' and 'resample' react as for a
+         *   failed candidate. 'repair' is not allowed.
+         */
+        'repair-fallback' : enum 'check-reaction' := 'check-reaction.warn';
+    }
+
+    /**
+     * Abstract base type for the repair strategies of 'constraint-check'. A repair changes
+     *   the values of the search features of a candidate. It is deterministic; every attempt
+     *   starts from the result of the previous one. The values of integer features are
+     *   rounded and all values are moved into the bounds of their features in the DDL.
+     */
+    abstract type 'constraint-repair' extends configuration {}
+
+    /**
+     * Saturation: a constraint on a single search feature x is a bound of x, and a violated
+     *   bound sets x to the bound, in the order of the DDL. For an integer feature, x becomes
+     *   the nearest integer on the feasible side, one step inside the bound if the
+     *   comparison is strict. Only constraints that are linear in exactly one search
+     *   feature, e.g. {@code 2 * x <= 3}. The name follows A. V. Kononova, D. Vermetten,
+     *   F. Caraffini, M.-A. Mitran, D. Zaharie: The importance of being constrained: dealing
+     *   with infeasible solutions in Differential Evolution and beyond. Evolutionary
+     *   Computation, 2024, doi 10.1162/evco_a_00333, section 2.4.
+     */
+    type 'saturation-repair' extends 'constraint-repair' {}
+
+    /**
+     * Orthogonal projection: a violated constraint g(x) = a * x + c >= 0 (or = 0) moves the
+     *   candidate onto its hyperplane, x + t * a with t = -g(x) / |a|^2. One attempt
+     *   projects onto every violated constraint once, in the order of the DDL ("systematic
+     *   projection", S. Agmon: The relaxation method for linear inequalities. Canadian
+     *   Journal of Mathematics 6, 1954, pp. 382-392). Rounding and the bounds of the DDL may
+     *   leave a constraint violated, so several attempts may be needed. Only constraints
+     *   that are linear in the search features.
+     */
+    type 'projection-repair' extends 'constraint-repair' {}
 
     /**
      * Abstract base type for the steps of the fitness pipeline. A step computes a new
