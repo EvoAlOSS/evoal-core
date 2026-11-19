@@ -614,6 +614,11 @@ auto merge:
 ##
 image:maven-with-bash:
   extends: .image:build-image
+  # the image compiles src/evoal against the DSLs in the registry: on develop, wait
+  # until dsl:deploy has published the DSLs of this commit
+  needs:
+    - job: dsl:deploy
+      optional: true
   rules:
     - if: ($CI_PIPELINE_SOURCE == "push" || $CI_PIPELINE_SOURCE == "web") &&
           $CI_COMMIT_BRANCH == "develop"
