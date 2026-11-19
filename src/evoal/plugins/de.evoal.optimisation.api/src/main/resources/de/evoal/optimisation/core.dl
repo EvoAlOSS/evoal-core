@@ -141,7 +141,10 @@ module de.evoal.optimisation.core {
      *   'warn': the failure is reported; the candidate stays unchanged.
      *   'replace': a new candidate takes the place of the failed one. It comes from the
      *     'replacement-source' of the check, or from the 'initialisation' of the algorithm.
-     *   'resample': the variation is redone, with a bounded number of attempts.
+     *   'resample': the variation of the failed candidate is redone until the candidate
+     *     passes the check, at most 'maximum-attempts' times; then the last candidate is
+     *     kept and a warning is reported. Only for checks of new candidates in algorithms
+     *     with a variation (the evolutionary algorithm).
      *   'repair': the candidate is repaired; only checks that offer a repair strategy.
      *
      * Every check type states the reactions it supports; a configuration with an
@@ -156,7 +159,9 @@ module de.evoal.optimisation.core {
      *   relationship of the kind {@code replacement} with the property {@code reason}.
      *   A replaced candidate that is not recorded (a new candidate, which is not evaluated,
      *   or a population member that is new in the iteration) has no individual, so its
-     *   replacement has the property {@code reason} itself.
+     *   replacement has the property {@code reason} itself. A resampled candidate has
+     *   the property {@code attempts}, the number of variations it took, on its
+     *   relationship.
      */
     abstract type 'candidate-check' extends configuration {
         /**
@@ -170,6 +175,12 @@ module de.evoal.optimisation.core {
          *   repeats its candidates, which is reported as a warning.
          */
         'replacement-source' : optional instance 'initial-population';
+
+        /**
+         * The maximum number of times the variation is redone for the reaction 'resample'.
+         */
+        @LowerBoundary { boundary := 1; }
+        'maximum-attempts' : int := 10;
     }
 
     /**

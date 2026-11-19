@@ -66,10 +66,21 @@ public class ApplicabilityReader {
 
     /**
      * @param configuration The configuration of an operator.
-     * @return The applicability of the operator's DL type.
+     * @return The applicability of the operator's DL type; for an operator with
+     *   {@code children} (e.g. {@code 'single-choice-mutation'}) combined with the
+     *   applicability of every child, since every child must apply.
      */
     public Applicability of(final EObject configuration) {
-        return of(definitionOf(configuration.eClass()));
+        Applicability applicability = of(definitionOf(configuration.eClass()));
+
+        final EStructuralFeature children = configuration.eClass().getEStructuralFeature("children");
+        if(children != null && configuration.eGet(children) instanceof Collection<?> configurations) {
+            for(final Object child : configurations) {
+                applicability = applicability.and(of((EObject) child));
+            }
+        }
+
+        return applicability;
     }
 
     /**

@@ -107,6 +107,23 @@ public class VariationTest {
     }
 
     @Test
+    public void aRevariedChildTakesThePlaceOfTheSameParent() {
+        // given
+        final Variation variation = variation(1.0, 1.0);
+        final Candidate first = parent(0.1, 0.2);
+        final Candidate second = parent(0.3, 0.4);
+        final Offspring child = variation.recombine(first, second).get(1);
+
+        // when
+        final Candidate again = variation.toCandidate(variation.revary(child));
+
+        // then
+        Assertions.assertEquals(Lineage.Kind.RECOMBINATION, again.lineage().kind());
+        Assertions.assertEquals(List.of(second, first), again.lineage().predecessors());
+        Assertions.assertNotSame(child.pair, again.lineage().pair());
+    }
+
+    @Test
     public void theVariationIsReproducible() {
         final Candidate first = parent(0.1, 0.2);
         final Candidate second = parent(0.3, 0.4);

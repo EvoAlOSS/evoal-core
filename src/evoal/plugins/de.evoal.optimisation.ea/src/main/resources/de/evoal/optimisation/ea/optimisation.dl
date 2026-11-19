@@ -278,6 +278,52 @@ module de.evoal.optimisation.ea.optimisation {
 	}
 
 	/**
+	 * Line recombination (the extended line recombination of the breeder genetic
+	 *   algorithm, Muehlenbein and Schlierkamp-Voosen 1993): every child lies on the line
+	 *   through its parents, z = x + a (y - x), where x is the parent whose place it takes,
+	 *   y the other parent, and a is drawn uniformly from [-d, 1 + d] (d = 'extension'),
+	 *   once per child and chromosome.
+	 */
+	@Applicability { representations := ['representation.double']; 'minimum-scale' := 'measurement-scale.cardinal'; }
+	type 'line-crossover' extends recombination {
+		/**
+		 * How far a child may lie beyond its parents, relative to their distance (d).
+		 */
+		@LowerBoundary { boundary := 0.0; }
+		extension : real := 0.25;
+	}
+
+	/**
+	 * Arithmetic crossover: the children are the weighted means alpha x + (1 - alpha) y
+	 *   and (1 - alpha) x + alpha y of the parents x and y, gene by gene; x is the parent
+	 *   whose place the first child takes. With alpha = 0.5 both children are the mean of
+	 *   the parents.
+	 */
+	@Applicability { representations := ['representation.double']; 'minimum-scale' := 'measurement-scale.cardinal'; }
+	type 'arithmetic-crossover' extends recombination {
+		/**
+		 * The weight of the parent whose place a child takes.
+		 */
+		@LowerBoundary { boundary := 0.0; }
+		@UpperBoundary { boundary := 1.0; }
+		alpha : real := 0.5;
+	}
+
+	/**
+	 * Blend crossover BLX-alpha (Eshelman and Schaffer 1993): every gene of every child is
+	 *   drawn uniformly from [min - alpha I, max + alpha I], where min and max are the
+	 *   parent values and I = max - min.
+	 */
+	@Applicability { representations := ['representation.double']; 'minimum-scale' := 'measurement-scale.cardinal'; }
+	type 'blx-alpha-crossover' extends recombination {
+		/**
+		 * How far the interval reaches beyond the parents, relative to their distance.
+		 */
+		@LowerBoundary { boundary := 0.0; }
+		alpha : real := 0.5;
+	}
+
+	/**
 	 * Random reset mutation: a mutated gene gets a value drawn uniformly from the
 	 *   boundaries of its feature.
 	 */
@@ -316,6 +362,41 @@ module de.evoal.optimisation.ea.optimisation {
 		 */
 		@LowerBoundary { boundary := 0.0; }
 		'distribution-index' : real := 20.0;
+	}
+
+	/**
+	 * Creep mutation: a mutated gene changes by a value drawn uniformly from -step, ...,
+	 *   -1, 1, ..., step.
+	 */
+	@Applicability { representations := ['representation.integer']; 'minimum-scale' := 'measurement-scale.ordinal'; }
+	type 'creep-mutation' extends mutation {
+		/**
+		 * The largest change of a gene.
+		 */
+		@LowerBoundary { boundary := 1; }
+		step : int := 1;
+	}
+
+	/**
+	 * Single-choice mutation (specific to EvoAl): if it fires ('probability', one draw per
+	 *   child), exactly one of its 'children' is chosen with the given 'weights' and
+	 *   applied with its own 'gene-probability'; the 'probability' of the chosen mutation is
+	 *   not used. Its own 'gene-probability' is not used either. It applies to the
+	 *   chromosomes that all its children apply to.
+	 */
+	@Applicability { representations := ['representation.double', 'representation.integer', 'representation.bit', 'representation.gray']; }
+	type 'single-choice-mutation' extends mutation {
+		/**
+		 * The mutations to choose from.
+		 */
+		@MinimumNumberOfElements { bound := 1; }
+		children : array instance mutation;
+
+		/**
+		 * The weight of every child, in their order; not negative, at least one greater
+		 *   than 0. Empty for equal weights.
+		 */
+		weights : array real := [];
 	}
 
 	/**

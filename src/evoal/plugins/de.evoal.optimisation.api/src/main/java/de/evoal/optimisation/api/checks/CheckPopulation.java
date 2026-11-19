@@ -36,7 +36,7 @@ public final class CheckPopulation extends CheckStep {
      * @param evaluator Evaluates the replacements.
      */
     public CheckPopulation(final List<ConfiguredCheck> checks, final Evaluator evaluator) {
-        super(checks);
+        super(checks, null);
         this.evaluator = evaluator;
     }
 

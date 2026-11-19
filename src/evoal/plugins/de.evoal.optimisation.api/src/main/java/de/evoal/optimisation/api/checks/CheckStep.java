@@ -7,6 +7,7 @@ import java.util.Optional;
 import lombok.extern.slf4j.Slf4j;
 
 import de.evoal.optimisation.api.run.Candidate;
+import de.evoal.optimisation.api.run.Lineage;
 import de.evoal.optimisation.api.steps.Check;
 import de.evoal.optimisation.api.steps.SearchState;
 
@@ -23,6 +24,11 @@ abstract class CheckStep implements Check {
     static final String REASON = CandidateCheckProducer.REASON;
 
     /**
+     * The name of the property with the number of variations of a resampled candidate.
+     */
+    static final String ATTEMPTS = CandidateCheckProducer.ATTEMPTS;
+
+    /**
      * The checks with the sources of the current run.
      */
     private final List<RunCheck> checks;
@@ -33,17 +39,25 @@ abstract class CheckStep implements Check {
     private List<Integer> failures = List.of();
 
     /**
+     * Redoes the variation for {@code resample}, {@code null} if the step cannot resample.
+     */
+    private final Resampler resampler;
+
+    /**
      * The number of tested candidates in the last execution.
      */
     private int tested;
 
     /**
      * @param checks The checks of the check point, in the configured order.
+     * @param resampler Redoes the variation for {@code resample}, {@code null} if the step
+     *   cannot resample.
      */
-    CheckStep(final List<ConfiguredCheck> checks) {
+    CheckStep(final List<ConfiguredCheck> checks, final Resampler resampler) {
         this.checks = checks.stream()
                             .map(RunCheck::new)
                             .toList();
+        this.resampler = resampler;
     }
 
     @Override
@@ -91,6 +105,7 @@ abstract class CheckStep implements Check {
                         log.info("Iteration {}: candidate {} failed the check {}, replacing it.", state.getIteration(), candidate.input(), reason);
                         result.set(i, replace.replace(candidate, reason, runCheck.source()));
                     }
+                    case RESAMPLE -> result.set(i, resample(state, i, check, reason));
                     default -> throw new IllegalStateException("The reaction '" + check.reaction() + "' of the check '"
                                                                + check.name() + "' is not supported.");
                 }
@@ -103,6 +118,50 @@ abstract class CheckStep implements Check {
         failures = List.copyOf(counts);
 
         return result;
+    }
+
+    /**
+     * Redoes the variation of the candidate at the index until it passes the check, at most
+     *   {@link CandidateCheck#maximumAttempts()} times; the last candidate is kept.
+     *
+     * @return The candidate with the number of its variations as property {@code attempts}.
+     */
+    private Candidate resample(final SearchState state, final int index, final CandidateCheck check, final String reason) {
+        if(resampler == null) {
+            throw new IllegalStateException("The check '" + check.name() + "' resamples, but the step cannot redo the variation.");
+        }
+
+        for(int attempt = 1; attempt <= check.maximumAttempts(); ++attempt) {
+            final Candidate resampled = resampler.resample(state, index);
+            final boolean passes = check.test(resampled).isEmpty();
+
+            if(passes || attempt == check.maximumAttempts()) {
+                if(!passes) {
+                    log.warn("Iteration {}: the candidate {} still fails the check {} after {} variations; keeping it.",
+                             state.getIteration(), resampled.input(), reason, attempt + 1);
+                }
+                return withAttempts(resampled, attempt + 1);
+            }
+        }
+
+        throw new IllegalStateException("The check '" + check.name() + "' allows no attempts.");
+    }
+
+    /**
+     * @return The candidate with the number of variations as property {@code attempts}: on
+     *   its relationship, or on itself if it has no predecessor.
+     */
+    private static Candidate withAttempts(final Candidate candidate, final int attempts) {
+        final Lineage lineage = candidate.lineage();
+        if(lineage.kind() == Lineage.Kind.NONE) {
+            candidate.setProperty(ATTEMPTS, (long) attempts);
+            return candidate;
+        }
+
+        final Lineage counted = lineage.withProperty(ATTEMPTS, (long) attempts);
+        return candidate.isEvaluated()
+                ? Candidate.evaluated(candidate.input(), candidate.evaluation(), counted)
+                : new Candidate(candidate.input(), counted);
     }
 
     /**

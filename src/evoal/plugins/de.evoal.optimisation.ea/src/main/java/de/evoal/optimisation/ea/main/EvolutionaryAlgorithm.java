@@ -57,7 +57,8 @@ import de.evoal.optimisation.ea.main.operators.ApplicabilityReader;
  *   <li>Selection: the {@code 'parent-selection'} selects 2 * ceil(lambda / 2) parents,</li>
  *   <li>Adaption: the recombinations recombine every pair into two children,</li>
  *   <li>Adaption: the mutations mutate the first lambda children (see {@link Variation}),</li>
- *   <li>Check: the checks of new candidates, if any are configured,</li>
+ *   <li>Check: the checks of new candidates, if any are configured; {@code resample} varies
+ *     a failed child again,</li>
  *   <li>FitnessCalculation: evaluate the children; unchanged copies keep their evaluation,</li>
  *   <li>Acceptance: the {@code replacement} forms the next population,</li>
  *   <li>Check: the population checks, if any are configured.</li>
@@ -122,6 +123,15 @@ public class EvolutionaryAlgorithm extends TemplateAlgorithm {
         return Set.of(CheckPoint.NEW_CANDIDATES, CheckPoint.POPULATION);
     }
 
+    /**
+     * @return {@code true}: a child can be varied again for the check reaction
+     *   {@code resample}.
+     */
+    @Override
+    protected boolean resamples() {
+        return true;
+    }
+
     @Override
     protected void configure(final EObject configuration) throws InitializationException {
         size = attributes.attributeToInteger(configuration, "size-of-population");
@@ -178,7 +188,7 @@ public class EvolutionaryAlgorithm extends TemplateAlgorithm {
                                                      randomService.random(OperatorPlan.STREAM + "/parent-selection")));
         generation.add(GenerationSteps.recombine(variation, offspring));
         generation.add(GenerationSteps.mutate(variation, offspring));
-        generation.addAll(newCandidateChecks());
+        generation.addAll(newCandidateChecks(GenerationSteps.resampler(variation)));
         generation.add(new EvaluateCandidates(evaluator));
         generation.add(GenerationSteps.replace(replacement, size, randomService.random(OperatorPlan.STREAM + "/replacement")));
         generation.addAll(populationChecks(evaluator));

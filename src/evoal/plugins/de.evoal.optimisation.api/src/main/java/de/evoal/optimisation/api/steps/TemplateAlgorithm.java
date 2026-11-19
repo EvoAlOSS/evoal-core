@@ -16,6 +16,7 @@ import de.evoal.optimisation.api.checks.CheckNewCandidates;
 import de.evoal.optimisation.api.checks.CheckPoint;
 import de.evoal.optimisation.api.checks.CheckPopulation;
 import de.evoal.optimisation.api.checks.ConfiguredCheck;
+import de.evoal.optimisation.api.checks.Resampler;
 import de.evoal.optimisation.api.fitness.Evaluator;
 import de.evoal.optimisation.api.model.OptimisationAlgorithm;
 import de.evoal.optimisation.api.run.OptimisationRun;
@@ -63,7 +64,7 @@ public abstract class TemplateAlgorithm implements OptimisationAlgorithm {
     @Override
     public final OptimisationAlgorithm init(final EObject configuration) throws InitializationException {
         criterion = producer.create(configuration);
-        checks = checkProducer.create(configuration, checkPoints());
+        checks = checkProducer.create(configuration, checkPoints(), resamples());
         configure(configuration);
         return this;
     }
@@ -82,9 +83,28 @@ public abstract class TemplateAlgorithm implements OptimisationAlgorithm {
      *   sources.
      */
     protected final List<Step> newCandidateChecks() {
+        return newCandidateChecks(null);
+    }
+
+    /**
+     * @param resampler Redoes the variation for the reaction {@code resample}; {@code null}
+     *   if the algorithm cannot resample ({@link #resamples()}).
+     * @return The step that applies the checks of new candidates, empty if none are
+     *   configured. A new step for every template, so every run has its own replacement
+     *   sources.
+     */
+    protected final List<Step> newCandidateChecks(final Resampler resampler) {
         final List<ConfiguredCheck> configured = checksAt(CheckPoint.NEW_CANDIDATES);
 
-        return configured.isEmpty() ? List.of() : List.of(new CheckNewCandidates(configured));
+        return configured.isEmpty() ? List.of() : List.of(new CheckNewCandidates(configured, resampler));
+    }
+
+    /**
+     * @return Whether the algorithm can redo the variation of a new candidate and passes a
+     *   {@link Resampler} to {@link #newCandidateChecks(Resampler)}; {@code false} by default.
+     */
+    protected boolean resamples() {
+        return false;
     }
 
     /**

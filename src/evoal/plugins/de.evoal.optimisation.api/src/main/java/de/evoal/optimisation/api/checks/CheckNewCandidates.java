@@ -13,13 +13,22 @@ import de.evoal.optimisation.api.steps.SearchState;
  * <p>
  * A failed candidate is not evaluated, so the memory model has no individual for it. Its
  *   replacement therefore has no predecessor; it gets the property {@code reason} instead.
+ *   For {@code resample}, the {@link Resampler} of the algorithm redoes the variation.
  */
 public final class CheckNewCandidates extends CheckStep {
     /**
      * @param checks The checks of new candidates, in the configured order.
      */
     public CheckNewCandidates(final List<ConfiguredCheck> checks) {
-        super(checks);
+        super(checks, null);
+    }
+
+    /**
+     * @param checks The checks of new candidates, in the configured order.
+     * @param resampler Redoes the variation for {@code resample}.
+     */
+    public CheckNewCandidates(final List<ConfiguredCheck> checks, final Resampler resampler) {
+        super(checks, resampler);
     }
 
     @Override

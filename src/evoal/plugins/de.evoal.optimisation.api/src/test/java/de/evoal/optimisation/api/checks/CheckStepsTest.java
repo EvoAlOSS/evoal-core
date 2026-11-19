@@ -239,6 +239,66 @@ public class CheckStepsTest {
             Assertions.assertEquals("test (warn): 1 of 2 candidates failed", step.description());
         }
 
+        /**
+         * Gives new mutations of the failing candidate; the first {@code failing} of them fail
+         *   too.
+         */
+        private final class CountingResampler implements Resampler {
+            private final java.util.List<Candidate> created = new java.util.ArrayList<>();
+
+            @Override
+            public Candidate resample(final SearchState state, final int index) {
+                final Candidate candidate = new Candidate(Mockito.mock(TypedEObject.class), Lineage.mutation(member()));
+                created.add(candidate);
+                return candidate;
+            }
+        }
+
+        @Test
+        public void aResampledCandidateCountsItsVariations() {
+            // given: the original and the first resampled candidate fail
+            final CountingResampler resampler = new CountingResampler();
+            final CheckNewCandidates step = new CheckNewCandidates(List.of(check("test", CheckPoint.NEW_CANDIDATES, CheckReaction.RESAMPLE,
+                                                                                 candidate -> candidate == failing
+                                                                                              || (!resampler.created.isEmpty() && candidate == resampler.created.getFirst()))),
+                                                                   resampler);
+
+            // when
+            step.execute(state);
+
+            // then: two resamples, so three variations
+            final Candidate resampled = state.getCandidates().get(1);
+            Assertions.assertEquals(2, resampler.created.size());
+            Assertions.assertSame(resampler.created.get(1).input(), resampled.input());
+            Assertions.assertEquals(3L, resampled.lineage().properties().get("attempts"));
+            Assertions.assertSame(passing, state.getCandidates().getFirst());
+        }
+
+        @Test
+        public void afterTheLastAttemptTheCandidateIsKept() {
+            // given: every candidate fails
+            final CountingResampler resampler = new CountingResampler();
+            final CheckNewCandidates step = new CheckNewCandidates(List.of(check("test", CheckPoint.NEW_CANDIDATES, CheckReaction.RESAMPLE,
+                                                                                 candidate -> true)),
+                                                                   resampler);
+
+            // when
+            step.execute(state);
+
+            // then: 3 attempts per candidate, the last one is kept
+            Assertions.assertEquals(6, resampler.created.size());
+            Assertions.assertSame(resampler.created.get(5).input(), state.getCandidates().get(1).input());
+            Assertions.assertEquals(4L, state.getCandidates().get(1).lineage().properties().get("attempts"));
+        }
+
+        @Test
+        public void aStepWithoutResamplerRejectsResampling() {
+            final CheckNewCandidates step = new CheckNewCandidates(List.of(check("test", CheckPoint.NEW_CANDIDATES, CheckReaction.RESAMPLE,
+                                                                                 candidate -> candidate == failing)));
+
+            Assertions.assertThrows(IllegalStateException.class, () -> step.execute(state));
+        }
+
         @Test
         public void aFailedCandidateIsReplacedByAnUnevaluatedOneWithTheReason() {
             // given
@@ -266,7 +326,18 @@ public class CheckStepsTest {
         public void supportedReactionsAtOfferedCheckPointsAreAccepted() {
             final List<CandidateCheck> checks = List.of(new TestCheck("test", CheckPoint.POPULATION, CheckReaction.REPLACE, candidate -> false));
 
-            Assertions.assertDoesNotThrow(() -> CandidateCheckProducer.validate(checks, Set.of(CheckPoint.POPULATION), "algorithm"));
+            Assertions.assertDoesNotThrow(() -> CandidateCheckProducer.validate(checks, Set.of(CheckPoint.POPULATION), false, "algorithm"));
+        }
+
+        @Test
+        public void resamplingNeedsACheckOfNewCandidatesAndAnAlgorithmThatCanResample() {
+            final List<CandidateCheck> population = List.of(new TestCheck("test", CheckPoint.POPULATION, CheckReaction.RESAMPLE, candidate -> false));
+            final List<CandidateCheck> newCandidates = List.of(new TestCheck("test", CheckPoint.NEW_CANDIDATES, CheckReaction.RESAMPLE, candidate -> false));
+            final Set<CheckPoint> both = Set.of(CheckPoint.POPULATION, CheckPoint.NEW_CANDIDATES);
+
+            Assertions.assertThrows(InitializationException.class, () -> CandidateCheckProducer.validate(population, both, true, "algorithm"));
+            Assertions.assertThrows(InitializationException.class, () -> CandidateCheckProducer.validate(newCandidates, both, false, "algorithm"));
+            Assertions.assertDoesNotThrow(() -> CandidateCheckProducer.validate(newCandidates, both, true, "algorithm"));
         }
 
         @Test
@@ -274,7 +345,7 @@ public class CheckStepsTest {
             final List<CandidateCheck> checks = List.of(new TestCheck("test", CheckPoint.POPULATION, CheckReaction.REPAIR, candidate -> false));
 
             Assertions.assertThrows(InitializationException.class,
-                                    () -> CandidateCheckProducer.validate(checks, Set.of(CheckPoint.POPULATION), "algorithm"));
+                                    () -> CandidateCheckProducer.validate(checks, Set.of(CheckPoint.POPULATION), false, "algorithm"));
         }
 
         @Test
@@ -282,7 +353,7 @@ public class CheckStepsTest {
             final List<CandidateCheck> checks = List.of(new TestCheck("test", CheckPoint.NEW_CANDIDATES, CheckReaction.WARN, candidate -> false));
 
             Assertions.assertThrows(InitializationException.class,
-                                    () -> CandidateCheckProducer.validate(checks, Set.of(CheckPoint.POPULATION), "algorithm"));
+                                    () -> CandidateCheckProducer.validate(checks, Set.of(CheckPoint.POPULATION), false, "algorithm"));
         }
 
         @Test
@@ -302,10 +373,15 @@ public class CheckStepsTest {
 
     /**
      * A check that fails the candidates of a predicate with the reason "failed". It supports
-     *   {@code warn} and {@code replace}.
+     *   {@code warn}, {@code replace} and {@code resample} with at most 3 attempts.
      */
     private record TestCheck(String name, CheckPoint checkPoint, CheckReaction reaction, Predicate<Candidate> fails)
             implements CandidateCheck {
+        @Override
+        public int maximumAttempts() {
+            return 3;
+        }
+
         @Override
         public Optional<EObject> replacementSource() {
             return Optional.empty();
@@ -313,7 +389,7 @@ public class CheckStepsTest {
 
         @Override
         public Set<CheckReaction> supportedReactions() {
-            return EnumSet.of(CheckReaction.WARN, CheckReaction.REPLACE);
+            return EnumSet.of(CheckReaction.WARN, CheckReaction.REPLACE, CheckReaction.RESAMPLE);
         }
 
         @Override

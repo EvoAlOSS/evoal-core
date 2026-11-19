@@ -1,5 +1,7 @@
 package de.evoal.optimisation.ea.api.operators;
 
+import java.util.EnumSet;
+import java.util.List;
 import java.util.Set;
 
 import de.evoal.optimisation.ea.api.genotype.Chromosome;
@@ -19,12 +21,27 @@ public record Applicability(Set<Representation> representations, MeasurementScal
     }
 
     /**
+     * @return The applicability of an operator that needs both: the common representations
+     *   and the stronger minimum scale.
+     */
+    public Applicability and(final Applicability other) {
+        final Set<Representation> common = EnumSet.noneOf(Representation.class);
+        common.addAll(representations);
+        common.retainAll(other.representations);
+
+        return new Applicability(common, minimumScale.isAtLeast(other.minimumScale) ? minimumScale : other.minimumScale);
+    }
+
+    /**
      * @param chromosome The chromosome.
      * @param scales The scale of every feature of the chromosome, {@code null} for a feature
      *   without declared scale.
      * @return Why the operator does not apply to the chromosome, {@code null} if it applies.
      */
-    public String reasonAgainst(final Chromosome chromosome, final java.util.List<MeasurementScale> scales) {
+    public String reasonAgainst(final Chromosome chromosome, final List<MeasurementScale> scales) {
+        if(representations.isEmpty()) {
+            return "it supports no representation";
+        }
         if(!representations.contains(chromosome.representation())) {
             return "it supports only " + representations.stream().sorted().toList() + " chromosomes";
         }

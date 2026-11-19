@@ -13,14 +13,21 @@ import de.evoal.optimisation.api.run.Candidate;
  * A test on candidates with a configured reaction to a failure (DL type
  *   {@code 'candidate-check'}). The check type defines where it tests the candidates
  *   ({@link #checkPoint()}) and which reactions it supports. The checks of an algorithm are
- *   created by the {@link CandidateCheckProducer}, which rejects unsupported reactions and
- *   check points the algorithm does not offer.
+ *   created by the {@link CandidateCheckProducer}, which rejects unsupported reactions, check
+ *   points the algorithm does not offer, and {@link CheckReaction#RESAMPLE} where the
+ *   algorithm cannot redo the variation.
  */
 public interface CandidateCheck extends EvoalComponent<CandidateCheck> {
     /**
      * @return Where the check tests the candidates.
      */
     CheckPoint checkPoint();
+
+    /**
+     * @return The maximum number of times the variation is redone for
+     *   {@link CheckReaction#RESAMPLE}.
+     */
+    int maximumAttempts();
 
     /**
      * @return The name of the check for reports, e.g. {@code maximum-age}.

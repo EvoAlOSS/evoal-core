@@ -37,4 +37,16 @@ public interface MutationOperator extends EvoalComponent<MutationOperator> {
      * @return The probability that the mutation is applied to a child.
      */
     double probability();
+
+    /**
+     * Chooses the mutation that changes a child once the mutation fires. A mutation that
+     *   combines others (e.g. {@code 'single-choice-mutation'}) chooses one of them; all
+     *   others are themselves.
+     *
+     * @param random The random numbers of the mutation.
+     * @return The mutation to apply to all chromosomes of the child.
+     */
+    default MutationOperator choose(final RandomGenerator random) {
+        return this;
+    }
 }

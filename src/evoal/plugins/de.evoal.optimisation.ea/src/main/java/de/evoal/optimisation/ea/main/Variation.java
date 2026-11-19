@@ -35,6 +35,9 @@ import de.evoal.optimisation.ea.api.operators.RecombinationOperator;
  *   the parent whose place it takes). A child that was recombined refers to both parents and
  *   its sibling, a child that was only mutated to its parent, and a child without changes is
  *   a copy of its parent and keeps the evaluation.
+ * <p>
+ * A mutation that fires first chooses the mutation to apply
+ *   ({@link MutationOperator#choose}); the property {@code operators} names the chosen one.
  */
 final class Variation {
     /**
@@ -108,6 +111,19 @@ final class Variation {
     }
 
     /**
+     * Redoes the variation of a child: recombines its parents again and keeps the child in
+     *   the place of the same parent, then mutates it. The draws continue the streams.
+     *
+     * @return The new child; its sibling is not recreated.
+     */
+    Offspring revary(final Offspring child) {
+        final Offspring again = recombine(child.parents.get(0), child.parents.get(1)).getFirst();
+        mutate(again);
+
+        return again;
+    }
+
+    /**
      * Mutates a child.
      */
     void mutate(final Offspring child) {
@@ -119,20 +135,22 @@ final class Variation {
                 continue;
             }
 
+            final MutationOperator mutation = use.operator().choose(random);
+
             int genes = 0;
             for(final int c : use.chromosomes()) {
                 genes += child.genome.chromosomes().get(c).size();
             }
-            final double geneProbability = use.operator().geneProbability().orElse(1.0 / genes);
+            final double geneProbability = mutation.geneProbability().orElse(1.0 / genes);
 
             final Genome before = child.genome.copy();
             for(final int c : use.chromosomes()) {
                 final Genes chromosomeGenes = child.genome.chromosomes().get(c);
-                use.operator().mutate(chromosomeGenes, geneProbability, random);
+                mutation.mutate(chromosomeGenes, geneProbability, random);
                 genotype.chromosomes().get(c).handleBoundaries(chromosomeGenes, boundaryHandling);
             }
 
-            noteChange(child, before, use.operator().name(), false);
+            noteChange(child, before, mutation.name(), false);
         }
     }
 

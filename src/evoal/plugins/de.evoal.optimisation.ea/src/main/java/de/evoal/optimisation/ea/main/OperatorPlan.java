@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import de.evoal.core.api.cdi.BeanFactory;
 import de.evoal.core.api.utils.AttributeHelper;
 import de.evoal.languages.model.base.definitions.ClassDefinition;
+import de.evoal.models.core.cdi.EvoalComponent;
 import de.evoal.models.core.exceptions.InitializationException;
 
 import de.evoal.optimisation.ea.api.genotype.Chromosome;
@@ -92,7 +93,7 @@ public record OperatorPlan(List<OperatorUse<RecombinationOperator>> recombinatio
         return new OperatorPlan(recombinations, mutations);
     }
 
-    private static <T extends de.evoal.models.core.cdi.EvoalComponent<T>> List<OperatorUse<T>> plan(
+    private static <T extends EvoalComponent<T>> List<OperatorUse<T>> plan(
             final EObject algorithm, final List<ConfiguredChromosome> chromosomes, final GenotypeFactory factory,
             final AttributeHelper helper, final ApplicabilityReader reader, final String slot, final Class<T> type,
             final Function<T, String> names, final Function<Chromosome, List<Candidate<T>>> defaults)
@@ -161,7 +162,7 @@ public record OperatorPlan(List<OperatorUse<RecombinationOperator>> recombinatio
         return uses;
     }
 
-    private static <T extends de.evoal.models.core.cdi.EvoalComponent<T>> List<Candidate<T>> create(
+    private static <T extends EvoalComponent<T>> List<Candidate<T>> create(
             final List<EObject> configurations, final String slot, final Class<T> type, final Function<T, String> names,
             final ApplicabilityReader reader) {
         final List<Candidate<T>> operators = new ArrayList<>();

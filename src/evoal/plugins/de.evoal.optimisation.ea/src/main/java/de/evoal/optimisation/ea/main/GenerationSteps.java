@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.random.RandomGenerator;
 
+import de.evoal.optimisation.api.checks.Resampler;
 import de.evoal.optimisation.api.run.Candidate;
 import de.evoal.optimisation.api.steps.Acceptance;
 import de.evoal.optimisation.api.steps.Adaption;
@@ -100,9 +101,23 @@ final class GenerationSteps {
                     candidates.add(variation.toCandidate(child));
                 }
 
-                state.setStrategy(OFFSPRING, new OffspringList(List.of()));
                 state.setCandidates(candidates);
             }
+        };
+    }
+
+    /**
+     * @return Redoes the variation of the child at an index of the current candidates for
+     *   the check reaction {@code resample}; the children are kept in the strategy state until
+     *   the replacement.
+     */
+    static Resampler resampler(final Variation variation) {
+        return (state, index) -> {
+            final List<Offspring> children = state.strategy(OFFSPRING)
+                                                  .orElseThrow(() -> new IllegalStateException("No children to resample."))
+                                                  .children();
+
+            return variation.toCandidate(variation.revary(children.get(index)));
         };
     }
 
@@ -121,6 +136,7 @@ final class GenerationSteps {
             public void execute(final SearchState state) {
                 state.setPopulation(replacement.replace(state.getPopulation(), state.getCandidates(), size, random));
                 state.setCandidates(List.of());
+                state.setStrategy(OFFSPRING, new OffspringList(List.of()));
             }
         };
     }
