@@ -8,9 +8,15 @@
 #   develop when this folder or a pom of src/evoal changes (job
 #   image:maven-with-bash).
 
-FROM docker.io/library/maven:3.9.12-eclipse-temurin-25-alpine AS base
-RUN apk add --no-cache zsh openblas \
- && ln -sf /usr/lib/libopenblas.so.3 /usr/lib/libopenblas.so \
+# Ubuntu (glibc) like the runtime image src/docker/evoal: native libraries such as the
+#   ONNX Runtime are built for glibc and do not load on Alpine (musl). OpenBLAS is the
+#   serial variant: the multithreaded default (libopenblas0-pthread) crashes when smile
+#   calls it from the JVM (segmentation fault in the example surrogate.adaption-training).
+FROM docker.io/library/maven:3.9.12-eclipse-temurin-25-noble AS base
+RUN apt-get update \
+ && apt-get install --yes --no-install-recommends zsh libopenblas0-serial \
+ && ln -sf /usr/lib/x86_64-linux-gnu/libopenblas.so.0 /usr/lib/x86_64-linux-gnu/libopenblas.so \
+ && rm -rf /var/lib/apt/lists/* \
  && sed -i -e "s;/bin/.*sh$;/bin/bash;g" /etc/passwd
 
 # Fills the tail repository by running the build of the merge request pipeline

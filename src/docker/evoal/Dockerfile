@@ -8,8 +8,11 @@
 
 FROM docker.io/library/eclipse-temurin:25-jre-noble
 
+# OpenBLAS is the serial variant: the multithreaded default (libopenblas0-pthread)
+#   crashes when smile calls it from the JVM (segmentation fault in the example
+#   surrogate.adaption-training).
 RUN apt-get update \
- && apt-get install --yes --no-install-recommends bash ca-certificates curl git libopenblas0 unzip \
+ && apt-get install --yes --no-install-recommends bash ca-certificates curl git libopenblas0-serial unzip \
  && ln -sf /usr/lib/x86_64-linux-gnu/libopenblas.so.0 /usr/lib/x86_64-linux-gnu/libopenblas.so \
  && rm -rf /var/lib/apt/lists/*
 
