@@ -7,6 +7,7 @@ import de.evoal.models.core.cdi.EvoalComponent;
 import de.evoal.models.core.exceptions.InitializationException;
 
 import de.evoal.optimisation.api.run.Candidate;
+import de.evoal.optimisation.ea.api.selection.CandidateOrder;
 import de.evoal.optimisation.ea.api.selection.SelectionMethod;
 
 /**
@@ -32,10 +33,12 @@ public interface ReplacementStrategy extends EvoalComponent<ReplacementStrategy>
      * @param parents The parents (the population).
      * @param children The evaluated children.
      * @param size The size of the next population (N).
+     * @param order The order in which the candidates are compared.
      * @param random The random numbers of the selection.
      * @return The next population.
      */
-    List<Candidate> replace(List<Candidate> parents, List<Candidate> children, int size, RandomGenerator random);
+    List<Candidate> replace(List<Candidate> parents, List<Candidate> children, int size, CandidateOrder order,
+                            RandomGenerator random);
 
     /**
      * @return Selects the candidates that survive.

@@ -12,6 +12,8 @@ import de.evoal.optimisation.api.steps.SearchState;
 import de.evoal.optimisation.api.steps.Selection;
 import de.evoal.optimisation.api.steps.StateKey;
 import de.evoal.optimisation.ea.api.replacement.ReplacementStrategy;
+import de.evoal.optimisation.ea.api.selection.CandidateOrder;
+import de.evoal.optimisation.ea.api.selection.CrowdedOrder;
 import de.evoal.optimisation.ea.api.selection.SelectionMethod;
 
 /**
@@ -37,7 +39,8 @@ final class GenerationSteps {
      * The parent selection: selects 2 * ceil(lambda / 2) parents of the population, which
      *   become the current candidates. Consecutive parents form a pair.
      */
-    static Selection selectParents(final SelectionMethod selection, final int offspring, final RandomGenerator random) {
+    static Selection selectParents(final SelectionMethod selection, final int offspring, final CandidateOrder order,
+                                   final RandomGenerator random) {
         final int parents = 2 * ((offspring + 1) / 2);
 
         return new Selection() {
@@ -48,7 +51,7 @@ final class GenerationSteps {
 
             @Override
             public void execute(final SearchState state) {
-                state.setCandidates(selection.select(state.getPopulation(), parents, random));
+                state.setCandidates(selection.select(state.getPopulation(), parents, order, random));
             }
         };
     }
@@ -125,7 +128,8 @@ final class GenerationSteps {
      * The replacement: forms the next population from the population and the evaluated
      *   children.
      */
-    static Acceptance replace(final ReplacementStrategy replacement, final int size, final RandomGenerator random) {
+    static Acceptance replace(final ReplacementStrategy replacement, final int size, final CandidateOrder order,
+                              final RandomGenerator random) {
         return new Acceptance() {
             @Override
             public String description() {
@@ -134,9 +138,33 @@ final class GenerationSteps {
 
             @Override
             public void execute(final SearchState state) {
-                state.setPopulation(replacement.replace(state.getPopulation(), state.getCandidates(), size, random));
+                state.setPopulation(replacement.replace(state.getPopulation(), state.getCandidates(), size, order, random));
                 state.setCandidates(List.of());
                 state.setStrategy(OFFSPRING, new OffspringList(List.of()));
+            }
+        };
+    }
+
+    /**
+     * Sorts the population into non-dominated fronts and sets the front and the crowding
+     *   distance of every member ({@link CrowdedOrder#assign}), if a member has none: after
+     *   the initialisation, and after a population check replaced a member. Otherwise the
+     *   members keep the values of {@code 'nsga2-selection'}.
+     */
+    static Acceptance sortIntoFronts() {
+        return new Acceptance() {
+            @Override
+            public String description() {
+                return "sort the population into non-dominated fronts";
+            }
+
+            @Override
+            public void execute(final SearchState state) {
+                final List<Candidate> population = state.getPopulation();
+
+                if(!population.stream().allMatch(CrowdedOrder::isRanked)) {
+                    CrowdedOrder.assign(population);
+                }
             }
         };
     }

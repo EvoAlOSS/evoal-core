@@ -516,6 +516,20 @@ module de.evoal.optimisation.ea.optimisation {
 	}
 
 	/**
+	 * The survivor selection of NSGA-II (K. Deb, A. Pratap, S. Agarwal, T. Meyarivan: A fast
+	 *   and elitist multiobjective genetic algorithm: NSGA-II. IEEE Transactions on
+	 *   Evolutionary Computation 6(2), 2002, pp. 182-197): the candidates are sorted into
+	 *   non-dominated fronts on the canonical fitness (all components minimised), and the
+	 *   crowding distance is computed in every front. The fronts are selected in their order;
+	 *   of the first front that does not fit completely, the candidates with the largest
+	 *   crowding distance are selected. Unlike the other selections, it selects without
+	 *   replacement. Every candidate gets the properties 'front' and 'crowding-distance'.
+	 *   Needs 'crowded-comparator', a fitness with at least two components, and
+	 *   'plus-replacement' (NSGA-II) or 'comma-replacement'.
+	 */
+	type 'nsga2-selection' extends selection {}
+
+	/**
 	 * Abstract base type of the replacements: they form the next population of N
 	 *   candidates ('size-of-population') from the N parents of the population and the
 	 *   lambda children ('number-of-offspring').
@@ -544,4 +558,17 @@ module de.evoal.optimisation.ea.optimisation {
 	 *   (Schwefel 1977). Needs lambda >= N.
 	 */
 	type 'comma-replacement' extends replacement {}
+
+	/**
+	 * The comparator of NSGA-II (Deb et al. 2002): the selections of the algorithm compare
+	 *   candidates by the crowded-comparison operator: a lower front is better, and in the
+	 *   same front a larger crowding distance. Front and crowding distance are computed by
+	 *   'nsga2-selection', which must be the selection of the replacement. With
+	 *   'tournament-selection' { size := 2; } as 'parent-selection', it gives the parent
+	 *   selection of NSGA-II; on equal front and crowding distance the first drawn candidate
+	 *   wins, while the reference implementation chooses at random. Elsewhere (e.g. for the
+	 *   best candidate so far), candidates are compared by Pareto dominance. Only the
+	 *   evolutionary algorithm can use it.
+	 */
+	type 'crowded-comparator' extends comparator {}
 }

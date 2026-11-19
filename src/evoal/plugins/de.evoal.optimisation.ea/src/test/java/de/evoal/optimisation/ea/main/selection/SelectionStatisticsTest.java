@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import de.evoal.core.api.math.EvoalMath;
 import de.evoal.optimisation.api.run.Candidate;
+import de.evoal.optimisation.ea.api.selection.CandidateOrder;
 import de.evoal.optimisation.ea.Candidates;
 import de.evoal.optimisation.ea.Statistics;
 import de.evoal.optimisation.ea.api.selection.SelectionMethod;
@@ -35,7 +36,7 @@ public class SelectionStatisticsTest {
      */
     private void assertFrequencies(final SelectionMethod selection, final double... probabilities) {
         final Map<Candidate, Long> counts = new IdentityHashMap<>();
-        selection.select(candidates, SELECTIONS, random)
+        selection.select(candidates, SELECTIONS, CandidateOrder.BY_VALUE, random)
                  .forEach(candidate -> counts.merge(candidate, 1L, Long::sum));
 
         for(int fitness = 0; fitness < probabilities.length; ++fitness) {
@@ -106,7 +107,7 @@ public class SelectionStatisticsTest {
 
         for(int spin = 0; spin < spins; ++spin) {
             final Map<Candidate, Integer> counts = new IdentityHashMap<>();
-            selection.select(candidates, 7, random).forEach(candidate -> counts.merge(candidate, 1, Integer::sum));
+            selection.select(candidates, 7, CandidateOrder.BY_VALUE, random).forEach(candidate -> counts.merge(candidate, 1, Integer::sum));
 
             for(int fitness = 0; fitness < 5; ++fitness) {
                 final int count = counts.getOrDefault(candidates.get(4 - fitness), 0);
@@ -126,7 +127,7 @@ public class SelectionStatisticsTest {
 
     @Test
     public void elitismSelectsTheBestFirst() {
-        final List<Candidate> selected = new EliteSelection(2, new RandomSelection()).select(candidates, 4, random);
+        final List<Candidate> selected = new EliteSelection(2, new RandomSelection()).select(candidates, 4, CandidateOrder.BY_VALUE, random);
 
         Assertions.assertSame(candidates.get(4), selected.get(0));
         Assertions.assertSame(candidates.get(3), selected.get(1));
@@ -137,7 +138,7 @@ public class SelectionStatisticsTest {
     public void fitnessProportionalSelectionsWithEqualFitnessAreUniform() {
         final List<Candidate> equal = Candidates.withFitness(1.0, 1.0, 1.0, 1.0);
         final Map<Candidate, Long> counts = new IdentityHashMap<>();
-        new RouletteWheelSelection().select(equal, SELECTIONS, random).forEach(candidate -> counts.merge(candidate, 1L, Long::sum));
+        new RouletteWheelSelection().select(equal, SELECTIONS, CandidateOrder.BY_VALUE, random).forEach(candidate -> counts.merge(candidate, 1L, Long::sum));
 
         for(final Candidate candidate : equal) {
             Statistics.assertBinomial(counts.getOrDefault(candidate, 0L), SELECTIONS, 0.25, "equal fitness");

@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
 import de.evoal.core.api.cdi.BeanFactory;
+import de.evoal.core.api.dynamic.DynamicEClassProvider;
 import de.evoal.core.api.languages.AttributeEvaluator;
 import de.evoal.core.api.random.RandomService;
 import de.evoal.core.api.utils.AttributeHelper;
@@ -28,6 +29,7 @@ import de.evoal.optimisation.api.execution.ExecutionRecorder;
 import de.evoal.optimisation.api.fitness.Evaluator;
 import de.evoal.optimisation.api.fitness.FitnessPipeline;
 import de.evoal.optimisation.api.model.InitialCandidatesProvider;
+import de.evoal.optimisation.api.run.Candidate;
 import de.evoal.optimisation.api.steps.EvaluateCandidates;
 import de.evoal.optimisation.api.steps.ReplacePopulation;
 import de.evoal.optimisation.api.steps.SampleCandidates;
@@ -37,10 +39,15 @@ import de.evoal.optimisation.api.steps.TemplateAlgorithm;
 import de.evoal.optimisation.ea.api.genotype.BoundaryHandling;
 import de.evoal.optimisation.ea.api.genotype.Genotype;
 import de.evoal.optimisation.ea.api.replacement.ReplacementStrategy;
+import de.evoal.optimisation.ea.api.selection.CandidateOrder;
+import de.evoal.optimisation.ea.api.selection.CrowdedOrder;
+import de.evoal.optimisation.ea.api.selection.ParetoFronts;
 import de.evoal.optimisation.ea.api.selection.SelectionMethod;
+import de.evoal.optimisation.ea.main.comparator.CrowdedComparator;
 import de.evoal.optimisation.ea.main.genotype.GenotypeFactory;
 import de.evoal.optimisation.ea.main.genotype.GenotypeFactory.ConfiguredChromosome;
 import de.evoal.optimisation.ea.main.operators.ApplicabilityReader;
+import de.evoal.optimisation.ea.main.selection.Nsga2Selection;
 
 /**
  * An evolutionary algorithm (DL type {@code 'evolutionary-algorithm'}) as a template of
@@ -63,6 +70,10 @@ import de.evoal.optimisation.ea.main.operators.ApplicabilityReader;
  *   <li>Acceptance: the {@code replacement} forms the next population,</li>
  *   <li>Check: the population checks, if any are configured.</li>
  * </ol>
+ * With {@code 'crowded-comparator'} and {@code 'nsga2-selection'} (NSGA-II), the
+ *   selections compare by front and crowding distance ({@link CrowdedOrder}), the ranks of
+ *   the population are its non-dominated fronts, and an Acceptance step sorts the population
+ *   into fronts after the initialisation and after a population check.
  */
 @Dependent
 @Named("de.evoal.optimisation.ea.optimisation.evolutionary-algorithm")
@@ -118,6 +129,20 @@ public class EvolutionaryAlgorithm extends TemplateAlgorithm {
 
     private Genotype genotype;
 
+    /**
+     * Whether the comparator is {@code 'crowded-comparator'} (NSGA-II).
+     */
+    private boolean crowded;
+
+    /**
+     * The order in which the selections compare candidates.
+     */
+    private CandidateOrder order;
+
+    private static final String PLUS = "plus-replacement";
+
+    private static final String COMMA = "comma-replacement";
+
     @Override
     protected Set<CheckPoint> checkPoints() {
         return Set.of(CheckPoint.NEW_CANDIDATES, CheckPoint.POPULATION);
@@ -155,10 +180,68 @@ public class EvolutionaryAlgorithm extends TemplateAlgorithm {
         requireSingleFitness("parent-selection", parentSelection);
         requireSingleFitness("replacement", replacement.selection());
 
+        final EObject comparator = helper.lookup(configuration, "comparator");
+        crowded = CrowdedComparator.TYPE.equals(DynamicEClassProvider.dlTypeOf(comparator));
+        checkNsga2(parentSelection, replacement, crowded, pipelines.get().layout().components().size());
+        order = crowded ? new CrowdedOrder() : CandidateOrder.BY_VALUE;
+
         recorder.defineProperty(Variation.OPERATORS, PropertyScope.RELATIONSHIP, PropertyValueType.TEXT, true,
                                 "The recombinations and mutations that changed the child, in their order.");
         recorder.defineProperty(Variation.CHANGED_FEATURES, PropertyScope.RELATIONSHIP, PropertyValueType.TEXT, true,
                                 "The features whose genes differ from the parent whose place the child takes.");
+
+        if(crowded) {
+            recorder.defineProperty(CrowdedOrder.FRONT, PropertyScope.INDIVIDUAL, PropertyValueType.INTEGER, false,
+                                    "The non-dominated front of the candidate, 0 for the first front.");
+            recorder.defineProperty(CrowdedOrder.CROWDING_DISTANCE, PropertyScope.INDIVIDUAL, PropertyValueType.REAL, false,
+                                    "The crowding distance of the candidate within its front; Infinity at the boundary of the front.");
+        }
+    }
+
+    /**
+     * Checks the parts of NSGA-II: {@code 'crowded-comparator'} and {@code 'nsga2-selection'}
+     *   only together, the selection only directly in {@code 'plus-replacement'} or
+     *   {@code 'comma-replacement'} (so that every member of the next population has a front),
+     *   and a fitness with at least two components.
+     *
+     * @param parentSelection The parent selection.
+     * @param replacement The replacement.
+     * @param crowded Whether the comparator is {@code 'crowded-comparator'}.
+     * @param components The number of fitness components.
+     * @throws InitializationException if a check fails.
+     */
+    static void checkNsga2(final SelectionMethod parentSelection, final ReplacementStrategy replacement,
+                           final boolean crowded, final int components) throws InitializationException {
+        if(parentSelection.sortsIntoFronts()) {
+            throw new InitializationException("'nsga2-selection' is a survivor selection; use it as the selection of the "
+                                              + "replacement, not as 'parent-selection'.");
+        }
+
+        final SelectionMethod survivors = replacement.selection();
+        if(!survivors.sortsIntoFronts()) {
+            if(crowded) {
+                throw new InitializationException("'crowded-comparator' needs 'nsga2-selection' as the selection of the "
+                                                  + "replacement, which computes the fronts and crowding distances.");
+            }
+            return;
+        }
+
+        if(!(survivors instanceof Nsga2Selection)) {
+            throw new InitializationException("'nsga2-selection' cannot be nested in '" + survivors.name()
+                                              + "'; use it directly as the selection of the replacement.");
+        }
+        if(!PLUS.equals(replacement.name()) && !COMMA.equals(replacement.name())) {
+            throw new InitializationException("'nsga2-selection' needs '" + PLUS + "' or '" + COMMA + "', not '"
+                                              + replacement.name() + "': every member of the next population needs a front.");
+        }
+        if(!crowded) {
+            throw new InitializationException("'nsga2-selection' needs 'crowded-comparator' as 'comparator'.");
+        }
+
+        if(components < 2) {
+            throw new InitializationException("NSGA-II needs a fitness with at least two components, but the fitness has "
+                                              + components + "; remove the scalarisation step from 'fitness-pipeline'.");
+        }
     }
 
     /**
@@ -179,20 +262,41 @@ public class EvolutionaryAlgorithm extends TemplateAlgorithm {
     protected Template template() {
         final Variation variation = new Variation(genotype, plan, boundaryHandling, randomService);
 
-        final List<Step> initialisationSteps = List.of(new SampleCandidates(initialisation, size),
-                                                       new EvaluateCandidates(evaluator),
-                                                       new ReplacePopulation());
+        final List<Step> initialisationSteps = new ArrayList<>(List.of(new SampleCandidates(initialisation, size),
+                                                                       new EvaluateCandidates(evaluator),
+                                                                       new ReplacePopulation()));
+        if(crowded) {
+            initialisationSteps.add(GenerationSteps.sortIntoFronts());
+        }
 
         final List<Step> generation = new ArrayList<>();
-        generation.add(GenerationSteps.selectParents(parentSelection, offspring,
+        generation.add(GenerationSteps.selectParents(parentSelection, offspring, order,
                                                      randomService.random(OperatorPlan.STREAM + "/parent-selection")));
         generation.add(GenerationSteps.recombine(variation, offspring));
         generation.add(GenerationSteps.mutate(variation, offspring));
         generation.addAll(newCandidateChecks(GenerationSteps.resampler(variation)));
         generation.add(new EvaluateCandidates(evaluator));
-        generation.add(GenerationSteps.replace(replacement, size, randomService.random(OperatorPlan.STREAM + "/replacement")));
-        generation.addAll(populationChecks(evaluator));
+        generation.add(GenerationSteps.replace(replacement, size, order,
+                                               randomService.random(OperatorPlan.STREAM + "/replacement")));
 
-        return new Template(initialisationSteps, generation);
+        final List<Step> checks = populationChecks(evaluator);
+        generation.addAll(checks);
+        if(crowded && !checks.isEmpty()) {
+            generation.add(GenerationSteps.sortIntoFronts());
+        }
+
+        if(!crowded) {
+            return new Template(initialisationSteps, generation);
+        }
+
+        // NSGA-II: the values are only partially ordered, the ranks are the fronts
+        return new Template(initialisationSteps, generation) {
+            @Override
+            protected List<List<Integer>> ranks(final List<Candidate> members) {
+                return ParetoFronts.fronts(members.stream()
+                                                  .map(member -> member.fitness().values())
+                                                  .toList());
+            }
+        };
     }
 }

@@ -10,6 +10,7 @@ import de.evoal.models.core.exceptions.InitializationException;
 
 import de.evoal.optimisation.api.run.Candidate;
 import de.evoal.optimisation.ea.api.replacement.AbstractReplacement;
+import de.evoal.optimisation.ea.api.selection.CandidateOrder;
 import de.evoal.optimisation.ea.api.selection.SelectionMethod;
 
 /**
@@ -44,7 +45,7 @@ public class CommaReplacement extends AbstractReplacement {
 
     @Override
     public List<Candidate> replace(final List<Candidate> parents, final List<Candidate> children, final int size,
-                                   final RandomGenerator random) {
-        return selection().select(children, size, random);
+                                   final CandidateOrder order, final RandomGenerator random) {
+        return selection().select(children, size, order, random);
     }
 }

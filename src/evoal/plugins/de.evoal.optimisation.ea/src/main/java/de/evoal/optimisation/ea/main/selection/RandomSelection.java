@@ -8,6 +8,7 @@ import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Named;
 
 import de.evoal.optimisation.api.run.Candidate;
+import de.evoal.optimisation.ea.api.selection.CandidateOrder;
 import de.evoal.optimisation.ea.api.selection.SelectionMethod;
 
 /**
@@ -23,7 +24,8 @@ public class RandomSelection implements SelectionMethod {
     }
 
     @Override
-    public List<Candidate> select(final List<Candidate> candidates, final int count, final RandomGenerator random) {
+    public List<Candidate> select(final List<Candidate> candidates, final int count, final CandidateOrder order,
+                                  final RandomGenerator random) {
         final List<Candidate> selected = new ArrayList<>(count);
         for(int i = 0; i < count; ++i) {
             selected.add(candidates.get(random.nextInt(candidates.size())));

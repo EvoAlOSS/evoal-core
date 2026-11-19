@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import de.evoal.models.core.exceptions.InitializationException;
 import de.evoal.optimisation.api.run.Candidate;
+import de.evoal.optimisation.ea.api.selection.CandidateOrder;
 import de.evoal.optimisation.ea.Candidates;
 import de.evoal.optimisation.ea.main.selection.EliteSelection;
 import de.evoal.optimisation.ea.main.selection.RandomSelection;
@@ -27,21 +28,21 @@ public class ReplacementTest {
 
     @Test
     public void survivorReplacementKeepsAllChildrenAndTheSelectedParents() {
-        final List<Candidate> next = new SurvivorReplacement(best).replace(parents, children, 4, random);
+        final List<Candidate> next = new SurvivorReplacement(best).replace(parents, children, 4, CandidateOrder.BY_VALUE, random);
 
         Assertions.assertEquals(List.of(parents.get(1), parents.get(2), children.get(0), children.get(1)), next);
     }
 
     @Test
     public void plusReplacementSelectsFromParentsAndChildren() {
-        final List<Candidate> next = new PlusReplacement(best).replace(parents, children, 4, random);
+        final List<Candidate> next = new PlusReplacement(best).replace(parents, children, 4, CandidateOrder.BY_VALUE, random);
 
         Assertions.assertEquals(List.of(parents.get(1), children.get(0), parents.get(2), parents.get(0)), next);
     }
 
     @Test
     public void commaReplacementSelectsFromTheChildrenOnly() {
-        final List<Candidate> next = new CommaReplacement(best).replace(parents, children, 2, random);
+        final List<Candidate> next = new CommaReplacement(best).replace(parents, children, 2, CandidateOrder.BY_VALUE, random);
 
         Assertions.assertEquals(List.of(children.get(0), children.get(1)), next);
     }

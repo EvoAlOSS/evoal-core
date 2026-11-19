@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.EObject;
 
 import de.evoal.core.api.languages.AttributeEvaluator;
 import de.evoal.optimisation.api.run.Candidate;
+import de.evoal.optimisation.ea.api.selection.CandidateOrder;
 import de.evoal.optimisation.ea.api.selection.SelectionMethod;
 
 /**
@@ -52,14 +53,15 @@ public class TournamentSelection implements SelectionMethod {
     }
 
     @Override
-    public List<Candidate> select(final List<Candidate> candidates, final int count, final RandomGenerator random) {
+    public List<Candidate> select(final List<Candidate> candidates, final int count, final CandidateOrder order,
+                                  final RandomGenerator random) {
         final List<Candidate> selected = new ArrayList<>(count);
 
         for(int i = 0; i < count; ++i) {
             Candidate best = candidates.get(random.nextInt(candidates.size()));
             for(int j = 1; j < size; ++j) {
                 final Candidate competitor = candidates.get(random.nextInt(candidates.size()));
-                if(competitor.value().isBetter(best.value())) {
+                if(order.isBetter(competitor, best)) {
                     best = competitor;
                 }
             }

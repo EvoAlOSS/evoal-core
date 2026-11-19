@@ -26,6 +26,7 @@ module de.evoal.optimisation.ea {
     opens de.evoal.optimisation.ea.api.operators to weld.core.impl;
     opens de.evoal.optimisation.ea.api.replacement to weld.core.impl;
     opens de.evoal.optimisation.ea.main to weld.core.impl;
+    opens de.evoal.optimisation.ea.main.comparator to weld.core.impl;
     opens de.evoal.optimisation.ea.main.genotype to weld.core.impl;
     opens de.evoal.optimisation.ea.main.operators to weld.core.impl;
     opens de.evoal.optimisation.ea.main.replacement to weld.core.impl;

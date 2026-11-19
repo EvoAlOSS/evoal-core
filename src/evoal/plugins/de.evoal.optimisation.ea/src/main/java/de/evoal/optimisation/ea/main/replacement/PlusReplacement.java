@@ -9,6 +9,7 @@ import jakarta.inject.Named;
 
 import de.evoal.optimisation.api.run.Candidate;
 import de.evoal.optimisation.ea.api.replacement.AbstractReplacement;
+import de.evoal.optimisation.ea.api.selection.CandidateOrder;
 import de.evoal.optimisation.ea.api.selection.SelectionMethod;
 
 /**
@@ -35,10 +36,10 @@ public class PlusReplacement extends AbstractReplacement {
 
     @Override
     public List<Candidate> replace(final List<Candidate> parents, final List<Candidate> children, final int size,
-                                   final RandomGenerator random) {
+                                   final CandidateOrder order, final RandomGenerator random) {
         final List<Candidate> pool = new ArrayList<>(parents);
         pool.addAll(children);
 
-        return selection().select(pool, size, random);
+        return selection().select(pool, size, order, random);
     }
 }

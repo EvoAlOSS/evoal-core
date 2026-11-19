@@ -1,28 +1,16 @@
 package de.evoal.optimisation.ea.api.selection;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.random.RandomGenerator;
 
 import de.evoal.optimisation.api.run.Candidate;
 
 /**
- * Helpers of the selections: ranking by the optimisation values and drawing by weights.
+ * Helpers of the selections: drawing by weights.
  */
 public final class Rankings {
     private Rankings() {
-    }
-
-    /**
-     * @return The candidates from the best to the worst by their optimisation values; equal
-     *   candidates keep their order.
-     */
-    public static List<Candidate> bestFirst(final List<Candidate> candidates) {
-        final List<Candidate> sorted = new ArrayList<>(candidates);
-        sorted.sort(Comparator.comparing(Candidate::value).reversed());
-
-        return sorted;
     }
 
     /**

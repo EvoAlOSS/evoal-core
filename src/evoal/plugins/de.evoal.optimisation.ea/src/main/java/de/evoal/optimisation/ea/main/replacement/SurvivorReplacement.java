@@ -11,6 +11,7 @@ import de.evoal.models.core.exceptions.InitializationException;
 
 import de.evoal.optimisation.api.run.Candidate;
 import de.evoal.optimisation.ea.api.replacement.AbstractReplacement;
+import de.evoal.optimisation.ea.api.selection.CandidateOrder;
 import de.evoal.optimisation.ea.api.selection.SelectionMethod;
 
 /**
@@ -45,8 +46,8 @@ public class SurvivorReplacement extends AbstractReplacement {
 
     @Override
     public List<Candidate> replace(final List<Candidate> parents, final List<Candidate> children, final int size,
-                                   final RandomGenerator random) {
-        final List<Candidate> next = new ArrayList<>(selection().select(parents, size - children.size(), random));
+                                   final CandidateOrder order, final RandomGenerator random) {
+        final List<Candidate> next = new ArrayList<>(selection().select(parents, size - children.size(), order, random));
         next.addAll(children);
 
         return next;

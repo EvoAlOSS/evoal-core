@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.EObject;
 
 import de.evoal.core.api.languages.AttributeEvaluator;
 import de.evoal.optimisation.api.run.Candidate;
+import de.evoal.optimisation.ea.api.selection.CandidateOrder;
 import de.evoal.optimisation.ea.api.selection.Rankings;
 import de.evoal.optimisation.ea.api.selection.SelectionMethod;
 
@@ -67,7 +68,8 @@ public class ExponentialRankingSelection implements SelectionMethod {
     }
 
     @Override
-    public List<Candidate> select(final List<Candidate> candidates, final int count, final RandomGenerator random) {
-        return Rankings.drawAll(Rankings.bestFirst(candidates), weights(candidates.size()), count, random);
+    public List<Candidate> select(final List<Candidate> candidates, final int count, final CandidateOrder order,
+                                  final RandomGenerator random) {
+        return Rankings.drawAll(order.bestFirst(candidates), weights(candidates.size()), count, random);
     }
 }

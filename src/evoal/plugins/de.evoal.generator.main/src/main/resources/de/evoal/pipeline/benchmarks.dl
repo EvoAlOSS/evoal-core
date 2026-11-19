@@ -199,6 +199,16 @@ module 'de.evoal.pipeline.benchmarks' {
 	}
 	
 	/**
+	 * ZDT1 (E. Zitzler, K. Deb, L. Thiele: Comparison of multiobjective evolutionary
+	 *   algorithms: empirical results. Evolutionary Computation 8(2), 2000, pp. 173-195),
+	 *   a benchmark with two minimised objectives. It reads n >= 2 variables x_1, ..., x_n
+	 *   in [0, 1] (the paper uses n = 30) and writes f_1 and f_2:
+	 *   f_1 = x_1, g = 1 + 9 / (n - 1) * (x_2 + ... + x_n), f_2 = g * (1 - sqrt(f_1 / g)).
+	 *   The Pareto-optimal front is f_2 = 1 - sqrt(f_1) for f_1 in [0, 1]; it is convex.
+	 */
+	type zdt1 extends benchmark {}
+
+	/**
 	 * TODO Document me
 	 */
 	type 'weighted-sphere' extends benchmark {	

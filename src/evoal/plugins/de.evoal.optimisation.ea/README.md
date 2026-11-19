@@ -96,6 +96,41 @@ fitness-proportional selections use the windowed weights f_max - f.
 | `'plus-replacement'` | N of parents and children, (mu + lambda) |
 | `'comma-replacement'` | N of the children, (mu, lambda) (lambda >= N) |
 
+The selections compare candidates through a `CandidateOrder` that the algorithm passes to
+them: by default by the optimisation values of the `'comparator'`, with
+`'crowded-comparator'` by front and crowding distance (`CrowdedOrder`).
+
+## NSGA-II
+
+NSGA-II (Deb et al. 2002) is configured from three parts:
+
+```text
+'parent-selection' := 'tournament-selection' { size := 2; };
+'comparator' := 'crowded-comparator' {};
+replacement := 'plus-replacement' { selection := 'nsga2-selection' {}; };
+```
+
+- `'nsga2-selection'` sorts the candidates into non-dominated fronts on the canonical
+  fitness (fast non-dominated sorting) and computes the crowding distance in every front
+  (`ParetoFronts`); it selects the fronts in their order and cuts the last one by
+  descending crowding distance. It selects without replacement and sets the individual
+  properties `front` (0 for the first front) and `crowding-distance` (`Infinity` at the ends
+  of a front).
+- `'crowded-comparator'`: the selections compare by the crowded comparison (lower front,
+  then larger crowding distance). A member of the next population is an identity copy of
+  the selected candidate and uses its front and distance. On equal front and distance, the
+  tournament keeps the first drawn candidate; the reference implementation chooses at
+  random. The value of a candidate (`ParetoValue`) compares by Pareto dominance, e.g. for
+  the best candidate so far of the memory model.
+- The ranks of the population are its non-dominated fronts (`Template.ranks`), so
+  `best-candidate-per-iteration` writes the first front of every generation.
+- An `Acceptance` step sorts the population into fronts after the initialisation and,
+  with population checks, after a check replaced a member.
+- Configuration checks: `'crowded-comparator'` and `'nsga2-selection'` only together and only
+  in the evolutionary algorithm; `'nsga2-selection'` directly in `'plus-replacement'` or
+  `'comma-replacement'`, not as parent selection and not nested; a fitness with at least two
+  components (no scalarisation step).
+
 ## Memory model
 
 A child that was recombined refers to both parents (`Recombination`) and, if the sibling is
@@ -112,6 +147,7 @@ In `src/main/examples`, each with a README:
   tournament selection and a (mu + lambda) replacement.
 - `ea-mixed-genotype`: a Gray chromosome and an integer chromosome with its own operators,
   roulette wheel selection and the memory model.
+- `ea-nsga2`: NSGA-II on ZDT1 with 30 variables (benchmark `zdt1` of the generator).
 
 The surrogate plugins have examples that search on a trained model with the EA
 (`surrogate.simple`, `surrogate.svr`, `surrogate.gaussianprocess`, `surrogate.onnx.simple`,
@@ -123,8 +159,14 @@ The surrogate plugins have examples that search on a trained model with the EA
   the observed frequencies lie within +-4 standard deviations of the binomial expectation.
 - `RealAndIntegerOperatorsTest`: line, arithmetic and BLX-alpha crossover, creep and
   single-choice mutation.
+- `ParetoFrontsTest`, `CrowdedOrderTest`, `Nsga2SelectionTest`, `ParetoValueTest`: fronts and
+  crowding distances of a hand-calculated example, the crowded comparison and the dominance
+  of the values; `Nsga2ConfigurationTest`: the configuration checks.
+- `Nsga2FrontTest`: the last first front in the reference output of `ea-nsga2` lies close to
+  the Pareto front of ZDT1 (on average at most 0.005 above it, no point more than 0.02) and
+  covers f1 in [0, 1].
 - Regressions in `src/test/regressions`: the three replacements, a mixed genotype,
-  `'maximum-age'` and the real-valued operators, each with the memory model.
+  `'maximum-age'`, the real-valued operators and NSGA-II, each with the memory model.
 
 ## References
 
@@ -152,3 +194,5 @@ The surrogate plugins have examples that search on a trained model with the EA
   Evolutionsstrategie. Birkhaeuser, 1977.
 - G. Syswerda: Uniform crossover in genetic algorithms. Proc. 3rd International Conference
   on Genetic Algorithms, 1989, pp. 2-9.
+- E. Zitzler, K. Deb, L. Thiele: Comparison of multiobjective evolutionary algorithms:
+  empirical results. Evolutionary Computation 8(2), 2000, pp. 173-195 (ZDT1).

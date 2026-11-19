@@ -25,7 +25,7 @@ import de.evoal.optimisation.api.run.SearchProcedure;
  *   memory state ({@link Population#steps()}).
  * <p>
  * The population of an iteration consists of the {@link #members()}, by default the
- *   population of the search state, ranked by the optimisation values. Afterwards, every member is replaced by a copy that is an
+ *   population of the search state, ranked by the optimisation values ({@link #ranks}). Afterwards, every member is replaced by a copy that is an
  *   identity of it ({@link Candidate#survivor()}): a member that no step replaces is recorded as
  *   the same candidate in the next iteration, also if the next iteration is interrupted by
  *   an exhausted evaluation budget. Its age grows by one.
@@ -100,16 +100,27 @@ public class Template implements SearchProcedure {
     }
 
     /**
+     * @param members The evaluated members of the population.
+     * @return The member indices of every rank, the best rank first: by default, ranked by the
+     *   optimisation values ({@link Ranking#byValue}). Algorithms whose values are only
+     *   partially ordered rank the members themselves, e.g. into non-dominated fronts.
+     */
+    protected List<List<Integer>> ranks(final List<Candidate> members) {
+        final List<OptimisationValue> values = members.stream()
+                                                      .map(Candidate::value)
+                                                      .toList();
+
+        return Ranking.byValue(values);
+    }
+
+    /**
      * @throws IllegalArgumentException if a member of the population is not evaluated.
      */
     @Override
     public Population population() {
         final List<Candidate> candidates = members();
-        final List<OptimisationValue> values = candidates.stream()
-                                                         .map(Candidate::value)
-                                                         .toList();
 
-        final Population population = new Population(candidates, Ranking.byValue(values), executedSteps);
+        final Population population = new Population(candidates, ranks(candidates), executedSteps);
         executedSteps.clear();
 
         // a member that stays in the population is the same, one iteration older candidate in

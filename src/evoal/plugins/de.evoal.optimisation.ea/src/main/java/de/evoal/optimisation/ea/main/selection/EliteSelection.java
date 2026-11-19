@@ -15,7 +15,7 @@ import de.evoal.core.api.languages.AttributeEvaluator;
 import de.evoal.core.api.utils.AttributeHelper;
 
 import de.evoal.optimisation.api.run.Candidate;
-import de.evoal.optimisation.ea.api.selection.Rankings;
+import de.evoal.optimisation.ea.api.selection.CandidateOrder;
 import de.evoal.optimisation.ea.api.selection.SelectionMethod;
 
 /**
@@ -72,10 +72,16 @@ public class EliteSelection implements SelectionMethod {
     }
 
     @Override
-    public List<Candidate> select(final List<Candidate> candidates, final int count, final RandomGenerator random) {
+    public boolean sortsIntoFronts() {
+        return rest.sortsIntoFronts();
+    }
+
+    @Override
+    public List<Candidate> select(final List<Candidate> candidates, final int count, final CandidateOrder order,
+                                  final RandomGenerator random) {
         final int elite = Math.min(this.count, Math.min(count, candidates.size()));
-        final List<Candidate> selected = new ArrayList<>(Rankings.bestFirst(candidates).subList(0, elite));
-        selected.addAll(rest.select(candidates, count - elite, random));
+        final List<Candidate> selected = new ArrayList<>(order.bestFirst(candidates).subList(0, elite));
+        selected.addAll(rest.select(candidates, count - elite, order, random));
 
         return selected;
     }

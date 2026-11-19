@@ -26,10 +26,19 @@ public interface SelectionMethod extends EvoalComponent<SelectionMethod> {
     }
 
     /**
+     * @return Whether the selection sorts the candidates into non-dominated fronts
+     *   ({@code 'nsga2-selection'}); includes nested selections.
+     */
+    default boolean sortsIntoFronts() {
+        return false;
+    }
+
+    /**
      * @param candidates The evaluated candidates to choose from; not empty.
      * @param count The number of candidates to choose.
+     * @param order The order in which the candidates are compared.
      * @param random The random numbers of the selection.
      * @return The chosen candidates, in the order they were chosen.
      */
-    List<Candidate> select(List<Candidate> candidates, int count, RandomGenerator random);
+    List<Candidate> select(List<Candidate> candidates, int count, CandidateOrder order, RandomGenerator random);
 }

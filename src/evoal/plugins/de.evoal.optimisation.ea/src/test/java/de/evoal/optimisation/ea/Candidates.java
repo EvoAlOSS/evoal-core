@@ -22,6 +22,7 @@ import de.evoal.optimisation.api.fitness.FitnessComponent;
 import de.evoal.optimisation.api.fitness.FitnessLayout;
 import de.evoal.optimisation.api.run.Candidate;
 import de.evoal.optimisation.api.run.Lineage;
+import de.evoal.optimisation.ea.main.comparator.CrowdedComparator;
 
 /**
  * Candidates and search spaces for the tests.
@@ -39,6 +40,21 @@ public final class Candidates {
         final Evaluation evaluation = new Evaluation(Mockito.mock(TypedEObject.class),
                                                      new Fitness(LAYOUT, new double[] {f}),
                                                      new Value(f));
+
+        return Candidate.evaluated(Mockito.mock(TypedEObject.class), evaluation, Lineage.NONE);
+    }
+
+    private static final FitnessLayout TWO_COMPONENTS = new FitnessLayout(List.of(FitnessComponent.named("f1"),
+                                                                                  FitnessComponent.named("f2")));
+
+    /**
+     * @return An evaluated candidate with the two fitness components {@code f1} and
+     *   {@code f2} and the value of {@code 'crowded-comparator'} (Pareto dominance).
+     */
+    public static Candidate withTwoComponents(final double f1, final double f2) {
+        final Fitness fitness = new Fitness(TWO_COMPONENTS, new double[] {f1, f2});
+        final TypedEObject objectives = Mockito.mock(TypedEObject.class);
+        final Evaluation evaluation = new Evaluation(objectives, fitness, new CrowdedComparator().toValue(objectives, fitness));
 
         return Candidate.evaluated(Mockito.mock(TypedEObject.class), evaluation, Lineage.NONE);
     }
