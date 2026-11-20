@@ -112,19 +112,35 @@ representations (`main.correlation.CorrelationTransfer`):
   correlation applies if the source (before its change) and the target lie in its ranges.
   The propagation is deterministic.
 - `'linkage-crossover'`: the wrapped crossover must exchange genes (`GeneExchange`:
-  single-point, multi-point, uniform); others are rejected. Afterwards, for every correlation
-  in DDL order, a feature that a child inherited from one parent decides that the child gets
-  the correlated feature from the same parent and the sibling from the other parent. A
-  feature whose value comes from neither parent (bits from both) is no anchor; every feature
-  is set at most once. A ranged correlation applies if both parents lie in its ranges.
-  Harik and Goldberg define the linkage of a group of genes as the probability that the
-  crossover conserves it (section 2); the operator conserves every correlated pair whose
-  anchor comes from one parent.
+  single-point, multi-point, uniform); others are rejected. Afterwards, it keeps the features
+  of every building block and of every correlated pair together (`main.correlation.Linkage`),
+  see below.
+
+The DDL also declares building blocks, groups of search features that interact
+(`'building-block'([data f, data g, ...])`, at least two features, none twice; read into
+`ProblemCorrelations` as well). A building block has no coefficient: the
+`'correlation-aware-mutation'` ignores it, and `'minimum-correlation'` does not apply to it. A
+feature may belong to several building blocks (overlapping building blocks, as in the CEC 2013
+LSGO functions f13 and f14). Building blocks may contain features of every type, since the
+crossover only copies values.
+
+The `'linkage-crossover'` takes the building blocks and the correlations together in DDL
+order. The anchor of a group is the first feature that an earlier group already set, or else
+the first feature that child A inherited from one parent; a feature whose value comes from
+neither parent (bits from both) is no anchor. Child A gets the other features of the group
+from the parent of the anchor, child B from the other parent. Features that are already set
+keep their values, so every feature is set at most once: the shared feature of overlapping
+building blocks anchors the later one, and a group with two features already set from
+different parents is not preserved completely. A ranged correlation applies if both parents
+lie in its ranges. Harik and Goldberg define the linkage of a group of genes (a building
+block) as the probability that the crossover conserves it (section 2); the operator conserves
+every group whose anchor comes from one parent.
 
 The relationships record `primary-features`, `propagated-features` (e.g. `x:2 from x:1
-(0.9)`) and `linked-features` (e.g. `x:2 with x:0`); the property definitions exist when the
-DDL declares correlations. `'correlation-statistics'` (optimisation.api) compares the declared
-correlations with the population.
+(0.9)`) and `linked-features` (e.g. `x:2 with x:0`, `x:7, x:12 with x:0`); the definitions of
+the first two exist when the DDL declares correlations, the one of `linked-features` when it
+declares correlations or building blocks. `'correlation-statistics'` (optimisation.api)
+compares the declared correlations with the population.
 
 ## Selections and replacements
 
@@ -213,8 +229,12 @@ The surrogate plugins have examples that search on a trained model with the EA
 - `Nsga2FrontTest`: the last first front in the reference output of `ea-nsga2` lies close to
   the Pareto front of ZDT1 (on average at most 0.005 above it, no point more than 0.02) and
   covers f1 in [0, 1].
+- `CorrelationTransferTest`, `LinkageTest`, `CorrelationVariationTest`: the propagation of
+  a mutation along correlations, the linkage of building blocks and correlated pairs
+  (anchors, overlapping building blocks, DDL order), and both operators in the `Variation`.
 - Regressions in `src/test/regressions`: the three replacements, a mixed genotype,
-  `'maximum-age'`, the real-valued operators and NSGA-II, each with the memory model.
+  `'maximum-age'`, the real-valued operators, NSGA-II, the correlation-aware operators
+  (`ea-correlation`) and building blocks (`ea-building-blocks`), each with the memory model.
 
 ## References
 

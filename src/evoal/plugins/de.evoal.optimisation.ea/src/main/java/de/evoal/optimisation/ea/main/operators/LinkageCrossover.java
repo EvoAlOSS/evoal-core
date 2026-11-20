@@ -23,17 +23,20 @@ import de.evoal.optimisation.ea.api.genotype.Genes;
 import de.evoal.optimisation.ea.api.operators.GeneExchange;
 import de.evoal.optimisation.ea.api.operators.RecombinationOperator;
 import de.evoal.optimisation.ea.main.correlation.CorrelationTransfer;
+import de.evoal.optimisation.ea.main.correlation.Linkage;
 
 /**
  * Linkage crossover (DL type {@code 'linkage-crossover'}, specific to EvoAl): the wrapped
  *   {@code crossover} exchanges the genes; its probability and applicability are used.
- *   Afterwards, correlated features of the DDL are inherited from the same parent, regardless
- *   of their chromosome and representation ({@link CorrelationTransfer#link}). The linkage of
- *   a group of genes is the probability that the crossover conserves it (G. R. Harik,
- *   D. E. Goldberg: Learning linkage. Foundations of Genetic Algorithms 4, 1996,
- *   pp. 247-262, section 2); the operator conserves every correlated pair whose anchor comes
- *   from one parent. Only recombinations that exchange genes ({@link GeneExchange}) can be
- *   wrapped.
+ *   Afterwards, the features of every building block and of every correlated pair of the DDL
+ *   are inherited from the same parent, regardless of their chromosome and representation
+ *   ({@link Linkage#link}). The linkage of a group of genes is the probability that the
+ *   crossover conserves it (G. R. Harik, D. E. Goldberg: Learning linkage. Foundations of
+ *   Genetic Algorithms 4, 1996, pp. 247-262, section 2); the operator conserves every group
+ *   whose anchor comes from one parent. Correlations are used if their absolute coefficient
+ *   is at least {@code 'minimum-correlation'} (see {@link CorrelationTransfer} for the other
+ *   conditions); building blocks are always used. Only recombinations that exchange genes
+ *   ({@link GeneExchange}) can be wrapped.
  */
 @Dependent
 @Named("de.evoal.optimisation.ea.optimisation.linkage-crossover")
@@ -57,9 +60,9 @@ public class LinkageCrossover implements RecombinationOperator {
     private AttributeHelper helper;
 
     /**
-     * Keeps correlated features together.
+     * Keeps the features of building blocks and correlated pairs together.
      */
-    private CorrelationTransfer transfer;
+    private Linkage linkage;
 
     /**
      * Creates a crossover that is configured by {@link #init(EObject)}.
@@ -71,16 +74,16 @@ public class LinkageCrossover implements RecombinationOperator {
      * Creates a configured crossover, e.g., for tests.
      *
      * @param crossover The recombination that exchanges the genes.
-     * @param transfer Keeps correlated features together.
+     * @param linkage Keeps the features of building blocks and correlated pairs together.
      * @throws IllegalArgumentException if the recombination does not exchange genes.
      */
-    public LinkageCrossover(final RecombinationOperator crossover, final CorrelationTransfer transfer) {
+    public LinkageCrossover(final RecombinationOperator crossover, final Linkage linkage) {
         if(!(crossover instanceof GeneExchange)) {
             throw new IllegalArgumentException(rejection(crossover));
         }
 
         this.crossover = crossover;
-        this.transfer = transfer;
+        this.linkage = linkage;
     }
 
     @Override
@@ -91,27 +94,37 @@ public class LinkageCrossover implements RecombinationOperator {
         }
 
         final double minimum = evaluator.attributeToDouble(configuration, "minimum-correlation");
-        transfer = new CorrelationTransfer(correlations.correlations().all(), minimum, boundaries, "linkage-crossover");
-        if(transfer.correlations().isEmpty()) {
-            log.warn("The 'linkage-crossover' around '{}' uses no correlation of the DDL; it only applies the wrapped "
-                     + "crossover.", crossover.name());
+        final CorrelationTransfer transfer = new CorrelationTransfer(correlations.correlations().all(), minimum, boundaries,
+                                                                     "linkage-crossover");
+        linkage = Linkage.of(correlations.correlations(), transfer);
+        if(linkage.groups().isEmpty()) {
+            log.warn("The 'linkage-crossover' around '{}' uses no correlation and no building block of the DDL; it only "
+                     + "applies the wrapped crossover.", crossover.name());
         }
 
         return this;
     }
 
     /**
-     * Keeps the correlated features of two children together.
+     * Keeps the features of building blocks and correlated pairs of two children together.
      *
      * @param parentA The parent whose place the first child takes.
      * @param parentB The other parent.
      * @param childA The first child after the crossover; its values are changed.
      * @param childB The second child after the crossover; its values are changed.
-     * @return The set features, e.g. {@code x:2 with x:1}.
+     * @return The set features with their anchor, e.g. {@code x:2 with x:1} or
+     *   {@code x:7, x:12 with x:0}.
      */
     public List<String> link(final TypedEObject parentA, final TypedEObject parentB, final TypedEObject childA,
                              final TypedEObject childB) {
-        return transfer.link(parentA, parentB, childA, childB);
+        return linkage.link(parentA, parentB, childA, childB);
+    }
+
+    /**
+     * @return Keeps the features of building blocks and correlated pairs together.
+     */
+    public Linkage linkage() {
+        return linkage;
     }
 
     @Override
@@ -132,12 +145,5 @@ public class LinkageCrossover implements RecombinationOperator {
     private static String rejection(final RecombinationOperator crossover) {
         return "The 'linkage-crossover' can only wrap recombinations that exchange genes (e.g. 'single-point-crossover', "
                + "'multi-point-crossover', 'uniform-crossover'), but '" + crossover.name() + "' creates new values.";
-    }
-
-    /**
-     * @return Keeps correlated features together.
-     */
-    public CorrelationTransfer transfer() {
-        return transfer;
     }
 }

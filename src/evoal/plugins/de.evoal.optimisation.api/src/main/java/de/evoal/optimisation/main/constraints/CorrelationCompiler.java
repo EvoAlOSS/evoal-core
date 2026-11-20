@@ -21,27 +21,34 @@ import de.evoal.languages.model.base.definitions.DataDescription;
 import de.evoal.languages.model.base.definitions.ScaleType;
 import de.evoal.languages.model.base.expressions.Call;
 import de.evoal.languages.model.base.expressions.Expression;
+import de.evoal.languages.model.interpreter.ConstantEvaluator;
 import de.evoal.models.v202704.optimisation.model.Problem;
 
+import de.evoal.optimisation.api.correlations.BuildingBlock;
 import de.evoal.optimisation.api.correlations.Correlation;
 import de.evoal.optimisation.api.correlations.CorrelationKind;
 import de.evoal.optimisation.api.correlations.CorrelationRange;
 import de.evoal.optimisation.api.correlations.Correlations;
+import de.evoal.optimisation.api.correlations.LinkageGroup;
 
 /**
- * Reads the correlations of an optimisation problem from the {@code constraints} sections of
- *   the DDL modules that declare its features (the same modules as the
- *   {@link ConstraintCompiler}):
+ * Reads the correlations and the building blocks of an optimisation problem from the
+ *   {@code constraints} sections of the DDL modules that declare its features (the same
+ *   modules as the {@link ConstraintCompiler}):
  * <ul>
  *   <li>{@code correlation(data f, data g, rho)} declares a correlation of two search
  *     features;</li>
  *   <li>{@code 'ranged-correlation'(data f, range(l, u), data g, range(l, u), rho)} declares a
- *     correlation that applies only while both features lie in their ranges.</li>
+ *     correlation that applies only while both features lie in their ranges;</li>
+ *   <li>{@code 'building-block'([data f, data g, …])} declares a building block, a group of
+ *     search features that interact.</li>
  * </ul>
  * A correlation with an objective, of a feature with itself, with a coefficient outside
- *   [-1, 1] or with an empty range is rejected. The kind of a correlation follows from the
- *   scales of its features ({@link CorrelationKind}). The correlations are numbered from 1 in
- *   the order of the DDL.
+ *   [-1, 1] or with an empty range is rejected, and so is a building block whose parameter is
+ *   no array of data, with a feature that is not searched, with fewer than two features or
+ *   with a feature twice. The kind of a correlation follows from the scales of its features
+ *   ({@link CorrelationKind}). The correlations are numbered from 1 in the order of the DDL,
+ *   and so are the building blocks.
  */
 @ApplicationScoped
 @Slf4j
@@ -50,6 +57,11 @@ public class CorrelationCompiler {
      * The name of the DDL function that declares a correlation.
      */
     private static final String CORRELATION = "correlation";
+
+    /**
+     * The name of the DDL function that declares a building block.
+     */
+    private static final String BUILDING_BLOCK = "building-block";
 
     /**
      * The name of the DDL function that declares a range.
@@ -83,8 +95,8 @@ public class CorrelationCompiler {
 
     /**
      * @param problem The optimisation problem.
-     * @return The correlations of the problem.
-     * @throws IllegalArgumentException if a correlation cannot be used.
+     * @return The correlations and the building blocks of the problem.
+     * @throws IllegalArgumentException if a correlation or a building block cannot be used.
      */
     public Correlations compile(final Problem problem) {
         final List<EStructuralFeature> searchFeatures = problem.getSearchSpace().getEAllStructuralFeatures();
@@ -96,47 +108,68 @@ public class CorrelationCompiler {
     /**
      * @param searchFeatures The search features of the problem.
      * @param objectives The objectives of the problem.
-     * @return The correlations of the problem.
-     * @throws IllegalArgumentException if a correlation cannot be used.
+     * @return The correlations and the building blocks of the problem.
+     * @throws IllegalArgumentException if a correlation or a building block cannot be used.
      */
     public Correlations compile(final Collection<EStructuralFeature> searchFeatures,
                                final Collection<EStructuralFeature> objectives) {
         final ConstraintCompiler.DdlCalls ddl = calls.readCalls(searchFeatures, objectives);
-        final List<Correlation> correlations = new ArrayList<>();
+        final List<LinkageGroup> groups = new ArrayList<>();
+        int correlations = 0;
+        int blocks = 0;
 
         for(final Call call : ddl.calls()) {
             final String function = call.getFunction().getName();
             final boolean ranged = RANGED_CORRELATION.equals(function);
-            if(!ranged && !CORRELATION.equals(function)) {
-                continue;
-            }
 
-            try {
-                correlations.add(toCorrelation(correlations.size() + 1, call, ranged, ddl.searchByData()));
-            } catch(final IllegalArgumentException e) {
-                throw new IllegalArgumentException("The correlation '" + ConstraintCompiler.textOf(call)
-                                                   + "' cannot be used: " + e.getMessage(), e);
+            if(ranged || CORRELATION.equals(function)) {
+                try {
+                    groups.add(toCorrelation(++correlations, call, ranged, ddl.searchByData()));
+                } catch(final IllegalArgumentException e) {
+                    throw new IllegalArgumentException("The correlation '" + ConstraintCompiler.textOf(call)
+                                                       + "' cannot be used: " + e.getMessage(), e);
+                }
+            } else if(BUILDING_BLOCK.equals(function)) {
+                try {
+                    groups.add(toBuildingBlock(++blocks, call, ddl.searchByData()));
+                } catch(final IllegalArgumentException e) {
+                    throw new IllegalArgumentException("The building block '" + ConstraintCompiler.textOf(call)
+                                                       + "' cannot be used: " + e.getMessage(), e);
+                }
             }
         }
 
-        final Correlations result = new Correlations(correlations);
+        final Correlations result = new Correlations(groups);
         if(!result.isEmpty()) {
-            log.info("Read {} correlations.", result.size());
+            log.info("Read {} correlations and {} building blocks.", correlations, blocks);
         }
 
         return result;
     }
 
-    private EStructuralFeature featureOf(final Expression parameter, final Map<DataDescription, EStructuralFeature> searchByData) {
-        final DataDescription description = new DataReferenceSwitch().doSwitch(parameter);
+    private EStructuralFeature featureOf(final Expression parameter, final Map<DataDescription, EStructuralFeature> searchByData,
+                                         final String declarations) {
+        DataDescription description;
+        try {
+            description = new DataReferenceSwitch().doSwitch(parameter);
+        } catch(final IllegalStateException e) {
+            // the switch rejects literals with an exception
+            description = null;
+        }
         if(description == null) {
             throw new IllegalArgumentException("'" + ConstraintCompiler.textOf(parameter) + "' is no data.");
         }
 
+        return searchFeatureOf(description, searchByData, declarations);
+    }
+
+    private static EStructuralFeature searchFeatureOf(final DataDescription description,
+                                                      final Map<DataDescription, EStructuralFeature> searchByData,
+                                                      final String declarations) {
         final EStructuralFeature feature = searchByData.get(description);
         if(feature == null) {
-            throw new IllegalArgumentException("'" + description.getName() + "' is not searched for; correlations are "
-                                               + "only declared between search features.");
+            throw new IllegalArgumentException("'" + description.getName() + "' is not searched for; " + declarations
+                                               + " are only declared between search features.");
         }
 
         return feature;
@@ -187,14 +220,46 @@ public class CorrelationCompiler {
                           .orElse(ScaleType.UNKNOWN);
     }
 
+    private BuildingBlock toBuildingBlock(final int number, final Call call,
+                                          final Map<DataDescription, EStructuralFeature> searchByData) {
+        ConstraintCompiler.requireParameters(call, 1);
+
+        final Expression parameter = call.getParameters().getFirst();
+        final String rejection = "'" + ConstraintCompiler.textOf(parameter) + "' is no array of data, e.g. "
+                                 + "[data 'x:0', data 'x:1'].";
+
+        // the interpreter evaluates an array to a list and a data reference to its description
+        final Object value;
+        try {
+            value = new ConstantEvaluator().doSwitch(parameter);
+        } catch(final IllegalStateException e) {
+            // the interpreter rejects expressions it cannot evaluate with an exception
+            throw new IllegalArgumentException(rejection, e);
+        }
+        if(!(value instanceof List<?> elements)) {
+            throw new IllegalArgumentException(rejection);
+        }
+
+        final List<EStructuralFeature> features = new ArrayList<>();
+        for(final Object element : elements) {
+            if(!(element instanceof DataDescription description)) {
+                throw new IllegalArgumentException(rejection);
+            }
+
+            features.add(searchFeatureOf(description, searchByData, "building blocks"));
+        }
+
+        return new BuildingBlock(number, features);
+    }
+
     private Correlation toCorrelation(final int number, final Call call, final boolean ranged,
                                       final Map<DataDescription, EStructuralFeature> searchByData) {
         ConstraintCompiler.requireParameters(call, ranged ? 5 : 3);
 
         final List<Expression> parameters = call.getParameters();
-        final EStructuralFeature first = featureOf(parameters.get(0), searchByData);
+        final EStructuralFeature first = featureOf(parameters.get(0), searchByData, "correlations");
         final CorrelationRange firstRange = ranged ? rangeOf(parameters.get(1)) : null;
-        final EStructuralFeature second = featureOf(parameters.get(ranged ? 2 : 1), searchByData);
+        final EStructuralFeature second = featureOf(parameters.get(ranged ? 2 : 1), searchByData, "correlations");
         final CorrelationRange secondRange = ranged ? rangeOf(parameters.get(3)) : null;
         final double coefficient = numberOf(parameters.get(ranged ? 4 : 2));
 

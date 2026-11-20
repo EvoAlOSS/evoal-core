@@ -199,15 +199,18 @@ public class EvolutionaryAlgorithm extends TemplateAlgorithm {
         recorder.defineProperty(Variation.CHANGED_FEATURES, PropertyScope.RELATIONSHIP, PropertyValueType.TEXT, true,
                                 "The features whose genes differ from the parent whose place the child takes.");
 
-        if(!problemCorrelations.correlations().isEmpty()) {
+        if(!problemCorrelations.correlations().all().isEmpty()) {
             recorder.defineProperty(Variation.PRIMARY_FEATURES, PropertyScope.RELATIONSHIP, PropertyValueType.TEXT, true,
                                     "The features that a 'correlation-aware-mutation' changed itself.");
             recorder.defineProperty(Variation.PROPAGATED_FEATURES, PropertyScope.RELATIONSHIP, PropertyValueType.TEXT, true,
                                     "The changes that a 'correlation-aware-mutation' propagated to correlated features, "
                                     + "e.g. 'x:2 from x:1 (0.9)'.");
+        }
+        if(!problemCorrelations.correlations().isEmpty()) {
             recorder.defineProperty(Variation.LINKED_FEATURES, PropertyScope.RELATIONSHIP, PropertyValueType.TEXT, true,
                                     "The features that a 'linkage-crossover' took from the same parent as a correlated "
-                                    + "feature, e.g. 'x:2 with x:1'.");
+                                    + "feature or a feature of the same building block, e.g. 'x:2 with x:1' or "
+                                    + "'x:7, x:12 with x:0'.");
         }
 
         if(crowded) {

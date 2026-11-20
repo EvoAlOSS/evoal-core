@@ -45,6 +45,24 @@ module de.evoal.optimisation.constraint {
     def void 'ranged-correlation'(data feature1, expression range1, data feature2, expression range2, real coefficient);
 
     /**
+     * Declares a building block, a group of search features that interact, i.e. the
+     *   problem is not separable in them, e.g.
+     *   {@code 'building-block'([data 'x:0', data 'x:7', data 'x:12']);}. The
+     *   'linkage-crossover' of the evolutionary algorithm keeps the features of a building
+     *   block together; the 'correlation-aware-mutation' ignores building blocks, since they
+     *   have no coefficient. A feature may belong to several building blocks. The term
+     *   follows G. R. Harik, D. E. Goldberg: Learning linkage. Foundations of Genetic
+     *   Algorithms 4, 1996, pp. 247-262, section 2: the linkage of a building block is the
+     *   probability that crossover preserves it.
+     *
+     * <b>Parameters:</b>
+     * <ol>
+     *   <li>The features of the building block, at least two and none twice.</li>
+     * </ol>
+     */
+    def void 'building-block'(array data features);
+
+    /**
      * Declares a constraint of the optimisation problem, a comparison of two arithmetic
      *   expressions over search features, objectives and numbers with one of the
      *   operators {@code <}, {@code <=}, {@code >}, {@code >=} or {@code =}.

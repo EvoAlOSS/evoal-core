@@ -1,0 +1,135 @@
+{
+  "formatVersion" : "2027.4.0",
+  "problem" : {
+    "name" : "regression",
+    "goals" : [ {
+      "feature" : "y:0",
+      "direction" : "minimise"
+    } ]
+  },
+  "algorithm" : {
+    "type" : "de.evoal.optimisation.ea.optimisation.evolutionary-algorithm"
+  },
+  "searchSpace" : [ {
+    "name" : "x:0",
+    "type" : "real",
+    "scale" : "quotient",
+    "lowerBound" : {
+      "value" : -5.12,
+      "inclusive" : true
+    },
+    "upperBound" : {
+      "value" : 5.12,
+      "inclusive" : true
+    }
+  }, {
+    "name" : "x:1",
+    "type" : "real",
+    "scale" : "quotient",
+    "lowerBound" : {
+      "value" : -5.12,
+      "inclusive" : true
+    },
+    "upperBound" : {
+      "value" : 5.12,
+      "inclusive" : true
+    }
+  }, {
+    "name" : "x:2",
+    "type" : "real",
+    "scale" : "quotient",
+    "lowerBound" : {
+      "value" : -5.12,
+      "inclusive" : true
+    },
+    "upperBound" : {
+      "value" : 5.12,
+      "inclusive" : true
+    }
+  }, {
+    "name" : "x:3",
+    "type" : "real",
+    "scale" : "quotient",
+    "lowerBound" : {
+      "value" : -5.12,
+      "inclusive" : true
+    },
+    "upperBound" : {
+      "value" : 5.12,
+      "inclusive" : true
+    }
+  }, {
+    "name" : "x:4",
+    "type" : "real",
+    "scale" : "quotient",
+    "lowerBound" : {
+      "value" : -5.12,
+      "inclusive" : true
+    },
+    "upperBound" : {
+      "value" : 5.12,
+      "inclusive" : true
+    }
+  }, {
+    "name" : "x:5",
+    "type" : "real",
+    "scale" : "quotient",
+    "lowerBound" : {
+      "value" : -5.12,
+      "inclusive" : true
+    },
+    "upperBound" : {
+      "value" : 5.12,
+      "inclusive" : true
+    }
+  } ],
+  "optimisationSpace" : [ {
+    "name" : "y:0",
+    "type" : "real",
+    "scale" : "quotient"
+  } ],
+  "fitness" : {
+    "components" : [ {
+      "name" : "y:0",
+      "goal" : "y:0"
+    } ],
+    "steps" : [ ]
+  },
+  "metricDefinitions" : [ {
+    "name" : "evaluations.real",
+    "kind" : "counter",
+    "valueType" : "integer",
+    "scope" : "iteration",
+    "description" : "Number of evaluations of the real optimisation function."
+  }, {
+    "name" : "evaluations.surrogate",
+    "kind" : "counter",
+    "valueType" : "integer",
+    "scope" : "iteration",
+    "description" : "Number of predictions of a surrogate model."
+  } ],
+  "propertyDefinitions" : [ {
+    "name" : "operators",
+    "scope" : "relationship",
+    "valueType" : "text",
+    "list" : true,
+    "description" : "The recombinations and mutations that changed the child, in their order."
+  }, {
+    "name" : "changed-features",
+    "scope" : "relationship",
+    "valueType" : "text",
+    "list" : true,
+    "description" : "The features whose genes differ from the parent whose place the child takes."
+  }, {
+    "name" : "linked-features",
+    "scope" : "relationship",
+    "valueType" : "text",
+    "list" : true,
+    "description" : "The features that a 'linkage-crossover' took from the same parent as a correlated feature or a feature of the same building block, e.g. 'x:2 with x:1' or 'x:7, x:12 with x:0'."
+  } ],
+  "setup" : {
+    "evoalVersion" : "${evoal.version}",
+    "seed" : "42",
+    "run" : 0
+  }
+}

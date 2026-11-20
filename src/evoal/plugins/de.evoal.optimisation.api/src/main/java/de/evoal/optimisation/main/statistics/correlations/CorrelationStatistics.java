@@ -143,7 +143,7 @@ public class CorrelationStatistics implements StatisticsWriter {
                                               + "'covariance-difference'.");
         }
 
-        if(problemCorrelations.correlations().isEmpty()) {
+        if(problemCorrelations.correlations().all().isEmpty()) {
             throw new InitializationException("'correlation-statistics' needs correlations, but the DDL of the problem "
                                               + "declares none.");
         }

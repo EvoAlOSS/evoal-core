@@ -458,16 +458,19 @@ module de.evoal.optimisation.ea.optimisation {
     /**
      * Linkage crossover (specific to EvoAl): the wrapped 'crossover' exchanges the genes;
      *   its 'probability' and applicability are used, the own ones are not. Afterwards,
-     *   correlated features of the DDL are inherited from the same parent, regardless of
-     *   their chromosome and representation: for every correlation, in the order of the
-     *   DDL, a feature that a child inherited from one parent determines that the child gets
-     *   the other feature from this parent, and its sibling from the other parent. Every
-     *   feature is set at most once. A ranged correlation applies if the values of both
-     *   parents lie in its ranges. The linkage of a group of genes is the probability that
-     *   the crossover conserves it (G. R. Harik, D. E. Goldberg: Learning linkage.
-     *   Foundations of Genetic Algorithms 4, 1996, pp. 247-262, section 2); the operator
-     *   conserves every correlated pair whose anchor comes from one parent. The
-     *   relationships of the children record the property 'linked-features'.
+     *   the features of every building block and of every correlated pair of the DDL are
+     *   inherited from the same parent, regardless of their chromosome and representation:
+     *   for every building block and correlation, in the order of the DDL, a feature that a
+     *   child inherited from one parent (the anchor) determines that the child gets the
+     *   other features from this parent, and its sibling from the other parent. A feature
+     *   that an earlier building block or correlation already set stays as it is and serves
+     *   as the anchor, so every feature is set at most once and overlapping building blocks
+     *   are possible. A ranged correlation applies if the values of both parents lie in its
+     *   ranges. The linkage of a group of genes is the probability that the crossover
+     *   conserves it (G. R. Harik, D. E. Goldberg: Learning linkage. Foundations of Genetic
+     *   Algorithms 4, 1996, pp. 247-262, section 2); the operator conserves every group
+     *   whose anchor comes from one parent. The relationships of the children record the
+     *   property 'linked-features'.
      *
      * Only crossovers that exchange genes can be wrapped ('single-point-crossover',
      *   'multi-point-crossover', 'uniform-crossover'); blending crossovers are rejected.
@@ -483,7 +486,8 @@ module de.evoal.optimisation.ea.optimisation {
         crossover : instance recombination;
 
         /**
-         * The smallest absolute correlation coefficient whose features are kept together.
+         * The smallest absolute correlation coefficient whose features are kept together;
+         *   building blocks are always kept together.
          */
         @LowerBoundary { boundary := 0.0; inclusive := true; }
         @UpperBoundary { boundary := 1.0; inclusive := true; }

@@ -21,7 +21,7 @@ import de.evoal.optimisation.api.correlations.CorrelationRange;
 import de.evoal.optimisation.ea.Candidates;
 
 /**
- * The transfer of changes along correlations and the linkage of the {@link CorrelationTransfer}.
+ * The transfer of changes along correlations by the {@link CorrelationTransfer}.
  *   Features: x real in [-1, 1], y real in [0, 10], n integer in [0, 4], u real without bounds,
  *   k integer without bounds.
  */
@@ -156,52 +156,6 @@ public class CorrelationTransferTest {
             Assertions.assertEquals(7.5, both.eGet(y));
             Assertions.assertEquals(0, both.eGet(n));
             Assertions.assertEquals(List.of("n from x (-1.0)"), propagated);
-        }
-    }
-
-    @Nested
-    @DisplayName("given two children of a crossover")
-    class Linkage {
-        private final TypedEObject parentA = point(0.5, 1.0, 0);
-        private final TypedEObject parentB = point(-0.5, 9.0, 4);
-
-        @Test
-        public void aChildGetsTheCorrelatedFeatureFromTheParentOfItsAnchor() {
-            // given: the crossover exchanged y
-            final TypedEObject childA = point(0.5, 9.0, 0);
-            final TypedEObject childB = point(-0.5, 1.0, 4);
-
-            // when
-            final List<String> linked = transfer(0.0, linear(1, x, y, 0.9)).link(parentA, parentB, childA, childB);
-
-            // then
-            Assertions.assertEquals(1.0, childA.eGet(y));
-            Assertions.assertEquals(9.0, childB.eGet(y));
-            Assertions.assertEquals(List.of("y with x"), linked);
-        }
-
-        @Test
-        public void childrenThatKeepTheLinkageAreUnchanged() {
-            final TypedEObject childA = point(0.5, 1.0, 4);
-            final TypedEObject childB = point(-0.5, 9.0, 0);
-
-            final List<String> linked = transfer(0.0, linear(1, x, y, 0.9)).link(parentA, parentB, childA, childB);
-
-            Assertions.assertEquals(List.of(), linked);
-            Assertions.assertEquals(4, childA.eGet(n));
-        }
-
-        @Test
-        public void aFeatureFromNeitherParentIsNoAnchor() {
-            // given: x of child A comes from neither parent, so y anchors x
-            final TypedEObject childA = point(0.1, 9.0, 0);
-            final TypedEObject childB = point(-0.1, 1.0, 4);
-
-            transfer(0.0, linear(1, x, y, 0.9)).link(parentA, parentB, childA, childB);
-
-            // then: y of child A comes from B, so x of child A becomes the one of B
-            Assertions.assertEquals(-0.5, childA.eGet(x));
-            Assertions.assertEquals(0.5, childB.eGet(x));
         }
     }
 }

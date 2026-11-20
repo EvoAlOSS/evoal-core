@@ -1,5 +1,6 @@
 package de.evoal.optimisation.api.correlations;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -27,7 +28,7 @@ public record Correlation(int number,
                           double coefficient,
                           CorrelationRange firstRange,
                           CorrelationRange secondRange,
-                          CorrelationKind kind) {
+                          CorrelationKind kind) implements LinkageGroup {
     /**
      * @throws IllegalArgumentException if both features are the same, the coefficient lies
      *   outside [-1, 1], or only one range is given.
@@ -58,6 +59,14 @@ public record Correlation(int number,
      */
     public boolean appliesTo(final double firstValue, final double secondValue) {
         return !isRanged() || firstRange.contains(firstValue) && secondRange.contains(secondValue);
+    }
+
+    /**
+     * @return The first and the second feature.
+     */
+    @Override
+    public List<EStructuralFeature> features() {
+        return List.of(first, second);
     }
 
     /**

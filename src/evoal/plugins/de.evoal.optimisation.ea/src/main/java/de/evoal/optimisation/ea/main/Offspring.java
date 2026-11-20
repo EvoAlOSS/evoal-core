@@ -48,7 +48,8 @@ final class Offspring {
     final List<String> propagatedFeatures = new ArrayList<>();
 
     /**
-     * The features that a linkage crossover set, e.g. {@code x:2 with x:1}.
+     * The features that a linkage crossover set, e.g. {@code x:2 with x:1} or
+     *   {@code x:7, x:12 with x:0}.
      */
     final List<String> linkedFeatures = new ArrayList<>();
 

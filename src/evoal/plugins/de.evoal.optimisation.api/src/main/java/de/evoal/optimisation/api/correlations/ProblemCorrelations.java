@@ -18,8 +18,9 @@ import de.evoal.optimisation.api.execution.MetricContributor;
 import de.evoal.optimisation.main.constraints.CorrelationCompiler;
 
 /**
- * The correlations of the optimisation problem of the current run, declared in the DDL
- *   ({@code correlation}, {@code 'ranged-correlation'}). They are read at the start of every
+ * The correlations and the building blocks of the optimisation problem of the current run,
+ *   declared in the DDL ({@code correlation}, {@code 'ranged-correlation'},
+ *   {@code 'building-block'}). They are read at the start of every
  *   run, before the algorithm is created; the bean uses the run start of the
  *   {@link MetricContributor}s for this and contributes no metrics. Correlations with a
  *   nominal feature are reported, since no component can use them.

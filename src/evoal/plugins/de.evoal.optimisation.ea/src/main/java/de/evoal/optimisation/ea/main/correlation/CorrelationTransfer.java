@@ -22,8 +22,10 @@ import de.evoal.optimisation.api.correlations.Correlation;
 import de.evoal.optimisation.api.correlations.CorrelationKind;
 
 /**
- * Transfers changes along the correlations of the DDL, at the level of features and
- *   independent of the representation of the genes.
+ * Selects the correlations of the DDL that the correlation-aware operators use and transfers
+ *   the changes of a mutation along them, at the level of features and independent of the
+ *   representation of the genes. The {@link Linkage} of the crossover uses the same
+ *   correlations.
  * <p>
  * A correlation is used if its absolute coefficient is at least the minimum, its features
  *   have an order (not nominal, not boolean) and both have a finite range: the bounds of the
@@ -114,66 +116,6 @@ public final class CorrelationTransfer {
     }
 
     /**
-     * Keeps correlated features together after a crossover (linkage): for every correlation,
-     *   in the order of the DDL, a feature that a child inherited from one parent (its value
-     *   equals the value of this parent) is the anchor; the child gets the other feature from
-     *   the same parent, and its sibling from the other parent. A feature whose value comes from
-     *   neither parent (e.g., its bits come from both) is no anchor. Every feature is set at most
-     *   once. A ranged correlation applies if the values of both parents lie in its ranges.
-     *
-     * @param parentA The parent whose place the first child takes.
-     * @param parentB The other parent.
-     * @param childA The first child; its values are changed.
-     * @param childB The second child; its values are changed.
-     * @return The set features, e.g. {@code x:2 with x:1}, in their order; empty if nothing
-     *   changed.
-     */
-    public List<String> link(final TypedEObject parentA, final TypedEObject parentB, final TypedEObject childA,
-                             final TypedEObject childB) {
-        final Set<EStructuralFeature> set = new LinkedHashSet<>();
-        final List<String> linked = new ArrayList<>();
-
-        for(final Correlation correlation : correlations) {
-            if(!appliesTo(correlation, parentA) || !appliesTo(correlation, parentB)) {
-                continue;
-            }
-
-            for(final EStructuralFeature anchor : List.of(correlation.first(), correlation.second())) {
-                final EStructuralFeature target = correlation.partnerOf(anchor).orElseThrow();
-                if(set.contains(target)) {
-                    continue;
-                }
-
-                final double anchorValue = valueOf(childA, anchor);
-                final TypedEObject source;
-                final TypedEObject other;
-                if(anchorValue == valueOf(parentA, anchor)) {
-                    source = parentA;
-                    other = parentB;
-                } else if(anchorValue == valueOf(parentB, anchor)) {
-                    source = parentB;
-                    other = parentA;
-                } else {
-                    continue;
-                }
-
-                final boolean changesA = valueOf(childA, target) != valueOf(source, target);
-                final boolean changesB = valueOf(childB, target) != valueOf(other, target);
-                set.add(anchor);
-                set.add(target);
-                if(changesA || changesB) {
-                    write(childA, target, valueOf(source, target));
-                    write(childB, target, valueOf(other, target));
-                    linked.add(target.getName() + " with " + anchor.getName());
-                }
-                break;
-            }
-        }
-
-        return linked;
-    }
-
-    /**
      * Propagates the changes of a mutation along the correlations.
      * <p>
      * The primary changes are the features of the used correlations whose values differ
@@ -241,10 +183,6 @@ public final class CorrelationTransfer {
         }
 
         return propagated;
-    }
-
-    private static boolean appliesTo(final Correlation correlation, final TypedEObject candidate) {
-        return correlation.appliesTo(valueOf(candidate, correlation.first()), valueOf(candidate, correlation.second()));
     }
 
     private int byDdlOrder(final EStructuralFeature first, final EStructuralFeature second) {

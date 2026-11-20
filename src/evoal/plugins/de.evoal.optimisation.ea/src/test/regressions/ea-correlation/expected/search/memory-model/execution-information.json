@@ -101,7 +101,7 @@
     "scope" : "relationship",
     "valueType" : "text",
     "list" : true,
-    "description" : "The features that a 'linkage-crossover' took from the same parent as a correlated feature, e.g. 'x:2 with x:1'."
+    "description" : "The features that a 'linkage-crossover' took from the same parent as a correlated feature or a feature of the same building block, e.g. 'x:2 with x:1' or 'x:7, x:12 with x:0'."
   } ],
   "setup" : {
     "evoalVersion" : "${evoal.version}",

@@ -45,8 +45,8 @@ import de.evoal.optimisation.ea.main.operators.LinkageCrossover;
  * <p>
  * A {@link CorrelationAwareMutation} propagates its change to correlated features after the
  *   use (properties {@code primary-features} and {@code propagated-features}); a
- *   {@link LinkageCrossover} keeps correlated features of both children together after the use
- *   (property {@code linked-features}).
+ *   {@link LinkageCrossover} keeps the features of building blocks and correlated pairs of both
+ *   children together after the use (property {@code linked-features}).
  */
 final class Variation {
     /**
@@ -128,8 +128,8 @@ final class Variation {
                 genotype.chromosomes().get(c).handleBoundaries(genesB, boundaryHandling);
             }
 
-            if(use.operator() instanceof LinkageCrossover linkage) {
-                link(linkage, a, b, first, second);
+            if(use.operator() instanceof LinkageCrossover crossover) {
+                link(crossover, a, b, first, second);
             }
 
             noteChange(a, beforeA, use.operator().name(), true);
@@ -188,19 +188,20 @@ final class Variation {
     }
 
     /**
-     * Keeps the correlated features of the children together and notes the set features.
+     * Keeps the features of building blocks and correlated pairs of the children together and
+     *   notes the set features.
      */
-    private void link(final LinkageCrossover linkage, final Offspring a, final Offspring b, final Candidate first,
+    private void link(final LinkageCrossover crossover, final Offspring a, final Offspring b, final Candidate first,
                       final Candidate second) {
         final TypedEObject childA = genotype.decode(a.genome);
         final TypedEObject childB = genotype.decode(b.genome);
-        final List<String> linked = linkage.link(first.input(), second.input(), childA, childB);
+        final List<String> linked = crossover.link(first.input(), second.input(), childA, childB);
         if(linked.isEmpty()) {
             return;
         }
 
-        genotype.write(a.genome, childA, linkage.transfer().features());
-        genotype.write(b.genome, childB, linkage.transfer().features());
+        genotype.write(a.genome, childA, crossover.linkage().features());
+        genotype.write(b.genome, childB, crossover.linkage().features());
         a.linkedFeatures.addAll(linked);
         b.linkedFeatures.addAll(linked);
     }
