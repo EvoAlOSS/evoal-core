@@ -10,7 +10,7 @@ module de.evoal.optimisation.api {
     requires deltaspike.cdictrl.weld;
     requires deltaspike.core.api;
 
-    requires lombok;
+    requires static lombok;
 
     requires org.slf4j;
     requires jul.to.slf4j;

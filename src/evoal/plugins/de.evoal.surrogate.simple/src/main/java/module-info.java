@@ -1,7 +1,7 @@
 module de.evoal.surrogate.simple {
     requires jakarta.inject;
     requires jakarta.cdi;
-    requires lombok;
+    requires static lombok;
 
     requires org.slf4j;
 

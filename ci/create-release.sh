@@ -126,3 +126,16 @@ done
 rm -rf "$EVOAL_HOME"/examples/*/expected
 rm -f "$EVOAL_HOME"/examples/*/regression.properties
 
+###############################################################################
+###############################################################################
+### licences and credits
+echo "Writing licences and credits ..."
+cp LICENSE.md CITATION.cff "$EVOAL_HOME"
+
+# licenses/, NOTICE and sbom.json from the credits of the jars in the release
+ABSOLUTE_EVOAL_HOME=$( cd -- "$EVOAL_HOME" >/dev/null 2>&1 ; pwd -P )
+if ! EVOAL_HOME="$ABSOLUTE_EVOAL_HOME" bash "$ABSOLUTE_EVOAL_HOME/bin/evoal-credits.sh" release-files "$ABSOLUTE_EVOAL_HOME"; then
+  echo "Failed to write the licences and credits of the release."
+  exit 1
+fi
+

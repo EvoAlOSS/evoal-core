@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# Prints the functions and parameters of the installation.
+
 if [ -z ${EVOAL_HOME+x} ]; then
   EVOAL_HOME=$( cd -- "$(dirname $0)/../" >/dev/null 2>&1 ; pwd -P )
 fi
@@ -11,11 +13,6 @@ if [ "$#" -ne 0 ]; then
     exit 1
 fi
 
-cd "$1" || exit 1
-
-POSITIONAL_ARGUMENTS=( "$@" )
-ADDITIONAL_ARGUMENTS=("${POSITIONAL_ARGUMENTS[@]:0}")
-
 declare -a LOCAL_JVM_ARGUMENTS=()
 
 if [ ${EVOAL_VM+x} ]; then
@@ -26,12 +23,7 @@ if [ ${EVOAL_DEBUG+x} ]; then
   LOCAL_JVM_ARGUMENTS+=( "-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=1044" )
 fi
 
-if [ ${EVOAL_LOGGING+x} ]; then
-  POSITIONAL_ARGUMENTS+=( "-Bcore:logging=$EVOAL_LOGGING" )
-fi
-
-set -x
+# Evoal prints the help only if --help is the only argument
 java ${LOCAL_JVM_ARGUMENTS[@]} \
      ${EVOAL_JVM_ARGUMENTS[@]} \
-     ${ADDITIONAL_ARGUMENTS[@]} \
      --help

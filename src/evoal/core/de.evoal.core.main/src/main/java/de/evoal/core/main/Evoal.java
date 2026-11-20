@@ -10,6 +10,7 @@ import de.evoal.core.api.cdi.MainClass;
 import jakarta.enterprise.context.ApplicationScoped;
 
 import de.evoal.core.api.utils.EvoAlShutDownException;
+import de.evoal.core.main.credits.CreditsCommand;
 import de.evoal.core.main.validation.DiagnosticsPrinter;
 import jakarta.enterprise.inject.spi.Bean;
 import lombok.extern.slf4j.Slf4j;
@@ -40,6 +41,14 @@ public final class Evoal {
 
     public static void main(final String ... args) {
         installJavaLoggingToSLF4JBridge();
+
+        // the credits need no CDI container; their output is not mixed with log messages
+        final boolean isCreditsSwitch = args.length > 0 && CreditsCommand.isCreditsSwitch(args[0]);
+        if(isCreditsSwitch) {
+            final int exitCode = CreditsCommand.run(List.of(args), System.out);
+            System.exit(exitCode);
+        }
+
         log.info("Starting up EvoAl");
 
         int errorCode = 0;
@@ -149,6 +158,18 @@ public final class Evoal {
                 System.out.println();
             }
         }
+
+        System.out.println();
+        System.out.println("--------------------------------------------------------------------------------");
+        System.out.println("  Credits (bin/evoal-credits.sh):");
+        System.out.println("    --credits, --praise, --licenses");
+        printIntended(6, """
+                Lists the libraries of the installation with version, licence, project link,
+                the plugins that use them and what for, and how EvoAl and the libraries are cited.""");
+        System.out.println("    --credits " + CreditsCommand.BIBTEX);
+        printIntended(6, "Prints the citations as BibTeX.");
+        System.out.println("    --credits " + CreditsCommand.RELEASE_FILES + " <folder>");
+        printIntended(6, "Writes licenses/, NOTICE and sbom.json of a release into the folder.");
     }
 
     private static void printIntended(final int nmrWhitespaces, final String text) {

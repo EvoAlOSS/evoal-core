@@ -11,7 +11,7 @@ module de.evoal.optimisation.ea {
 
     // logging
     requires org.slf4j;
-    requires lombok;
+    requires static lombok;
     requires org.eclipse.emf.common;
     requires org.eclipse.emf.ecore;
 

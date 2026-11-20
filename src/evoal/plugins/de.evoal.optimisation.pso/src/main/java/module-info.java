@@ -2,7 +2,7 @@ module de.evoal.optimisation.pso {
     requires jakarta.cdi;
     requires jakarta.inject;
 
-    requires lombok;
+    requires static lombok;
 
     requires org.slf4j;
 

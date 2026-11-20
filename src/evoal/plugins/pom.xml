@@ -174,7 +174,7 @@
 			<scope>provided</scope>
 		</dependency>
 
-        <!-- Dependency to EvoAl core -->
+        <!-- Dependency to EvoAl core (also runs the credits check) -->
 		<dependency>
 			<groupId>de.evoal</groupId>
 			<artifactId>core.main</artifactId>
@@ -182,4 +182,48 @@
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>
+
+	<build>
+		<plugins>
+			<!--
+			  Credits of the shipped libraries, configured in the aggregation POM. External
+			  plugins inherit both from this POM.
+			-->
+			<plugin>
+				<groupId>org.cyclonedx</groupId>
+				<artifactId>cyclonedx-maven-plugin</artifactId>
+			</plugin>
+
+			<plugin>
+				<!--
+				  Checks the credits of the module (de.evoal.core.main.credits.CreditsCheck): every jar in
+				  target/<artifactId> has an entry in META-INF/evoal/credits.json with purpose and licence,
+				  and every entry names a shipped jar. Runs after copy-dependencies has filled the folder.
+				  Declared here and not in the pluginManagement of the aggregation POM, because other
+				  modules use the exec plugin for other purposes (e.g. the regressions).
+				-->
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>check-credits</id>
+						<phase>package</phase>
+						<goals>
+							<goal>java</goal>
+						</goals>
+						<configuration>
+							<mainClass>de.evoal.core.main.credits.CreditsCheck</mainClass>
+							<classpathScope>compile</classpathScope>
+							<arguments>
+								<argument>${project.packaging}</argument>
+								<argument>${project.build.outputDirectory}/META-INF/evoal</argument>
+								<argument>${project.build.directory}/${project.artifactId}</argument>
+								<argument>${project.build.finalName}.jar</argument>
+							</arguments>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 </project>

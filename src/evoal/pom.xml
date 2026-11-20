@@ -424,6 +424,43 @@ java.lang.StrictMath#hypot(double,double)
                 </plugin>
 
                 <plugin>
+                    <!--
+                      Writes the CycloneDX SBOM of a shipped module (core.main, every plugin) into
+                      META-INF/evoal of its jar. It lists the runtime dependencies with licence and
+                      hashes; the credits check and later the credits switch use it (#312).
+                    -->
+                    <groupId>org.cyclonedx</groupId>
+                    <artifactId>cyclonedx-maven-plugin</artifactId>
+                    <version>2.9.1</version>
+                    <executions>
+                        <execution>
+                            <id>sbom</id>
+                            <phase>process-resources</phase>
+                            <goals>
+                                <goal>makeBom</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <outputDirectory>${project.build.outputDirectory}/META-INF/evoal</outputDirectory>
+                        <outputName>sbom.cdx</outputName>
+                        <outputFormat>json</outputFormat>
+                        <projectType>library</projectType>
+                        <includeProvidedScope>false</includeProvidedScope>
+                        <includeSystemScope>false</includeSystemScope>
+                        <includeTestScope>false</includeTestScope>
+                        <skipAttach>true</skipAttach>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <!-- also runs the credits check of core.main and the plugins (see their POMs) -->
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>exec-maven-plugin</artifactId>
+                    <version>3.5.0</version>
+                </plugin>
+
+                <plugin>
 					<groupId>org.codehaus.mojo</groupId>
 					<artifactId>flatten-maven-plugin</artifactId>
 					<version>1.5.0</version>

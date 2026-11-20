@@ -1,5 +1,5 @@
 module de.evoal.surrogate.ws {
-    requires lombok;
+    requires static lombok;
     requires org.slf4j;
 
     requires jakarta.inject.api;

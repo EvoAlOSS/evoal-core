@@ -1,0 +1,10 @@
+{
+    "libraries": [
+        {
+            "library": "nz.ac.waikato.cms.weka:weka-stable",
+            "purpose": "Weka: reads ARFF files and extracts their data definitions.",
+            "licenses": ["GPL-3.0-or-later"],
+            "citations": ["frank2016weka"]
+        }
+    ]
+}

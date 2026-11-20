@@ -2,7 +2,7 @@ module de.evoal.core.junit {
     requires jakarta.inject;
     requires jakarta.cdi;
 
-    requires lombok;
+    requires static lombok;
 
     requires org.slf4j;
 

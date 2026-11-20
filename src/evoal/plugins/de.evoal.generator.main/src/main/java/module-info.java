@@ -5,7 +5,7 @@ module de.evoal.generator.main {
     requires com.google.common;
     requires com.google.guice;
 
-    requires lombok;
+    requires static lombok;
 
     requires org.slf4j;
 

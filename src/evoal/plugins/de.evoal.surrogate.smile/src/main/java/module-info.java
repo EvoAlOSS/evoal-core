@@ -1,5 +1,5 @@
 module de.evoal.surrogate.smile {
-    requires lombok;
+    requires static lombok;
 
     requires org.slf4j;
 

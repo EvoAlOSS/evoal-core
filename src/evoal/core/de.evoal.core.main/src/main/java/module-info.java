@@ -6,11 +6,14 @@ module de.evoal.core.main {
     requires jakarta.inject;
 
     requires weld.se.core;
+    // Weld's relaxed construction creates proxies of beans without a non-private constructor
+    // via sun.misc.Unsafe; Weld is an automatic module, so it cannot require the module itself
+    requires jdk.unsupported;
     requires deltaspike.cdictrl.api;
     requires deltaspike.cdictrl.weld;
     requires deltaspike.core.api;
 
-    requires lombok;
+    requires static lombok;
 
     requires org.slf4j;
     requires jul.to.slf4j;
@@ -87,4 +90,7 @@ module de.evoal.core.main {
     opens de.evoal.core.api.validation.model to weld.core.impl;
     opens de.evoal.core.main.validation.constraints to weld.core.impl;
     opens de.evoal.core.main.cdi to weld.core.impl;
+
+    // Jackson creates the records of credits.json
+    opens de.evoal.core.main.credits to tools.jackson.databind;
 }

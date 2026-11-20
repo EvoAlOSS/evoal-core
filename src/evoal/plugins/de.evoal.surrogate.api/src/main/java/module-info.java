@@ -3,7 +3,7 @@ module de.evoal.surrogate.api {
     requires jakarta.cdi;
     requires com.google.guice;
 
-    requires lombok;
+    requires static lombok;
 
     requires org.slf4j;
 

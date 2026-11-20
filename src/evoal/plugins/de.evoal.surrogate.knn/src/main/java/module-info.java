@@ -9,7 +9,7 @@ module de.evoal.surrogate.knn {
 
     // logging
     requires org.slf4j;
-    requires lombok;
+    requires static lombok;
 
     requires commons.math3;
     requires tools.jackson.core;

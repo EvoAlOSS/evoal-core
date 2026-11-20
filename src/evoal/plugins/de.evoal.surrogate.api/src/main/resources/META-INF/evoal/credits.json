@@ -1,0 +1,8 @@
+{
+    "libraries": [
+        {
+            "library": "com.microsoft.onnxruntime:onnxruntime",
+            "purpose": "ONNX Runtime (with its native libraries): evaluates surrogate models in the ONNX format."
+        }
+    ]
+}

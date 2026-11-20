@@ -12,7 +12,7 @@ module de.evoal.optimisation.local_search {
 
     // logging
     requires org.slf4j;
-    requires lombok;
+    requires static lombok;
     requires de.evoal.languages.model.interpreter;
     requires de.evoal.languages.models;
     requires org.eclipse.emf.ecore;

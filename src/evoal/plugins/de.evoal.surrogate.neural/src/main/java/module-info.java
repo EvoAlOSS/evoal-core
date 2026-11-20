@@ -1,7 +1,7 @@
 module de.evoal.surrogate.neural {
     requires commons.math3;
     requires jakarta.enterprise.cdi.api;
-    requires lombok;
+    requires static lombok;
     requires org.slf4j;
 
     requires de.evoal.core.main;

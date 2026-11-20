@@ -10,7 +10,7 @@ module de.evoal.optimisation.random_search {
 
     // logging
     requires org.slf4j;
-    requires lombok;
+    requires static lombok;
     requires org.eclipse.emf.ecore;
 
     exports de.evoal.optimisation.random_search.main;

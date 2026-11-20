@@ -20,11 +20,11 @@
 	</properties>
 
 	<dependencies>
-		<!-- Prevent me from typing -->
+		<!-- Prevent me from typing; only needed at compile time, so it is not shipped -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<scope>compile</scope>
+			<scope>provided</scope>
 		</dependency>
 
 		<!-- Weld for CDI (@runtime) -->
@@ -345,6 +345,43 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
+			</plugin>
+
+			<!-- credits of the shipped libraries, configured in the aggregation POM -->
+			<plugin>
+				<groupId>org.cyclonedx</groupId>
+				<artifactId>cyclonedx-maven-plugin</artifactId>
+			</plugin>
+
+			<plugin>
+				<!--
+				  Checks the credits of the module (de.evoal.core.main.credits.CreditsCheck): every jar in
+				  target/<artifactId> has an entry in META-INF/evoal/credits.json with purpose and licence,
+				  and every entry names a shipped jar. Runs after copy-dependencies has filled the folder.
+				  Declared here and not in the pluginManagement of the aggregation POM, because other
+				  modules use the exec plugin for other purposes (e.g. the regressions).
+				-->
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>check-credits</id>
+						<phase>package</phase>
+						<goals>
+							<goal>java</goal>
+						</goals>
+						<configuration>
+							<mainClass>de.evoal.core.main.credits.CreditsCheck</mainClass>
+							<classpathScope>compile</classpathScope>
+							<arguments>
+								<argument>${project.packaging}</argument>
+								<argument>${project.build.outputDirectory}/META-INF/evoal</argument>
+								<argument>${project.build.directory}/${project.artifactId}</argument>
+								<argument>${project.build.finalName}.jar</argument>
+							</arguments>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
