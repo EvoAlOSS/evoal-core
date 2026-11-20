@@ -259,10 +259,14 @@
             </plugin>
 
             <plugin>
+                <!--
+                  Copies the shipped libraries next to the module jar. prepare-package, so that the credits
+                  check can mark the shipped libraries in the SBOM before the jar is packed.
+                -->
                 <artifactId>maven-dependency-plugin</artifactId>
                 <executions>
                     <execution>
-                        <phase>package</phase>
+                        <phase>prepare-package</phase>
                         <goals>
                             <goal>copy-dependencies</goal>
                         </goals>
@@ -295,15 +299,6 @@
             <plugin>
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <version>2.22.2</version>
-            </plugin>
-
-            <plugin>
-                <groupId>com.gemnasium</groupId>
-                <artifactId>gemnasium-maven-plugin</artifactId>
-                <version>0.5.1</version>
-                <configuration>
-                    <ignoredScopes>test</ignoredScopes>
-                </configuration>
             </plugin>
 
             <plugin>
@@ -427,7 +422,9 @@ java.lang.StrictMath#hypot(double,double)
                     <!--
                       Writes the CycloneDX SBOM of a shipped module (core.main, every plugin) into
                       META-INF/evoal of its jar. It lists the runtime dependencies with licence and
-                      hashes; the credits check and later the credits switch use it (#312).
+                      hashes; the credits check and the credits switch use it (#312). The credits
+                      check marks the libraries that the module does not ship with the scope
+                      'excluded'; GitLab's dependency scanning reads the shipped ones (#298).
                     -->
                     <groupId>org.cyclonedx</groupId>
                     <artifactId>cyclonedx-maven-plugin</artifactId>

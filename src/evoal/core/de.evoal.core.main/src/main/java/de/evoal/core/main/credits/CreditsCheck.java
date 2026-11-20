@@ -27,9 +27,15 @@ import tools.jackson.core.JacksonException;
  * A library counts as shipped if a jar with the SHA-256 hash of its SBOM component lies in the
  *   folder that the build fills for the release ({@code target/<artifactId>}). Libraries of
  *   the SBOM that the module does not ship, e.g. transitive dependencies of a plugin, are
- *   ignored. EvoAl's own artifacts need no entry.
+ *   ignored. EvoAl's own artifacts need no entry. A library whose code is inside the jar of a
+ *   shipped library ({@link LibraryCredits#contains()}) counts as shipped as well: it must be
+ *   part of the SBOM, must not be shipped as a jar of its own, and its SBOM entry must state
+ *   exactly one licence whose text core.main holds.
  * <p>
- * The build calls {@link #main(String...)} in the {@code package} phase.
+ * If the credits are complete, the check marks the shipped libraries in the SBOM
+ *   ({@link ShippedScopes}). The build calls {@link #main(String...)} in the
+ *   {@code prepare-package} phase, after the dependencies are copied and before the SBOM is
+ *   packed into the jar.
  */
 public final class CreditsCheck {
     /**
@@ -123,6 +129,55 @@ public final class CreditsCheck {
 
             if(!entry.fields().containsKey("title")) {
                 problems.add("The entry '" + entry.key() + "' in " + CreditsFiles.CITATIONS_FILE + " has no title.");
+            }
+        }
+    }
+
+    /**
+     * Checks the libraries inside the jars of shipped libraries ({@link LibraryCredits#contains()}).
+     *
+     * @param components All libraries of the SBOM.
+     * @param shipped The libraries whose jars are shipped.
+     */
+    private void checkContained(final ModuleCredits credits,
+                                final List<SbomComponent> components,
+                                final List<SbomComponent> shipped) {
+        final Map<String, SbomComponent> componentsByCoordinates = components.stream()
+                                                                             .collect(byKey(SbomComponent::coordinates));
+        final Set<String> shippedCoordinates = shipped.stream()
+                                                      .map(SbomComponent::coordinates)
+                                                      .collect(Collectors.toSet());
+        final Set<String> containedCoordinates = new HashSet<>();
+
+        for(final LibraryCredits library : credits.libraries()) {
+            for(final String contained : library.contains()) {
+                final String user = "'" + contained + "' inside '" + library.library() + "'";
+
+                final boolean isNew = containedCoordinates.add(contained);
+                if(!isNew) {
+                    problems.add("The library " + user + " is named twice in 'contains'.");
+                    continue;
+                }
+
+                final SbomComponent component = componentsByCoordinates.get(contained);
+                if(component == null) {
+                    problems.add("The library " + user + " is not part of the SBOM of the module.");
+                    continue;
+                }
+
+                if(component.isEvoal()) {
+                    problems.add("The library " + user + " is one of EvoAl's own artifacts.");
+                    continue;
+                }
+
+                if(shippedCoordinates.contains(contained)) {
+                    problems.add("The library " + user + " is also shipped as a jar of its own.");
+                    continue;
+                }
+
+                final String hint = "; a library inside another one is used under the licence of its POM.";
+                final List<String> licenseIds = singleSbomLicense(component, contained, hint);
+                checkLicenseTexts(licenseIds, contained);
             }
         }
     }
@@ -248,24 +303,8 @@ public final class CreditsCheck {
         }
 
         final String hint = "; state the licence under which EvoAl uses it in 'licenses'.";
-        if(!component.licenseNames().isEmpty()) {
-            problems.add("The POM of '" + library.library() + "' states a licence without SPDX id "
-                         + component.licenseNames() + hint);
-            return List.of();
-        }
 
-        if(component.licenseIds().isEmpty()) {
-            problems.add("The POM of '" + library.library() + "' states no licence" + hint);
-            return List.of();
-        }
-
-        if(component.licenseIds().size() > 1) {
-            problems.add("The POM of '" + library.library() + "' states several licences "
-                         + component.licenseIds() + hint);
-            return List.of();
-        }
-
-        return component.licenseIds();
+        return singleSbomLicense(component, library.library(), hint);
     }
 
     /**
@@ -303,6 +342,18 @@ public final class CreditsCheck {
             throw new IllegalStateException("The credits of '" + moduleJar + "' have " + problems.size()
                                             + " problem(s):\n  - " + list);
         }
+    }
+
+    /**
+     * Marks the shipped libraries and the ones inside their jars in the SBOM.
+     */
+    private void markShipped(final ModuleCredits credits, final List<SbomComponent> shipped) throws IOException {
+        final Set<String> coordinates = new HashSet<>();
+        shipped.forEach(component -> coordinates.add(component.coordinates()));
+        credits.libraries()
+               .forEach(library -> coordinates.addAll(library.contains()));
+
+        ShippedScopes.mark(creditsFolder.resolve(CreditsFiles.SBOM_FILE), coordinates);
     }
 
     /**
@@ -352,6 +403,7 @@ public final class CreditsCheck {
         }
 
         checkEntries(credits, shipped);
+        checkContained(credits, components, shipped);
 
         final List<BibTeXEntry> entries;
         try {
@@ -363,17 +415,51 @@ public final class CreditsCheck {
         }
 
         checkCitations(credits, entries);
+
+        if(problems.isEmpty()) {
+            markShipped(credits, shipped);
+        }
     }
 
     /**
-     * @return The jars in {@link #shippedFolder} except the module jar, sorted by name.
+     * @return The jars in {@link #shippedFolder} except the module jar, sorted by name; none if
+     *   the folder does not exist. The check runs before the module jar is packed, so the folder
+     *   is missing in a clean build of a module that ships no library.
      */
     private List<Path> shippedJars() throws IOException {
+        if(!Files.isDirectory(shippedFolder)) {
+            return List.of();
+        }
+
         try(Stream<Path> files = Files.list(shippedFolder)) {
             return files.filter(file -> file.getFileName().toString().endsWith(".jar"))
                         .filter(file -> !file.getFileName().toString().equals(moduleJar))
                         .sorted()
                         .toList();
         }
+    }
+
+    /**
+     * @return The single SPDX id that the SBOM states for the library; reports a missing,
+     *   unnamed or ambiguous licence with the hint and returns an empty list then.
+     */
+    private List<String> singleSbomLicense(final SbomComponent component, final String library, final String hint) {
+        if(!component.licenseNames().isEmpty()) {
+            problems.add("The POM of '" + library + "' states a licence without SPDX id "
+                         + component.licenseNames() + hint);
+            return List.of();
+        }
+
+        if(component.licenseIds().isEmpty()) {
+            problems.add("The POM of '" + library + "' states no licence" + hint);
+            return List.of();
+        }
+
+        if(component.licenseIds().size() > 1) {
+            problems.add("The POM of '" + library + "' states several licences " + component.licenseIds() + hint);
+            return List.of();
+        }
+
+        return component.licenseIds();
     }
 }

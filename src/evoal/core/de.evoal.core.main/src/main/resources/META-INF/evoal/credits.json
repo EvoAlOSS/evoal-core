@@ -164,7 +164,8 @@
         },
         {
             "library": "org.eclipse.xtext:org.eclipse.xtext",
-            "purpose": "Xtext: reads EvoAl's languages (DDL, DL, OL, generator language)."
+            "purpose": "Xtext: reads EvoAl's languages (DDL, DL, OL, generator language).",
+            "contains": ["org.eclipse.xtext:org.eclipse.xtext.util"]
         },
         {
             "library": "org.eclipse.xtext:org.eclipse.xtext.xbase.lib",

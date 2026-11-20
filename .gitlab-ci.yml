@@ -8,8 +8,8 @@
 #
 #   merge request into       dsl:build (only if src/languages changed),
 #   develop                  evoal:regressions (unit tests and regressions with
-#                            4 threads, coverage), evoal:coverage, dependency
-#                            scanning, secret detection
+#                            4 threads, coverage), evoal:coverage,
+#                            evoal:dependency-scanning, secret detection
 #
 #   merge request develop    dsl:build (only if src/languages changed),
 #   into release (nightly    evoal:release-check (unit tests, regressions and
@@ -19,7 +19,8 @@
 #   develop, release, tags   dsl:deploy, evoal:release (one build: deploy and
 #                            the four platform packages; on develop also unit
 #                            tests, regressions and examples with coverage),
-#                            pages; release and tags also
+#                            pages; develop also evoal:dependency-scanning;
+#                            release and tags also
 #                            evoal:package-smoke-test and image:evoal; tags
 #                            also release-notes, publish:check-packages and
 #                            publish
@@ -44,9 +45,8 @@
 #   <version>-<branch> for testing.
 ###############################################################################
 
-# include pre-defined templates for dependency scanning
+# GitLab's template for the secret detection
 include:
-  - local: ci/Dependency-Scanning.gitlab-ci.yml
   - template: Jobs/Secret-Detection.gitlab-ci.yml
 
 workflow:
@@ -121,7 +121,6 @@ variables:
   EVOAL_IMAGE: gitlab.informatik.uni-bremen.de:5005/evoal/source/evoal-core/evoal/maven-with-bash:3.9.15
   API_IMAGE: gitlab.informatik.uni-bremen.de:5005/evoal/source/evoal-core/evoal/alpine-with-jq:3.22
   KANIKO_IMAGE: gcr.io/kaniko-project/executor:v1.23.2-debug
-  SECURE_LOG_LEVEL: "debug"
 
   ######################
   # pom.xml to build
@@ -299,6 +298,8 @@ evoal:regressions:
     paths:
       - src/evoal/core/de.evoal.releng.jacoco/target/site/jacoco-aggregate/jacoco.xml
       - src/evoal/core/de.evoal.releng.regressions/target/regressions
+      # SBOMs of the shipped modules for evoal:dependency-scanning
+      - src/evoal/*/*/target/classes/META-INF/evoal/sbom.cdx.json
 
 #############################################################
 ## Release check: unit tests, regressions and all examples,
@@ -363,10 +364,13 @@ evoal:release:
       fi
   coverage: /Total.*?([0-9]{1,3})%/
   # the packages (about 200 MB each) are too large for job artifacts, they go
-  #   to the package registry (release, tags) instead
+  #   to the package registry (release, tags) instead; the SBOMs of the shipped
+  #   modules are kept for evoal:dependency-scanning (develop)
   artifacts:
     when: always
     expire_in: "7 days"
+    paths:
+      - src/evoal/*/*/target/classes/META-INF/evoal/sbom.cdx.json
     reports:
       junit:
         - src/evoal/*/*/target/surefire-reports/TEST-*.xml
@@ -402,27 +406,44 @@ evoal:coverage:
         path: src/evoal/core/de.evoal.releng.jacoco/target/site/coverage.xml
 
 #############################################################
-## Dependency scanning (vulnerability and license)
+## Dependency scanning (vulnerabilities and licences) of the
+##   shipped libraries: GitLab scans the CycloneDX SBOMs of the
+##   shipped modules (core.main, plugins) that the build writes
+##   (#312); ci/create-sbom-reports.sh adds the properties GitLab
+##   needs. Findings are only reported. GitLab creates
+##   vulnerabilities, the dependency list and the continuous
+##   vulnerability scanning from the develop pipelines; merge
+##   requests show the findings in the security tab.
 ##
 ## Situations
-##   - merge request into develop (not draft), see
-##     ci/Dependency-Scanning.gitlab-ci.yml
+##   - merge request into develop (not draft), SBOMs from
+##     evoal:regressions
+##   - develop, SBOMs from evoal:release
 ##
-dependency_scanning:
+evoal:dependency-scanning:
   stage: Quality
-  dependencies: []
+  image: $API_IMAGE
+  rules:
+    - !reference [.rules-merge-request-develop, rules]
+    - if: ($CI_PIPELINE_SOURCE == "push" || $CI_PIPELINE_SOURCE == "web") &&
+          $CI_COMMIT_BRANCH == "develop"
+  needs:
+    - job: evoal:regressions
+      artifacts: true
+      optional: true
+    - job: evoal:release
+      artifacts: true
+      optional: true
   cache: []
-  variables:
-    DS_JAVA_VERSION: 17
-    DS_MAX_DEPTH: 3
-    DS_EXCLUDED_PATHS: src/mirror,src/languages,src/core/*,src/plugins/*
-  after_script:
-    - >
-      cd src;
-      for FILE in `find . -name "gemnasium-maven-plugin.json"`; do
-        echo $FILE
-        mv $FILE `echo "./$FILE" | sed -e "s;/gemnasium-maven-plugin.json;-gemnasium-maven-plugin.json;g"`;
-      done
+  timeout: 10m
+  script:
+    - bash ci/create-sbom-reports.sh
+  artifacts:
+    expire_in: "7 days"
+    paths:
+      - src/evoal/*/*/gl-sbom-evoal.cdx.json
+    reports:
+      cyclonedx: src/evoal/*/*/gl-sbom-evoal.cdx.json
 
 #############################################################
 ## Secret detection (GitLab template) of the commits of the

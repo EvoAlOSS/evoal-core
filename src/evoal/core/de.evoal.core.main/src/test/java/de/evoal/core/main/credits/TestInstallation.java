@@ -41,9 +41,10 @@ final class TestInstallation {
      * Builds the installation that the tests of the credits share:
      * <ul>
      *   <li>{@code modules}: core.main with a citation of EvoAl, the libraries
-     *     {@code shared-lib} (Apache-2.0, with a NOTICE) and {@code gpl-lib} (GPL-3.0-only in
-     *     the SBOM, GPL-3.0-or-later in the credits), EvoAl's {@code language} and a jar
-     *     outside of the SBOM;</li>
+     *     {@code shared-lib} (Apache-2.0, with a NOTICE, contains {@code inner-lib} under
+     *     BSD-3-Clause, which has no jar of its own) and {@code gpl-lib} (GPL-3.0-only in the
+     *     SBOM, GPL-3.0-or-later in the credits), EvoAl's {@code language} and a jar outside of
+     *     the SBOM;</li>
      *   <li>{@code plugins/arff}: a plugin with {@code plugin-lib} (dual licence, EPL-2.0
      *     chosen, with a citation and bundled MIT code);</li>
      *   <li>{@code plugins/other}: a plugin that ships {@code shared-lib} as well.</li>
@@ -54,13 +55,18 @@ final class TestInstallation {
 
         installation.library("modules", "org.example", "shared-lib", license("Apache-2.0"),
                              Map.of("META-INF/NOTICE.txt", "Shared Lib\nCopyright The Shared Authors"));
+        installation.component("modules", "org.example", "inner-lib", license("BSD-3-Clause"));
         installation.library("modules", "org.example", "gpl-lib", license("GPL-3.0-only"), Map.of());
         installation.library("modules", "de.evoal.languages", "language", "", Map.of());
         installation.module("modules", "core.main", """
                 {
                     "citations": ["evoal"],
                     "libraries": [
-                        {"library": "org.example:shared-lib", "purpose": "Shares things."},
+                        {
+                            "library": "org.example:shared-lib",
+                            "purpose": "Shares things.",
+                            "contains": ["org.example:inner-lib"]
+                        },
                         {"library": "org.example:gpl-lib", "purpose": "Is free.", "licenses": ["GPL-3.0-or-later"]}
                     ]
                 }""", """
@@ -96,6 +102,24 @@ final class TestInstallation {
                 {"libraries": [{"library": "org.example:shared-lib", "purpose": "Shares more."}]}""", null);
 
         return installation;
+    }
+
+    /**
+     * Adds a component without a jar of its own to the folder's SBOM, e.g. a library inside
+     *   another library's jar.
+     *
+     * @param licenses The licence entries of the component as CycloneDX JSON.
+     */
+    void component(final String folder, final String group, final String name, final String licenses) {
+        final String component = """
+                {
+                    "group": "%s",
+                    "name": "%s",
+                    "version": "1.0",
+                    "licenses": [%s]
+                }""".formatted(group, name, licenses);
+        componentsByFolder.computeIfAbsent(folder, ignored -> new ArrayList<>())
+                          .add(component);
     }
 
     /**

@@ -12,6 +12,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.regex.Pattern;
+import java.util.stream.Stream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
@@ -29,7 +30,8 @@ import tools.jackson.databind.node.ObjectNode;
  *   <li>{@value #NOTICE_FILE}: EvoAl's notice, a statement if libraries under the GPL are part
  *     of the release, and the notice files of the libraries;</li>
  *   <li>{@value #SBOM_FILE}: the CycloneDX SBOM of the release, with the licences under which
- *     EvoAl uses the libraries.</li>
+ *     EvoAl uses the libraries; a library inside another library's jar
+ *     ({@link LibraryCredits#contains()}) is a component of its own, after its container.</li>
  * </ul>
  * EvoAl's licence ({@code LICENSE.md}) is copied by the release script.
  */
@@ -87,10 +89,13 @@ public final class ReleaseFiles {
     private static List<String> gplLibraries(final InstalledCredits credits, final Set<String> gplLicenses) {
         final List<String> libraries = new ArrayList<>();
         for(final InstalledLibrary library : credits.libraries()) {
-            final List<String> licenses = library.licenses()
-                                                 .stream()
-                                                 .filter(ReleaseFiles::isGpl)
-                                                 .toList();
+            final Stream<String> containedLicenses = library.contained()
+                                                            .stream()
+                                                            .flatMap(contained -> contained.licenseIds().stream());
+            final List<String> licenses = Stream.concat(library.licenses().stream(), containedLicenses)
+                                                .filter(ReleaseFiles::isGpl)
+                                                .distinct()
+                                                .toList();
             if(licenses.isEmpty()) {
                 continue;
             }
@@ -167,6 +172,8 @@ public final class ReleaseFiles {
             licenseIds.addAll(library.licenses());
             library.bundled()
                    .forEach(bundled -> licenseIds.addAll(bundled.licenses()));
+            library.contained()
+                   .forEach(contained -> licenseIds.addAll(contained.licenseIds()));
         }
 
         return licenseIds;
@@ -283,6 +290,10 @@ public final class ReleaseFiles {
 
         for(final InstalledLibrary library : credits.libraries()) {
             components.add(withLicenses(library.component(), library.licenses()));
+
+            for(final SbomComponent contained : library.contained()) {
+                components.add(withLicenses(contained, contained.licenseIds()));
+            }
         }
 
         final String json = MAPPER.writeValueAsString(sbom) + "\n";

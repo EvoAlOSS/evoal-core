@@ -16,6 +16,8 @@ import java.util.List;
  * @param uses What the modules use the library for.
  * @param citations The entries that the authors of the library ask users to cite.
  * @param bundled Native code inside the jar with a licence of its own.
+ * @param contained The libraries whose code is inside the jar ({@link LibraryCredits#contains()}),
+ *   as their SBOM lists them; they are used under the licences of their SBOM entry.
  */
 public record InstalledLibrary(SbomComponent component,
                                Path jar,
@@ -23,12 +25,14 @@ public record InstalledLibrary(SbomComponent component,
                                String website,
                                List<LibraryUse> uses,
                                List<BibTeXEntry> citations,
-                               List<BundledCredits> bundled) {
+                               List<BundledCredits> bundled,
+                               List<SbomComponent> contained) {
     public InstalledLibrary {
         licenses = CreditsFiles.copyOrEmpty(licenses);
         uses = CreditsFiles.copyOrEmpty(uses);
         citations = CreditsFiles.copyOrEmpty(citations);
         bundled = CreditsFiles.copyOrEmpty(bundled);
+        contained = CreditsFiles.copyOrEmpty(contained);
     }
 
     /**

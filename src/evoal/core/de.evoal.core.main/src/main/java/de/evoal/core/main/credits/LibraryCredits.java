@@ -15,16 +15,22 @@ import java.util.List;
  * @param citations The keys of the entries in {@value CreditsFiles#CITATIONS_FILE} that the
  *   authors of the library ask users to cite.
  * @param bundled Native code inside the jar that has its own licence.
+ * @param contains The coordinates ({@code groupId:artifactId}) of libraries of the SBOM whose
+ *   code is inside the jar of this library and that are not shipped as jars of their own, e.g.
+ *   the util part of EvoAl's merged Xtext jar. They count as shipped, under the licence of their
+ *   SBOM entry, and need no entry of their own.
  */
 public record LibraryCredits(String library,
                              String purpose,
                              List<String> licenses,
                              String url,
                              List<String> citations,
-                             List<BundledCredits> bundled) {
+                             List<BundledCredits> bundled,
+                             List<String> contains) {
     public LibraryCredits {
         licenses = CreditsFiles.copyOrEmpty(licenses);
         citations = CreditsFiles.copyOrEmpty(citations);
         bundled = CreditsFiles.copyOrEmpty(bundled);
+        contains = CreditsFiles.copyOrEmpty(contains);
     }
 }

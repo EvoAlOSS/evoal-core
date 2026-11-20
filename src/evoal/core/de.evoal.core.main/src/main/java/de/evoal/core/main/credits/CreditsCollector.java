@@ -26,7 +26,9 @@ import java.util.zip.ZipFile;
  *   check ({@link CreditsCheck}), so only the libraries that are really there are listed, in
  *   the version that is there.
  * <p>
- * A library that several modules ship appears once, with the purposes of all of them.
+ * A library that several modules ship appears once, with the purposes of all of them. Libraries
+ *   whose code is inside another library's jar ({@link LibraryCredits#contains()}) have no jar of
+ *   their own; they appear with the library that contains them.
  */
 public final class CreditsCollector {
     /**
@@ -146,6 +148,14 @@ public final class CreditsCollector {
         final List<BundledCredits> bundled = Stream.concat(first.bundled().stream(), second.bundled().stream())
                                                    .distinct()
                                                    .toList();
+        final List<SbomComponent> contained = Stream.concat(first.contained().stream(), second.contained().stream())
+                                                    .collect(Collectors.toMap(SbomComponent::coordinates,
+                                                                              Function.identity(),
+                                                                              (kept, duplicate) -> kept,
+                                                                              LinkedHashMap::new))
+                                                    .values()
+                                                    .stream()
+                                                    .toList();
 
         return new InstalledLibrary(first.component(),
                                     first.jar(),
@@ -153,7 +163,8 @@ public final class CreditsCollector {
                                     first.website(),
                                     uses,
                                     citations,
-                                    bundled);
+                                    bundled,
+                                    contained);
     }
 
     /**
@@ -251,9 +262,15 @@ public final class CreditsCollector {
         final List<BibTeXEntry> citations = citationsOf(citationKeys, files.entries());
         final List<BundledCredits> bundled = entry.map(LibraryCredits::bundled)
                                                   .orElseGet(List::of);
+        final List<String> containedCoordinates = entry.map(LibraryCredits::contains)
+                                                       .orElseGet(List::of);
+        final List<SbomComponent> contained = files.components()
+                                                   .stream()
+                                                   .filter(candidate -> containedCoordinates.contains(candidate.coordinates()))
+                                                   .toList();
         final List<LibraryUse> uses = List.of(new LibraryUse(moduleName, purpose));
 
-        return new InstalledLibrary(component, jar, licenses, website, uses, citations, bundled);
+        return new InstalledLibrary(component, jar, licenses, website, uses, citations, bundled, contained);
     }
 
     /**

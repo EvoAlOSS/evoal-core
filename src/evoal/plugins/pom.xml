@@ -198,7 +198,9 @@
 				<!--
 				  Checks the credits of the module (de.evoal.core.main.credits.CreditsCheck): every jar in
 				  target/<artifactId> has an entry in META-INF/evoal/credits.json with purpose and licence,
-				  and every entry names a shipped jar. Runs after copy-dependencies has filled the folder.
+				  and every entry names a shipped jar; then it marks the libraries that the module does not
+				  ship with the scope 'excluded' in META-INF/evoal/sbom.cdx.json. Runs in prepare-package,
+				  after copy-dependencies has filled the folder and before the jar is packed.
 				  Declared here and not in the pluginManagement of the aggregation POM, because other
 				  modules use the exec plugin for other purposes (e.g. the regressions).
 				-->
@@ -207,7 +209,7 @@
 				<executions>
 					<execution>
 						<id>check-credits</id>
-						<phase>package</phase>
+						<phase>prepare-package</phase>
 						<goals>
 							<goal>java</goal>
 						</goals>

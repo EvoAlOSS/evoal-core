@@ -21,3 +21,5 @@ xtend-gen
 #*#
 .#*
 *~
+# SBOM reports for the dependency scanning (ci/create-sbom-reports.sh)
+gl-sbom-*.cdx.json

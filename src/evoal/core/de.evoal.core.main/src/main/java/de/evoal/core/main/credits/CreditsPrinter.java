@@ -9,8 +9,8 @@ import java.util.stream.Stream;
 /**
  * Prints the credits of an installation for {@code --credits}: how EvoAl and its plugins are
  *   cited, then every third-party library with version, licence, project link, the modules
- *   that use it and what for, its citation and bundled native code. {@code --credits bibtex}
- *   prints all citations as BibTeX instead.
+ *   that use it and what for, its citation, the libraries inside its jar and bundled native
+ *   code. {@code --credits bibtex} prints all citations as BibTeX instead.
  */
 public final class CreditsPrinter {
     /**
@@ -118,6 +118,11 @@ public final class CreditsPrinter {
 
         for(final BibTeXEntry citation : library.citations()) {
             out.println(INDENT + "Cite:     " + CitationFormat.toText(citation));
+        }
+
+        for(final SbomComponent contained : library.contained()) {
+            out.println(INDENT + "Contains: " + contained.name() + " " + contained.version() + " ("
+                        + contained.coordinates() + ")");
         }
 
         printBundled(out, library);

@@ -46,7 +46,9 @@ public class ReleaseFilesTest {
                          .toList();
         }
 
-        Assertions.assertEquals(List.of("Apache-2.0.txt", "EPL-2.0.txt", "GPL-3.0-or-later.txt", "MIT.txt"), files);
+        Assertions.assertEquals(List.of("Apache-2.0.txt", "BSD-3-Clause.txt", "EPL-2.0.txt", "GPL-3.0-or-later.txt",
+                                        "MIT.txt"),
+                                files);
     }
 
     @Test
@@ -86,7 +88,8 @@ public class ReleaseFilesTest {
                                         "language [Apache-2.0]",
                                         "gpl-lib [GPL-3.0-or-later]",
                                         "plugin-lib [EPL-2.0]",
-                                        "shared-lib [Apache-2.0]"),
+                                        "shared-lib [Apache-2.0]",
+                                        "inner-lib [BSD-3-Clause]"),
                                 components);
     }
 

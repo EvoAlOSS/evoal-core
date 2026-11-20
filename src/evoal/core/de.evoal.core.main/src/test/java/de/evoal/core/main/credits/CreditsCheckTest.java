@@ -7,14 +7,19 @@ import java.nio.file.Path;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HexFormat;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
+
+import tools.jackson.databind.JsonNode;
+import tools.jackson.databind.json.JsonMapper;
 
 public class CreditsCheckTest {
     /**
@@ -119,6 +124,76 @@ public class CreditsCheckTest {
         Files.writeString(creditsFolder.resolve(CreditsFiles.CITATIONS_FILE), "@misc{key, title = {Title}}");
 
         Assertions.assertEquals(List.of(), check());
+        Assertions.assertEquals(Map.of("library", ShippedScopes.REQUIRED,
+                                       "language", ShippedScopes.REQUIRED,
+                                       "not-shipped", ShippedScopes.EXCLUDED),
+                                scopes());
+    }
+
+    @Test
+    public void markingTwiceGivesTheSameSbom() throws IOException {
+        addShipped("org.example", "library", license("MIT"));
+        addToSbom("org.example", "not-shipped", "", new byte[] {1});
+        writeCredits("""
+                {"libraries": [{"library": "org.example:library", "purpose": "Test."}]}""");
+
+        Assertions.assertEquals(List.of(), check());
+        final String marked = readSbom();
+
+        final CreditsCheck again = new CreditsCheck(creditsFolder, shippedFolder, MODULE_JAR, KNOWN_LICENSES::contains);
+        Assertions.assertEquals(List.of(), again.run());
+        Assertions.assertEquals(marked, readSbom());
+    }
+
+    @Test
+    public void containedLibrariesAreChecked() throws IOException {
+        addShipped("org.example", "merged", license("EPL-2.0"));
+        addShipped("org.example", "separate", license("MIT"));
+        addToSbom("org.example", "unlicensed", "", new byte[] {1});
+        addToSbom("de.evoal.languages", "language", "", new byte[] {2});
+        writeCredits("""
+                {
+                    "libraries": [
+                        {
+                            "library": "org.example:merged",
+                            "purpose": "Test.",
+                            "contains": ["org.example:missing", "org.example:separate", "org.example:unlicensed",
+                                         "de.evoal.languages:language", "org.example:missing"]
+                        },
+                        {"library": "org.example:separate", "purpose": "Test."}
+                    ]
+                }""");
+        final String original = sbomWithComponents();
+
+        final List<String> problems = check();
+
+        Assertions.assertEquals(List.of("The library 'org.example:missing' inside 'org.example:merged' is not part of "
+                                        + "the SBOM of the module.",
+                                        "The library 'org.example:separate' inside 'org.example:merged' is also "
+                                        + "shipped as a jar of its own.",
+                                        "The POM of 'org.example:unlicensed' states no licence; a library inside "
+                                        + "another one is used under the licence of its POM.",
+                                        "The library 'de.evoal.languages:language' inside 'org.example:merged' is "
+                                        + "one of EvoAl's own artifacts.",
+                                        "The library 'org.example:missing' inside 'org.example:merged' is named twice "
+                                        + "in 'contains'."),
+                                problems);
+        Assertions.assertEquals(original, readSbom(), "An SBOM with problems is not marked.");
+    }
+
+    @Test
+    public void containedLibraryNeedsNoEntryAndIsMarkedAsShipped() throws IOException {
+        addShipped("org.example", "merged", license("EPL-2.0"));
+        addToSbom("org.example", "inner", license("EPL-2.0"), new byte[] {1});
+        addToSbom("org.example", "not-shipped", "", new byte[] {2});
+        writeCredits("""
+                {"libraries": [{"library": "org.example:merged", "purpose": "Test.", "contains": ["org.example:inner"]}]}""");
+
+        Assertions.assertEquals(List.of(), check());
+        Assertions.assertEquals(Map.of("merged", ShippedScopes.REQUIRED,
+                                       "inner", ShippedScopes.REQUIRED,
+                                       "not-shipped", ShippedScopes.EXCLUDED),
+                                scopes());
     }
 
     @Test
@@ -209,6 +284,15 @@ public class CreditsCheckTest {
     }
 
     @Test
+    public void missingShippedFolderMeansNothingIsShipped() throws IOException {
+        addToSbom("org.example", "not-shipped", "", new byte[] {1});
+        Files.delete(shippedFolder);
+
+        Assertions.assertEquals(List.of(), check());
+        Assertions.assertEquals(Map.of("not-shipped", ShippedScopes.EXCLUDED), scopes());
+    }
+
+    @Test
     public void misspeltFieldIsReported() throws IOException {
         writeCredits("""
                 {"libraries": [{"library": "org.example:library", "purpose": "Test.", "licence": ["MIT"]}]}""");
@@ -234,6 +318,34 @@ public class CreditsCheckTest {
     public void prepareFolders() throws IOException {
         creditsFolder = Files.createDirectory(temporaryFolder.resolve("credits"));
         shippedFolder = Files.createDirectory(temporaryFolder.resolve("shipped"));
+    }
+
+    private String readSbom() throws IOException {
+        return Files.readString(creditsFolder.resolve(CreditsFiles.SBOM_FILE));
+    }
+
+    /**
+     * @return The SBOM that {@link #writeSbom()} writes.
+     */
+    private String sbomWithComponents() {
+        final String list = String.join(",\n", components);
+
+        return "{\"bomFormat\": \"CycloneDX\", \"components\": [" + list + "]}";
+    }
+
+    /**
+     * @return The scopes of the components of the SBOM file by name.
+     */
+    private Map<String, String> scopes() throws IOException {
+        final JsonNode sbom = JsonMapper.builder()
+                                        .build()
+                                        .readTree(readSbom());
+        final Map<String, String> scopes = new HashMap<>();
+        for(final JsonNode component : sbom.path("components")) {
+            scopes.put(component.path("name").asString(), component.path("scope").asString());
+        }
+
+        return scopes;
     }
 
     private static String sha256Of(final byte[] content) {
@@ -264,9 +376,6 @@ public class CreditsCheckTest {
     }
 
     private void writeSbom() throws IOException {
-        final String list = String.join(",\n", components);
-        final String sbom = "{\"bomFormat\": \"CycloneDX\", \"components\": [" + list + "]}";
-
-        Files.writeString(creditsFolder.resolve(CreditsFiles.SBOM_FILE), sbom);
+        Files.writeString(creditsFolder.resolve(CreditsFiles.SBOM_FILE), sbomWithComponents());
     }
 }

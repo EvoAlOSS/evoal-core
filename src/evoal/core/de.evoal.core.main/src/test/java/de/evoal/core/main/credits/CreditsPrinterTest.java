@@ -65,6 +65,7 @@ public class CreditsPrinterTest {
         Assertions.assertTrue(text.contains("""
                       Used by:  core: Shares things.
                       Used by:  other: Shares more.
+                      Contains: inner-lib 1.0 (org.example:inner-lib)
                 """), text);
     }
 

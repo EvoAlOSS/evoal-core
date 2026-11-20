@@ -58,6 +58,18 @@ public class CreditsCollectorTest {
     }
 
     @Test
+    public void libraryInsideAJarAppearsWithItsContainer() {
+        final InstalledLibrary shared = credits.libraries().get(2);
+
+        final List<String> contained = shared.contained()
+                                             .stream()
+                                             .map(component -> component.coordinates() + " " + component.licenseIds())
+                                             .toList();
+
+        Assertions.assertEquals(List.of("org.example:inner-lib [BSD-3-Clause]"), contained);
+    }
+
+    @Test
     public void licenceChoiceAndCitationsOfThePluginAreUsed() {
         final InstalledLibrary pluginLibrary = credits.libraries().get(1);
 
