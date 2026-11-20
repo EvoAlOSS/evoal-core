@@ -12,9 +12,37 @@ module de.evoal.optimisation.constraint {
      */
     def void 'standard-deviation'(data reference, real deviation);
 
-    def void connection(data ref1, data ref2, real connection);
+    /**
+     * Declares the correlation of two search features. Correlation-aware operators of the
+     *   evolutionary algorithm ('correlation-aware-mutation', 'linkage-crossover') use it,
+     *   and 'correlation-statistics' compares it with the population. The coefficient is
+     *   the Pearson correlation for cardinal and quotient features and the Spearman rank
+     *   correlation if a feature is ordinal; a correlation with a nominal feature is
+     *   skipped.
+     *
+     * <b>Parameters:</b>
+     * <ol>
+     *   <li>The first feature.</li>
+     *   <li>The second feature, not the first one.</li>
+     *   <li>The correlation coefficient, in [-1, 1].</li>
+     * </ol>
+     */
+    def void correlation(data feature1, data feature2, real coefficient);
 
-    def void 'ranged-connection'(data ref1, expression range1, data ref2, expression range2, real connection);
+    /**
+     * Declares the correlation of two search features that applies only while both lie in
+     *   their ranges, see 'correlation'.
+     *
+     * <b>Parameters:</b>
+     * <ol>
+     *   <li>The first feature.</li>
+     *   <li>Its range, {@code range(lower, upper)}, both bounds included.</li>
+     *   <li>The second feature, not the first one.</li>
+     *   <li>Its range, {@code range(lower, upper)}.</li>
+     *   <li>The correlation coefficient, in [-1, 1].</li>
+     * </ol>
+     */
+    def void 'ranged-correlation'(data feature1, expression range1, data feature2, expression range2, real coefficient);
 
     /**
      * Declares a constraint of the optimisation problem, a comparison of two arithmetic
@@ -30,5 +58,14 @@ module de.evoal.optimisation.constraint {
      */
     def void constraint(expression exp, string category);
 
+    /**
+     * A range of values for 'ranged-correlation', both bounds included.
+     *
+     * <b>Parameters:</b>
+     * <ol>
+     *   <li>The lower bound.</li>
+     *   <li>The upper bound, not smaller than the lower bound.</li>
+     * </ol>
+     */
     def void range(real lower, real upper);
 }

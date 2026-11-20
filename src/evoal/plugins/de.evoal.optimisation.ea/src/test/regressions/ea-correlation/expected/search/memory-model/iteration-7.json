@@ -1,0 +1,336 @@
+{
+  "formatVersion" : "2027.4.0",
+  "number" : 7,
+  "individuals" : [ {
+    "id" : 120,
+    "input" : {
+      "x:0" : 0.9922852307070017,
+      "x:1" : 0.28871845657334927,
+      "k:0" : -1
+    },
+    "output" : {
+      "y:0" : 14.488561425469005
+    },
+    "fitness" : [ 14.488561425469005 ],
+    "relationships" : [ {
+      "kind" : "mutation",
+      "targets" : [ 102 ],
+      "properties" : {
+        "operators" : [ "correlation-aware-mutation(gaussian-mutation)", "random-reset-mutation" ],
+        "changed-features" : [ "x:0", "x:1", "k:0" ],
+        "primary-features" : [ "x:1" ],
+        "propagated-features" : [ "x:0 from x:1 (0.8)", "k:0 from x:0 (-0.6)" ],
+        "linked-features" : [ "x:1 with x:0" ]
+      }
+    } ]
+  }, {
+    "id" : 112,
+    "input" : {
+      "x:0" : 1.109097128351447,
+      "x:1" : -2.166818463858662,
+      "k:0" : 2
+    },
+    "output" : {
+      "y:0" : 17.19229211820398
+    },
+    "fitness" : [ 17.19229211820398 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 98 ]
+    } ]
+  }, {
+    "id" : 113,
+    "input" : {
+      "x:0" : 1.109097128351447,
+      "x:1" : -2.166818463858662,
+      "k:0" : -2
+    },
+    "output" : {
+      "y:0" : 17.19229211820398
+    },
+    "fitness" : [ 17.19229211820398 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 103 ]
+    } ]
+  }, {
+    "id" : 117,
+    "input" : {
+      "x:0" : 1.109097128351447,
+      "x:1" : -2.166818463858662,
+      "k:0" : -2
+    },
+    "output" : {
+      "y:0" : 17.19229211820398
+    },
+    "fitness" : [ 17.19229211820398 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 103 ]
+    } ]
+  }, {
+    "id" : 118,
+    "input" : {
+      "x:0" : 1.109097128351447,
+      "x:1" : -2.166818463858662,
+      "k:0" : 2
+    },
+    "output" : {
+      "y:0" : 17.19229211820398
+    },
+    "fitness" : [ 17.19229211820398 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 98 ]
+    } ]
+  }, {
+    "id" : 119,
+    "input" : {
+      "x:0" : 1.109097128351447,
+      "x:1" : -2.166818463858662,
+      "k:0" : -2
+    },
+    "output" : {
+      "y:0" : 17.19229211820398
+    },
+    "fitness" : [ 17.19229211820398 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 103 ]
+    } ]
+  }, {
+    "id" : 125,
+    "input" : {
+      "x:0" : 1.109097128351447,
+      "x:1" : -2.166818463858662,
+      "k:0" : -2
+    },
+    "output" : {
+      "y:0" : 17.19229211820398
+    },
+    "fitness" : [ 17.19229211820398 ],
+    "relationships" : [ {
+      "kind" : "mutation",
+      "targets" : [ 98 ],
+      "properties" : {
+        "operators" : [ "random-reset-mutation" ],
+        "changed-features" : [ "k:0" ],
+        "linked-features" : [ "x:1 with x:0" ]
+      }
+    } ]
+  }, {
+    "id" : 116,
+    "input" : {
+      "x:0" : 0.08019767734319194,
+      "x:1" : -0.8513909851314129,
+      "k:0" : 4
+    },
+    "output" : {
+      "y:0" : 22.025888080283572
+    },
+    "fitness" : [ 22.025888080283572 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 102 ]
+    } ]
+  }, {
+    "id" : 122,
+    "input" : {
+      "x:0" : 5.12,
+      "x:1" : 1.041903833460181,
+      "k:0" : 1
+    },
+    "output" : {
+      "y:0" : 31.354886609669528
+    },
+    "fitness" : [ 31.354886609669528 ],
+    "relationships" : [ {
+      "kind" : "mutation",
+      "targets" : [ 111 ],
+      "properties" : {
+        "operators" : [ "random-reset-mutation" ],
+        "changed-features" : [ "k:0" ],
+        "linked-features" : [ "x:1 with x:0" ]
+      }
+    } ]
+  }, {
+    "id" : 127,
+    "input" : {
+      "x:0" : -1.2127786352657481,
+      "x:1" : 1.8136575332491638,
+      "k:0" : 4
+    },
+    "output" : {
+      "y:0" : 34.54883280269354
+    },
+    "fitness" : [ 34.54883280269354 ],
+    "relationships" : [ {
+      "kind" : "mutation",
+      "targets" : [ 107 ],
+      "properties" : {
+        "operators" : [ "correlation-aware-mutation(gaussian-mutation)" ],
+        "changed-features" : [ "x:0", "x:1" ],
+        "primary-features" : [ "x:0" ],
+        "propagated-features" : [ "x:1 from x:0 (0.8)" ],
+        "linked-features" : [ "x:1 with x:0" ]
+      }
+    } ]
+  }, {
+    "id" : 126,
+    "input" : {
+      "x:0" : -1.2534481005616236,
+      "x:1" : -5.12,
+      "k:0" : -1
+    },
+    "output" : {
+      "y:0" : 41.71247946647256
+    },
+    "fitness" : [ 41.71247946647256 ],
+    "relationships" : [ {
+      "kind" : "mutation",
+      "targets" : [ 103 ],
+      "properties" : {
+        "operators" : [ "correlation-aware-mutation(gaussian-mutation)" ],
+        "changed-features" : [ "x:0", "x:1", "k:0" ],
+        "primary-features" : [ "x:1" ],
+        "propagated-features" : [ "x:0 from x:1 (0.8)", "k:0 from x:0 (-0.6)" ],
+        "linked-features" : [ "x:1 with x:0" ]
+      }
+    } ]
+  }, {
+    "id" : 123,
+    "input" : {
+      "x:0" : 5.12,
+      "x:1" : -0.07026911337147235,
+      "k:0" : 4
+    },
+    "output" : {
+      "y:0" : 45.88859333694782
+    },
+    "fitness" : [ 45.88859333694782 ],
+    "relationships" : [ {
+      "kind" : "mutation",
+      "targets" : [ 98 ],
+      "properties" : {
+        "operators" : [ "correlation-aware-mutation(gaussian-mutation)", "random-reset-mutation" ],
+        "changed-features" : [ "x:0", "x:1", "k:0" ],
+        "primary-features" : [ "x:0", "x:1" ],
+        "propagated-features" : [ "k:0 from x:0 (-0.6)" ],
+        "linked-features" : [ "x:1 with x:0" ]
+      }
+    } ]
+  }, {
+    "id" : 115,
+    "input" : {
+      "x:0" : 0.8371231653611563,
+      "x:1" : -2.3843976342508943,
+      "k:0" : -5
+    },
+    "output" : {
+      "y:0" : 53.65737226061486
+    },
+    "fitness" : [ 53.65737226061486 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 105 ]
+    } ]
+  }, {
+    "id" : 124,
+    "input" : {
+      "x:0" : 5.12,
+      "x:1" : 2.4093979177691995,
+      "k:0" : 1
+    },
+    "output" : {
+      "y:0" : 54.15286064258387
+    },
+    "fitness" : [ 54.15286064258387 ],
+    "relationships" : [ {
+      "kind" : "mutation",
+      "targets" : [ 99 ],
+      "properties" : {
+        "operators" : [ "correlation-aware-mutation(gaussian-mutation)" ],
+        "changed-features" : [ "x:1" ],
+        "primary-features" : [ "x:1" ],
+        "linked-features" : [ "x:1 with x:0" ]
+      }
+    } ]
+  }, {
+    "id" : 121,
+    "input" : {
+      "x:0" : 5.12,
+      "x:1" : -4.813551978808924,
+      "k:0" : 0
+    },
+    "output" : {
+      "y:0" : 58.20717971057594
+    },
+    "fitness" : [ 58.20717971057594 ],
+    "relationships" : [ {
+      "kind" : "mutation",
+      "targets" : [ 98 ],
+      "properties" : {
+        "operators" : [ "correlation-aware-mutation(gaussian-mutation)" ],
+        "changed-features" : [ "x:0", "x:1", "k:0" ],
+        "primary-features" : [ "x:0", "x:1" ],
+        "propagated-features" : [ "k:0 from x:0 (-0.6)" ],
+        "linked-features" : [ "x:1 with x:0" ]
+      }
+    } ]
+  }, {
+    "id" : 114,
+    "input" : {
+      "x:0" : 5.12,
+      "x:1" : 5.12,
+      "k:0" : -1
+    },
+    "output" : {
+      "y:0" : 58.849427451571785
+    },
+    "fitness" : [ 58.849427451571785 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 104 ]
+    } ]
+  } ],
+  "steps" : [ ],
+  "ranks" : [ {
+    "number" : 0,
+    "members" : [ 120 ]
+  }, {
+    "number" : 1,
+    "members" : [ 112, 113, 117, 118, 119, 125 ]
+  }, {
+    "number" : 2,
+    "members" : [ 116 ]
+  }, {
+    "number" : 3,
+    "members" : [ 122 ]
+  }, {
+    "number" : 4,
+    "members" : [ 127 ]
+  }, {
+    "number" : 5,
+    "members" : [ 126 ]
+  }, {
+    "number" : 6,
+    "members" : [ 123 ]
+  }, {
+    "number" : 7,
+    "members" : [ 115 ]
+  }, {
+    "number" : 8,
+    "members" : [ 124 ]
+  }, {
+    "number" : 9,
+    "members" : [ 121 ]
+  }, {
+    "number" : 10,
+    "members" : [ 114 ]
+  } ],
+  "bestSoFar" : 120,
+  "metrics" : {
+    "evaluations.real" : 68,
+    "evaluations.surrogate" : 0
+  }
+}

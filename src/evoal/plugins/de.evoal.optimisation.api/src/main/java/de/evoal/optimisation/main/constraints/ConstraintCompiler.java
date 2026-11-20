@@ -43,7 +43,7 @@ import de.evoal.optimisation.api.constraints.Constraints;
  *   <li>{@code 'standard-deviation'(data 'f', sigma)} declares the standard deviation of a
  *     feature for the {@code 'tolerance-measure'}.</li>
  * </ul>
- * Other calls (e.g., correlations) are ignored. The constraints are numbered in the order of
+ * Other calls (e.g., correlations, see {@link CorrelationCompiler}) are ignored. The constraints are numbered in the order of
  *   the modules (first use of a feature, search features first) and of the DDL.
  */
 @ApplicationScoped
@@ -106,17 +106,10 @@ public class ConstraintCompiler {
      */
     public Constraints compile(final Collection<EStructuralFeature> searchFeatures,
                                final Collection<EStructuralFeature> objectives) {
-        final Map<DataDescription, EStructuralFeature> searchByData = byData(searchFeatures);
-        final Map<DataDescription, EStructuralFeature> objectivesByData = byData(objectives);
-        final Set<DataDescriptionModule> modules = new LinkedHashSet<>();
-        searchByData.keySet().forEach(description -> moduleOf(description).ifPresent(modules::add));
-        objectivesByData.keySet().forEach(description -> moduleOf(description).ifPresent(modules::add));
-
-        final List<Call> calls = modules.stream()
-                                        .flatMap(module -> module.getConstraints().stream())
-                                        .map(ConstraintCompiler::toCall)
-                                        .flatMap(Optional::stream)
-                                        .toList();
+        final DdlCalls ddl = readCalls(searchFeatures, objectives);
+        final List<Call> calls = ddl.calls();
+        final Map<DataDescription, EStructuralFeature> searchByData = ddl.searchByData();
+        final Map<DataDescription, EStructuralFeature> objectivesByData = ddl.objectivesByData();
 
         final Map<EStructuralFeature, Double> deviations = readDeviations(calls, searchByData, objectivesByData);
         final List<Constraint> constraints = new ArrayList<>();
@@ -135,6 +128,44 @@ public class ConstraintCompiler {
         log.info("Read {} constraints in the groups {}.", result.size(), result.groups());
 
         return result;
+    }
+
+    /**
+     * The calls of the {@code constraints} sections of the DDL modules of a problem.
+     *
+     * @param calls The calls, in the order of the modules and of the DDL.
+     * @param searchByData The search features by their data description.
+     * @param objectivesByData The objectives by their data description.
+     */
+    record DdlCalls(List<Call> calls,
+                    Map<DataDescription, EStructuralFeature> searchByData,
+                    Map<DataDescription, EStructuralFeature> objectivesByData) {
+    }
+
+    /**
+     * Reads the calls of the {@code constraints} sections of the DDL modules that declare the
+     *   features, in the order of the modules (first use of a feature, search features first)
+     *   and of the DDL.
+     *
+     * @param searchFeatures The search features of the problem.
+     * @param objectives The objectives of the problem.
+     * @return The calls with the features by their data description.
+     */
+    DdlCalls readCalls(final Collection<EStructuralFeature> searchFeatures,
+                       final Collection<EStructuralFeature> objectives) {
+        final Map<DataDescription, EStructuralFeature> searchByData = byData(searchFeatures);
+        final Map<DataDescription, EStructuralFeature> objectivesByData = byData(objectives);
+        final Set<DataDescriptionModule> modules = new LinkedHashSet<>();
+        searchByData.keySet().forEach(description -> moduleOf(description).ifPresent(modules::add));
+        objectivesByData.keySet().forEach(description -> moduleOf(description).ifPresent(modules::add));
+
+        final List<Call> calls = modules.stream()
+                                        .flatMap(module -> module.getConstraints().stream())
+                                        .map(ConstraintCompiler::toCall)
+                                        .flatMap(Optional::stream)
+                                        .toList();
+
+        return new DdlCalls(calls, searchByData, objectivesByData);
     }
 
     private static Optional<DataDescriptionModule> moduleOf(final DataDescription description) {
@@ -187,7 +218,7 @@ public class ConstraintCompiler {
         return deviations;
     }
 
-    private static void requireParameters(final Call call, final int count) {
+    static void requireParameters(final Call call, final int count) {
         final int actual = call.getParameters().size();
 
         if(actual != count) {

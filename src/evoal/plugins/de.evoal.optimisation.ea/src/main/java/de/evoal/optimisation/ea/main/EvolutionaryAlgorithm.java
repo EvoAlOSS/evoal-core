@@ -25,6 +25,7 @@ import de.evoal.models.v202704.optimisation.memory.PropertyScope;
 import de.evoal.models.v202704.optimisation.memory.PropertyValueType;
 
 import de.evoal.optimisation.api.checks.CheckPoint;
+import de.evoal.optimisation.api.correlations.ProblemCorrelations;
 import de.evoal.optimisation.api.execution.ExecutionRecorder;
 import de.evoal.optimisation.api.fitness.Evaluator;
 import de.evoal.optimisation.api.fitness.FitnessPipeline;
@@ -111,6 +112,12 @@ public class EvolutionaryAlgorithm extends TemplateAlgorithm {
     @Inject
     private Provider<FitnessPipeline> pipelines;
 
+    /**
+     * The correlations of the DDL; their properties are defined if there are any.
+     */
+    @Inject
+    private ProblemCorrelations problemCorrelations;
+
     private OperatorPlan plan;
 
     @Inject
@@ -191,6 +198,17 @@ public class EvolutionaryAlgorithm extends TemplateAlgorithm {
                                 "The recombinations and mutations that changed the child, in their order.");
         recorder.defineProperty(Variation.CHANGED_FEATURES, PropertyScope.RELATIONSHIP, PropertyValueType.TEXT, true,
                                 "The features whose genes differ from the parent whose place the child takes.");
+
+        if(!problemCorrelations.correlations().isEmpty()) {
+            recorder.defineProperty(Variation.PRIMARY_FEATURES, PropertyScope.RELATIONSHIP, PropertyValueType.TEXT, true,
+                                    "The features that a 'correlation-aware-mutation' changed itself.");
+            recorder.defineProperty(Variation.PROPAGATED_FEATURES, PropertyScope.RELATIONSHIP, PropertyValueType.TEXT, true,
+                                    "The changes that a 'correlation-aware-mutation' propagated to correlated features, "
+                                    + "e.g. 'x:2 from x:1 (0.9)'.");
+            recorder.defineProperty(Variation.LINKED_FEATURES, PropertyScope.RELATIONSHIP, PropertyValueType.TEXT, true,
+                                    "The features that a 'linkage-crossover' took from the same parent as a correlated "
+                                    + "feature, e.g. 'x:2 with x:1'.");
+        }
 
         if(crowded) {
             recorder.defineProperty(CrowdedOrder.FRONT, PropertyScope.INDIVIDUAL, PropertyValueType.INTEGER, false,

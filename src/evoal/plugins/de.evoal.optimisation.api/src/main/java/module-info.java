@@ -49,6 +49,7 @@ module de.evoal.optimisation.api {
     exports de.evoal.optimisation.api.cdi;
     exports de.evoal.optimisation.api.checks;
     exports de.evoal.optimisation.api.constraints;
+    exports de.evoal.optimisation.api.correlations;
     exports de.evoal.optimisation.api.evaluation;
     exports de.evoal.optimisation.api.events;
     exports de.evoal.optimisation.api.execution;
@@ -56,7 +57,6 @@ module de.evoal.optimisation.api {
 //    exports de.evoal.optimisation.api.constraints.calculation;
 //    exports de.evoal.optimisation.api.constraints.model;
 //    exports de.evoal.optimisation.api.constraints.strategies;
-//    exports de.evoal.optimisation.api.correlations;
     exports de.evoal.optimisation.api.model;
 //    exports de.evoal.optimisation.api.model.impl;
     exports de.evoal.optimisation.api.statistics.io;
@@ -73,13 +73,13 @@ module de.evoal.optimisation.api {
     opens de.evoal.optimisation.api.cdi to weld.core.impl;
     opens de.evoal.optimisation.api.checks to weld.core.impl;
     opens de.evoal.optimisation.api.constraints to weld.core.impl;
+    opens de.evoal.optimisation.api.correlations to weld.core.impl;
     opens de.evoal.optimisation.api.evaluation to weld.core.impl;
     opens de.evoal.optimisation.api.events to weld.core.impl;
     opens de.evoal.optimisation.api.execution to weld.core.impl;
     opens de.evoal.optimisation.api.fitness to weld.core.impl;
 //    opens de.evoal.optimisation.api.constraints.calculation to weld.core.impl;
 //    opens de.evoal.optimisation.api.constraints.model to weld.core.impl;
-//    opens de.evoal.optimisation.api.correlations to weld.core.impl;
     opens de.evoal.optimisation.api.model to weld.core.impl;
 //    opens de.evoal.optimisation.api.model.impl to weld.core.impl;
 //    opens de.evoal.optimisation.api.statistics to weld.core.impl;
@@ -104,6 +104,7 @@ module de.evoal.optimisation.api {
     opens de.evoal.optimisation.main.search to weld.core.impl;
     opens de.evoal.optimisation.main.statistics to weld.core.impl;
     opens de.evoal.optimisation.main.statistics.constraints to weld.core.impl;
+    opens de.evoal.optimisation.main.statistics.correlations to weld.core.impl;
     opens de.evoal.optimisation.main.statistics.individuals to weld.core.impl;
     opens de.evoal.optimisation.main.statistics.memory to weld.core.impl;
     opens de.evoal.optimisation.main.statistics.metrics to weld.core.impl;

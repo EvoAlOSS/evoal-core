@@ -70,6 +70,10 @@ Every probability has one unit (`Variation`):
   property `operators` names the chosen one. It applies to the chromosomes that all its
   children apply to (`ApplicabilityReader` combines them).
 
+- `'correlation-aware-mutation' { mutation; 'minimum-correlation'; 'propagation-depth'; }`
+  and `'linkage-crossover' { crossover; 'minimum-correlation'; }` wrap an operator and use
+  its probabilities and applicability; see [Correlation-aware operators](#correlation-aware-operators).
+
 Every configured operator and selection draws from its own named stream of the
 `RandomService` (`de.evoal.optimisation.ea/<slot>[<index>]`), so a run gives the same
 result with any number of evaluation threads.
@@ -83,6 +87,44 @@ result with any number of evaluation threads.
 | `'bit-flip-mutation'` | bit, Gray | nominal |
 | `'creep-mutation'` | integer | ordinal |
 | `'single-choice-mutation'` | all its children have in common | the strongest of its children |
+| `'correlation-aware-mutation'`, `'linkage-crossover'` | those of the wrapped operator | the one of the wrapped operator |
+
+## Correlation-aware operators
+
+The DDL declares correlations between search features (`correlation(data f, data g, rho)`,
+`'ranged-correlation'(data f, range(l, u), data g, range(l, u), rho)`; read by the
+`CorrelationCompiler` of `de.evoal.optimisation.api` into `ProblemCorrelations`). Two wrapping
+operators use every correlation whose absolute coefficient is at least their
+`'minimum-correlation'`, at the level of features and independent of chromosomes and
+representations (`main.correlation.CorrelationTransfer`):
+
+- `'correlation-aware-mutation'`: the wrapped mutation makes the primary change. Afterwards,
+  `Variation` decodes the genome, and the change of every feature f is transferred to the
+  features g correlated with it: change(g) = rho * change(f) / range(f) * range(g). The range
+  is given by the DDL bounds (an unbounded integer feature uses the range of its type, a pair
+  with an unbounded real feature is skipped; both are warned about). For a pair with an
+  ordinal feature, the shift is applied to the normalised position as rank; pairs with a
+  nominal feature are skipped. The new value is rounded for integer features, clamped to the
+  bounds and encoded again (`Genotype.write`, also for bit and Gray chromosomes). Step 1
+  transfers the primary changes, step n the changes of step n - 1, up to
+  `'propagation-depth'`; correlations are visited in DDL order, the first one wins, every
+  feature changes at most once, and primary features are not changed again. A ranged
+  correlation applies if the source (before its change) and the target lie in its ranges.
+  The propagation is deterministic.
+- `'linkage-crossover'`: the wrapped crossover must exchange genes (`GeneExchange`:
+  single-point, multi-point, uniform); others are rejected. Afterwards, for every correlation
+  in DDL order, a feature that a child inherited from one parent decides that the child gets
+  the correlated feature from the same parent and the sibling from the other parent. A
+  feature whose value comes from neither parent (bits from both) is no anchor; every feature
+  is set at most once. A ranged correlation applies if both parents lie in its ranges.
+  Harik and Goldberg define the linkage of a group of genes as the probability that the
+  crossover conserves it (section 2); the operator conserves every correlated pair whose
+  anchor comes from one parent.
+
+The relationships record `primary-features`, `propagated-features` (e.g. `x:2 from x:1
+(0.9)`) and `linked-features` (e.g. `x:2 with x:0`); the property definitions exist when the
+DDL declares correlations. `'correlation-statistics'` (optimisation.api) compares the declared
+correlations with the population.
 
 ## Selections and replacements
 
@@ -150,6 +192,8 @@ In `src/main/examples`, each with a README:
 - `ea-mixed-genotype`: a Gray chromosome and an integer chromosome with its own operators,
   roulette wheel selection and the memory model.
 - `ea-nsga2`: NSGA-II on ZDT1 with 30 variables (benchmark `zdt1` of the generator).
+- `ea-correlations`: three ranged correlations across a double and a Gray chromosome,
+  `'correlation-aware-mutation'`, `'linkage-crossover'` and `'correlation-statistics'`.
 - `ea-constraints`: two constraint groups, one repaired by `'projection-repair'` before the
   evaluation, one penalised by `'constraint-penalty'`; `'constraint-statistics'`.
 
@@ -196,6 +240,8 @@ The surrogate plugins have examples that search on a trained model with the EA
   I. Evolutionary Computation 1(1), 1993, pp. 25-49.
 - H.-P. Schwefel: Numerische Optimierung von Computer-Modellen mittels der
   Evolutionsstrategie. Birkhaeuser, 1977.
+- G. R. Harik, D. E. Goldberg: Learning linkage. Foundations of Genetic Algorithms 4, 1996,
+  pp. 247-262, also IlliGAL Report 96006 (linkage, section 2).
 - G. Syswerda: Uniform crossover in genetic algorithms. Proc. 3rd International Conference
   on Genetic Algorithms, 1989, pp. 2-9.
 - E. Zitzler, K. Deb, L. Thiele: Comparison of multiobjective evolutionary algorithms:

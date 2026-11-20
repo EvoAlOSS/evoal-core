@@ -6,6 +6,8 @@ import java.util.random.RandomGenerator;
 
 import de.evoal.core.api.random.RandomService;
 
+import de.evoal.models.core.ecore.TypedEObject;
+
 import de.evoal.optimisation.api.run.Candidate;
 import de.evoal.optimisation.api.run.Lineage;
 import de.evoal.optimisation.ea.api.genotype.BoundaryHandling;
@@ -14,6 +16,8 @@ import de.evoal.optimisation.ea.api.genotype.Genome;
 import de.evoal.optimisation.ea.api.genotype.Genotype;
 import de.evoal.optimisation.ea.api.operators.MutationOperator;
 import de.evoal.optimisation.ea.api.operators.RecombinationOperator;
+import de.evoal.optimisation.ea.main.operators.CorrelationAwareMutation;
+import de.evoal.optimisation.ea.main.operators.LinkageCrossover;
 
 /**
  * Recombines and mutates the genomes of one run, following the probability rules of the
@@ -38,6 +42,11 @@ import de.evoal.optimisation.ea.api.operators.RecombinationOperator;
  * <p>
  * A mutation that fires first chooses the mutation to apply
  *   ({@link MutationOperator#choose}); the property {@code operators} names the chosen one.
+ * <p>
+ * A {@link CorrelationAwareMutation} propagates its change to correlated features after the
+ *   use (properties {@code primary-features} and {@code propagated-features}); a
+ *   {@link LinkageCrossover} keeps correlated features of both children together after the use
+ *   (property {@code linked-features}).
  */
 final class Variation {
     /**
@@ -49,6 +58,22 @@ final class Variation {
      * The name of the property with the changed features.
      */
     static final String CHANGED_FEATURES = "changed-features";
+
+    /**
+     * The name of the property with the features that a correlation-aware mutation changed
+     *   itself.
+     */
+    static final String PRIMARY_FEATURES = "primary-features";
+
+    /**
+     * The name of the property with the changes that a correlation-aware mutation propagated.
+     */
+    static final String PROPAGATED_FEATURES = "propagated-features";
+
+    /**
+     * The name of the property with the features that a linkage crossover set.
+     */
+    static final String LINKED_FEATURES = "linked-features";
 
     private final BoundaryHandling boundaryHandling;
 
@@ -103,6 +128,10 @@ final class Variation {
                 genotype.chromosomes().get(c).handleBoundaries(genesB, boundaryHandling);
             }
 
+            if(use.operator() instanceof LinkageCrossover linkage) {
+                link(linkage, a, b, first, second);
+            }
+
             noteChange(a, beforeA, use.operator().name(), true);
             noteChange(b, beforeB, use.operator().name(), true);
         }
@@ -150,8 +179,51 @@ final class Variation {
                 genotype.chromosomes().get(c).handleBoundaries(chromosomeGenes, boundaryHandling);
             }
 
+            if(mutation instanceof CorrelationAwareMutation correlationAware) {
+                propagate(correlationAware, child, before);
+            }
+
             noteChange(child, before, mutation.name(), false);
         }
+    }
+
+    /**
+     * Keeps the correlated features of the children together and notes the set features.
+     */
+    private void link(final LinkageCrossover linkage, final Offspring a, final Offspring b, final Candidate first,
+                      final Candidate second) {
+        final TypedEObject childA = genotype.decode(a.genome);
+        final TypedEObject childB = genotype.decode(b.genome);
+        final List<String> linked = linkage.link(first.input(), second.input(), childA, childB);
+        if(linked.isEmpty()) {
+            return;
+        }
+
+        genotype.write(a.genome, childA, linkage.transfer().features());
+        genotype.write(b.genome, childB, linkage.transfer().features());
+        a.linkedFeatures.addAll(linked);
+        b.linkedFeatures.addAll(linked);
+    }
+
+    /**
+     * Propagates the changes of a correlation-aware mutation and notes the primary and the
+     *   propagated changes.
+     */
+    private void propagate(final CorrelationAwareMutation mutation, final Offspring child, final Genome before) {
+        final List<String> primary = genotype.changedFeatures(before, child.genome);
+        if(primary.isEmpty()) {
+            return;
+        }
+
+        final TypedEObject after = genotype.decode(child.genome);
+        final List<String> propagated = mutation.propagate(genotype.decode(before), after);
+        child.primaryFeatures.addAll(primary);
+        if(propagated.isEmpty()) {
+            return;
+        }
+
+        genotype.write(child.genome, after, mutation.transfer().features());
+        child.propagatedFeatures.addAll(propagated);
     }
 
     private void noteChange(final Offspring child, final Genome before, final String operator, final boolean recombination) {
@@ -173,8 +245,17 @@ final class Variation {
         final Lineage origin = child.recombined
                 ? Lineage.recombination(child.parents, child.pair)
                 : Lineage.mutation(parent);
-        final Lineage lineage = origin.withProperty(OPERATORS, List.copyOf(child.operators))
-                                      .withProperty(CHANGED_FEATURES, genotype.changedFeatures(child.parentGenome, child.genome));
+        Lineage lineage = origin.withProperty(OPERATORS, List.copyOf(child.operators))
+                                .withProperty(CHANGED_FEATURES, genotype.changedFeatures(child.parentGenome, child.genome));
+        if(!child.primaryFeatures.isEmpty()) {
+            lineage = lineage.withProperty(PRIMARY_FEATURES, List.copyOf(child.primaryFeatures));
+        }
+        if(!child.propagatedFeatures.isEmpty()) {
+            lineage = lineage.withProperty(PROPAGATED_FEATURES, List.copyOf(child.propagatedFeatures));
+        }
+        if(!child.linkedFeatures.isEmpty()) {
+            lineage = lineage.withProperty(LINKED_FEATURES, List.copyOf(child.linkedFeatures));
+        }
 
         return new Candidate(genotype.decode(child.genome), lineage);
     }

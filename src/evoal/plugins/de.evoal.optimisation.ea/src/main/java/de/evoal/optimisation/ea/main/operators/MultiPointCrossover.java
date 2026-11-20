@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.EObject;
 import de.evoal.core.api.languages.AttributeEvaluator;
 import de.evoal.optimisation.ea.api.genotype.Genes;
 import de.evoal.optimisation.ea.api.operators.AbstractRecombination;
+import de.evoal.optimisation.ea.api.operators.GeneExchange;
 
 /**
  * Multi-point crossover (DL type {@code 'multi-point-crossover'}): {@code points} different
@@ -20,7 +21,7 @@ import de.evoal.optimisation.ea.api.operators.AbstractRecombination;
  */
 @Dependent
 @Named("de.evoal.optimisation.ea.optimisation.multi-point-crossover")
-public class MultiPointCrossover extends AbstractRecombination {
+public class MultiPointCrossover extends AbstractRecombination implements GeneExchange {
     /**
      * The number of cut points.
      */

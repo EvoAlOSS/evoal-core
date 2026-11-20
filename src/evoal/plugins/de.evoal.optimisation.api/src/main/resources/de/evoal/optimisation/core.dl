@@ -658,6 +658,41 @@ module de.evoal.optimisation.core {
     type 'constraint-statistics' extends 'statistics-writer' {}
 
     /**
+     * Compares the correlations of the DDL ('correlation', 'ranged-correlation') with the
+     *   population of every iteration.
+     *   File: <tt>correlation-statistics.csv</tt> in the output folder.
+     *   Columns: iteration, then for every correlation n of the DDL (members of the
+     *   population inside its ranges):
+     *   with 'empirical-correlation': <tt>n-&lt;n&gt;</tt> (their number),
+     *   <tt>correlation-&lt;n&gt;</tt> (the Pearson correlation, the Spearman rank
+     *   correlation if a feature is ordinal) and <tt>deviation-&lt;n&gt;</tt> (empirical
+     *   minus declared coefficient);
+     *   with 'covariance-difference': <tt>covariance-difference-&lt;n&gt;</tt> (the
+     *   covariance in the population minus the one in the initial population).
+     *   A value that cannot be computed is empty. Correlations with a nominal feature have
+     *   no columns.
+     *
+     * Sources: K. Pearson: Mathematical contributions to the theory of evolution. III.
+     *   Regression, heredity, and panmixia. Philosophical Transactions A 187, 1896,
+     *   pp. 253-318; C. Spearman: The proof and measurement of association between two
+     *   things. American Journal of Psychology 15(1), 1904, pp. 72-101.
+     *
+     * A problem without correlations or a configuration without output is rejected.
+     */
+    type 'correlation-statistics' extends 'statistics-writer' {
+        /**
+         * Whether the number of members, the empirical correlation and its deviation from
+         *   the declared coefficient are written.
+         */
+        'empirical-correlation' : boolean := true;
+
+        /**
+         * Whether the difference of the covariance to the initial population is written.
+         */
+        'covariance-difference' : boolean := false;
+    }
+
+    /**
      * Writes the memory model of every run as JSON files into the folder
      *   <tt>memory-model</tt> in the output folder, while the run is executed:
      *

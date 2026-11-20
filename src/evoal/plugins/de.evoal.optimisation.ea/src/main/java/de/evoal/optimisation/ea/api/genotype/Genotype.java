@@ -1,7 +1,10 @@
 package de.evoal.optimisation.ea.api.genotype;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
 
@@ -106,6 +109,45 @@ public final class Genotype {
         return new Genome(chromosomes.stream()
                                      .map(chromosome -> chromosome.encode(candidate))
                                      .toList());
+    }
+
+    /**
+     * @param feature A search feature.
+     * @return The index of the chromosome that holds the feature.
+     * @throws IllegalArgumentException if no chromosome holds the feature.
+     */
+    public int chromosomeOf(final EStructuralFeature feature) {
+        for(int c = 0; c < chromosomes.size(); ++c) {
+            if(chromosomes.get(c).features().contains(feature)) {
+                return c;
+            }
+        }
+
+        throw new IllegalArgumentException("The feature '" + feature.getName() + "' belongs to no chromosome.");
+    }
+
+    /**
+     * Writes the values of features into a genome: the chromosomes that hold them are encoded
+     *   from the candidate again, and their genes are replaced in place.
+     *
+     * @param genome The genome; its genes are changed.
+     * @param values A candidate with the values of the features.
+     * @param features The features whose values changed.
+     */
+    public void write(final Genome genome, final TypedEObject values, final Collection<EStructuralFeature> features) {
+        final Set<Integer> changed = new TreeSet<>();
+        features.forEach(feature -> changed.add(chromosomeOf(feature)));
+
+        for(final int c : changed) {
+            final Genes genes = genome.chromosomes().get(c);
+            final Genes encoded = chromosomes.get(c).encode(values);
+
+            for(int gene = 0; gene < genes.size(); ++gene) {
+                if(!genes.equalAt(encoded, gene)) {
+                    genes.exchange(encoded, gene);
+                }
+            }
+        }
     }
 
     /**

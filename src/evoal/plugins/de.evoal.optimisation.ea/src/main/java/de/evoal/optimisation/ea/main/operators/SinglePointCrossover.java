@@ -7,6 +7,7 @@ import jakarta.inject.Named;
 
 import de.evoal.optimisation.ea.api.genotype.Genes;
 import de.evoal.optimisation.ea.api.operators.AbstractRecombination;
+import de.evoal.optimisation.ea.api.operators.GeneExchange;
 
 /**
  * One-point crossover (DL type {@code 'single-point-crossover'}): a cut point is chosen
@@ -15,7 +16,7 @@ import de.evoal.optimisation.ea.api.operators.AbstractRecombination;
  */
 @Dependent
 @Named("de.evoal.optimisation.ea.optimisation.single-point-crossover")
-public class SinglePointCrossover extends AbstractRecombination {
+public class SinglePointCrossover extends AbstractRecombination implements GeneExchange {
     public SinglePointCrossover() {
     }
 

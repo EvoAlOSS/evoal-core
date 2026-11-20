@@ -10,6 +10,7 @@ import org.eclipse.emf.ecore.EObject;
 import de.evoal.core.api.languages.AttributeEvaluator;
 import de.evoal.optimisation.ea.api.genotype.Genes;
 import de.evoal.optimisation.ea.api.operators.AbstractRecombination;
+import de.evoal.optimisation.ea.api.operators.GeneExchange;
 
 /**
  * Uniform crossover (DL type {@code 'uniform-crossover'}): the children exchange every gene
@@ -17,7 +18,7 @@ import de.evoal.optimisation.ea.api.operators.AbstractRecombination;
  */
 @Dependent
 @Named("de.evoal.optimisation.ea.optimisation.uniform-crossover")
-public class UniformCrossover extends AbstractRecombination {
+public class UniformCrossover extends AbstractRecombination implements GeneExchange {
     /**
      * The probability that a gene is exchanged.
      */

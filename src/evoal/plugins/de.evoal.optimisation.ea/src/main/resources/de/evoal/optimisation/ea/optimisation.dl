@@ -412,6 +412,85 @@ module de.evoal.optimisation.ea.optimisation {
     }
 
     /**
+     * Correlation-aware mutation (specific to EvoAl): the wrapped 'mutation' makes the
+     *   primary change; its 'probability', 'gene-probability' and applicability are used, the
+     *   own ones are not. Afterwards, the change of every feature f is propagated to the
+     *   features g correlated with it in the DDL ('correlation', 'ranged-correlation'),
+     *   regardless of their chromosome and representation:
+     *   change(g) = rho * change(f) / range(f) * range(g). The range of a feature is given
+     *   by its bounds in the DDL (an integer feature without bounds uses the range of its
+     *   type; a pair with an unbounded real feature is skipped). For a pair with an ordinal feature, the
+     *   shift is applied to the normalised rank; pairs with a nominal feature are skipped.
+     *   The new value is rounded for integer features and clamped to the bounds. A ranged
+     *   correlation applies only if both features lie in their ranges.
+     *
+     * The propagation is deterministic: the correlations are visited in the order of the
+     *   DDL, a feature with several changed partners takes the change of the first one, and
+     *   every feature changes at most once per mutation; the features the wrapped mutation
+     *   changed are not changed again. The relationship of the child records the properties
+     *   'primary-features' and 'propagated-features'.
+     */
+    @Applicability {
+        representations := ['representation.double', 'representation.integer', 'representation.bit',
+                            'representation.gray'];
+    }
+    type 'correlation-aware-mutation' extends mutation {
+        /**
+         * The mutation that makes the primary change.
+         */
+        mutation : instance mutation;
+
+        /**
+         * The smallest absolute correlation coefficient that is propagated.
+         */
+        @LowerBoundary { boundary := 0.0; inclusive := true; }
+        @UpperBoundary { boundary := 1.0; inclusive := true; }
+        'minimum-correlation' : real := 0.0;
+
+        /**
+         * The number of propagation steps: 1 propagates only to the features correlated with
+         *   a changed feature, n follows chains of up to n correlations.
+         */
+        @LowerBoundary { boundary := 1; }
+        'propagation-depth' : int := 1;
+    }
+
+    /**
+     * Linkage crossover (specific to EvoAl): the wrapped 'crossover' exchanges the genes;
+     *   its 'probability' and applicability are used, the own ones are not. Afterwards,
+     *   correlated features of the DDL are inherited from the same parent, regardless of
+     *   their chromosome and representation: for every correlation, in the order of the
+     *   DDL, a feature that a child inherited from one parent determines that the child gets
+     *   the other feature from this parent, and its sibling from the other parent. Every
+     *   feature is set at most once. A ranged correlation applies if the values of both
+     *   parents lie in its ranges. The linkage of a group of genes is the probability that
+     *   the crossover conserves it (G. R. Harik, D. E. Goldberg: Learning linkage.
+     *   Foundations of Genetic Algorithms 4, 1996, pp. 247-262, section 2); the operator
+     *   conserves every correlated pair whose anchor comes from one parent. The
+     *   relationships of the children record the property 'linked-features'.
+     *
+     * Only crossovers that exchange genes can be wrapped ('single-point-crossover',
+     *   'multi-point-crossover', 'uniform-crossover'); blending crossovers are rejected.
+     */
+    @Applicability {
+        representations := ['representation.double', 'representation.integer', 'representation.bit',
+                            'representation.gray'];
+    }
+    type 'linkage-crossover' extends recombination {
+        /**
+         * The crossover that exchanges the genes.
+         */
+        crossover : instance recombination;
+
+        /**
+         * The smallest absolute correlation coefficient whose features are kept together.
+         */
+        @LowerBoundary { boundary := 0.0; inclusive := true; }
+        @UpperBoundary { boundary := 1.0; inclusive := true; }
+        'minimum-correlation' : real := 0.0;
+    }
+
+    /**
      * Abstract base type of the selections. A selection chooses a number of candidates
      *   from a list; a candidate can be chosen more than once. The selections compare by
      *   the 'comparator' of the algorithm, except the ones that use the fitness itself.

@@ -1,7 +1,9 @@
 package de.evoal.optimisation.ea.main;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 import de.evoal.optimisation.api.run.Candidate;
 import de.evoal.optimisation.ea.api.genotype.Genome;
@@ -34,6 +36,21 @@ final class Offspring {
      * The operators that changed the genome, in their order.
      */
     final List<String> operators = new ArrayList<>();
+
+    /**
+     * The features that a correlation-aware mutation changed itself, in their order.
+     */
+    final Set<String> primaryFeatures = new LinkedHashSet<>();
+
+    /**
+     * The changes that a correlation-aware mutation propagated, e.g. {@code x:2 from x:1 (0.9)}.
+     */
+    final List<String> propagatedFeatures = new ArrayList<>();
+
+    /**
+     * The features that a linkage crossover set, e.g. {@code x:2 with x:1}.
+     */
+    final List<String> linkedFeatures = new ArrayList<>();
 
     /**
      * Whether a recombination changed the genome.

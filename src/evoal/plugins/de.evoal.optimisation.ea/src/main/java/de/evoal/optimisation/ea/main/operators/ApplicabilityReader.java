@@ -68,7 +68,9 @@ public class ApplicabilityReader {
      * @param configuration The configuration of an operator.
      * @return The applicability of the operator's DL type; for an operator with
      *   {@code children} (e.g. {@code 'single-choice-mutation'}) combined with the
-     *   applicability of every child, since every child must apply.
+     *   applicability of every child, since every child must apply; for a wrapping operator
+     *   with a {@code mutation} or {@code crossover} (e.g. {@code 'linkage-crossover'})
+     *   combined with the applicability of the wrapped operator.
      */
     public Applicability of(final EObject configuration) {
         Applicability applicability = of(definitionOf(configuration.eClass()));
@@ -77,6 +79,13 @@ public class ApplicabilityReader {
         if(children != null && configuration.eGet(children) instanceof Collection<?> configurations) {
             for(final Object child : configurations) {
                 applicability = applicability.and(of((EObject) child));
+            }
+        }
+
+        for(final String wrapped : List.of("mutation", "crossover")) {
+            final EStructuralFeature feature = configuration.eClass().getEStructuralFeature(wrapped);
+            if(feature != null && configuration.eGet(feature) instanceof EObject operator) {
+                applicability = applicability.and(of(operator));
             }
         }
 
