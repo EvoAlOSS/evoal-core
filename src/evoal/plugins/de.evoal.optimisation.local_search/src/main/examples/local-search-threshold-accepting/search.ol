@@ -52,6 +52,10 @@ module 'search' {
 		'comparator' := 'numeric-comparator' {};
 		'optimisation-function' := 'problem-function' {};
 
-		'stopping-criteria' := [ 'iteration-count' { 'maximum-iterations' := 300; } ];
+		// stops at the iteration limit or as soon as the best candidate so far is below 0.01
+		'stopping-criteria' := [
+			'iteration-count' { 'maximum-iterations' := 300; },
+			'target-value' { 'objective' := data 'y:0'; 'target' := 0.01; }
+		];
 	}
 }

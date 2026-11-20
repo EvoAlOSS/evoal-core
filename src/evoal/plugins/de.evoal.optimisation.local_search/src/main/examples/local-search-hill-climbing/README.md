@@ -28,6 +28,10 @@ differ only in the accepting strategy:
   local search (`configure 'local-search'`).
   - `'accepting-strategy' := 'hill-climber' {}` accepts only better neighbours.
   - `'manual-strategy'` with step size 0.5 creates the 8 neighbours of a candidate.
+  - `'stopping-criteria'`: the run stops after 300 iterations (`'iteration-count'`)
+    or as soon as the best candidate so far is below 0.01 (`'target-value'`), i.e.,
+    close to the global minimum 0. The three local search examples use the same
+    criteria, so they show how many iterations and evaluations each strategy needs.
 
 ## Run
 
@@ -55,10 +59,16 @@ the current candidate (`x:0`, `x:1`) and its value (`y:0`):
   `No acceptable neighbour in generation … Terminating optimisation.`
 - Which local minimum is reached depends on the order of the neighbours. With
   `EVOAL_SEED=42`, the search ends after 2 iterations at (5, -4) with
-  `y:0` = 41, far from the global minimum 0.
+  `y:0` = 41, far from the global minimum 0. It never reaches the target 0.01.
 
 Compare with the simulated annealing and threshold accepting examples, which
-leave the local minimum.
+leave the local minimum. With `EVOAL_SEED=42`:
+
+| Example | Best `y:0` | Iterations | Evaluations |
+|---|---|---|---|
+| `local-search-hill-climbing` | 41, stuck in a local minimum | 2 | 7 |
+| `local-search-simulated-annealing` | 0, target reached | 353 | 354 |
+| `local-search-threshold-accepting` | 0, target reached | 85 | 134 |
 
 ## Try next
 
@@ -68,3 +78,5 @@ leave the local minimum.
 - Set `'neighbour-order' := 'neighbour-order.fixed';` in the `'manual-strategy'`.
   The neighbours are then always offered in the same order, so the search
   always takes the same path.
+- Add `'metrics-per-iteration' {}` to `document [...]`: its column
+  `evaluations.real` counts the evaluations up to every iteration.

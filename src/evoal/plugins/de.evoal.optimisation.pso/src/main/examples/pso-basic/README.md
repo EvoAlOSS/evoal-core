@@ -31,6 +31,10 @@ minima, and its global minimum 0 at (0, 0).
     search space is reflected at the boundary.
   - `'topology' := 'topology.global'`: the neighbourhood of every particle is
     the whole swarm.
+  - `'stopping-criteria'`: the run stops after 100 iterations (`'iteration-count'`)
+    or as soon as the best particle so far is below 0.01 (`'target-value'`), i.e.,
+    close to the global minimum 0. The example `random-search` uses the same
+    criteria.
 
 ## Run
 
@@ -49,8 +53,11 @@ EVOAL_SEED=42 ./01-run-search.sh
 ## What to look at
 
 - `output/search/best-candidate-per-iteration.csv`: the best particle of every
-  iteration. `y:0` falls from about 8 to about 0.001 within the 100 iterations,
-  and `x:0`, `x:1` approach 0.
+  iteration. `y:0` falls from about 8, and `x:0`, `x:1` approach 0. With
+  `EVOAL_SEED=42`, the best particle so far is below the target 0.01 in iteration 80
+  (`y:0` ≈ 0.0074), so `'target-value'` ends the run after 1620 evaluations.
+  Random search (example `random-search`) does not get below 4.2 with 2020
+  evaluations.
 - `output/search/candidates-per-iteration.csv`: all 20 particles of every
   iteration (`generation`). Plot `x:0` against `x:1` for some generations:
   first the particles are spread over the whole search space, at the end they
@@ -62,6 +69,8 @@ EVOAL_SEED=42 ./01-run-search.sh
 
 - Keep the inertia high (`'inertia-end' := 0.9`). The swarm does not contract and
   does not get close to the optimum.
+- Lower the target (e.g., `'target' := 0.001`) and compare how many more
+  iterations the swarm needs.
 - Use other boundary handling: `'boundary-handling.stick'` (the particle stops
   at the boundary) or `'boundary-handling.wrap'` (it reenters on the other side).
 - Use another mover: `'constriction-factor-mover' { 'c1' := 2.05; 'c2' := 2.05; }`

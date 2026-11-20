@@ -35,6 +35,10 @@ differ only in the accepting strategy:
     a little more than the height of a hill.
   - `'linear-decrease'` with `'iterations' := 300`: the threshold falls linearly
     to 0 within 300 iterations.
+  - `'stopping-criteria'`: the run stops after 300 iterations (`'iteration-count'`)
+    or as soon as the best candidate so far is below 0.01 (`'target-value'`), i.e.,
+    close to the global minimum 0. The three local search examples use the same
+    target, so they show how many iterations and evaluations each strategy needs.
 
 ## Run
 
@@ -57,12 +61,22 @@ the current candidate (`x:0`, `x:1`) and its value (`y:0`):
 
 - In the first iterations, `y:0` goes up and down: the search moves over the
   hills between local minima.
-- While the threshold falls, the search only moves downhill and ends in a
-  local minimum. The last row repeats the candidate and the log says
+- While the threshold falls, the search only moves downhill. If it does not
+  reach the target, it ends in a local minimum: the last row repeats the
+  candidate and the log says
   `No acceptable neighbour in generation … Terminating optimisation.`
-- With `EVOAL_SEED=42`, the search ends after 86 iterations in the global
-  minimum (0, 0) with `y:0` = 0. Hill climbing from the same start ends at
-  `y:0` = 41. Other seeds end between 0 and 9, most of them at 0 or 1.
+- With `EVOAL_SEED=42`, the search reaches the global minimum (0, 0) with
+  `y:0` = 0 in iteration 85, so `'target-value'` ends the run after 134
+  evaluations. Hill climbing from the same start ends at `y:0` = 41. Other seeds
+  end between 0 and 9, most of them at 0 or 1.
+
+The three local search examples with `EVOAL_SEED=42`:
+
+| Example | Best `y:0` | Iterations | Evaluations |
+|---|---|---|---|
+| `local-search-hill-climbing` | 41, stuck in a local minimum | 2 | 7 |
+| `local-search-simulated-annealing` | 0, target reached | 353 | 354 |
+| `local-search-threshold-accepting` | 0, target reached | 85 | 134 |
 
 ## Try next
 
@@ -72,3 +86,5 @@ the current candidate (`x:0`, `x:1`) and its value (`y:0`):
 - Compare with the simulated annealing example: which one gets closer to the
   global minimum in most runs? The evaluation example `search-evaluation`
   shows how to run a search many times.
+- Add `'metrics-per-iteration' {}` to `document [...]`: its column
+  `evaluations.real` counts the evaluations up to every iteration.

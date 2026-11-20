@@ -1,0 +1,53 @@
+// Regression: basic mover that stops when the best particle so far falls below the target value
+//   0.01 (iteration 17: 0.0033), before the iteration limit of 50.
+import "definitions" from de.evoal.core.math;
+
+import "definitions" from de.evoal.optimisation.core;
+import "definitions" from de.evoal.pipeline.base;
+import "definitions" from de.evoal.pipeline.benchmarks;
+import "definitions" from de.evoal.pipeline.optimisation;
+import "definitions" from de.evoal.optimisation.pso.optimisation;
+
+import "data" from 'search';
+
+module 'search' {
+    specify problem 'regression' {
+        search for data 'x:0', data 'x:1'
+
+        map with 'benchmark-function' {
+            'benchmarks' := [
+                'benchmark-configuration' {
+                    function := ackley {};
+                    reads := [data 'x:0', data 'x:1'];
+                    writes := [data 'y:0'];
+                }
+            ];
+        }
+
+        and minimise data 'y:0'
+
+        document ['best-candidate-so-far' {}, 'metrics-per-iteration' {}].
+    }
+
+    configure 'particle-swarm-optimisation' for 'regression' {
+        'size-of-population' := 9;
+        'neighborhood-size' := 3;
+        'swarm' := 'default-swarm' {};
+        'mover' := 'basic-mover' {
+            'inertia-start' := 0.75;
+            'inertia-end' := 0.25;
+            'inertia-iterations' := 10;
+            'c1' := 2.05;
+            'c2' := 2.05;
+            'boundary-type' := 'boundary-handling.wrap';
+        };
+        'topology' := 'topology.global';
+        'initialisation' := 'random-population' {};
+        'comparator' := 'numeric-comparator' {};
+        'optimisation-function' := 'problem-function' {};
+        'stopping-criteria' := [
+            'iteration-count' { 'maximum-iterations' := 50; },
+            'target-value' { 'objective' := data 'y:0'; 'target' := 0.01; }
+        ];
+    }
+}

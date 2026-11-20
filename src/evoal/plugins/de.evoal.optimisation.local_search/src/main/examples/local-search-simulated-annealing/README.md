@@ -43,6 +43,10 @@ differ only in the accepting strategy:
     multiplied by 0.998 in every iteration, so it is about 0.1 after the 3000
     iterations. Since every iteration tests only one neighbour, the search
     needs many iterations.
+  - `'stopping-criteria'`: the run stops after 3000 iterations (`'iteration-count'`)
+    or as soon as the best candidate so far is below 0.01 (`'target-value'`), i.e.,
+    close to the global minimum 0. The three local search examples use the same
+    target, so they show how many iterations and evaluations each strategy needs.
 
 ## Run
 
@@ -69,19 +73,34 @@ candidate found up to every iteration:
   neighbours and climbs over the hills between local minima.
 - Later, increases become rare and `y:0` settles in a local minimum. Many rows
   repeat the candidate, because the tested neighbour was rejected.
-- With `EVOAL_SEED=42`, the search accepts 170 worse neighbours, most of them in
-  the first 500 iterations. It visits the global minimum (0, 0) in iteration
-  353, climbs out of it again while the temperature is still high, and ends at
-  (3, 1) with `y:0` = 10. `best-candidate-so-far.csv` keeps (0, 0) from
-  iteration 353 on. Hill climbing from the same start ends at `y:0` = 41.
-- Other seeds end between 0 and 5, and their best candidate has `y:0` = 0 in
-  most runs: the result of a single run is random.
+- With `EVOAL_SEED=42`, the search visits the global minimum (0, 0) in iteration
+  353. The best candidate so far is then below the target 0.01, so
+  `'target-value'` ends the run after 354 evaluations, long before the 3000
+  iterations. Hill climbing from the same start ends at `y:0` = 41.
+- Other seeds reach the global minimum in most runs, after a different number of
+  iterations: the result of a single run is random.
+
+The three local search examples with `EVOAL_SEED=42`:
+
+| Example | Best `y:0` | Iterations | Evaluations |
+|---|---|---|---|
+| `local-search-hill-climbing` | 41, stuck in a local minimum | 2 | 7 |
+| `local-search-simulated-annealing` | 0, target reached | 353 | 354 |
+| `local-search-threshold-accepting` | 0, target reached | 85 | 134 |
 
 The log shows the acceptance probability of every worse neighbour
 (`Acceptance probability is …`).
 
 ## Try next
 
+- Remove `'target-value'` from `'stopping-criteria'`, so the run takes all 3000
+  iterations. With `EVOAL_SEED=42`, the search accepts 170 worse neighbours, most
+  of them in the first 500 iterations. It climbs out of (0, 0) again while the
+  temperature is still high and ends at (3, 1) with `y:0` = 10, while
+  `best-candidate-so-far.csv` keeps (0, 0) from iteration 353 on: the last
+  candidate of simulated annealing is not necessarily its best one.
+- Add `'metrics-per-iteration' {}` to `document [...]`: its column
+  `evaluations.real` counts the evaluations up to every iteration.
 - Lower the start temperature (e.g., 5.0). The search hardly accepts worse
   neighbours and behaves like hill climbing.
 - Cool faster (`'decrease-rate' := 0.98`). The search freezes in a local minimum

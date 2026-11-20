@@ -780,6 +780,36 @@ module de.evoal.optimisation.core {
     }
 
     /**
+     * Stopping criterion that stops as soon as the best individual so far reaches a target
+     *   value of an objective, e.g. to compare how many iterations and evaluations
+     *   algorithms need to get close to a known optimum. It reads the objective of the best
+     *   individual so far, so it also works for algorithms that move to worse candidates.
+     *
+     * The target is reached if the value is strictly better than the target, as in the
+     *   COCO benchmarks: below it for a goal {@code minimise}, above it for {@code maximise};
+     *   for a goal {@code towards}, the distance of the value from the goal's target is
+     *   smaller than the distance of this criterion's target. A target equal to the optimum
+     *   is therefore never reached; use the optimum plus a precision, e.g. 0.001 for an
+     *   optimum of 0.
+     *
+     * An infeasible best individual (one that violates a constraint of the problem) does
+     *   not reach the target. With several goals, the best individual so far is the one the
+     *   comparator prefers; the run stops only if this individual reaches the target in the
+     *   given objective.
+     */
+    type 'target-value' extends 'stopping-criterion' {
+        /**
+         * The objective; the problem must have a goal for it.
+         */
+        'objective' : data;
+
+        /**
+         * The target value, in the units of the objective.
+         */
+        'target' : real;
+    }
+
+    /**
      * Stopping criterion that stops when a file is created.
      */
     type 'file-check' extends 'stopping-criterion' {
