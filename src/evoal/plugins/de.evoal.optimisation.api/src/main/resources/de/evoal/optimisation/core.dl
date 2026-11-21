@@ -114,7 +114,8 @@ module de.evoal.optimisation.core {
         'comparator' : instance comparator;
 
         /**
-         * Configurable stopping criterion.
+         * The stopping criteria. The run stops after the first iteration in which at least
+         *   one of them is satisfied (like 'any-of').
          */
         @MinimumNumberOfElements{ bound := 1; }
         'stopping-criteria' : array instance 'stopping-criterion';
@@ -747,6 +748,31 @@ module de.evoal.optimisation.core {
     }
 
     /**
+     * Stopping criterion that is satisfied when all of its criteria are satisfied, e.g.
+     *   'stagnation' together with 'iteration-count' as a minimum number of iterations.
+     *   Every criterion is checked in every iteration. Combinations can be nested.
+     */
+    type 'all-of' extends 'stopping-criterion' {
+        /**
+         * The combined criteria.
+         */
+        @MinimumNumberOfElements{ bound := 1; }
+        criteria : array instance 'stopping-criterion';
+    }
+
+    /**
+     * Stopping criterion that is satisfied when at least one of its criteria is satisfied.
+     *   Every criterion is checked in every iteration. Combinations can be nested.
+     */
+    type 'any-of' extends 'stopping-criterion' {
+        /**
+         * The combined criteria.
+         */
+        @MinimumNumberOfElements{ bound := 1; }
+        criteria : array instance 'stopping-criterion';
+    }
+
+    /**
      * Stopping criterion that stops after a fixed number of iterations.
      */
     type 'iteration-count' extends 'stopping-criterion' {
@@ -815,6 +841,69 @@ module de.evoal.optimisation.core {
          */
         'target' : real;
     }
+
+    /**
+     * Stopping criterion that stops when a measure of the recorded fitness has not improved
+     *   for a number of iterations, an improvement-based criterion like ImpBest and ImpAv in
+     *   K. Zielinski, P. Weitkemper, R. Laur, K.-D. Kammeyer: Examination of Stopping
+     *   Criteria for Differential Evolution based on a Power Allocation Problem. 10th
+     *   International Conference on Optimization of Electrical and Electronic Equipment
+     *   (OPTIM), 2006.
+     *
+     * The measure is smaller for better iterations (the canonical fitness is minimised).
+     *   Iteration 0 sets the reference value. An iteration improves if its value is below
+     *   the reference by more than the tolerance, the larger of 'absolute-tolerance' and
+     *   'relative-tolerance' times the magnitude of the reference. An improvement becomes
+     *   the new reference, so small improvements add up until they exceed the tolerance. A
+     *   value that is not finite never improves.
+     *
+     * The measures need a fitness with one component; with several goals, add a
+     *   scalarisation such as 'weighted-sum' to the 'fitness-pipeline'.
+     */
+    type stagnation extends 'stopping-criterion' {
+        /**
+         * The number of iterations without improvement after which the run stops.
+         */
+        @LowerBoundary { boundary := 1; }
+        iterations : int;
+
+        /**
+         * The smallest improvement that counts, in units of the fitness.
+         */
+        @LowerBoundary { boundary := 0.0; }
+        'absolute-tolerance' : real := 0.0;
+
+        /**
+         * The smallest improvement that counts, as a fraction of the magnitude of the
+         *   reference value.
+         */
+        @LowerBoundary { boundary := 0.0; }
+        'relative-tolerance' : real := 0.0;
+
+        /**
+         * The measure of an iteration.
+         */
+        measure : instance 'stagnation-measure' := 'best-fitness' {};
+    }
+
+    /**
+     * Base class for the measures of 'stagnation': one value per iteration, computed from
+     *   the recorded fitness, where smaller is better. Plugins can add measures.
+     */
+    abstract type 'stagnation-measure' extends configuration {}
+
+    /**
+     * The best fitness of an iteration: the smallest fitness of the best individuals
+     *   (rank 0), which the algorithm's comparator chose, e.g. the feasible ones first
+     *   (ImpBest in Zielinski et al. 2006).
+     */
+    type 'best-fitness' extends 'stagnation-measure' {}
+
+    /**
+     * The mean fitness of all members of an iteration, i.e. the population that continues
+     *   (ImpAv in Zielinski et al. 2006).
+     */
+    type 'mean-fitness' extends 'stagnation-measure' {}
 
     /**
      * Stopping criterion that stops when a file is created.

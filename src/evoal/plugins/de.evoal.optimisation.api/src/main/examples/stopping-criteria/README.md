@@ -9,7 +9,11 @@ several criteria; the search stops as soon as one of them is met.
 |---|---|
 | `'iteration-count'` | after `'maximum-iterations'` iterations (the initial evaluation is iteration 0) |
 | `'evaluation-budget'` | when the optimisation function has been evaluated `'maximum-evaluations'` times |
+| `'target-value'` | when the best candidate so far is better than `'target'` in the objective `'objective'` |
+| `'stagnation'` | when a measure of the fitness (`'best-fitness'` or `'mean-fitness'`) has not improved by more than the tolerance for `'iterations'` iterations |
 | `'file-check'` | when the file `'file'` (default `evoal-stop.txt`) exists in the working folder |
+| `'all-of'` | when all of its `criteria` are met |
+| `'any-of'` | when at least one of its `criteria` is met |
 
 An evaluation budget makes algorithms comparable: a swarm of 20 particles uses
 20 evaluations per iteration, a local search between 1 and 8. Comparing them
@@ -62,6 +66,11 @@ EVOAL_SEED=42 ./01-run-search.sh
 - Set `'exhaustion' := 'budget-exhaustion.cut-off'`: the run ends with exactly 310
   evaluations; the last iteration is only partly evaluated.
 - Lower `'maximum-iterations'` to 5: now the iteration count stops the run first.
+- Replace the budget by
+  `'stagnation' { 'iterations' := 5; 'relative-tolerance' := 0.01; 'measure' := 'best-fitness' {}; }`:
+  the swarm stops when its best fitness has not improved by more than 1 % for 5
+  iterations. To require a minimum number of iterations as well, combine both:
+  `'all-of' { 'criteria' := ['stagnation' { … }, 'iteration-count' { 'maximum-iterations' := 20; }]; }`.
 - Add `'file-check' {}` to the list, start the search with a large budget, and
   create the file `evoal-stop.txt` in the example folder while it runs.
   Since the result then depends on something outside the run, the memory model
