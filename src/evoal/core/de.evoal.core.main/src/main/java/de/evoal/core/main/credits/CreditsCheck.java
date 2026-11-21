@@ -5,7 +5,9 @@ import java.io.UncheckedIOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -23,6 +25,13 @@ import tools.jackson.core.JacksonException;
  *   entry in {@value CreditsFiles#CREDITS_FILE} with a purpose and a licence whose text
  *   core.main holds, every entry names a shipped library, and the citations exist in
  *   {@value CreditsFiles#CITATIONS_FILE}.
+ * <p>
+ * Citations are named by the module, by its libraries and by its DL types and declarations
+ *   ({@code @Literature}, {@link LiteratureSources}). A key may be defined in the module's own
+ *   {@value CreditsFiles#CITATIONS_FILE} or in the one of a module it depends on (e.g. the
+ *   EvoAl paper in core.main); an own entry must not redefine a key of a dependency. Every own
+ *   entry must be cited, must have a supported entry type and the required fields of that type
+ *   ({@link #REQUIRED_FIELDS}).
  * <p>
  * A library counts as shipped if a jar with the SHA-256 hash of its SBOM component lies in the
  *   folder that the build fills for the release ({@code target/<artifactId>}). Libraries of
@@ -43,6 +52,13 @@ import tools.jackson.core.JacksonException;
  */
 public final class CreditsCheck {
     /**
+     * The supported BibTeX entry types with their required fields, as in the BibTeX
+     *   documentation ({@code btxdoc}); each element lists alternatives, one of which is
+     *   required (e.g. author or editor of a book).
+     */
+    static final Map<String, List<List<String>>> REQUIRED_FIELDS = requiredFields();
+
+    /**
      * The folder with the files of {@link CreditsFiles} ({@code target/classes/META-INF/evoal}).
      */
     private final Path creditsFolder;
@@ -51,6 +67,11 @@ public final class CreditsCheck {
      * Tells whether core.main holds the text of a licence (SPDX id).
      */
     private final Predicate<String> hasLicenseText;
+
+    /**
+     * The keys of the module's DL definitions and the citations of its dependencies.
+     */
+    private final LiteratureSources literature;
 
     /**
      * The file name of the module's own jar in {@link #shippedFolder}.
@@ -77,10 +98,50 @@ public final class CreditsCheck {
                         final Path shippedFolder,
                         final String moduleJar,
                         final Predicate<String> hasLicenseText) {
+        this(creditsFolder, shippedFolder, moduleJar, hasLicenseText, LiteratureSources.NONE);
+    }
+
+    /**
+     * @param creditsFolder The folder with the files of {@link CreditsFiles}.
+     * @param shippedFolder The folder with the module jar and the jars it ships.
+     * @param moduleJar The file name of the module's own jar.
+     * @param hasLicenseText Tells whether core.main holds the text of a licence.
+     * @param literature The keys of the module's DL definitions and the citations of its
+     *   dependencies.
+     */
+    public CreditsCheck(final Path creditsFolder,
+                        final Path shippedFolder,
+                        final String moduleJar,
+                        final Predicate<String> hasLicenseText,
+                        final LiteratureSources literature) {
         this.creditsFolder = creditsFolder;
         this.shippedFolder = shippedFolder;
         this.moduleJar = moduleJar;
         this.hasLicenseText = hasLicenseText;
+        this.literature = literature;
+    }
+
+    private static Map<String, List<List<String>>> requiredFields() {
+        final Map<String, List<List<String>>> fields = new LinkedHashMap<>();
+        fields.put("article", fields("author", "title", "journal", "year"));
+        fields.put("book", List.of(List.of("author", "editor"), List.of("title"), List.of("publisher"), List.of("year")));
+        fields.put("incollection", fields("author", "title", "booktitle", "publisher", "year"));
+        fields.put("inproceedings", fields("author", "title", "booktitle", "year"));
+        fields.put("mastersthesis", fields("author", "title", "school", "year"));
+        fields.put("misc", fields("title"));
+        fields.put("phdthesis", fields("author", "title", "school", "year"));
+        fields.put("techreport", fields("author", "title", "institution", "year"));
+
+        return Collections.unmodifiableMap(fields);
+    }
+
+    /**
+     * @return The fields, each required without alternative.
+     */
+    private static List<List<String>> fields(final String... names) {
+        return Stream.of(names)
+                     .map(List::of)
+                     .toList();
     }
 
     /**
@@ -93,9 +154,10 @@ public final class CreditsCheck {
     }
 
     /**
-     * Checks that the cited keys exist and records them as cited.
+     * Checks that the cited keys exist in the module's citations or in those of a dependency
+     *   and records them as cited.
      *
-     * @param citer The module or library that cites, for the message.
+     * @param citer The module, library or DL definition that cites, for the message.
      */
     private void checkCitationKeys(final List<String> citations,
                                    final String citer,
@@ -104,15 +166,18 @@ public final class CreditsCheck {
         for(final String key : citations) {
             citedKeys.add(key);
 
-            if(!keys.contains(key)) {
+            if(!keys.contains(key) && !literature.dependencyEntries().containsKey(key)) {
                 problems.add("The citation '" + key + "' of " + citer + " is missing in "
-                             + CreditsFiles.CITATIONS_FILE + ".");
+                             + CreditsFiles.CITATIONS_FILE + " and in the " + CreditsFiles.CITATIONS_FILE
+                             + " of the dependencies.");
             }
         }
     }
 
     /**
-     * Checks the citations: every key exists, every entry is cited and has a title.
+     * Checks the citations: every key of the module, its libraries and its DL definitions
+     *   exists, every entry is cited, has the required fields of its entry type and does not
+     *   redefine an entry of a dependency.
      */
     private void checkCitations(final ModuleCredits credits, final List<BibTeXEntry> entries) {
         final Set<String> keys = entries.stream()
@@ -124,15 +189,43 @@ public final class CreditsCheck {
         for(final LibraryCredits library : credits.libraries()) {
             checkCitationKeys(library.citations(), "'" + library.library() + "'", keys, citedKeys);
         }
+        literature.dlCitations()
+                  .forEach((key, citers) -> checkCitationKeys(List.of(key), "the DL definition(s) " + String.join(", ", citers),
+                                                              keys, citedKeys));
+        problems.addAll(literature.problems());
 
         for(final BibTeXEntry entry : entries) {
             if(!citedKeys.contains(entry.key())) {
                 problems.add("The entry '" + entry.key() + "' in " + CreditsFiles.CITATIONS_FILE
-                             + " is not cited by the module or a library.");
+                             + " is not cited by the module, a library or a DL definition.");
             }
 
-            if(!entry.fields().containsKey("title")) {
-                problems.add("The entry '" + entry.key() + "' in " + CreditsFiles.CITATIONS_FILE + " has no title.");
+            final String dependency = literature.dependencyEntries().get(entry.key());
+            if(dependency != null) {
+                problems.add("The entry '" + entry.key() + "' in " + CreditsFiles.CITATIONS_FILE
+                             + " redefines the entry of a dependency (" + dependency + "); cite that one instead.");
+            }
+
+            checkRequiredFields(entry);
+        }
+    }
+
+    /**
+     * Checks that the entry has a supported entry type and its required fields
+     *   ({@link #REQUIRED_FIELDS}).
+     */
+    private void checkRequiredFields(final BibTeXEntry entry) {
+        final List<List<String>> required = REQUIRED_FIELDS.get(entry.type());
+        if(required == null) {
+            problems.add("The entry '" + entry.key() + "' in " + CreditsFiles.CITATIONS_FILE + " has the entry type '@"
+                         + entry.type() + "', which is not supported; use one of " + REQUIRED_FIELDS.keySet() + ".");
+            return;
+        }
+
+        for(final List<String> alternatives : required) {
+            if(alternatives.stream().noneMatch(entry.fields()::containsKey)) {
+                problems.add("The entry '" + entry.key() + "' in " + CreditsFiles.CITATIONS_FILE + " has no "
+                             + String.join(" or ", alternatives) + ", which '@" + entry.type() + "' requires.");
             }
         }
     }
@@ -365,13 +458,34 @@ public final class CreditsCheck {
         final CreditsCheck check = new CreditsCheck(creditsFolder,
                                                     shippedFolder,
                                                     moduleJar,
-                                                    CreditsCheck::isLicenseKnown);
+                                                    CreditsCheck::isLicenseKnown,
+                                                    readLiterature(creditsFolder));
         final List<String> problems = check.run();
 
         if(!problems.isEmpty()) {
             final String list = String.join("\n  - ", problems);
             throw new IllegalStateException("The credits of '" + moduleJar + "' have " + problems.size()
                                             + " problem(s):\n  - " + list);
+        }
+    }
+
+    /**
+     * Reads the literature of the module: the build runs the check with the class path of the
+     *   module ({@code exec:java}, compile scope), which holds its output folder and its
+     *   dependencies.
+     *
+     * @param creditsFolder The folder {@value CreditsFiles#FOLDER} in the output folder of the
+     *   module.
+     */
+    private static LiteratureSources readLiterature(final Path creditsFolder) {
+        final Path classesFolder = creditsFolder.toAbsolutePath().normalize().getParent().getParent();
+        final ClassLoader classpath = Optional.ofNullable(Thread.currentThread().getContextClassLoader())
+                                              .orElse(CreditsCheck.class.getClassLoader());
+
+        try {
+            return LiteratureSources.read(classesFolder, classpath);
+        } catch(final IOException e) {
+            throw new UncheckedIOException("Cannot read the literature of the module.", e);
         }
     }
 

@@ -1551,74 +1551,84 @@ public class BaseLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 	public class FunctionDefinitionRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.base.dsl.BaseLanguage.FunctionDefinitionRule");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cDefKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cTypeAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cTypeTypeRuleParserRuleCall_1_0 = (RuleCall)cTypeAssignment_1.eContents().get(0);
-		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cNameStringOrIdParserRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
-		private final Keyword cLeftParenthesisKeyword_3 = (Keyword)cGroup.eContents().get(3);
-		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
-		private final Assignment cParametersAssignment_4_0 = (Assignment)cGroup_4.eContents().get(0);
-		private final RuleCall cParametersParameterRuleParserRuleCall_4_0_0 = (RuleCall)cParametersAssignment_4_0.eContents().get(0);
-		private final Group cGroup_4_1 = (Group)cGroup_4.eContents().get(1);
-		private final Keyword cCommaKeyword_4_1_0 = (Keyword)cGroup_4_1.eContents().get(0);
-		private final Assignment cParametersAssignment_4_1_1 = (Assignment)cGroup_4_1.eContents().get(1);
-		private final RuleCall cParametersParameterRuleParserRuleCall_4_1_1_0 = (RuleCall)cParametersAssignment_4_1_1.eContents().get(0);
-		private final Keyword cRightParenthesisKeyword_5 = (Keyword)cGroup.eContents().get(5);
-		private final Keyword cSemicolonKeyword_6 = (Keyword)cGroup.eContents().get(6);
+		private final Assignment cConstraintsAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cConstraintsConstraintRuleParserRuleCall_0_0 = (RuleCall)cConstraintsAssignment_0.eContents().get(0);
+		private final Keyword cDefKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cTypeAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cTypeTypeRuleParserRuleCall_2_0 = (RuleCall)cTypeAssignment_2.eContents().get(0);
+		private final Assignment cNameAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cNameStringOrIdParserRuleCall_3_0 = (RuleCall)cNameAssignment_3.eContents().get(0);
+		private final Keyword cLeftParenthesisKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Group cGroup_5 = (Group)cGroup.eContents().get(5);
+		private final Assignment cParametersAssignment_5_0 = (Assignment)cGroup_5.eContents().get(0);
+		private final RuleCall cParametersParameterRuleParserRuleCall_5_0_0 = (RuleCall)cParametersAssignment_5_0.eContents().get(0);
+		private final Group cGroup_5_1 = (Group)cGroup_5.eContents().get(1);
+		private final Keyword cCommaKeyword_5_1_0 = (Keyword)cGroup_5_1.eContents().get(0);
+		private final Assignment cParametersAssignment_5_1_1 = (Assignment)cGroup_5_1.eContents().get(1);
+		private final RuleCall cParametersParameterRuleParserRuleCall_5_1_1_0 = (RuleCall)cParametersAssignment_5_1_1.eContents().get(0);
+		private final Keyword cRightParenthesisKeyword_6 = (Keyword)cGroup.eContents().get(6);
+		private final Keyword cSemicolonKeyword_7 = (Keyword)cGroup.eContents().get(7);
 		
 		//FunctionDefinitionRule returns FunctionDefinition:
+		//    (constraints += ConstraintRule)*
 		//    'def' type = TypeRule name = StringOrId '(' (parameters+=ParameterRule (',' parameters+=ParameterRule)*)? ')' ';'
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
+		//(constraints += ConstraintRule)*
 		//'def' type = TypeRule name = StringOrId '(' (parameters+=ParameterRule (',' parameters+=ParameterRule)*)? ')' ';'
 		public Group getGroup() { return cGroup; }
 		
+		//(constraints += ConstraintRule)*
+		public Assignment getConstraintsAssignment_0() { return cConstraintsAssignment_0; }
+		
+		//ConstraintRule
+		public RuleCall getConstraintsConstraintRuleParserRuleCall_0_0() { return cConstraintsConstraintRuleParserRuleCall_0_0; }
+		
 		//'def'
-		public Keyword getDefKeyword_0() { return cDefKeyword_0; }
+		public Keyword getDefKeyword_1() { return cDefKeyword_1; }
 		
 		//type = TypeRule
-		public Assignment getTypeAssignment_1() { return cTypeAssignment_1; }
+		public Assignment getTypeAssignment_2() { return cTypeAssignment_2; }
 		
 		//TypeRule
-		public RuleCall getTypeTypeRuleParserRuleCall_1_0() { return cTypeTypeRuleParserRuleCall_1_0; }
+		public RuleCall getTypeTypeRuleParserRuleCall_2_0() { return cTypeTypeRuleParserRuleCall_2_0; }
 		
 		//name = StringOrId
-		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
+		public Assignment getNameAssignment_3() { return cNameAssignment_3; }
 		
 		//StringOrId
-		public RuleCall getNameStringOrIdParserRuleCall_2_0() { return cNameStringOrIdParserRuleCall_2_0; }
+		public RuleCall getNameStringOrIdParserRuleCall_3_0() { return cNameStringOrIdParserRuleCall_3_0; }
 		
 		//'('
-		public Keyword getLeftParenthesisKeyword_3() { return cLeftParenthesisKeyword_3; }
+		public Keyword getLeftParenthesisKeyword_4() { return cLeftParenthesisKeyword_4; }
 		
 		//(parameters+=ParameterRule (',' parameters+=ParameterRule)*)?
-		public Group getGroup_4() { return cGroup_4; }
+		public Group getGroup_5() { return cGroup_5; }
 		
 		//parameters+=ParameterRule
-		public Assignment getParametersAssignment_4_0() { return cParametersAssignment_4_0; }
+		public Assignment getParametersAssignment_5_0() { return cParametersAssignment_5_0; }
 		
 		//ParameterRule
-		public RuleCall getParametersParameterRuleParserRuleCall_4_0_0() { return cParametersParameterRuleParserRuleCall_4_0_0; }
+		public RuleCall getParametersParameterRuleParserRuleCall_5_0_0() { return cParametersParameterRuleParserRuleCall_5_0_0; }
 		
 		//(',' parameters+=ParameterRule)*
-		public Group getGroup_4_1() { return cGroup_4_1; }
+		public Group getGroup_5_1() { return cGroup_5_1; }
 		
 		//','
-		public Keyword getCommaKeyword_4_1_0() { return cCommaKeyword_4_1_0; }
+		public Keyword getCommaKeyword_5_1_0() { return cCommaKeyword_5_1_0; }
 		
 		//parameters+=ParameterRule
-		public Assignment getParametersAssignment_4_1_1() { return cParametersAssignment_4_1_1; }
+		public Assignment getParametersAssignment_5_1_1() { return cParametersAssignment_5_1_1; }
 		
 		//ParameterRule
-		public RuleCall getParametersParameterRuleParserRuleCall_4_1_1_0() { return cParametersParameterRuleParserRuleCall_4_1_1_0; }
+		public RuleCall getParametersParameterRuleParserRuleCall_5_1_1_0() { return cParametersParameterRuleParserRuleCall_5_1_1_0; }
 		
 		//')'
-		public Keyword getRightParenthesisKeyword_5() { return cRightParenthesisKeyword_5; }
+		public Keyword getRightParenthesisKeyword_6() { return cRightParenthesisKeyword_6; }
 		
 		//';'
-		public Keyword getSemicolonKeyword_6() { return cSemicolonKeyword_6; }
+		public Keyword getSemicolonKeyword_7() { return cSemicolonKeyword_7; }
 	}
 	public class ConstantDefinitionRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.base.dsl.BaseLanguage.ConstantDefinitionRule");
@@ -2917,6 +2927,7 @@ public class BaseLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 	}
 	
 	//FunctionDefinitionRule returns FunctionDefinition:
+	//    (constraints += ConstraintRule)*
 	//    'def' type = TypeRule name = StringOrId '(' (parameters+=ParameterRule (',' parameters+=ParameterRule)*)? ')' ';'
 	//;
 	public FunctionDefinitionRuleElements getFunctionDefinitionRuleAccess() {

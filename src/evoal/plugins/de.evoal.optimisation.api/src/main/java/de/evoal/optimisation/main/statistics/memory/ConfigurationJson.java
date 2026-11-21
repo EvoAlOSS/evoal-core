@@ -57,13 +57,24 @@ public class ConfigurationJson {
      *   attribute is read as {@code null}.
      */
     public static ConfigurationJson of(final @NonNull AttributeEvaluator evaluator) {
-        return new ConfigurationJson((configuration, attribute) -> {
-            if(isUnsetOptional(configuration, attribute)) {
-                return null;
-            }
+        return new ConfigurationJson((configuration, attribute) -> readAttribute(evaluator, configuration, attribute));
+    }
 
-            return evaluator.attributeToJava(configuration, attribute.getName(), attribute.getEType());
-        });
+    /**
+     * @param evaluator Reads the attribute values with their defaults applied.
+     * @param configuration A configuration.
+     * @param attribute One of its attributes.
+     * @return The value of the attribute as the components read it, with its default value
+     *   applied; {@code null} for an unset optional attribute.
+     */
+    public static Object readAttribute(final @NonNull AttributeEvaluator evaluator,
+                                       final @NonNull EObject configuration,
+                                       final @NonNull EStructuralFeature attribute) {
+        if(isUnsetOptional(configuration, attribute)) {
+            return null;
+        }
+
+        return evaluator.attributeToJava(configuration, attribute.getName(), attribute.getEType());
     }
 
     /**

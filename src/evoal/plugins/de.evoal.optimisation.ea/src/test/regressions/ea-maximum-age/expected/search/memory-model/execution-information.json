@@ -139,6 +139,7 @@
       "steps" : true
     }
   } ],
+  "citations" : [ "berger2024evoal", "deb1995simulated", "deb2002fast", "muehlenbein1992how", "baeck1993optimal", "baker1985adaptive", "schwefel1977numerische", "muehlenbein1993predictive", "rastrigin1974systems" ],
   "searchSpace" : [ {
     "name" : "x:0",
     "type" : "real",

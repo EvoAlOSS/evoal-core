@@ -35,6 +35,7 @@ import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
 import de.evoal.optimisation.api.execution.EvaluationPosition;
 import de.evoal.optimisation.api.execution.ExecutionRecorder;
 import de.evoal.optimisation.api.fitness.Goals;
+import de.evoal.optimisation.api.run.RunLiterature;
 import de.evoal.optimisation.api.statistics.writer.StatisticsWriter;
 
 /**
@@ -123,6 +124,13 @@ public class MemoryModelWriter implements StatisticsWriter {
      */
     @Inject
     private Goals goals;
+
+    /**
+     * The literature of the configuration ({@code citations.bib}), whose keys the execution
+     *   information lists.
+     */
+    @Inject
+    private RunLiterature literature;
 
     /**
      * Converts the memory model to JSON, created when the run starts.
@@ -296,7 +304,8 @@ public class MemoryModelWriter implements StatisticsWriter {
                                                                 documentation,
                                                                 fitnessSteps,
                                                                 execution,
-                                                                setup);
+                                                                setup,
+                                                                literature.keys());
         folder.write("execution-information.json", document);
 
         log.info("Writing the memory model to '{}'.", folder.getFolder());

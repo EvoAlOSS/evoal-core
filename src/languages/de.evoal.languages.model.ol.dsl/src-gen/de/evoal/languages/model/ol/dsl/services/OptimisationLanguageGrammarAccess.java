@@ -1243,6 +1243,7 @@ public class OptimisationLanguageGrammarAccess extends AbstractElementFinder.Abs
 	}
 	
 	//FunctionDefinitionRule returns FunctionDefinition:
+	//    (constraints += ConstraintRule)*
 	//    'def' type = TypeRule name = StringOrId '(' (parameters+=ParameterRule (',' parameters+=ParameterRule)*)? ')' ';'
 	//;
 	public BaseLanguageGrammarAccess.FunctionDefinitionRuleElements getFunctionDefinitionRuleAccess() {

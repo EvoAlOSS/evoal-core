@@ -4,9 +4,11 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Provider;
 
+import de.evoal.core.api.board.Blackboard;
 import de.evoal.core.api.cdi.BeanFactory;
 import de.evoal.core.api.random.RandomService;
 import de.evoal.models.v202704.optimisation.model.OptimisationModule;
+import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
 import de.evoal.optimisation.api.execution.EvaluationPosition;
 import de.evoal.optimisation.api.execution.ExecutionRecorder;
 import de.evoal.optimisation.api.fitness.FitnessPipeline;
@@ -46,6 +48,15 @@ public class SearchRunner {
     @Inject
     private Provider<FitnessPipeline> fitnessPipelines;
 
+    @Inject
+    private Blackboard board;
+
+    /**
+     * Writes the literature of the configuration ({@value RunLiterature#FILE_NAME}).
+     */
+    @Inject
+    private RunLiterature literature;
+
     /**
      * Loads the configuration, sets up the search and optimisation space of its problem and binds
      *   the runtime model to the blackboard ({@code optimisation:optimisation-configuration}).
@@ -58,9 +69,10 @@ public class SearchRunner {
     }
 
     /**
-     * Executes a run of the algorithm of the configuration: starts the random numbers of the run,
-     *   the individual ids and the execution of the memory model, creates the algorithm and runs
-     *   it.
+     * Executes a run of the algorithm of the configuration: writes the literature of the
+     *   configuration into the output folder ({@value RunLiterature#FILE_NAME}, once for all runs
+     *   of a configuration and folder), starts the random numbers of the run, the individual ids
+     *   and the execution of the memory model, creates the algorithm and runs it.
      *
      * @param configuration The runtime model of {@link #setUp}.
      * @param run The number of the run; it determines the random numbers of the run.
@@ -68,6 +80,7 @@ public class SearchRunner {
      *   {@code null} for a single run.
      */
     public void run(final OptimisationModule configuration, final long run, final EvaluationPosition position) {
+        literature.start(configuration, board.getOrNull(OptimisationBlackboardEntries.EVALUATION_OUTPUT_FOLDER));
         randomService.startRun(run);
         idGenerator.startRun();
         executionRecorder.startRun(position);

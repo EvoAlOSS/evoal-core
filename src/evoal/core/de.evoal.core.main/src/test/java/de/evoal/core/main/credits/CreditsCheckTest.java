@@ -374,7 +374,95 @@ public class CreditsCheckTest {
 
         final List<String> problems = check();
 
-        Assertions.assertEquals(List.of("The citation 'missing' of the module is missing in credits.bib."), problems);
+        Assertions.assertEquals(List.of("The citation 'missing' of the module is missing in credits.bib and in the "
+                                        + "credits.bib of the dependencies."), problems);
+    }
+
+    private List<String> check(final LiteratureSources literature) throws IOException {
+        writeSbom();
+
+        final CreditsCheck check = new CreditsCheck(creditsFolder, shippedFolder, MODULE_JAR, KNOWN_LICENSES::contains,
+                                                    literature);
+
+        return check.run();
+    }
+
+    @Test
+    public void dlKeysAreCitationsAndMustHaveAnEntry() throws IOException {
+        // given
+        writeCredits("""
+                {"libraries": []}""");
+        Files.writeString(creditsFolder.resolve(CreditsFiles.CITATIONS_FILE),
+                          "@misc{harik1996learning, title = {Learning linkage}}");
+        final LiteratureSources literature = new LiteratureSources(
+                Map.of("harik1996learning", List.of("'m.linkage-crossover'"),
+                       "deb2002fast", List.of("'m.nsga2-selection'", "'m.crowded-comparator'")),
+                Map.of(),
+                List.of());
+
+        // when
+        final List<String> problems = check(literature);
+
+        // then
+        Assertions.assertEquals(List.of("The citation 'deb2002fast' of the DL definition(s) 'm.nsga2-selection', "
+                                        + "'m.crowded-comparator' is missing in credits.bib and in the credits.bib of "
+                                        + "the dependencies."), problems);
+    }
+
+    @Test
+    public void aKeyOfADependencyCanBeCitedButNotRedefined() throws IOException {
+        // given
+        writeCredits("""
+                {"citations": ["berger2024evoal"], "libraries": []}""");
+        Files.writeString(creditsFolder.resolve(CreditsFiles.CITATIONS_FILE),
+                          "@misc{deb2002fast, title = {A fast and elitist multiobjective genetic algorithm}}");
+        final LiteratureSources literature = new LiteratureSources(
+                Map.of("berger2024evoal", List.of("'m.memory-model'"), "deb2002fast", List.of("'m.nsga2-selection'")),
+                Map.of("berger2024evoal", "core.main", "deb2002fast", "optimisation.api"),
+                List.of());
+
+        // when
+        final List<String> problems = check(literature);
+
+        // then
+        Assertions.assertEquals(List.of("The entry 'deb2002fast' in credits.bib redefines the entry of a dependency "
+                                        + "(optimisation.api); cite that one instead."), problems);
+    }
+
+    @Test
+    public void entriesNeedTheRequiredFieldsOfTheirType() throws IOException {
+        // given
+        writeCredits("""
+                {"citations": ["article", "book", "online"], "libraries": []}""");
+        Files.writeString(creditsFolder.resolve(CreditsFiles.CITATIONS_FILE), """
+                @article{article, author = {A}, title = {T}, year = 2000}
+                @book{book, editor = {E}, title = {T}, publisher = {P}, year = 2000}
+                @online{online, title = {T}}
+                """);
+
+        // when
+        final List<String> problems = check();
+
+        // then
+        Assertions.assertEquals(2, problems.size(), problems.toString());
+        Assertions.assertEquals("The entry 'article' in credits.bib has no journal, which '@article' requires.",
+                                problems.get(0));
+        Assertions.assertTrue(problems.get(1).startsWith("The entry 'online' in credits.bib has the entry type "
+                                                         + "'@online', which is not supported"), problems.toString());
+    }
+
+    @Test
+    public void unreadableDlAnnotationsAreReported() throws IOException {
+        // given
+        writeCredits("""
+                {"libraries": []}""");
+        final LiteratureSources literature = new LiteratureSources(Map.of(), Map.of(), List.of("cannot be resolved"));
+
+        // when
+        final List<String> problems = check(literature);
+
+        // then
+        Assertions.assertEquals(List.of("cannot be resolved"), problems);
     }
 
     @BeforeEach

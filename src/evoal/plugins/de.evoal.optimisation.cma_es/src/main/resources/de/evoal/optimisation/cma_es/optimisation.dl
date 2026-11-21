@@ -6,13 +6,9 @@ module de.evoal.optimisation.cma_es.optimisation {
     /**
      * The covariance matrix adaptation evolution strategy, a (mu/mu_w, lambda)-CMA-ES with
      *   cumulative step-size adaptation, rank-one and rank-mu update and positive
-     *   recombination weights, as in figure 6 and table 1 of N. Hansen: The CMA evolution
-     *   strategy: a tutorial, arXiv:1604.00772v2, 2023. It goes back to N. Hansen,
-     *   A. Ostermeier: Completely derandomized self-adaptation in evolution strategies.
-     *   Evolutionary Computation 9(2), 2001, pp. 159-195, doi 10.1162/106365601750190398,
-     *   and N. Hansen, S. D. Mueller, P. Koumoutsakos: Reducing the time complexity of the
-     *   derandomized evolution strategy with covariance matrix adaptation (CMA-ES).
-     *   Evolutionary Computation 11(1), 2003, pp. 1-18, doi 10.1162/106365603321828970.
+     *   recombination weights, as in figure 6 and table 1 of Hansen's tutorial (Hansen 2016,
+     *   arXiv:1604.00772v2 of 2023). It goes back to Hansen and Ostermeier 2001 and Hansen,
+     *   Mueller and Koumoutsakos 2003.
      *
      * Every iteration samples lambda candidates from the normal distribution
      *   N(m, sigma^2 C), evaluates them, and updates the mean m, the evolution paths, the
@@ -37,6 +33,7 @@ module de.evoal.optimisation.cma_es.optimisation {
      *   ('learned-within-building-block-<n>', 'learned-between-building-block-<n>') of the
      *   DDL. The sampled candidates have no predecessors.
      */
+    @Literature { keys := ["hansen2016cma", "hansen2001completely", "hansen2003reducing"]; }
     type 'cma-es' extends 'algorithm' {
         /**
          * The initial step size sigma_0. The tutorial suggests 0.3 (b - a) for a search
@@ -98,16 +95,16 @@ module de.evoal.optimisation.cma_es.optimisation {
      * A full covariance matrix; it is decomposed every max(1, floor(1 / (10 n (c_1 + c_mu))))
      *   iterations (appendix B.2 of the tutorial).
      */
+    @Literature { keys := ["hansen2016cma"]; }
     type 'full-covariance' extends 'covariance-model' {}
 
     /**
      * A diagonal covariance matrix, sep-CMA-ES: only the variances are adapted, with c_1 and
      *   c_mu multiplied by (n + 2) / 3, so an iteration takes linear time and space per
-     *   candidate (R. Ros, N. Hansen: A simple modification in CMA-ES achieving linear time
-     *   and space complexity. PPSN X, LNCS 5199, 2008, pp. 296-305,
-     *   doi 10.1007/978-3-540-87700-4_30). For many search features, e.g. the 1000 of CEC 2013
+     *   candidate (Ros and Hansen 2008). For many search features, e.g. the 1000 of CEC 2013
      *   LSGO.
      */
+    @Literature { keys := ["ros2008simple"]; }
     type 'diagonal-covariance' extends 'covariance-model' {}
 
     /**
@@ -125,11 +122,10 @@ module de.evoal.optimisation.cma_es.optimisation {
 
     /**
      * IPOP-CMA-ES: every restart multiplies the population size by 'population-factor', with
-     *   the initial step size (A. Auger, N. Hansen: A restart CMA evolution strategy with
-     *   increasing population size. IEEE Congress on Evolutionary Computation 2005,
-     *   pp. 1769-1776, doi 10.1109/CEC.2005.1554902). The schedule follows 'cma.fmin' of
+     *   the initial step size (Auger and Hansen 2005). The schedule follows 'cma.fmin' of
      *   pycma 4.6.0.
      */
+    @Literature { keys := ["auger2005restart"]; }
     type 'ipop-restart' extends 'restart-strategy' {
         /**
          * The factor of the population size per restart.
@@ -145,9 +141,7 @@ module de.evoal.optimisation.cma_es.optimisation {
     }
 
     /**
-     * BIPOP-CMA-ES: restarts in two regimes (N. Hansen: Benchmarking a BI-population CMA-ES
-     *   on the BBOB-2009 function testbed. GECCO 2009 companion, pp. 2389-2396,
-     *   doi 10.1145/1570256.1570333), with the schedule of 'cma.fmin(..., bipop=True)' of
+     * BIPOP-CMA-ES: restarts in two regimes (Hansen 2009), with the schedule of 'cma.fmin(..., bipop=True)' of
      *   pycma 4.6.0. The first run counts for the small regime. A restart is small while the
      *   small regime used fewer evaluations than the large one: with u uniform in [0, 1) and
      *   k the number of runs that were not small restarts, its population size is
@@ -155,6 +149,7 @@ module de.evoal.optimisation.cma_es.optimisation {
      *   half the evaluations of the large regime. Otherwise the restart is large:
      *   lambda factor^k with sigma_0, as with IPOP.
      */
+    @Literature { keys := ["hansen2009benchmarking"]; }
     type 'bipop-restart' extends 'restart-strategy' {
         /**
          * The factor of the population size per large restart.
@@ -174,6 +169,7 @@ module de.evoal.optimisation.cma_es.optimisation {
      * Learning rates that replace the defaults of table 1 of the tutorial (for the diagonal
      *   model, c_1 and c_mu of sep-CMA-ES). An attribute that is not set keeps its default.
      */
+    @Literature { keys := ["hansen2016cma"]; }
     type 'learning-rates' extends configuration {
         /**
          * The learning rate c_sigma of the evolution path of the step size; default
@@ -229,6 +225,7 @@ module de.evoal.optimisation.cma_es.optimisation {
      * Optionally, 'maximum-iterations' ends a run after a number of iterations.
      * The function value of a candidate is the first component of its fitness.
      */
+    @Literature { keys := ["hansen2016cma"]; }
     type 'cma-es-termination' extends configuration {
         /**
          * The tolerance of 'tol-fun'; 0 turns it off.
@@ -303,9 +300,11 @@ module de.evoal.optimisation.cma_es.optimisation {
     }
 
     /**
-     * L = a + b (n + 3)^2 / sqrt(lambda). The archived BBOB entries BIPOP-CMA-ES 2009 and
-     *   IPOP-CMA-ES 2010 use a = 100, b = 50; pycma's default is a = 100, b = 150.
+     * L = a + b (n + 3)^2 / sqrt(lambda). The archived BBOB entries BIPOP-CMA-ES 2009
+     *   (Hansen 2009) and IPOP-CMA-ES 2010 (Ros 2010) use a = 100, b = 50; pycma's default is
+     *   a = 100, b = 150.
      */
+    @Literature { keys := ["hansen2009benchmarking", "ros2010black"]; }
     type 'quadratic-iteration-limit' extends 'iteration-limit' {
         /**
          * The constant a.
@@ -322,8 +321,9 @@ module de.evoal.optimisation.cma_es.optimisation {
 
     /**
      * L = a + b n sqrt(n / lambda), for the diagonal model. The archived BBOB entry
-     *   IPOP-SEP-CMA-ES 2009 uses a = 100, b = 300.
+     *   IPOP-SEP-CMA-ES 2009 (Ros 2009) uses a = 100, b = 300.
      */
+    @Literature { keys := ["ros2009benchmarking"]; }
     type 'sep-iteration-limit' extends 'iteration-limit' {
         /**
          * The constant a.
@@ -353,5 +353,6 @@ module de.evoal.optimisation.cma_es.optimisation {
      *   (the diagonal model, another algorithm). A problem without building blocks and
      *   correlations is rejected.
      */
+    @Literature { keys := ["berger2024evoal"]; }
     type 'learned-linkage' extends 'statistics-writer' {}
 }

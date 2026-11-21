@@ -277,6 +277,7 @@ ArrayTypeRule returns types::ArrayType:
 ;
 
 FunctionDefinitionRule returns FunctionDefinition:
+	(constraints += ConstraintRule)*
 	'def' type = TypeRule name = StringOrId '(' (parameters+=ParameterRule (',' parameters+=ParameterRule)*)? ')' ';'
 ;
 

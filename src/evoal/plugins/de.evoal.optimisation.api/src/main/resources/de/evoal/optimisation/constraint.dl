@@ -1,3 +1,5 @@
+import "definitions" from 'de.evoal.core.constraints';
+
 module de.evoal.optimisation.constraint {
     /**
      * Declares the standard deviation of the measurements of a feature. The
@@ -16,9 +18,9 @@ module de.evoal.optimisation.constraint {
      * Declares the correlation of two search features. Correlation-aware operators of the
      *   evolutionary algorithm ('correlation-aware-mutation', 'linkage-crossover') use it,
      *   and 'correlation-statistics' compares it with the population. The coefficient is
-     *   the Pearson correlation for cardinal and quotient features and the Spearman rank
-     *   correlation if a feature is ordinal; a correlation with a nominal feature is
-     *   skipped.
+     *   the Pearson correlation (Pearson 1896) for cardinal and quotient features and the
+     *   Spearman rank correlation (Spearman 1904) if a feature is ordinal; a correlation
+     *   with a nominal feature is skipped.
      *
      * <b>Parameters:</b>
      * <ol>
@@ -27,6 +29,7 @@ module de.evoal.optimisation.constraint {
      *   <li>The correlation coefficient, in [-1, 1].</li>
      * </ol>
      */
+    @Literature { keys := ["pearson1896mathematical", "spearman1904proof"]; }
     def void correlation(data feature1, data feature2, real coefficient);
 
     /**
@@ -42,6 +45,7 @@ module de.evoal.optimisation.constraint {
      *   <li>The correlation coefficient, in [-1, 1].</li>
      * </ol>
      */
+    @Literature { keys := ["pearson1896mathematical", "spearman1904proof"]; }
     def void 'ranged-correlation'(data feature1, expression range1, data feature2, expression range2, real coefficient);
 
     /**
@@ -51,8 +55,7 @@ module de.evoal.optimisation.constraint {
      *   'linkage-crossover' of the evolutionary algorithm keeps the features of a building
      *   block together; the 'correlation-aware-mutation' ignores building blocks, since they
      *   have no coefficient. A feature may belong to several building blocks. The term
-     *   follows G. R. Harik, D. E. Goldberg: Learning linkage. Foundations of Genetic
-     *   Algorithms 4, 1996, pp. 247-262, section 2: the linkage of a building block is the
+     *   follows Harik and Goldberg 1997, section 2: the linkage of a building block is the
      *   probability that crossover preserves it.
      *
      * <b>Parameters:</b>
@@ -60,6 +63,7 @@ module de.evoal.optimisation.constraint {
      *   <li>The features of the building block, at least two and none twice.</li>
      * </ol>
      */
+    @Literature { keys := ["harik1997learning"]; }
     def void 'building-block'(array data features);
 
     /**

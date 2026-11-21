@@ -56,7 +56,7 @@ public class ConstraintCompiler {
     /**
      * The name of the DDL function that declares a constraint.
      */
-    private static final String CONSTRAINT = "constraint";
+    public static final String CONSTRAINT = "constraint";
 
     /**
      * The name of the DDL function that declares a standard deviation.
@@ -120,6 +120,19 @@ public class ConstraintCompiler {
         final List<EStructuralFeature> objectives = problem.getOptimisationSpace().getEAllStructuralFeatures();
 
         return compile(searchFeatures, objectives);
+    }
+
+    /**
+     * @param problem The optimisation problem.
+     * @return The DDL declarations of the problem, e.g. {@code correlation} or
+     *   {@code 'building-block'}: the calls of the {@code constraints} sections of the DDL
+     *   modules that declare its features and of the imported DDL modules, in their order.
+     */
+    public List<Call> declarations(final Problem problem) {
+        final List<EStructuralFeature> searchFeatures = problem.getSearchSpace().getEAllStructuralFeatures();
+        final List<EStructuralFeature> objectives = problem.getOptimisationSpace().getEAllStructuralFeatures();
+
+        return readCalls(searchFeatures, objectives).calls();
     }
 
     /**

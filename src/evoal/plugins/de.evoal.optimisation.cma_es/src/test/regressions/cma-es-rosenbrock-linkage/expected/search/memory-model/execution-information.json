@@ -97,6 +97,7 @@
       "steps" : false
     }
   } ],
+  "citations" : [ "berger2024evoal", "hansen2016cma", "hansen2001completely", "hansen2003reducing", "rosenbrock1960automatic", "harik1997learning", "pearson1896mathematical", "spearman1904proof" ],
   "searchSpace" : [ {
     "name" : "x:0",
     "type" : "real",

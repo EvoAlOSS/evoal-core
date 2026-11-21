@@ -103,6 +103,7 @@
       "steps" : false
     }
   } ],
+  "citations" : [ "berger2024evoal", "hansen2016cma", "hansen2001completely", "hansen2003reducing", "auger2005restart", "hansen2009benchmarking", "ros2010black" ],
   "searchSpace" : [ {
     "name" : "x:0",
     "type" : "real",

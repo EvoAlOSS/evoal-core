@@ -19,9 +19,10 @@ module de.evoal.optimisation.pso.optimisation {
 	nominal enum 'topology' ( global, star, ring, square );
 	
 	/**
-	 * Particle swarm optimisation. Supports only real search variables; the
-	 *   memory model's bestSoFar is the best personal best of the swarm.
+	 * Particle swarm optimisation (Kennedy and Eberhart 1995). Supports only real search
+	 *   variables; the memory model's bestSoFar is the best personal best of the swarm.
 	 */
+	@Literature { keys := ["kennedy1995particle"]; }
 	type 'particle-swarm-optimisation' extends 'algorithm' {
 	    'swarm' : instance swarm;
 	    'size-of-population'  : int;
@@ -39,9 +40,10 @@ module de.evoal.optimisation.pso.optimisation {
 
 	/**
 	 * Swarm that switches between attraction and repulsion depending on its
-	 *   diversity (Riget and Vesterstrom). Requires the 'arpso-mover' and a lower and
-	 *   an upper boundary for every search variable.
+	 *   diversity (Riget and Vesterstroem 2002). Requires the 'arpso-mover' and a lower
+	 *   and an upper boundary for every search variable.
 	 */
+	@Literature { keys := ["riget2002diversity"]; }
 	type 'arpso-swarm' extends 'swarm' {
         'diversity-low' : real; //example: 0.000005
         'diversity-high' : real; //example: 0.25
@@ -101,11 +103,12 @@ module de.evoal.optimisation.pso.optimisation {
 	}
 
 	/**
-	 * PSO mover with the constriction factor of Clerc and Kennedy. The factor
+	 * PSO mover with the constriction factor of Clerc and Kennedy 2002. The factor
 	 *   2 / |2 - phi - sqrt(phi^2 - 4 phi)| with phi = c1 + c2 is only defined for
 	 *   phi >= 4.
 	 */
 	@MultiVariateConstraint { 'expression' := self.'c1' + self.'c2' >= 4.0; }
+	@Literature { keys := ["clerc2002particle"]; }
 	type 'constriction-factor-mover' extends 'pso-mover' {
          /**
           * Parameter c1 of basic PSO kinematic equation. Weights influence of individual memory.
@@ -119,9 +122,10 @@ module de.evoal.optimisation.pso.optimisation {
     }
 
     /**
-     *  Attractive-repulsive PSO Mover (short ARPSOMover), based on the paper of
-     *    Riget and Vesterstrom.
+     *  Attractive-repulsive PSO Mover (short ARPSOMover), based on Riget and
+     *    Vesterstroem 2002.
      */
+    @Literature { keys := ["riget2002diversity"]; }
     type 'arpso-mover' extends 'pso-mover' {
 	    /**
 	     * Starting value of inertia weight. Should be less than 1.

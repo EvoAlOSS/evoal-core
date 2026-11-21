@@ -111,6 +111,7 @@
       "steps" : false
     }
   } ],
+  "citations" : [ "berger2024evoal", "huang2023quantitative", "liang2006problem", "muehlenbein1992how", "baeck1993optimal", "schwefel1977numerische", "runarsson2000stochastic", "rosenbrock1960automatic" ],
   "searchSpace" : [ {
     "name" : "x:0",
     "type" : "real",

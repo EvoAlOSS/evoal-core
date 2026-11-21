@@ -161,16 +161,14 @@ module de.evoal.optimisation.core {
      *   one of an equality max(0, |g| - 'equality-tolerance'). Strict and non-strict
      *   inequalities are measured alike. The degree is 0 exactly if the constraint is
      *   satisfied; the violation of a group is the sum of the degrees of its constraints.
-     *   This is the usual definition, see T. Huang, Q. Zhang, W. Pedrycz, S. Yang: A
-     *   quantitative pairwise comparison-based constraint handling technique for
-     *   constrained optimization, arXiv:2310.13186, 2023, section 2.
+     *   This is the usual definition, see Huang et al. 2023, section 2.
      */
+    @Literature { keys := ["huang2023quantitative", "liang2006problem"]; }
     abstract type 'constraint-measure' extends configuration {
         /**
          * The deviation up to which an equality counts as satisfied. The default 1e-4 is
-         *   the tolerance of the CEC benchmarks of constrained optimisation (J. J. Liang
-         *   et al.: Problem definitions and evaluation criteria for the CEC 2006 special
-         *   session on constrained real-parameter optimization, technical report, 2006).
+         *   the tolerance of the CEC benchmarks of constrained optimisation (Liang et al.
+         *   2006).
          */
         @LowerBoundary { boundary := 0.0; inclusive := true; }
         'equality-tolerance' : real := 1.0e-4;
@@ -189,6 +187,7 @@ module de.evoal.optimisation.core {
      *   features without one are not moved. A constraint with k moved features is
      *   measured at 3^k points.
      */
+    @Literature { keys := ["berger2024evoal"]; }
     type 'tolerance-measure' extends 'constraint-measure' {
         /**
          * The multiple of the standard deviation by which a feature is moved.
@@ -316,22 +315,21 @@ module de.evoal.optimisation.core {
      *   bound sets x to the bound, in the order of the DDL. For an integer feature, x becomes
      *   the nearest integer on the feasible side, one step inside the bound if the
      *   comparison is strict. Only constraints that are linear in exactly one search
-     *   feature, e.g. {@code 2 * x <= 3}. The name follows A. V. Kononova, D. Vermetten,
-     *   F. Caraffini, M.-A. Mitran, D. Zaharie: The importance of being constrained: dealing
-     *   with infeasible solutions in Differential Evolution and beyond. Evolutionary
-     *   Computation, 2024, doi 10.1162/evco_a_00333, section 2.4.
+     *   feature, e.g. {@code 2 * x <= 3}. The name follows Kononova et al. 2024, section
+     *   2.4.
      */
+    @Literature { keys := ["kononova2024importance"]; }
     type 'saturation-repair' extends 'constraint-repair' {}
 
     /**
      * Orthogonal projection: a violated constraint g(x) = a * x + c >= 0 (or = 0) moves the
      *   candidate onto its hyperplane, x + t * a with t = -g(x) / |a|^2. One attempt
      *   projects onto every violated constraint once, in the order of the DDL ("systematic
-     *   projection", S. Agmon: The relaxation method for linear inequalities. Canadian
-     *   Journal of Mathematics 6, 1954, pp. 382-392). Rounding and the bounds of the DDL may
-     *   leave a constraint violated, so several attempts may be needed. Only constraints
-     *   that are linear in the search features.
+     *   projection", Agmon 1954). Rounding and the bounds of the DDL may leave a constraint
+     *   violated, so several attempts may be needed. Only constraints that are linear in the
+     *   search features.
      */
+    @Literature { keys := ["agmon1954relaxation"]; }
     type 'projection-repair' extends 'constraint-repair' {}
 
     /**
@@ -436,13 +434,12 @@ module de.evoal.optimisation.core {
     }
 
     /**
-     * The feasibility rules (K. Deb: An efficient constraint handling method for genetic
-     *   algorithms. Computer Methods in Applied Mechanics and Engineering 186(2-4), 2000,
-     *   pp. 311-338) for a single fitness component: a feasible candidate is better than
-     *   an infeasible one; two feasible candidates are compared by their fitness; two
-     *   infeasible candidates by the violation of the group (the smaller is better).
-     *   Feasible means that every constraint of the group is satisfied.
+     * The feasibility rules (Deb 2000) for a single fitness component: a feasible candidate
+     *   is better than an infeasible one; two feasible candidates are compared by their
+     *   fitness; two infeasible candidates by the violation of the group (the smaller is
+     *   better). Feasible means that every constraint of the group is satisfied.
      */
+    @Literature { keys := ["deb2000efficient"]; }
     type 'feasibility-comparator' extends comparator {
         /**
          * The constraint group, as named in the DDL.
@@ -451,14 +448,13 @@ module de.evoal.optimisation.core {
     }
 
     /**
-     * The epsilon-level comparison (T. Takahama, S. Sakai: Constrained optimization by the
-     *   epsilon constrained differential evolution with gradient-based mutation and
-     *   feasible elites. IEEE Congress on Evolutionary Computation 2006, pp. 1-8) for a
-     *   single fitness component: like 'feasibility-comparator', but a candidate whose
-     *   violation of the group is at most epsilon counts as feasible, and two candidates
-     *   with the same violation are compared by their fitness. With epsilon 0, it equals
-     *   the feasibility rules except for the last case.
+     * The epsilon-level comparison (Takahama and Sakai 2006) for a single fitness component:
+     *   like 'feasibility-comparator', but a candidate whose violation of the group is at
+     *   most epsilon counts as feasible, and two candidates with the same violation are
+     *   compared by their fitness. With epsilon 0, it equals the feasibility rules except
+     *   for the last case.
      */
+    @Literature { keys := ["takahama2006constrained"]; }
     type 'epsilon-comparator' extends comparator {
         /**
          * The constraint group, as named in the DDL.
@@ -698,13 +694,11 @@ module de.evoal.optimisation.core {
      *   A value that cannot be computed is empty. Correlations with a nominal feature have
      *   no columns.
      *
-     * Sources: K. Pearson: Mathematical contributions to the theory of evolution. III.
-     *   Regression, heredity, and panmixia. Philosophical Transactions A 187, 1896,
-     *   pp. 253-318; C. Spearman: The proof and measurement of association between two
-     *   things. American Journal of Psychology 15(1), 1904, pp. 72-101.
+     * Sources: Pearson 1896, Spearman 1904.
      *
      * A problem without correlations or a configuration without output is rejected.
      */
+    @Literature { keys := ["berger2024evoal", "pearson1896mathematical", "spearman1904proof"]; }
     type 'correlation-statistics' extends 'statistics-writer' {
         /**
          * Whether the number of members, the empirical correlation and its deviation from
@@ -745,7 +739,12 @@ module de.evoal.optimisation.core {
      *   folder <tt>memory-model/repetition-&lt;repetition&gt;</tt>, or
      *   <tt>memory-model/target-&lt;target&gt;/repetition-&lt;repetition&gt;</tt> if target
      *   points are used.
+     *
+     * <tt>execution-information.json</tt> lists the BibTeX keys of the literature of the
+     *   configuration ({@code citations}); the entries are in <tt>citations.bib</tt> in the
+     *   output folder, which every run writes, also without this writer.
      */
+    @Literature { keys := ["berger2024evoal"]; }
     type 'memory-model' extends 'statistics-writer' {
         /**
          * Which version of the memory model is written into <tt>iteration-&lt;n&gt;.json</tt>.
@@ -870,10 +869,7 @@ module de.evoal.optimisation.core {
     /**
      * Stopping criterion that stops when a measure of the recorded fitness has not improved
      *   for a number of iterations, an improvement-based criterion like ImpBest and ImpAv in
-     *   K. Zielinski, P. Weitkemper, R. Laur, K.-D. Kammeyer: Examination of Stopping
-     *   Criteria for Differential Evolution based on a Power Allocation Problem. 10th
-     *   International Conference on Optimization of Electrical and Electronic Equipment
-     *   (OPTIM), 2006.
+     *   Zielinski et al. 2006.
      *
      * The measure is smaller for better iterations (the canonical fitness is minimised).
      *   Iteration 0 sets the reference value. An iteration improves if its value is below
@@ -885,6 +881,7 @@ module de.evoal.optimisation.core {
      * The measures need a fitness with one component; with several goals, add a
      *   scalarisation such as 'weighted-sum' to the 'fitness-pipeline'.
      */
+    @Literature { keys := ["zielinski2006examination"]; }
     type stagnation extends 'stopping-criterion' {
         /**
          * The number of iterations without improvement after which the run stops.
@@ -922,12 +919,14 @@ module de.evoal.optimisation.core {
      *   (rank 0), which the algorithm's comparator chose, e.g. the feasible ones first
      *   (ImpBest in Zielinski et al. 2006).
      */
+    @Literature { keys := ["zielinski2006examination"]; }
     type 'best-fitness' extends 'stagnation-measure' {}
 
     /**
      * The mean fitness of all members of an iteration, i.e. the population that continues
      *   (ImpAv in Zielinski et al. 2006).
      */
+    @Literature { keys := ["zielinski2006examination"]; }
     type 'mean-fitness' extends 'stagnation-measure' {}
 
     /**

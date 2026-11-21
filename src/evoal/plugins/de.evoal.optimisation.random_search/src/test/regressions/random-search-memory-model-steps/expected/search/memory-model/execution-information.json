@@ -63,6 +63,7 @@
       "steps" : true
     }
   } ],
+  "citations" : [ "berger2024evoal", "rastrigin1974systems" ],
   "searchSpace" : [ {
     "name" : "x:0",
     "type" : "real",

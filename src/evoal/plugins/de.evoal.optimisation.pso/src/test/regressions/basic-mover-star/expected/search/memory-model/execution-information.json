@@ -96,6 +96,7 @@
       "steps" : false
     }
   } ],
+  "citations" : [ "berger2024evoal", "kennedy1995particle", "ackley1987connectionist" ],
   "searchSpace" : [ {
     "name" : "x:0",
     "type" : "real",

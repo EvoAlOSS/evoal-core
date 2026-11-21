@@ -25,6 +25,9 @@ import org.junit.jupiter.api.io.TempDir;
 
 import org.mockito.Mockito;
 
+import tools.jackson.databind.JsonNode;
+import tools.jackson.databind.json.JsonMapper;
+
 import de.evoal.core.api.reproducibility.ReproducibilityProtocol;
 import de.evoal.core.api.dynamic.EAnnotationHelper;
 import de.evoal.core.api.languages.AttributeEvaluator;
@@ -44,6 +47,7 @@ import de.evoal.optimisation.api.execution.MetricContributor;
 import de.evoal.optimisation.api.fitness.FitnessLayout;
 import de.evoal.optimisation.api.fitness.Goal;
 import de.evoal.optimisation.api.fitness.Goals;
+import de.evoal.optimisation.api.run.RunLiterature;
 import de.evoal.optimisation.main.fitness.RelativeDistance;
 
 public class MemoryModelWriterTest {
@@ -107,6 +111,16 @@ public class MemoryModelWriterTest {
         return attributes;
     }
 
+    /**
+     * @return The literature of a configuration with the keys.
+     */
+    static RunLiterature literature(final List<String> keys) {
+        final RunLiterature literature = Mockito.mock(RunLiterature.class);
+        Mockito.when(literature.keys()).thenReturn(keys);
+
+        return literature;
+    }
+
     private MemoryModelWriter writer(final File output) throws Exception {
         final MemoryModelWriter writer = new MemoryModelWriter();
         inject(writer, "algorithm", MemoryModels.algorithmConfiguration());
@@ -114,6 +128,7 @@ public class MemoryModelWriterTest {
         inject(writer, "attributes", attributes(null));
         inject(writer, "evaluator", Mockito.mock(AttributeEvaluator.class));
         inject(writer, "goals", MemoryModels.goals(MemoryModels.problem()));
+        inject(writer, "literature", literature(List.of("berger2024evoal", "harik1996learning")));
         inject(writer, "outputFolder", output);
         inject(writer, "problem", MemoryModels.problem());
         inject(writer, "problemWriters", List.of(MemoryModels.configuration("memory-model")));
@@ -170,6 +185,18 @@ public class MemoryModelWriterTest {
                 final Path path = memoryModel.resolve(file);
                 Assertions.assertEquals(List.of(), MemoryModelSchemas.violationsOf(path));
             }
+        }
+
+        @Test
+        public void theExecutionInformationListsTheLiteratureOfTheConfiguration() throws Exception {
+            // when
+            addTwoIterations(writer);
+            writer.write();
+
+            // then
+            final JsonNode information = JsonMapper.builder().build()
+                                                   .readTree(memoryModel.resolve("execution-information.json").toFile());
+            Assertions.assertEquals("[\"berger2024evoal\",\"harik1996learning\"]", information.get("citations").toString());
         }
 
         @Test

@@ -328,6 +328,8 @@ public class MemoryModelJson {
      * @param execution The execution with the complete metric definitions and the fitness
      *   components.
      * @param setup What is needed to repeat the run.
+     * @param citations The BibTeX keys of the literature of the configuration, as in
+     *   {@code citations.bib}.
      */
     public ObjectNode toExecutionInformation(final Problem problem,
                                              final Goals goals,
@@ -335,7 +337,8 @@ public class MemoryModelJson {
                                              final List<? extends EObject> documentation,
                                              final List<? extends EObject> fitnessSteps,
                                              final Execution execution,
-                                             final RunSetup setup) {
+                                             final RunSetup setup,
+                                             final List<String> citations) {
         final ObjectNode document = newDocument();
 
         final ObjectNode problemNode = toProblem(problem, goals);
@@ -348,6 +351,9 @@ public class MemoryModelJson {
         documentation.stream()
                      .map(configurations::toConfiguration)
                      .forEach(documentationNodes::add);
+
+        final ArrayNode citationNodes = document.putArray("citations");
+        citations.forEach(citationNodes::add);
 
         final ArrayNode searchSpace = toFeatures(problem.getSearchSpace());
         document.set("searchSpace", searchSpace);

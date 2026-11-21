@@ -104,6 +104,7 @@
       "steps" : false
     }
   } ],
+  "citations" : [ "berger2024evoal", "kennedy1995particle", "rastrigin1974systems" ],
   "searchSpace" : [ {
     "name" : "x:0",
     "type" : "real",

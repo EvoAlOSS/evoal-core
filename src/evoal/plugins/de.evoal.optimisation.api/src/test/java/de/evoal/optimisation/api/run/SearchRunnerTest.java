@@ -1,5 +1,7 @@
 package de.evoal.optimisation.api.run;
 
+import java.io.File;
+
 import jakarta.inject.Provider;
 
 import org.junit.jupiter.api.Assertions;
@@ -12,10 +14,12 @@ import org.mockito.MockedStatic;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import de.evoal.core.api.board.Blackboard;
 import de.evoal.core.api.cdi.BeanFactory;
 import de.evoal.core.api.random.RandomService;
 import de.evoal.models.v202704.core.Configuration;
 import de.evoal.models.v202704.optimisation.model.OptimisationModule;
+import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
 import de.evoal.optimisation.api.execution.EvaluationPosition;
 import de.evoal.optimisation.api.execution.ExecutionRecorder;
 import de.evoal.optimisation.api.fitness.FitnessLayout;
@@ -41,6 +45,12 @@ public class SearchRunnerTest {
     @Mock
     private Provider<FitnessPipeline> fitnessPipelines;
 
+    @Mock
+    private Blackboard board;
+
+    @Mock
+    private RunLiterature literature;
+
     @InjectMocks
     private SearchRunner runner;
 
@@ -65,6 +75,8 @@ public class SearchRunnerTest {
 
         final OptimisationAlgorithm algorithm = Mockito.mock(OptimisationAlgorithm.class);
         final EvaluationPosition position = EvaluationPosition.withoutTarget(3, 5);
+        final File outputFolder = new File("output/search");
+        Mockito.when(board.getOrNull(OptimisationBlackboardEntries.EVALUATION_OUTPUT_FOLDER)).thenReturn(outputFolder);
 
         try (MockedStatic<BeanFactory> factory = Mockito.mockStatic(BeanFactory.class)) {
             factory.when(() -> BeanFactory.createComponent(OptimisationAlgorithm.class, algorithmConfiguration)).thenReturn(algorithm);
@@ -72,7 +84,8 @@ public class SearchRunnerTest {
             runner.run(configuration, 7, position);
         }
 
-        final InOrder order = Mockito.inOrder(randomService, idGenerator, executionRecorder, algorithm);
+        final InOrder order = Mockito.inOrder(literature, randomService, idGenerator, executionRecorder, algorithm);
+        order.verify(literature).start(configuration, outputFolder);
         order.verify(randomService).startRun(7);
         order.verify(idGenerator).startRun();
         order.verify(executionRecorder).startRun(position);

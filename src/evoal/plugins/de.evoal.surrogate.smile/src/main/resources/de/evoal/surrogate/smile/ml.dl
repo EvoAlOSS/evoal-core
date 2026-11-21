@@ -231,10 +231,9 @@ module de.evoal.surrogate.smile.ml {
 	 * Pearson VII universal kernel. The Pearson VII function is often used for curve
      *   fitting of X-ray diffraction scans and single bands in infrared spectra.<br/>
      * <br/>
-	 * References<br/>
-	 * B. Üstün, W.J. Melssen, and L. Buydens. Facilitating the Application of Support
-	 *   Vector Regression by Using a Universal Pearson VII Function Based Kernel, 2006.
+	 * Reference: Üstün, Melssen and Buydens 2006.
 	 */
+	@Literature { keys := ["uestuen2006facilitating"]; }
 	type 'pearson' extends 'kernel' {
 		
 		/**
@@ -372,26 +371,13 @@ module de.evoal.surrogate.smile.ml {
      *   the cost function ignores any training data close to the model prediction
      *   (within a threshold ε).<br/>
      * <br/>
-	 * References:<br/>
-	 * <ul>
-	 *   <li>A. J Smola and B. Scholkopf. A Tutorial on Support Vector Regression.</li>
-	 *   <li>Gary William Flake and Steve Lawrence. Efficient SVM Regression Training
-     *       with SMO.</li>
-	 *   <li>Christopher J. C. Burges. A Tutorial on Support Vector Machines for Pattern
-	 *       Recognition. Data Mining and Knowledge Discovery 2:121-167, 1998.</li>
-	 *   <li>John Platt. Sequential Minimal Optimization: A Fast Algorithm for Training
-     *       Support Vector Machines.</li>
-	 *   <li>Rong-En Fan, Pai-Hsuen, and Chih-Jen Lin. Working Set Selection Using Second
-     *       Order Information for Training Support Vector Machines. JMLR, 6:1889-1918, 2005.</li>
-	 *   <li>Antoine Bordes, Seyda Ertekin, Jason Weston and Leon Bottou. Fast Kernel
-	 *       Classifiers with Online and Active Learning, Journal of Machine Learning Research,
-     *      6:1579-1619, 2005.</li>
-	 *   <li>Tobias Glasmachers and Christian Igel. Second Order SMO Improves SVM Online and
-     *       Active Learning.</li>
-	 *   <li>Chih-Chung Chang and Chih-Jen Lin. LIBSVM: a Library for Support Vector Machines.</li>
-	 * </ul>
+	 * References: Smola and Schoelkopf 2004; Flake and Lawrence 2002; Burges 1998;
+	 *   Platt 1998; Fan, Chen and Lin 2005; Bordes et al. 2005; Glasmachers and Igel
+	 *   2008; Chang and Lin 2011 (LIBSVM).
 	 */
 	@MultiVariateConstraint{  'expression'  := self.'soft-margin' < self.tolerance; }
+	@Literature { keys := ["smola2004tutorial", "flake2002efficient", "burges1998tutorial", "platt1998sequential",
+	                       "fan2005working", "bordes2005fast", "glasmachers2008second", "chang2011libsvm"]; }
 	type 'epsilon-svr' extends surrogate {
 		/**
 	     * The soft margin penalty parameter.

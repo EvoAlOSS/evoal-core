@@ -1,3 +1,4 @@
+import "definitions" from 'de.evoal.core.constraints';
 import "definitions" from 'de.evoal.core.math';
 import "definitions" from 'de.evoal.pipeline.base';
 
@@ -10,7 +11,7 @@ module 'de.evoal.pipeline.benchmarks' {
 	/**
 	 * In mathematical optimisation, the Ackley function is a non-convex function
 	 * used as a performance test problem for optimisation algorithms. It was proposed
-	 * by David Ackley in his 1987 PhD dissertation. ... <a href="https://en.wikipedia.org/wiki/Ackley_function">Wikipedia</a>.
+	 * by David Ackley (Ackley 1987). ... <a href="https://en.wikipedia.org/wiki/Ackley_function">Wikipedia</a>.
 	 * 
 	 * <math display="block">
 	 *   <mrow>
@@ -112,6 +113,7 @@ module 'de.evoal.pipeline.benchmarks' {
 	 * According to this specification, the function only generates a single output
 	 *   variable out of a n input variables.
 	 */
+	@Literature { keys := ["ackley1987connectionist"]; }
 	type ackley extends benchmark {
 		/**
 		 * The constant a is set to 20 in the original Ackley function.
@@ -131,7 +133,7 @@ module 'de.evoal.pipeline.benchmarks' {
 	
 	/**
 	 * In mathematical optimisation, the Rastrigin function is a non-convex function
-	 * used as a performance test problem for optimisation algorithms. ... <a href="https://en.wikipedia.org/wiki/Rastrigin_function">Wikipedia</a>
+	 * used as a performance test problem for optimisation algorithms (Rastrigin 1974). ... <a href="https://en.wikipedia.org/wiki/Rastrigin_function">Wikipedia</a>
 	 * 
 	 * <math display="block">
 	 *   <mrow>
@@ -191,6 +193,7 @@ module 'de.evoal.pipeline.benchmarks' {
 	 * </math>
 	 * 
 	 */
+	@Literature { keys := ["rastrigin1974systems"]; }
 	type rastrigin extends benchmark {
 		/**
 		 * Constant a, which is typically 10.
@@ -199,13 +202,12 @@ module 'de.evoal.pipeline.benchmarks' {
 	}
 	
 	/**
-	 * ZDT1 (E. Zitzler, K. Deb, L. Thiele: Comparison of multiobjective evolutionary
-	 *   algorithms: empirical results. Evolutionary Computation 8(2), 2000, pp. 173-195),
-	 *   a benchmark with two minimised objectives. It reads n >= 2 variables x_1, ..., x_n
+	 * ZDT1 (Zitzler, Deb and Thiele 2000), a benchmark with two minimised objectives. It reads n >= 2 variables x_1, ..., x_n
 	 *   in [0, 1] (the paper uses n = 30) and writes f_1 and f_2:
 	 *   f_1 = x_1, g = 1 + 9 / (n - 1) * (x_2 + ... + x_n), f_2 = g * (1 - sqrt(f_1 / g)).
 	 *   The Pareto-optimal front is f_2 = 1 - sqrt(f_1) for f_1 in [0, 1]; it is convex.
 	 */
+	@Literature { keys := ["zitzler2000comparison"]; }
 	type zdt1 extends benchmark {}
 
 	/**
@@ -215,8 +217,9 @@ module 'de.evoal.pipeline.benchmarks' {
 	}
 	
 	/**
-	 * TODO Document me
+	 * The Rosenbrock function (Rosenbrock 1960).
 	 */
+	@Literature { keys := ["rosenbrock1960automatic"]; }
 	type 'rosenbrock' extends benchmark {	
 	}
 }

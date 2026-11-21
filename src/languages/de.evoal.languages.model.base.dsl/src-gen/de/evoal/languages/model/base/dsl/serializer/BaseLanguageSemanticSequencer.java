@@ -564,7 +564,7 @@ public class BaseLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 	 *     FunctionDefinitionRule returns FunctionDefinition
 	 *
 	 * Constraint:
-	 *     (type=TypeRule name=StringOrId (parameters+=ParameterRule parameters+=ParameterRule*)?)
+	 *     (constraints+=ConstraintRule* type=TypeRule name=StringOrId (parameters+=ParameterRule parameters+=ParameterRule*)?)
 	 * </pre>
 	 */
 	protected void sequence_FunctionDefinitionRule(ISerializationContext context, FunctionDefinition semanticObject) {

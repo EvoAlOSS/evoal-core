@@ -281,6 +281,7 @@ public class ParallelEvaluationReproducibilityTest {
         inject(writer, "attributes", attributes);
         inject(writer, "evaluator", Mockito.mock(AttributeEvaluator.class));
         inject(writer, "goals", goals);
+        inject(writer, "literature", MemoryModelWriterTest.literature(List.of()));
         inject(writer, "outputFolder", outputFolder.toFile());
         inject(writer, "problem", problem);
         inject(writer, "randomService", randomService);

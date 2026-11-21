@@ -110,6 +110,7 @@
       "steps" : false
     }
   } ],
+  "citations" : [ "berger2024evoal", "hansen2016cma", "hansen2001completely", "hansen2003reducing", "huang2023quantitative", "liang2006problem", "ros2008simple", "auger2005restart" ],
   "searchSpace" : [ {
     "name" : "x:0",
     "type" : "real",

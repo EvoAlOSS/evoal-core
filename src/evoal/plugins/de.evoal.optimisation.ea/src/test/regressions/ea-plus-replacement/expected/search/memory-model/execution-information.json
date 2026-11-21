@@ -123,6 +123,7 @@
       "steps" : true
     }
   } ],
+  "citations" : [ "berger2024evoal", "muehlenbein1992how", "baeck1993optimal", "schwefel1977numerische", "rastrigin1974systems" ],
   "searchSpace" : [ {
     "name" : "x:0",
     "type" : "real",

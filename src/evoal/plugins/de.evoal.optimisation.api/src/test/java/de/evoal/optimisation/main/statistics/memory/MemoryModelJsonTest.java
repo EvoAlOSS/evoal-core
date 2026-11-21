@@ -89,7 +89,8 @@ public class MemoryModelJsonTest {
                                                                     List.of(),
                                                                     List.of(),
                                                                     execution,
-                                                                    SINGLE_RUN);
+                                                                    SINGLE_RUN,
+                                                                    List.of());
 
             // then
             Assertions.assertEquals("[{\"name\":\"reason\",\"scope\":\"relationship\",\"valueType\":\"text\","
@@ -109,7 +110,8 @@ public class MemoryModelJsonTest {
                                                                     List.of(),
                                                                     List.of(),
                                                                     MemoryModels.execution(),
-                                                                    SINGLE_RUN);
+                                                                    SINGLE_RUN,
+                                                                    List.of());
 
             // then
             Assertions.assertFalse(document.has("propertyDefinitions"));
@@ -166,7 +168,8 @@ public class MemoryModelJsonTest {
                                                                     List.of(),
                                                                     List.of(),
                                                                     MemoryModels.execution(),
-                                                                    SINGLE_RUN);
+                                                                    SINGLE_RUN,
+                                                                    List.of());
 
             // then
             final String expectedSearchSpace = "[{\"name\":\"x:0\",\"type\":\"real\",\"scale\":\"quotient\","
@@ -185,7 +188,8 @@ public class MemoryModelJsonTest {
                                                                     List.of(),
                                                                     List.of(),
                                                                     MemoryModels.execution(),
-                                                                    SINGLE_RUN);
+                                                                    SINGLE_RUN,
+                                                                    List.of());
 
             // then
             final String expectedFirstDefinition = "{\"name\":\"evaluations.real\",\"kind\":\"counter\","
@@ -203,7 +207,8 @@ public class MemoryModelJsonTest {
                                                                     List.of(),
                                                                     List.of(),
                                                                     MemoryModels.execution(),
-                                                                    SINGLE_RUN);
+                                                                    SINGLE_RUN,
+                                                                    List.of());
 
             // then
             Assertions.assertEquals("2027.4.0", document.get("formatVersion").asString());
@@ -231,7 +236,8 @@ public class MemoryModelJsonTest {
                                                                     List.of(),
                                                                     List.of(),
                                                                     MemoryModels.execution(),
-                                                                    SINGLE_RUN);
+                                                                    SINGLE_RUN,
+                                                                    List.of());
 
             // then
             Assertions.assertEquals("[{\"feature\":\"y:0\",\"direction\":\"target\",\"target\":1.5,"
@@ -257,7 +263,8 @@ public class MemoryModelJsonTest {
                                                                     List.of(),
                                                                     List.of(step),
                                                                     execution,
-                                                                    SINGLE_RUN);
+                                                                    SINGLE_RUN,
+                                                                    List.of());
 
             // then
             Assertions.assertEquals("{\"components\":[{\"name\":\"y:0\",\"goal\":\"y:0\"},{\"name\":\"violation\"}],"
@@ -279,7 +286,8 @@ public class MemoryModelJsonTest {
                                                                     List.of(),
                                                                     List.of(),
                                                                     MemoryModels.execution(),
-                                                                    setup);
+                                                                    setup,
+                                                                    List.of());
 
             // then
             final String expectedSetup = "{\"evoalVersion\":\"2027.4.0\",\"seed\":\"-7\",\"run\":13,"

@@ -121,6 +121,7 @@
       "steps" : false
     }
   } ],
+  "citations" : [ "berger2024evoal", "zielinski2006examination", "rosenbrock1960automatic" ],
   "searchSpace" : [ {
     "name" : "x:0",
     "type" : "real",

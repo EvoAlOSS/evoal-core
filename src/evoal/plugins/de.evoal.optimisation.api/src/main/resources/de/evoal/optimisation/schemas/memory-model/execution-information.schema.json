@@ -48,6 +48,12 @@
       "type": "array",
       "items": { "$ref": "common.schema.json#/$defs/configuration" }
     },
+    "citations": {
+      "description": "The BibTeX keys of the literature of the configuration, in the order of citations.bib in the output folder: the EvoAl paper, then the sources of the DL types and DDL declarations the configuration uses and the citations of their plugins and libraries.",
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "uniqueItems": true
+    },
     "searchSpace": {
       "description": "Features in declaration order.",
       "type": "array",
@@ -155,6 +161,6 @@
       "additionalProperties": false
     }
   },
-  "required": ["formatVersion", "problem", "algorithm", "documentation", "searchSpace", "optimisationSpace", "fitness", "metricDefinitions", "setup"],
+  "required": ["formatVersion", "problem", "algorithm", "documentation", "citations", "searchSpace", "optimisationSpace", "fitness", "metricDefinitions", "setup"],
   "additionalProperties": false
 }

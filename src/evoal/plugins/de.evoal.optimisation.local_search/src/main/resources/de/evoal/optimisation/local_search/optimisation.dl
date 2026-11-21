@@ -37,8 +37,10 @@ module de.evoal.optimisation.local_search.optimisation {
      * Accepts a neighbour that is better, equal, or worse by less than a threshold
      *   (|difference| < threshold). The threshold decreases over time. The neighbours are
      *   offered in the order of the neighbour choosing strategy; if all of them are
-     *   rejected, the search ends, because the threshold only falls.
+     *   rejected, the search ends, because the threshold only falls (Dueck and Scheuer
+     *   1990).
      */
+    @Literature { keys := ["dueck1990threshold"]; }
     type 'threshold-accepting' extends 'accepting-strategy' {
     	/**
     	 * The threshold value to start with.
@@ -52,14 +54,16 @@ module de.evoal.optimisation.local_search.optimisation {
     }
 
     /**
-     * Simulated annealing is an acceptance probability function. The probability is affected
-     *   by the temperature, which decreases according to a cooling schedule.
+     * Simulated annealing (Kirkpatrick et al. 1983) is an acceptance probability function.
+     *   The probability is affected by the temperature, which decreases according to a
+     *   cooling schedule.
      *
      * As in the textbook version, every iteration tests a single neighbour, chosen at
      *   random from all neighbours (the 'neighbour-order' is not used). A better
      *   neighbour is always accepted, a worse one with the acceptance probability. If the
      *   neighbour is rejected, the candidate stays and the next iteration tries again.
      */
+    @Literature { keys := ["kirkpatrick1983optimization"]; }
     type 'simulated-annealing' extends 'accepting-strategy'{
     	/**
     	 * The temperature value to start with.

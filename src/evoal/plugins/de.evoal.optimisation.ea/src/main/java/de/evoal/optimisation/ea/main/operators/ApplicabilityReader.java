@@ -10,19 +10,17 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
 import org.eclipse.emf.common.util.Enumerator;
-import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
+import de.evoal.core.api.dynamic.DynamicDefinitions;
 import de.evoal.core.api.languages.AttributeEvaluator;
 import de.evoal.languages.model.base.definitions.ClassDefinition;
 import de.evoal.languages.model.base.expressions.Attribute;
 import de.evoal.languages.model.base.expressions.Expression;
 import de.evoal.languages.model.base.expressions.Instance;
-import de.evoal.languages.model.dynamic.ClassMapping;
-import de.evoal.languages.model.dynamic.DynamicPackage;
 
 import de.evoal.optimisation.ea.api.genotype.MeasurementScale;
 import de.evoal.optimisation.ea.api.genotype.Representation;
@@ -96,16 +94,9 @@ public class ApplicabilityReader {
      * @throws IllegalStateException if the class was not created from a DL type.
      */
     public static ClassDefinition definitionOf(final EClass eClass) {
-        final EAnnotation annotation = eClass.getEAnnotation(DynamicPackage.eNS_URI);
-        if(annotation != null) {
-            for(final EObject content : annotation.getContents()) {
-                if(content instanceof ClassMapping mapping) {
-                    return mapping.getSource();
-                }
-            }
-        }
-
-        throw new IllegalStateException("The class '" + eClass.getName() + "' was not created from a DL type.");
+        return DynamicDefinitions.definitionOf(eClass)
+                                 .orElseThrow(() -> new IllegalStateException("The class '" + eClass.getName()
+                                                                              + "' was not created from a DL type."));
     }
 
     private Applicability toApplicability(final Instance annotation) {

@@ -1049,6 +1049,7 @@ public class DefinitionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 	}
 	
 	//FunctionDefinitionRule returns FunctionDefinition:
+	//    (constraints += ConstraintRule)*
 	//    'def' type = TypeRule name = StringOrId '(' (parameters+=ParameterRule (',' parameters+=ParameterRule)*)? ')' ';'
 	//;
 	public BaseLanguageGrammarAccess.FunctionDefinitionRuleElements getFunctionDefinitionRuleAccess() {

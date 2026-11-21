@@ -175,6 +175,7 @@
       "steps" : true
     }
   } ],
+  "citations" : [ "berger2024evoal", "eshelman1993real", "muehlenbein1993predictive", "muehlenbein1992how", "baeck1993optimal", "deb2002fast", "syswerda1989uniform", "goldberg1991comparative", "rastrigin1974systems" ],
   "searchSpace" : [ {
     "name" : "x:0",
     "type" : "real",

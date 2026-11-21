@@ -50,12 +50,28 @@ module 'de.evoal.core.constraints' {
     }
 
     /**
-     * Constraint that specifies a minimum number of elements for arrays.
+     * Constraint that specifies a maximum number of elements for arrays.
      */
     type MaximumNumberOfElements extends Constraint {
         /**
-         * The minimum number of elements
+         * The maximum number of elements
          */
         bound : int;
+    }
+
+    /**
+     * Names the literature of a DL type or of a declaration ({@code def}) by BibTeX keys,
+     *   e.g. {@code @Literature { keys := ["harik1996learning"]; }}. The full entries are in
+     *   <tt>META-INF/evoal/credits.bib</tt> of the plugin that declares the type, or of a
+     *   module it depends on; the build fails for a key without an entry. A type also has
+     *   the literature of its super types. A run lists the literature of the types and
+     *   declarations its configuration uses in <tt>citations.bib</tt>.
+     */
+    type Literature extends Constraint {
+        /**
+         * The BibTeX keys of the sources.
+         */
+        @MinimumNumberOfElements { bound := 1; }
+        keys : array string;
     }
 }

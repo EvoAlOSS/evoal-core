@@ -175,6 +175,7 @@
       "steps" : false
     }
   } ],
+  "citations" : [ "berger2024evoal", "agmon1954relaxation", "kononova2024importance", "huang2023quantitative", "liang2006problem", "deb1995simulated", "deb2002fast", "muehlenbein1992how", "baeck1993optimal", "syswerda1989uniform", "goldberg1991comparative", "rastrigin1974systems" ],
   "searchSpace" : [ {
     "name" : "x:0",
     "type" : "real",

@@ -144,6 +144,7 @@
       "steps" : false
     }
   } ],
+  "citations" : [ "berger2024evoal", "gray1953pulse", "muehlenbein1992how", "baeck1993optimal", "syswerda1989uniform", "baker1987reducing", "rastrigin1974systems" ],
   "searchSpace" : [ {
     "name" : "x:0",
     "type" : "real",

@@ -123,6 +123,7 @@
       "steps" : true
     }
   } ],
+  "citations" : [ "berger2024evoal", "deb2002fast", "huang2023quantitative", "liang2006problem", "deb1995simulated", "muehlenbein1992how", "baeck1993optimal", "goldberg1991comparative", "schwefel1977numerische", "zitzler2000comparison" ],
   "searchSpace" : [ {
     "name" : "x:0",
     "type" : "real",

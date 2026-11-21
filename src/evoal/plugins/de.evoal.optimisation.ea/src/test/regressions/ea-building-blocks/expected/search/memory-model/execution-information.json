@@ -151,6 +151,7 @@
       "steps" : false
     }
   } ],
+  "citations" : [ "berger2024evoal", "harik1997learning", "syswerda1989uniform", "muehlenbein1992how", "baeck1993optimal", "goldberg1991comparative", "rastrigin1974systems", "pearson1896mathematical", "spearman1904proof" ],
   "searchSpace" : [ {
     "name" : "x:0",
     "type" : "real",

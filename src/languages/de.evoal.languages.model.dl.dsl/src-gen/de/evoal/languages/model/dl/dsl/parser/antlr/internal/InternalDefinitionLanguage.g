@@ -3105,16 +3105,35 @@ ruleFunctionDefinitionRule returns [EObject current=null]
 	leaveRule();
 }:
 	(
-		otherlv_0='def'
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getFunctionDefinitionRuleAccess().getConstraintsConstraintRuleParserRuleCall_0_0());
+				}
+				lv_constraints_0_0=ruleConstraintRule
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getFunctionDefinitionRuleRule());
+					}
+					add(
+						$current,
+						"constraints",
+						lv_constraints_0_0,
+						"de.evoal.languages.model.base.dsl.BaseLanguage.ConstraintRule");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)*
+		otherlv_1='def'
 		{
-			newLeafNode(otherlv_0, grammarAccess.getFunctionDefinitionRuleAccess().getDefKeyword_0());
+			newLeafNode(otherlv_1, grammarAccess.getFunctionDefinitionRuleAccess().getDefKeyword_1());
 		}
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getFunctionDefinitionRuleAccess().getTypeTypeRuleParserRuleCall_1_0());
+					newCompositeNode(grammarAccess.getFunctionDefinitionRuleAccess().getTypeTypeRuleParserRuleCall_2_0());
 				}
-				lv_type_1_0=ruleTypeRule
+				lv_type_2_0=ruleTypeRule
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getFunctionDefinitionRuleRule());
@@ -3122,7 +3141,7 @@ ruleFunctionDefinitionRule returns [EObject current=null]
 					set(
 						$current,
 						"type",
-						lv_type_1_0,
+						lv_type_2_0,
 						"de.evoal.languages.model.base.dsl.BaseLanguage.TypeRule");
 					afterParserOrEnumRuleCall();
 				}
@@ -3131,9 +3150,9 @@ ruleFunctionDefinitionRule returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getFunctionDefinitionRuleAccess().getNameStringOrIdParserRuleCall_2_0());
+					newCompositeNode(grammarAccess.getFunctionDefinitionRuleAccess().getNameStringOrIdParserRuleCall_3_0());
 				}
-				lv_name_2_0=ruleStringOrId
+				lv_name_3_0=ruleStringOrId
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getFunctionDefinitionRuleRule());
@@ -3141,23 +3160,23 @@ ruleFunctionDefinitionRule returns [EObject current=null]
 					set(
 						$current,
 						"name",
-						lv_name_2_0,
+						lv_name_3_0,
 						"de.evoal.languages.model.base.dsl.BaseLanguage.StringOrId");
 					afterParserOrEnumRuleCall();
 				}
 			)
 		)
-		otherlv_3='('
+		otherlv_4='('
 		{
-			newLeafNode(otherlv_3, grammarAccess.getFunctionDefinitionRuleAccess().getLeftParenthesisKeyword_3());
+			newLeafNode(otherlv_4, grammarAccess.getFunctionDefinitionRuleAccess().getLeftParenthesisKeyword_4());
 		}
 		(
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getFunctionDefinitionRuleAccess().getParametersParameterRuleParserRuleCall_4_0_0());
+						newCompositeNode(grammarAccess.getFunctionDefinitionRuleAccess().getParametersParameterRuleParserRuleCall_5_0_0());
 					}
-					lv_parameters_4_0=ruleParameterRule
+					lv_parameters_5_0=ruleParameterRule
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getFunctionDefinitionRuleRule());
@@ -3165,23 +3184,23 @@ ruleFunctionDefinitionRule returns [EObject current=null]
 						add(
 							$current,
 							"parameters",
-							lv_parameters_4_0,
+							lv_parameters_5_0,
 							"de.evoal.languages.model.base.dsl.BaseLanguage.ParameterRule");
 						afterParserOrEnumRuleCall();
 					}
 				)
 			)
 			(
-				otherlv_5=','
+				otherlv_6=','
 				{
-					newLeafNode(otherlv_5, grammarAccess.getFunctionDefinitionRuleAccess().getCommaKeyword_4_1_0());
+					newLeafNode(otherlv_6, grammarAccess.getFunctionDefinitionRuleAccess().getCommaKeyword_5_1_0());
 				}
 				(
 					(
 						{
-							newCompositeNode(grammarAccess.getFunctionDefinitionRuleAccess().getParametersParameterRuleParserRuleCall_4_1_1_0());
+							newCompositeNode(grammarAccess.getFunctionDefinitionRuleAccess().getParametersParameterRuleParserRuleCall_5_1_1_0());
 						}
-						lv_parameters_6_0=ruleParameterRule
+						lv_parameters_7_0=ruleParameterRule
 						{
 							if ($current==null) {
 								$current = createModelElementForParent(grammarAccess.getFunctionDefinitionRuleRule());
@@ -3189,7 +3208,7 @@ ruleFunctionDefinitionRule returns [EObject current=null]
 							add(
 								$current,
 								"parameters",
-								lv_parameters_6_0,
+								lv_parameters_7_0,
 								"de.evoal.languages.model.base.dsl.BaseLanguage.ParameterRule");
 							afterParserOrEnumRuleCall();
 						}
@@ -3197,13 +3216,13 @@ ruleFunctionDefinitionRule returns [EObject current=null]
 				)
 			)*
 		)?
-		otherlv_7=')'
+		otherlv_8=')'
 		{
-			newLeafNode(otherlv_7, grammarAccess.getFunctionDefinitionRuleAccess().getRightParenthesisKeyword_5());
+			newLeafNode(otherlv_8, grammarAccess.getFunctionDefinitionRuleAccess().getRightParenthesisKeyword_6());
 		}
-		otherlv_8=';'
+		otherlv_9=';'
 		{
-			newLeafNode(otherlv_8, grammarAccess.getFunctionDefinitionRuleAccess().getSemicolonKeyword_6());
+			newLeafNode(otherlv_9, grammarAccess.getFunctionDefinitionRuleAccess().getSemicolonKeyword_7());
 		}
 	)
 ;

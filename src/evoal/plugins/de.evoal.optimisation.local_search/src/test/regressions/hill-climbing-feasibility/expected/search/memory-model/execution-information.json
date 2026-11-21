@@ -112,6 +112,7 @@
       "steps" : false
     }
   } ],
+  "citations" : [ "berger2024evoal", "deb2000efficient", "huang2023quantitative", "liang2006problem", "rosenbrock1960automatic" ],
   "searchSpace" : [ {
     "name" : "x:0",
     "type" : "real",
