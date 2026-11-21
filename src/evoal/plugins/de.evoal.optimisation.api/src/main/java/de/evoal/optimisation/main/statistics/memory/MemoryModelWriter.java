@@ -3,6 +3,7 @@ package de.evoal.optimisation.main.statistics.memory;
 import java.io.File;
 import java.lang.module.ModuleDescriptor;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,7 +24,6 @@ import de.evoal.core.api.languages.AttributeEvaluator;
 import de.evoal.core.api.random.RandomService;
 import de.evoal.core.api.utils.AttributeHelper;
 import de.evoal.core.api.utils.EvoalIOException;
-import de.evoal.models.core.utils.FQNProvider;
 import de.evoal.models.v202704.core.Configuration;
 import de.evoal.models.v202704.optimisation.memory.Execution;
 import de.evoal.models.v202704.optimisation.memory.Individual;
@@ -70,11 +70,19 @@ public class MemoryModelWriter implements StatisticsWriter {
     public static final String UNKNOWN_VERSION = "unknown";
 
     /**
-     * The configuration of the algorithm, whose DL type is written.
+     * The configuration of the algorithm.
      */
     @Inject
     @ConfigurationValue(entry = OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm")
     private EObject algorithm;
+
+    /**
+     * The statistics writers of the algorithm block ({@code document := [...]}), {@code null} if
+     *   there are none.
+     */
+    @Inject
+    @ConfigurationValue(entry = OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "documentation")
+    private List<EObject> algorithmWriters;
 
     /**
      * Finds the data descriptions of the features.
@@ -89,7 +97,7 @@ public class MemoryModelWriter implements StatisticsWriter {
     private AttributeHelper attributes;
 
     /**
-     * Reads the attribute values of target distances and fitness steps, with their defaults.
+     * Reads the attribute values of the configurations, with their defaults.
      */
     @Inject
     private AttributeEvaluator evaluator;
@@ -139,6 +147,13 @@ public class MemoryModelWriter implements StatisticsWriter {
     @Inject
     @ConfigurationValue(entry = OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "problem")
     private EObject problem;
+
+    /**
+     * The statistics writers of the problem, {@code null} if there are none.
+     */
+    @Inject
+    @ConfigurationValue(entry = OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "problem.documentation")
+    private List<EObject> problemWriters;
 
     /**
      * Provides the seed of the execution.
@@ -270,20 +285,37 @@ public class MemoryModelWriter implements StatisticsWriter {
         folder = new MemoryModelFolder(runFolder());
         folder.prepare();
 
-        final String algorithmType = new FQNProvider().get(algorithm);
+        final List<EObject> documentation = writersInUse();
         final List<Configuration> fitnessSteps = attributes.lookup(algorithm, "fitness-pipeline");
         final Execution execution = recorder.getExecution();
         final RunSetup setup = toSetup();
 
         final ObjectNode document = json.toExecutionInformation(optimisationProblem,
                                                                 goals,
-                                                                algorithmType,
+                                                                algorithm,
+                                                                documentation,
                                                                 fitnessSteps,
                                                                 execution,
                                                                 setup);
         folder.write("execution-information.json", document);
 
         log.info("Writing the memory model to '{}'.", folder.getFolder());
+    }
+
+    /**
+     * @return The statistics writers in the order they are used: those of the problem, then
+     *   those of the algorithm block (see {@code StatisticsFactory}).
+     */
+    private List<EObject> writersInUse() {
+        final List<EObject> writers = new ArrayList<>();
+        if(problemWriters != null) {
+            writers.addAll(problemWriters);
+        }
+        if(algorithmWriters != null) {
+            writers.addAll(algorithmWriters);
+        }
+
+        return writers;
     }
 
     /**

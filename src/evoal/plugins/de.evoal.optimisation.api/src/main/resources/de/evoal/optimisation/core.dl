@@ -698,9 +698,10 @@ module de.evoal.optimisation.core {
      *
      * <ul>
      *   <li><tt>execution-information.json</tt> before the first iteration: problem,
-     *     goals, algorithm, search and optimisation space, metric definitions, property
-     *     definitions (if any), and what is needed to repeat the run (EvoAl version, seed,
-     *     run).</li>
+     *     goals, the configurations of the optimisation function, the algorithm and the
+     *     statistics writers (DL type and all attribute values), search and optimisation
+     *     space, metric definitions, property definitions (if any), and what is needed to
+     *     repeat the run (EvoAl version, seed, run).</li>
      *   <li><tt>iteration-&lt;n&gt;.json</tt> for every iteration: its individuals with
      *     their values, origin (relationships) and properties (e.g. the reason of a
      *     replacement), its steps, ranks and metrics.</li>

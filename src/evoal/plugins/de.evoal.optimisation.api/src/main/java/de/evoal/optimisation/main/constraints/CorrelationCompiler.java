@@ -13,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
 import de.evoal.core.api.dynamic.EAnnotationHelper;
+import de.evoal.core.api.languages.ExpressionText;
 import de.evoal.core.api.languages.base.CallSwitch;
 import de.evoal.core.api.languages.base.DataReferenceSwitch;
 import de.evoal.core.api.languages.base.NumberSwitch;
@@ -126,14 +127,14 @@ public class CorrelationCompiler {
                 try {
                     groups.add(toCorrelation(++correlations, call, ranged, ddl.searchByData()));
                 } catch(final IllegalArgumentException e) {
-                    throw new IllegalArgumentException("The correlation '" + ConstraintCompiler.textOf(call)
+                    throw new IllegalArgumentException("The correlation '" + ExpressionText.of(call)
                                                        + "' cannot be used: " + e.getMessage(), e);
                 }
             } else if(BUILDING_BLOCK.equals(function)) {
                 try {
                     groups.add(toBuildingBlock(++blocks, call, ddl.searchByData()));
                 } catch(final IllegalArgumentException e) {
-                    throw new IllegalArgumentException("The building block '" + ConstraintCompiler.textOf(call)
+                    throw new IllegalArgumentException("The building block '" + ExpressionText.of(call)
                                                        + "' cannot be used: " + e.getMessage(), e);
                 }
             }
@@ -157,7 +158,7 @@ public class CorrelationCompiler {
             description = null;
         }
         if(description == null) {
-            throw new IllegalArgumentException("'" + ConstraintCompiler.textOf(parameter) + "' is no data.");
+            throw new IllegalArgumentException("'" + ExpressionText.of(parameter) + "' is no data.");
         }
 
         return searchFeatureOf(description, searchByData, declarations);
@@ -195,7 +196,7 @@ public class CorrelationCompiler {
     private static double numberOf(final Expression parameter) {
         final Number number = new NumberSwitch().doSwitch(parameter);
         if(number == null) {
-            throw new IllegalArgumentException("'" + ConstraintCompiler.textOf(parameter) + "' is no number.");
+            throw new IllegalArgumentException("'" + ExpressionText.of(parameter) + "' is no number.");
         }
 
         return number.doubleValue();
@@ -204,7 +205,7 @@ public class CorrelationCompiler {
     private static CorrelationRange rangeOf(final Expression parameter) {
         final Call call = new CallSwitch().doSwitch(parameter);
         if(call == null || !RANGE.equals(call.getFunction().getName())) {
-            throw new IllegalArgumentException("'" + ConstraintCompiler.textOf(parameter) + "' is no range(lower, upper).");
+            throw new IllegalArgumentException("'" + ExpressionText.of(parameter) + "' is no range(lower, upper).");
         }
 
         ConstraintCompiler.requireParameters(call, 2);
@@ -225,7 +226,7 @@ public class CorrelationCompiler {
         ConstraintCompiler.requireParameters(call, 1);
 
         final Expression parameter = call.getParameters().getFirst();
-        final String rejection = "'" + ConstraintCompiler.textOf(parameter) + "' is no array of data, e.g. "
+        final String rejection = "'" + ExpressionText.of(parameter) + "' is no array of data, e.g. "
                                  + "[data 'x:0', data 'x:1'].";
 
         // the interpreter evaluates an array to a list and a data reference to its description

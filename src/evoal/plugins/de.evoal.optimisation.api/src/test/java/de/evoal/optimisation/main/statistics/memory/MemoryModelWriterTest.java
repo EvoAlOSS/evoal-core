@@ -116,6 +116,7 @@ public class MemoryModelWriterTest {
         inject(writer, "goals", MemoryModels.goals(MemoryModels.problem()));
         inject(writer, "outputFolder", output);
         inject(writer, "problem", MemoryModels.problem());
+        inject(writer, "problemWriters", List.of(MemoryModels.configuration("memory-model")));
         inject(writer, "randomService", RandomService.withSeed(42));
         inject(writer, "recorder", recorder);
 
@@ -195,6 +196,30 @@ public class MemoryModelWriterTest {
             final Path information = memoryModel.resolve("execution-information.json");
             Assertions.assertEquals(List.of(), MemoryModelSchemas.violationsOf(information));
             Assertions.assertTrue(Files.readString(information).contains("\"scale\" : 2.0"));
+        }
+
+        @Test
+        public void theWritersOfTheProblemAndTheAlgorithmAreDescribedInTheirOrder() throws Exception {
+            // given
+            inject(writer, "algorithmWriters", List.of(MemoryModels.configuration("metrics-per-iteration")));
+
+            // when
+            writer.start();
+
+            // then
+            final Path information = memoryModel.resolve("execution-information.json");
+            Assertions.assertEquals(List.of(), MemoryModelSchemas.violationsOf(information));
+            final String content = Files.readString(information);
+            final String expected = """
+                      "documentation" : [ {
+                        "type" : "de.evoal.test.memory-model",
+                        "attributes" : { }
+                      }, {
+                        "type" : "de.evoal.test.metrics-per-iteration",
+                        "attributes" : { }
+                      } ],
+                    """;
+            Assertions.assertTrue(content.contains(expected), content);
         }
 
         @Test

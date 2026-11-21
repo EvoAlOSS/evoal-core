@@ -85,7 +85,8 @@ public class MemoryModelJsonTest {
             // when
             final ObjectNode document = json.toExecutionInformation(MemoryModels.problem(),
                                                                     MemoryModels.goals(MemoryModels.problem()),
-                                                                    "de.evoal.test.algorithm",
+                                                                    MemoryModels.algorithmConfiguration(),
+                                                                    List.of(),
                                                                     List.of(),
                                                                     execution,
                                                                     SINGLE_RUN);
@@ -104,7 +105,8 @@ public class MemoryModelJsonTest {
             // when
             final ObjectNode document = json.toExecutionInformation(MemoryModels.problem(),
                                                                     MemoryModels.goals(MemoryModels.problem()),
-                                                                    "de.evoal.test.algorithm",
+                                                                    MemoryModels.algorithmConfiguration(),
+                                                                    List.of(),
                                                                     List.of(),
                                                                     MemoryModels.execution(),
                                                                     SINGLE_RUN);
@@ -160,7 +162,8 @@ public class MemoryModelJsonTest {
             // when
             final ObjectNode document = json.toExecutionInformation(MemoryModels.problem(),
                                                                     MemoryModels.goals(MemoryModels.problem()),
-                                                                    "de.evoal.test.algorithm",
+                                                                    MemoryModels.algorithmConfiguration(),
+                                                                    List.of(),
                                                                     List.of(),
                                                                     MemoryModels.execution(),
                                                                     SINGLE_RUN);
@@ -178,7 +181,8 @@ public class MemoryModelJsonTest {
             // when
             final ObjectNode document = json.toExecutionInformation(MemoryModels.problem(),
                                                                     MemoryModels.goals(MemoryModels.problem()),
-                                                                    "de.evoal.test.algorithm",
+                                                                    MemoryModels.algorithmConfiguration(),
+                                                                    List.of(),
                                                                     List.of(),
                                                                     MemoryModels.execution(),
                                                                     SINGLE_RUN);
@@ -195,16 +199,20 @@ public class MemoryModelJsonTest {
             // when
             final ObjectNode document = json.toExecutionInformation(MemoryModels.problem(),
                                                                     MemoryModels.goals(MemoryModels.problem()),
-                                                                    "de.evoal.test.algorithm",
+                                                                    MemoryModels.algorithmConfiguration(),
+                                                                    List.of(),
                                                                     List.of(),
                                                                     MemoryModels.execution(),
                                                                     SINGLE_RUN);
 
             // then
             Assertions.assertEquals("2027.4.0", document.get("formatVersion").asString());
-            Assertions.assertEquals("{\"name\":\"sphere\",\"goals\":[{\"feature\":\"y:0\",\"direction\":\"minimise\"}]}",
+            Assertions.assertEquals("{\"name\":\"sphere\",\"goals\":[{\"feature\":\"y:0\",\"direction\":\"minimise\"}],"
+                                    + "\"function\":{\"type\":\"de.evoal.test.sphere-function\",\"attributes\":{}}}",
                                     document.get("problem").toString());
-            Assertions.assertEquals("{\"type\":\"de.evoal.test.algorithm\"}", document.get("algorithm").toString());
+            Assertions.assertEquals("{\"type\":\"de.evoal.test.algorithm\",\"attributes\":{}}",
+                                    document.get("algorithm").toString());
+            Assertions.assertEquals("[]", document.get("documentation").toString());
             Assertions.assertEquals("{\"evoalVersion\":\"2027.4.0\",\"seed\":\"9007199254740993\",\"run\":0}",
                                     document.get("setup").toString());
         }
@@ -219,7 +227,8 @@ public class MemoryModelJsonTest {
             // when
             final ObjectNode document = json.toExecutionInformation(problem,
                                                                     goals,
-                                                                    "de.evoal.test.algorithm",
+                                                                    MemoryModels.algorithmConfiguration(),
+                                                                    List.of(),
                                                                     List.of(),
                                                                     MemoryModels.execution(),
                                                                     SINGLE_RUN);
@@ -244,7 +253,8 @@ public class MemoryModelJsonTest {
             // when
             final ObjectNode document = json.toExecutionInformation(MemoryModels.problem(),
                                                                     MemoryModels.goals(MemoryModels.problem()),
-                                                                    "de.evoal.test.algorithm",
+                                                                    MemoryModels.algorithmConfiguration(),
+                                                                    List.of(),
                                                                     List.of(step),
                                                                     execution,
                                                                     SINGLE_RUN);
@@ -265,7 +275,8 @@ public class MemoryModelJsonTest {
             // when
             final ObjectNode document = json.toExecutionInformation(MemoryModels.problem(),
                                                                     MemoryModels.goals(MemoryModels.problem()),
-                                                                    "de.evoal.test.algorithm",
+                                                                    MemoryModels.algorithmConfiguration(),
+                                                                    List.of(),
                                                                     List.of(),
                                                                     MemoryModels.execution(),
                                                                     setup);

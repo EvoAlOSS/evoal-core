@@ -5,11 +5,64 @@
     "goals" : [ {
       "feature" : "y:0",
       "direction" : "minimise"
-    } ]
+    } ],
+    "function" : {
+      "type" : "de.evoal.pipeline.optimisation.benchmark-function",
+      "attributes" : {
+        "benchmarks" : [ {
+          "type" : "de.evoal.pipeline.optimisation.benchmark-configuration",
+          "attributes" : {
+            "function" : {
+              "type" : "de.evoal.pipeline.benchmarks.rastrigin",
+              "attributes" : {
+                "a" : 10.0
+              }
+            },
+            "reads" : [ "x:0", "x:1" ],
+            "writes" : [ "y:0" ]
+          }
+        } ]
+      }
+    }
   },
   "algorithm" : {
-    "type" : "de.evoal.optimisation.random_search.optimisation.random-search"
+    "type" : "de.evoal.optimisation.random_search.optimisation.random-search",
+    "attributes" : {
+      "initialisation" : {
+        "type" : "de.evoal.optimisation.core.random-population",
+        "attributes" : { }
+      },
+      "optimisation-function" : {
+        "type" : "de.evoal.optimisation.core.problem-function",
+        "attributes" : { }
+      },
+      "comparator" : {
+        "type" : "de.evoal.optimisation.core.numeric-comparator",
+        "attributes" : { }
+      },
+      "stopping-criteria" : [ {
+        "type" : "de.evoal.optimisation.core.iteration-count",
+        "attributes" : {
+          "maximum-iterations" : 2
+        }
+      } ],
+      "fitness-pipeline" : [ ],
+      "candidate-checks" : [ ],
+      "constraint-measure" : {
+        "type" : "de.evoal.optimisation.core.exact-measure",
+        "attributes" : {
+          "equality-tolerance" : 1.0E-4
+        }
+      },
+      "samples-per-iteration" : 3
+    }
   },
+  "documentation" : [ {
+    "type" : "de.evoal.optimisation.core.memory-model",
+    "attributes" : {
+      "steps" : true
+    }
+  } ],
   "searchSpace" : [ {
     "name" : "x:0",
     "type" : "real",

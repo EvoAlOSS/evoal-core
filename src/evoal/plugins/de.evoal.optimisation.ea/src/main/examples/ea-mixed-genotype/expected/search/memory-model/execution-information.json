@@ -5,11 +5,147 @@
     "goals" : [ {
       "feature" : "y:0",
       "direction" : "minimise"
-    } ]
+    } ],
+    "function" : {
+      "type" : "de.evoal.pipeline.optimisation.benchmark-function",
+      "attributes" : {
+        "benchmarks" : [ {
+          "type" : "de.evoal.pipeline.optimisation.benchmark-configuration",
+          "attributes" : {
+            "function" : {
+              "type" : "de.evoal.pipeline.benchmarks.rastrigin",
+              "attributes" : {
+                "a" : 10.0
+              }
+            },
+            "reads" : [ "x:0", "x:1", "n:0", "n:1" ],
+            "writes" : [ "y:0" ]
+          }
+        } ]
+      }
+    }
   },
   "algorithm" : {
-    "type" : "de.evoal.optimisation.ea.optimisation.evolutionary-algorithm"
+    "type" : "de.evoal.optimisation.ea.optimisation.evolutionary-algorithm",
+    "attributes" : {
+      "initialisation" : {
+        "type" : "de.evoal.optimisation.core.random-population",
+        "attributes" : { }
+      },
+      "optimisation-function" : {
+        "type" : "de.evoal.optimisation.core.problem-function",
+        "attributes" : { }
+      },
+      "comparator" : {
+        "type" : "de.evoal.optimisation.core.numeric-comparator",
+        "attributes" : { }
+      },
+      "stopping-criteria" : [ {
+        "type" : "de.evoal.optimisation.core.iteration-count",
+        "attributes" : {
+          "maximum-iterations" : 50
+        }
+      } ],
+      "fitness-pipeline" : [ ],
+      "candidate-checks" : [ ],
+      "constraint-measure" : {
+        "type" : "de.evoal.optimisation.core.exact-measure",
+        "attributes" : {
+          "equality-tolerance" : 1.0E-4
+        }
+      },
+      "size-of-population" : 30,
+      "number-of-offspring" : 20,
+      "genotype" : {
+        "type" : "de.evoal.optimisation.ea.optimisation.genotype",
+        "attributes" : {
+          "chromosomes" : [ {
+            "type" : "de.evoal.optimisation.ea.optimisation.gray-chromosome",
+            "attributes" : {
+              "features" : [ "x:0", "x:1" ],
+              "recombination" : [ ],
+              "mutation" : [ ],
+              "precision" : 12
+            }
+          }, {
+            "type" : "de.evoal.optimisation.ea.optimisation.integer-chromosome",
+            "attributes" : {
+              "features" : [ "n:0", "n:1" ],
+              "recombination" : [ {
+                "type" : "de.evoal.optimisation.ea.optimisation.uniform-crossover",
+                "attributes" : {
+                  "probability" : 1.0,
+                  "swap-probability" : 0.5
+                }
+              } ],
+              "mutation" : [ {
+                "type" : "de.evoal.optimisation.ea.optimisation.creep-mutation",
+                "attributes" : {
+                  "probability" : 1.0,
+                  "gene-probability" : 0.5,
+                  "step" : 1
+                }
+              } ]
+            }
+          } ]
+        }
+      },
+      "parent-selection" : {
+        "type" : "de.evoal.optimisation.ea.optimisation.roulette-wheel-selection",
+        "attributes" : { }
+      },
+      "recombination" : [ {
+        "type" : "de.evoal.optimisation.ea.optimisation.multi-point-crossover",
+        "attributes" : {
+          "probability" : 0.8,
+          "points" : 2
+        }
+      } ],
+      "mutation" : [ {
+        "type" : "de.evoal.optimisation.ea.optimisation.bit-flip-mutation",
+        "attributes" : {
+          "probability" : 1.0,
+          "gene-probability" : null
+        }
+      } ],
+      "replacement" : {
+        "type" : "de.evoal.optimisation.ea.optimisation.survivor-replacement",
+        "attributes" : {
+          "selection" : {
+            "type" : "de.evoal.optimisation.ea.optimisation.elite-selection",
+            "attributes" : {
+              "count" : 2,
+              "rest" : {
+                "type" : "de.evoal.optimisation.ea.optimisation.stochastic-universal-sampling",
+                "attributes" : { }
+              }
+            }
+          }
+        }
+      },
+      "boundary-handling" : "stick"
+    }
   },
+  "documentation" : [ {
+    "type" : "de.evoal.optimisation.core.candidates-per-iteration",
+    "attributes" : {
+      "prefix-data" : false,
+      "store-search-space" : true,
+      "store-optimisation-space" : true
+    }
+  }, {
+    "type" : "de.evoal.optimisation.core.best-candidate-per-iteration",
+    "attributes" : {
+      "prefix-data" : false,
+      "store-search-space" : true,
+      "store-optimisation-space" : true
+    }
+  }, {
+    "type" : "de.evoal.optimisation.core.memory-model",
+    "attributes" : {
+      "steps" : false
+    }
+  } ],
   "searchSpace" : [ {
     "name" : "x:0",
     "type" : "real",

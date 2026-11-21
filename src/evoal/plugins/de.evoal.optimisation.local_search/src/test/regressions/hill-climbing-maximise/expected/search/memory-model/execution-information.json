@@ -5,11 +5,136 @@
     "goals" : [ {
       "feature" : "y:0",
       "direction" : "maximise"
-    } ]
+    } ],
+    "function" : {
+      "type" : "de.evoal.pipeline.optimisation.benchmark-function",
+      "attributes" : {
+        "benchmarks" : [ {
+          "type" : "de.evoal.pipeline.optimisation.benchmark-configuration",
+          "attributes" : {
+            "function" : {
+              "type" : "de.evoal.pipeline.benchmarks.rosenbrock",
+              "attributes" : { }
+            },
+            "reads" : [ "x:0", "x:1" ],
+            "writes" : [ "y:0" ]
+          }
+        } ]
+      }
+    }
   },
   "algorithm" : {
-    "type" : "de.evoal.optimisation.local_search.optimisation.local-search"
+    "type" : "de.evoal.optimisation.local_search.optimisation.local-search",
+    "attributes" : {
+      "initialisation" : {
+        "type" : "de.evoal.optimisation.core.specify-candidates",
+        "attributes" : {
+          "candidate-file" : null,
+          "candidate-list" : [ {
+            "type" : "de.evoal.optimisation.core.candidate",
+            "attributes" : {
+              "values" : [ {
+                "type" : "de.evoal.optimisation.core.variable",
+                "attributes" : {
+                  "var" : "x:0",
+                  "val" : 2.0
+                }
+              }, {
+                "type" : "de.evoal.optimisation.core.variable",
+                "attributes" : {
+                  "var" : "x:1",
+                  "val" : 5.0
+                }
+              } ]
+            }
+          }, {
+            "type" : "de.evoal.optimisation.core.candidate",
+            "attributes" : {
+              "values" : [ {
+                "type" : "de.evoal.optimisation.core.variable",
+                "attributes" : {
+                  "var" : "x:0",
+                  "val" : -3.0
+                }
+              }, {
+                "type" : "de.evoal.optimisation.core.variable",
+                "attributes" : {
+                  "var" : "x:1",
+                  "val" : 4.0
+                }
+              } ]
+            }
+          } ],
+          "random" : false
+        }
+      },
+      "optimisation-function" : {
+        "type" : "de.evoal.optimisation.core.problem-function",
+        "attributes" : { }
+      },
+      "comparator" : {
+        "type" : "de.evoal.optimisation.core.numeric-comparator",
+        "attributes" : { }
+      },
+      "stopping-criteria" : [ {
+        "type" : "de.evoal.optimisation.core.iteration-count",
+        "attributes" : {
+          "maximum-iterations" : 10
+        }
+      } ],
+      "fitness-pipeline" : [ ],
+      "candidate-checks" : [ ],
+      "constraint-measure" : {
+        "type" : "de.evoal.optimisation.core.exact-measure",
+        "attributes" : {
+          "equality-tolerance" : 1.0E-4
+        }
+      },
+      "neighbour-choosing-strategy" : {
+        "type" : "de.evoal.optimisation.local_search.optimisation.manual-strategy",
+        "attributes" : {
+          "step-size" : [ {
+            "type" : "de.evoal.optimisation.core.variable",
+            "attributes" : {
+              "var" : "x:0",
+              "val" : 0.1
+            }
+          }, {
+            "type" : "de.evoal.optimisation.core.variable",
+            "attributes" : {
+              "var" : "x:1",
+              "val" : 0.1
+            }
+          } ],
+          "neighbour-order" : "fixed"
+        }
+      },
+      "accepting-strategy" : {
+        "type" : "de.evoal.optimisation.local_search.optimisation.hill-climber",
+        "attributes" : { }
+      }
+    }
   },
+  "documentation" : [ {
+    "type" : "de.evoal.optimisation.core.candidates-per-iteration",
+    "attributes" : {
+      "prefix-data" : false,
+      "store-search-space" : true,
+      "store-optimisation-space" : true
+    }
+  }, {
+    "type" : "de.evoal.optimisation.core.best-candidate-per-iteration",
+    "attributes" : {
+      "prefix-data" : false,
+      "store-search-space" : true,
+      "store-optimisation-space" : true
+    }
+  }, {
+    "type" : "de.evoal.optimisation.core.memory-model",
+    "attributes" : {
+      "steps" : false
+    }
+  } ],
   "searchSpace" : [ {
     "name" : "x:0",
     "type" : "real",

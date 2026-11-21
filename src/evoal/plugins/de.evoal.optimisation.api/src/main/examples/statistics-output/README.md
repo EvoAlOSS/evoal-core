@@ -54,10 +54,12 @@ All files are in `output/search/`.
   the optimisation function so far. It grows by 5 per iteration, one per particle.
   `evaluations.surrogate` counts the evaluations of a surrogate model (none here).
 - `memory-model/`: the memory model of the run, written while the run is executed.
-  - `execution-information.json` (before the first iteration): the problem, the
-    configuration of the algorithm, the search and optimisation space, the
-    components of the fitness (`fitness`), the definitions of the metrics, and
-    what is needed to repeat the run (EvoAl version, seed).
+  - `execution-information.json` (before the first iteration): the problem with
+    the configuration of its optimisation function, the configuration of the
+    algorithm and of the statistics writers (`documentation`) with all
+    attributes, the search and optimisation space, the components of the fitness
+    (`fitness`), the definitions of the metrics, and what is needed to repeat the
+    run (EvoAl version, seed).
   - `iteration-<n>.json`: the individuals of iteration `n` with their values
     (`input`, `output`), their fitness (`fitness`, one value per component of
     `execution-information.json`; smaller is better, so a maximised objective

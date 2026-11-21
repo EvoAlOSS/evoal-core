@@ -214,7 +214,7 @@
       "additionalProperties": false
     },
     "configuration": {
-      "description": "An instance of a DL type, e.g., a target distance or a fitness step: its fully qualified type and its attribute values (with defaults applied). Nested instances are configurations, data is written by name.",
+      "description": "An instance of a DL type, e.g., an algorithm, a target distance or a fitness step: its fully qualified type and the values of all its attributes in their order (with defaults applied). Nested instances are configurations, data is written by name, expressions as their source text, enum literals by name, unset optional attributes as null and unset arrays as empty arrays.",
       "type": "object",
       "properties": {
         "type": {

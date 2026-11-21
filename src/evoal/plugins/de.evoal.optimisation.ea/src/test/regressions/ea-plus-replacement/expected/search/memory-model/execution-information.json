@@ -5,11 +5,114 @@
     "goals" : [ {
       "feature" : "y:0",
       "direction" : "minimise"
-    } ]
+    } ],
+    "function" : {
+      "type" : "de.evoal.pipeline.optimisation.benchmark-function",
+      "attributes" : {
+        "benchmarks" : [ {
+          "type" : "de.evoal.pipeline.optimisation.benchmark-configuration",
+          "attributes" : {
+            "function" : {
+              "type" : "de.evoal.pipeline.benchmarks.rastrigin",
+              "attributes" : {
+                "a" : 10.0
+              }
+            },
+            "reads" : [ "x:0", "x:1", "x:2" ],
+            "writes" : [ "y:0" ]
+          }
+        } ]
+      }
+    }
   },
   "algorithm" : {
-    "type" : "de.evoal.optimisation.ea.optimisation.evolutionary-algorithm"
+    "type" : "de.evoal.optimisation.ea.optimisation.evolutionary-algorithm",
+    "attributes" : {
+      "initialisation" : {
+        "type" : "de.evoal.optimisation.core.random-population",
+        "attributes" : { }
+      },
+      "optimisation-function" : {
+        "type" : "de.evoal.optimisation.core.problem-function",
+        "attributes" : { }
+      },
+      "comparator" : {
+        "type" : "de.evoal.optimisation.core.numeric-comparator",
+        "attributes" : { }
+      },
+      "stopping-criteria" : [ {
+        "type" : "de.evoal.optimisation.core.iteration-count",
+        "attributes" : {
+          "maximum-iterations" : 10
+        }
+      } ],
+      "fitness-pipeline" : [ ],
+      "candidate-checks" : [ ],
+      "constraint-measure" : {
+        "type" : "de.evoal.optimisation.core.exact-measure",
+        "attributes" : {
+          "equality-tolerance" : 1.0E-4
+        }
+      },
+      "size-of-population" : 20,
+      "number-of-offspring" : 20,
+      "genotype" : null,
+      "parent-selection" : {
+        "type" : "de.evoal.optimisation.ea.optimisation.random-selection",
+        "attributes" : { }
+      },
+      "recombination" : [ {
+        "type" : "de.evoal.optimisation.ea.optimisation.single-point-crossover",
+        "attributes" : {
+          "probability" : 0.8
+        }
+      } ],
+      "mutation" : [ {
+        "type" : "de.evoal.optimisation.ea.optimisation.gaussian-mutation",
+        "attributes" : {
+          "probability" : 1.0,
+          "gene-probability" : 0.5,
+          "sigma" : 0.2
+        }
+      } ],
+      "replacement" : {
+        "type" : "de.evoal.optimisation.ea.optimisation.plus-replacement",
+        "attributes" : {
+          "selection" : {
+            "type" : "de.evoal.optimisation.ea.optimisation.elite-selection",
+            "attributes" : {
+              "count" : 20,
+              "rest" : {
+                "type" : "de.evoal.optimisation.ea.optimisation.random-selection",
+                "attributes" : { }
+              }
+            }
+          }
+        }
+      },
+      "boundary-handling" : "bounce"
+    }
   },
+  "documentation" : [ {
+    "type" : "de.evoal.optimisation.core.candidates-per-iteration",
+    "attributes" : {
+      "prefix-data" : false,
+      "store-search-space" : true,
+      "store-optimisation-space" : true
+    }
+  }, {
+    "type" : "de.evoal.optimisation.core.best-candidate-so-far",
+    "attributes" : {
+      "prefix-data" : false,
+      "store-search-space" : true,
+      "store-optimisation-space" : true
+    }
+  }, {
+    "type" : "de.evoal.optimisation.core.memory-model",
+    "attributes" : {
+      "steps" : true
+    }
+  } ],
   "searchSpace" : [ {
     "name" : "x:0",
     "type" : "real",

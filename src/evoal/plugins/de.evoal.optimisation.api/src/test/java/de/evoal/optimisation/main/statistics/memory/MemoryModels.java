@@ -92,16 +92,24 @@ final class MemoryModels {
      * @return The configuration of an algorithm of the DL type {@code de.evoal.test.algorithm}.
      */
     static EObject algorithmConfiguration() {
+        return configuration("algorithm");
+    }
+
+    /**
+     * @return A configuration without attributes of the DL type {@code de.evoal.test.<name>}.
+     */
+    static Configuration configuration(final String name) {
         final EPackage root = EcoreFactory.eINSTANCE.createEPackage();
         final EPackage module = EcoreFactory.eINSTANCE.createEPackage();
         module.setName("de.evoal.test");
         root.getESubpackages().add(module);
 
         final EClass type = EcoreFactory.eINSTANCE.createEClass();
-        type.setName("algorithm");
+        type.setName(name);
+        type.getESuperTypes().add(CorePackage.Literals.CONFIGURATION);
         module.getEClassifiers().add(type);
 
-        return EcoreUtil.create(type);
+        return (Configuration) EcoreUtil.create(type);
     }
 
     /**
@@ -234,7 +242,8 @@ final class MemoryModels {
     }
 
     /**
-     * @return The problem {@code sphere} that minimises {@code y:0}.
+     * @return The problem {@code sphere} that minimises {@code y:0} with the optimisation
+     *   function {@code de.evoal.test.sphere-function}.
      */
     static Problem problem() {
         final MinimiseGoal goal = ModelFactory.eINSTANCE.createMinimiseGoal();
@@ -245,6 +254,7 @@ final class MemoryModels {
         problem.setSearchSpace(SEARCH_SPACE.getEClass());
         problem.setOptimisationSpace(OPTIMISATION_SPACE.getEClass());
         problem.getGoals().add(goal);
+        problem.setOptimisationFunction(configuration("sphere-function"));
 
         return problem;
     }

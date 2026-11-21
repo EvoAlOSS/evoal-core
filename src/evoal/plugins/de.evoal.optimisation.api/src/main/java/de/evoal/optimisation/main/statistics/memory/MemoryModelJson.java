@@ -83,13 +83,14 @@ public class MemoryModelJson {
     private final EAnnotationHelper annotationHelper;
 
     /**
-     * Converts the configurations of target distances and fitness steps.
+     * Converts the configurations of the algorithm, the optimisation function, the
+     *   statistics writers, target distances and fitness steps.
      */
     private final ConfigurationJson configurations;
 
     /**
      * @param annotationHelper Finds the data descriptions of the features.
-     * @param configurations Converts the configurations of target distances and fitness steps.
+     * @param configurations Converts the configurations of the run.
      */
     public MemoryModelJson(final @NonNull EAnnotationHelper annotationHelper,
                            final @NonNull ConfigurationJson configurations) {
@@ -317,9 +318,11 @@ public class MemoryModelJson {
     /**
      * @return The document {@code execution-information.json}.
      *
-     * @param problem The optimisation problem.
+     * @param problem The optimisation problem with its optimisation function.
      * @param goals The goals of the problem, with the targets of the run resolved.
-     * @param algorithmType The fully qualified DL type of the algorithm.
+     * @param algorithm The configuration of the algorithm.
+     * @param documentation The configurations of the statistics writers, in the order they
+     *   are used (those of the problem first).
      * @param fitnessSteps The configurations of the steps in {@code 'fitness-pipeline'}, in
      *   their order.
      * @param execution The execution with the complete metric definitions and the fitness
@@ -328,7 +331,8 @@ public class MemoryModelJson {
      */
     public ObjectNode toExecutionInformation(final Problem problem,
                                              final Goals goals,
-                                             final String algorithmType,
+                                             final EObject algorithm,
+                                             final List<? extends EObject> documentation,
                                              final List<? extends EObject> fitnessSteps,
                                              final Execution execution,
                                              final RunSetup setup) {
@@ -337,8 +341,13 @@ public class MemoryModelJson {
         final ObjectNode problemNode = toProblem(problem, goals);
         document.set("problem", problemNode);
 
-        final ObjectNode algorithm = document.putObject("algorithm");
-        algorithm.put("type", algorithmType);
+        final ObjectNode algorithmNode = configurations.toConfiguration(algorithm);
+        document.set("algorithm", algorithmNode);
+
+        final ArrayNode documentationNodes = document.putArray("documentation");
+        documentation.stream()
+                     .map(configurations::toConfiguration)
+                     .forEach(documentationNodes::add);
 
         final ArrayNode searchSpace = toFeatures(problem.getSearchSpace());
         document.set("searchSpace", searchSpace);
@@ -687,7 +696,9 @@ public class MemoryModelJson {
     }
 
     /**
-     * @return The problem with its name and goals.
+     * @return The problem with its name, goals and the configuration of its optimisation
+     *   function.
+     * @throws IllegalStateException if the problem has no optimisation function.
      */
     private ObjectNode toProblem(final Problem problem, final Goals goals) {
         final ObjectNode problemNode = NODES.objectNode();
@@ -698,6 +709,12 @@ public class MemoryModelJson {
              .stream()
              .map(goal -> toGoal(goal, problem))
              .forEach(goalNodes::add);
+
+        final EObject function = problem.getOptimisationFunction();
+        if(function == null) {
+            throw new IllegalStateException("The problem '" + problem.getName() + "' has no optimisation function.");
+        }
+        problemNode.set("function", configurations.toConfiguration(function));
 
         return problemNode;
     }

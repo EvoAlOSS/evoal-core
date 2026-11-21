@@ -11,6 +11,7 @@ import java.util.function.ToDoubleFunction;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
+import de.evoal.core.api.languages.ExpressionText;
 import de.evoal.core.api.math.EvoalMath;
 import de.evoal.languages.model.base.definitions.DataDescription;
 import de.evoal.languages.model.base.definitions.TypeDefinition;
@@ -295,7 +296,7 @@ final class ConditionCompiler extends ExpressionsSwitch<ConditionCompiler.Term> 
     public Term defaultCase(final EObject object) {
         final String element = object.eClass().getName();
 
-        final String text = ConstraintCompiler.textOf(object);
+        final String text = ExpressionText.of(object);
 
         throw new IllegalArgumentException("'" + text + "' (" + element + ") is not supported.");
     }

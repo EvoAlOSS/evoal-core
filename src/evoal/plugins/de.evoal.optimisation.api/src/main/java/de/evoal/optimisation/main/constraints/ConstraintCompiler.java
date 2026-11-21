@@ -16,10 +16,9 @@ import lombok.extern.slf4j.Slf4j;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.xtext.nodemodel.ICompositeNode;
-import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 
 import de.evoal.core.api.dynamic.EAnnotationHelper;
+import de.evoal.core.api.languages.ExpressionText;
 import de.evoal.core.api.languages.base.CallSwitch;
 import de.evoal.core.api.languages.base.DataReferenceSwitch;
 import de.evoal.core.api.languages.base.NumberSwitch;
@@ -223,30 +222,18 @@ public class ConstraintCompiler {
 
         if(actual != count) {
             final String function = call.getFunction().getName();
-            final String text = textOf(call);
+            final String text = ExpressionText.of(call);
 
             throw new IllegalArgumentException("'" + function + "' needs " + count + " parameters, but has " + actual
                                                + ": " + text + ".");
         }
     }
 
-    /**
-     * @return The source text of an expression, for reports.
-     */
-    static String textOf(final EObject expression) {
-        final ICompositeNode node = NodeModelUtils.getNode(expression);
-        if(node == null) {
-            return expression.toString();
-        }
-
-        return NodeModelUtils.getTokenText(node);
-    }
-
     private static Optional<Call> toCall(final Expression expression) {
         final Call call = new CallSwitch().doSwitch(expression);
 
         if(call == null) {
-            log.warn("Ignoring the entry '{}' of a constraints section: it is no call.", textOf(expression));
+            log.warn("Ignoring the entry '{}' of a constraints section: it is no call.", ExpressionText.of(expression));
         }
 
         return Optional.ofNullable(call);
@@ -262,7 +249,7 @@ public class ConstraintCompiler {
         final Expression comparison = call.getParameters().get(0);
         final Expression groupParameter = call.getParameters().get(1);
         final String group = new StringSwitch().doSwitch(groupParameter);
-        final String text = textOf(comparison);
+        final String text = ExpressionText.of(comparison);
 
         try {
             final ConditionCompiler compiler = new ConditionCompiler(searchByData, objectivesByData);
