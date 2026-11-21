@@ -77,6 +77,11 @@ public class EliteSelection implements SelectionMethod {
     }
 
     @Override
+    public boolean ranksStochastically() {
+        return rest.ranksStochastically();
+    }
+
+    @Override
     public List<Candidate> select(final List<Candidate> candidates, final int count, final CandidateOrder order,
                                   final RandomGenerator random) {
         final int elite = Math.min(this.count, Math.min(count, candidates.size()));

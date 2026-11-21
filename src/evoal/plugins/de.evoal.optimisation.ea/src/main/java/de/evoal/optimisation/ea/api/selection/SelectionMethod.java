@@ -34,6 +34,14 @@ public interface SelectionMethod extends EvoalComponent<SelectionMethod> {
     }
 
     /**
+     * @return Whether the selection ranks the candidates stochastically
+     *   ({@code 'stochastic-ranking-selection'}); includes nested selections.
+     */
+    default boolean ranksStochastically() {
+        return false;
+    }
+
+    /**
      * @param candidates The evaluated candidates to choose from; not empty.
      * @param count The number of candidates to choose.
      * @param order The order in which the candidates are compared.

@@ -48,7 +48,9 @@ import de.evoal.optimisation.ea.main.genotype.GenotypeFactory;
 import de.evoal.optimisation.ea.main.genotype.GenotypeFactory.ConfiguredChromosome;
 import de.evoal.optimisation.ea.main.operators.ApplicabilityReader;
 import de.evoal.optimisation.ea.main.selection.Nsga2Selection;
+import de.evoal.optimisation.ea.main.selection.StochasticRankingSelection;
 import de.evoal.optimisation.ea.main.statistics.LinkageStatistics;
+import de.evoal.optimisation.ea.main.statistics.StochasticRankingStatistics;
 
 /**
  * An evolutionary algorithm (DL type {@code 'evolutionary-algorithm'}) as a template of
@@ -117,6 +119,9 @@ public class EvolutionaryAlgorithm extends TemplateAlgorithm {
      */
     @Inject
     private LinkageStatistics linkageStatistics;
+
+    @Inject
+    private StochasticRankingStatistics stochasticRankingStatistics;
 
     @Inject
     private ProblemCorrelations problemCorrelations;
@@ -220,6 +225,12 @@ public class EvolutionaryAlgorithm extends TemplateAlgorithm {
                                     "The non-dominated front of the candidate, 0 for the first front.");
             recorder.defineProperty(CrowdedOrder.CROWDING_DISTANCE, PropertyScope.INDIVIDUAL, PropertyValueType.REAL, false,
                                     "The crowding distance of the candidate within its front; Infinity at the boundary of the front.");
+        }
+
+        if(parentSelection.ranksStochastically() || replacement.selection().ranksStochastically()) {
+            recorder.defineProperty(StochasticRankingSelection.RANK, PropertyScope.INDIVIDUAL, PropertyValueType.INTEGER, false,
+                                    "The place of the candidate in its last stochastic ranking of the iteration, 0 for the first.");
+            stochasticRankingStatistics.define(recorder);
         }
     }
 

@@ -153,8 +153,8 @@ numbers; a resampled child is counted, its unused sibling is not.
 
 ## Selections and replacements
 
-All selections choose with replacement. Ranking and comparison use the `'comparator'` of the
-algorithm; `'roulette-wheel-selection'`, `'stochastic-universal-sampling'` and
+All selections except `'nsga2-selection'` and `'stochastic-ranking-selection'` choose with
+replacement. Ranking and comparison use the `'comparator'` of the algorithm; `'roulette-wheel-selection'`, `'stochastic-universal-sampling'` and
 `'boltzmann-selection'` use the fitness itself and need a fitness with one component (the
 configuration is rejected otherwise). The fitness is canonical (smaller is better), so the
 fitness-proportional selections use the windowed weights f_max - f.
@@ -168,6 +168,30 @@ fitness-proportional selections use the windowed weights f_max - f.
 The selections compare candidates through a `CandidateOrder` that the algorithm passes to
 them: by default by the optimisation values of the `'comparator'`, with
 `'crowded-comparator'` by front and crowding distance (`CrowdedOrder`).
+
+## Stochastic ranking
+
+`'stochastic-ranking-selection' { group; 'fitness-probability'; sweeps; penalty; }` handles a
+constraint group by stochastic ranking (Runarsson and Yao 2000, Fig. 1;
+`api.selection.StochasticRanking`): the candidates start in a random order (Fisher-Yates
+shuffle from the stream of the selection), and every sweep visits the neighbouring pairs from
+the front to the back with one draw u per pair. A pair is compared by the canonical fitness if
+both are feasible or u < P_f (`'fitness-probability'`, default 0.45 as in the paper's
+experiments), otherwise by the penalty; the worse one moves back. The ranking stops after a
+sweep without swap or after `sweeps` sweeps (default: the number of ranked candidates, the
+paper's N = lambda). The penalty is `'squared-sum'`, the paper's quadratic loss (default), or
+`'sum'`, the violation of the group as the other handlings measure it
+(`ViolationRecord.squaredViolation`, `violation`).
+
+The selection takes the first candidates of the ranking, without replacement, and does not use
+the `'comparator'`; it needs a fitness with one component. The paper's (mu, lambda) evolution
+strategy is `'comma-replacement' { selection := 'stochastic-ranking-selection' { group; }; }`.
+Every ranked candidate gets the individual property `stochastic-rank` (0 for the first; a later
+ranking in the same iteration overwrites it), and `StochasticRankingStatistics` records the
+iteration metrics `stochastic-ranking-sweeps`, `stochastic-ranking-fitness-comparisons` and
+`stochastic-ranking-penalty-comparisons` (pairs with at least one infeasible candidate decided
+by the fitness or the penalty; summed over the rankings of the iteration). Their ratio shows the
+balance between objective and penalty that P_f controls.
 
 ## NSGA-II
 
@@ -253,10 +277,15 @@ The surrogate plugins have examples that search on a trained model with the EA
   (anchors, overlapping building blocks, DDL order), and both operators in the `Variation`.
 - `LinkageStatisticsTest`: the counts of preserved groups before and after the linkage step,
   and the rows of `'linkage-statistics'`.
+- `StochasticRankingTest`, `StochasticRankingSelectionTest`: the ranking with P_f 0 and 1,
+  feasible pairs by fitness, the early stop and the limit of sweeps, the frequency of a decision
+  by fitness (binomial), the selection of the first candidates with their `stochastic-rank`,
+  and the defaults of the DL.
 - Regressions in `src/test/regressions`: the three replacements, a mixed genotype,
   `'maximum-age'`, the real-valued operators, NSGA-II, the correlation-aware operators
-  (`ea-correlation`) and building blocks with linkage statistics (`ea-building-blocks`), each
-  with the memory model.
+  (`ea-correlation`), building blocks with linkage statistics (`ea-building-blocks`) and
+  stochastic ranking in a (10, 40) comma replacement (`ea-stochastic-ranking`), each with the
+  memory model.
 
 ## References
 
@@ -278,8 +307,14 @@ The surrogate plugins have examples that search on a trained model with the EA
 - D. E. Goldberg, K. Deb: A comparative analysis of selection schemes used in genetic
   algorithms. Foundations of Genetic Algorithms 1, 1991, pp. 69-93.
 - F. Gray: Pulse code communication. US patent 2,632,058, 1953.
+- T. Baeck: Optimal mutation rates in genetic search. Proc. 5th International Conference on
+  Genetic Algorithms, 1993, pp. 2-8.
+- H. Muehlenbein: How genetic algorithms really work: I. Mutation and hillclimbing. Parallel
+  Problem Solving from Nature 2, 1992.
 - H. Muehlenbein, D. Schlierkamp-Voosen: Predictive models for the breeder genetic algorithm
   I. Evolutionary Computation 1(1), 1993, pp. 25-49.
+- T. P. Runarsson, X. Yao: Stochastic ranking for constrained evolutionary optimization. IEEE
+  Transactions on Evolutionary Computation 4(3), 2000, pp. 284-294.
 - H.-P. Schwefel: Numerische Optimierung von Computer-Modellen mittels der
   Evolutionsstrategie. Birkhaeuser, 1977.
 - G. R. Harik, D. E. Goldberg: Learning linkage. Foundations of Genetic Algorithms 4, 1996,

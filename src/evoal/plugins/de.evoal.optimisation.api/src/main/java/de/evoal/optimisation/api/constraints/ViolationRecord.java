@@ -128,4 +128,20 @@ public final class ViolationRecord {
                           .mapToDouble(this::degree)
                           .sum();
     }
+
+    /**
+     * @param group The name of a group.
+     * @return The sum of the squared degrees of the constraints of the group, the quadratic
+     *   loss of the penalty methods (e.g. T. P. Runarsson, X. Yao: Stochastic ranking for
+     *   constrained evolutionary optimization. IEEE Transactions on Evolutionary Computation
+     *   4(3), 2000, pp. 284-294, eq. 5).
+     * @throws IllegalArgumentException if the problem has no constraint in the group.
+     */
+    public double squaredViolation(final String group) {
+        return constraints.inGroup(group)
+                          .stream()
+                          .mapToDouble(this::degree)
+                          .map(degree -> degree * degree)
+                          .sum();
+    }
 }

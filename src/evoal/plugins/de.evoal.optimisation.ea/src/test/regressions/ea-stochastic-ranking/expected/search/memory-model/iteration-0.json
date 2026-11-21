@@ -1,0 +1,196 @@
+{
+  "formatVersion" : "2027.4.0",
+  "number" : 0,
+  "individuals" : [ {
+    "id" : 7,
+    "input" : {
+      "x:0" : 0.8071912173280169,
+      "x:1" : 0.660778179858712
+    },
+    "output" : {
+      "y:0" : 0.0456770228665441
+    },
+    "fitness" : [ 0.0456770228665441 ],
+    "relationships" : [ ],
+    "properties" : {
+      "violation-1" : 0.0,
+      "violation-2" : 0.0
+    }
+  }, {
+    "id" : 4,
+    "input" : {
+      "x:0" : 1.281463369970381,
+      "x:1" : 1.5902189843088235
+    },
+    "output" : {
+      "y:0" : 0.34888772367028775
+    },
+    "fitness" : [ 0.34888772367028775 ],
+    "relationships" : [ ],
+    "properties" : {
+      "violation-1" : 2.670944786632031,
+      "violation-2" : 0.0
+    }
+  }, {
+    "id" : 5,
+    "input" : {
+      "x:0" : -1.096912391365923,
+      "x:1" : 1.5429548186677176
+    },
+    "output" : {
+      "y:0" : 15.939234095010312
+    },
+    "fitness" : [ 15.939234095010312 ],
+    "relationships" : [ ],
+    "properties" : {
+      "violation-1" : 2.0839263667820367,
+      "violation-2" : 1.2969123913659228
+    }
+  }, {
+    "id" : 3,
+    "input" : {
+      "x:0" : -1.4170509561805962,
+      "x:1" : 1.6134929876582311
+    },
+    "output" : {
+      "y:0" : 21.40835000128894
+    },
+    "fitness" : [ 21.40835000128894 ],
+    "relationships" : [ ],
+    "properties" : {
+      "violation-1" : 3.111393033634627,
+      "violation-2" : 1.6170509561805961
+    }
+  }, {
+    "id" : 6,
+    "input" : {
+      "x:0" : 0.5261635429526219,
+      "x:1" : -0.7419612435488374
+    },
+    "output" : {
+      "y:0" : 104.02176352669699
+    },
+    "fitness" : [ 104.02176352669699 ],
+    "relationships" : [ ],
+    "properties" : {
+      "violation-1" : 0.0,
+      "violation-2" : 0.0
+    }
+  }, {
+    "id" : 1,
+    "input" : {
+      "x:0" : 1.5220622823821515,
+      "x:1" : 0.43324106576228383
+    },
+    "output" : {
+      "y:0" : 355.00435690866414
+    },
+    "fitness" : [ 355.00435690866414 ],
+    "relationships" : [ ],
+    "properties" : {
+      "violation-1" : 1.0043714125132035,
+      "violation-2" : 0.0
+    }
+  }, {
+    "id" : 0,
+    "input" : {
+      "x:0" : 1.8816599609968856,
+      "x:1" : 1.4628949025133622
+    },
+    "output" : {
+      "y:0" : 432.4815422720982
+    },
+    "fitness" : [ 432.4815422720982 ],
+    "relationships" : [ ],
+    "properties" : {
+      "violation-1" : 4.18070570461838,
+      "violation-2" : 0.0
+    }
+  }, {
+    "id" : 2,
+    "input" : {
+      "x:0" : -0.8464134624447897,
+      "x:1" : -1.5336636944835162
+    },
+    "output" : {
+      "y:0" : 509.69499305651254
+    },
+    "fitness" : [ 509.69499305651254 ],
+    "relationships" : [ ],
+    "properties" : {
+      "violation-1" : 1.5685400771846054,
+      "violation-2" : 1.0464134624447896
+    }
+  }, {
+    "id" : 9,
+    "input" : {
+      "x:0" : 1.801789334367069,
+      "x:1" : -1.6519546586284806
+    },
+    "output" : {
+      "y:0" : 2400.0745970942903
+    },
+    "fitness" : [ 2400.0745970942903 ],
+    "relationships" : [ ],
+    "properties" : {
+      "violation-1" : 4.475398999603265,
+      "violation-2" : 0.0
+    }
+  }, {
+    "id" : 8,
+    "input" : {
+      "x:0" : 1.9991515183944566,
+      "x:1" : -1.5805458555683907
+    },
+    "output" : {
+      "y:0" : 3111.461470856496
+    },
+    "fitness" : [ 3111.461470856496 ],
+    "relationships" : [ ],
+    "properties" : {
+      "violation-1" : 4.994731995053277,
+      "violation-2" : 0.0
+    }
+  } ],
+  "steps" : [ ],
+  "ranks" : [ {
+    "number" : 0,
+    "members" : [ 7 ]
+  }, {
+    "number" : 1,
+    "members" : [ 4 ]
+  }, {
+    "number" : 2,
+    "members" : [ 5 ]
+  }, {
+    "number" : 3,
+    "members" : [ 3 ]
+  }, {
+    "number" : 4,
+    "members" : [ 6 ]
+  }, {
+    "number" : 5,
+    "members" : [ 1 ]
+  }, {
+    "number" : 6,
+    "members" : [ 0 ]
+  }, {
+    "number" : 7,
+    "members" : [ 2 ]
+  }, {
+    "number" : 8,
+    "members" : [ 9 ]
+  }, {
+    "number" : 9,
+    "members" : [ 8 ]
+  } ],
+  "bestSoFar" : 7,
+  "metrics" : {
+    "constraint-evaluations" : 20,
+    "evaluations.real" : 10,
+    "evaluations.surrogate" : 0,
+    "stochastic-ranking-sweeps" : 0,
+    "stochastic-ranking-fitness-comparisons" : 0,
+    "stochastic-ranking-penalty-comparisons" : 0
+  }
+}

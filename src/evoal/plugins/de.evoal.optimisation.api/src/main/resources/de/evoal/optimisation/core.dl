@@ -147,8 +147,9 @@ module de.evoal.optimisation.core {
          *   {@code violation-<n>}, n is the position of the constraint in the DDL, from 1),
          *   and the measured constraints are counted in the metric
          *   {@code constraint-evaluations}. A group is handled by 'constraint-check',
-         *   'constraint-penalty', 'feasibility-comparator', 'epsilon-comparator' or
-         *   'nsga2-selection'; a group that nothing handles is reported as a warning.
+         *   'constraint-penalty', 'feasibility-comparator', 'epsilon-comparator',
+         *   'nsga2-selection' or 'stochastic-ranking-selection'; a group that nothing handles
+         *   is reported as a warning.
          */
         'constraint-measure' : instance 'constraint-measure' := 'exact-measure' {};
     }
@@ -200,7 +201,7 @@ module de.evoal.optimisation.core {
      * The reaction to a candidate that fails a check.
      *   'warn': the failure is reported; the candidate stays unchanged.
      *   'replace': a new candidate takes the place of the failed one. It comes from the
-     *     'replacement-source' of the check, or from the 'initialisation' of the algorithm.
+     *     'replacement-source' of the check ('random-population' by default).
      *   'resample': the variation of the failed candidate is redone until the candidate
      *     passes the check, at most 'maximum-attempts' times; then the last candidate is
      *     kept and a warning is reported. An initial candidate has no variation; it is

@@ -1,0 +1,276 @@
+{
+  "formatVersion" : "2027.4.0",
+  "number" : 5,
+  "individuals" : [ {
+    "id" : 588,
+    "input" : {
+      "x:0" : 0.8429355417851421,
+      "x:1" : 0.7022633290050774
+    },
+    "output" : {
+      "y:0" : 0.03152011461599492
+    },
+    "fitness" : [ 0.03152011461599492 ],
+    "relationships" : [ {
+      "kind" : "mutation",
+      "targets" : [ 473 ],
+      "properties" : {
+        "operators" : [ "gaussian-mutation" ],
+        "changed-features" : [ "x:0", "x:1" ]
+      }
+    } ],
+    "properties" : {
+      "stochastic-rank" : 0,
+      "violation-1" : 0.0,
+      "violation-2" : 0.0
+    }
+  }, {
+    "id" : 585,
+    "input" : {
+      "x:0" : 0.6740454270002416,
+      "x:1" : 0.44664145864425275
+    },
+    "output" : {
+      "y:0" : 0.11216888512528105
+    },
+    "fitness" : [ 0.11216888512528105 ],
+    "relationships" : [ {
+      "kind" : "mutation",
+      "targets" : [ 468 ],
+      "properties" : {
+        "operators" : [ "gaussian-mutation" ],
+        "changed-features" : [ "x:0", "x:1" ]
+      }
+    } ],
+    "properties" : {
+      "stochastic-rank" : 1,
+      "violation-1" : 0.0,
+      "violation-2" : 0.0
+    }
+  }, {
+    "id" : 604,
+    "input" : {
+      "x:0" : 0.6405069574429684,
+      "x:1" : 0.4104018097996736
+    },
+    "output" : {
+      "y:0" : 0.12923757776571868
+    },
+    "fitness" : [ 0.12923757776571868 ],
+    "relationships" : [ {
+      "kind" : "mutation",
+      "targets" : [ 484 ],
+      "properties" : {
+        "operators" : [ "gaussian-mutation" ],
+        "changed-features" : [ "x:0", "x:1" ]
+      }
+    } ],
+    "properties" : {
+      "stochastic-rank" : 2,
+      "violation-1" : 0.0,
+      "violation-2" : 0.0
+    }
+  }, {
+    "id" : 605,
+    "input" : {
+      "x:0" : 0.5566206419823456,
+      "x:1" : 0.2987395761932321
+    },
+    "output" : {
+      "y:0" : 0.20887732972326364
+    },
+    "fitness" : [ 0.20887732972326364 ],
+    "relationships" : [ {
+      "kind" : "mutation",
+      "targets" : [ 470 ],
+      "properties" : {
+        "operators" : [ "gaussian-mutation" ],
+        "changed-features" : [ "x:0", "x:1" ]
+      }
+    } ],
+    "properties" : {
+      "stochastic-rank" : 3,
+      "violation-1" : 0.0,
+      "violation-2" : 0.0
+    }
+  }, {
+    "id" : 578,
+    "input" : {
+      "x:0" : 0.851265204348552,
+      "x:1" : 0.7705868131968943
+    },
+    "output" : {
+      "y:0" : 0.23311862880525464
+    },
+    "fitness" : [ 0.23311862880525464 ],
+    "relationships" : [ {
+      "kind" : "mutation",
+      "targets" : [ 453 ],
+      "properties" : {
+        "operators" : [ "gaussian-mutation" ],
+        "changed-features" : [ "x:0", "x:1" ]
+      }
+    } ],
+    "properties" : {
+      "stochastic-rank" : 4,
+      "violation-1" : 0.0,
+      "violation-2" : 0.0
+    }
+  }, {
+    "id" : 601,
+    "input" : {
+      "x:0" : 0.5695570584046495,
+      "x:1" : 0.34895893018130153
+    },
+    "output" : {
+      "y:0" : 0.24561859985123155
+    },
+    "fitness" : [ 0.24561859985123155 ],
+    "relationships" : [ {
+      "kind" : "mutation",
+      "targets" : [ 473 ],
+      "properties" : {
+        "operators" : [ "gaussian-mutation" ],
+        "changed-features" : [ "x:0", "x:1" ]
+      }
+    } ],
+    "properties" : {
+      "stochastic-rank" : 5,
+      "violation-1" : 0.0,
+      "violation-2" : 0.0
+    }
+  }, {
+    "id" : 587,
+    "input" : {
+      "x:0" : 0.482672981319864,
+      "x:1" : 0.2103324401620164
+    },
+    "output" : {
+      "y:0" : 0.31888767608767543
+    },
+    "fitness" : [ 0.31888767608767543 ],
+    "relationships" : [ {
+      "kind" : "mutation",
+      "targets" : [ 453 ],
+      "properties" : {
+        "operators" : [ "gaussian-mutation" ],
+        "changed-features" : [ "x:0", "x:1" ]
+      }
+    } ],
+    "properties" : {
+      "stochastic-rank" : 6,
+      "violation-1" : 0.0,
+      "violation-2" : 0.0
+    }
+  }, {
+    "id" : 590,
+    "input" : {
+      "x:0" : 0.7044786920779353,
+      "x:1" : 0.4300143912243313
+    },
+    "output" : {
+      "y:0" : 0.5265814920572256
+    },
+    "fitness" : [ 0.5265814920572256 ],
+    "relationships" : [ {
+      "kind" : "mutation",
+      "targets" : [ 453 ],
+      "properties" : {
+        "operators" : [ "gaussian-mutation" ],
+        "changed-features" : [ "x:0", "x:1" ]
+      }
+    } ],
+    "properties" : {
+      "stochastic-rank" : 7,
+      "violation-1" : 0.0,
+      "violation-2" : 0.0
+    }
+  }, {
+    "id" : 572,
+    "input" : {
+      "x:0" : 0.5418181014618921,
+      "x:1" : 0.35299315501476
+    },
+    "output" : {
+      "y:0" : 0.5630791646394153
+    },
+    "fitness" : [ 0.5630791646394153 ],
+    "relationships" : [ {
+      "kind" : "mutation",
+      "targets" : [ 453 ],
+      "properties" : {
+        "operators" : [ "gaussian-mutation" ],
+        "changed-features" : [ "x:0", "x:1" ]
+      }
+    } ],
+    "properties" : {
+      "stochastic-rank" : 8,
+      "violation-1" : 0.0,
+      "violation-2" : 0.0
+    }
+  }, {
+    "id" : 596,
+    "input" : {
+      "x:0" : 0.2339440433365461,
+      "x:1" : 0.028141238798594814
+    },
+    "output" : {
+      "y:0" : 0.6575369693757172
+    },
+    "fitness" : [ 0.6575369693757172 ],
+    "relationships" : [ {
+      "kind" : "mutation",
+      "targets" : [ 476 ],
+      "properties" : {
+        "operators" : [ "gaussian-mutation" ],
+        "changed-features" : [ "x:0", "x:1" ]
+      }
+    } ],
+    "properties" : {
+      "stochastic-rank" : 9,
+      "violation-1" : 0.0,
+      "violation-2" : 0.0
+    }
+  } ],
+  "steps" : [ ],
+  "ranks" : [ {
+    "number" : 0,
+    "members" : [ 588 ]
+  }, {
+    "number" : 1,
+    "members" : [ 585 ]
+  }, {
+    "number" : 2,
+    "members" : [ 604 ]
+  }, {
+    "number" : 3,
+    "members" : [ 605 ]
+  }, {
+    "number" : 4,
+    "members" : [ 578 ]
+  }, {
+    "number" : 5,
+    "members" : [ 601 ]
+  }, {
+    "number" : 6,
+    "members" : [ 587 ]
+  }, {
+    "number" : 7,
+    "members" : [ 590 ]
+  }, {
+    "number" : 8,
+    "members" : [ 572 ]
+  }, {
+    "number" : 9,
+    "members" : [ 596 ]
+  } ],
+  "bestSoFar" : 588,
+  "metrics" : {
+    "constraint-evaluations" : 420,
+    "evaluations.real" : 210,
+    "evaluations.surrogate" : 0,
+    "stochastic-ranking-sweeps" : 31,
+    "stochastic-ranking-fitness-comparisons" : 0,
+    "stochastic-ranking-penalty-comparisons" : 0
+  }
+}

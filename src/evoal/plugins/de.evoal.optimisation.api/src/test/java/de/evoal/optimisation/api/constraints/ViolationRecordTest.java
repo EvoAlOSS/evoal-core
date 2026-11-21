@@ -37,6 +37,19 @@ public class ViolationRecordTest {
         }
 
         @Test
+        public void theSquaredViolationOfAGroupIsTheSumOfItsSquaredDegrees() {
+            // given
+            final ViolationRecord record = new ViolationRecord(constraints, new double[] {0.5, 2.0, 3.0});
+
+            // when
+            final double violation = record.squaredViolation("strict");
+
+            // then
+            Assertions.assertEquals(0.25 + 9.0, violation);
+            Assertions.assertThrows(IllegalArgumentException.class, () -> record.squaredViolation("unknown"));
+        }
+
+        @Test
         public void aGroupWithoutDegreesIsFeasibleWhileTheOtherIsNot() {
             // given
             final ViolationRecord record = new ViolationRecord(constraints, new double[] {0.0, 1.0, 0.0});

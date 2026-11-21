@@ -82,8 +82,8 @@ public class ConstraintGroupCheck {
                                                   .toList();
         if(!unhandled.isEmpty()) {
             log.warn("The constraint groups {} are measured, but nothing handles them: they have no effect on the "
-                     + "search. Use 'constraint-penalty', 'feasibility-comparator', 'epsilon-comparator' or "
-                     + "'nsga2-selection'.", unhandled);
+                     + "search. Use 'constraint-check', 'constraint-penalty', 'feasibility-comparator', "
+                     + "'epsilon-comparator', 'nsga2-selection' or 'stochastic-ranking-selection'.", unhandled);
         }
     }
 

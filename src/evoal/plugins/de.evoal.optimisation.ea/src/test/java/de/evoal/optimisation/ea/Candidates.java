@@ -92,6 +92,20 @@ public final class Candidates {
     }
 
     /**
+     * @return An evaluated candidate like {@link #withFitness(double)} whose violation of the
+     *   constraint group {@link #GROUP} is {@code violation}.
+     */
+    public static Candidate withViolation(final double f, final double violation) {
+        final ViolationRecord violations = new ViolationRecord(CONSTRAINTS, new double[] {violation});
+        final Evaluation evaluation = new Evaluation(Mockito.mock(TypedEObject.class),
+                                                     new Fitness(LAYOUT, new double[] {f}),
+                                                     new Value(f),
+                                                     violations);
+
+        return Candidate.evaluated(Mockito.mock(TypedEObject.class), evaluation, Lineage.NONE);
+    }
+
+    /**
      * @return Evaluated candidates with the given fitness values.
      */
     public static List<Candidate> withFitness(final double... values) {
