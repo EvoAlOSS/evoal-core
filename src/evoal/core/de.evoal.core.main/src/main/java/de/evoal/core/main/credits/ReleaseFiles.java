@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.function.Function;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 import java.util.zip.ZipEntry;
@@ -27,8 +28,10 @@ import tools.jackson.databind.node.ObjectNode;
  * <ul>
  *   <li>{@value #LICENSES_FOLDER}{@code /<SPDX id>.txt}: the text of every licence of the
  *     release, EvoAl's own (Apache-2.0) included;</li>
- *   <li>{@value #NOTICE_FILE}: EvoAl's notice, a statement if libraries under the GPL are part
- *     of the release, and the notice files of the libraries;</li>
+ *   <li>{@value #NOTICE_FILE}: EvoAl's notice, a statement if libraries or bundled code under
+ *     the GPL are part of the release, the copyright notices of the third-party code inside the
+ *     modules' jars ({@link ModuleCredits#bundled()}), and the notice files of the libraries
+ *     with the copyright notices of their bundled code;</li>
  *   <li>{@value #SBOM_FILE}: the CycloneDX SBOM of the release, with the licences under which
  *     EvoAl uses the libraries; a library inside another library's jar
  *     ({@link LibraryCredits#contains()}) is a component of its own, after its container.</li>
@@ -88,14 +91,28 @@ public final class ReleaseFiles {
      */
     private static List<String> gplLibraries(final InstalledCredits credits, final Set<String> gplLicenses) {
         final List<String> libraries = new ArrayList<>();
+        for(final InstalledModule module : credits.modules()) {
+            for(final BundledCredits bundled : module.bundled()) {
+                final List<String> licenses = gplLicensesOf(bundled.licenses().stream());
+                if(licenses.isEmpty()) {
+                    continue;
+                }
+
+                gplLicenses.addAll(licenses);
+                libraries.add(bundled.name() + " (" + module.name() + ")");
+            }
+        }
+
         for(final InstalledLibrary library : credits.libraries()) {
             final Stream<String> containedLicenses = library.contained()
                                                             .stream()
                                                             .flatMap(contained -> contained.licenseIds().stream());
-            final List<String> licenses = Stream.concat(library.licenses().stream(), containedLicenses)
-                                                .filter(ReleaseFiles::isGpl)
-                                                .distinct()
-                                                .toList();
+            final Stream<String> bundledLicenses = library.bundled()
+                                                          .stream()
+                                                          .flatMap(bundled -> bundled.licenses().stream());
+            final Stream<String> allLicenses = Stream.of(library.licenses().stream(), containedLicenses, bundledLicenses)
+                                                     .flatMap(Function.identity());
+            final List<String> licenses = gplLicensesOf(allLicenses);
             if(licenses.isEmpty()) {
                 continue;
             }
@@ -107,6 +124,15 @@ public final class ReleaseFiles {
         }
 
         return libraries;
+    }
+
+    /**
+     * @return The GPL licences among the licences, without duplicates.
+     */
+    private static List<String> gplLicensesOf(final Stream<String> licenseIds) {
+        return licenseIds.filter(ReleaseFiles::isGpl)
+                         .distinct()
+                         .toList();
     }
 
     private static boolean isGpl(final String licenseId) {
@@ -167,6 +193,11 @@ public final class ReleaseFiles {
     private static Set<String> releaseLicenses(final InstalledCredits credits) {
         final Set<String> licenseIds = new TreeSet<>();
         licenseIds.add(EVOAL_LICENSE);
+
+        for(final InstalledModule module : credits.modules()) {
+            module.bundled()
+                  .forEach(bundled -> licenseIds.addAll(bundled.licenses()));
+        }
 
         for(final InstalledLibrary library : credits.libraries()) {
             licenseIds.addAll(library.licenses());
@@ -241,8 +272,24 @@ public final class ReleaseFiles {
             lines.add("License (" + licenses + "). EvoAl's own code remains available under the Apache License 2.0.");
         }
 
+        for(final InstalledModule module : credits.modules()) {
+            for(final BundledCredits bundled : module.bundled()) {
+                lines.add("");
+                lines.add(SEPARATOR);
+                lines.add(bundled.name() + ", part of " + module.name());
+                lines.add(SEPARATOR);
+                lines.addAll(noticeOf(bundled));
+            }
+        }
+
         for(final InstalledLibrary library : credits.libraries()) {
-            final List<String> notices = noticesOf(library.jar());
+            final List<String> notices = new ArrayList<>(noticesOf(library.jar()));
+            for(final BundledCredits bundled : library.bundled()) {
+                if(bundled.copyright() != null) {
+                    notices.add(bundled.name() + ":\n" + String.join("\n", noticeOf(bundled)));
+                }
+            }
+
             if(notices.isEmpty()) {
                 continue;
             }
@@ -256,6 +303,29 @@ public final class ReleaseFiles {
         }
 
         Files.write(folder.resolve(NOTICE_FILE), lines, StandardCharsets.UTF_8);
+    }
+
+    /**
+     * @return The notice of bundled code: its copyright notice, its project link and the files
+     *   of its licence texts in the release.
+     */
+    private static List<String> noticeOf(final BundledCredits bundled) {
+        final List<String> lines = new ArrayList<>();
+        if(bundled.copyright() != null) {
+            lines.add(bundled.copyright().strip());
+        }
+
+        if(bundled.url() != null) {
+            lines.add(bundled.url());
+        }
+
+        final List<String> texts = bundled.licenses()
+                                          .stream()
+                                          .map(licenseId -> LICENSES_FOLDER + "/" + licenseId + ".txt")
+                                          .toList();
+        lines.add("Licensed under " + String.join(", ", bundled.licenses()) + " (" + String.join(", ", texts) + ").");
+
+        return lines;
     }
 
     private static void writeSbom(final InstalledCredits credits, final Path folder) throws IOException {

@@ -46,7 +46,7 @@ public class ReleaseFilesTest {
                          .toList();
         }
 
-        Assertions.assertEquals(List.of("Apache-2.0.txt", "BSD-3-Clause.txt", "EPL-2.0.txt", "GPL-3.0-or-later.txt",
+        Assertions.assertEquals(List.of("Apache-2.0.txt", "BSD-2-Clause.txt", "BSD-3-Clause.txt", "EPL-2.0.txt", "GPL-3.0-or-later.txt",
                                         "MIT.txt"),
                                 files);
     }
@@ -56,10 +56,34 @@ public class ReleaseFilesTest {
         final String notice = Files.readString(releaseFolder.resolve(ReleaseFiles.NOTICE_FILE));
 
         Assertions.assertTrue(notice.startsWith("EvoAl\n"), notice);
-        final String gplStatement = "GNU General Public License (GPL-3.0-or-later):\n  - gpl-lib 1.0 (core)\n";
+        final String gplStatement = "GNU General Public License (GPL-3.0-or-later):\n"
+                                    + "  - solver (suite)\n"
+                                    + "  - gpl-lib 1.0 (core)\n";
         Assertions.assertTrue(notice.contains(gplStatement), notice);
         Assertions.assertTrue(notice.contains("shared-lib 1.0 (org.example:shared-lib)\n"
                                               + "-".repeat(80) + "\nShared Lib\nCopyright The Shared Authors"),
+                              notice);
+    }
+
+    @Test
+    public void noticeContainsTheCopyrightNoticesOfTheBundledCode() throws IOException {
+        final String notice = Files.readString(releaseFolder.resolve(ReleaseFiles.NOTICE_FILE));
+        final String separator = "-".repeat(80);
+
+        Assertions.assertTrue(notice.contains(separator + "\nported benchmark, part of suite\n" + separator + "\n"
+                                              + "Copyright 2013, Jane Doe\n"
+                                              + "https://example.org/benchmark\n"
+                                              + "Licensed under BSD-2-Clause (licenses/BSD-2-Clause.txt).\n"),
+                              notice);
+        Assertions.assertTrue(notice.contains(separator + "\nsolver, part of suite\n" + separator + "\n"
+                                              + "Copyright 2001, John Doe\n"
+                                              + "Licensed under GPL-3.0-or-later (licenses/GPL-3.0-or-later.txt).\n"),
+                              notice);
+        Assertions.assertTrue(notice.contains("plugin-lib 1.0 (org.example:plugin-lib)\n" + separator + "\n"
+                                              + "native:\n"
+                                              + "Copyright 2020, The Native Authors\n"
+                                              + "https://example.org/native\n"
+                                              + "Licensed under MIT (licenses/MIT.txt).\n"),
                               notice);
     }
 
@@ -85,7 +109,9 @@ public class ReleaseFilesTest {
         Assertions.assertEquals(List.of("core.main [Apache-2.0]",
                                         "core.arff [Apache-2.0]",
                                         "other [Apache-2.0]",
+                                        "benchmark.suite [Apache-2.0]",
                                         "language [Apache-2.0]",
+                                        "binding [Apache-2.0]",
                                         "gpl-lib [GPL-3.0-or-later]",
                                         "plugin-lib [EPL-2.0]",
                                         "shared-lib [Apache-2.0]",

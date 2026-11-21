@@ -9,9 +9,14 @@ import java.util.List;
  * @param name {@code core} or the folder name of the plugin.
  * @param component The module as its SBOM describes it ({@code metadata.component}).
  * @param citations The entries with which users cite the module itself.
+ * @param bundled The third-party code inside the module's jars ({@link ModuleCredits#bundled()}).
  */
-public record InstalledModule(String name, SbomComponent component, List<BibTeXEntry> citations) {
+public record InstalledModule(String name,
+                              SbomComponent component,
+                              List<BibTeXEntry> citations,
+                              List<BundledCredits> bundled) {
     public InstalledModule {
         citations = CreditsFiles.copyOrEmpty(citations);
+        bundled = CreditsFiles.copyOrEmpty(bundled);
     }
 }

@@ -32,6 +32,10 @@ import tools.jackson.core.JacksonException;
  *   part of the SBOM, must not be shipped as a jar of its own, and its SBOM entry must state
  *   exactly one licence whose text core.main holds.
  * <p>
+ * Third-party code inside the module's own jars or inside EvoAl's own artifacts that it ships
+ *   ({@link ModuleCredits#bundled()}) is checked like the bundled code of a library, and it
+ *   needs a copyright notice for the release's notice file.
+ * <p>
  * If the credits are complete, the check marks the shipped libraries in the SBOM
  *   ({@link ShippedScopes}). The build calls {@link #main(String...)} in the
  *   {@code prepare-package} phase, after the dependencies are copied and before the SBOM is
@@ -229,18 +233,45 @@ public final class CreditsCheck {
         final List<String> licenseIds = licensesOf(library, component);
         checkLicenseTexts(licenseIds, library.library());
 
-        for(final BundledCredits bundled : library.bundled()) {
-            final String user = library.library() + "/" + bundled.name();
-            final boolean hasName = bundled.name() != null && !bundled.name().isBlank();
+        checkBundled(library.bundled(), "'" + library.library() + "'", library.library() + "/", false);
+    }
+
+    /**
+     * Checks bundled code: every entry has a unique name, a licence whose text core.main holds
+     *   and, if required, a copyright notice.
+     *
+     * @param owner The module or library that contains the code, for the messages.
+     * @param prefix The prefix of the code's name in the messages, e.g. the library.
+     * @param isCopyrightRequired Whether the entries need a copyright notice.
+     */
+    private void checkBundled(final List<BundledCredits> bundled,
+                              final String owner,
+                              final String prefix,
+                              final boolean isCopyrightRequired) {
+        final Set<String> names = new HashSet<>();
+
+        for(final BundledCredits code : bundled) {
+            final boolean hasName = code.name() != null && !code.name().isBlank();
             if(!hasName) {
-                problems.add("Bundled code of '" + library.library() + "' has no name.");
+                problems.add("Bundled code of " + owner + " has no name.");
             }
 
-            if(bundled.licenses().isEmpty()) {
+            final String user = prefix + code.name();
+            final boolean isNewName = !hasName || names.add(code.name());
+            if(!isNewName) {
+                problems.add("The bundled code '" + user + "' has two entries in " + CreditsFiles.CREDITS_FILE + ".");
+            }
+
+            if(code.licenses().isEmpty()) {
                 problems.add("The bundled code '" + user + "' has no licence.");
             }
 
-            checkLicenseTexts(bundled.licenses(), user);
+            final boolean hasCopyright = code.copyright() != null && !code.copyright().isBlank();
+            if(isCopyrightRequired && !hasCopyright) {
+                problems.add("The bundled code '" + user + "' has no copyright notice.");
+            }
+
+            checkLicenseTexts(code.licenses(), user);
         }
     }
 
@@ -402,6 +433,7 @@ public final class CreditsCheck {
             return;
         }
 
+        checkBundled(credits.bundled(), "the module", "", true);
         checkEntries(credits, shipped);
         checkContained(credits, components, shipped);
 

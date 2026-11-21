@@ -53,7 +53,13 @@ public class CreditsPrinterTest {
                 https://doi.org/10.1/evoal
                 """;
         Assertions.assertTrue(text.startsWith(evoal), text);
-        Assertions.assertTrue(text.contains("EvoAl uses the following 3 libraries."), text);
+        Assertions.assertTrue(text.contains("""
+
+                The plugin suite contains third-party code:
+                  ported benchmark (BSD-2-Clause, https://example.org/benchmark)
+                  solver (GPL-3.0-or-later)
+
+                EvoAl uses the following 3 libraries."""), text);
         Assertions.assertTrue(text.contains("""
                   plugin-lib 1.0 (org.example:plugin-lib)
                       Licence:  EPL-2.0 (https://spdx.org/licenses/EPL-2.0.html)

@@ -197,6 +197,69 @@ public class CreditsCheckTest {
     }
 
     @Test
+    public void bundledCodeOfTheModuleIsAccepted() throws IOException {
+        writeCredits("""
+                {
+                    "bundled": [
+                        {
+                            "name": "ported benchmark",
+                            "licenses": ["MIT"],
+                            "url": "https://example.org/benchmark",
+                            "copyright": "Copyright 2013, Jane Doe"
+                        },
+                        {"name": "native code", "licenses": ["Apache-2.0"], "copyright": "Copyright 2020, John Doe"}
+                    ]
+                }""");
+
+        Assertions.assertEquals(List.of(), check());
+    }
+
+    @Test
+    public void bundledCodeOfTheModuleIsChecked() throws IOException {
+        writeCredits("""
+                {
+                    "bundled": [
+                        {"name": "unknown", "licenses": ["BSD-2-Clause"], "copyright": "Copyright 2013, Jane Doe"},
+                        {"name": "unlicensed", "copyright": "Copyright 2013, Jane Doe"},
+                        {"name": "anonymous", "licenses": ["MIT"]},
+                        {"licenses": ["MIT"], "copyright": "Copyright 2013, Jane Doe"},
+                        {"name": "unknown", "licenses": ["MIT"], "copyright": "Copyright 2013, Jane Doe"}
+                    ]
+                }""");
+
+        final List<String> problems = check();
+
+        Assertions.assertEquals(List.of("core.main has no text for the licence 'BSD-2-Clause' of 'unknown' "
+                                        + "(META-INF/evoal/licenses/BSD-2-Clause.txt).",
+                                        "The bundled code 'unlicensed' has no licence.",
+                                        "The bundled code 'anonymous' has no copyright notice.",
+                                        "Bundled code of the module has no name.",
+                                        "The bundled code 'unknown' has two entries in credits.json."),
+                                problems);
+    }
+
+    @Test
+    public void bundledCodeOfALibraryNeedsNoCopyrightNotice() throws IOException {
+        addShipped("org.example", "library", license("Apache-2.0"));
+        writeCredits("""
+                {
+                    "libraries": [
+                        {
+                            "library": "org.example:library",
+                            "purpose": "Test.",
+                            "bundled": [{"name": "native", "licenses": ["MIT"]}, {"name": "native", "licenses": []}]
+                        }
+                    ]
+                }""");
+
+        final List<String> problems = check();
+
+        Assertions.assertEquals(List.of("The bundled code 'org.example:library/native' has two entries in credits.json.",
+                                        "The bundled code 'org.example:library/native' has no licence."),
+                                problems);
+    }
+
+    @Test
     public void entryWithoutShippedLibraryIsReported() throws IOException {
         writeCredits("""
                 {"libraries": [{"library": "org.example:gone", "purpose": "Test."}]}""");

@@ -27,13 +27,29 @@ public class CreditsCollectorTest {
     }
 
     @Test
+    public void bundledCodeAppearsWithItsModule() {
+        final InstalledModule suite = credits.modules().get(3);
+
+        Assertions.assertEquals(List.of(new BundledCredits("ported benchmark",
+                                                           List.of("BSD-2-Clause"),
+                                                           "https://example.org/benchmark",
+                                                           "Copyright 2013, Jane Doe"),
+                                        new BundledCredits("solver",
+                                                           List.of("GPL-3.0-or-later"),
+                                                           null,
+                                                           "Copyright 2001, John Doe")),
+                                suite.bundled());
+        Assertions.assertEquals(List.of(), credits.modules().get(0).bundled());
+    }
+
+    @Test
     public void evoalLibrariesAreNoThirdPartyLibraries() {
         final List<String> names = credits.evoalComponents()
                                           .stream()
                                           .map(SbomComponent::name)
                                           .toList();
 
-        Assertions.assertEquals(List.of("language"), names);
+        Assertions.assertEquals(List.of("language", "binding"), names);
     }
 
     @Test
@@ -93,7 +109,7 @@ public class CreditsCollectorTest {
                                           .map(InstalledModule::name)
                                           .toList();
 
-        Assertions.assertEquals(List.of("core", "arff", "other"), names);
+        Assertions.assertEquals(List.of("core", "arff", "other", "suite"), names);
         Assertions.assertEquals("evoal", credits.modules().get(0).citations().get(0).key());
         Assertions.assertEquals("2.0", credits.modules().get(0).component().version());
     }

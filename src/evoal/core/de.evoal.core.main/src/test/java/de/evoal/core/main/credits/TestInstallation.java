@@ -46,8 +46,10 @@ final class TestInstallation {
      *     SBOM, GPL-3.0-or-later in the credits), EvoAl's {@code language} and a jar outside of
      *     the SBOM;</li>
      *   <li>{@code plugins/arff}: a plugin with {@code plugin-lib} (dual licence, EPL-2.0
-     *     chosen, with a citation and bundled MIT code);</li>
-     *   <li>{@code plugins/other}: a plugin that ships {@code shared-lib} as well.</li>
+     *     chosen, with a citation and bundled MIT code with a copyright notice);</li>
+     *   <li>{@code plugins/other}: a plugin that ships {@code shared-lib} as well;</li>
+     *   <li>{@code plugins/suite}: a plugin without citations and libraries that ships EvoAl's
+     *     {@code binding} and contains third-party code (BSD-2-Clause and GPL-3.0-or-later).</li>
      * </ul>
      */
     static TestInstallation example(final Path root) throws IOException {
@@ -90,7 +92,14 @@ final class TestInstallation {
                             "purpose": "Reads files.",
                             "licenses": ["EPL-2.0"],
                             "citations": ["paper"],
-                            "bundled": [{"name": "native", "licenses": ["MIT"], "url": "https://example.org/native"}]
+                            "bundled": [
+                                {
+                                    "name": "native",
+                                    "licenses": ["MIT"],
+                                    "url": "https://example.org/native",
+                                    "copyright": "Copyright 2020, The Native Authors"
+                                }
+                            ]
                         }
                     ]
                 }""", """
@@ -100,6 +109,20 @@ final class TestInstallation {
                              Map.of("META-INF/NOTICE.txt", "Shared Lib\nCopyright The Shared Authors"));
         installation.module("plugins/other", "other", """
                 {"libraries": [{"library": "org.example:shared-lib", "purpose": "Shares more."}]}""", null);
+
+        installation.library("plugins/suite", "de.evoal.benchmark", "binding", "", Map.of());
+        installation.module("plugins/suite", "benchmark.suite", """
+                {
+                    "bundled": [
+                        {
+                            "name": "ported benchmark",
+                            "licenses": ["BSD-2-Clause"],
+                            "url": "https://example.org/benchmark",
+                            "copyright": "Copyright 2013, Jane Doe"
+                        },
+                        {"name": "solver", "licenses": ["GPL-3.0-or-later"], "copyright": "Copyright 2001, John Doe"}
+                    ]
+                }""", null);
 
         return installation;
     }

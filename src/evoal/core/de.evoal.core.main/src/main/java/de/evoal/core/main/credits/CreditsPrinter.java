@@ -8,7 +8,7 @@ import java.util.stream.Stream;
 
 /**
  * Prints the credits of an installation for {@code --credits}: how EvoAl and its plugins are
- *   cited, then every third-party library with version, licence, project link, the modules
+ *   cited and the third-party code inside their jars, then every third-party library with version, licence, project link, the modules
  *   that use it and what for, its citation, the libraries inside its jar and bundled native
  *   code. {@code --credits bibtex} prints all citations as BibTeX instead.
  */
@@ -74,9 +74,21 @@ public final class CreditsPrinter {
 
     private static void printBundled(final PrintStream out, final InstalledLibrary library) {
         for(final BundledCredits bundled : library.bundled()) {
-            final String licenses = String.join(", ", bundled.licenses());
-            out.println(INDENT + "Bundles:  " + bundled.name() + " (" + licenses + ", " + bundled.url() + ")");
+            out.println(INDENT + "Bundles:  " + describeBundled(bundled));
         }
+    }
+
+    /**
+     * @return The bundled code with its licences and project link, e.g.
+     *   {@code Snappy (BSD-3-Clause, https://github.com/google/snappy)}.
+     */
+    private static String describeBundled(final BundledCredits bundled) {
+        final String licenses = String.join(", ", bundled.licenses());
+        if(bundled.url() == null) {
+            return bundled.name() + " (" + licenses + ")";
+        }
+
+        return bundled.name() + " (" + licenses + ", " + bundled.url() + ")";
     }
 
     /**
@@ -129,7 +141,8 @@ public final class CreditsPrinter {
     }
 
     /**
-     * Prints the version of EvoAl and the citations of EvoAl and its plugins.
+     * Prints the version of EvoAl, the citations of EvoAl and its plugins and the third-party
+     *   code inside their jars.
      */
     private static void printModules(final PrintStream out, final List<InstalledModule> modules) {
         for(final InstalledModule module : modules) {
@@ -138,15 +151,22 @@ public final class CreditsPrinter {
                 out.println("EvoAl " + module.component().version());
             }
 
-            if(module.citations().isEmpty()) {
-                continue;
+            final String citer = isCore ? "EvoAl" : "the plugin " + module.name();
+            if(!module.citations().isEmpty()) {
+                out.println();
+                out.println("If you use " + citer + ", please cite:");
+                for(final BibTeXEntry citation : module.citations()) {
+                    out.println("  " + CitationFormat.toText(citation));
+                }
             }
 
-            final String citer = isCore ? "EvoAl" : "the plugin " + module.name();
-            out.println();
-            out.println("If you use " + citer + ", please cite:");
-            for(final BibTeXEntry citation : module.citations()) {
-                out.println("  " + CitationFormat.toText(citation));
+            if(!module.bundled().isEmpty()) {
+                final String owner = isCore ? "EvoAl" : "The plugin " + module.name();
+                out.println();
+                out.println(owner + " contains third-party code:");
+                for(final BundledCredits bundled : module.bundled()) {
+                    out.println("  " + describeBundled(bundled));
+                }
             }
         }
     }

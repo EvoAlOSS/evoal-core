@@ -28,7 +28,8 @@ import java.util.zip.ZipFile;
  * <p>
  * A library that several modules ship appears once, with the purposes of all of them. Libraries
  *   whose code is inside another library's jar ({@link LibraryCredits#contains()}) have no jar of
- *   their own; they appear with the library that contains them.
+ *   their own; they appear with the library that contains them. Third-party code inside a
+ *   module's jars ({@link ModuleCredits#bundled()}) appears with the module.
  */
 public final class CreditsCollector {
     /**
@@ -81,7 +82,8 @@ public final class CreditsCollector {
 
             for(final ModuleFiles files : moduleFiles.values()) {
                 final List<BibTeXEntry> moduleCitations = citationsOf(files.credits().citations(), files.entries());
-                modules.add(new InstalledModule(moduleName, files.module(), moduleCitations));
+                final List<BundledCredits> moduleBundled = files.credits().bundled();
+                modules.add(new InstalledModule(moduleName, files.module(), moduleCitations, moduleBundled));
 
                 for(final SbomComponent component : files.components()) {
                     final Path jar = librariesByHash.get(component.sha256());

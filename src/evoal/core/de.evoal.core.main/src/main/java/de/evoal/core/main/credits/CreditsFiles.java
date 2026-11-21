@@ -23,8 +23,8 @@ import tools.jackson.databind.json.JsonMapper;
  * <ul>
  *   <li>{@value #SBOM_FILE}: the CycloneDX SBOM that the build generates;</li>
  *   <li>{@value #CREDITS_FILE}: the hand-written purpose, licence choice and citations per
- *     shipped library ({@link ModuleCredits}), optional for a module without third-party
- *     libraries;</li>
+ *     shipped library and the third-party code inside the module's jars ({@link ModuleCredits}),
+ *     optional for a module without third-party libraries and code;</li>
  *   <li>{@value #CITATIONS_FILE}: the BibTeX entries that the citations name, optional.</li>
  * </ul>
  * core.main also holds the generic licence texts in {@value #LICENSES_FOLDER}, one file
