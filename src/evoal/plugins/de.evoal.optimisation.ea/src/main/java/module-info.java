@@ -31,4 +31,5 @@ module de.evoal.optimisation.ea {
     opens de.evoal.optimisation.ea.main.operators to weld.core.impl;
     opens de.evoal.optimisation.ea.main.replacement to weld.core.impl;
     opens de.evoal.optimisation.ea.main.selection to weld.core.impl;
+    opens de.evoal.optimisation.ea.main.statistics to weld.core.impl;
 }

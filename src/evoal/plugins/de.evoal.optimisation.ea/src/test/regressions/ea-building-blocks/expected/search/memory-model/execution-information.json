@@ -107,6 +107,78 @@
     "valueType" : "integer",
     "scope" : "iteration",
     "description" : "Number of predictions of a surrogate model."
+  }, {
+    "name" : "linkage-children-building-block-1",
+    "kind" : "measure",
+    "valueType" : "integer",
+    "scope" : "iteration",
+    "description" : "Number of children of recombinations in the iteration that the building block 1 of 'x:0', 'x:2', 'x:4' applies to."
+  }, {
+    "name" : "linkage-preserved-building-block-1",
+    "kind" : "measure",
+    "valueType" : "integer",
+    "scope" : "iteration",
+    "description" : "Number of these children that preserve the building block 1 of 'x:0', 'x:2', 'x:4' after the recombinations: all its features have the values of one parent."
+  }, {
+    "name" : "linkage-preserved-before-building-block-1",
+    "kind" : "measure",
+    "valueType" : "integer",
+    "scope" : "iteration",
+    "description" : "Number of these children that preserve the building block 1 of 'x:0', 'x:2', 'x:4' before the first linkage step of their pair."
+  }, {
+    "name" : "linkage-children-building-block-2",
+    "kind" : "measure",
+    "valueType" : "integer",
+    "scope" : "iteration",
+    "description" : "Number of children of recombinations in the iteration that the building block 2 of 'x:2', 'x:5' applies to."
+  }, {
+    "name" : "linkage-preserved-building-block-2",
+    "kind" : "measure",
+    "valueType" : "integer",
+    "scope" : "iteration",
+    "description" : "Number of these children that preserve the building block 2 of 'x:2', 'x:5' after the recombinations: all its features have the values of one parent."
+  }, {
+    "name" : "linkage-preserved-before-building-block-2",
+    "kind" : "measure",
+    "valueType" : "integer",
+    "scope" : "iteration",
+    "description" : "Number of these children that preserve the building block 2 of 'x:2', 'x:5' before the first linkage step of their pair."
+  }, {
+    "name" : "linkage-children-building-block-3",
+    "kind" : "measure",
+    "valueType" : "integer",
+    "scope" : "iteration",
+    "description" : "Number of children of recombinations in the iteration that the building block 3 of 'x:1', 'x:3' applies to."
+  }, {
+    "name" : "linkage-preserved-building-block-3",
+    "kind" : "measure",
+    "valueType" : "integer",
+    "scope" : "iteration",
+    "description" : "Number of these children that preserve the building block 3 of 'x:1', 'x:3' after the recombinations: all its features have the values of one parent."
+  }, {
+    "name" : "linkage-preserved-before-building-block-3",
+    "kind" : "measure",
+    "valueType" : "integer",
+    "scope" : "iteration",
+    "description" : "Number of these children that preserve the building block 3 of 'x:1', 'x:3' before the first linkage step of their pair."
+  }, {
+    "name" : "linkage-children-correlation-1",
+    "kind" : "measure",
+    "valueType" : "integer",
+    "scope" : "iteration",
+    "description" : "Number of children of recombinations in the iteration that the correlation 1 of 'x:0' and 'x:5' (0.6) applies to."
+  }, {
+    "name" : "linkage-preserved-correlation-1",
+    "kind" : "measure",
+    "valueType" : "integer",
+    "scope" : "iteration",
+    "description" : "Number of these children that preserve the correlation 1 of 'x:0' and 'x:5' (0.6) after the recombinations: all its features have the values of one parent."
+  }, {
+    "name" : "linkage-preserved-before-correlation-1",
+    "kind" : "measure",
+    "valueType" : "integer",
+    "scope" : "iteration",
+    "description" : "Number of these children that preserve the correlation 1 of 'x:0' and 'x:5' (0.6) before the first linkage step of their pair."
   } ],
   "propertyDefinitions" : [ {
     "name" : "operators",
@@ -120,6 +192,18 @@
     "valueType" : "text",
     "list" : true,
     "description" : "The features whose genes differ from the parent whose place the child takes."
+  }, {
+    "name" : "primary-features",
+    "scope" : "relationship",
+    "valueType" : "text",
+    "list" : true,
+    "description" : "The features that a 'correlation-aware-mutation' changed itself."
+  }, {
+    "name" : "propagated-features",
+    "scope" : "relationship",
+    "valueType" : "text",
+    "list" : true,
+    "description" : "The changes that a 'correlation-aware-mutation' propagated to correlated features, e.g. 'x:2 from x:1 (0.9)'."
   }, {
     "name" : "linked-features",
     "scope" : "relationship",

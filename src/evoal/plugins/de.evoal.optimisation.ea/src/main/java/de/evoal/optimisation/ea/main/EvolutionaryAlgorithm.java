@@ -49,6 +49,7 @@ import de.evoal.optimisation.ea.main.genotype.GenotypeFactory;
 import de.evoal.optimisation.ea.main.genotype.GenotypeFactory.ConfiguredChromosome;
 import de.evoal.optimisation.ea.main.operators.ApplicabilityReader;
 import de.evoal.optimisation.ea.main.selection.Nsga2Selection;
+import de.evoal.optimisation.ea.main.statistics.LinkageStatistics;
 
 /**
  * An evolutionary algorithm (DL type {@code 'evolutionary-algorithm'}) as a template of
@@ -115,6 +116,9 @@ public class EvolutionaryAlgorithm extends TemplateAlgorithm {
     /**
      * The correlations of the DDL; their properties are defined if there are any.
      */
+    @Inject
+    private LinkageStatistics linkageStatistics;
+
     @Inject
     private ProblemCorrelations problemCorrelations;
 
@@ -211,6 +215,7 @@ public class EvolutionaryAlgorithm extends TemplateAlgorithm {
                                     "The features that a 'linkage-crossover' took from the same parent as a correlated "
                                     + "feature or a feature of the same building block, e.g. 'x:2 with x:1' or "
                                     + "'x:7, x:12 with x:0'.");
+            linkageStatistics.define(recorder, problemCorrelations.correlations().linkageGroups());
         }
 
         if(crowded) {
@@ -295,7 +300,7 @@ public class EvolutionaryAlgorithm extends TemplateAlgorithm {
 
     @Override
     protected Template template() {
-        final Variation variation = new Variation(genotype, plan, boundaryHandling, randomService);
+        final Variation variation = new Variation(genotype, plan, boundaryHandling, randomService, linkageStatistics);
 
         final SampleCandidates sample = new SampleCandidates(initialisation, size);
         final List<Step> childChecks = newCandidateChecks(GenerationSteps.resampler(variation));

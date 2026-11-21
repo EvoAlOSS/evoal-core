@@ -18,6 +18,7 @@ import de.evoal.optimisation.ea.api.operators.MutationOperator;
 import de.evoal.optimisation.ea.api.operators.RecombinationOperator;
 import de.evoal.optimisation.ea.main.operators.CorrelationAwareMutation;
 import de.evoal.optimisation.ea.main.operators.LinkageCrossover;
+import de.evoal.optimisation.ea.main.statistics.LinkageStatistics;
 
 /**
  * Recombines and mutates the genomes of one run, following the probability rules of the
@@ -47,6 +48,15 @@ import de.evoal.optimisation.ea.main.operators.LinkageCrossover;
  *   use (properties {@code primary-features} and {@code propagated-features}); a
  *   {@link LinkageCrossover} keeps the features of building blocks and correlated pairs of both
  *   children together after the use (property {@code linked-features}).
+ * <p>
+ * The linkage step and the statistics compare the children with the parents as the genotype
+ *   represents them (encoded and decoded again), since a real feature of a bit or Gray
+ *   chromosome is rounded to its grid and the initial population is not created by the
+ *   genotype.
+ * <p>
+ * If the run records {@link LinkageStatistics}, every child of a recombination that fired is
+ *   counted with its state before the first linkage step of the pair and after the
+ *   recombinations (decoded only then); the statistics draw no random numbers.
  */
 final class Variation {
     /**
@@ -86,6 +96,14 @@ final class Variation {
     private final List<RandomGenerator> recombinationRandom = new ArrayList<>();
 
     /**
+     * Counts how often the recombinations preserve building blocks and correlated pairs;
+     *   {@code null} if nothing is counted.
+     */
+    private final LinkageStatistics statistics;
+
+    /**
+     * Creates a variation without linkage statistics, e.g., for tests.
+     *
      * @param genotype The genotype.
      * @param plan The operators.
      * @param boundaryHandling Brings the genes back into their boundaries.
@@ -93,6 +111,20 @@ final class Variation {
      */
     Variation(final Genotype genotype, final OperatorPlan plan, final BoundaryHandling boundaryHandling,
               final RandomService random) {
+        this(genotype, plan, boundaryHandling, random, null);
+    }
+
+    /**
+     * @param genotype The genotype.
+     * @param plan The operators.
+     * @param boundaryHandling Brings the genes back into their boundaries.
+     * @param random Gives the random streams of the current run.
+     * @param statistics Counts how often the recombinations preserve building blocks and
+     *   correlated pairs; {@code null} or not recording if nothing is counted.
+     */
+    Variation(final Genotype genotype, final OperatorPlan plan, final BoundaryHandling boundaryHandling,
+              final RandomService random, final LinkageStatistics statistics) {
+        this.statistics = statistics != null && statistics.isRecording() ? statistics : null;
         this.genotype = genotype;
         this.boundaryHandling = boundaryHandling;
         this.recombinations = plan.recombinations();
@@ -106,9 +138,28 @@ final class Variation {
      * Recombines a pair of parents into two children.
      */
     List<Offspring> recombine(final Candidate first, final Candidate second) {
+        return recombine(first, second, true);
+    }
+
+    /**
+     * Recombines a pair of parents into two children.
+     *
+     * @param countSibling Whether the linkage statistics count the second child, which is not
+     *   used when a child is varied again.
+     */
+    private List<Offspring> recombine(final Candidate first, final Candidate second, final boolean countSibling) {
         final Object pair = new Object();
         final Offspring a = new Offspring(genotype.encode(first.input()), List.of(first, second), pair);
         final Offspring b = new Offspring(genotype.encode(second.input()), List.of(second, first), pair);
+
+        boolean fired = false;
+        TypedEObject unlinkedA = null;
+        TypedEObject unlinkedB = null;
+
+        // the parents as the genotype represents them, e.g. rounded to the precision of a bit chromosome;
+        // created when needed
+        TypedEObject parentA = null;
+        TypedEObject parentB = null;
 
         for(int u = 0; u < recombinations.size(); ++u) {
             final OperatorUse<RecombinationOperator> use = recombinations.get(u);
@@ -117,6 +168,7 @@ final class Variation {
             if(random.nextDouble() >= use.operator().probability()) {
                 continue;
             }
+            fired = true;
 
             final Genome beforeA = a.genome.copy();
             final Genome beforeB = b.genome.copy();
@@ -129,14 +181,46 @@ final class Variation {
             }
 
             if(use.operator() instanceof LinkageCrossover crossover) {
-                link(crossover, a, b, first, second);
+                if(parentA == null) {
+                    parentA = represented(first);
+                    parentB = represented(second);
+                }
+                if(statistics != null && unlinkedA == null) {
+                    unlinkedA = genotype.decode(a.genome);
+                    unlinkedB = genotype.decode(b.genome);
+                }
+                link(crossover, a, b, parentA, parentB);
             }
 
             noteChange(a, beforeA, use.operator().name(), true);
             noteChange(b, beforeB, use.operator().name(), true);
         }
 
+        if(statistics != null && fired) {
+            if(parentA == null) {
+                parentA = represented(first);
+                parentB = represented(second);
+            }
+
+            final TypedEObject childA = genotype.decode(a.genome);
+            statistics.count(parentA, parentB, unlinkedA == null ? childA : unlinkedA, childA);
+
+            if(countSibling) {
+                final TypedEObject childB = genotype.decode(b.genome);
+                statistics.count(parentA, parentB, unlinkedB == null ? childB : unlinkedB, childB);
+            }
+        }
+
         return List.of(a, b);
+    }
+
+    /**
+     * @return The input of the candidate as the genotype represents it: encoded and decoded
+     *   again, so a real feature of a bit or Gray chromosome lies on its grid, like the
+     *   decoded children. The initial population is not created by the genotype.
+     */
+    private TypedEObject represented(final Candidate candidate) {
+        return genotype.decode(genotype.encode(candidate.input()));
     }
 
     /**
@@ -146,7 +230,7 @@ final class Variation {
      * @return The new child; its sibling is not recreated.
      */
     Offspring revary(final Offspring child) {
-        final Offspring again = recombine(child.parents.get(0), child.parents.get(1)).getFirst();
+        final Offspring again = recombine(child.parents.get(0), child.parents.get(1), false).getFirst();
         mutate(again);
 
         return again;
@@ -190,12 +274,15 @@ final class Variation {
     /**
      * Keeps the features of building blocks and correlated pairs of the children together and
      *   notes the set features.
+     *
+     * @param parentA The first parent as the genotype represents it.
+     * @param parentB The second parent as the genotype represents it.
      */
-    private void link(final LinkageCrossover crossover, final Offspring a, final Offspring b, final Candidate first,
-                      final Candidate second) {
+    private void link(final LinkageCrossover crossover, final Offspring a, final Offspring b, final TypedEObject parentA,
+                      final TypedEObject parentB) {
         final TypedEObject childA = genotype.decode(a.genome);
         final TypedEObject childB = genotype.decode(b.genome);
-        final List<String> linked = crossover.link(first.input(), second.input(), childA, childB);
+        final List<String> linked = crossover.link(parentA, parentB, childA, childB);
         if(linked.isEmpty()) {
             return;
         }

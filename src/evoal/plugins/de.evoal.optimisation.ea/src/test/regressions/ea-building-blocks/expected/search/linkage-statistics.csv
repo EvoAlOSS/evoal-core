@@ -1,0 +1,12 @@
+iteration,children-building-block-1,preserved-building-block-1,rate-building-block-1,preserved-before-building-block-1,rate-before-building-block-1,children-building-block-2,preserved-building-block-2,rate-building-block-2,preserved-before-building-block-2,rate-before-building-block-2,children-building-block-3,preserved-building-block-3,rate-building-block-3,preserved-before-building-block-3,rate-before-building-block-3,children-correlation-1,preserved-correlation-1,rate-correlation-1,preserved-before-correlation-1,rate-before-correlation-1
+0,0,0,,0,,0,0,,0,,0,0,,0,,0,0,,0,
+1,8,8,1.0,0,0.0,8,4,0.5,0,0.0,8,2,0.25,4,0.5,8,4,0.5,6,0.75
+2,8,8,1.0,4,0.5,8,6,0.75,4,0.5,8,8,1.0,8,1.0,8,6,0.75,6,0.75
+3,8,6,0.75,4,0.5,8,6,0.75,6,0.75,8,4,0.5,8,1.0,8,6,0.75,6,0.75
+4,8,6,0.75,4,0.5,8,8,1.0,6,0.75,8,8,1.0,2,0.25,8,8,1.0,4,0.5
+5,8,6,0.75,6,0.75,8,6,0.75,6,0.75,8,8,1.0,8,1.0,8,6,0.75,6,0.75
+6,8,6,0.75,6,0.75,8,8,1.0,8,1.0,8,8,1.0,8,1.0,8,8,1.0,8,1.0
+7,8,8,1.0,6,0.75,8,8,1.0,8,1.0,8,6,0.75,6,0.75,8,8,1.0,8,1.0
+8,8,4,0.5,8,1.0,8,8,1.0,8,1.0,8,8,1.0,8,1.0,8,8,1.0,8,1.0
+9,8,4,0.5,6,0.75,8,8,1.0,8,1.0,8,8,1.0,8,1.0,8,8,1.0,6,0.75
+10,8,8,1.0,4,0.5,8,4,0.5,6,0.75,8,8,1.0,8,1.0,8,6,0.75,8,1.0

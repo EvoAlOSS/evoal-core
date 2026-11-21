@@ -495,6 +495,35 @@ module de.evoal.optimisation.ea.optimisation {
     }
 
     /**
+     * Writes how often the recombinations of every iteration preserve the building blocks
+     *   and correlated pairs of the DDL. The linkage of a building block is the probability
+     *   that crossover preserves it (G. R. Harik, D. E. Goldberg: Learning linkage.
+     *   Foundations of Genetic Algorithms 4, 1996, pp. 247-262, section 2); the rates
+     *   estimate it.
+     *
+     * Every child that a recombination created is counted for every building block and
+     *   correlation that applies to its parents (a ranged correlation only if both parents
+     *   lie in its ranges). A group is preserved in a child if all its features have the
+     *   values of one parent. It is checked at the end of the recombinations, before the
+     *   mutation, and right before the first linkage step of the pair: with a single
+     *   'linkage-crossover', the latter is the wrapped crossover alone; with several
+     *   recombinations, later ones only show in the first value. Without a linkage step,
+     *   both are the same.
+     *
+     * The evolutionary algorithm records the counts as iteration metrics of the memory
+     *   model ('linkage-children-g', 'linkage-preserved-g', 'linkage-preserved-before-g').
+     *   File: <tt>linkage-statistics.csv</tt> in the output folder, one row per iteration:
+     *   <tt>iteration</tt>, then for every building block and correlation g of the DDL
+     *   (<tt>building-block-n</tt>, <tt>correlation-n</tt>), in its order:
+     *   <tt>children-g</tt>, <tt>preserved-g</tt>, <tt>rate-g</tt>,
+     *   <tt>preserved-before-g</tt> and <tt>rate-before-g</tt>. A rate is empty if no child
+     *   was counted.
+     *
+     * A problem without building blocks and correlations is rejected.
+     */
+    type 'linkage-statistics' extends 'statistics-writer' {}
+
+    /**
      * Abstract base type of the selections. A selection chooses a number of candidates
      *   from a list; a candidate can be chosen more than once. The selections compare by
      *   the 'comparator' of the algorithm, except the ones that use the fitness itself.

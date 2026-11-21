@@ -142,6 +142,20 @@ the first two exist when the DDL declares correlations, the one of `linked-featu
 declares correlations or building blocks. `'correlation-statistics'` (optimisation.api)
 compares the declared correlations with the population.
 
+Linkage statistics (`main.statistics.LinkageStatistics`): when the DDL declares building
+blocks or correlations, the EA counts per iteration how often the recombinations preserve
+each of them, i.e. all its features have the values of one parent (the linkage of Harik and
+Goldberg is this probability). Every child of a recombination that fired is counted for every
+group that applies to its parents (a ranged correlation only if both parents lie in its
+ranges), for every recombination, not only `'linkage-crossover'`. A group is checked at the
+end of the recombinations, before the mutation, and right before the first linkage step of
+the pair (with a single `'linkage-crossover'`: the wrapped crossover alone; later
+recombinations only show in the first value). The iteration metrics are
+`linkage-children-<g>`, `linkage-preserved-<g>` and `linkage-preserved-before-<g>` for
+`g = building-block-<n>` or `correlation-<n>`. The statistics writer `'linkage-statistics'`
+writes them with the rates into `linkage-statistics.csv`. The statistics draw no random
+numbers; a resampled child is counted, its unused sibling is not.
+
 ## Selections and replacements
 
 All selections choose with replacement. Ranking and comparison use the `'comparator'` of the
@@ -232,9 +246,12 @@ The surrogate plugins have examples that search on a trained model with the EA
 - `CorrelationTransferTest`, `LinkageTest`, `CorrelationVariationTest`: the propagation of
   a mutation along correlations, the linkage of building blocks and correlated pairs
   (anchors, overlapping building blocks, DDL order), and both operators in the `Variation`.
+- `LinkageStatisticsTest`: the counts of preserved groups before and after the linkage step,
+  and the rows of `'linkage-statistics'`.
 - Regressions in `src/test/regressions`: the three replacements, a mixed genotype,
   `'maximum-age'`, the real-valued operators, NSGA-II, the correlation-aware operators
-  (`ea-correlation`) and building blocks (`ea-building-blocks`), each with the memory model.
+  (`ea-correlation`) and building blocks with linkage statistics (`ea-building-blocks`), each
+  with the memory model.
 
 ## References
 

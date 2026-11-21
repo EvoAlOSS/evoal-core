@@ -71,6 +71,60 @@
     "valueType" : "integer",
     "scope" : "iteration",
     "description" : "Number of predictions of a surrogate model."
+  }, {
+    "name" : "linkage-children-correlation-1",
+    "kind" : "measure",
+    "valueType" : "integer",
+    "scope" : "iteration",
+    "description" : "Number of children of recombinations in the iteration that the correlation 1 of 'x:1' and 'x:2' (0.9 in [-1.12, 3.0] x [-2.0, 0.0]) applies to."
+  }, {
+    "name" : "linkage-preserved-correlation-1",
+    "kind" : "measure",
+    "valueType" : "integer",
+    "scope" : "iteration",
+    "description" : "Number of these children that preserve the correlation 1 of 'x:1' and 'x:2' (0.9 in [-1.12, 3.0] x [-2.0, 0.0]) after the recombinations: all its features have the values of one parent."
+  }, {
+    "name" : "linkage-preserved-before-correlation-1",
+    "kind" : "measure",
+    "valueType" : "integer",
+    "scope" : "iteration",
+    "description" : "Number of these children that preserve the correlation 1 of 'x:1' and 'x:2' (0.9 in [-1.12, 3.0] x [-2.0, 0.0]) before the first linkage step of their pair."
+  }, {
+    "name" : "linkage-children-correlation-2",
+    "kind" : "measure",
+    "valueType" : "integer",
+    "scope" : "iteration",
+    "description" : "Number of children of recombinations in the iteration that the correlation 2 of 'x:0' and 'x:1' (0.9 in [1.0, 4.0] x [-5.12, -3.0]) applies to."
+  }, {
+    "name" : "linkage-preserved-correlation-2",
+    "kind" : "measure",
+    "valueType" : "integer",
+    "scope" : "iteration",
+    "description" : "Number of these children that preserve the correlation 2 of 'x:0' and 'x:1' (0.9 in [1.0, 4.0] x [-5.12, -3.0]) after the recombinations: all its features have the values of one parent."
+  }, {
+    "name" : "linkage-preserved-before-correlation-2",
+    "kind" : "measure",
+    "valueType" : "integer",
+    "scope" : "iteration",
+    "description" : "Number of these children that preserve the correlation 2 of 'x:0' and 'x:1' (0.9 in [1.0, 4.0] x [-5.12, -3.0]) before the first linkage step of their pair."
+  }, {
+    "name" : "linkage-children-correlation-3",
+    "kind" : "measure",
+    "valueType" : "integer",
+    "scope" : "iteration",
+    "description" : "Number of children of recombinations in the iteration that the correlation 3 of 'x:0' and 'x:2' (0.9 in [-5.12, -3.0] x [2.0, 5.12]) applies to."
+  }, {
+    "name" : "linkage-preserved-correlation-3",
+    "kind" : "measure",
+    "valueType" : "integer",
+    "scope" : "iteration",
+    "description" : "Number of these children that preserve the correlation 3 of 'x:0' and 'x:2' (0.9 in [-5.12, -3.0] x [2.0, 5.12]) after the recombinations: all its features have the values of one parent."
+  }, {
+    "name" : "linkage-preserved-before-correlation-3",
+    "kind" : "measure",
+    "valueType" : "integer",
+    "scope" : "iteration",
+    "description" : "Number of these children that preserve the correlation 3 of 'x:0' and 'x:2' (0.9 in [-5.12, -3.0] x [2.0, 5.12]) before the first linkage step of their pair."
   } ],
   "propertyDefinitions" : [ {
     "name" : "operators",

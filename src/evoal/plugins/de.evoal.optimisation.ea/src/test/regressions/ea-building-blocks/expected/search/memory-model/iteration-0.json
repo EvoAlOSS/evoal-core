@@ -295,6 +295,18 @@
   "bestSoFar" : 5,
   "metrics" : {
     "evaluations.real" : 16,
-    "evaluations.surrogate" : 0
+    "evaluations.surrogate" : 0,
+    "linkage-children-building-block-1" : 0,
+    "linkage-preserved-building-block-1" : 0,
+    "linkage-preserved-before-building-block-1" : 0,
+    "linkage-children-building-block-2" : 0,
+    "linkage-preserved-building-block-2" : 0,
+    "linkage-preserved-before-building-block-2" : 0,
+    "linkage-children-building-block-3" : 0,
+    "linkage-preserved-building-block-3" : 0,
+    "linkage-preserved-before-building-block-3" : 0,
+    "linkage-children-correlation-1" : 0,
+    "linkage-preserved-correlation-1" : 0,
+    "linkage-preserved-before-correlation-1" : 0
   }
 }

@@ -11,6 +11,8 @@ import org.junit.jupiter.api.Test;
 import de.evoal.core.api.ecore.info.BoundaryExtractor;
 import de.evoal.core.api.ecore.info.FeatureBoundaries;
 import de.evoal.core.api.random.RandomService;
+import de.evoal.models.v202704.optimisation.memory.Iteration;
+import de.evoal.models.v202704.optimisation.memory.MemoryFactory;
 import de.evoal.models.core.ecore.Space;
 import de.evoal.models.core.ecore.TypedEObject;
 
@@ -34,6 +36,7 @@ import de.evoal.optimisation.ea.main.operators.LinkageCrossover;
 import de.evoal.optimisation.ea.main.operators.SbxCrossover;
 import de.evoal.optimisation.ea.main.operators.SinglePointCrossover;
 import de.evoal.optimisation.ea.main.operators.UniformCrossover;
+import de.evoal.optimisation.ea.main.statistics.LinkageStatistics;
 
 /**
  * The correlation-aware operators in the {@link Variation}: x lives in a double chromosome,
@@ -134,5 +137,65 @@ public class CorrelationVariationTest {
     public void onlyCrossoversThatExchangeGenesCanBeLinked() {
         Assertions.assertThrows(IllegalArgumentException.class, () -> new LinkageCrossover(new SbxCrossover(1.0, 15.0), linkage));
         Assertions.assertDoesNotThrow(() -> new LinkageCrossover(new SinglePointCrossover(1.0), linkage));
+    }
+
+    @Test
+    public void theLinkageStatisticsCountTheBuildingBlockBeforeAndAfterTheLinkageStep() {
+        // given: x and y form a building block; the uniform crossover exchanges x, the linkage step brings y along
+        final BuildingBlock block = new BuildingBlock(1, List.of(x, y));
+        final LinkageStatistics statistics = new LinkageStatistics();
+        statistics.setUp(List.of(block));
+        final RecombinationOperator crossover = new LinkageCrossover(new UniformCrossover(1.0, 1.0), new Linkage(List.of(block)));
+        final OperatorPlan plan = new OperatorPlan(List.of(new OperatorUse<>(crossover, List.of(0), "test/recombination")),
+                                                   List.of());
+        final Variation variation = new Variation(genotype, plan, BoundaryHandling.STICK, RandomService.withSeed(5), statistics);
+
+        // when
+        variation.recombine(parent(0.5, 0.5), parent(-0.5, -0.5));
+        final Iteration iteration = MemoryFactory.eINSTANCE.createIteration();
+        statistics.contributeTo(iteration);
+
+        // then: both children are counted, preserved after the linkage step, not before it
+        Assertions.assertEquals(2L, iteration.getMetrics().get(LinkageStatistics.CHILDREN + "building-block-1"));
+        Assertions.assertEquals(2L, iteration.getMetrics().get(LinkageStatistics.PRESERVED + "building-block-1"));
+        Assertions.assertEquals(0L, iteration.getMetrics().get(LinkageStatistics.PRESERVED_BEFORE + "building-block-1"));
+    }
+
+    @Test
+    public void aRecombinationThatDoesNotFireIsNotCounted() {
+        final BuildingBlock block = new BuildingBlock(1, List.of(x, y));
+        final LinkageStatistics statistics = new LinkageStatistics();
+        statistics.setUp(List.of(block));
+        final RecombinationOperator crossover = new UniformCrossover(0.0, 1.0);
+        final OperatorPlan plan = new OperatorPlan(List.of(new OperatorUse<>(crossover, List.of(0), "test/recombination")),
+                                                   List.of());
+        final Variation variation = new Variation(genotype, plan, BoundaryHandling.STICK, RandomService.withSeed(5), statistics);
+
+        variation.recombine(parent(0.5, 0.5), parent(-0.5, -0.5));
+        final Iteration iteration = MemoryFactory.eINSTANCE.createIteration();
+        statistics.contributeTo(iteration);
+
+        Assertions.assertEquals(0L, iteration.getMetrics().get(LinkageStatistics.CHILDREN + "building-block-1"));
+    }
+
+    @Test
+    public void aFeatureOfAGrayChromosomeIsAnAnchorAlthoughTheParentLiesOffItsGrid() {
+        // given: y (Gray, 16 bits) comes first in the building block; 0.5 is not on the grid of y.
+        // The uniform crossover only exchanges the chromosome of x, so y of the first child comes from the first parent.
+        final Linkage block = new Linkage(List.of(new BuildingBlock(1, List.of(y, x))));
+        final RecombinationOperator crossover = new LinkageCrossover(new UniformCrossover(1.0, 1.0), block);
+        final OperatorPlan plan = new OperatorPlan(List.of(new OperatorUse<>(crossover, List.of(0), "test/recombination")),
+                                                   List.of());
+        final Variation variation = new Variation(genotype, plan, BoundaryHandling.STICK, RandomService.withSeed(5));
+
+        // when
+        final List<Offspring> children = variation.recombine(parent(0.5, 0.5), parent(-0.5, -0.5));
+        final Candidate a = variation.toCandidate(children.get(0));
+
+        // then: y anchors the building block, so x returns to the value of the first parent and the child keeps its
+        // genome (without the anchor, x would anchor and y would come from the second parent)
+        Assertions.assertEquals(0.5, (Double) a.input().eGet(x));
+        Assertions.assertEquals(0.5, (Double) a.input().eGet(y), 2.0 / 65535);
+        Assertions.assertNull(a.lineage().properties().get(Variation.OPERATORS));
     }
 }

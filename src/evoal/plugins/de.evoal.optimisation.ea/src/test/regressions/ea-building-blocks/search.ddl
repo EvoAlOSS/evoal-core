@@ -3,7 +3,7 @@ import "definitions" from de.evoal.optimisation.constraint;
 
 /**
  * Search space of the regression ea-building-blocks: Rastrigin in six real dimensions with
- *   two building blocks that overlap in x:2, and a third building block.
+ *   two building blocks that overlap in x:2, a third building block and a correlation.
  */
 module search {
     data:
@@ -58,4 +58,5 @@ module search {
         'building-block'([data 'x:0', data 'x:2', data 'x:4']);
         'building-block'([data 'x:2', data 'x:5']);
         'building-block'([data 'x:1', data 'x:3']);
+        correlation(data 'x:0', data 'x:5', 0.6);
 }

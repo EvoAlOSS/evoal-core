@@ -106,7 +106,7 @@ public final class Linkage {
         final List<String> linked = new ArrayList<>();
 
         for(final LinkageGroup group : groups) {
-            if(group instanceof Correlation correlation && (!appliesTo(correlation, parentA) || !appliesTo(correlation, parentB))) {
+            if(!appliesTo(group, parentA, parentB)) {
                 continue;
             }
 
@@ -148,9 +148,37 @@ public final class Linkage {
         return linked;
     }
 
+    /**
+     * @param group A building block or a correlation.
+     * @param parentA One parent.
+     * @param parentB The other parent.
+     * @return Whether the group applies to the parents: always for a building block and a
+     *   correlation without ranges, otherwise if both parents lie in the ranges.
+     */
+    public static boolean appliesTo(final LinkageGroup group, final TypedEObject parentA, final TypedEObject parentB) {
+        return !(group instanceof Correlation correlation) || appliesTo(correlation, parentA) && appliesTo(correlation, parentB);
+    }
+
     private static boolean appliesTo(final Correlation correlation, final TypedEObject candidate) {
         return correlation.appliesTo(((Number) candidate.eGet(correlation.first())).doubleValue(),
                                      ((Number) candidate.eGet(correlation.second())).doubleValue());
+    }
+
+    /**
+     * @param group A building block or a correlation.
+     * @param child A child of the two parents.
+     * @param parentA One parent.
+     * @param parentB The other parent.
+     * @return Whether the child preserves the group: all its features have the values of one
+     *   parent (a value both parents share fits both).
+     */
+    public static boolean isPreserved(final LinkageGroup group, final TypedEObject child, final TypedEObject parentA,
+                                      final TypedEObject parentB) {
+        return hasValuesOf(group, child, parentA) || hasValuesOf(group, child, parentB);
+    }
+
+    private static boolean hasValuesOf(final LinkageGroup group, final TypedEObject child, final TypedEObject parent) {
+        return group.features().stream().allMatch(feature -> sameValue(child.eGet(feature), parent.eGet(feature)));
     }
 
     /**

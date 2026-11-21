@@ -321,6 +321,15 @@
   "bestSoFar" : 46,
   "metrics" : {
     "evaluations.real" : 60,
-    "evaluations.surrogate" : 0
+    "evaluations.surrogate" : 0,
+    "linkage-children-correlation-1" : 8,
+    "linkage-preserved-correlation-1" : 8,
+    "linkage-preserved-before-correlation-1" : 2,
+    "linkage-children-correlation-2" : 8,
+    "linkage-preserved-correlation-2" : 6,
+    "linkage-preserved-before-correlation-2" : 8,
+    "linkage-children-correlation-3" : 0,
+    "linkage-preserved-correlation-3" : 0,
+    "linkage-preserved-before-correlation-3" : 0
   }
 }
