@@ -1,0 +1,94 @@
+import "definitions" from 'de.evoal.core.math';
+import "definitions" from 'de.evoal.pipeline.base';
+import "definitions" from 'de.evoal.core.base';
+
+module 'de.evoal.pipeline.statistics' {
+	/**
+	 * Sink that estimates the correlation of every pair of the data it reads when the stream
+	 *   has ended, and publishes the estimates as the pipeline value 'result' (a list with one
+	 *   entry per estimate, e.g. for 'template' and 'csv-writer'). The step writes no data.
+	 *
+	 * The Pearson correlation is estimated for cardinal and quotient data, the Spearman rank
+	 *   correlation (average ranks for ties) if one of the two is ordinal; pairs with nominal
+	 *   data are skipped. Other data that is not numeric (e.g. an ordinal enum) is rejected.
+	 *   A row without a value for one of the two data is left out for that pair only.
+	 *
+	 * Every estimate has the number of rows, the coefficient and a confidence interval by
+	 *   Fisher's z-transformation (R. A. Fisher: On the "probable error" of a coefficient of
+	 *   correlation deduced from a small sample. Metron 1, 1921, pp. 3-32). Each pair gets an
+	 *   estimate on all rows and, if 'ranges' give ranges for both data, one per combination
+	 *   of their ranges.
+	 *
+	 * The entries of the value have the keys first, second, firstLower, firstUpper,
+	 *   secondLower, secondUpper (the ranges, missing for an estimate on all rows), ranged,
+	 *   kind (pearson or spearman), n, coefficient, absoluteCoefficient, confidenceLower,
+	 *   confidenceUpper (missing for at most three rows), confidenceLevel and intervalMethod.
+	 */
+	type 'correlation-estimation' extends Sink {
+		/**
+		 * The name of the pipeline value that holds the estimates.
+		 */
+		result : string;
+
+		/**
+		 * Estimates with a smaller absolute coefficient are left out.
+		 */
+		'minimum-correlation' : real := 0.0;
+
+		/**
+		 * The confidence level of the intervals, in (0, 1).
+		 */
+		'confidence-level' : real := 0.95;
+
+		/**
+		 * The variance of Fisher's z-transformation of a Spearman correlation. The Pearson
+		 *   correlation always uses 1/(n-3).
+		 */
+		'confidence-interval' : instance 'rank-confidence-interval' := 'bonett-wright' {};
+
+		/**
+		 * The ranges in which ranged correlations are estimated, any number per data.
+		 */
+		ranges : optional array instance 'feature-range';
+	}
+
+	/**
+	 * A range of data in which 'correlation-estimation' estimates ranged correlations. Both
+	 *   bounds belong to the range.
+	 */
+	type 'feature-range' extends configuration {
+		/**
+		 * The data, one of the data the step reads.
+		 */
+		feature : data;
+
+		/**
+		 * The lower bound.
+		 */
+		lower : real;
+
+		/**
+		 * The upper bound, not smaller than the lower bound.
+		 */
+		upper : real;
+	}
+
+	/**
+	 * Base type for the variance of Fisher's z-transformation of a Spearman correlation.
+	 */
+	abstract type 'rank-confidence-interval' extends configuration {}
+
+	/**
+	 * Variance (1 + r^2/2)/(n-3), D. G. Bonett, T. A. Wright: Sample size requirements for
+	 *   estimating Pearson, Kendall and Spearman correlations. Psychometrika 65(1), 2000,
+	 *   pp. 23-28; more accurate than 'fieller-hartley-pearson' for large coefficients.
+	 */
+	type 'bonett-wright' extends 'rank-confidence-interval' {}
+
+	/**
+	 * Variance 1.06/(n-3), E. C. Fieller, H. O. Hartley, E. S. Pearson: Tests for rank
+	 *   correlation coefficients. I. Biometrika 44(3/4), 1957, pp. 470-481; meant for
+	 *   absolute coefficients up to 0.8.
+	 */
+	type 'fieller-hartley-pearson' extends 'rank-confidence-interval' {}
+}

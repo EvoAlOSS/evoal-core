@@ -1,0 +1,34 @@
+import "definitions" from 'de.evoal.core.math';
+import "definitions" from 'de.evoal.pipeline.base';
+import "definitions" from 'de.evoal.pipeline.distributions';
+
+import "data" from 'search';
+
+/**
+ * Generates 1000 rows of x:0, x:1, x:2 from a multivariate normal distribution with unit
+ *   variances and the correlations rho(x:0, x:1) = 0.8, rho(x:0, x:2) = rho(x:1, x:2) = 0.
+ */
+module 'generate' {
+	pipeline 'samples' [
+		step {
+			component 'distribution-based-data' {
+				distributions := [
+					'multivariate-normal-distribution' {
+						means := [0.0, 0.0, 0.0];
+						covariance := [
+							[1.0, 0.8, 0.0],
+							[0.8, 1.0, 0.0],
+							[0.0, 0.0, 1.0]
+						];
+					}
+				];
+			}
+
+			writes [data 'x:0', data 'x:1', data 'x:2'];
+		}
+	]
+
+	begin
+		write "output/data.csv" with 1000 samples from executing [ 'samples' ];
+	end
+}

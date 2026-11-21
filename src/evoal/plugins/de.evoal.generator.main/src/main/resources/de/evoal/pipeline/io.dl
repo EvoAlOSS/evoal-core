@@ -28,4 +28,47 @@ module 'de.evoal.pipeline.io' {
 		 */
 		filename : string;
 	}
+
+	/**
+	 * Sink that renders a FreeMarker template (https://freemarker.apache.org) with named
+	 *   pipeline values when the stream has ended, e.g., a DDL module from the estimates of
+	 *   'correlation-estimation'. The step reads and writes no data. In the template, every
+	 *   value is available under its name; numbers are written with a point, at most 16
+	 *   decimals and no exponent (e.g. 0.8031 or 1000), a missing value is an error, and
+	 *   templates cannot create or call Java objects.
+	 */
+	type template extends Sink {
+		/**
+		 * Name of the template file.
+		 */
+		template : string;
+
+		/**
+		 * Name of the file to write.
+		 */
+		filename : string;
+
+		/**
+		 * The names of the pipeline values the template uses.
+		 */
+		values : array string;
+	}
+
+	/**
+	 * Sink that writes a named pipeline value, a list of maps, as a CSV file when the stream
+	 *   has ended: one row per map, one column per key (in the order of the first map), the
+	 *   keys as column names. The step reads and writes no data. An empty list writes an empty
+	 *   file.
+	 */
+	type 'csv-writer' extends Sink {
+		/**
+		 * The name of the pipeline value to write.
+		 */
+		name : string;
+
+		/**
+		 * Name of the file to write.
+		 */
+		filename : string;
+	}
 }

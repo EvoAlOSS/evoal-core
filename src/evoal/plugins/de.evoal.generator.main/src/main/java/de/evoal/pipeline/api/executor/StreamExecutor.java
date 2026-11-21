@@ -10,6 +10,7 @@ import de.evoal.pipeline.api.executor.PipelineExecutor;
 import de.evoal.pipeline.api.model.PipelineComponent;
 import de.evoal.pipeline.api.model.PipelineComposite;
 import de.evoal.models.core.ecore.TypedEObject;
+import de.evoal.pipeline.api.model.PipelineSink;
 import de.evoal.pipeline.api.model.PipelineSource;
 import de.evoal.pipeline.impl.components.misc.Limit;
 import lombok.extern.slf4j.Slf4j;
@@ -84,7 +85,16 @@ public class StreamExecutor implements PipelineExecutor {
             stream = stream.map(component::apply);
         }
 
-        return collector.apply(stream);
+        final T result = collector.apply(stream);
+
+        // the stream has ended: the sinks act in pipeline order
+        for(final PipelineComponent component : components) {
+            if(component instanceof PipelineSink sink) {
+                sink.streamEnded();
+            }
+        }
+
+        return result;
     }
 
     private Collection<PipelineComponent> toCollection(final PipelineComposite pipeline) {

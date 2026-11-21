@@ -1,5 +1,8 @@
 package de.evoal.pipeline.impl.internal;
 
+import de.evoal.core.api.languages.base.StringSwitch;
+import de.evoal.languages.model.base.definitions.FunctionDefinition;
+import de.evoal.languages.model.dl.DefinitionModule;
 import de.evoal.languages.model.execution.*;
 import de.evoal.languages.model.execution.util.ExecutionSwitch;
 import de.evoal.languages.model.generator.ApplyStatement;
@@ -10,6 +13,16 @@ import java.util.Map;
 
 @Slf4j
 public class ExecutionDSLConverter extends ExecutionSwitch<Object> {
+    /**
+     * The name of the module that declares {@value #EXECUTE}.
+     */
+    private static final String BASE_MODULE = "de.evoal.pipeline.base";
+
+    /**
+     * The name of the built-in function that executes a pipeline.
+     */
+    private static final String EXECUTE = "execute";
+
     private final ExecutionFactory execFactory = ExecutionFactory.eINSTANCE;
     private final GeneratorDSLConverter converter;
     private final Map<Variable, Variable> variables;
@@ -70,6 +83,51 @@ public class ExecutionDSLConverter extends ExecutionSwitch<Object> {
                 .forEach(result.getElements()::add);
 
         return result;
+    }
+
+    /**
+     * Copies a call of a built-in function. The parameter of {@code execute("name")} names a
+     *   pipeline of the module; it becomes a reference to the converted pipeline, so an unknown
+     *   name is rejected before the program runs.
+     *
+     * @throws IllegalArgumentException if {@code execute} has no string parameter or names no
+     *   pipeline of the module.
+     */
+    @Override
+    public CallBuiltinFunction caseCallBuiltinFunction(final CallBuiltinFunction obj) {
+        final CallBuiltinFunction result = execFactory.createCallBuiltinFunction();
+        result.setDefinition(obj.getDefinition());
+
+        if(isExecute(obj)) {
+            final String name = obj.getParameters().size() == 1
+                    ? new StringSwitch().doSwitch(obj.getParameters().getFirst())
+                    : null;
+            if(name == null) {
+                throw new IllegalArgumentException("execute needs the name of one pipeline as a string, e.g. "
+                                                   + "execute(\"main\");.");
+            }
+
+            result.getParameters().add(converter.referenceToPipeline(name));
+        } else {
+            obj.getParameters()
+               .stream()
+               .map(EcoreUtil::copy)
+               .forEach(result.getParameters()::add);
+        }
+
+        return result;
+    }
+
+    /**
+     * @return Whether the call is the built-in function {@code execute} of the pipeline module.
+     */
+    private static boolean isExecute(final CallBuiltinFunction call) {
+        final FunctionDefinition definition = call.getDefinition();
+        if(definition == null || !EXECUTE.equals(definition.getName())) {
+            return false;
+        }
+
+        return definition.eContainer() instanceof DefinitionModule module && BASE_MODULE.equals(module.getName());
     }
 
     @Override

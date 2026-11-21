@@ -1,0 +1,70 @@
+import "definitions" from 'de.evoal.core.math';
+import "definitions" from 'de.evoal.pipeline.base';
+import "definitions" from 'de.evoal.pipeline.io';
+import "definitions" from 'de.evoal.pipeline.statistics';
+
+import "data" from 'search';
+
+/**
+ * Estimates the correlations of the generated data: the estimates go into the DDL module
+ *   estimated-correlations.ddl next to the configuration files (by the template
+ *   estimated-correlations.ddl.ftl), which search.ol imports, and into the table
+ *   output/correlations.csv.
+ */
+module 'estimate' {
+	pipeline 'estimate-correlations' [
+		/**
+		 * The source: every row of the file, the pipeline ends with the file.
+		 */
+		step {
+			component 'reader' {
+				filename := "output/data.csv";
+			}
+
+			writes [data 'x:0', data 'x:1', data 'x:2'];
+		}
+
+		/**
+		 * Estimates every pair on all rows and, for x:0 and x:1, in the quadrant where both
+		 *   are positive. Pairs with |r| < 0.3 are left out.
+		 */
+		step {
+			component 'correlation-estimation' {
+				result := "correlations";
+				'minimum-correlation' := 0.3;
+				'confidence-level' := 0.95;
+				ranges := [
+					'feature-range' { feature := data 'x:0'; lower := 0.0; upper := 5.12; },
+					'feature-range' { feature := data 'x:1'; lower := 0.0; upper := 5.12; }
+				];
+			}
+
+			reads [data 'x:0', data 'x:1', data 'x:2'];
+		}
+
+		/**
+		 * The estimates as a DDL module for the search.
+		 */
+		step {
+			component 'template' {
+				template := "estimated-correlations.ddl.ftl";
+				filename := "estimated-correlations.ddl";
+				values := ["correlations"];
+			}
+		}
+
+		/**
+		 * The estimates as a table.
+		 */
+		step {
+			component 'csv-writer' {
+				name := "correlations";
+				filename := "output/correlations.csv";
+			}
+		}
+	]
+
+	begin
+		execute("estimate-correlations");
+	end
+}

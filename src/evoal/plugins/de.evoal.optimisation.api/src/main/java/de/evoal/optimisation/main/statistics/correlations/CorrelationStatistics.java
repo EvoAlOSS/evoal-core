@@ -1,7 +1,6 @@
 package de.evoal.optimisation.main.statistics.correlations;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import jakarta.enterprise.context.Dependent;
@@ -20,6 +19,7 @@ import de.evoal.models.v202704.optimisation.memory.Individual;
 import de.evoal.models.v202704.optimisation.memory.Iteration;
 
 import de.evoal.optimisation.api.correlations.Correlation;
+import de.evoal.optimisation.api.correlations.CorrelationEstimator;
 import de.evoal.optimisation.api.correlations.CorrelationKind;
 import de.evoal.optimisation.api.correlations.ProblemCorrelations;
 import de.evoal.optimisation.api.statistics.io.Writer;
@@ -206,15 +206,13 @@ public class CorrelationStatistics implements StatisticsWriter {
             final double[] second = values[1];
 
             if(empirical) {
-                final Double empiricalCoefficient = correlation.kind() == CorrelationKind.RANK
-                        ? pearson(ranks(first), ranks(second))
-                        : pearson(first, second);
+                final Double empiricalCoefficient = CorrelationEstimator.coefficient(correlation.kind(), first, second);
                 record.add((long) first.length);
                 record.add(empiricalCoefficient);
                 record.add(empiricalCoefficient == null ? null : empiricalCoefficient - correlation.coefficient());
             }
 
-            final Double currentCovariance = covariance(first, second);
+            final Double currentCovariance = CorrelationEstimator.covariance(first, second);
             if(initial) {
                 initialCovariances[i] = currentCovariance == null ? Double.NaN : currentCovariance;
             }
@@ -229,76 +227,10 @@ public class CorrelationStatistics implements StatisticsWriter {
         return record.toArray();
     }
 
-    /**
-     * @return The covariance (divided by n), {@code null} for fewer than two values.
-     */
-    static Double covariance(final double[] first, final double[] second) {
-        final int n = first.length;
-        if(n < 2) {
-            return null;
-        }
-
-        final double firstMean = Arrays.stream(first).average().orElseThrow();
-        final double secondMean = Arrays.stream(second).average().orElseThrow();
-        double sum = 0.0;
-        for(int i = 0; i < n; ++i) {
-            sum += (first[i] - firstMean) * (second[i] - secondMean);
-        }
-
-        return sum / n;
-    }
-
     private static List<Correlation> measured(final List<Correlation> all) {
         return all.stream()
                   .filter(correlation -> correlation.kind() != CorrelationKind.NOMINAL)
                   .toList();
-    }
-
-    /**
-     * @return The Pearson correlation, {@code null} for fewer than two values or a constant
-     *   feature.
-     */
-    static Double pearson(final double[] first, final double[] second) {
-        final Double covariance = covariance(first, second);
-        if(covariance == null) {
-            return null;
-        }
-
-        final double firstDeviation = Math.sqrt(covariance(first, first));
-        final double secondDeviation = Math.sqrt(covariance(second, second));
-        if(firstDeviation == 0.0 || secondDeviation == 0.0) {
-            return null;
-        }
-
-        return covariance / (firstDeviation * secondDeviation);
-    }
-
-    /**
-     * @return The ranks of the values from 1, equal values get the average of their ranks.
-     */
-    static double[] ranks(final double[] values) {
-        final Integer[] order = new Integer[values.length];
-        for(int i = 0; i < order.length; ++i) {
-            order[i] = i;
-        }
-        Arrays.sort(order, (a, b) -> Double.compare(values[a], values[b]));
-
-        final double[] ranks = new double[values.length];
-        int start = 0;
-        while(start < order.length) {
-            int end = start;
-            while(end + 1 < order.length && values[order[end + 1]] == values[order[start]]) {
-                ++end;
-            }
-
-            final double average = (start + end) / 2.0 + 1.0;
-            for(int i = start; i <= end; ++i) {
-                ranks[order[i]] = average;
-            }
-            start = end + 1;
-        }
-
-        return ranks;
     }
 
     /**

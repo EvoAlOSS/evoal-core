@@ -11,6 +11,7 @@ import de.evoal.pipeline.api.cdi.DefinitionModuleLoader;
 import de.evoal.pipeline.api.executor.PipelineExecutor;
 import de.evoal.pipeline.api.executor.StreamExecutor;
 import de.evoal.pipeline.api.model.PipelineComposite;
+import de.evoal.pipeline.api.values.PipelineValues;
 import de.evoal.pipeline.impl.internal.PipelineInstantiator;
 import lombok.extern.slf4j.Slf4j;
 
@@ -56,7 +57,13 @@ public class ExecuteFunction implements EvoalBuiltinFunction {
             }
         }
 
+        if(composite == null) {
+            throw new EvoAlEvaluationException("execute needs the name of one pipeline, e.g. execute(\"main\");, but got "
+                                               + Arrays.toString(arguments) + ".");
+        }
+
         composite.setContext(context);
+        PipelineValues.of(context).beginExecution();
 
         final PipelineExecutor executor = new StreamExecutor();
 

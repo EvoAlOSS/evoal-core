@@ -20,6 +20,7 @@
         <evoal.languages.version>2026.10.0-SNAPSHOT</evoal.languages.version>
 
         <deltaspike.version>2.0.1</deltaspike.version>
+        <freemarker.version>2.3.34</freemarker.version>
         <jackson.version>3.1.2</jackson.version>
         <jacoco.version>0.8.14</jacoco.version>
         <json-schema-validator.version>3.0.5</json-schema-validator.version>

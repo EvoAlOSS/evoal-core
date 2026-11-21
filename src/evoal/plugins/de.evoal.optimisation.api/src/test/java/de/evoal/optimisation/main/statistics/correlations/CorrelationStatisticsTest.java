@@ -67,24 +67,6 @@ public class CorrelationStatisticsTest {
     }
 
     @Test
-    public void pearsonIsOneForAnIncreasingLinearRelation() {
-        Assertions.assertEquals(1.0, CorrelationStatistics.pearson(new double[] {1, 2, 3}, new double[] {2, 4, 6}), 1e-12);
-        Assertions.assertEquals(-1.0, CorrelationStatistics.pearson(new double[] {1, 2, 3}, new double[] {3, 2, 1}), 1e-12);
-    }
-
-    @Test
-    public void pearsonIsUndefinedForAConstantFeatureOrOneValue() {
-        Assertions.assertNull(CorrelationStatistics.pearson(new double[] {1, 2, 3}, new double[] {5, 5, 5}));
-        Assertions.assertNull(CorrelationStatistics.pearson(new double[] {1}, new double[] {2}));
-    }
-
-    @Test
-    public void equalValuesGetTheAverageOfTheirRanks() {
-        Assertions.assertArrayEquals(new double[] {1.0, 2.5, 2.5, 4.0},
-                                     CorrelationStatistics.ranks(new double[] {0.1, 7.0, 7.0, 9.0}));
-    }
-
-    @Test
     public void theRowHasTheEmpiricalCorrelationAndItsDeviationPerCorrelation() {
         // given: y = x^3 is monotone, but not linear
         final Correlation linear = new Correlation(1, x, y, 0.9, null, null, CorrelationKind.LINEAR);

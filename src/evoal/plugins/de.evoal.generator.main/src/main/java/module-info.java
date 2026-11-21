@@ -10,6 +10,8 @@ module de.evoal.generator.main {
     requires org.slf4j;
 
     requires commons.math3;
+    requires org.apache.commons.csv;
+    requires freemarker;
 
     requires org.eclipse.emf.common;
     requires org.eclipse.emf.ecore;
@@ -38,6 +40,7 @@ module de.evoal.generator.main {
     exports de.evoal.pipeline.api.executor;
     exports de.evoal.pipeline.api.model;
     exports de.evoal.pipeline.api.sequence;
+    exports de.evoal.pipeline.api.values;
 
     opens de.evoal.pipeline;
     opens de.evoal.pipeline.api.board to weld.core.impl;
@@ -53,4 +56,5 @@ module de.evoal.generator.main {
     opens de.evoal.pipeline.impl.internal to weld.core.impl;
     opens de.evoal.pipeline.impl.optimisation to weld.core.impl;
     opens de.evoal.pipeline.impl.components.sequences to weld.core.impl;
+    opens de.evoal.pipeline.impl.components.statistics to weld.core.impl;
 }

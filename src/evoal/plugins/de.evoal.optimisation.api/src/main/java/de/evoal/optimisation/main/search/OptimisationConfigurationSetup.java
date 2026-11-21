@@ -23,12 +23,14 @@ import de.evoal.models.v202704.optimisation.model.OptimisationModule;
 import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
 import de.evoal.optimisation.api.producer.SpaceProducer;
 import de.evoal.optimisation.main.constraints.ConstraintGroupCheck;
+import de.evoal.optimisation.main.constraints.ImportedDataModules;
 import de.evoal.optimisation.main.producer.OptimisationModuleLoader;
 
 /**
  * Prepares the optimisation configuration of an OL file for the search applications:
  *   it loads the file, sets up the search and optimisation space, transforms the OL
- *   model into the runtime model, checks its constraint groups
+ *   model into the runtime model, binds the DDL modules imported by the OL module of the
+ *   problem ({@link ImportedDataModules}), checks its constraint groups
  *   ({@link ConstraintGroupCheck}) and binds the runtime model to
  *   {@link OptimisationBlackboardEntries#OPTIMISATION_CONFIGURATION}.
  * <p>
@@ -68,7 +70,9 @@ public class OptimisationConfigurationSetup {
      */
     public OptimisationModule setUp(final String configurationFile) {
         final de.evoal.languages.model.ol.OptimisationModule configurationModel = loader.load(configurationFile);
-        setupSpaces(problemOf(configurationModel));
+        final ProblemInstance problem = problemOf(configurationModel);
+        setupSpaces(problem);
+        board.bind(OptimisationBlackboardEntries.IMPORTED_DATA_MODULES, ImportedDataModules.of(problem));
 
         final Space merged = spaceProducer.optimisationSpace()
                                           .merge(spaceProducer.searchSpace());

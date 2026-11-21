@@ -22,7 +22,8 @@ module 'de.evoal.pipeline.base' {
     abstract type Source extends Step {}
 
     /**
-     * A component that generates data without consuming.
+     * A component that acts when the stream of rows has ended, e.g., to estimate values from
+     *   all rows or to write a file. It passes the rows on unchanged.
      */
     abstract type Sink extends Step {}
 
@@ -36,7 +37,11 @@ module 'de.evoal.pipeline.base' {
     def void generate(string filename, int count, array literal pipelines);
 
     /**
-     * Executes a pipeline.
+     * Executes a pipeline once: its first step is the source (e.g. 'reader'), and the
+     *   pipeline ends when the source has no more data. Sinks (e.g. 'correlation-estimation',
+     *   'template', 'csv-writer') act when the stream has ended.
+     *
+     * @param pipeline The name of a pipeline of the module, e.g. execute("main");.
      */
-    def void execute(literal 'pipeline');
+    def void execute(string 'pipeline');
 }

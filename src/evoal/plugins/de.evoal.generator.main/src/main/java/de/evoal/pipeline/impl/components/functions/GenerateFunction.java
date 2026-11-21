@@ -8,6 +8,7 @@ import de.evoal.models.v202704.pipeline.PipelineDefinition;
 import de.evoal.pipeline.api.executor.PipelineExecutor;
 import de.evoal.pipeline.api.executor.StreamExecutor;
 import de.evoal.pipeline.api.model.PipelineComposite;
+import de.evoal.pipeline.api.values.PipelineValues;
 import de.evoal.pipeline.impl.internal.GeneratorDSLConverter;
 import de.evoal.pipeline.impl.internal.PipelineInstantiator;
 import lombok.extern.slf4j.Slf4j;
@@ -48,6 +49,9 @@ public class GenerateFunction implements EvoalBuiltinFunction {
 
         final PipelineInstantiator converter = new PipelineInstantiator(space);
         final PipelineComposite pipeline = converter.definitionsToComposite(pipelines);
+        pipeline.setContext(context);
+        PipelineValues.of(context).beginExecution();
+
         final PipelineExecutor executor = new StreamExecutor();
 
         executor.setSpace(space);

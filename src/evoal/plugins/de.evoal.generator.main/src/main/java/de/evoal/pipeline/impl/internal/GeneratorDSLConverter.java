@@ -236,6 +236,29 @@ public class GeneratorDSLConverter extends GeneratorSwitch<Object> {
     }
 
     /**
+     * @param name The name of a pipeline of the generator module.
+     * @return A reference to the converted pipeline.
+     * @throws IllegalArgumentException if the module defines no pipeline of this name.
+     */
+    VariableReference referenceToPipeline(final String name) {
+        return pipelines.entrySet()
+                        .stream()
+                        .filter(e -> e.getKey() instanceof PipelineDefinition definition && name.equals(definition.getName()))
+                        .map(Map.Entry::getValue)
+                        .findFirst()
+                        .map(this::referenceTo)
+                        .orElseThrow(() -> new IllegalArgumentException(
+                                "The module defines no pipeline '" + name + "'; its pipelines are "
+                                + pipelines.keySet()
+                                           .stream()
+                                           .filter(PipelineDefinition.class::isInstance)
+                                           .map(p -> "'" + ((PipelineDefinition) p).getName() + "'")
+                                           .sorted()
+                                           .toList()
+                                + "."));
+    }
+
+    /**
      * Loads a DL file of the pipeline plugin into the resource set of the generator module.
      */
     private DefinitionModule loadDefinitions(final String file) {

@@ -14,7 +14,7 @@ import net.jafama.StrictFastMath;
  * The implementations are pure Java, so their results do not depend on the
  *   platform:
  * <ul>
- *   <li>{@link #cos}, {@link #exp}, and {@link #log} use Jafama's
+ *   <li>{@link #cos}, {@link #exp}, {@link #log}, {@link #tanh}, and {@link #atanh} use Jafama's
  *     {@link StrictFastMath}, which is two to six times faster than
  *     {@link StrictMath}. The result differs from the exact one by at most
  *     4 ulp ({@code exp}), 1 ulp ({@code log}), or 6e-16 ({@code cos}).</li>
@@ -66,6 +66,20 @@ public final class EvoalMath {
     @SuppressForbidden
     public static double pow(final double base, final double exponent) {
         return StrictMath.pow(base, exponent);
+    }
+
+    /**
+     * @return the hyperbolic tangent of {@code x}.
+     */
+    public static double tanh(final double x) {
+        return StrictFastMath.tanh(x);
+    }
+
+    /**
+     * @return the inverse hyperbolic tangent of {@code x}, infinite for |x| = 1.
+     */
+    public static double atanh(final double x) {
+        return StrictFastMath.atanh(x);
     }
 
     /**

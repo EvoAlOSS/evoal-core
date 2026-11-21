@@ -1,0 +1,8 @@
+{
+    "libraries": [
+        {
+            "library": "org.freemarker:freemarker",
+            "purpose": "Apache FreeMarker: renders the templates of the pipeline component 'template', e.g. a DDL module of estimated correlations."
+        }
+    ]
+}

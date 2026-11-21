@@ -23,6 +23,13 @@ public class OptimisationBlackboardEntries {
     public static final String EVALUATION_RUN = "optimisation:evaluation-run";
 
     /**
+     * The DDL modules that the OL module of the problem imports (a list of
+     *   {@code DataDescriptionModule}, set when the configuration is loaded); their
+     *   {@code constraints} sections belong to the problem.
+     */
+    public static final String IMPORTED_DATA_MODULES = "optimisation:imported-data-modules";
+
+    /**
      * The heuristic configuration.
      */
     public static final String OPTIMISATION_CONFIGURATION = "optimisation:optimisation-configuration";

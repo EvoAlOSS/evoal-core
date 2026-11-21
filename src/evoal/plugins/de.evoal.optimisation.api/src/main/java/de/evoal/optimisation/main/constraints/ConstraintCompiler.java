@@ -17,6 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
+import de.evoal.core.api.board.Blackboard;
 import de.evoal.core.api.dynamic.EAnnotationHelper;
 import de.evoal.core.api.languages.ExpressionText;
 import de.evoal.core.api.languages.base.CallSwitch;
@@ -29,12 +30,15 @@ import de.evoal.languages.model.base.expressions.Expression;
 import de.evoal.languages.model.ddl.DataDescriptionModule;
 import de.evoal.models.v202704.optimisation.model.Problem;
 
+import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
 import de.evoal.optimisation.api.constraints.Constraint;
 import de.evoal.optimisation.api.constraints.Constraints;
 
 /**
  * Reads the constraints of an optimisation problem from the {@code constraints} sections of
- *   the DDL modules that declare its search features and objectives:
+ *   the DDL modules that declare its search features and objectives, and of the DDL modules
+ *   that the OL module of the problem imports ({@link ImportedDataModules}, bound to
+ *   {@link OptimisationBlackboardEntries#IMPORTED_DATA_MODULES}):
  * <ul>
  *   <li>{@code constraint(comparison, "group")} declares a constraint. The comparison is
  *     compiled into its normal form g ({@link ConditionCompiler}); a constraint that cannot be
@@ -42,8 +46,9 @@ import de.evoal.optimisation.api.constraints.Constraints;
  *   <li>{@code 'standard-deviation'(data 'f', sigma)} declares the standard deviation of a
  *     feature for the {@code 'tolerance-measure'}.</li>
  * </ul>
- * Other calls (e.g., correlations, see {@link CorrelationCompiler}) are ignored. The constraints are numbered in the order of
- *   the modules (first use of a feature, search features first) and of the DDL.
+ * Other calls (e.g., correlations, see {@link CorrelationCompiler}) are ignored. The constraints
+ *   are numbered in the order of the modules (first use of a feature, search features first,
+ *   then the imported modules in the order of their imports) and of the DDL.
  */
 @ApplicationScoped
 @Slf4j
@@ -62,7 +67,18 @@ public class ConstraintCompiler {
     private EAnnotationHelper annotations;
 
     /**
-     * Creates a compiler whose helper is injected.
+     * Holds the imported DDL modules of the problem; {@code null} if they are given.
+     */
+    @Inject
+    private Blackboard board;
+
+    /**
+     * The imported DDL modules of the problem; {@code null} if they come from the blackboard.
+     */
+    private List<DataDescriptionModule> importedModules;
+
+    /**
+     * Creates a compiler whose helpers are injected.
      */
     public ConstraintCompiler() {
     }
@@ -71,7 +87,16 @@ public class ConstraintCompiler {
      * @param annotations Finds the data description of a feature.
      */
     public ConstraintCompiler(final EAnnotationHelper annotations) {
+        this(annotations, List.of());
+    }
+
+    /**
+     * @param annotations Finds the data description of a feature.
+     * @param importedModules The DDL modules that the OL module of the problem imports.
+     */
+    public ConstraintCompiler(final EAnnotationHelper annotations, final List<DataDescriptionModule> importedModules) {
         this.annotations = annotations;
+        this.importedModules = List.copyOf(importedModules);
     }
 
     private Map<DataDescription, EStructuralFeature> byData(final Collection<EStructuralFeature> features) {
@@ -143,8 +168,8 @@ public class ConstraintCompiler {
 
     /**
      * Reads the calls of the {@code constraints} sections of the DDL modules that declare the
-     *   features, in the order of the modules (first use of a feature, search features first)
-     *   and of the DDL.
+     *   features and of the imported DDL modules, in the order of the modules (first use of a
+     *   feature, search features first, then the imports) and of the DDL.
      *
      * @param searchFeatures The search features of the problem.
      * @param objectives The objectives of the problem.
@@ -157,6 +182,7 @@ public class ConstraintCompiler {
         final Set<DataDescriptionModule> modules = new LinkedHashSet<>();
         searchByData.keySet().forEach(description -> moduleOf(description).ifPresent(modules::add));
         objectivesByData.keySet().forEach(description -> moduleOf(description).ifPresent(modules::add));
+        modules.addAll(importedModules());
 
         final List<Call> calls = modules.stream()
                                         .flatMap(module -> module.getConstraints().stream())
@@ -165,6 +191,21 @@ public class ConstraintCompiler {
                                         .toList();
 
         return new DdlCalls(calls, searchByData, objectivesByData);
+    }
+
+    /**
+     * @return The imported DDL modules of the problem, none if no configuration was loaded.
+     */
+    private List<DataDescriptionModule> importedModules() {
+        if(importedModules != null) {
+            return importedModules;
+        }
+
+        final List<DataDescriptionModule> bound = board == null
+                ? null
+                : board.getOrNull(OptimisationBlackboardEntries.IMPORTED_DATA_MODULES);
+
+        return bound == null ? List.of() : bound;
     }
 
     private static Optional<DataDescriptionModule> moduleOf(final DataDescription description) {

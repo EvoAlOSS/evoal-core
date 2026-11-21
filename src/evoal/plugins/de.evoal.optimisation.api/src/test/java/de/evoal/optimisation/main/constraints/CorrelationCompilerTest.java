@@ -170,6 +170,32 @@ public class CorrelationCompilerTest {
     }
 
     @Test
+    public void anImportedModuleContributesItsCorrelationsAfterTheDeclaringModules() {
+        // given: a module that only holds correlations, e.g. estimated by a pipeline
+        declare(call("correlation", data(x0), data(x1), number(0.9)));
+        final DataDescriptionModule estimated = DdlFactory.eINSTANCE.createDataDescriptionModule();
+        estimated.getConstraints().add(call("correlation", data(x0), data(o), number(-0.4)));
+        final CorrelationCompiler withImports = new CorrelationCompiler(new EAnnotationHelper(), List.of(estimated, module));
+
+        // when
+        final List<Correlation> correlations = withImports.compile(searchClass.getEAllStructuralFeatures(),
+                                                                   objectiveClass.getEAllStructuralFeatures())
+                                                          .all();
+
+        // then: the declaring module is read once, the imported one after it
+        Assertions.assertEquals(List.of(0.9, -0.4), correlations.stream().map(Correlation::coefficient).toList());
+        Assertions.assertEquals(2, correlations.get(1).number());
+    }
+
+    @Test
+    public void withoutImportsOnlyTheDeclaringModulesCount() {
+        final DataDescriptionModule estimated = DdlFactory.eINSTANCE.createDataDescriptionModule();
+        estimated.getConstraints().add(call("correlation", data(x0), data(o), number(-0.4)));
+
+        Assertions.assertTrue(compile().all().isEmpty());
+    }
+
+    @Test
     public void aCorrelationWithAnObjectiveIsRejected() {
         declare(call("correlation", data(x0), data(y), number(0.5)));
 

@@ -1,0 +1,15 @@
+import "definitions" from 'de.evoal.pipeline.base';
+
+import "data" from 'de.evoal.pipeline.test.data';
+
+module 'de.evoal.pipeline.test.execute' {
+    pipeline 'main' [
+    ]
+
+    pipeline 'other' [
+    ]
+
+    begin
+        execute("other");
+    end
+}

@@ -264,7 +264,7 @@ public abstract class ModuleLoaderBase<T extends EObject> {
      * @param imp The import.
      * @return The URI of the imported file.
      */
-    private static URI importedUri(final Resource resource, final Import imp) {
+    public static URI importedUri(final Resource resource, final Import imp) {
         final String resolved = new ClasspathGlobalScopeProvider.CustomUriResolver().apply(imp);
 
         return URI.createURI(resolved).resolve(resource.getURI());

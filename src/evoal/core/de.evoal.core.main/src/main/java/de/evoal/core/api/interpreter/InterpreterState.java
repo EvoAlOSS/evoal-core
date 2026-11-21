@@ -86,6 +86,14 @@ public class InterpreterState {
         );
     }
 
+    /**
+     * @return The outermost state, e.g., the state of the program for the state of a loop body.
+     */
+    public InterpreterState root() {
+        return parentState.map(InterpreterState::root)
+                          .orElse(this);
+    }
+
     public void setSpace(final Space space) {
         this.space = Optional.of(space);
     }

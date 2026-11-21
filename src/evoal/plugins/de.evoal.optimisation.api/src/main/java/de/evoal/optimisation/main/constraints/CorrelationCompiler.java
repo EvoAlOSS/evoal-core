@@ -22,6 +22,7 @@ import de.evoal.languages.model.base.definitions.DataDescription;
 import de.evoal.languages.model.base.definitions.ScaleType;
 import de.evoal.languages.model.base.expressions.Call;
 import de.evoal.languages.model.base.expressions.Expression;
+import de.evoal.languages.model.ddl.DataDescriptionModule;
 import de.evoal.languages.model.interpreter.ConstantEvaluator;
 import de.evoal.models.v202704.optimisation.model.Problem;
 
@@ -34,8 +35,9 @@ import de.evoal.optimisation.api.correlations.LinkageGroup;
 
 /**
  * Reads the correlations and the building blocks of an optimisation problem from the
- *   {@code constraints} sections of the DDL modules that declare its features (the same
- *   modules as the {@link ConstraintCompiler}):
+ *   {@code constraints} sections of the DDL modules that declare its features and of the DDL
+ *   modules imported by the OL module of the problem (the same modules as the
+ *   {@link ConstraintCompiler}):
  * <ul>
  *   <li>{@code correlation(data f, data g, rho)} declares a correlation of two search
  *     features;</li>
@@ -90,8 +92,16 @@ public class CorrelationCompiler {
      * @param annotations Finds the data description of a feature.
      */
     public CorrelationCompiler(final EAnnotationHelper annotations) {
+        this(annotations, List.of());
+    }
+
+    /**
+     * @param annotations Finds the data description of a feature.
+     * @param importedModules The DDL modules that the OL module of the problem imports.
+     */
+    public CorrelationCompiler(final EAnnotationHelper annotations, final List<DataDescriptionModule> importedModules) {
         this.annotations = annotations;
-        this.calls = new ConstraintCompiler(annotations);
+        this.calls = new ConstraintCompiler(annotations, importedModules);
     }
 
     /**
@@ -180,17 +190,7 @@ public class CorrelationCompiler {
      * @return The kind of a correlation of the two features by their scales.
      */
     private CorrelationKind kindOf(final EStructuralFeature first, final EStructuralFeature second) {
-        final ScaleType firstScale = scaleOf(first);
-        final ScaleType secondScale = scaleOf(second);
-
-        if(firstScale == ScaleType.NOMINAL || secondScale == ScaleType.NOMINAL) {
-            return CorrelationKind.NOMINAL;
-        }
-        if(firstScale == ScaleType.ORDINAL || secondScale == ScaleType.ORDINAL) {
-            return CorrelationKind.RANK;
-        }
-
-        return CorrelationKind.LINEAR;
+        return CorrelationKind.of(scaleOf(first), scaleOf(second));
     }
 
     private static double numberOf(final Expression parameter) {
