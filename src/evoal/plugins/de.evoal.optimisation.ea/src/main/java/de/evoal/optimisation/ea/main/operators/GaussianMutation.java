@@ -8,10 +8,10 @@ import jakarta.inject.Named;
 import org.eclipse.emf.ecore.EObject;
 
 import de.evoal.core.api.languages.AttributeEvaluator;
+import de.evoal.core.api.random.Gaussian;
 import de.evoal.optimisation.ea.api.genotype.Genes;
 import de.evoal.optimisation.ea.api.genotype.RealGenes;
 import de.evoal.optimisation.ea.api.operators.AbstractMutation;
-import de.evoal.optimisation.ea.api.operators.Gaussian;
 
 /**
  * Gaussian mutation (DL type {@code 'gaussian-mutation'}): a normally distributed value with

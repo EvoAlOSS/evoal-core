@@ -1,0 +1,26 @@
+import "definitions" from 'de.evoal.core.constraints';
+
+/**
+ * Search space of the regression cma-es-bipop-restarts: Rastrigin in two real dimensions.
+ */
+module search {
+    data:
+        /**
+         * First dimension of the search space.
+         */
+        @LowerBoundary { boundary := -5.12; inclusive := true; }
+        @UpperBoundary { boundary := 5.12; inclusive := true; }
+        quotient real data 'x:0';
+
+        /**
+         * Second dimension of the search space.
+         */
+        @LowerBoundary { boundary := -5.12; inclusive := true; }
+        @UpperBoundary { boundary := 5.12; inclusive := true; }
+        quotient real data 'x:1';
+
+        /**
+         * Value of the benchmark function.
+         */
+        quotient real data 'y:0';
+}

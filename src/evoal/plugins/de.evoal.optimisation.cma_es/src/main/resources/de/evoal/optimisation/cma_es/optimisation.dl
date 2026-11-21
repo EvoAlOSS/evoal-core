@@ -1,0 +1,293 @@
+import "definitions" from 'de.evoal.core.constraints';
+import "definitions" from 'de.evoal.core.base';
+import "definitions" from 'de.evoal.optimisation.core';
+
+module de.evoal.optimisation.cma_es.optimisation {
+    /**
+     * The covariance matrix adaptation evolution strategy, a (mu/mu_w, lambda)-CMA-ES with
+     *   cumulative step-size adaptation, rank-one and rank-mu update and positive
+     *   recombination weights, as in figure 6 and table 1 of N. Hansen: The CMA evolution
+     *   strategy: a tutorial, arXiv:1604.00772v2, 2023. It goes back to N. Hansen,
+     *   A. Ostermeier: Completely derandomized self-adaptation in evolution strategies.
+     *   Evolutionary Computation 9(2), 2001, pp. 159-195, doi 10.1162/106365601750190398,
+     *   and N. Hansen, S. D. Mueller, P. Koumoutsakos: Reducing the time complexity of the
+     *   derandomized evolution strategy with covariance matrix adaptation (CMA-ES).
+     *   Evolutionary Computation 11(1), 2003, pp. 1-18, doi 10.1162/106365603321828970.
+     *
+     * Every iteration samples lambda candidates from the normal distribution
+     *   N(m, sigma^2 C), evaluates them, and updates the mean m, the evolution paths, the
+     *   step size sigma and the covariance matrix C from the mu best (comma selection). The
+     *   mean of the first distribution, and of the distribution of every restart, is the next
+     *   candidate of the 'initialisation', e.g. a uniformly random point of the search space
+     *   with 'random-population'. C starts as the identity.
+     *
+     * Only real search features are supported. The distribution lives in an unbounded
+     *   space; a sample is mapped into the bounds of the DDL by the boundary transformation
+     *   of pycma ('BoundTransform': the identity except in a margin of max(1, |bound|) / 20
+     *   at each bound, quadratic there, periodic outside), so no evaluation is wasted.
+     *
+     * The 'candidate-checks' may check new candidates with the reactions 'warn' and
+     *   'resample' (a new sample of the same distribution). 'replace' and 'repair' are
+     *   rejected: a candidate that is not a sample of the distribution would bias the
+     *   update.
+     *
+     * The memory model records the distribution of every iteration as metrics: 'sigma',
+     *   'axis-ratio', 'population-size', 'restart', 'mean-<feature>', and the correlations
+     *   that C implies for the correlations ('learned-correlation-<n>') and building blocks
+     *   ('learned-within-building-block-<n>', 'learned-between-building-block-<n>') of the
+     *   DDL. The sampled candidates have no predecessors.
+     */
+    type 'cma-es' extends 'algorithm' {
+        /**
+         * The initial step size sigma_0. The tutorial suggests 0.3 (b - a) for a search
+         *   interval [a, b]; the archived BBOB runs use 2 on [-5, 5].
+         */
+        @LowerBoundary { boundary := 0.0; inclusive := false; }
+        'initial-step-size' : real;
+
+        /**
+         * The population size lambda; default 4 + floor(3 ln n) for n search features,
+         *   equation (48) of the tutorial. Restarts change it.
+         */
+        @LowerBoundary { boundary := 2; }
+        'population-size' : optional int;
+
+        /**
+         * The number mu of parents of the configured population size, at most
+         *   'population-size' / 2; default floor(lambda / 2). Restarts with another population
+         *   size use floor(lambda / 2).
+         */
+        @LowerBoundary { boundary := 1; }
+        'parent-number' : optional int;
+
+        /**
+         * The covariance matrix: 'full-covariance' or 'diagonal-covariance' (sep-CMA-ES).
+         */
+        'covariance-model' : instance 'covariance-model';
+
+        /**
+         * What happens when a termination criterion of CMA-ES ends a run: 'no-restart',
+         *   'ipop-restart' or 'bipop-restart'.
+         */
+        'restart-strategy' : instance 'restart-strategy';
+
+        /**
+         * Learning rates that replace the defaults of the tutorial.
+         */
+        'learning-rates' : optional instance 'learning-rates';
+
+        /**
+         * The termination criteria of a CMA-ES run (appendix B.3 of the tutorial).
+         */
+        termination : instance 'cma-es-termination';
+
+        /**
+         * Whether the memory model records the correlation C implies for every pair of
+         *   search features ('correlation-<f>-<g>', n (n - 1) / 2 metrics per iteration). The
+         *   diagonal model records none.
+         */
+        'record-all-correlations' : boolean := false;
+    }
+
+    /**
+     * The covariance matrix of the distribution.
+     */
+    abstract type 'covariance-model' extends configuration {}
+
+    /**
+     * A full covariance matrix; it is decomposed every max(1, floor(1 / (10 n (c_1 + c_mu))))
+     *   iterations (appendix B.2 of the tutorial).
+     */
+    type 'full-covariance' extends 'covariance-model' {}
+
+    /**
+     * A diagonal covariance matrix, sep-CMA-ES: only the variances are adapted, with c_1 and
+     *   c_mu multiplied by (n + 2) / 3, so an iteration takes linear time and space per
+     *   candidate (R. Ros, N. Hansen: A simple modification in CMA-ES achieving linear time
+     *   and space complexity. PPSN X, LNCS 5199, 2008, pp. 296-305,
+     *   doi 10.1007/978-3-540-87700-4_30). For many search features, e.g. the 1000 of CEC 2013
+     *   LSGO.
+     */
+    type 'diagonal-covariance' extends 'covariance-model' {}
+
+    /**
+     * What CMA-ES does when a termination criterion ends a run. Every restart takes the next
+     *   candidate of the 'initialisation' as its mean, starts with C = I, and its
+     *   candidates have the property 'restart' with the number of the run. The kernel's
+     *   'stopping-criteria' end the whole search, e.g. 'evaluation-budget'.
+     */
+    abstract type 'restart-strategy' extends configuration {}
+
+    /**
+     * No restart: the search ends with the first run.
+     */
+    type 'no-restart' extends 'restart-strategy' {}
+
+    /**
+     * IPOP-CMA-ES: every restart multiplies the population size by 'population-factor', with
+     *   the initial step size (A. Auger, N. Hansen: A restart CMA evolution strategy with
+     *   increasing population size. IEEE Congress on Evolutionary Computation 2005,
+     *   pp. 1769-1776, doi 10.1109/CEC.2005.1554902). The schedule follows 'cma.fmin' of
+     *   pycma 4.6.0.
+     */
+    type 'ipop-restart' extends 'restart-strategy' {
+        /**
+         * The factor of the population size per restart.
+         */
+        @LowerBoundary { boundary := 1.0; inclusive := false; }
+        'population-factor' : real := 2.0;
+
+        /**
+         * The largest number of restarts; no limit by default.
+         */
+        @LowerBoundary { boundary := 0; }
+        'maximum-restarts' : optional int;
+    }
+
+    /**
+     * BIPOP-CMA-ES: restarts in two regimes (N. Hansen: Benchmarking a BI-population CMA-ES
+     *   on the BBOB-2009 function testbed. GECCO 2009 companion, pp. 2389-2396,
+     *   doi 10.1145/1570256.1570333), with the schedule of 'cma.fmin(..., bipop=True)' of
+     *   pycma 4.6.0. The first run counts for the small regime. A restart is small while the
+     *   small regime used fewer evaluations than the large one: with u uniform in [0, 1) and
+     *   k the number of runs that were not small restarts, its population size is
+     *   floor(lambda (factor^k)^(u^2)), its step size sigma_0 0.01^u, and it ends after at most
+     *   half the evaluations of the large regime. Otherwise the restart is large:
+     *   lambda factor^k with sigma_0, as with IPOP.
+     */
+    type 'bipop-restart' extends 'restart-strategy' {
+        /**
+         * The factor of the population size per large restart.
+         */
+        @LowerBoundary { boundary := 1.0; inclusive := false; }
+        'population-factor' : real := 2.0;
+
+        /**
+         * The largest number of large restarts; small restarts do not count. No limit by
+         *   default.
+         */
+        @LowerBoundary { boundary := 0; }
+        'maximum-restarts' : optional int;
+    }
+
+    /**
+     * Learning rates that replace the defaults of table 1 of the tutorial (for the diagonal
+     *   model, c_1 and c_mu of sep-CMA-ES). An attribute that is not set keeps its default.
+     */
+    type 'learning-rates' extends configuration {
+        /**
+         * The learning rate c_sigma of the evolution path of the step size; default
+         *   (mu_eff + 2) / (n + mu_eff + 5).
+         */
+        'c-sigma' : optional real;
+
+        /**
+         * The damping d_sigma of the step size; default
+         *   1 + 2 max(0, sqrt((mu_eff - 1) / (n + 1)) - 1) + c_sigma.
+         */
+        'd-sigma' : optional real;
+
+        /**
+         * The learning rate c_c of the evolution path of the rank-one update; default
+         *   (4 + mu_eff / n) / (n + 4 + 2 mu_eff / n).
+         */
+        'c-c' : optional real;
+
+        /**
+         * The learning rate c_1 of the rank-one update; default 2 / ((n + 1.3)^2 + mu_eff).
+         */
+        'c-1' : optional real;
+
+        /**
+         * The learning rate c_mu of the rank-mu update; default
+         *   min(1 - c_1, 2 (1/4 + mu_eff + 1 / mu_eff - 2) / ((n + 2)^2 + mu_eff)).
+         */
+        'c-mu' : optional real;
+
+        /**
+         * The learning rate c_m of the mean; default 1.
+         */
+        'c-m' : optional real;
+    }
+
+    /**
+     * The termination criteria of a CMA-ES run, appendix B.3 of the tutorial. With
+     *   L = 10 + ceil(30 n / lambda) iterations:
+     *   'no-effect-axis': adding 0.1 standard deviations along a principal axis of C does not
+     *     change m;
+     *   'no-effect-coord': adding 0.2 standard deviations in one coordinate does not change m;
+     *   'condition-cov': the condition number of C exceeds the limit;
+     *   'equal-fun-values': the best values of the last L iterations are equal;
+     *   'stagnation': in the histories of the best and of the median values over the last
+     *     20 % of the iterations (at least 120 + 30 n / lambda, at most 20 000), the median
+     *     of the most recent 30 % is not better than the median of the first 30 %;
+     *   'tol-x-up': sigma max(diag(D)) grew by more than the factor;
+     *   'tol-fun': the best values of the last L iterations and all values of the last one
+     *     lie within the tolerance;
+     *   'tol-x': sigma sqrt(C_ii) and sigma |p_c,i| are below the tolerance times sigma_0 in
+     *     every coordinate.
+     * The function value of a candidate is the first component of its fitness.
+     */
+    type 'cma-es-termination' extends configuration {
+        /**
+         * The tolerance of 'tol-fun'; 0 turns it off.
+         */
+        @LowerBoundary { boundary := 0.0; inclusive := true; }
+        'tol-fun' : real := 1.0e-12;
+
+        /**
+         * The tolerance of 'tol-x', relative to the initial step size; 0 turns it off.
+         */
+        @LowerBoundary { boundary := 0.0; inclusive := true; }
+        'tol-x' : real := 1.0e-12;
+
+        /**
+         * The factor of 'tol-x-up'.
+         */
+        @LowerBoundary { boundary := 1.0; inclusive := false; }
+        'tol-x-up' : real := 1.0e4;
+
+        /**
+         * The limit of 'condition-cov'.
+         */
+        @LowerBoundary { boundary := 1.0; inclusive := false; }
+        'condition-cov' : real := 1.0e14;
+
+        /**
+         * Whether 'no-effect-axis' is checked.
+         */
+        'no-effect-axis' : boolean := true;
+
+        /**
+         * Whether 'no-effect-coord' is checked.
+         */
+        'no-effect-coord' : boolean := true;
+
+        /**
+         * Whether 'equal-fun-values' is checked.
+         */
+        'equal-fun-values' : boolean := true;
+
+        /**
+         * Whether 'stagnation' is checked.
+         */
+        stagnation : boolean := true;
+    }
+
+    /**
+     * Compares the linkage CMA-ES learned with the linkage of the DDL.
+     *   File: <tt>learned-linkage.csv</tt> in the output folder, one row per iteration:
+     *   <tt>iteration</tt>, then for every correlation g of the DDL (<tt>correlation-n</tt>)
+     *   <tt>declared-g</tt> (its coefficient), <tt>learned-g</tt> (the correlation the
+     *   covariance matrix implies) and <tt>difference-g</tt> (learned - declared), and for
+     *   every building block b (<tt>building-block-n</tt>) <tt>within-b</tt> and
+     *   <tt>between-b</tt>: the mean absolute learned correlation of the pairs within the
+     *   block and of the pairs of a feature of the block and a feature outside it.
+     *
+     * The covariance matrix describes the whole search space, so a ranged correlation is
+     *   compared like an unranged one. A learned value is empty if the iteration has none
+     *   (the diagonal model, another algorithm). A problem without building blocks and
+     *   correlations is rejected.
+     */
+    type 'learned-linkage' extends 'statistics-writer' {}
+}

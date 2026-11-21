@@ -1,4 +1,4 @@
-package de.evoal.optimisation.ea.api.operators;
+package de.evoal.core.api.random;
 
 import java.util.random.RandomGenerator;
 

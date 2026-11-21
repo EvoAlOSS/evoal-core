@@ -1,0 +1,233 @@
+{
+  "formatVersion" : "2027.4.0",
+  "problem" : {
+    "name" : "regression",
+    "goals" : [ {
+      "feature" : "y:0",
+      "direction" : "minimise"
+    } ],
+    "function" : {
+      "type" : "de.evoal.pipeline.optimisation.benchmark-function",
+      "attributes" : {
+        "benchmarks" : [ {
+          "type" : "de.evoal.pipeline.optimisation.benchmark-configuration",
+          "attributes" : {
+            "function" : {
+              "type" : "de.evoal.pipeline.benchmarks.rosenbrock",
+              "attributes" : { }
+            },
+            "reads" : [ "x:0", "x:1", "x:2" ],
+            "writes" : [ "y:0" ]
+          }
+        } ]
+      }
+    }
+  },
+  "algorithm" : {
+    "type" : "de.evoal.optimisation.cma_es.optimisation.cma-es",
+    "attributes" : {
+      "initialisation" : {
+        "type" : "de.evoal.optimisation.core.random-population",
+        "attributes" : { }
+      },
+      "optimisation-function" : {
+        "type" : "de.evoal.optimisation.core.problem-function",
+        "attributes" : { }
+      },
+      "comparator" : {
+        "type" : "de.evoal.optimisation.core.numeric-comparator",
+        "attributes" : { }
+      },
+      "stopping-criteria" : [ {
+        "type" : "de.evoal.optimisation.core.iteration-count",
+        "attributes" : {
+          "maximum-iterations" : 8
+        }
+      } ],
+      "fitness-pipeline" : [ ],
+      "candidate-checks" : [ ],
+      "constraint-measure" : {
+        "type" : "de.evoal.optimisation.core.exact-measure",
+        "attributes" : {
+          "equality-tolerance" : 1.0E-4
+        }
+      },
+      "initial-step-size" : 1.0,
+      "population-size" : null,
+      "parent-number" : null,
+      "covariance-model" : {
+        "type" : "de.evoal.optimisation.cma_es.optimisation.full-covariance",
+        "attributes" : { }
+      },
+      "restart-strategy" : {
+        "type" : "de.evoal.optimisation.cma_es.optimisation.no-restart",
+        "attributes" : { }
+      },
+      "learning-rates" : null,
+      "termination" : {
+        "type" : "de.evoal.optimisation.cma_es.optimisation.cma-es-termination",
+        "attributes" : {
+          "tol-fun" : 1.0E-12,
+          "tol-x" : 1.0E-12,
+          "tol-x-up" : 10000.0,
+          "condition-cov" : 1.0E14,
+          "no-effect-axis" : true,
+          "no-effect-coord" : true,
+          "equal-fun-values" : true,
+          "stagnation" : true
+        }
+      },
+      "record-all-correlations" : false
+    }
+  },
+  "documentation" : [ {
+    "type" : "de.evoal.optimisation.core.best-candidate-per-iteration",
+    "attributes" : {
+      "prefix-data" : false,
+      "store-search-space" : true,
+      "store-optimisation-space" : true
+    }
+  }, {
+    "type" : "de.evoal.optimisation.cma_es.optimisation.learned-linkage",
+    "attributes" : { }
+  }, {
+    "type" : "de.evoal.optimisation.core.memory-model",
+    "attributes" : {
+      "steps" : false
+    }
+  } ],
+  "searchSpace" : [ {
+    "name" : "x:0",
+    "type" : "real",
+    "scale" : "quotient",
+    "lowerBound" : {
+      "value" : -5.0,
+      "inclusive" : true
+    },
+    "upperBound" : {
+      "value" : 5.0,
+      "inclusive" : true
+    }
+  }, {
+    "name" : "x:1",
+    "type" : "real",
+    "scale" : "quotient",
+    "lowerBound" : {
+      "value" : -5.0,
+      "inclusive" : true
+    },
+    "upperBound" : {
+      "value" : 5.0,
+      "inclusive" : true
+    }
+  }, {
+    "name" : "x:2",
+    "type" : "real",
+    "scale" : "quotient",
+    "lowerBound" : {
+      "value" : -5.0,
+      "inclusive" : true
+    },
+    "upperBound" : {
+      "value" : 5.0,
+      "inclusive" : true
+    }
+  } ],
+  "optimisationSpace" : [ {
+    "name" : "y:0",
+    "type" : "real",
+    "scale" : "quotient"
+  } ],
+  "fitness" : {
+    "components" : [ {
+      "name" : "y:0",
+      "goal" : "y:0"
+    } ],
+    "steps" : [ ]
+  },
+  "metricDefinitions" : [ {
+    "name" : "evaluations.real",
+    "kind" : "counter",
+    "valueType" : "integer",
+    "scope" : "iteration",
+    "description" : "Number of evaluations of the real optimisation function."
+  }, {
+    "name" : "evaluations.surrogate",
+    "kind" : "counter",
+    "valueType" : "integer",
+    "scope" : "iteration",
+    "description" : "Number of predictions of a surrogate model."
+  }, {
+    "name" : "sigma",
+    "kind" : "measure",
+    "valueType" : "real",
+    "scope" : "iteration",
+    "description" : "The step size sigma of the distribution of CMA-ES."
+  }, {
+    "name" : "axis-ratio",
+    "kind" : "measure",
+    "valueType" : "real",
+    "scope" : "iteration",
+    "description" : "The ratio of the longest to the shortest principal axis of the covariance matrix C."
+  }, {
+    "name" : "population-size",
+    "kind" : "measure",
+    "valueType" : "integer",
+    "scope" : "iteration",
+    "description" : "The population size lambda of CMA-ES."
+  }, {
+    "name" : "restart",
+    "kind" : "measure",
+    "valueType" : "integer",
+    "scope" : "iteration",
+    "description" : "The number of the CMA-ES run of the distribution, 0 before the first restart."
+  }, {
+    "name" : "mean-x:0",
+    "kind" : "measure",
+    "valueType" : "real",
+    "scope" : "iteration",
+    "description" : "The mean of 'x:0' in the distribution of CMA-ES, mapped into the bounds."
+  }, {
+    "name" : "mean-x:1",
+    "kind" : "measure",
+    "valueType" : "real",
+    "scope" : "iteration",
+    "description" : "The mean of 'x:1' in the distribution of CMA-ES, mapped into the bounds."
+  }, {
+    "name" : "mean-x:2",
+    "kind" : "measure",
+    "valueType" : "real",
+    "scope" : "iteration",
+    "description" : "The mean of 'x:2' in the distribution of CMA-ES, mapped into the bounds."
+  }, {
+    "name" : "learned-within-building-block-1",
+    "kind" : "measure",
+    "valueType" : "real",
+    "scope" : "iteration",
+    "description" : "The mean absolute correlation the covariance matrix of CMA-ES implies for the pairs of features within the building block 1 of 'x:0', 'x:1'."
+  }, {
+    "name" : "learned-between-building-block-1",
+    "kind" : "measure",
+    "valueType" : "real",
+    "scope" : "iteration",
+    "description" : "The mean absolute correlation the covariance matrix of CMA-ES implies for the pairs of a feature of the building block 1 of 'x:0', 'x:1' and a feature outside it."
+  }, {
+    "name" : "learned-correlation-1",
+    "kind" : "measure",
+    "valueType" : "real",
+    "scope" : "iteration",
+    "description" : "The correlation the covariance matrix of CMA-ES implies for the features of the correlation 1 of 'x:1' and 'x:2' (0.5)."
+  } ],
+  "propertyDefinitions" : [ {
+    "name" : "genotype",
+    "scope" : "individual",
+    "valueType" : "real",
+    "list" : true,
+    "description" : "The point of the distribution of CMA-ES that the bounds transformed into the candidate; set only if it differs from the candidate."
+  } ],
+  "setup" : {
+    "evoalVersion" : "${evoal.version}",
+    "seed" : "42",
+    "run" : 0
+  }
+}

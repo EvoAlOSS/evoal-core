@@ -1,0 +1,112 @@
+package de.evoal.optimisation.api.steps;
+
+import java.lang.reflect.Field;
+import java.util.EnumSet;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+
+import org.eclipse.emf.ecore.EObject;
+
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
+
+import org.mockito.Mockito;
+
+import de.evoal.models.core.exceptions.InitializationException;
+
+import de.evoal.optimisation.api.cdi.TerminationCriterionProducer;
+import de.evoal.optimisation.api.checks.CandidateCheck;
+import de.evoal.optimisation.api.checks.CandidateCheckProducer;
+import de.evoal.optimisation.api.checks.CheckPoint;
+import de.evoal.optimisation.api.checks.CheckReaction;
+import de.evoal.optimisation.api.checks.ConfiguredCheck;
+
+public class TemplateAlgorithmTest {
+    /**
+     * An algorithm that supports the reactions warn and resample only.
+     */
+    private static final class SamplingAlgorithm extends TemplateAlgorithm {
+        private boolean configured;
+
+        @Override
+        protected Set<CheckPoint> checkPoints() {
+            return Set.of(CheckPoint.NEW_CANDIDATES);
+        }
+
+        @Override
+        protected void configure(final EObject configuration) {
+            configured = true;
+        }
+
+        @Override
+        protected Set<CheckReaction> reactions() {
+            return EnumSet.of(CheckReaction.WARN, CheckReaction.RESAMPLE);
+        }
+
+        @Override
+        protected Template template() {
+            return new Template(List.of(), List.of());
+        }
+    }
+
+    private static SamplingAlgorithm algorithmWith(final CandidateCheck check) throws Exception {
+        final ConfiguredCheck configured = new ConfiguredCheck(check, () -> null);
+        final CandidateCheckProducer checks = Mockito.mock(CandidateCheckProducer.class);
+        Mockito.when(checks.create(Mockito.any(), Mockito.any(), Mockito.anyBoolean())).thenReturn(List.of(configured));
+
+        final SamplingAlgorithm algorithm = new SamplingAlgorithm();
+        inject(algorithm, "checkProducer", checks);
+        inject(algorithm, "producer", Mockito.mock(TerminationCriterionProducer.class));
+
+        return algorithm;
+    }
+
+    private static CandidateCheck check(final CheckReaction reaction) {
+        final CandidateCheck check = Mockito.mock(CandidateCheck.class, Mockito.CALLS_REAL_METHODS);
+        Mockito.doReturn(reaction).when(check).reaction();
+        Mockito.doReturn(Optional.empty()).when(check).repair();
+        Mockito.doReturn("constraint-check").when(check).name();
+
+        return check;
+    }
+
+    private static void inject(final Object target, final String name, final Object value)
+            throws ReflectiveOperationException {
+        final Field field = TemplateAlgorithm.class.getDeclaredField(name);
+        field.setAccessible(true);
+        field.set(target, value);
+    }
+
+    @Nested
+    @DisplayName("given an algorithm that supports warn and resample")
+    class RestrictedReactions {
+        @Test
+        public void supportedReactionIsAccepted() throws Exception {
+            // given
+            final SamplingAlgorithm algorithm = algorithmWith(check(CheckReaction.RESAMPLE));
+
+            // when
+            algorithm.init(Mockito.mock(EObject.class));
+
+            // then
+            Assertions.assertTrue(algorithm.configured);
+        }
+
+        @Test
+        public void unsupportedReactionIsRejected() throws Exception {
+            // given
+            final SamplingAlgorithm algorithm = algorithmWith(check(CheckReaction.REPLACE));
+
+            // when
+            final InitializationException exception = Assertions.assertThrows(InitializationException.class,
+                                                                              () -> algorithm.init(Mockito.mock(EObject.class)));
+
+            // then
+            Assertions.assertTrue(exception.getMessage().contains("replace"), exception.getMessage());
+            Assertions.assertFalse(algorithm.configured);
+        }
+    }
+}

@@ -248,15 +248,20 @@ A replaced candidate that is not recorded in the memory model has no individual,
 replacement cannot refer to it.
 
 `TemplateAlgorithm` creates the checks with the `CandidateCheckProducer`. It rejects the
-configuration with an `InitializationException` if a check does not support its reaction
-or if the algorithm does not offer its check point (`checkPoints()`, none by default). An
-algorithm places the steps of `populationChecks(evaluator)` and `newCandidateChecks()` at
-its check points; both are empty if no check is configured, so the recorded steps do not
-change. Local search offers `POPULATION`; random search and particle swarm optimisation
-offer none; the evolutionary algorithm offers both and checks its initial candidates with
+configuration with an `InitializationException` if a check does not support its reaction,
+if the algorithm does not offer its check point (`checkPoints()`, none by default), or if
+the algorithm does not support a reaction of the check, also as the fallback of a repair
+(`reactions()`, all by default). An algorithm places the steps of
+`populationChecks(evaluator)` and `newCandidateChecks()` at its check points; both are empty
+if no check is configured, so the recorded steps do not change. Local search offers
+`POPULATION`; random search and particle swarm optimisation offer none; the evolutionary
+algorithm offers both and checks its initial candidates with
 `sharingSources(childChecks, sample)`: the same checks with the same replacement sources,
 and the `SampleCandidates` step of the initialisation as `Resampler` (`resample` of an
-initial candidate takes the next candidate of the `'initialisation'`).
+initial candidate takes the next candidate of the `'initialisation'`). CMA-ES
+(`de.evoal.optimisation.cma_es`) offers `NEW_CANDIDATES` with the reactions `warn` and
+`resample` only (a new sample of its distribution): a replaced or repaired candidate is
+not a sample of the distribution and would bias its update.
 
 `resample` and `repair` try at most `'maximum-attempts'` times. A resampled candidate has
 the property `attempts` (number of variations); a repaired candidate keeps the lineage of

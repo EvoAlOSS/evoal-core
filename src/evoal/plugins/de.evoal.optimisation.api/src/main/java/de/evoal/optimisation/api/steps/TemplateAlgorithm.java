@@ -1,5 +1,7 @@
 package de.evoal.optimisation.api.steps;
 
+import java.util.Arrays;
+import java.util.EnumSet;
 import java.util.List;
 import java.util.Set;
 
@@ -15,6 +17,7 @@ import de.evoal.optimisation.api.checks.CandidateCheckProducer;
 import de.evoal.optimisation.api.checks.CheckNewCandidates;
 import de.evoal.optimisation.api.checks.CheckPoint;
 import de.evoal.optimisation.api.checks.CheckPopulation;
+import de.evoal.optimisation.api.checks.CheckReaction;
 import de.evoal.optimisation.api.checks.ConfiguredCheck;
 import de.evoal.optimisation.api.checks.Resampler;
 import de.evoal.optimisation.api.fitness.Evaluator;
@@ -30,7 +33,9 @@ import de.evoal.optimisation.api.run.OptimisationRun;
  * <p>
  * A subclass states the check points it offers ({@link #checkPoints()}) and places the
  *   steps of {@link #populationChecks(Evaluator)} and {@link #newCandidateChecks()} at them.
- *   A configured check whose check point the algorithm does not offer is rejected.
+ *   A configured check whose check point the algorithm does not offer is rejected, as is a
+ *   check that reacts with a reaction the algorithm does not support ({@link #reactions()}),
+ *   also as the fallback of a repair.
  */
 public abstract class TemplateAlgorithm implements OptimisationAlgorithm {
     /**
@@ -65,6 +70,7 @@ public abstract class TemplateAlgorithm implements OptimisationAlgorithm {
     public final OptimisationAlgorithm init(final EObject configuration) throws InitializationException {
         criterion = producer.create(configuration);
         checks = checkProducer.create(configuration, checkPoints(), resamples());
+        rejectUnsupportedReactions();
         configure(configuration);
         return this;
     }
@@ -110,6 +116,36 @@ public abstract class TemplateAlgorithm implements OptimisationAlgorithm {
         return checks.stream()
                      .map(step -> (Step) ((CheckNewCandidates) step).withResampler(resampler))
                      .toList();
+    }
+
+    /**
+     * @return The reactions the algorithm supports in its candidate checks; all by default.
+     *   An algorithm whose update relies on the candidates it created itself, e.g., one that
+     *   learns a distribution from its samples, can exclude {@code replace} and
+     *   {@code repair}.
+     */
+    protected Set<CheckReaction> reactions() {
+        return EnumSet.allOf(CheckReaction.class);
+    }
+
+    /**
+     * @throws InitializationException if a check reacts with a reaction the algorithm does
+     *   not support, as its reaction or as the fallback of its repair.
+     */
+    private void rejectUnsupportedReactions() throws InitializationException {
+        final Set<CheckReaction> supported = reactions();
+
+        for(final ConfiguredCheck configured : checks) {
+            final List<CheckReaction> unsupported = Arrays.stream(CheckReaction.values())
+                                                          .filter(reaction -> !supported.contains(reaction))
+                                                          .filter(configured.check()::reactsWith)
+                                                          .toList();
+            if(!unsupported.isEmpty()) {
+                throw new InitializationException("The algorithm does not support the reaction " + unsupported
+                                                  + " of the check '" + configured.check().name() + "'; it supports "
+                                                  + supported + ".");
+            }
+        }
     }
 
     /**

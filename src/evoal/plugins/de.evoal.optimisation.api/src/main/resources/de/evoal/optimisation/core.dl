@@ -205,7 +205,8 @@ module de.evoal.optimisation.core {
      *     passes the check, at most 'maximum-attempts' times; then the last candidate is
      *     kept and a warning is reported. An initial candidate has no variation; it is
      *     resampled by the next candidate of the 'initialisation'. Only for checks of new
-     *     candidates in algorithms with a variation (the evolutionary algorithm).
+     *     candidates in algorithms with a variation (the evolutionary algorithm; CMA-ES
+     *     samples the candidate again from its distribution).
      *   'repair': the candidate is repaired, at most 'maximum-attempts' times; then the
      *     fallback reaction of the check applies. Only checks that offer a repair
      *     strategy ('constraint-check').
