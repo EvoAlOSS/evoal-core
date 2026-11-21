@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Named;
 import java.util.*;
+import de.evoal.core.api.math.EvoalMath;
 
 /**
  * Calculates the root mean squared error.
@@ -46,7 +47,7 @@ public class RRSECalculator extends SurrogateInformationCalculator {
 					for(final EStructuralFeature feature : actual.eClass().getEAllStructuralFeatures()) {
 						final double difference = expected.eGetAsDouble(feature) - actual.eGetAsDouble(feature) / expected.eGetAsDouble(feature);
 						data.get(feature)
-								.add(difference * difference);
+								.add(EvoalMath.square(difference));
 					}
 				});
 

@@ -21,12 +21,22 @@ import net.jafama.StrictFastMath;
  *   <li>{@link #pow} uses {@link StrictMath}, because the Jafama version is
  *     not exact for integer powers, e.g., it returns 399.9999999999999 for
  *     20².</li>
+ *   <li>{@link #sin} uses {@link StrictMath}, because the Jafama version
+ *     differs from it already at 1 (by 1 ulp) and returns +0.0 for -0.0.</li>
+ *   <li>{@link #square} multiplies, which is exact and cheaper than
+ *     {@link #pow}.</li>
  * </ul>
- *
- * Squares are cheaper and exact as {@code x * x}.
  */
 public final class EvoalMath {
     private EvoalMath() {
+    }
+
+    /**
+     * @return the sine of {@code x} (in radians).
+     */
+    @SuppressForbidden
+    public static double sin(final double x) {
+        return StrictMath.sin(x);
     }
 
     /**
@@ -56,5 +66,12 @@ public final class EvoalMath {
     @SuppressForbidden
     public static double pow(final double base, final double exponent) {
         return StrictMath.pow(base, exponent);
+    }
+
+    /**
+     * @return {@code x * x}.
+     */
+    public static double square(final double x) {
+        return x * x;
     }
 }

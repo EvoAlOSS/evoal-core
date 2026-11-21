@@ -24,6 +24,7 @@ import de.evoal.models.core.ecore.TypedEObject;
 import de.evoal.surrogate.smile.api.KernelBasedSVRFunction;
 import smile.tensor.DenseMatrix;
 import smile.tensor.ScalarType;
+import de.evoal.core.api.math.EvoalMath;
 
 @Slf4j
 public final class PredictiveErrorData {
@@ -171,7 +172,7 @@ public final class PredictiveErrorData {
         double std = 0.0;
         double stdDelta = 1.0;
         for(int i = 0; i < predictionErrors.length; ++i) {
-            std += candidateSmoothing.get(0, i) * (predictionErrors[i] * predictionErrors[i]);
+            std += candidateSmoothing.get(0, i) * EvoalMath.square(predictionErrors[i]);
             stdDelta += candidateSmoothing.get(0, i) * delta[i];
         }
 

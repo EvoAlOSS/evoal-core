@@ -34,6 +34,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
 import java.util.random.RandomGenerator;
+import de.evoal.core.api.math.EvoalMath;
 
 /**
  *  Constriction Factor Mover, CFMover
@@ -81,7 +82,7 @@ public class CFMover implements Mover {
 
         double phi = c1 + c2;
 
-        double k = 2 / Math.abs(2. - phi - Math.sqrt(phi * phi - 4. * phi));
+        double k = 2 / Math.abs(2. - phi - Math.sqrt(EvoalMath.square(phi) - 4. * phi));
 
         int i = 0;
         for(final EStructuralFeature feature : currentPosition.eSpace()) {

@@ -30,7 +30,7 @@ public class Rastrigin extends PipelineComponentImpl {
         for(final EStructuralFeature ef : getReads()) {
             double read_i = obj.eGetAsDouble(ef);
 
-            value += (read_i * read_i - a * EvoalMath.cos(2 * Math.PI * read_i));
+            value += (EvoalMath.square(read_i) - a * EvoalMath.cos(2 * Math.PI * read_i));
         }
 
         obj.eSet(getWrites().iterator().next(), value);

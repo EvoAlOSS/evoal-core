@@ -16,6 +16,7 @@ import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Named;
 import java.util.Arrays;
 import java.util.Optional;
+import de.evoal.core.api.math.EvoalMath;
 
 /**
  * Calculates cross validation values.
@@ -73,7 +74,7 @@ public class RSquareCalculator extends SurrogateInformationCalculator {
 											.stream()
 											.mapToDouble(f -> {
 												final double difference = expected.eGetAsDouble(f) - calculated.eGetAsDouble(f);
-												return difference * difference;
+												return EvoalMath.square(difference);
 											})
 											.toArray();
 						}).toArray(double[][]::new);
@@ -87,7 +88,7 @@ public class RSquareCalculator extends SurrogateInformationCalculator {
 			}
 
 			final double unexplainedVariation = error;
-			final double totalVariation = sds[index] * sds[index] * yValues.length;
+			final double totalVariation = EvoalMath.square(sds[index]) * yValues.length;
 			final double rSquare = 1 - unexplainedVariation / totalVariation;
 
 			log.info("unexplained variation: '{}', total variation: {}, rSquare: {}", unexplainedVariation, totalVariation, rSquare);

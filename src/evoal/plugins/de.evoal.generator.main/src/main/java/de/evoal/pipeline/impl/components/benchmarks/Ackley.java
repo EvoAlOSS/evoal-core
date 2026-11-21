@@ -38,7 +38,7 @@ public class Ackley extends PipelineComponentImpl {
         for(final EStructuralFeature ef : getReads()) {
             double read_i = obj.eGetAsDouble(ef);
 
-        	sum1 += read_i * read_i;
+        	sum1 += EvoalMath.square(read_i);
         	sum2 += EvoalMath.cos(c * read_i);
         }
 

@@ -19,6 +19,7 @@ import de.evoal.surrogate.api.function.ModelFunction;
 import de.evoal.surrogate.api.function.ModelFunctionData;
 import de.evoal.surrogate.api.io.ModelReader;
 import de.evoal.surrogate.smile.api.KernelBasedSVRFunction;
+import de.evoal.core.api.math.EvoalMath;
 
 /**
  * Adapts the prediction of an SVR surrogate by the width of its prediction interval
@@ -68,7 +69,7 @@ public class PredictionIntervalStep extends AdaptionStep {
     static double adapt(final double value, final double lower, final double upper) {
         final double width = upper - lower;
 
-        return (2 * value * value) / width;
+        return (2 * EvoalMath.square(value)) / width;
     }
 
     @Override

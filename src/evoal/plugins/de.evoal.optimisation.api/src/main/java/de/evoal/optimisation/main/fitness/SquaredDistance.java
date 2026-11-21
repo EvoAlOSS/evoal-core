@@ -4,6 +4,7 @@ import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Named;
 
 import de.evoal.optimisation.api.fitness.TargetDistance;
+import de.evoal.core.api.math.EvoalMath;
 
 /**
  * The squared distance {@code (v - t)^2}.
@@ -15,6 +16,6 @@ public class SquaredDistance implements TargetDistance {
     public double distance(final double value, final double target) {
         final double difference = value - target;
 
-        return difference * difference;
+        return EvoalMath.square(difference);
     }
 }

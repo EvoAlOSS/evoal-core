@@ -8,6 +8,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Named;
 import java.util.Iterator;
+import de.evoal.core.api.math.EvoalMath;
 
 @Dependent
 @Named("de.evoal.pipeline.benchmarks.rosenbrock")
@@ -26,9 +27,9 @@ public class Rosenbrock extends PipelineComponentImpl {
             double read_i = obj.eGetAsDouble(ps_i);
             double read_n = obj.eGetAsDouble(ps_n);
 
-            final double valley = read_n - read_i * read_i;
+            final double valley = read_n - EvoalMath.square(read_i);
             final double offset = 1 - read_i;
-            value += 100 * (valley * valley) + offset * offset;
+            value += 100 * EvoalMath.square(valley) + EvoalMath.square(offset);
             ps_i = ps_n;
         }
 

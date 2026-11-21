@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Named;
 import java.util.function.Function;
+import de.evoal.core.api.math.EvoalMath;
 
 @Dependent
 @Named("de.evoal.surrogate.simple.ml.simple-quadratic-regression-learner")
@@ -48,7 +49,7 @@ public class SimpleQuadraticFunctionLearner extends AbstractModelLearner {
 	@Override
 	public void add(final TypedEObject features) {
 		final double input = inputFeature.apply(features);
-		regression.addData(input * input, outputFeature.apply(features));
+		regression.addData(EvoalMath.square(input), outputFeature.apply(features));
 	}
 
 	@Override

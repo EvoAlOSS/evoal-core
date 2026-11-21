@@ -23,6 +23,7 @@ import smile.tensor.ScalarType;
 
 import java.util.*;
 import java.util.stream.IntStream;
+import de.evoal.core.api.math.EvoalMath;
 
 @Slf4j
 @Dependent
@@ -143,7 +144,7 @@ public class PredictiveErrorCalculator extends SurrogateInformationCalculator {
 
                      double denominator = 0.0;
                      for(int l = 0; l < row.length; ++l) {
-                         denominator += row[l] * (errors[l] * errors[l]);
+                         denominator += row[l] * EvoalMath.square(errors[l]);
                      }
 
                      double nominator = 1.0;

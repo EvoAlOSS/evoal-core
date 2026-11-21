@@ -64,8 +64,25 @@ public class EvoalMathTest {
     }
 
     @Test
+    public void squareIsTheProduct() {
+        final SplittableRandom random = new SplittableRandom(42);
+
+        for(int i = 0; i < 100_000; i++) {
+            final double x = random.nextDouble(-1e10, 1e10);
+            Assertions.assertEquals(x * x, EvoalMath.square(x));
+        }
+
+        Assertions.assertEquals(400.0, EvoalMath.square(-20));
+        Assertions.assertEquals(0.0, EvoalMath.square(-0.0));
+        Assertions.assertEquals(Double.POSITIVE_INFINITY, EvoalMath.square(Double.NEGATIVE_INFINITY));
+        Assertions.assertEquals(Double.POSITIVE_INFINITY, EvoalMath.square(1e200));
+        Assertions.assertTrue(Double.isNaN(EvoalMath.square(Double.NaN)));
+    }
+
+    @Test
     public void specialValuesBehaveLikeStrictMath() {
         for(final double x : SPECIAL_VALUES) {
+            Assertions.assertEquals(StrictMath.sin(x), EvoalMath.sin(x), "sin(" + x + ")");
             Assertions.assertEquals(StrictMath.cos(x), EvoalMath.cos(x), "cos(" + x + ")");
             Assertions.assertEquals(StrictMath.exp(x), EvoalMath.exp(x), "exp(" + x + ")");
             Assertions.assertEquals(StrictMath.log(x), EvoalMath.log(x), "log(" + x + ")");

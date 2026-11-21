@@ -35,6 +35,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
 import java.util.random.RandomGenerator;
+import de.evoal.core.api.math.EvoalMath;
 
 /**
  *  Fully informed particle swarm (FIPS) mover of Rui Mendes.
@@ -75,7 +76,7 @@ public class FIPSMover implements Mover {
         final TypedEObject nextPosition = new TypedEObject(currentPosition);
         final Double[] next_velocity = new Double[currentVelocity.length];
 
-        double k = 2 / Math.abs(2. - phi - Math.sqrt(phi * phi - 4. * phi));
+        double k = 2 / Math.abs(2. - phi - Math.sqrt(EvoalMath.square(phi) - 4. * phi));
 
         int i = 0;
         for (final EStructuralFeature feature : currentPosition.eSpace()) {

@@ -11,6 +11,7 @@ import de.evoal.models.core.ecore.Space;
 import de.evoal.models.core.ecore.TypedEObject;
 import de.evoal.core.api.utils.Requirements;
 import de.evoal.surrogate.api.function.ModelFunction;
+import de.evoal.core.api.math.EvoalMath;
 
 @Slf4j
 public class SimpleQuadraticFunction extends ModelFunction {
@@ -41,7 +42,7 @@ public class SimpleQuadraticFunction extends ModelFunction {
 
 		this.regression = (in, out) -> {
 			final double x = in.eGetAsDouble(iFeature);
-			out.eSet(oFeature, intercept + slope * (x * x));
+			out.eSet(oFeature, intercept + slope * EvoalMath.square(x));
 		};
 	}
 

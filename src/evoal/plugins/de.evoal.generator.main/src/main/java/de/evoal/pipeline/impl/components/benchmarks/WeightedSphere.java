@@ -7,6 +7,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 
 import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Named;
+import de.evoal.core.api.math.EvoalMath;
 
 @Dependent
 @Named("de.evoal.pipeline.benchmarks.weighted-sphere")
@@ -20,7 +21,7 @@ public class WeightedSphere extends PipelineComponentImpl {
         for(final EStructuralFeature feat : getReads()) {
             double read_i = obj.eGetAsDouble(feat);
 
-            value += read_i * read_i * counter++;
+            value += EvoalMath.square(read_i) * counter++;
         }
 
 

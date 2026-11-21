@@ -336,7 +336,7 @@
                         <annotation>de.evoal.core.api.math.SuppressForbidden</annotation>
                     </suppressAnnotations>
                     <signatures><![CDATA[
-@defaultMessage The result may differ between platforms; use de.evoal.core.api.math.EvoalMath (or x * x for squares) instead.
+@defaultMessage The result may differ between platforms; use de.evoal.core.api.math.EvoalMath (EvoalMath.square for squares) instead.
 java.lang.Math#sin(double)
 java.lang.Math#cos(double)
 java.lang.Math#tan(double)
@@ -355,7 +355,7 @@ java.lang.Math#log1p(double)
 java.lang.Math#pow(double,double)
 java.lang.Math#cbrt(double)
 java.lang.Math#hypot(double,double)
-@defaultMessage Use de.evoal.core.api.math.EvoalMath (or x * x for squares) instead, so all functions have one implementation.
+@defaultMessage Use de.evoal.core.api.math.EvoalMath (EvoalMath.square for squares) instead, so all functions have one implementation.
 java.lang.StrictMath#sin(double)
 java.lang.StrictMath#cos(double)
 java.lang.StrictMath#tan(double)

@@ -13,6 +13,7 @@ import de.evoal.models.core.ecore.TypedEObject;
 
 import de.evoal.optimisation.api.constraints.Constraint;
 import de.evoal.optimisation.api.constraints.LinearForm;
+import de.evoal.core.api.math.EvoalMath;
 
 /**
  * Orthogonal projection (DL type {@code 'projection-repair'}) for linear constraints
@@ -52,7 +53,7 @@ public class ProjectionRepair extends AbstractConstraintRepair {
             final double squaredNorm = form.coefficients()
                                            .values()
                                            .stream()
-                                           .mapToDouble(coefficient -> coefficient * coefficient)
+                                           .mapToDouble(EvoalMath::square)
                                            .sum();
             final double t = -valueOf(constraint, values) / squaredNorm;
 

@@ -32,6 +32,7 @@ import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import de.evoal.core.api.math.EvoalMath;
 
 /**
  *  Implements the diversity enhanced particle movement scheme of Riget and Vesterstrom.
@@ -121,7 +122,7 @@ public class ARPSOSwarm extends DefaultSwarm {
         for (final EStructuralFeature feature : space) {
             final FeatureBoundaries.Boundaries bounds = boundaries.get(feature);
             final double range = bounds.upper().doubleValue() - bounds.lower().doubleValue();
-            squaredLength += range * range;
+            squaredLength += EvoalMath.square(range);
         }
 
         return Math.sqrt(squaredLength);
@@ -157,7 +158,7 @@ public class ARPSOSwarm extends DefaultSwarm {
             int j = 0;
             for (final EStructuralFeature feature : space) {
                 final double distance = p.getCurrentPosition().eGetAsDouble(feature) - averagePosition[j];
-                squaredDistance += distance * distance;
+                squaredDistance += EvoalMath.square(distance);
 
                 j += 1;
             }

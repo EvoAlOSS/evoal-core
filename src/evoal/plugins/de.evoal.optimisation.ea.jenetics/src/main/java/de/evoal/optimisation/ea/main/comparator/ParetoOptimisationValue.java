@@ -9,6 +9,7 @@ import io.jenetics.ext.moea.ElementComparator;
 import io.jenetics.ext.moea.ElementDistance;
 import io.jenetics.ext.moea.Vec;
 import lombok.NonNull;
+import de.evoal.core.api.math.EvoalMath;
 
 public class ParetoOptimisationValue implements OptimisationValue {
     private final Vec<double []> fitnessValues;
@@ -42,7 +43,7 @@ public class ParetoOptimisationValue implements OptimisationValue {
         double sum = 0.0;
         for (int i = 0; i < thisVec.length(); i++) {
             double elementDistance = thisVec.distance(otherVec, i);
-            sum += elementDistance * elementDistance;
+            sum += EvoalMath.square(elementDistance);
         }
         return Math.sqrt(sum);
     }
