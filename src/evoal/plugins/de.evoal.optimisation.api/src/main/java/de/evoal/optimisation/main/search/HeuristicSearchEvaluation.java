@@ -1,7 +1,6 @@
 package de.evoal.optimisation.main.search;
 
 import de.evoal.core.api.board.Blackboard;
-import de.evoal.core.api.random.RandomService;
 import de.evoal.core.api.ecore.EObjectPair;
 import de.evoal.models.v202704.optimisation.model.OptimisationModule;
 import de.evoal.models.core.ecore.Space;
@@ -9,10 +8,7 @@ import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
 import de.evoal.core.api.cdi.*;
 import de.evoal.optimisation.api.cdi.TargetPointLoader;
 import de.evoal.optimisation.api.execution.EvaluationPosition;
-import de.evoal.optimisation.api.execution.ExecutionRecorder;
-import de.evoal.optimisation.api.fitness.FitnessPipeline;
-import de.evoal.optimisation.api.model.IndividualIDGenerator;
-import de.evoal.optimisation.api.model.OptimisationAlgorithm;
+import de.evoal.optimisation.api.run.SearchRunner;
 
 import jakarta.enterprise.context.ApplicationScoped;
 
@@ -45,7 +41,7 @@ public class HeuristicSearchEvaluation implements MainClass {
     private Blackboard board;
 
     @Inject
-    private RandomService randomService;
+    private SearchRunner runner;
 
     /**
      * Counts the runs over all targets, each run gets its own random numbers.
@@ -54,21 +50,6 @@ public class HeuristicSearchEvaluation implements MainClass {
 
     @Inject
     private WriterContext context;
-
-    @Inject
-    private ExecutionRecorder executionRecorder;
-
-    /**
-     * Creates the fitness pipeline of the run, whose components are recorded.
-     */
-    @Inject
-    private Provider<FitnessPipeline> fitnessPipelines;
-
-    @Inject
-    private IndividualIDGenerator idGenerator;
-
-    @Inject
-    private OptimisationConfigurationSetup configurationSetup;
 
     @Inject
     @BlackboardValue(OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION_FILE)
@@ -108,7 +89,7 @@ public class HeuristicSearchEvaluation implements MainClass {
         final String outputFolder = board.get(OptimisationBlackboardEntries.EVALUATION_OUTPUT_FOLDER);
         outputBaseDir = HeuristicSearchUtils.calculateOutputBaseDir(new File(outputFolder), new File(olFile));
 
-        algorithmConfiguration = configurationSetup.setUp(olFile);
+        algorithmConfiguration = runner.setUp(olFile);
 
         if(targetFile != null) {
             final TargetPointLoader loader = BeanFactory.create(TargetPointLoader.class);
@@ -167,19 +148,8 @@ public class HeuristicSearchEvaluation implements MainClass {
             final String run = convertToString(i, runLength);
             board.bind(OptimisationBlackboardEntries.EVALUATION_RUN, run);
             context.bindColumn(repetitionColumn, i);
-            randomService.startRun(runCounter++);
-            idGenerator.startRun();
 
-            final EvaluationPosition position = toEvaluationPosition(i);
-            executionRecorder.startRun(position);
-
-            final OptimisationAlgorithm algorithm =
-                    BeanFactory.createComponent(OptimisationAlgorithm.class, algorithmConfiguration.getAlgorithm());
-
-            executionRecorder.defineFitness(fitnessPipelines.get().layout());
-            executionRecorder.beginExecution();
-            algorithm.run();
-            executionRecorder.finishRun();
+            runner.run(algorithmConfiguration, runCounter++, toEvaluationPosition(i));
         }
     }
 

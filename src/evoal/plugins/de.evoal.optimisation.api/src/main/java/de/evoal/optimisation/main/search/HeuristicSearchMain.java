@@ -4,22 +4,16 @@ import java.io.File;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import jakarta.inject.Provider;
 
 import lombok.extern.slf4j.Slf4j;
 
 import de.evoal.core.api.board.Blackboard;
 import de.evoal.core.api.cdi.Application;
-import de.evoal.core.api.cdi.BeanFactory;
 import de.evoal.core.api.cdi.MainClass;
-import de.evoal.core.api.random.RandomService;
 import de.evoal.models.v202704.optimisation.model.OptimisationModule;
 
 import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
-import de.evoal.optimisation.api.execution.ExecutionRecorder;
-import de.evoal.optimisation.api.fitness.FitnessPipeline;
-import de.evoal.optimisation.api.model.IndividualIDGenerator;
-import de.evoal.optimisation.api.model.OptimisationAlgorithm;
+import de.evoal.optimisation.api.run.SearchRunner;
 
 /**
  * Runs a single heuristic search for the problem and algorithm of an OL file.
@@ -39,22 +33,7 @@ public class HeuristicSearchMain implements MainClass {
     private Blackboard board;
 
     @Inject
-    private ExecutionRecorder executionRecorder;
-
-    /**
-     * Creates the fitness pipeline of the run, whose components are recorded.
-     */
-    @Inject
-    private Provider<FitnessPipeline> fitnessPipelines;
-
-    @Inject
-    private IndividualIDGenerator idGenerator;
-
-    @Inject
-    private RandomService randomService;
-
-    @Inject
-    private OptimisationConfigurationSetup configurationSetup;
+    private SearchRunner runner;
 
     @Override
     public void run() {
@@ -69,18 +48,7 @@ public class HeuristicSearchMain implements MainClass {
         board.bind(OptimisationBlackboardEntries.EVALUATION_OUTPUT_FOLDER, outputBaseDir);
         board.bind(OptimisationBlackboardEntries.EVALUATION_RUN, "0");
 
-        final OptimisationModule configuration = configurationSetup.setUp(heuristicFileName);
-
-        randomService.startRun(0);
-        idGenerator.startRun();
-        executionRecorder.startRun();
-
-        final OptimisationAlgorithm algorithm =
-                BeanFactory.createComponent(OptimisationAlgorithm.class, configuration.getAlgorithm());
-
-        executionRecorder.defineFitness(fitnessPipelines.get().layout());
-        executionRecorder.beginExecution();
-        algorithm.run();
-        executionRecorder.finishRun();
+        final OptimisationModule configuration = runner.setUp(heuristicFileName);
+        runner.run(configuration, 0, null);
     }
 }
