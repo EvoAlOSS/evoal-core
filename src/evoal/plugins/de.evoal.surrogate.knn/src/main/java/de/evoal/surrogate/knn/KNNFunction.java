@@ -75,6 +75,6 @@ public class KNNFunction extends ModelFunction {
                 .getAverage();
 
         // Store information
-        consumer.accept(input, average);
+        consumer.accept(output, average);
     }
 }

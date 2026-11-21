@@ -15,7 +15,46 @@ module de.evoal.surrogate.ml {
 	def void 'cross-validation'(int times);
 
     /**
-     * Calculates <i>R²</i>.
+     * Calculates the coefficient of determination <i>R²</i> of every output feature on the
+     * training data:
+     *
+     * <math display="block">
+     *   <mrow>
+     *     <msup><mi>R</mi><mn>2</mn></msup>
+     *     <mo>=</mo>
+     *     <mn>1</mn>
+     *     <mo>−</mo>
+     *         <mfrac>
+     *           <mrow>
+     *             <msubsup>
+     *               <mo stretchy="true">∑</mo>
+     *               <mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow>
+     *               <mi>n</mi>
+     *             </msubsup>
+     *             <msup>
+     *               <mrow><mo fence="true" form="prefix">(</mo><msub><mover><mi>y</mi><mo stretchy="false">^</mo></mover><mi>i</mi></msub><mo>−</mo><msub><mi>y</mi><mi>i</mi></msub><mo fence="true" form="postfix">)</mo></mrow>
+     *               <mn>2</mn>
+     *             </msup>
+     *           </mrow>
+     *           <mrow>
+     *             <msubsup>
+     *               <mo stretchy="true">∑</mo>
+     *               <mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow>
+     *               <mi>n</mi>
+     *             </msubsup>
+     *             <msup>
+     *               <mrow><mo fence="true" form="prefix">(</mo><msub><mi>y</mi><mi>i</mi></msub><mo>−</mo><mover><mi>y</mi><mo stretchy="false">¯</mo></mover><mo fence="true" form="postfix">)</mo></mrow>
+     *               <mn>2</mn>
+     *             </msup>
+     *           </mrow>
+     *         </mfrac>
+     *   </mrow>
+     * </math>
+     *
+     * with the symbols of {@code rrse}. 1 is a perfect surrogate, 0 is as good as predicting
+     * the mean, worse surrogates give negative values; on the same data
+     * <i>R²</i> = 1 − <i>rrse</i>². If all values of a feature are equal, the measure is
+     * undefined and is not written (a warning is logged).
      */
 	def void 'R²'();
 
@@ -70,60 +109,48 @@ module de.evoal.surrogate.ml {
 	def void rmse();
 
 	/**
-	 * Calcuates the <i>root relative squared error</i>:
+	 * Calculates the <i>root relative squared error</i> of every output feature on the
+	 * training data (Witten, Frank and Hall, <i>Data Mining</i>, section "Evaluating numeric
+	 * prediction"):
 	 *
-	 * <math display="block" class="tml-display" style="display:block math;">
-     *    <mrow>
-     *     <mi>r</mi>
-     *     <mi>r</mi>
-     *     <mi>s</mi>
-     *     <mi>e</mi>
+	 * <math display="block">
+     *   <mrow>
+     *     <mi>r</mi><mi>r</mi><mi>s</mi><mi>e</mi>
      *     <mo>=</mo>
      *     <msqrt>
-     *       <mfrac>
-     *         <mrow>
-     *           <msubsup>
-     *             <mo stretchy="true">∑</mo>
-     *             <mrow>
-     *               <mi>i</mi>
-     *               <mo>=</mo>
-     *               <mn>1</mn>
-     *             </mrow>
-     *             <mi>n</mi>
-     *           </msubsup>
-     *           <msup>
-     *             <mrow>
-     *               <mo fence="true" form="prefix">(</mo>
-     *               <mfrac>
-     *                 <mrow>
-     *                   <msub>
-     *                     <mi>y</mi>
-     *                     <mi>i</mi>
-     *                   </msub>
-     *                   <mo>−</mo>
-     *                   <msub>
-     *                     <mover>
-     *                       <mi>y</mi>
-     *                       <mo stretchy="false" class="tml-xshift" style="math-style:normal;math-depth:0;">^</mo>
-     *                     </mover>
-     *                     <mi>i</mi>
-     *                   </msub>
-     *                 </mrow>
-     *                 <msub>
-     *                   <mi>y</mi>
-     *                   <mi>i</mi>
-     *                 </msub>
-     *               </mfrac>
-     *               <mo fence="true" form="postfix">)</mo>
-     *             </mrow>
-     *             <mn>2</mn>
-     *           </msup>
-     *         </mrow>
-     *         <mi>n</mi>
-     *       </mfrac>
+     *         <mfrac>
+     *           <mrow>
+     *             <msubsup>
+     *               <mo stretchy="true">∑</mo>
+     *               <mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow>
+     *               <mi>n</mi>
+     *             </msubsup>
+     *             <msup>
+     *               <mrow><mo fence="true" form="prefix">(</mo><msub><mover><mi>y</mi><mo stretchy="false">^</mo></mover><mi>i</mi></msub><mo>−</mo><msub><mi>y</mi><mi>i</mi></msub><mo fence="true" form="postfix">)</mo></mrow>
+     *               <mn>2</mn>
+     *             </msup>
+     *           </mrow>
+     *           <mrow>
+     *             <msubsup>
+     *               <mo stretchy="true">∑</mo>
+     *               <mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow>
+     *               <mi>n</mi>
+     *             </msubsup>
+     *             <msup>
+     *               <mrow><mo fence="true" form="prefix">(</mo><msub><mi>y</mi><mi>i</mi></msub><mo>−</mo><mover><mi>y</mi><mo stretchy="false">¯</mo></mover><mo fence="true" form="postfix">)</mo></mrow>
+     *               <mn>2</mn>
+     *             </msup>
+     *           </mrow>
+     *         </mfrac>
      *     </msqrt>
      *   </mrow>
      * </math>
+	 *
+	 * where <i>y<sub>i</sub></i> are the values of the training data, <i>ŷ<sub>i</sub></i> the
+	 * predictions of the surrogate and <i>ȳ</i> the mean of the values. It compares the error
+	 * of the surrogate with the error of always predicting the mean: 0 is a perfect surrogate,
+	 * 1 is as good as the mean. The value is a ratio, not a percentage. If all values of a
+	 * feature are equal, the measure is undefined and is not written (a warning is logged).
 	 */
 	def void rrse();
 }

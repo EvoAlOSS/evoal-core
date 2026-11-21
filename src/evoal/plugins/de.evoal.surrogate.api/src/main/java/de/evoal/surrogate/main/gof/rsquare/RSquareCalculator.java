@@ -1,25 +1,21 @@
 package de.evoal.surrogate.main.gof.rsquare;
 
-import de.evoal.models.core.ecore.Space;
-import de.evoal.models.core.ecore.TypedEObject;
-import de.evoal.core.api.ecore.stream.EObjectPairStreamSupplier;
 import de.evoal.core.api.interpreter.InterpreterState;
 import de.evoal.surrogate.api.io.pson.Parameter;
 import de.evoal.surrogate.api.training.SurrogateInformationCalculator;
+import de.evoal.surrogate.main.gof.PredictedValues;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.math3.stat.descriptive.moment.Mean;
-import org.apache.commons.math3.stat.descriptive.moment.StandardDeviation;
-import org.apache.commons.math3.util.Pair;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
 import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Named;
-import java.util.Arrays;
+import java.util.Map;
 import java.util.Optional;
-import de.evoal.core.api.math.EvoalMath;
+import java.util.OptionalDouble;
 
 /**
- * Calculates cross validation values.
+ * Calculates the coefficient of determination R² ({@link CoefficientOfDetermination}) of
+ *   every output feature on the training data.
  */
 @Dependent
 @Named("de.evoal.surrogate.ml.R²")
@@ -28,81 +24,29 @@ public class RSquareCalculator extends SurrogateInformationCalculator {
 
 	@Override
 	public Optional<Object> calculate(final InterpreterState context, final Object[] arguments) {
-		log.info("{}", context);
-
-		final EObjectPairStreamSupplier trainingSupplier = helper.loadTrainingDataPaired(context);
-
-		final Space inSpace = functionData.function().getInput();
-		final Space outSpace = functionData.function().getOutput();
-
 		log.info("calculating r² of surrogate function.");
-		final double [][] yValues = trainingSupplier
-											.get()
-											.map(Pair::getSecond)
-				   							.map(t -> outSpace.stream().mapToDouble(t::eGetAsDouble).toArray())
-											.toArray(double[][]::new);
 
-		final double [] means = new double [yValues[0].length];
-		for(int i = 0; i < means.length; ++i) {
-			final int j = i;
-			means[i] = new Mean().evaluate(Arrays.stream(yValues)
-							 					 .mapToDouble(a -> a[j])
-							 					 .toArray());
-		}
+		final Map<EStructuralFeature, PredictedValues> values = PredictedValues.collect(functionData, helper.loadTrainingDataPaired(context));
 
-		final double [] sds = new double [yValues[0].length];
-		for(int i = 0; i < sds.length; ++i) {
-			final int j = i;
-			sds[i] = new StandardDeviation().evaluate(Arrays.stream(yValues)
-															  .mapToDouble(a -> a[j])
-															  .toArray());
-		}
+		for(final Map.Entry<EStructuralFeature, PredictedValues> entry : values.entrySet()) {
+			final String name = entry.getKey().getName();
+			final OptionalDouble rSquare = CoefficientOfDetermination.of(entry.getValue().actual(), entry.getValue().predicted());
 
-		final double [][] errors =
-				trainingSupplier
-						.get()
-						.map(pair -> {
-							final TypedEObject input = pair.getFirst();
-							final TypedEObject expected = pair.getSecond();
-							final TypedEObject calculated = new TypedEObject(expected.eSpace());
-
-							functionData.function()
-										.apply(input, calculated);
-
-							return expected.eClass()
-											.getEAllStructuralFeatures()
-											.stream()
-											.mapToDouble(f -> {
-												final double difference = expected.eGetAsDouble(f) - calculated.eGetAsDouble(f);
-												return EvoalMath.square(difference);
-											})
-											.toArray();
-						}).toArray(double[][]::new);
-
-		int index = 0;
-		for(final EStructuralFeature feature : outSpace) {
-			double error = 0.0;
-
-			for(int x = 0; x < errors.length; ++x) {
-				error += errors[x][index];
+			if(rSquare.isEmpty()) {
+				log.warn("R² of {} is undefined: all values of the training data are equal.", name);
+				continue;
 			}
 
-			final double unexplainedVariation = error;
-			final double totalVariation = EvoalMath.square(sds[index]) * yValues.length;
-			final double rSquare = 1 - unexplainedVariation / totalVariation;
-
-			log.info("unexplained variation: '{}', total variation: {}, rSquare: {}", unexplainedVariation, totalVariation, rSquare);
+			log.info("R² of {}: '{}'", name, rSquare.getAsDouble());
 
 			final Parameter goodnessOfFit = Parameter.builder()
 					.name("r²")
-					.value(rSquare)
+					.value(rSquare.getAsDouble())
 					.build();
 
 			functionData.writer()
 					.get()
-					.addOutputFeatureInformation(feature, goodnessOfFit);
-
-			index += 1;
+					.addOutputFeatureInformation(entry.getKey(), goodnessOfFit);
 		}
 
 		return Optional.empty();
