@@ -1,0 +1,8 @@
+import "definitions" from 'de.evoal.optimisation.core';
+
+module de.evoal.optimisation.test.imported.algorithm {
+    /**
+     * An algorithm type for the tests of problems from imported OL modules.
+     */
+    type 'test-algorithm' extends algorithm {}
+}

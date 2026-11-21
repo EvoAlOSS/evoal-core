@@ -6,6 +6,7 @@ import de.evoal.core.api.utils.EvoAlShutDownException;
 import de.evoal.core.api.validation.components.MetaValidationComponent;
 import de.evoal.core.api.validation.model.Diagnostics;
 import de.evoal.languages.model.base.Import;
+import de.evoal.languages.model.utils.scoping.ClasspathGlobalScopeProvider;
 import jakarta.enterprise.event.Observes;
 import jakarta.enterprise.event.Reception;
 import lombok.NonNull;
@@ -177,16 +178,15 @@ public abstract class ModuleLoaderBase<T extends EObject> {
         dependencies.forEach((key, val) -> val.remove(key));
         dependencies.forEach((key, val) -> val.remove(null));
 
-        // Search for imports that are missing
+        // Search for imports that are missing, e.g., because no reference points into them (yet)
         dependencies.forEach((resource, deps) -> {
             StreamSupport.stream(
                             Spliterators.spliteratorUnknownSize(resource.getAllContents(), Spliterator.ORDERED),
                             false)
                     .filter(Import.class::isInstance)
                     .map(Import.class::cast)
-                    .map(Import::getFilename)
-                    .filter(f -> deps.stream().noneMatch(dep -> dep.getURI().toString().endsWith(f)))
-                    .forEach(f -> deps.add(temporarySet.getResource(URI.createURI("classpath:/" + f), true)));
+                    .filter(i -> deps.stream().noneMatch(dep -> dep.getURI().toString().endsWith(i.getFilename())))
+                    .forEach(i -> deps.add(temporarySet.getResource(importedUri(resource, i), true)));
         });
 
         // collect all files to load (transitively)
@@ -253,6 +253,21 @@ public abstract class ModuleLoaderBase<T extends EObject> {
         }
 
         return loadingStack;
+    }
+
+    /**
+     * Resolves an import the same way as the scoping of the languages
+     *   ({@link ClasspathGlobalScopeProvider.CustomUriResolver}): a file on the search path,
+     *   relative to the importing resource, otherwise a resource on the classpath.
+     *
+     * @param resource The importing resource.
+     * @param imp The import.
+     * @return The URI of the imported file.
+     */
+    private static URI importedUri(final Resource resource, final Import imp) {
+        final String resolved = new ClasspathGlobalScopeProvider.CustomUriResolver().apply(imp);
+
+        return URI.createURI(resolved).resolve(resource.getURI());
     }
 
     private Map<Resource, List<Set<Resource>>> findCycles(final ArrayList<Resource> loadingOrder, Map<Resource, Set<Resource>> dependencies) {
