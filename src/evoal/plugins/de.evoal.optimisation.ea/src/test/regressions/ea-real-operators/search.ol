@@ -1,7 +1,6 @@
-// Regression: the real-valued crossovers BLX-alpha, line and arithmetic crossover of the
-// algorithm on a double chromosome, a single-choice mutation that chooses between Gaussian and
-// polynomial mutation, and an integer chromosome with its own creep mutation (the real-valued
-// operators skip it).
+// Regression: the real-valued crossovers BLX-alpha, line and arithmetic crossover on a double
+// chromosome with a single-choice mutation that chooses between Gaussian and polynomial
+// mutation, and an integer chromosome with uniform crossover and creep mutation.
 import "definitions" from de.evoal.core.math;
 
 import "definitions" from de.evoal.optimisation.core;
@@ -37,7 +36,21 @@ module 'search' {
         'initialisation' := 'random-population' {};
         genotype := genotype {
             chromosomes := [
-                'double-chromosome' { features := [data 'x:0', data 'x:1']; },
+                'double-chromosome' {
+                    features := [data 'x:0', data 'x:1'];
+                    recombination := [
+                        'blx-alpha-crossover' { probability := 0.5; alpha := 0.5; },
+                        'line-crossover' { probability := 0.3; extension := 0.25; },
+                        'arithmetic-crossover' { probability := 0.2; alpha := 0.3; }
+                    ];
+                    mutation := [
+                        'single-choice-mutation' {
+                            probability := 0.6;
+                            children := [ 'gaussian-mutation' { sigma := 0.05; }, 'polynomial-mutation' {} ];
+                            weights := [2.0, 1.0];
+                        }
+                    ];
+                },
                 'integer-chromosome' {
                     features := [data 'n:0'];
                     recombination := [ 'uniform-crossover' {} ];
@@ -46,18 +59,6 @@ module 'search' {
             ];
         };
         'parent-selection' := 'tournament-selection' { size := 3; };
-        recombination := [
-            'blx-alpha-crossover' { probability := 0.5; alpha := 0.5; },
-            'line-crossover' { probability := 0.3; extension := 0.25; },
-            'arithmetic-crossover' { probability := 0.2; alpha := 0.3; }
-        ];
-        mutation := [
-            'single-choice-mutation' {
-                probability := 0.6;
-                children := [ 'gaussian-mutation' { sigma := 0.05; }, 'polynomial-mutation' {} ];
-                weights := [2.0, 1.0];
-            }
-        ];
         replacement := 'survivor-replacement' {
             selection := 'elite-selection' { count := 2; rest := 'tournament-selection' { size := 2; }; };
         };

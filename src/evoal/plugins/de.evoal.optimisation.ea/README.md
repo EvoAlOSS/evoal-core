@@ -36,47 +36,42 @@ A `Genotype` maps every search variable to exactly one chromosome
 | `'bit-chromosome'` | `BitGenes`: 1 bit per boolean, `precision` bits per real or integer, standard binary code | boolean, integer, real |
 | `'gray-chromosome'` | like `'bit-chromosome'`, real and integer features in Gray code | boolean, integer, real |
 
-Without `genotype`, the default mapping creates one chromosome per representation (real
-features a double chromosome, integer features an integer chromosome, boolean features a
-bit chromosome). Every search variable that is not boolean needs a lower and an upper
+`genotype` is required: the configuration states every chromosome, its features and its
+operators (#311). Every search variable that is not boolean needs a lower and an upper
 boundary. After every operator, `'boundary-handling'` (`stick`, `bounce`, `wrap`) brings
 values outside the boundaries back.
 
 ## Operators and probabilities
 
-Which chromosomes an operator changes is stated once, in the DL: the annotation
+Every chromosome lists its `recombination` and `mutation` operators; both lists are required,
+and an empty list means that the chromosome is not recombined or not mutated. The algorithm
+has no operators of its own, and there are no default operators (#311). Which chromosomes an
+operator may change is stated once, in the DL: the annotation
 `@Applicability { representations; 'minimum-scale'; }` on the operator type. The
-`ApplicabilityReader` reads it from the operator's DL type (also for the default
-operators). The `OperatorPlan` decides per chromosome:
-
-1. a chromosome with its own `recombination` or `mutation` list uses it; every operator in it
-   must apply to the chromosome;
-2. otherwise, it uses the operators of the algorithm that apply to it (skips are logged);
-3. if none applies, it uses the default of its representation: double chromosomes
-   `'sbx-crossover'` (probability 0.9) and `'polynomial-mutation'`, integer chromosomes
-   `'uniform-crossover'` and `'random-reset-mutation'`, bit and Gray chromosomes
-   `'single-point-crossover'` and `'bit-flip-mutation'`. A double chromosome with features
-   below the cardinal scale gets `'uniform-crossover'` and `'random-reset-mutation'`.
+`ApplicabilityReader` reads it from the operator's DL type, and the `OperatorPlan` rejects an
+operator that does not apply to its chromosome. A chromosome with neither recombinations nor
+mutations never changes, which is logged as a warning.
 
 Every probability has one unit (`Variation`):
 
-- `probability` of a recombination: one draw per pair; the recombination then changes every
-  chromosome it applies to. A pair that is not recombined passes on two copies.
+- `probability` of a recombination: one draw per pair; the recombination then changes its
+  chromosome. A pair that is not recombined passes on two copies.
 - `probability` of a mutation: one draw per child; `'gene-probability'`: one draw per gene,
-  default 1 / n with n the number of genes the mutation covers.
+  default 1 / n with n the number of genes of the chromosome, the usual rate of one changed
+  gene per mutation (Muehlenbein 1992, Baeck 1993).
 - Draws are `nextDouble() < p`. Operators are applied in list order.
 - `'single-choice-mutation'`: if it fires, exactly one of its `children` is chosen by
-  `weights` (`MutationOperator.choose`) and applied with its own gene probability; the
-  property `operators` names the chosen one. It applies to the chromosomes that all its
-  children apply to (`ApplicabilityReader` combines them).
+  `weights`, one per child (`MutationOperator.choose`), and applied with its own gene
+  probability; the property `operators` names the chosen one. It applies to a chromosome
+  that all its children apply to (`ApplicabilityReader` combines them).
 
 - `'correlation-aware-mutation' { mutation; 'minimum-correlation'; 'propagation-depth'; }`
   and `'linkage-crossover' { crossover; 'minimum-correlation'; }` wrap an operator and use
   its probabilities and applicability; see [Correlation-aware operators](#correlation-aware-operators).
 
 Every configured operator and selection draws from its own named stream of the
-`RandomService` (`de.evoal.optimisation.ea/<slot>[<index>]`), so a run gives the same
-result with any number of evaluation threads.
+`RandomService` (operators: `de.evoal.optimisation.ea/genotype.chromosomes[<c>].<slot>[<index>]`),
+so a run gives the same result with any number of evaluation threads.
 
 | Operator | Representations | Minimum scale |
 |---|---|---|
@@ -227,10 +222,10 @@ child itself.
 
 In `src/main/examples`, each with a README:
 
-- `ea-basic`: a real-valued benchmark with the default mapping and the default operators,
-  tournament selection and a (mu + lambda) replacement.
-- `ea-mixed-genotype`: a Gray chromosome and an integer chromosome with its own operators,
-  roulette wheel selection and the memory model.
+- `ea-basic`: a real-valued benchmark with one double chromosome (simulated binary crossover
+  and polynomial mutation), tournament selection and a (mu + lambda) replacement.
+- `ea-mixed-genotype`: a Gray chromosome and an integer chromosome, each with operators for
+  its representation, roulette wheel selection and the memory model.
 - `ea-nsga2`: NSGA-II on ZDT1 with 30 variables (benchmark `zdt1` of the generator).
 - `ea-correlations`: three ranged correlations across a double and a Gray chromosome,
   `'correlation-aware-mutation'`, `'linkage-crossover'` and `'correlation-statistics'`.

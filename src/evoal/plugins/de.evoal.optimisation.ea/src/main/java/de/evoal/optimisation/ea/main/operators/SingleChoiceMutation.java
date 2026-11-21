@@ -1,7 +1,6 @@
 package de.evoal.optimisation.ea.main.operators;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.random.RandomGenerator;
 
@@ -24,9 +23,9 @@ import de.evoal.optimisation.ea.api.selection.Rankings;
 /**
  * Single-choice mutation (DL type {@code 'single-choice-mutation'}, specific to EvoAl): if it
  *   fires ({@code probability}, one draw per child), exactly one of its {@code children} is
- *   chosen with the given {@code weights} (equal if empty) and applied to the child with its
+ *   chosen with the given {@code weights} (one per child) and applied to the child with its
  *   own gene probability; the {@code probability} of the chosen mutation is not used. It
- *   applies to the chromosomes all its children apply to.
+ *   applies to a chromosome all its children apply to.
  */
 @Dependent
 @Named("de.evoal.optimisation.ea.optimisation.single-choice-mutation")
@@ -55,12 +54,17 @@ public class SingleChoiceMutation extends AbstractMutation {
     /**
      * @param probability The probability that the mutation fires.
      * @param children The mutations to choose from.
-     * @param weights The weight of every child; empty for equal weights.
+     * @param weights The weight of every child.
+     * @throws IllegalArgumentException if the weights are not valid ({@link #checkWeights}).
      */
     public SingleChoiceMutation(final double probability, final List<MutationOperator> children, final double[] weights) {
         super(probability, Double.NaN);
         this.children = List.copyOf(children);
-        this.weights = weights.length == 0 ? equalWeights(children.size()) : weights.clone();
+        try {
+            this.weights = checkWeights(weights, children.size());
+        } catch(final InitializationException e) {
+            throw new IllegalArgumentException(e.getMessage(), e);
+        }
     }
 
     @Override
@@ -85,31 +89,31 @@ public class SingleChoiceMutation extends AbstractMutation {
         }
         children = List.copyOf(created);
 
-        final double[] configured = attributes.attributeToDoubleArray(configuration, "weights");
-        if(configured.length == 0) {
-            weights = equalWeights(children.size());
-            return;
-        }
+        weights = checkWeights(attributes.attributeToDoubleArray(configuration, "weights"), children.size());
+    }
 
-        if(configured.length != children.size()) {
-            throw new InitializationException("The 'single-choice-mutation' has " + children.size() + " children, but "
-                                              + configured.length + " weights.");
+    /**
+     * @param weights The configured weights.
+     * @param children The number of children.
+     * @return A copy of the weights.
+     * @throws InitializationException if there is not exactly one weight per child, a weight
+     *   is negative, or no weight is greater than 0.
+     */
+    static double[] checkWeights(final double[] weights, final int children) throws InitializationException {
+        if(weights.length != children) {
+            throw new InitializationException("The 'single-choice-mutation' needs one weight per child: it has " + children
+                                              + " children, but " + weights.length + " weights.");
         }
-        for(final double weight : configured) {
+        for(final double weight : weights) {
             if(!(weight >= 0.0)) {
                 throw new InitializationException("The weights of the 'single-choice-mutation' must not be negative, but one is " + weight + ".");
             }
         }
-        if(Rankings.sum(configured) <= 0.0) {
+        if(Rankings.sum(weights) <= 0.0) {
             throw new InitializationException("At least one weight of the 'single-choice-mutation' must be greater than 0.");
         }
-        weights = configured;
-    }
 
-    private static double[] equalWeights(final int count) {
-        final double[] equal = new double[count];
-        Arrays.fill(equal, 1.0);
-        return equal;
+        return weights.clone();
     }
 
     /**

@@ -17,10 +17,10 @@ stuck in one of the many local minima (see the example
 `local-search-hill-climbing`); the population and the recombination let the EA
 jump between them.
 
-The configuration gives no `genotype`. The EA then puts the five real variables
-into one double chromosome and uses the default operators of real values:
+The `genotype` puts the five real variables into one double chromosome with
 simulated binary crossover (`'sbx-crossover'`, probability 0.9) and polynomial
-mutation (`'polynomial-mutation'`, every gene with probability 1/5).
+mutation (`'polynomial-mutation'`, every gene with probability 1/5, the default
+1 / n of a chromosome with n genes).
 
 ## Files
 
@@ -31,6 +31,8 @@ mutation (`'polynomial-mutation'`, every gene with probability 1/5).
   (`configure 'evolutionary-algorithm'`):
   - `'size-of-population' := 40`, `'number-of-offspring' := 40`: 40 parents
     (mu) create 40 children (lambda) per generation.
+  - `genotype := genotype { chromosomes := [ 'double-chromosome' { ... } ]; }`:
+    the chromosome with its features, `recombination` and `mutation`.
   - `'parent-selection' := 'tournament-selection' { size := 3; }`.
   - `replacement := 'plus-replacement' { ... }`: the next population is chosen
     from the 80 parents and children together, (mu + lambda). The
@@ -55,7 +57,7 @@ EVOAL_SEED=42 ./01-run-search.sh
 
 - `output/search/best-candidate-per-iteration.csv`: the best candidate of every
   generation; a generation has several rows if candidates are equally good,
-  e.g. a parent and its unchanged copy. With the seed 42, `y:0` falls from about 52 to about 0.003 within
+  e.g. a parent and its unchanged copy. With the seed 42, `y:0` falls from about 52 to about 0.01 within
   the 100 generations, and all variables approach 0.
 - `output/search/candidates-per-iteration.csv`: all 40 candidates of every
   generation. Plot `x:0` against `x:1` for some generations: first the
@@ -67,9 +69,9 @@ EVOAL_SEED=42 ./01-run-search.sh
 - Use a comma replacement, (mu, lambda): `replacement := 'comma-replacement'
   { selection := 'tournament-selection' { size := 2; }; };`. The parents do not
   survive, so the best value can get worse from one generation to the next.
-- Give the operators explicitly, e.g. `recombination := [ 'blx-alpha-crossover'
-  { probability := 0.9; } ];` and `mutation := [ 'gaussian-mutation' { sigma :=
-  0.1; } ];`.
+- Use other operators for real values, e.g. `recombination := [
+  'blx-alpha-crossover' { probability := 0.9; } ];` and `mutation := [
+  'gaussian-mutation' { sigma := 0.1; } ];`.
 - Make the selection weaker (`size := 2`) or stronger (`size := 5`) and compare
   how fast `y:0` falls.
 - Combine different variable types in one search, see the example

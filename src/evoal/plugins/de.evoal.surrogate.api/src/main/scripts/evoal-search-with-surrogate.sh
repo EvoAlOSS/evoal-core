@@ -48,6 +48,6 @@ java ${LOCAL_JVM_ARGUMENTS[@]} \
      "-Boptimisation:optimisation-configuration-file=$2" \
      "-Bsurrogate:configuration-file=$3" \
      "-Bsurrogate:pre-trained=$4" \
-     "-Bsurrogate:training-data=$5"\
+     "-Bsurrogate:training-data-file=$5"\
      "-Boptimisation:evaluation-output-folder=$6" \
      "-Boptimisation:constraint-folder=$7"

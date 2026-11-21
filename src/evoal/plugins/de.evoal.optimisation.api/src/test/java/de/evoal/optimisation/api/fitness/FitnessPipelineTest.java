@@ -230,7 +230,7 @@ public class FitnessPipelineTest {
         @Test
         public void theWeightedSumUsesTheCanonicalDirection() {
             // given: a is minimised, b is maximised, so the fitness is 0.5 * a + 0.5 * (-b)
-            final List<FitnessStep> steps = List.of(new WeightedSumStep(Map.of(), true));
+            final List<FitnessStep> steps = List.of(new WeightedSumStep(Map.of("a", 1.0, "b", 1.0), true));
 
             // when
             final double better = fitnessOf(steps, 1.0, 5.0).value(0);
@@ -271,7 +271,7 @@ public class FitnessPipelineTest {
         @Test
         public void aScalarisationBeforeTheLastStepIsRejected() {
             // given
-            final List<FitnessStep> steps = List.of(new WeightedSumStep(Map.of(), true),
+            final List<FitnessStep> steps = List.of(new WeightedSumStep(Map.of("a", 1.0, "b", 1.0), true),
                                                     new ScalingStep(Map.of("weighted-sum", 2.0)));
 
             // when, then
@@ -281,8 +281,8 @@ public class FitnessPipelineTest {
         @Test
         public void aSecondScalarisationIsRejected() {
             // given
-            final List<FitnessStep> steps = List.of(new WeightedSumStep(Map.of(), true),
-                                                    new WeightedSumStep(Map.of(), false));
+            final List<FitnessStep> steps = List.of(new WeightedSumStep(Map.of("a", 1.0, "b", 1.0), true),
+                                                    new WeightedSumStep(Map.of("weighted-sum", 1.0), false));
 
             // when, then
             Assertions.assertThrows(IllegalArgumentException.class, () -> new FitnessPipeline(goals, steps));
@@ -313,7 +313,7 @@ public class FitnessPipelineTest {
             // given
             final List<FitnessStep> steps = List.of(new ObjectiveUnitsStep(),
                                                     new ScalingStep(Map.of("a", 2.0)),
-                                                    new WeightedSumStep(Map.of(), true));
+                                                    new WeightedSumStep(Map.of("a", 1.0), true));
 
             // when, then
             Assertions.assertDoesNotThrow(() -> new FitnessPipeline(goals, steps));
@@ -331,7 +331,7 @@ public class FitnessPipelineTest {
         @Test
         public void itIsRejectedAfterAScalarisation() {
             // given
-            final List<FitnessStep> steps = List.of(new WeightedSumStep(Map.of(), true), new ObjectiveUnitsStep());
+            final List<FitnessStep> steps = List.of(new WeightedSumStep(Map.of("a", 1.0), true), new ObjectiveUnitsStep());
 
             // when, then
             Assertions.assertThrows(IllegalArgumentException.class, () -> new FitnessPipeline(goals, steps));

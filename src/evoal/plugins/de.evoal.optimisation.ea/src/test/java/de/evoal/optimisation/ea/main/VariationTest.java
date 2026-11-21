@@ -42,8 +42,8 @@ public class VariationTest {
 
     private Variation variation(final double crossoverProbability, final double mutationProbability) {
         final OperatorPlan plan = new OperatorPlan(
-                List.<OperatorUse<RecombinationOperator>>of(new OperatorUse<>(new SinglePointCrossover(crossoverProbability), List.of(0), "test/recombination")),
-                List.<OperatorUse<MutationOperator>>of(new OperatorUse<>(new GaussianMutation(mutationProbability, 1.0, 0.1), List.of(0), "test/mutation")));
+                List.<OperatorUse<RecombinationOperator>>of(new OperatorUse<>(new SinglePointCrossover(crossoverProbability), 0, "test/recombination")),
+                List.<OperatorUse<MutationOperator>>of(new OperatorUse<>(new GaussianMutation(mutationProbability, 1.0, 0.1), 0, "test/mutation")));
 
         return new Variation(genotype, plan, BoundaryHandling.STICK, RandomService.withSeed(3));
     }

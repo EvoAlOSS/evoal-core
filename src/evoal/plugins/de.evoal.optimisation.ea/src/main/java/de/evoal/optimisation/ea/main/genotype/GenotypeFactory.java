@@ -31,10 +31,7 @@ import de.evoal.optimisation.ea.api.genotype.IntegerChromosome;
 import de.evoal.optimisation.ea.api.genotype.MeasurementScale;
 
 /**
- * Creates the {@link Genotype} of the algorithm: from the configured {@code genotype}, or with
- *   the default mapping (one chromosome per representation: real features a double
- *   chromosome, integer features an integer chromosome, boolean features a bit chromosome,
- *   each in the order of the search space).
+ * Creates the {@link Genotype} of the algorithm from the configured {@code genotype}.
  */
 @Dependent
 public class GenotypeFactory {
@@ -57,20 +54,20 @@ public class GenotypeFactory {
      * A configured chromosome with its operator configurations.
      *
      * @param chromosome The chromosome.
-     * @param configuration Its configuration, {@code null} for the default mapping.
+     * @param configuration Its configuration.
      */
     public record ConfiguredChromosome(Chromosome chromosome, EObject configuration) {
     }
 
     /**
-     * @param genotype The configured {@code genotype}, {@code null} for the default mapping.
+     * @param genotype The configured {@code genotype}.
      * @return The chromosomes.
      * @throws InitializationException if a chromosome cannot represent its features.
      */
     public List<ConfiguredChromosome> create(final EObject genotype) throws InitializationException {
         requireBoundedFeatures();
 
-        final List<ConfiguredChromosome> chromosomes = genotype == null ? defaultMapping() : configured(genotype);
+        final List<ConfiguredChromosome> chromosomes = configured(genotype);
 
         try {
             new Genotype(chromosomes.stream().map(ConfiguredChromosome::chromosome).toList(), searchSpace);
@@ -104,39 +101,6 @@ public class GenotypeFactory {
             };
 
             chromosomes.add(new ConfiguredChromosome(chromosome, configuration));
-        }
-
-        return chromosomes;
-    }
-
-    private List<ConfiguredChromosome> defaultMapping() throws InitializationException {
-        final List<EStructuralFeature> reals = new ArrayList<>();
-        final List<EStructuralFeature> integers = new ArrayList<>();
-        final List<EStructuralFeature> booleans = new ArrayList<>();
-
-        for(final EStructuralFeature feature : searchSpace) {
-            final EClassifier type = feature.getEType();
-            if(EClassifierHelper.isDouble(type)) {
-                reals.add(feature);
-            } else if(EClassifierHelper.isInteger(type)) {
-                integers.add(feature);
-            } else if(EClassifierHelper.isBoolean(type)) {
-                booleans.add(feature);
-            } else {
-                throw new InitializationException("The evolutionary algorithm does not support the search variable '"
-                                                  + feature.getName() + "' of type " + type.getName() + ".");
-            }
-        }
-
-        final List<ConfiguredChromosome> chromosomes = new ArrayList<>();
-        if(!reals.isEmpty()) {
-            chromosomes.add(new ConfiguredChromosome(doubleChromosome(reals), null));
-        }
-        if(!integers.isEmpty()) {
-            chromosomes.add(new ConfiguredChromosome(integerChromosome(integers), null));
-        }
-        if(!booleans.isEmpty()) {
-            chromosomes.add(new ConfiguredChromosome(binaryChromosome(booleans, 1, false), null));
         }
 
         return chromosomes;

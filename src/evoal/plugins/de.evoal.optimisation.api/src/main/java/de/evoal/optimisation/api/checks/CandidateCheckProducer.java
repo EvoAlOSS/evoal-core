@@ -30,10 +30,10 @@ import de.evoal.optimisation.api.model.InitialCandidatesProvider;
  *     point the algorithm does not offer, {@code repair} without a repair strategy, and
  *     {@code resample} (also as the fallback of a repair) for population checks or
  *     algorithms that cannot redo their variation;</li>
- *   <li>creates the replacement source of every replacing check: its
- *     {@code 'replacement-source'}, or the {@code 'initialisation'} of the algorithm. A
- *     {@code 'specify-candidates'} source repeats its candidates, which is reported as a
- *     warning;</li>
+ *   <li>creates the replacement source of every replacing check from its
+ *     {@code 'replacement-source'}. A source of given candidates
+ *     ({@code 'specify-candidates'}, {@code 'candidates-from-file'}) repeats its candidates,
+ *     which is reported as a warning;</li>
  *   <li>defines the property {@link #REASON} of replacements in the
  *     {@link ExecutionRecorder}: on relationships for population checks, on individuals for
  *     checks of new candidates and for population checks (a replaced member that is new in
@@ -61,9 +61,10 @@ public class CandidateCheckProducer {
     public static final String REPAIR = "repair";
 
     /**
-     * The DL type of the initial population source that repeats its candidates.
+     * The DL types of the initial population sources that repeat their candidates.
      */
-    private static final String SPECIFY_CANDIDATES = "de.evoal.optimisation.core.specify-candidates";
+    private static final Set<String> GIVEN_CANDIDATES = Set.of("de.evoal.optimisation.core.specify-candidates",
+                                                               "de.evoal.optimisation.core.candidates-from-file");
 
     private static final FQNProvider NAMES = new FQNProvider();
 
@@ -93,7 +94,6 @@ public class CandidateCheckProducer {
         validate(checks, offered, resampling, NAMES.get(algorithm));
         defineProperties(checks);
 
-        final EObject initialisation = helper.lookup(algorithm, "initialisation");
         final List<ConfiguredCheck> configured = new ArrayList<>();
         for(final CandidateCheck check : checks) {
             if(!check.reactsWith(CheckReaction.REPLACE)) {
@@ -101,10 +101,11 @@ public class CandidateCheckProducer {
                 continue;
             }
 
-            final EObject source = check.replacementSource().orElse(initialisation);
-            if(SPECIFY_CANDIDATES.equals(NAMES.get(source))) {
-                log.warn("The replacements of the check '{}' come from 'specify-candidates' and repeat the given candidates.",
-                         check.name());
+            final EObject source = check.replacementSource();
+            final String type = NAMES.get(source);
+            if(GIVEN_CANDIDATES.contains(type)) {
+                log.warn("The replacements of the check '{}' come from '{}' and repeat the given candidates.",
+                         check.name(), type.substring(type.lastIndexOf('.') + 1));
             }
 
             final InitialCandidatesProvider provider = BeanFactory.createComponent(InitialCandidatesProvider.class, source);

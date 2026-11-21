@@ -51,10 +51,20 @@ module de.evoal.surrogate.optimisation {
 	}
 	
 	/**
-	 * Initial candidates drawn at random (with repetition) from the training data. Also
+	 * Initial candidates drawn at random (with repetition) from training data. Also
 	 *   a 'replacement-source' of candidate checks.
+	 *
+	 * The data comes from 'training-file'. Without it, the population uses the training data
+	 *   of the run: the file given on the command line with
+	 *   <tt>-Bsurrogate:training-data-file=&lt;file&gt;</tt> (the fifth argument of
+	 *   <tt>evoal-search-with-surrogate.sh</tt>), read once per run. This is the only place
+	 *   where a run setting instead of the configuration decides what runs; without both, the
+	 *   configuration is rejected at start.
 	 */
 	type 'training-population' extends 'initial-population' {
+	    /**
+	     * The file with the training data.
+	     */
 	    'training-file' : optional string;
 	}
 	

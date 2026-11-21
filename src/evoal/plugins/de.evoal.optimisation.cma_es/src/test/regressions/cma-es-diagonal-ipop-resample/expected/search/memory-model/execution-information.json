@@ -49,7 +49,10 @@
         "type" : "de.evoal.optimisation.core.constraint-check",
         "attributes" : {
           "reaction" : "resample",
-          "replacement-source" : null,
+          "replacement-source" : {
+            "type" : "de.evoal.optimisation.core.random-population",
+            "attributes" : { }
+          },
           "maximum-attempts" : 5,
           "group" : "budget",
           "repair" : null,

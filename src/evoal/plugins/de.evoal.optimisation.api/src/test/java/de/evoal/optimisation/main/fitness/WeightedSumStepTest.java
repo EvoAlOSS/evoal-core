@@ -28,7 +28,7 @@ public class WeightedSumStepTest {
         @Test
         public void theFitnessHasOneComponentWithoutGoal() {
             // given
-            final WeightedSumStep step = new WeightedSumStep(Map.of(), true);
+            final WeightedSumStep step = new WeightedSumStep(Map.of("a", 1.0, "b", 1.0), true);
 
             // when
             final FitnessLayout layout = step.layout(LAYOUT);
@@ -42,7 +42,7 @@ public class WeightedSumStepTest {
         @Test
         public void theResultHasTheDeclaredLayout() {
             // given
-            final WeightedSumStep step = new WeightedSumStep(Map.of(), true);
+            final WeightedSumStep step = new WeightedSumStep(Map.of("a", 1.0, "b", 1.0), true);
             final FitnessLayout declared = step.layout(LAYOUT);
             final Fitness fitness = new Fitness(LAYOUT, new double[] {1.0, 2.0});
 
@@ -54,19 +54,27 @@ public class WeightedSumStepTest {
         }
     }
 
+    @Test
+    public void weightsAreRequired() {
+        // no equal weights for an empty list (#311)
+        final IllegalArgumentException e = Assertions.assertThrows(IllegalArgumentException.class,
+                                                                   () -> new WeightedSumStep(Map.of(), true));
+        Assertions.assertTrue(e.getMessage().contains("needs a weight for every component"), e.getMessage());
+    }
+
     @Nested
-    @DisplayName("given no weights")
+    @DisplayName("given the same weight for every component")
     class EqualWeights {
         @Test
         public void theNormalisedSumIsTheMean() {
-            final WeightedSumStep step = new WeightedSumStep(Map.of(), true);
+            final WeightedSumStep step = new WeightedSumStep(Map.of("a", 1.0, "b", 1.0), true);
 
             Assertions.assertEquals(2.0, sumOf(step, 1.0, 3.0));
         }
 
         @Test
         public void theSumWithoutNormalisationIsThePlainSum() {
-            final WeightedSumStep step = new WeightedSumStep(Map.of(), false);
+            final WeightedSumStep step = new WeightedSumStep(Map.of("a", 1.0, "b", 1.0), false);
 
             Assertions.assertEquals(4.0, sumOf(step, 1.0, 3.0));
         }

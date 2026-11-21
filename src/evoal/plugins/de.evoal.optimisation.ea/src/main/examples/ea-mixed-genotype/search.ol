@@ -36,9 +36,14 @@ module 'search' {
 		genotype := genotype {
 			chromosomes := [
 				// the real variables as bit strings: 12 bits per variable in Gray code, so
-				// neighbouring values differ in one bit
-				'gray-chromosome' { features := [data 'x:0', data 'x:1']; precision := 12; },
-				// the integer variables as integers, with their own operators
+				// neighbouring values differ in one bit; two-point crossover and bit flips
+				'gray-chromosome' {
+					features := [data 'x:0', data 'x:1'];
+					precision := 12;
+					recombination := [ 'multi-point-crossover' { points := 2; probability := 0.8; } ];
+					mutation := [ 'bit-flip-mutation' {} ];
+				},
+				// the integer variables as integers, with operators for integers
 				'integer-chromosome' {
 					features := [data 'n:0', data 'n:1'];
 					recombination := [ 'uniform-crossover' {} ];
@@ -50,11 +55,6 @@ module 'search' {
 		// fitness-proportional: a candidate is chosen with a probability that grows with
 		// the distance of its value to the worst value of the population
 		'parent-selection' := 'roulette-wheel-selection' {};
-
-		// operators of the algorithm: they apply to the Gray chromosome only, the integer
-		// chromosome has its own
-		recombination := [ 'multi-point-crossover' { points := 2; probability := 0.8; } ];
-		mutation := [ 'bit-flip-mutation' {} ];
 
 		// 10 parents survive (the best 2 for sure), the 20 children replace the others
 		replacement := 'survivor-replacement' {

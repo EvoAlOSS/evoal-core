@@ -9,6 +9,7 @@ import java.util.random.RandomGeneratorFactory;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import de.evoal.models.core.exceptions.InitializationException;
 import de.evoal.optimisation.ea.Statistics;
 import de.evoal.optimisation.ea.api.genotype.Genes;
 import de.evoal.optimisation.ea.api.genotype.IntegerGenes;
@@ -126,11 +127,11 @@ public class RealAndIntegerOperatorsTest {
     }
 
     @Test
-    public void singleChoiceWithEqualWeightsChoosesUniformly() {
+    public void singleChoiceWithTheSameWeightsChoosesUniformly() {
         final List<MutationOperator> children = List.of(new GaussianMutation(1.0, Double.NaN, 0.1),
                                                         new PolynomialMutation(1.0, Double.NaN, 20.0),
                                                         new RandomResetMutation(1.0, Double.NaN));
-        final SingleChoiceMutation mutation = new SingleChoiceMutation(1.0, children, new double[0]);
+        final SingleChoiceMutation mutation = new SingleChoiceMutation(1.0, children, new double[] {1.0, 1.0, 1.0});
 
         final long[] counts = new long[3];
         for(int trial = 0; trial < TRIALS; ++trial) {
@@ -144,9 +145,23 @@ public class RealAndIntegerOperatorsTest {
 
     @Test
     public void singleChoiceDoesNotMutateItself() {
-        final SingleChoiceMutation mutation = new SingleChoiceMutation(1.0, List.of(new RandomResetMutation(1.0, Double.NaN)), new double[0]);
+        final SingleChoiceMutation mutation = new SingleChoiceMutation(1.0, List.of(new RandomResetMutation(1.0, Double.NaN)), new double[] {1.0});
         final Genes genes = reals(1.0);
 
         Assertions.assertThrows(UnsupportedOperationException.class, () -> mutation.mutate(genes, 1.0, random));
+    }
+
+    @Test
+    public void singleChoiceNeedsOneWeightPerChild() {
+        // no equal weights for an empty list (#311)
+        final InitializationException none = Assertions.assertThrows(InitializationException.class,
+                () -> SingleChoiceMutation.checkWeights(new double[0], 2));
+        Assertions.assertTrue(none.getMessage().contains("one weight per child"), none.getMessage());
+
+        Assertions.assertThrows(InitializationException.class, () -> SingleChoiceMutation.checkWeights(new double[] {1.0}, 2));
+        Assertions.assertThrows(InitializationException.class, () -> SingleChoiceMutation.checkWeights(new double[] {1.0, -1.0}, 2));
+        Assertions.assertThrows(InitializationException.class, () -> SingleChoiceMutation.checkWeights(new double[] {0.0, 0.0}, 2));
+        Assertions.assertThrows(IllegalArgumentException.class,
+                () -> new SingleChoiceMutation(1.0, List.of(new RandomResetMutation(1.0, Double.NaN)), new double[0]));
     }
 }

@@ -533,8 +533,8 @@ public class CheckStepsTest {
                 }
 
                 @Override
-                public Optional<EObject> replacementSource() {
-                    return Optional.empty();
+                public EObject replacementSource() {
+                    return null;
                 }
 
                 @Override
@@ -587,8 +587,8 @@ public class CheckStepsTest {
         }
 
         @Override
-        public Optional<EObject> replacementSource() {
-            return Optional.empty();
+        public EObject replacementSource() {
+            return null;
         }
 
         @Override
@@ -633,8 +633,8 @@ public class CheckStepsTest {
         }
 
         @Override
-        public Optional<EObject> replacementSource() {
-            return Optional.empty();
+        public EObject replacementSource() {
+            return null;
         }
 
         @Override

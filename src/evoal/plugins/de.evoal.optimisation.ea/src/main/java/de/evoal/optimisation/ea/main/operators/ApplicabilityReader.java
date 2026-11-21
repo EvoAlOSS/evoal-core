@@ -2,7 +2,6 @@ package de.evoal.optimisation.ea.main.operators;
 
 import java.util.Collection;
 import java.util.EnumSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -90,24 +89,6 @@ public class ApplicabilityReader {
         }
 
         return applicability;
-    }
-
-    /**
-     * @param module A type of the DL module that declares the operator type.
-     * @param name The name of the operator type, e.g. {@code sbx-crossover}.
-     * @return The applicability of the operator type.
-     * @throws IllegalStateException if the module has no such type.
-     */
-    public Applicability of(final ClassDefinition module, final String name) {
-        final EObject container = module.eContainer();
-        final Iterator<EObject> contents = container.eAllContents();
-        while(contents.hasNext()) {
-            if(contents.next() instanceof ClassDefinition definition && name.equals(definition.getName())) {
-                return of(definition);
-            }
-        }
-
-        throw new IllegalStateException("The DL module has no type '" + name + "'.");
     }
 
     /**

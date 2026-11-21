@@ -56,15 +56,38 @@
       },
       "size-of-population" : 20,
       "number-of-offspring" : 10,
-      "genotype" : null,
+      "genotype" : {
+        "type" : "de.evoal.optimisation.ea.optimisation.genotype",
+        "attributes" : {
+          "chromosomes" : [ {
+            "type" : "de.evoal.optimisation.ea.optimisation.double-chromosome",
+            "attributes" : {
+              "features" : [ "x:0", "x:1", "x:2" ],
+              "recombination" : [ {
+                "type" : "de.evoal.optimisation.ea.optimisation.sbx-crossover",
+                "attributes" : {
+                  "probability" : 0.9,
+                  "distribution-index" : 15.0
+                }
+              } ],
+              "mutation" : [ {
+                "type" : "de.evoal.optimisation.ea.optimisation.polynomial-mutation",
+                "attributes" : {
+                  "probability" : 1.0,
+                  "gene-probability" : null,
+                  "distribution-index" : 20.0
+                }
+              } ]
+            }
+          } ]
+        }
+      },
       "parent-selection" : {
         "type" : "de.evoal.optimisation.ea.optimisation.tournament-selection",
         "attributes" : {
           "size" : 2
         }
       },
-      "recombination" : [ ],
-      "mutation" : [ ],
       "replacement" : {
         "type" : "de.evoal.optimisation.ea.optimisation.survivor-replacement",
         "attributes" : {

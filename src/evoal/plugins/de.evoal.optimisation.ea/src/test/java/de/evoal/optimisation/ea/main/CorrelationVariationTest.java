@@ -73,7 +73,7 @@ public class CorrelationVariationTest {
         // given: the gaussian mutation only changes the chromosome of x
         final MutationOperator mutation = new CorrelationAwareMutation(new GaussianMutation(1.0, 1.0, 0.2), transfer, 1);
         final OperatorPlan plan = new OperatorPlan(List.of(),
-                                                   List.of(new OperatorUse<>(mutation, List.of(0), "test/mutation")));
+                                                   List.of(new OperatorUse<>(mutation, 0, "test/mutation")));
         final Variation variation = new Variation(genotype, plan, BoundaryHandling.STICK, RandomService.withSeed(5));
         final Candidate parent = parent(0.0, 0.0);
         final Offspring child = new Offspring(genotype.encode(parent.input()), List.of(parent), null);
@@ -97,7 +97,7 @@ public class CorrelationVariationTest {
     public void aLinkageCrossoverKeepsXAndYFromTheSameParent() {
         // given: the uniform crossover only exchanges the chromosome of x
         final RecombinationOperator crossover = new LinkageCrossover(new UniformCrossover(1.0, 1.0), linkage);
-        final OperatorPlan plan = new OperatorPlan(List.of(new OperatorUse<>(crossover, List.of(0), "test/recombination")),
+        final OperatorPlan plan = new OperatorPlan(List.of(new OperatorUse<>(crossover, 0, "test/recombination")),
                                                    List.of());
         final Variation variation = new Variation(genotype, plan, BoundaryHandling.STICK, RandomService.withSeed(5));
 
@@ -118,7 +118,7 @@ public class CorrelationVariationTest {
         // given: x and y form a building block, and the uniform crossover only exchanges the chromosome of x
         final Linkage block = new Linkage(List.of(new BuildingBlock(1, List.of(x, y))));
         final RecombinationOperator crossover = new LinkageCrossover(new UniformCrossover(1.0, 1.0), block);
-        final OperatorPlan plan = new OperatorPlan(List.of(new OperatorUse<>(crossover, List.of(0), "test/recombination")),
+        final OperatorPlan plan = new OperatorPlan(List.of(new OperatorUse<>(crossover, 0, "test/recombination")),
                                                    List.of());
         final Variation variation = new Variation(genotype, plan, BoundaryHandling.STICK, RandomService.withSeed(5));
 
@@ -146,7 +146,7 @@ public class CorrelationVariationTest {
         final LinkageStatistics statistics = new LinkageStatistics();
         statistics.setUp(List.of(block));
         final RecombinationOperator crossover = new LinkageCrossover(new UniformCrossover(1.0, 1.0), new Linkage(List.of(block)));
-        final OperatorPlan plan = new OperatorPlan(List.of(new OperatorUse<>(crossover, List.of(0), "test/recombination")),
+        final OperatorPlan plan = new OperatorPlan(List.of(new OperatorUse<>(crossover, 0, "test/recombination")),
                                                    List.of());
         final Variation variation = new Variation(genotype, plan, BoundaryHandling.STICK, RandomService.withSeed(5), statistics);
 
@@ -167,7 +167,7 @@ public class CorrelationVariationTest {
         final LinkageStatistics statistics = new LinkageStatistics();
         statistics.setUp(List.of(block));
         final RecombinationOperator crossover = new UniformCrossover(0.0, 1.0);
-        final OperatorPlan plan = new OperatorPlan(List.of(new OperatorUse<>(crossover, List.of(0), "test/recombination")),
+        final OperatorPlan plan = new OperatorPlan(List.of(new OperatorUse<>(crossover, 0, "test/recombination")),
                                                    List.of());
         final Variation variation = new Variation(genotype, plan, BoundaryHandling.STICK, RandomService.withSeed(5), statistics);
 
@@ -184,7 +184,7 @@ public class CorrelationVariationTest {
         // The uniform crossover only exchanges the chromosome of x, so y of the first child comes from the first parent.
         final Linkage block = new Linkage(List.of(new BuildingBlock(1, List.of(y, x))));
         final RecombinationOperator crossover = new LinkageCrossover(new UniformCrossover(1.0, 1.0), block);
-        final OperatorPlan plan = new OperatorPlan(List.of(new OperatorUse<>(crossover, List.of(0), "test/recombination")),
+        final OperatorPlan plan = new OperatorPlan(List.of(new OperatorUse<>(crossover, 0, "test/recombination")),
                                                    List.of());
         final Variation variation = new Variation(genotype, plan, BoundaryHandling.STICK, RandomService.withSeed(5));
 

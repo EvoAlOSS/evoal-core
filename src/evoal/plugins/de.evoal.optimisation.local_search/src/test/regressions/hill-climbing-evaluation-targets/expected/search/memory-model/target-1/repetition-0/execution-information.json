@@ -36,7 +36,6 @@
       "initialisation" : {
         "type" : "de.evoal.optimisation.core.specify-candidates",
         "attributes" : {
-          "candidate-file" : null,
           "candidate-list" : [ {
             "type" : "de.evoal.optimisation.core.candidate",
             "attributes" : {

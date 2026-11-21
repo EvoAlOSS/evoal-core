@@ -56,27 +56,37 @@
       },
       "size-of-population" : 15,
       "number-of-offspring" : 30,
-      "genotype" : null,
+      "genotype" : {
+        "type" : "de.evoal.optimisation.ea.optimisation.genotype",
+        "attributes" : {
+          "chromosomes" : [ {
+            "type" : "de.evoal.optimisation.ea.optimisation.double-chromosome",
+            "attributes" : {
+              "features" : [ "x:0", "x:1", "x:2" ],
+              "recombination" : [ {
+                "type" : "de.evoal.optimisation.ea.optimisation.multi-point-crossover",
+                "attributes" : {
+                  "probability" : 1.0,
+                  "points" : 2
+                }
+              } ],
+              "mutation" : [ {
+                "type" : "de.evoal.optimisation.ea.optimisation.random-reset-mutation",
+                "attributes" : {
+                  "probability" : 0.5,
+                  "gene-probability" : null
+                }
+              } ]
+            }
+          } ]
+        }
+      },
       "parent-selection" : {
         "type" : "de.evoal.optimisation.ea.optimisation.exponential-ranking-selection",
         "attributes" : {
           "c" : 0.9
         }
       },
-      "recombination" : [ {
-        "type" : "de.evoal.optimisation.ea.optimisation.multi-point-crossover",
-        "attributes" : {
-          "probability" : 1.0,
-          "points" : 2
-        }
-      } ],
-      "mutation" : [ {
-        "type" : "de.evoal.optimisation.ea.optimisation.random-reset-mutation",
-        "attributes" : {
-          "probability" : 0.5,
-          "gene-probability" : null
-        }
-      } ],
       "replacement" : {
         "type" : "de.evoal.optimisation.ea.optimisation.comma-replacement",
         "attributes" : {

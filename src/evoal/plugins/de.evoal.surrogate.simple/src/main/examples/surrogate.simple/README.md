@@ -20,9 +20,8 @@ bound, x = -5, with y = 12.48.
   function is unknown) and the configuration of the EA:
   - 50 parents create 30 children per generation, parents are chosen by
     tournaments of 2.
-  - `'arithmetic-crossover'`: a child is the mean of its parents (with
-    probability 0.5); the mutation is the default of real values,
-    `'polynomial-mutation'`.
+  - `genotype`: one double chromosome with `'arithmetic-crossover'` (a child is
+    the mean of its parents, with probability 0.5) and `'polynomial-mutation'`.
   - `'survivor-replacement'`: the best 5 parents and 15 more chosen by
     tournaments survive, the 30 children replace the others.
   - `'candidate-checks' := ['maximum-age' { ... }]`: a candidate that has

@@ -22,9 +22,8 @@ import de.evoal.optimisation.api.fitness.Scalarisation;
  * Reduces the fitness to one component {@code weighted-sum}: the sum of the fitness
  *   components multiplied by their weights (DL type {@code 'weighted-sum'}).
  * <p>
- * Without weights, all components have the same weight. Otherwise every component has
- *   exactly one weight; weights are not negative and at least one is greater than 0, so the
- *   sum keeps the canonical direction. With {@code normalise}, the weights are divided by
+ * Every component has exactly one weight; weights are not negative and at least one is
+ *   greater than 0, so the sum keeps the canonical direction. With {@code normalise}, the weights are divided by
  *   their sum (the usual definition of the weighted sum); this only changes the scale of
  *   the fitness, not the order of the candidates.
  */
@@ -63,7 +62,7 @@ public class WeightedSumStep implements Scalarisation {
     private double[] resolvedWeights;
 
     /**
-     * The weight of each component, by the name of the component; empty for equal weights.
+     * The weight of each component, by the name of the component.
      */
     private Map<String, Double> weights = Map.of();
 
@@ -74,11 +73,10 @@ public class WeightedSumStep implements Scalarisation {
     }
 
     /**
-     * @param weights The weight of each component, by the name of the component; empty for
-     *   equal weights.
+     * @param weights The weight of each component, by the name of the component.
      * @param normalise Whether the weights are divided by their sum.
-     * @throws IllegalArgumentException if a weight is negative or no weight is greater
-     *   than 0.
+     * @throws IllegalArgumentException if there are no weights, a weight is negative or no
+     *   weight is greater than 0.
      */
     public WeightedSumStep(final Map<String, Double> weights, final boolean normalise) {
         this.weights = requireValid(weights);
@@ -107,8 +105,8 @@ public class WeightedSumStep implements Scalarisation {
     }
 
     /**
-     * @throws IllegalArgumentException if weights are given, but not for every component, or
-     *   for a component that is not part of the layout.
+     * @throws IllegalArgumentException if a component has no weight, or a weight belongs to a
+     *   component that is not part of the layout.
      */
     @Override
     public FitnessLayout layout(final FitnessLayout input) {
@@ -131,12 +129,6 @@ public class WeightedSumStep implements Scalarisation {
     private double[] toComponentWeights(final FitnessLayout layout) {
         final double[] componentWeights = new double[layout.size()];
 
-        if(weights.isEmpty()) {
-            Arrays.fill(componentWeights, 1.0);
-
-            return componentWeights;
-        }
-
         requireWeightForEveryComponent(layout);
 
         for(final Map.Entry<String, Double> weight : weights.entrySet()) {
@@ -155,8 +147,8 @@ public class WeightedSumStep implements Scalarisation {
                                                  .toList();
 
         if(!withoutWeight.isEmpty()) {
-            throw new IllegalArgumentException("'weighted-sum' lists weights, but none for " + withoutWeight
-                                               + ". Either list a weight for every component or none.");
+            throw new IllegalArgumentException("'weighted-sum' needs a weight for every component, but has none for "
+                                               + withoutWeight + ".");
         }
     }
 
@@ -169,6 +161,10 @@ public class WeightedSumStep implements Scalarisation {
     }
 
     private static Map<String, Double> requireValid(final Map<String, Double> weights) {
+        if(weights.isEmpty()) {
+            throw new IllegalArgumentException("'weighted-sum' needs a weight for every component, but lists none.");
+        }
+
         for(final Map.Entry<String, Double> weight : weights.entrySet()) {
             final double value = weight.getValue();
 
@@ -183,7 +179,7 @@ public class WeightedSumStep implements Scalarisation {
                                                  .stream()
                                                  .anyMatch(value -> value > 0.0);
 
-        if(!weights.isEmpty() && !hasPositiveWeight) {
+        if(!hasPositiveWeight) {
             throw new IllegalArgumentException("At least one weight in 'weighted-sum' must be greater than 0.");
         }
 

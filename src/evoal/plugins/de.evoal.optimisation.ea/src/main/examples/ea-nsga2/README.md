@@ -77,6 +77,8 @@ example `EVOAL_SEED=42 ./01-run-search.sh`.
   has the properties `front` and `crowding-distance`, and the ranks of an
   iteration are its fronts. With 250 generations of 200 individuals, the output
   is large; reduce `'maximum-iterations'` first.
-- Combine the goals into one with `'fitness-pipeline' := [ 'weighted-sum' {} ]`
-  and a single-objective configuration (see the example `ea-basic`): the search
-  then finds one point of the front, not the whole front.
+- Combine the goals into one with `'fitness-pipeline' := [ 'weighted-sum' {
+  weights := [ 'variable' { var := data 'f:1'; val := 1.0; }, 'variable' { var :=
+  data 'f:2'; val := 1.0; } ]; } ]` and a single-objective configuration (see the
+  example `ea-basic`): the search then finds one point of the front, not the whole
+  front.

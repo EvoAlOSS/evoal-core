@@ -45,6 +45,7 @@ module 'search' {
                 },
                 'integer-chromosome' {
                     features := [data 'k:0'];
+                    recombination := [ 'uniform-crossover' {} ];
                     mutation := [ 'random-reset-mutation' { 'gene-probability' := 0.3; } ];
                 }
             ];

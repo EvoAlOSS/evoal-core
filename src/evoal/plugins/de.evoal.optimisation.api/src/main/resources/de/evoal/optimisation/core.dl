@@ -237,11 +237,12 @@ module de.evoal.optimisation.core {
         reaction : enum 'check-reaction';
 
         /**
-         * The source of new candidates for the reaction 'replace'. If it is not set, the
-         *   'initialisation' of the algorithm is used. A 'specify-candidates' source
-         *   repeats its candidates, which is reported as a warning.
+         * The source of new candidates for the reaction 'replace' (also as the
+         *   'repair-fallback' of a repair); other reactions do not use it. A source of given
+         *   candidates ('specify-candidates', 'candidates-from-file') repeats its
+         *   candidates, which is reported as a warning.
          */
-        'replacement-source' : optional instance 'initial-population';
+        'replacement-source' : instance 'initial-population' := 'random-population' {};
 
         /**
          * The maximum number of times the variation is redone for the reaction 'resample',
@@ -397,11 +398,10 @@ module de.evoal.optimisation.core {
     type 'weighted-sum' extends scalarisation {
         /**
          * The weight of each component ({@code var}: the objective, {@code val}: the
-         *   weight). Either empty, then all components have the same weight, or every
-         *   component is listed exactly once. Weights are not negative and at least one is
-         *   greater than 0.
+         *   weight). Every component is listed exactly once. Weights are not negative and
+         *   at least one is greater than 0.
          */
-        weights : array instance variable := [];
+        weights : array instance variable;
 
         /**
          * Whether the weights are divided by their sum, so that they sum to 1. This only
@@ -505,16 +505,39 @@ module de.evoal.optimisation.core {
     }
 
     /**
-    * reads candidate from file and uses this candidate
-    * as the starting point.
-    */
+     * Takes the candidates from 'candidate-list': drawn uniformly with repetition
+     *   ('random'), or one after the other, starting again after the last one.
+     */
     type 'specify-candidates' extends 'initial-population' {
-        'candidate-file' : optional string;
+        /**
+         * The candidates.
+         */
+        @MinimumNumberOfElements { bound := 1; }
+        'candidate-list' : array instance candidate;
 
-        'candidate-list': optional array instance candidate;
+        /**
+         * Whether the candidates are drawn uniformly with repetition instead of one after
+         *   the other.
+         */
+        'random' : boolean := true;
+    }
 
-        //determines order of candidates read from file. Random (default) or linear.
-        'random': boolean := true;
+    /**
+     * Takes the candidates from the file 'candidate-file', read by the reader of its
+     *   extension (e.g. json): drawn uniformly with repetition ('random'), or one after the
+     *   other, starting again after the last one.
+     */
+    type 'candidates-from-file' extends 'initial-population' {
+        /**
+         * The file with the candidates.
+         */
+        'candidate-file' : string;
+
+        /**
+         * Whether the candidates are drawn uniformly with repetition instead of one after
+         *   the other.
+         */
+        'random' : boolean := true;
     }
 
     abstract type 'statistics-writer' extends configuration {

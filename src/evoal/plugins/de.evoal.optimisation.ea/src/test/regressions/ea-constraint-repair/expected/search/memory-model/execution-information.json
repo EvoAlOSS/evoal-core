@@ -51,7 +51,10 @@
         "type" : "de.evoal.optimisation.core.constraint-check",
         "attributes" : {
           "reaction" : "repair",
-          "replacement-source" : null,
+          "replacement-source" : {
+            "type" : "de.evoal.optimisation.core.random-population",
+            "attributes" : { }
+          },
           "maximum-attempts" : 3,
           "group" : "budget",
           "repair" : {
@@ -64,7 +67,10 @@
         "type" : "de.evoal.optimisation.core.constraint-check",
         "attributes" : {
           "reaction" : "repair",
-          "replacement-source" : null,
+          "replacement-source" : {
+            "type" : "de.evoal.optimisation.core.random-population",
+            "attributes" : { }
+          },
           "maximum-attempts" : 1,
           "group" : "box",
           "repair" : {
@@ -109,7 +115,13 @@
             "type" : "de.evoal.optimisation.ea.optimisation.integer-chromosome",
             "attributes" : {
               "features" : [ "k:0" ],
-              "recombination" : [ ],
+              "recombination" : [ {
+                "type" : "de.evoal.optimisation.ea.optimisation.uniform-crossover",
+                "attributes" : {
+                  "probability" : 1.0,
+                  "swap-probability" : 0.5
+                }
+              } ],
               "mutation" : [ {
                 "type" : "de.evoal.optimisation.ea.optimisation.random-reset-mutation",
                 "attributes" : {
@@ -127,8 +139,6 @@
           "size" : 2
         }
       },
-      "recombination" : [ ],
-      "mutation" : [ ],
       "replacement" : {
         "type" : "de.evoal.optimisation.ea.optimisation.survivor-replacement",
         "attributes" : {

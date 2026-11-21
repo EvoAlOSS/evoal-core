@@ -22,10 +22,19 @@ module 'search' {
 		'number-of-offspring' := 30;
 		'initialisation' := 'random-population' {};
 
+		// one double chromosome: the child is the mean of its parents, then it is mutated
+		// polynomially
+		genotype := genotype {
+			chromosomes := [
+				'double-chromosome' {
+					features := [data 'x:0'];
+					recombination := [ 'arithmetic-crossover' { probability := 0.5; alpha := 0.5; } ];
+					mutation := [ 'polynomial-mutation' {} ];
+				}
+			];
+		};
+
 		'parent-selection' := 'tournament-selection' { size := 2; };
-		// the child is the mean of its parents; the mutation is the default of a double
-		// chromosome, 'polynomial-mutation'
-		recombination := [ 'arithmetic-crossover' { probability := 0.5; alpha := 0.5; } ];
 		// 20 parents survive (the best 5 for sure), the 30 children replace the others
 		replacement := 'survivor-replacement' {
 			selection := 'elite-selection' {
@@ -33,7 +42,8 @@ module 'search' {
 				rest := 'tournament-selection' { size := 2; };
 			};
 		};
-		// a candidate that has survived 10 generations is replaced by a random one
+		// a candidate that has survived 10 generations is replaced by a random one (the default
+		// 'replacement-source')
 		'candidate-checks' := [
 			'maximum-age' { iterations := 10; reaction := 'check-reaction.replace'; }
 		];

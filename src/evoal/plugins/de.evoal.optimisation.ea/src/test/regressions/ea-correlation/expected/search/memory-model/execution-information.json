@@ -122,8 +122,6 @@
           "size" : 2
         }
       },
-      "recombination" : [ ],
-      "mutation" : [ ],
       "replacement" : {
         "type" : "de.evoal.optimisation.ea.optimisation.survivor-replacement",
         "attributes" : {

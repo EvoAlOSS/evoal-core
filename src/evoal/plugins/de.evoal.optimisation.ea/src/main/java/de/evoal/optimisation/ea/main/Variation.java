@@ -25,10 +25,10 @@ import de.evoal.optimisation.ea.main.statistics.LinkageStatistics;
  *   EA:
  * <ul>
  *   <li>a recombination is applied to a pair with its probability, one draw per pair and
- *     use, and then changes every chromosome of the use;</li>
+ *     use, and then changes the chromosome of the use;</li>
  *   <li>a mutation is applied to a child with its probability, one draw per child and use,
- *     and then changes every gene of the chromosomes of the use with the gene probability
- *     (default 1 / n, n the number of these genes);</li>
+ *     and then changes every gene of the chromosome of the use with the gene probability
+ *     (default 1 / n, n the number of genes of the chromosome);</li>
  *   <li>the uses are applied in the order of the {@link OperatorPlan}; after every use, the
  *     boundary handling brings the genes back into their boundaries.</li>
  * </ul>
@@ -172,13 +172,12 @@ final class Variation {
 
             final Genome beforeA = a.genome.copy();
             final Genome beforeB = b.genome.copy();
-            for(final int c : use.chromosomes()) {
-                final Genes genesA = a.genome.chromosomes().get(c);
-                final Genes genesB = b.genome.chromosomes().get(c);
-                use.operator().recombine(genesA, genesB, random);
-                genotype.chromosomes().get(c).handleBoundaries(genesA, boundaryHandling);
-                genotype.chromosomes().get(c).handleBoundaries(genesB, boundaryHandling);
-            }
+            final int c = use.chromosome();
+            final Genes genesA = a.genome.chromosomes().get(c);
+            final Genes genesB = b.genome.chromosomes().get(c);
+            use.operator().recombine(genesA, genesB, random);
+            genotype.chromosomes().get(c).handleBoundaries(genesA, boundaryHandling);
+            genotype.chromosomes().get(c).handleBoundaries(genesB, boundaryHandling);
 
             if(use.operator() instanceof LinkageCrossover crossover) {
                 if(parentA == null) {
@@ -250,18 +249,13 @@ final class Variation {
 
             final MutationOperator mutation = use.operator().choose(random);
 
-            int genes = 0;
-            for(final int c : use.chromosomes()) {
-                genes += child.genome.chromosomes().get(c).size();
-            }
-            final double geneProbability = mutation.geneProbability().orElse(1.0 / genes);
+            final int c = use.chromosome();
+            final Genes chromosomeGenes = child.genome.chromosomes().get(c);
+            final double geneProbability = mutation.geneProbability().orElse(1.0 / chromosomeGenes.size());
 
             final Genome before = child.genome.copy();
-            for(final int c : use.chromosomes()) {
-                final Genes chromosomeGenes = child.genome.chromosomes().get(c);
-                mutation.mutate(chromosomeGenes, geneProbability, random);
-                genotype.chromosomes().get(c).handleBoundaries(chromosomeGenes, boundaryHandling);
-            }
+            mutation.mutate(chromosomeGenes, geneProbability, random);
+            genotype.chromosomes().get(c).handleBoundaries(chromosomeGenes, boundaryHandling);
 
             if(mutation instanceof CorrelationAwareMutation correlationAware) {
                 propagate(correlationAware, child, before);

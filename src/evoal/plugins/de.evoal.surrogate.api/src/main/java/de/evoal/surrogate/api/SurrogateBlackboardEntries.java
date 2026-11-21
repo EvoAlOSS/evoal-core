@@ -27,10 +27,17 @@ public class SurrogateBlackboardEntries implements BlackboardEntries {
     public static final String SURROGATE_PRETRAINED_FILE = "surrogate:pre-trained";
 
     /**
-     * File containing the training data.
+     * File containing the training data; read into {@link #SURROGATE_TRAINING_DATA} when a
+     *   'training-population' without 'training-file' needs it.
      */
-    @Commandline(main = "", name = "surrogate:training-data", doc = "File containing data for the surrogate training.")
-    public static final String SURROGATE_TRAINING_DATA_FILE = "surrogate:training-data";
+    @Commandline(main = "", name = "surrogate:training-data-file", doc = "File containing the training data, used by a 'training-population' without 'training-file'.")
+    public static final String SURROGATE_TRAINING_DATA_FILE = "surrogate:training-data-file";
+
+    /**
+     * The training data read from {@link #SURROGATE_TRAINING_DATA_FILE}
+     *   ({@link TrainingData}); read once per run.
+     */
+    public static final String SURROGATE_TRAINING_DATA = "surrogate:training-data";
 
     private SurrogateBlackboardEntries() {}
 }

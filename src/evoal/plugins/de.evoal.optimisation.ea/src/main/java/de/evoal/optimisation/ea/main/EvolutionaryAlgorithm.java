@@ -13,7 +13,6 @@ import lombok.extern.slf4j.Slf4j;
 
 import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EStructuralFeature;
 
 import de.evoal.core.api.cdi.BeanFactory;
 import de.evoal.core.api.dynamic.DynamicEClassProvider;
@@ -178,13 +177,11 @@ public class EvolutionaryAlgorithm extends TemplateAlgorithm {
         final EEnumLiteral handling = helper.lookup(configuration, "boundary-handling");
         boundaryHandling = BoundaryHandling.of(handling.getName());
 
-        final EStructuralFeature genotypeFeature = configuration.eClass().getEStructuralFeature("genotype");
-        final EObject genotypeConfiguration = configuration.eIsSet(genotypeFeature) ? (EObject) configuration.eGet(genotypeFeature) : null;
-        final List<ConfiguredChromosome> chromosomes = genotypes.create(genotypeConfiguration);
+        final List<ConfiguredChromosome> chromosomes = genotypes.create(helper.<EObject>lookup(configuration, "genotype"));
         genotype = new Genotype(chromosomes.stream().map(ConfiguredChromosome::chromosome).toList(), genotypes.searchSpace());
         log.info("Genotype: {}.", genotype);
 
-        plan = OperatorPlan.create(configuration, chromosomes, genotypes, helper, reader);
+        plan = OperatorPlan.create(chromosomes, genotypes, helper, reader);
 
         parentSelection = BeanFactory.createComponent(SelectionMethod.class, helper.<EObject>lookup(configuration, "parent-selection"));
         replacement = BeanFactory.createComponent(ReplacementStrategy.class, helper.<EObject>lookup(configuration, "replacement"));

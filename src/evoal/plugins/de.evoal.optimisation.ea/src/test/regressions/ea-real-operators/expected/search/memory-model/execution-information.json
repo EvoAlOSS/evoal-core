@@ -63,8 +63,48 @@
             "type" : "de.evoal.optimisation.ea.optimisation.double-chromosome",
             "attributes" : {
               "features" : [ "x:0", "x:1" ],
-              "recombination" : [ ],
-              "mutation" : [ ]
+              "recombination" : [ {
+                "type" : "de.evoal.optimisation.ea.optimisation.blx-alpha-crossover",
+                "attributes" : {
+                  "probability" : 0.5,
+                  "alpha" : 0.5
+                }
+              }, {
+                "type" : "de.evoal.optimisation.ea.optimisation.line-crossover",
+                "attributes" : {
+                  "probability" : 0.3,
+                  "extension" : 0.25
+                }
+              }, {
+                "type" : "de.evoal.optimisation.ea.optimisation.arithmetic-crossover",
+                "attributes" : {
+                  "probability" : 0.2,
+                  "alpha" : 0.3
+                }
+              } ],
+              "mutation" : [ {
+                "type" : "de.evoal.optimisation.ea.optimisation.single-choice-mutation",
+                "attributes" : {
+                  "probability" : 0.6,
+                  "gene-probability" : null,
+                  "children" : [ {
+                    "type" : "de.evoal.optimisation.ea.optimisation.gaussian-mutation",
+                    "attributes" : {
+                      "probability" : 1.0,
+                      "gene-probability" : null,
+                      "sigma" : 0.05
+                    }
+                  }, {
+                    "type" : "de.evoal.optimisation.ea.optimisation.polynomial-mutation",
+                    "attributes" : {
+                      "probability" : 1.0,
+                      "gene-probability" : null,
+                      "distribution-index" : 20.0
+                    }
+                  } ],
+                  "weights" : [ 2.0, 1.0 ]
+                }
+              } ]
             }
           }, {
             "type" : "de.evoal.optimisation.ea.optimisation.integer-chromosome",
@@ -95,48 +135,6 @@
           "size" : 3
         }
       },
-      "recombination" : [ {
-        "type" : "de.evoal.optimisation.ea.optimisation.blx-alpha-crossover",
-        "attributes" : {
-          "probability" : 0.5,
-          "alpha" : 0.5
-        }
-      }, {
-        "type" : "de.evoal.optimisation.ea.optimisation.line-crossover",
-        "attributes" : {
-          "probability" : 0.3,
-          "extension" : 0.25
-        }
-      }, {
-        "type" : "de.evoal.optimisation.ea.optimisation.arithmetic-crossover",
-        "attributes" : {
-          "probability" : 0.2,
-          "alpha" : 0.3
-        }
-      } ],
-      "mutation" : [ {
-        "type" : "de.evoal.optimisation.ea.optimisation.single-choice-mutation",
-        "attributes" : {
-          "probability" : 0.6,
-          "gene-probability" : null,
-          "children" : [ {
-            "type" : "de.evoal.optimisation.ea.optimisation.gaussian-mutation",
-            "attributes" : {
-              "probability" : 1.0,
-              "gene-probability" : null,
-              "sigma" : 0.05
-            }
-          }, {
-            "type" : "de.evoal.optimisation.ea.optimisation.polynomial-mutation",
-            "attributes" : {
-              "probability" : 1.0,
-              "gene-probability" : null,
-              "distribution-index" : 20.0
-            }
-          } ],
-          "weights" : [ 2.0, 1.0 ]
-        }
-      } ],
       "replacement" : {
         "type" : "de.evoal.optimisation.ea.optimisation.survivor-replacement",
         "attributes" : {

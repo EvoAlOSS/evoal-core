@@ -2,498 +2,444 @@
   "formatVersion" : "2027.4.0",
   "number" : 5,
   "individuals" : [ {
-    "id" : 323,
+    "id" : 295,
     "input" : {
-      "x:0" : -0.7614358974358977,
-      "x:1" : 0.9364786324786323,
-      "n:0" : 0,
-      "n:1" : 0
-    },
-    "output" : {
-      "y:0" : 11.52480960168183
-    },
-    "fitness" : [ 11.52480960168183 ],
-    "relationships" : [ {
-      "kind" : "recombination",
-      "targets" : [ 280, 268 ],
-      "partner" : 324,
-      "properties" : {
-        "operators" : [ "multi-point-crossover", "uniform-crossover", "bit-flip-mutation", "creep-mutation" ],
-        "changed-features" : [ "x:0", "x:1", "n:1" ]
-      }
-    } ]
-  }, {
-    "id" : 290,
-    "input" : {
-      "x:0" : -3.102007326007326,
-      "x:1" : 1.0390036630036628,
-      "n:0" : 0,
-      "n:1" : 0
-    },
-    "output" : {
-      "y:0" : 12.985373314424358
-    },
-    "fitness" : [ 12.985373314424358 ],
-    "relationships" : [ {
-      "kind" : "identity",
-      "targets" : [ 227 ]
-    } ]
-  }, {
-    "id" : 294,
-    "input" : {
-      "x:0" : -3.102007326007326,
-      "x:1" : 1.0390036630036628,
-      "n:0" : 0,
-      "n:1" : 0
-    },
-    "output" : {
-      "y:0" : 12.985373314424358
-    },
-    "fitness" : [ 12.985373314424358 ],
-    "relationships" : [ {
-      "kind" : "identity",
-      "targets" : [ 227 ]
-    } ]
-  }, {
-    "id" : 342,
-    "input" : {
-      "x:0" : -3.102007326007326,
-      "x:1" : 1.0390036630036628,
-      "n:0" : 0,
-      "n:1" : 0
-    },
-    "output" : {
-      "y:0" : 12.985373314424358
-    },
-    "fitness" : [ 12.985373314424358 ],
-    "relationships" : [ {
-      "kind" : "identity",
-      "targets" : [ 227 ]
-    } ]
-  }, {
-    "id" : 344,
-    "input" : {
-      "x:0" : -3.102007326007326,
-      "x:1" : 1.0390036630036628,
-      "n:0" : 0,
-      "n:1" : 0
-    },
-    "output" : {
-      "y:0" : 12.985373314424358
-    },
-    "fitness" : [ 12.985373314424358 ],
-    "relationships" : [ {
-      "kind" : "identity",
-      "targets" : [ 227 ]
-    } ]
-  }, {
-    "id" : 327,
-    "input" : {
-      "x:0" : -3.102007326007326,
-      "x:1" : -1.0390036630036628,
-      "n:0" : 0,
-      "n:1" : 0
-    },
-    "output" : {
-      "y:0" : 12.985373314424358
-    },
-    "fitness" : [ 12.985373314424358 ],
-    "relationships" : [ {
-      "kind" : "recombination",
-      "targets" : [ 276, 268 ],
-      "partner" : 308,
-      "properties" : {
-        "operators" : [ "multi-point-crossover", "uniform-crossover", "bit-flip-mutation", "creep-mutation" ],
-        "changed-features" : [ "x:0", "x:1" ]
-      }
-    } ]
-  }, {
-    "id" : 328,
-    "input" : {
-      "x:0" : 3.0569963369963373,
-      "x:1" : 1.1190231990231991,
-      "n:0" : 0,
-      "n:1" : 0
-    },
-    "output" : {
-      "y:0" : 13.900297724017577
-    },
-    "fitness" : [ 13.900297724017577 ],
-    "relationships" : [ {
-      "kind" : "recombination",
-      "targets" : [ 267, 227 ],
-      "partner" : 329,
-      "properties" : {
-        "operators" : [ "uniform-crossover", "bit-flip-mutation" ],
-        "changed-features" : [ "x:0", "x:1", "n:1" ]
-      }
-    } ]
-  }, {
-    "id" : 324,
-    "input" : {
-      "x:0" : -2.9794774114774114,
-      "x:1" : 1.0390036630036628,
-      "n:0" : 0,
+      "x:0" : 2.0592527472527475,
+      "x:1" : 1.0089963369963373,
+      "n:0" : 2,
       "n:1" : 2
     },
     "output" : {
-      "y:0" : 14.338625934244476
+      "y:0" : 13.959620747152329
     },
-    "fitness" : [ 14.338625934244476 ],
+    "fitness" : [ 13.959620747152329 ],
     "relationships" : [ {
-      "kind" : "recombination",
-      "targets" : [ 268, 280 ],
-      "partner" : 323,
+      "kind" : "identity",
+      "targets" : [ 285 ]
+    } ]
+  }, {
+    "id" : 296,
+    "input" : {
+      "x:0" : 2.0592527472527475,
+      "x:1" : 1.0089963369963373,
+      "n:0" : 2,
+      "n:1" : 2
+    },
+    "output" : {
+      "y:0" : 13.959620747152329
+    },
+    "fitness" : [ 13.959620747152329 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 285 ]
+    } ]
+  }, {
+    "id" : 347,
+    "input" : {
+      "x:0" : 2.0592527472527475,
+      "x:1" : 1.0089963369963373,
+      "n:0" : 2,
+      "n:1" : 2
+    },
+    "output" : {
+      "y:0" : 13.959620747152329
+    },
+    "fitness" : [ 13.959620747152329 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 285 ]
+    } ]
+  }, {
+    "id" : 307,
+    "input" : {
+      "x:0" : 3.132014652014653,
+      "x:1" : -0.011252747252747497,
+      "n:0" : 1,
+      "n:1" : 1
+    },
+    "output" : {
+      "y:0" : 15.081977545095931
+    },
+    "fitness" : [ 15.081977545095931 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 272 ]
+    } ]
+  }, {
+    "id" : 343,
+    "input" : {
+      "x:0" : 0.25631257631257665,
+      "x:1" : -1.8892112332112334,
+      "n:0" : -1,
+      "n:1" : 0
+    },
+    "output" : {
+      "y:0" : 17.35789469831886
+    },
+    "fitness" : [ 17.35789469831886 ],
+    "relationships" : [ {
+      "kind" : "mutation",
+      "targets" : [ 271 ],
       "properties" : {
-        "operators" : [ "multi-point-crossover", "uniform-crossover", "bit-flip-mutation" ],
+        "operators" : [ "bit-flip-mutation", "creep-mutation" ],
         "changed-features" : [ "x:0", "x:1", "n:0", "n:1" ]
       }
     } ]
   }, {
-    "id" : 335,
+    "id" : 310,
     "input" : {
-      "x:0" : -0.09877411477411435,
-      "x:1" : 0.851457875457875,
-      "n:0" : -2,
-      "n:1" : 2
+      "x:0" : 0.313826617826618,
+      "x:1" : -1.911716727716728,
+      "n:0" : 0,
+      "n:1" : 1
     },
     "output" : {
-      "y:0" : 14.647821711519438
+      "y:0" : 20.156273394757953
     },
-    "fitness" : [ 14.647821711519438 ],
+    "fitness" : [ 20.156273394757953 ],
     "relationships" : [ {
       "kind" : "recombination",
-      "targets" : [ 264, 270 ],
-      "partner" : 334,
+      "targets" : [ 271, 267 ],
+      "partner" : 330,
       "properties" : {
-        "operators" : [ "multi-point-crossover", "bit-flip-mutation", "creep-mutation" ],
-        "changed-features" : [ "x:0", "x:1", "n:0" ]
-      }
-    } ]
-  }, {
-    "id" : 332,
-    "input" : {
-      "x:0" : -0.9639853479853482,
-      "x:1" : 1.7091672771672775,
-      "n:0" : 1,
-      "n:1" : 0
-    },
-    "output" : {
-      "y:0" : 17.643000655048
-    },
-    "fitness" : [ 17.643000655048 ],
-    "relationships" : [ {
-      "kind" : "recombination",
-      "targets" : [ 264, 227 ],
-      "partner" : 333,
-      "properties" : {
-        "operators" : [ "uniform-crossover", "creep-mutation" ],
-        "changed-features" : [ "n:0", "n:1" ]
-      }
-    } ]
-  }, {
-    "id" : 329,
-    "input" : {
-      "x:0" : -3.102007326007326,
-      "x:1" : 1.0390036630036628,
-      "n:0" : 1,
-      "n:1" : -2
-    },
-    "output" : {
-      "y:0" : 17.985373314424358
-    },
-    "fitness" : [ 17.985373314424358 ],
-    "relationships" : [ {
-      "kind" : "recombination",
-      "targets" : [ 227, 267 ],
-      "partner" : 328,
-      "properties" : {
-        "operators" : [ "uniform-crossover", "creep-mutation" ],
-        "changed-features" : [ "n:0", "n:1" ]
-      }
-    } ]
-  }, {
-    "id" : 325,
-    "input" : {
-      "x:0" : -3.1245128205128205,
-      "x:1" : 0.8814652014652014,
-      "n:0" : 1,
-      "n:1" : -1
-    },
-    "output" : {
-      "y:0" : 18.09448501471475
-    },
-    "fitness" : [ 18.09448501471475 ],
-    "relationships" : [ {
-      "kind" : "recombination",
-      "targets" : [ 268, 264 ],
-      "partner" : 326,
-      "properties" : {
-        "operators" : [ "multi-point-crossover", "bit-flip-mutation" ],
+        "operators" : [ "multi-point-crossover" ],
         "changed-features" : [ "x:0" ]
       }
     } ]
   }, {
-    "id" : 326,
+    "id" : 349,
     "input" : {
-      "x:0" : -1.0590085470085464,
-      "x:1" : 1.7091672771672775,
+      "x:0" : 0.17629304029304027,
+      "x:1" : -1.911716727716728,
+      "n:0" : -1,
+      "n:1" : 3
+    },
+    "output" : {
+      "y:0" : 20.717789146873102
+    },
+    "fitness" : [ 20.717789146873102 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 227 ]
+    } ]
+  }, {
+    "id" : 332,
+    "input" : {
+      "x:0" : 0.22380463980463983,
+      "x:1" : 1.911716727716728,
+      "n:0" : 1,
+      "n:1" : 3
+    },
+    "output" : {
+      "y:0" : 23.565683513807947
+    },
+    "fitness" : [ 23.565683513807947 ],
+    "relationships" : [ {
+      "kind" : "recombination",
+      "targets" : [ 270, 279 ],
+      "partner" : 331,
+      "properties" : {
+        "operators" : [ "uniform-crossover", "bit-flip-mutation" ],
+        "changed-features" : [ "x:0", "n:0", "n:1" ]
+      }
+    } ]
+  }, {
+    "id" : 302,
+    "input" : {
+      "x:0" : -2.236796092796093,
+      "x:1" : -1.0139975579975573,
+      "n:0" : 1,
+      "n:1" : 3
+    },
+    "output" : {
+      "y:0" : 25.24142364427197
+    },
+    "fitness" : [ 25.24142364427197 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 264 ]
+    } ]
+  }, {
+    "id" : 350,
+    "input" : {
+      "x:0" : 0.17629304029304027,
+      "x:1" : -1.609142857142857,
       "n:0" : -1,
       "n:1" : 1
     },
     "output" : {
-      "y:0" : 19.25977766605788
+      "y:0" : 27.89240259198415
     },
-    "fitness" : [ 19.25977766605788 ],
-    "relationships" : [ {
-      "kind" : "recombination",
-      "targets" : [ 264, 268 ],
-      "partner" : 325,
-      "properties" : {
-        "operators" : [ "multi-point-crossover", "creep-mutation" ],
-        "changed-features" : [ "x:0", "n:1" ]
-      }
-    } ]
-  }, {
-    "id" : 345,
-    "input" : {
-      "x:0" : 0.1637899877899871,
-      "x:1" : -1.2890647130647133,
-      "n:0" : -1,
-      "n:1" : 0
-    },
-    "output" : {
-      "y:0" : 19.96274536578347
-    },
-    "fitness" : [ 19.96274536578347 ],
+    "fitness" : [ 27.89240259198415 ],
     "relationships" : [ {
       "kind" : "identity",
-      "targets" : [ 263 ]
+      "targets" : [ 269 ]
     } ]
   }, {
-    "id" : 339,
+    "id" : 335,
     "input" : {
-      "x:0" : -0.09877411477411435,
-      "x:1" : 0.2413089133089139,
-      "n:0" : 0,
-      "n:1" : 3
-    },
-    "output" : {
-      "y:0" : 20.38697713704492
-    },
-    "fitness" : [ 20.38697713704492 ],
-    "relationships" : [ {
-      "kind" : "recombination",
-      "targets" : [ 270, 269 ],
-      "partner" : 338,
-      "properties" : {
-        "operators" : [ "multi-point-crossover", "creep-mutation" ],
-        "changed-features" : [ "x:1", "n:1" ]
-      }
-    } ]
-  }, {
-    "id" : 330,
-    "input" : {
-      "x:0" : -2.084258852258852,
-      "x:1" : 1.8942124542124539,
-      "n:0" : 0,
-      "n:1" : 3
-    },
-    "output" : {
-      "y:0" : 20.430018993134784
-    },
-    "fitness" : [ 20.430018993134784 ],
-    "relationships" : [ {
-      "kind" : "recombination",
-      "targets" : [ 235, 282 ],
-      "partner" : 331,
-      "properties" : {
-        "operators" : [ "multi-point-crossover", "creep-mutation" ],
-        "changed-features" : [ "x:1", "n:0" ]
-      }
-    } ]
-  }, {
-    "id" : 341,
-    "input" : {
-      "x:0" : 2.9419682539682546,
-      "x:1" : 0.25131135531135573,
+      "x:0" : 2.3818315018315017,
+      "x:1" : 1.0089963369963373,
       "n:0" : 1,
-      "n:1" : 0
+      "n:1" : 2
     },
     "output" : {
-      "y:0" : 20.458150239160346
+      "y:0" : 29.0751436628319
     },
-    "fitness" : [ 20.458150239160346 ],
+    "fitness" : [ 29.0751436628319 ],
     "relationships" : [ {
-      "kind" : "mutation",
-      "targets" : [ 250 ],
+      "kind" : "recombination",
+      "targets" : [ 285, 287 ],
+      "partner" : 336,
       "properties" : {
-        "operators" : [ "bit-flip-mutation", "creep-mutation" ],
-        "changed-features" : [ "x:0", "x:1", "n:1" ]
+        "operators" : [ "multi-point-crossover", "creep-mutation" ],
+        "changed-features" : [ "x:0", "n:0" ]
+      }
+    } ]
+  }, {
+    "id" : 334,
+    "input" : {
+      "x:0" : 2.416840048840049,
+      "x:1" : 1.0089963369963373,
+      "n:0" : 0,
+      "n:1" : 2
+    },
+    "output" : {
+      "y:0" : 29.54085678287594
+    },
+    "fitness" : [ 29.54085678287594 ],
+    "relationships" : [ {
+      "kind" : "recombination",
+      "targets" : [ 285, 270 ],
+      "partner" : 333,
+      "properties" : {
+        "operators" : [ "multi-point-crossover", "uniform-crossover", "bit-flip-mutation", "creep-mutation" ],
+        "changed-features" : [ "x:0", "n:0" ]
       }
     } ]
   }, {
     "id" : 337,
     "input" : {
-      "x:0" : -0.038759462759462515,
-      "x:1" : -1.9092161172161175,
-      "n:0" : 1,
-      "n:1" : -4
+      "x:0" : 0.24380952380952348,
+      "x:1" : -0.22880586080586163,
+      "n:0" : 2,
+      "n:1" : -3
     },
     "output" : {
-      "y:0" : 22.524901117360386
+      "y:0" : 31.395199479636304
     },
-    "fitness" : [ 22.524901117360386 ],
+    "fitness" : [ 31.395199479636304 ],
     "relationships" : [ {
       "kind" : "recombination",
-      "targets" : [ 282, 262 ],
-      "partner" : 336,
+      "targets" : [ 267, 228 ],
+      "partner" : 338,
       "properties" : {
         "operators" : [ "multi-point-crossover", "uniform-crossover", "bit-flip-mutation", "creep-mutation" ],
+        "changed-features" : [ "x:0", "x:1", "n:0", "n:1" ]
+      }
+    } ]
+  }, {
+    "id" : 341,
+    "input" : {
+      "x:0" : -0.32382905982905985,
+      "x:1" : -1.0114969474969477,
+      "n:0" : 1,
+      "n:1" : 4
+    },
+    "output" : {
+      "y:0" : 32.62830052162295
+    },
+    "fitness" : [ 32.62830052162295 ],
+    "relationships" : [ {
+      "kind" : "recombination",
+      "targets" : [ 264, 286 ],
+      "partner" : 342,
+      "properties" : {
+        "operators" : [ "uniform-crossover", "bit-flip-mutation", "creep-mutation" ],
+        "changed-features" : [ "x:0", "x:1", "n:1" ]
+      }
+    } ]
+  }, {
+    "id" : 345,
+    "input" : {
+      "x:0" : -0.22880586080586163,
+      "x:1" : -0.26881562881562804,
+      "n:0" : -2,
+      "n:1" : -3
+    },
+    "output" : {
+      "y:0" : 32.97634813225588
+    },
+    "fitness" : [ 32.97634813225588 ],
+    "relationships" : [ {
+      "kind" : "recombination",
+      "targets" : [ 280, 272 ],
+      "partner" : 346,
+      "properties" : {
+        "operators" : [ "multi-point-crossover", "bit-flip-mutation", "creep-mutation" ],
         "changed-features" : [ "x:0", "x:1", "n:0", "n:1" ]
       }
     } ]
   }, {
     "id" : 333,
     "input" : {
-      "x:0" : -3.102007326007326,
-      "x:1" : 1.024,
-      "n:0" : -1,
+      "x:0" : -0.18379487179487164,
+      "x:1" : 1.6091428571428574,
+      "n:0" : 2,
+      "n:1" : 2
+    },
+    "output" : {
+      "y:0" : 34.32161366453833
+    },
+    "fitness" : [ 34.32161366453833 ],
+    "relationships" : [ {
+      "kind" : "recombination",
+      "targets" : [ 270, 285 ],
+      "partner" : 334,
+      "properties" : {
+        "operators" : [ "multi-point-crossover", "uniform-crossover", "bit-flip-mutation" ],
+        "changed-features" : [ "x:0", "x:1", "n:0" ]
+      }
+    } ]
+  }, {
+    "id" : 339,
+    "input" : {
+      "x:0" : 0.17629304029304027,
+      "x:1" : -1.9192185592185593,
+      "n:0" : -4,
       "n:1" : 3
     },
     "output" : {
-      "y:0" : 22.76911338262638
+      "y:0" : 35.50780472418849
     },
-    "fitness" : [ 22.76911338262638 ],
-    "relationships" : [ {
-      "kind" : "recombination",
-      "targets" : [ 227, 264 ],
-      "partner" : 332,
-      "properties" : {
-        "operators" : [ "uniform-crossover", "bit-flip-mutation", "creep-mutation" ],
-        "changed-features" : [ "x:1", "n:0", "n:1" ]
-      }
-    } ]
-  }, {
-    "id" : 299,
-    "input" : {
-      "x:0" : -3.102007326007326,
-      "x:1" : -1.9967374847374848,
-      "n:0" : 2,
-      "n:1" : -2
-    },
-    "output" : {
-      "y:0" : 23.596116381926635
-    },
-    "fitness" : [ 23.596116381926635 ],
-    "relationships" : [ {
-      "kind" : "identity",
-      "targets" : [ 269 ]
-    } ]
-  }, {
-    "id" : 343,
-    "input" : {
-      "x:0" : 3.1395164835164833,
-      "x:1" : -2.17178021978022,
-      "n:0" : 1,
-      "n:1" : 1
-    },
-    "output" : {
-      "y:0" : 25.45635568852235
-    },
-    "fitness" : [ 25.45635568852235 ],
-    "relationships" : [ {
-      "kind" : "identity",
-      "targets" : [ 222 ]
-    } ]
-  }, {
-    "id" : 287,
-    "input" : {
-      "x:0" : -2.6093870573870572,
-      "x:1" : 1.0390036630036628,
-      "n:0" : 0,
-      "n:1" : 0
-    },
-    "output" : {
-      "y:0" : 25.916843202401097
-    },
-    "fitness" : [ 25.916843202401097 ],
-    "relationships" : [ {
-      "kind" : "identity",
-      "targets" : [ 276 ]
-    } ]
-  }, {
-    "id" : 340,
-    "input" : {
-      "x:0" : -2.6093870573870572,
-      "x:1" : 1.0390036630036628,
-      "n:0" : -1,
-      "n:1" : 1
-    },
-    "output" : {
-      "y:0" : 27.916843202401097
-    },
-    "fitness" : [ 27.916843202401097 ],
+    "fitness" : [ 35.50780472418849 ],
     "relationships" : [ {
       "kind" : "mutation",
-      "targets" : [ 276 ],
+      "targets" : [ 273 ],
       "properties" : {
-        "operators" : [ "creep-mutation" ],
-        "changed-features" : [ "n:0", "n:1" ]
+        "operators" : [ "bit-flip-mutation", "creep-mutation" ],
+        "changed-features" : [ "x:1", "n:0" ]
       }
     } ]
   }, {
-    "id" : 308,
+    "id" : 330,
     "input" : {
-      "x:0" : -2.6093870573870572,
-      "x:1" : 0.8814652014652014,
+      "x:0" : 0.17629304029304027,
+      "x:1" : 1.8817094017094016,
       "n:0" : 0,
-      "n:1" : 0
+      "n:1" : -5
     },
     "output" : {
-      "y:0" : 27.963108831741316
+      "y:0" : 36.74175448320913
     },
-    "fitness" : [ 27.963108831741316 ],
+    "fitness" : [ 36.74175448320913 ],
     "relationships" : [ {
       "kind" : "recombination",
-      "targets" : [ 268, 276 ],
-      "partner" : 327,
+      "targets" : [ 267, 271 ],
+      "partner" : 310,
       "properties" : {
-        "operators" : [ "multi-point-crossover", "uniform-crossover" ],
+        "operators" : [ "multi-point-crossover", "bit-flip-mutation", "creep-mutation" ],
+        "changed-features" : [ "x:0", "x:1", "n:1" ]
+      }
+    } ]
+  }, {
+    "id" : 344,
+    "input" : {
+      "x:0" : 0.14378510378510345,
+      "x:1" : -1.6191452991452993,
+      "n:0" : -3,
+      "n:1" : 2
+    },
+    "output" : {
+      "y:0" : 36.77944126759928
+    },
+    "fitness" : [ 36.77944126759928 ],
+    "relationships" : [ {
+      "kind" : "mutation",
+      "targets" : [ 273 ],
+      "properties" : {
+        "operators" : [ "bit-flip-mutation", "creep-mutation" ],
+        "changed-features" : [ "x:0", "x:1", "n:1" ]
+      }
+    } ]
+  }, {
+    "id" : 342,
+    "input" : {
+      "x:0" : 5.11249816849817,
+      "x:1" : -0.13378266178266163,
+      "n:0" : 1,
+      "n:1" : 2
+    },
+    "output" : {
+      "y:0" : 36.881102074950036
+    },
+    "fitness" : [ 36.881102074950036 ],
+    "relationships" : [ {
+      "kind" : "recombination",
+      "targets" : [ 286, 264 ],
+      "partner" : 341,
+      "properties" : {
+        "operators" : [ "uniform-crossover", "bit-flip-mutation", "creep-mutation" ],
         "changed-features" : [ "x:0", "n:0", "n:1" ]
       }
     } ]
   }, {
-    "id" : 347,
+    "id" : 338,
     "input" : {
-      "x:0" : -2.956971916971917,
-      "x:1" : 4.082246642246644,
-      "n:0" : 2,
-      "n:1" : -1
+      "x:0" : -4.954959706959707,
+      "x:1" : -1.8892112332112334,
+      "n:0" : 0,
+      "n:1" : -3
     },
     "output" : {
-      "y:0" : 32.07746357355866
+      "y:0" : 39.84506714653553
     },
-    "fitness" : [ 32.07746357355866 ],
-    "relationships" : [ {
-      "kind" : "identity",
-      "targets" : [ 271 ]
-    } ]
-  }, {
-    "id" : 334,
-    "input" : {
-      "x:0" : -0.9564835164835168,
-      "x:1" : 1.679159951159951,
-      "n:0" : -1,
-      "n:1" : 4
-    },
-    "output" : {
-      "y:0" : 35.41140601500753
-    },
-    "fitness" : [ 35.41140601500753 ],
+    "fitness" : [ 39.84506714653553 ],
     "relationships" : [ {
       "kind" : "recombination",
-      "targets" : [ 270, 264 ],
+      "targets" : [ 228, 267 ],
+      "partner" : 337,
+      "properties" : {
+        "operators" : [ "multi-point-crossover", "uniform-crossover", "creep-mutation" ],
+        "changed-features" : [ "x:0", "x:1", "n:0" ]
+      }
+    } ]
+  }, {
+    "id" : 346,
+    "input" : {
+      "x:0" : 3.127013431013432,
+      "x:1" : -5.109997557997558,
+      "n:0" : 1,
+      "n:1" : 0
+    },
+    "output" : {
+      "y:0" : 42.204007820609604
+    },
+    "fitness" : [ 42.204007820609604 ],
+    "relationships" : [ {
+      "kind" : "recombination",
+      "targets" : [ 272, 280 ],
+      "partner" : 345,
+      "properties" : {
+        "operators" : [ "multi-point-crossover", "bit-flip-mutation", "creep-mutation" ],
+        "changed-features" : [ "x:0", "x:1", "n:1" ]
+      }
+    } ]
+  }, {
+    "id" : 336,
+    "input" : {
+      "x:0" : 0.6038974358974363,
+      "x:1" : 0.6514090354090358,
+      "n:0" : 0,
+      "n:1" : 3
+    },
+    "output" : {
+      "y:0" : 43.53884483075771
+    },
+    "fitness" : [ 43.53884483075771 ],
+    "relationships" : [ {
+      "kind" : "recombination",
+      "targets" : [ 287, 285 ],
       "partner" : 335,
       "properties" : {
         "operators" : [ "multi-point-crossover", "bit-flip-mutation", "creep-mutation" ],
@@ -501,168 +447,226 @@
       }
     } ]
   }, {
-    "id" : 338,
+    "id" : 292,
     "input" : {
-      "x:0" : -3.137015873015873,
-      "x:1" : -1.3565811965811965,
+      "x:0" : 4.8174261294261305,
+      "x:1" : -1.9142173382173384,
       "n:0" : 1,
-      "n:1" : -3
+      "n:1" : 3
     },
     "output" : {
-      "y:0" : 41.370868530061266
+      "y:0" : 44.17862596895738
     },
-    "fitness" : [ 41.370868530061266 ],
+    "fitness" : [ 44.17862596895738 ],
     "relationships" : [ {
-      "kind" : "recombination",
-      "targets" : [ 269, 270 ],
-      "partner" : 339,
-      "properties" : {
-        "operators" : [ "multi-point-crossover", "bit-flip-mutation", "creep-mutation" ],
-        "changed-features" : [ "x:0", "x:1", "n:0", "n:1" ]
-      }
+      "kind" : "identity",
+      "targets" : [ 279 ]
     } ]
   }, {
-    "id" : 346,
+    "id" : 348,
     "input" : {
-      "x:0" : -4.579868131868132,
-      "x:1" : 1.0340024420024418,
+      "x:0" : -2.236796092796093,
+      "x:1" : -3.627135531135531,
       "n:0" : 1,
       "n:1" : -1
     },
     "output" : {
-      "y:0" : 43.03875982159059
+      "y:0" : 46.306249306323
     },
-    "fitness" : [ 43.03875982159059 ],
+    "fitness" : [ 46.306249306323 ],
     "relationships" : [ {
       "kind" : "identity",
-      "targets" : [ 266 ]
+      "targets" : [ 224 ]
     } ]
   }, {
     "id" : 331,
     "input" : {
-      "x:0" : -0.00375091575091524,
-      "x:1" : 3.609631257631258,
-      "n:0" : 4,
-      "n:1" : 2
-    },
-    "output" : {
-      "y:0" : 50.75210900078446
-    },
-    "fitness" : [ 50.75210900078446 ],
-    "relationships" : [ {
-      "kind" : "recombination",
-      "targets" : [ 282, 235 ],
-      "partner" : 330,
-      "properties" : {
-        "operators" : [ "multi-point-crossover", "creep-mutation" ],
-        "changed-features" : [ "x:1", "n:0" ]
-      }
-    } ]
-  }, {
-    "id" : 336,
-    "input" : {
-      "x:0" : 3.354568986568986,
-      "x:1" : 2.189284493284493,
-      "n:0" : 2,
+      "x:0" : 4.8174261294261305,
+      "x:1" : -1.9142173382173384,
+      "n:0" : -2,
       "n:1" : 3
     },
     "output" : {
-      "y:0" : 51.43074149646242
+      "y:0" : 47.17862596895738
     },
-    "fitness" : [ 51.43074149646242 ],
+    "fitness" : [ 47.17862596895738 ],
     "relationships" : [ {
       "kind" : "recombination",
-      "targets" : [ 262, 282 ],
-      "partner" : 337,
+      "targets" : [ 279, 270 ],
+      "partner" : 332,
+      "properties" : {
+        "operators" : [ "uniform-crossover", "creep-mutation" ],
+        "changed-features" : [ "n:0" ]
+      }
+    } ]
+  }, {
+    "id" : 351,
+    "input" : {
+      "x:0" : -2.286808302808303,
+      "x:1" : -0.25131135531135573,
+      "n:0" : -2,
+      "n:1" : 4
+    },
+    "output" : {
+      "y:0" : 47.66721549179075
+    },
+    "fitness" : [ 47.66721549179075 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 275 ]
+    } ]
+  }, {
+    "id" : 329,
+    "input" : {
+      "x:0" : 0.3038241758241762,
+      "x:1" : 3.1695238095238087,
+      "n:0" : -4,
+      "n:1" : 2
+    },
+    "output" : {
+      "y:0" : 48.61223199746903
+    },
+    "fitness" : [ 48.61223199746903 ],
+    "relationships" : [ {
+      "kind" : "recombination",
+      "targets" : [ 271, 284 ],
+      "partner" : 328,
+      "properties" : {
+        "operators" : [ "multi-point-crossover", "uniform-crossover", "bit-flip-mutation" ],
+        "changed-features" : [ "x:1", "n:0", "n:1" ]
+      }
+    } ]
+  }, {
+    "id" : 340,
+    "input" : {
+      "x:0" : -4.847433455433455,
+      "x:1" : -0.6289035409035408,
+      "n:0" : 0,
+      "n:1" : 2
+    },
+    "output" : {
+      "y:0" : 49.04202825748557
+    },
+    "fitness" : [ 49.04202825748557 ],
+    "relationships" : [ {
+      "kind" : "mutation",
+      "targets" : [ 266 ],
+      "properties" : {
+        "operators" : [ "creep-mutation" ],
+        "changed-features" : [ "n:0" ]
+      }
+    } ]
+  }, {
+    "id" : 328,
+    "input" : {
+      "x:0" : 2.659399267399267,
+      "x:1" : 3.4345885225885224,
+      "n:0" : -1,
+      "n:1" : 2
+    },
+    "output" : {
+      "y:0" : 58.42614954413119
+    },
+    "fitness" : [ 58.42614954413119 ],
+    "relationships" : [ {
+      "kind" : "recombination",
+      "targets" : [ 284, 271 ],
+      "partner" : 329,
       "properties" : {
         "operators" : [ "multi-point-crossover", "uniform-crossover", "bit-flip-mutation", "creep-mutation" ],
-        "changed-features" : [ "x:0", "x:1", "n:0", "n:1" ]
+        "changed-features" : [ "x:0", "x:1", "n:0" ]
       }
     } ]
   } ],
   "steps" : [ ],
   "ranks" : [ {
     "number" : 0,
-    "members" : [ 323 ]
+    "members" : [ 295, 296, 347 ]
   }, {
     "number" : 1,
-    "members" : [ 290, 294, 342, 344, 327 ]
+    "members" : [ 307 ]
   }, {
     "number" : 2,
-    "members" : [ 328 ]
+    "members" : [ 343 ]
   }, {
     "number" : 3,
-    "members" : [ 324 ]
+    "members" : [ 310 ]
   }, {
     "number" : 4,
-    "members" : [ 335 ]
+    "members" : [ 349 ]
   }, {
     "number" : 5,
     "members" : [ 332 ]
   }, {
     "number" : 6,
-    "members" : [ 329 ]
+    "members" : [ 302 ]
   }, {
     "number" : 7,
-    "members" : [ 325 ]
+    "members" : [ 350 ]
   }, {
     "number" : 8,
-    "members" : [ 326 ]
+    "members" : [ 335 ]
   }, {
     "number" : 9,
-    "members" : [ 345 ]
-  }, {
-    "number" : 10,
-    "members" : [ 339 ]
-  }, {
-    "number" : 11,
-    "members" : [ 330 ]
-  }, {
-    "number" : 12,
-    "members" : [ 341 ]
-  }, {
-    "number" : 13,
-    "members" : [ 337 ]
-  }, {
-    "number" : 14,
-    "members" : [ 333 ]
-  }, {
-    "number" : 15,
-    "members" : [ 299 ]
-  }, {
-    "number" : 16,
-    "members" : [ 343 ]
-  }, {
-    "number" : 17,
-    "members" : [ 287 ]
-  }, {
-    "number" : 18,
-    "members" : [ 340 ]
-  }, {
-    "number" : 19,
-    "members" : [ 308 ]
-  }, {
-    "number" : 20,
-    "members" : [ 347 ]
-  }, {
-    "number" : 21,
     "members" : [ 334 ]
   }, {
-    "number" : 22,
+    "number" : 10,
+    "members" : [ 337 ]
+  }, {
+    "number" : 11,
+    "members" : [ 341 ]
+  }, {
+    "number" : 12,
+    "members" : [ 345 ]
+  }, {
+    "number" : 13,
+    "members" : [ 333 ]
+  }, {
+    "number" : 14,
+    "members" : [ 339 ]
+  }, {
+    "number" : 15,
+    "members" : [ 330 ]
+  }, {
+    "number" : 16,
+    "members" : [ 344 ]
+  }, {
+    "number" : 17,
+    "members" : [ 342 ]
+  }, {
+    "number" : 18,
     "members" : [ 338 ]
   }, {
-    "number" : 23,
+    "number" : 19,
     "members" : [ 346 ]
   }, {
-    "number" : 24,
+    "number" : 20,
+    "members" : [ 336 ]
+  }, {
+    "number" : 21,
+    "members" : [ 292 ]
+  }, {
+    "number" : 22,
+    "members" : [ 348 ]
+  }, {
+    "number" : 23,
     "members" : [ 331 ]
   }, {
+    "number" : 24,
+    "members" : [ 351 ]
+  }, {
     "number" : 25,
-    "members" : [ 336 ]
+    "members" : [ 329 ]
+  }, {
+    "number" : 26,
+    "members" : [ 340 ]
+  }, {
+    "number" : 27,
+    "members" : [ 328 ]
   } ],
-  "bestSoFar" : 323,
+  "bestSoFar" : 182,
   "metrics" : {
-    "evaluations.real" : 129,
+    "evaluations.real" : 130,
     "evaluations.surrogate" : 0
   }
 }

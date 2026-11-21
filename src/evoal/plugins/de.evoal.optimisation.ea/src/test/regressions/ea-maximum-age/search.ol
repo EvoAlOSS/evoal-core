@@ -34,6 +34,15 @@ module 'search' {
         'size-of-population' := 10;
         'number-of-offspring' := 10;
         'initialisation' := 'random-population' {};
+        genotype := genotype {
+            chromosomes := [
+                'double-chromosome' {
+                    features := [data 'x:0', data 'x:1', data 'x:2'];
+                    recombination := [ 'sbx-crossover' { probability := 0.9; } ];
+                    mutation := [ 'polynomial-mutation' {} ];
+                }
+            ];
+        };
         'parent-selection' := 'linear-ranking-selection' { 'eta-minus' := 0.5; };
         replacement := 'plus-replacement' {
             selection := 'elite-selection' { count := 2; rest := 'truncation-selection' { threshold := 0.5; }; };

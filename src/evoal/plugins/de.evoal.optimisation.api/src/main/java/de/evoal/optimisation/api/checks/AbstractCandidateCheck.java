@@ -1,19 +1,17 @@
 package de.evoal.optimisation.api.checks;
 
-import java.util.Optional;
 
 import jakarta.inject.Inject;
 
 import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EStructuralFeature;
 
 import de.evoal.core.api.utils.AttributeHelper;
 import de.evoal.models.core.exceptions.InitializationException;
 
 /**
  * Base class of the checks: reads the attributes of the base type {@code 'candidate-check'},
- *   the {@code reaction}, the optional {@code 'replacement-source'} and
+ *   the {@code reaction}, the {@code 'replacement-source'} and
  *   {@code 'maximum-attempts'}. Subclasses read
  *   their own attributes in {@link #configure(EObject)}.
  */
@@ -32,7 +30,7 @@ public abstract class AbstractCandidateCheck implements CandidateCheck {
     private CheckReaction reaction;
 
     /**
-     * The configuration of the replacement source, {@code null} if not set.
+     * The configuration of the replacement source.
      */
     private EObject replacementSource;
 
@@ -68,10 +66,7 @@ public abstract class AbstractCandidateCheck implements CandidateCheck {
         final EEnumLiteral literal = helper.lookup(configuration, "reaction");
         reaction = CheckReaction.of(literal);
 
-        final EStructuralFeature source = configuration.eClass().getEStructuralFeature("replacement-source");
-        if(source != null && configuration.eIsSet(source)) {
-            replacementSource = (EObject) configuration.eGet(source);
-        }
+        replacementSource = helper.lookup(configuration, "replacement-source");
 
         maximumAttempts = helper.<Integer>lookup(configuration, "maximum-attempts");
 
@@ -99,7 +94,7 @@ public abstract class AbstractCandidateCheck implements CandidateCheck {
     }
 
     @Override
-    public Optional<EObject> replacementSource() {
-        return Optional.ofNullable(replacementSource);
+    public EObject replacementSource() {
+        return replacementSource;
     }
 }

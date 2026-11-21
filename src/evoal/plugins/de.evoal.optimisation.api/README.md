@@ -270,10 +270,11 @@ attempts), or has them itself without a predecessor. If the repair fails, the fa
 the repair (`Repair.fallback()`: `warn`, `replace` or `resample`) reacts to the original
 candidate.
 
-Replacements come from the `'replacement-source'` of the check or from the
-`'initialisation'` of the algorithm. Each check takes them from one stream of its source
-per run, so `'random-population'` continues to draw new candidates; `'specify-candidates'`
-repeats its candidates, which is logged as a warning.
+Replacements come from the `'replacement-source'` of the check, `'random-population' {}` by
+default (#311: no fallback to the `'initialisation'` of the algorithm). Each check takes them
+from one stream of its source per run, so `'random-population'` continues to draw new
+candidates; the sources of given candidates (`'specify-candidates'`, `'candidates-from-file'`)
+repeat their candidates, which is logged as a warning.
 
 Checks in this module:
 
@@ -416,7 +417,7 @@ rejects, when it is built:
 |---|---|---|---|
 | `scaling` | `ScalingStep` | `ChangesUnits` | divides listed components by a reference value |
 | `'objective-selection'` | `ObjectiveSelectionStep` | | keeps one component |
-| `'weighted-sum'` | `WeightedSumStep` | `Scalarisation` | one component `weighted-sum` |
+| `'weighted-sum'` | `WeightedSumStep` | `Scalarisation` | one component `weighted-sum`; `weights` lists every component once |
 | `'constraint-penalty'` | `ConstraintPenaltyStep` | `ChangesUnits` | adds weight times the violation of a constraint group to every component |
 | `'prediction-interval'` | `PredictionIntervalStep` (surrogate.adaption) | `RequiresObjectiveUnits` | adapts predicted objectives by the width of their prediction interval |
 | `'gaussian-density'`, `'kernel-density'` | `GaussianDensityStep`, `KernelDensityStep` (surrogate.adaption) | `RequiresObjectiveUnits` | adapts predicted objectives by the density of the training data around the candidate |

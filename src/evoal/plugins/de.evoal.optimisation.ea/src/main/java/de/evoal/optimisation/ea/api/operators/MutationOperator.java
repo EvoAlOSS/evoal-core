@@ -14,7 +14,8 @@ import de.evoal.optimisation.ea.api.genotype.Genes;
  */
 public interface MutationOperator extends EvoalComponent<MutationOperator> {
     /**
-     * @return The configured probability that a gene is changed; empty for the default 1 / n.
+     * @return The configured probability that a gene is changed; empty for the default 1 / n,
+     *   n the number of genes of the chromosome.
      */
     OptionalDouble geneProbability();
 

@@ -32,8 +32,8 @@ module de.evoal.optimisation.ea.optimisation {
      * States to which chromosomes a recombination or mutation applies: the
      *   representations it supports and the weakest scale of measurement the features
      *   of the chromosome may have. A feature without a declared scale is accepted. An
-     *   operator of the algorithm skips the chromosomes it does not apply to; the skips
-     *   are reported when the algorithm starts.
+     *   operator of a chromosome that it does not apply to is rejected when the algorithm
+     *   starts.
      */
     type Applicability extends Constraint {
         /**
@@ -54,9 +54,9 @@ module de.evoal.optimisation.ea.optimisation {
      * <ol>
      *   <li>the 'parent-selection' selects 2 * ceil(n / 2) parents of the population
      *     ('number-of-offspring' n); consecutive parents form a pair,</li>
-     *   <li>the recombinations recombine every pair into two children; a pair that is not
-     *     recombined passes on two copies,</li>
-     *   <li>the mutations mutate the first n children,</li>
+     *   <li>the recombinations of the chromosomes recombine every pair into two children; a
+     *     pair that is not recombined passes on two copies,</li>
+     *   <li>the mutations of the chromosomes mutate the first n children,</li>
      *   <li>the 'candidate-checks' of new candidates test the children,</li>
      *   <li>the children are evaluated; unchanged copies keep the evaluation of their
      *     parent,</li>
@@ -81,29 +81,15 @@ module de.evoal.optimisation.ea.optimisation {
         'number-of-offspring' : int;
 
         /**
-         * How the features are mapped to chromosomes. If it is not set, every
-         *   representation gets one chromosome: real features a 'double-chromosome',
-         *   integer features an 'integer-chromosome', and boolean features a
-         *   'bit-chromosome'.
+         * How the features are mapped to chromosomes; every chromosome lists its
+         *   recombinations and mutations.
          */
-        genotype : optional instance genotype;
+        genotype : instance genotype;
 
         /**
          * Selects the parents from the population.
          */
         'parent-selection' : instance selection;
-
-        /**
-         * The recombinations of every chromosome that has no recombinations of its own,
-         *   in their order. They skip chromosomes they do not apply to.
-         */
-        recombination : array instance recombination := [];
-
-        /**
-         * The mutations of every chromosome that has no mutations of its own, in their
-         *   order. They skip chromosomes they do not apply to.
-         */
-        mutation : array instance mutation := [];
 
         /**
          * Forms the next population from the parents and the children.
@@ -126,9 +112,10 @@ module de.evoal.optimisation.ea.optimisation {
     }
 
     /**
-     * Abstract base type of the chromosomes. If a chromosome has no operators of its own
-     *   and none of the operators of the algorithm applies to it, it gets the default
-     *   operators of its representation.
+     * Abstract base type of the chromosomes. A chromosome lists its recombinations and
+     *   mutations; an operator that does not apply to it is rejected. A chromosome with
+     *   neither recombinations nor mutations never changes, which is reported as a warning
+     *   when the algorithm starts.
      */
     abstract type chromosome {
         /**
@@ -138,27 +125,25 @@ module de.evoal.optimisation.ea.optimisation {
         features : array data;
 
         /**
-         * The recombinations of the chromosome; replace the recombinations of the
-         *   algorithm for this chromosome.
+         * The recombinations of the chromosome, in their order; empty if the chromosome is
+         *   not recombined.
          */
-        recombination : array instance recombination := [];
+        recombination : array instance recombination;
 
         /**
-         * The mutations of the chromosome; replace the mutations of the algorithm for
-         *   this chromosome.
+         * The mutations of the chromosome, in their order; empty if the chromosome is not
+         *   mutated.
          */
-        mutation : array instance mutation := [];
+        mutation : array instance mutation;
     }
 
     /**
-     * Real features, one gene each. Default operators: 'sbx-crossover' with probability
-     *   0.9 and 'polynomial-mutation'.
+     * Real features, one gene each.
      */
     type 'double-chromosome' extends chromosome {}
 
     /**
-     * Integer features, one gene each. Default operators: 'uniform-crossover' and
-     *   'random-reset-mutation'.
+     * Integer features, one gene each.
      */
     type 'integer-chromosome' extends chromosome {}
 
@@ -166,8 +151,7 @@ module de.evoal.optimisation.ea.optimisation {
      * Features as bits in standard binary code: a boolean feature is one bit, a real or
      *   integer feature 'precision' bits. The bits k of a feature with the boundaries l
      *   and u stand for l + k * (u - l) / (2^precision - 1); integers are rounded, and
-     *   every integer of the range must be reachable. Default operators:
-     *   'single-point-crossover' and 'bit-flip-mutation'.
+     *   every integer of the range must be reachable.
      */
     type 'bit-chromosome' extends chromosome {
         /**
@@ -192,9 +176,9 @@ module de.evoal.optimisation.ea.optimisation {
     }
 
     /**
-     * Abstract base type of the recombinations. A recombination is applied to a pair of
-     *   parents with 'probability' (one draw per pair) and then changes every chromosome
-     *   it applies to. It creates two children.
+     * Abstract base type of the recombinations. A recombination of a chromosome is applied
+     *   to a pair of parents with 'probability' (one draw per pair) and then changes the
+     *   chromosome. It creates two children.
      */
     abstract type recombination extends configuration {
         /**
@@ -206,9 +190,9 @@ module de.evoal.optimisation.ea.optimisation {
     }
 
     /**
-     * Abstract base type of the mutations. A mutation is applied to a child with
-     *   'probability' (one draw per child) and then changes every gene of the chromosomes
-     *   it applies to with 'gene-probability' (one draw per gene).
+     * Abstract base type of the mutations. A mutation of a chromosome is applied to a child
+     *   with 'probability' (one draw per child) and then changes every gene of the
+     *   chromosome with 'gene-probability' (one draw per gene).
      */
     abstract type mutation extends configuration {
         /**
@@ -220,7 +204,11 @@ module de.evoal.optimisation.ea.optimisation {
 
         /**
          * The probability that a gene is changed. If it is not set, it is 1 / n, where n
-         *   is the number of genes of the chromosomes the mutation applies to.
+         *   is the number of genes of the chromosome, the usual rate of one changed gene
+         *   per mutation (H. Muehlenbein: How genetic algorithms really work: I. Mutation
+         *   and hillclimbing. Parallel Problem Solving from Nature 2, 1992; T. Baeck:
+         *   Optimal mutation rates in genetic search. Proceedings of the 5th International
+         *   Conference on Genetic Algorithms, 1993, pp. 2-8).
          */
         @LowerBoundary { boundary := 0.0; }
         @UpperBoundary { boundary := 1.0; }
@@ -390,8 +378,8 @@ module de.evoal.optimisation.ea.optimisation {
      * Single-choice mutation (specific to EvoAl): if it fires ('probability', one draw per
      *   child), exactly one of its 'children' is chosen with the given 'weights' and
      *   applied with its own 'gene-probability'; the 'probability' of the chosen mutation is
-     *   not used. Its own 'gene-probability' is not used either. It applies to the
-     *   chromosomes that all its children apply to.
+     *   not used. Its own 'gene-probability' is not used either. It applies to a
+     *   chromosome that all its children apply to.
      */
     @Applicability {
         representations := ['representation.double', 'representation.integer', 'representation.bit',
@@ -405,10 +393,10 @@ module de.evoal.optimisation.ea.optimisation {
         children : array instance mutation;
 
         /**
-         * The weight of every child, in their order; not negative, at least one greater
-         *   than 0. Empty for equal weights.
+         * The weight of every child, in their order: one weight per child, not negative,
+         *   at least one greater than 0.
          */
-        weights : array real := [];
+        weights : array real;
     }
 
     /**

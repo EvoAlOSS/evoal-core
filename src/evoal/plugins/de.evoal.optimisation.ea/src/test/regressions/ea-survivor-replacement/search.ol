@@ -1,5 +1,5 @@
-// Regression: evolutionary algorithm with the default mapping (one double chromosome with
-// 'sbx-crossover' and 'polynomial-mutation'), binary tournaments as parent selection and
+// Regression: evolutionary algorithm with one double chromosome ('sbx-crossover' with
+// probability 0.9 and 'polynomial-mutation'), binary tournaments as parent selection and
 // survivor replacement: the two best parents survive, the remaining eight are chosen by
 // tournaments, and all ten children survive.
 import "definitions" from de.evoal.core.math;
@@ -35,6 +35,15 @@ module 'search' {
         'size-of-population' := 20;
         'number-of-offspring' := 10;
         'initialisation' := 'random-population' {};
+        genotype := genotype {
+            chromosomes := [
+                'double-chromosome' {
+                    features := [data 'x:0', data 'x:1', data 'x:2'];
+                    recombination := [ 'sbx-crossover' { probability := 0.9; } ];
+                    mutation := [ 'polynomial-mutation' {} ];
+                }
+            ];
+        };
         'parent-selection' := 'tournament-selection' { size := 2; };
         replacement := 'survivor-replacement' {
             selection := 'elite-selection' { count := 2; rest := 'tournament-selection' { size := 2; }; };

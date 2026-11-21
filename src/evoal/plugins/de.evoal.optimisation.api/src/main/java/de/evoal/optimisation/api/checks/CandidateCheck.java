@@ -65,10 +65,9 @@ public interface CandidateCheck extends EvoalComponent<CandidateCheck> {
 
     /**
      * @return The configuration of the source of new candidates for {@link CheckReaction#REPLACE}
-     *   (also as the fallback of a repair),
-     *   empty if the {@code 'initialisation'} of the algorithm is used.
+     *   (also as the fallback of a repair).
      */
-    Optional<EObject> replacementSource();
+    EObject replacementSource();
 
     /**
      * @return The reactions the check supports.

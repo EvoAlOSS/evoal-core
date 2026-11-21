@@ -34,8 +34,18 @@ module 'search' {
 		'number-of-offspring' := 40;
 		'initialisation' := 'random-population' {};
 
-		// no genotype: the five real variables form one double chromosome, which gets the
-		// default operators 'sbx-crossover' (probability 0.9) and 'polynomial-mutation'
+		// the five real variables form one double chromosome with simulated binary crossover
+		// (probability 0.9) and polynomial mutation
+		genotype := genotype {
+			chromosomes := [
+				'double-chromosome' {
+					features := [data 'x:0', data 'x:1', data 'x:2', data 'x:3', data 'x:4'];
+					recombination := [ 'sbx-crossover' { probability := 0.9; } ];
+					mutation := [ 'polynomial-mutation' {} ];
+				}
+			];
+		};
+
 		'parent-selection' := 'tournament-selection' { size := 3; };
 
 		// (mu + lambda): the best 2 of parents and children survive for sure, the other 38

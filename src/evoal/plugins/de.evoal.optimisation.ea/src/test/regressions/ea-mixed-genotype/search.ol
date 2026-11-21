@@ -1,7 +1,7 @@
-// Regression: an explicit genotype with a Gray-coded chromosome (a real and an integer
-// feature), an integer chromosome with its own mutation, and a bit chromosome (a boolean).
-// The uniform crossover of the algorithm applies to all chromosomes, the bit-flip mutation
-// to the Gray and bit chromosomes only. Roulette wheel selection selects the parents,
+// Regression: a genotype with a Gray-coded chromosome (a real and an integer feature), an
+// integer chromosome and a bit chromosome (a boolean). Every chromosome has a uniform
+// crossover; the Gray and bit chromosomes are mutated by bit flips, the integer chromosome by
+// random resets. Roulette wheel selection selects the parents,
 // stochastic universal sampling the survivors.
 import "definitions" from de.evoal.core.math;
 
@@ -38,17 +38,25 @@ module 'search' {
         'initialisation' := 'random-population' {};
         genotype := genotype {
             chromosomes := [
-                'gray-chromosome' { features := [data 'x:0', data 'n:0']; precision := 12; },
+                'gray-chromosome' {
+                    features := [data 'x:0', data 'n:0'];
+                    precision := 12;
+                    recombination := [ 'uniform-crossover' {} ];
+                    mutation := [ 'bit-flip-mutation' {} ];
+                },
                 'integer-chromosome' {
                     features := [data 'k:0'];
+                    recombination := [ 'uniform-crossover' {} ];
                     mutation := [ 'random-reset-mutation' { 'gene-probability' := 0.3; } ];
                 },
-                'bit-chromosome' { features := [data 'b:0']; }
+                'bit-chromosome' {
+                    features := [data 'b:0'];
+                    recombination := [ 'uniform-crossover' {} ];
+                    mutation := [ 'bit-flip-mutation' {} ];
+                }
             ];
         };
         'parent-selection' := 'roulette-wheel-selection' {};
-        recombination := [ 'uniform-crossover' {} ];
-        mutation := [ 'bit-flip-mutation' {} ];
         replacement := 'survivor-replacement' {
             selection := 'stochastic-universal-sampling' {};
         };
