@@ -1,0 +1,210 @@
+{
+  "formatVersion" : "2027.4.0",
+  "problem" : {
+    "name" : "regression",
+    "goals" : [ {
+      "feature" : "y:0",
+      "direction" : "minimise"
+    } ],
+    "function" : {
+      "type" : "de.evoal.pipeline.optimisation.benchmark-function",
+      "attributes" : {
+        "benchmarks" : [ {
+          "type" : "de.evoal.pipeline.optimisation.benchmark-configuration",
+          "attributes" : {
+            "function" : {
+              "type" : "de.evoal.pipeline.benchmarks.weighted-sphere",
+              "attributes" : { }
+            },
+            "reads" : [ "x:0", "x:1" ],
+            "writes" : [ "y:0" ]
+          }
+        } ]
+      }
+    }
+  },
+  "algorithm" : {
+    "type" : "de.evoal.optimisation.cma_es.optimisation.cma-es",
+    "attributes" : {
+      "initialisation" : {
+        "type" : "de.evoal.optimisation.core.random-population",
+        "attributes" : { }
+      },
+      "optimisation-function" : {
+        "type" : "de.evoal.optimisation.core.problem-function",
+        "attributes" : { }
+      },
+      "comparator" : {
+        "type" : "de.evoal.optimisation.core.numeric-comparator",
+        "attributes" : { }
+      },
+      "stopping-criteria" : [ {
+        "type" : "de.evoal.optimisation.core.iteration-count",
+        "attributes" : {
+          "maximum-iterations" : 80
+        }
+      } ],
+      "fitness-pipeline" : [ ],
+      "candidate-checks" : [ ],
+      "constraint-measure" : {
+        "type" : "de.evoal.optimisation.core.exact-measure",
+        "attributes" : {
+          "equality-tolerance" : 1.0E-4
+        }
+      },
+      "initial-step-size" : 1.0,
+      "population-size" : null,
+      "parent-number" : null,
+      "covariance-model" : {
+        "type" : "de.evoal.optimisation.cma_es.optimisation.full-covariance",
+        "attributes" : { }
+      },
+      "restart-strategy" : {
+        "type" : "de.evoal.optimisation.cma_es.optimisation.ipop-restart",
+        "attributes" : {
+          "population-factor" : 2.0,
+          "maximum-restarts" : 3
+        }
+      },
+      "learning-rates" : null,
+      "termination" : {
+        "type" : "de.evoal.optimisation.cma_es.optimisation.cma-es-termination",
+        "attributes" : {
+          "tol-fun" : 1.0E-12,
+          "tol-x" : 1.0E-12,
+          "tol-x-up" : 10000.0,
+          "condition-cov" : 1.0E14,
+          "no-effect-axis" : true,
+          "no-effect-coord" : true,
+          "equal-fun-values" : true,
+          "stagnation" : true,
+          "maximum-iterations" : {
+            "type" : "de.evoal.optimisation.cma_es.optimisation.quadratic-iteration-limit",
+            "attributes" : {
+              "a" : 10.0,
+              "b" : 1.0
+            }
+          }
+        }
+      },
+      "record-all-correlations" : false
+    }
+  },
+  "documentation" : [ {
+    "type" : "de.evoal.optimisation.core.best-candidate-per-iteration",
+    "attributes" : {
+      "prefix-data" : false,
+      "store-search-space" : true,
+      "store-optimisation-space" : true
+    }
+  }, {
+    "type" : "de.evoal.optimisation.core.memory-model",
+    "attributes" : {
+      "steps" : false
+    }
+  } ],
+  "searchSpace" : [ {
+    "name" : "x:0",
+    "type" : "real",
+    "scale" : "quotient",
+    "lowerBound" : {
+      "value" : -5.0,
+      "inclusive" : true
+    },
+    "upperBound" : {
+      "value" : 5.0,
+      "inclusive" : true
+    }
+  }, {
+    "name" : "x:1",
+    "type" : "real",
+    "scale" : "quotient",
+    "lowerBound" : {
+      "value" : -5.0,
+      "inclusive" : true
+    },
+    "upperBound" : {
+      "value" : 5.0,
+      "inclusive" : true
+    }
+  } ],
+  "optimisationSpace" : [ {
+    "name" : "y:0",
+    "type" : "real",
+    "scale" : "quotient"
+  } ],
+  "fitness" : {
+    "components" : [ {
+      "name" : "y:0",
+      "goal" : "y:0"
+    } ],
+    "steps" : [ ]
+  },
+  "metricDefinitions" : [ {
+    "name" : "evaluations.real",
+    "kind" : "counter",
+    "valueType" : "integer",
+    "scope" : "iteration",
+    "description" : "Number of evaluations of the real optimisation function."
+  }, {
+    "name" : "evaluations.surrogate",
+    "kind" : "counter",
+    "valueType" : "integer",
+    "scope" : "iteration",
+    "description" : "Number of predictions of a surrogate model."
+  }, {
+    "name" : "sigma",
+    "kind" : "measure",
+    "valueType" : "real",
+    "scope" : "iteration",
+    "description" : "The step size sigma of the distribution of CMA-ES."
+  }, {
+    "name" : "axis-ratio",
+    "kind" : "measure",
+    "valueType" : "real",
+    "scope" : "iteration",
+    "description" : "The ratio of the longest to the shortest principal axis of the covariance matrix C."
+  }, {
+    "name" : "population-size",
+    "kind" : "measure",
+    "valueType" : "integer",
+    "scope" : "iteration",
+    "description" : "The population size lambda of CMA-ES."
+  }, {
+    "name" : "restart",
+    "kind" : "measure",
+    "valueType" : "integer",
+    "scope" : "iteration",
+    "description" : "The number of the CMA-ES run of the distribution, 0 before the first restart."
+  }, {
+    "name" : "mean-x:0",
+    "kind" : "measure",
+    "valueType" : "real",
+    "scope" : "iteration",
+    "description" : "The mean of 'x:0' in the distribution of CMA-ES, mapped into the bounds."
+  }, {
+    "name" : "mean-x:1",
+    "kind" : "measure",
+    "valueType" : "real",
+    "scope" : "iteration",
+    "description" : "The mean of 'x:1' in the distribution of CMA-ES, mapped into the bounds."
+  } ],
+  "propertyDefinitions" : [ {
+    "name" : "genotype",
+    "scope" : "individual",
+    "valueType" : "real",
+    "list" : true,
+    "description" : "The point of the distribution of CMA-ES that the bounds transformed into the candidate; set only if it differs from the candidate."
+  }, {
+    "name" : "restart",
+    "scope" : "individual",
+    "valueType" : "integer",
+    "list" : false,
+    "description" : "The number of the CMA-ES run whose distribution sampled the candidate, 0 before the first restart."
+  } ],
+  "setup" : {
+    "evoalVersion" : "${evoal.version}",
+    "seed" : "42",
+    "run" : 0
+  }
+}

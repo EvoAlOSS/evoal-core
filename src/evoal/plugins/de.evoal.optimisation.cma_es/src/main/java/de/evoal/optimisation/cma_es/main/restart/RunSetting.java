@@ -17,4 +17,12 @@ public record RunSetting(int populationSize, double stepSizeFactor, long maximum
     public static RunSetting of(final int populationSize) {
         return new RunSetting(populationSize, 1.0, Long.MAX_VALUE, "default");
     }
+
+    /**
+     * @param iterations A further limit of the iterations of the run.
+     * @return The setting whose iteration limit is the smaller of both limits.
+     */
+    public RunSetting limitedTo(final long iterations) {
+        return new RunSetting(populationSize, stepSizeFactor, Math.min(maximumIterations, iterations), regime);
+    }
 }

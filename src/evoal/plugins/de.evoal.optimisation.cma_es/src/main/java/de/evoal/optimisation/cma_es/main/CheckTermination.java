@@ -10,9 +10,10 @@ import de.evoal.optimisation.api.steps.SearchState;
 import de.evoal.optimisation.cma_es.main.distribution.TerminationCriteria;
 
 /**
- * Checks the termination criteria of CMA-ES and the iteration limit of the current CMA-ES
- *   run (BIPOP). If one holds, the restart strategy starts the next CMA-ES run, or the search
- *   ends; it then samples no further candidates.
+ * Checks the iteration limit of the current CMA-ES run ('maximum-iterations' and the limit of
+ *   a small BIPOP restart) and the termination criteria of CMA-ES. If one holds, the restart
+ *   strategy starts the next CMA-ES run, or the search ends; it then samples no further
+ *   candidates.
  */
 @Slf4j
 final class CheckTermination implements ParameterAdjustment {

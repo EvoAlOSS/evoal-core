@@ -60,4 +60,40 @@ public class RestartScheduleTest {
             Assertions.assertEquals(40, nextLarge.populationSize());
         }
     }
+
+    @Nested
+    @DisplayName("given a run setting with an iteration limit of 100")
+    class LimitedSetting {
+        private final RunSetting setting = new RunSetting(10, 0.5, 100L, "small");
+
+        @Test
+        public void aSmallerFurtherLimitWins() {
+            // when
+            final RunSetting limited = setting.limitedTo(40L);
+
+            // then
+            Assertions.assertEquals(40L, limited.maximumIterations());
+            Assertions.assertEquals(10, limited.populationSize());
+            Assertions.assertEquals(0.5, limited.stepSizeFactor());
+            Assertions.assertEquals("small", limited.regime());
+        }
+
+        @Test
+        public void aLargerFurtherLimitKeepsTheOwnOne() {
+            // when
+            final RunSetting limited = setting.limitedTo(1000L);
+
+            // then
+            Assertions.assertEquals(100L, limited.maximumIterations());
+        }
+
+        @Test
+        public void noFurtherLimitKeepsTheOwnOne() {
+            // when
+            final RunSetting limited = setting.limitedTo(Long.MAX_VALUE);
+
+            // then
+            Assertions.assertEquals(100L, limited.maximumIterations());
+        }
+    }
 }

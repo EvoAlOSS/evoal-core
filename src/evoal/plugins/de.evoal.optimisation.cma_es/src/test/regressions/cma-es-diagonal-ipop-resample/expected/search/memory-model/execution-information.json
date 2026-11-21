@@ -90,7 +90,8 @@
           "no-effect-axis" : true,
           "no-effect-coord" : true,
           "equal-fun-values" : true,
-          "stagnation" : true
+          "stagnation" : true,
+          "maximum-iterations" : null
         }
       },
       "record-all-correlations" : false

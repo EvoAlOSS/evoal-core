@@ -62,6 +62,24 @@ a CMA-ES run (`'cma-es-termination'`, appendix B.3 of the tutorial: `no-effect-a
 `no-effect-coord`, `condition-cov`, `equal-fun-values`, `stagnation`, `tol-x-up`, `tol-fun`,
 `tol-x`). The function value these criteria use is the first fitness component.
 
+### Iteration limit
+
+`'maximum-iterations'` of `'cma-es-termination'` (optional, no limit by default) ends a CMA-ES
+run after L(n, lambda) iterations, checked before the other criteria:
+
+| Type | L | Values of the archived BBOB entries |
+|---|---|---|
+| `'fixed-iteration-limit' { iterations }` | iterations | – |
+| `'quadratic-iteration-limit' { 'a'; 'b' }` | a + b (n + 3)^2 / sqrt(lambda) | BIPOP-CMA-ES 2009, IPOP-CMA-ES 2010: a = 100, b = 50 (pycma's default: b = 150) |
+| `'sep-iteration-limit' { 'a'; 'b' }` | a + b n sqrt(n / lambda) | IPOP-SEP-CMA-ES 2009: a = 100, b = 300 |
+
+L is computed for every CMA-ES run with the population size of that run, as `cmaes.m` does
+with `MaxIter` (version 3.61.beta: `stopMaxIter` is evaluated in every restart). pycma 4.6.0
+evaluates `maxiter` once, with the real-valued default 4 + 3 ln n, and keeps it for all
+restarts. A run ends when its number of updates reaches L, so the limit is ceil(L). A small
+BIPOP restart ends after the smaller of L and its own limit (half the evaluations of the large
+regime / lambda), as `min(maxiter0, ...)` in pycma.
+
 ### Restarts
 
 Every CMA-ES run takes its mean from the next candidate of `'initialisation'` and starts with
@@ -157,11 +175,13 @@ The diagonal model records no correlations. The statistics writer `'learned-link
    ```
 
 2. **Unit tests:** eigendecomposition, default parameters (pycma's example values for n = 20),
-   termination criteria, restart schedules.
+   termination criteria, iteration limits, restart schedules.
 3. **Regressions** (`src/test/regressions`):
    - `cma-es-rosenbrock-linkage`: memory model and `'learned-linkage'`;
    - `cma-es-bipop-restarts`: both regimes, budget cut-off;
-   - `cma-es-diagonal-ipop-resample`: diagonal model, IPOP, resampling constraint check.
+   - `cma-es-diagonal-ipop-resample`: diagonal model, IPOP, resampling constraint check;
+   - `cma-es-maximum-iterations`: IPOP with `'quadratic-iteration-limit'`; the four CMA-ES runs
+     end after 21, 18, 16 and 14 iterations.
 4. **COCO (statistical):** the comparison of the runtime distributions on BBOB with the archived
    CMA-ES entries is part of the COCO plugin of `evoal-benchmark-suites`.
 

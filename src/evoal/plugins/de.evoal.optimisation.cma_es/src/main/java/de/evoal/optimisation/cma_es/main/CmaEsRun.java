@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.IntToLongFunction;
 import java.util.random.RandomGenerator;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -45,6 +46,12 @@ final class CmaEsRun {
      * The evaluations of the current CMA-ES run.
      */
     private long evaluations;
+
+    /**
+     * The iteration limit of a CMA-ES run by its population size ('maximum-iterations' of
+     *   'cma-es-termination'), {@link Long#MAX_VALUE} for no limit.
+     */
+    private final IntToLongFunction iterationLimit;
 
     /**
      * The genotypes of the candidates sampled last, by their input; the survivors of a
@@ -98,9 +105,10 @@ final class CmaEsRun {
     private RunSetting setting;
 
     CmaEsRun(final DistributionFactory factory, final BoundTransform bounds, final Space searchSpace,
-             final Iterator<TypedEObject> means, final RestartSchedule schedule, final RandomGenerator samplingRandom,
-             final RandomGenerator restartRandom) {
+             final Iterator<TypedEObject> means, final RestartSchedule schedule, final IntToLongFunction iterationLimit,
+             final RandomGenerator samplingRandom, final RandomGenerator restartRandom) {
         this.factory = factory;
+        this.iterationLimit = iterationLimit;
         this.bounds = bounds;
         this.searchSpace = searchSpace;
         this.means = means;
@@ -235,8 +243,8 @@ final class CmaEsRun {
         }
 
         final double[] initialMean = bounds.inverse(valuesOf(means.next()));
-        setting = runSetting;
-        distribution = factory.create(runSetting, initialMean);
+        setting = runSetting.limitedTo(iterationLimit.applyAsLong(runSetting.populationSize()));
+        distribution = factory.create(setting, initialMean);
         initialStepSize = distribution.stepSize();
         history = new RunHistory();
         evaluations = 0;

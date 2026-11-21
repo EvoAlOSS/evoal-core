@@ -226,6 +226,7 @@ module de.evoal.optimisation.cma_es.optimisation {
      *     lie within the tolerance;
      *   'tol-x': sigma sqrt(C_ii) and sigma |p_c,i| are below the tolerance times sigma_0 in
      *     every coordinate.
+     * Optionally, 'maximum-iterations' ends a run after a number of iterations.
      * The function value of a candidate is the first component of its fitness.
      */
     type 'cma-es-termination' extends configuration {
@@ -272,6 +273,69 @@ module de.evoal.optimisation.cma_es.optimisation {
          * Whether 'stagnation' is checked.
          */
         stagnation : boolean := true;
+
+        /**
+         * The largest number of iterations of a run; no limit by default. It is checked
+         *   before the other criteria. A small restart of BIPOP ends after the smaller of this
+         *   limit and its own one.
+         */
+        'maximum-iterations' : optional instance 'iteration-limit';
+    }
+
+    /**
+     * The largest number of iterations L(n, lambda) of a CMA-ES run, with n search features and
+     *   the population size lambda of that run. It is computed anew for every run, as
+     *   <tt>cmaes.m</tt> does with <tt>MaxIter</tt> (pycma instead evaluates its
+     *   <tt>maxiter</tt> once, with the default lambda of the first run). A run ends when its
+     *   number of iterations reaches L.
+     */
+    abstract type 'iteration-limit' extends configuration {}
+
+    /**
+     * The same limit for every run.
+     */
+    type 'fixed-iteration-limit' extends 'iteration-limit' {
+        /**
+         * The number of iterations.
+         */
+        @LowerBoundary { boundary := 1; }
+        iterations : int;
+    }
+
+    /**
+     * L = a + b (n + 3)^2 / sqrt(lambda). The archived BBOB entries BIPOP-CMA-ES 2009 and
+     *   IPOP-CMA-ES 2010 use a = 100, b = 50; pycma's default is a = 100, b = 150.
+     */
+    type 'quadratic-iteration-limit' extends 'iteration-limit' {
+        /**
+         * The constant a.
+         */
+        @LowerBoundary { boundary := 0.0; inclusive := true; }
+        'a' : real;
+
+        /**
+         * The factor b.
+         */
+        @LowerBoundary { boundary := 0.0; inclusive := true; }
+        'b' : real;
+    }
+
+    /**
+     * L = a + b n sqrt(n / lambda), for the diagonal model. The archived BBOB entry
+     *   IPOP-SEP-CMA-ES 2009 uses a = 100, b = 300.
+     */
+    type 'sep-iteration-limit' extends 'iteration-limit' {
+        /**
+         * The constant a.
+         */
+        @LowerBoundary { boundary := 0.0; inclusive := true; }
+        'a' : real;
+
+        /**
+         * The factor b.
+         */
+        @LowerBoundary { boundary := 0.0; inclusive := true; }
+        'b' : real;
     }
 
     /**

@@ -17,9 +17,11 @@ module de.evoal.optimisation.cma_es {
     exports de.evoal.optimisation.cma_es.main;
     exports de.evoal.optimisation.cma_es.main.distribution;
     exports de.evoal.optimisation.cma_es.main.restart;
+    exports de.evoal.optimisation.cma_es.main.termination;
 
     // Opening packages to CDI
     opens de.evoal.optimisation.cma_es;
     opens de.evoal.optimisation.cma_es.main to weld.core.impl;
     opens de.evoal.optimisation.cma_es.main.restart to weld.core.impl;
+    opens de.evoal.optimisation.cma_es.main.termination to weld.core.impl;
 }

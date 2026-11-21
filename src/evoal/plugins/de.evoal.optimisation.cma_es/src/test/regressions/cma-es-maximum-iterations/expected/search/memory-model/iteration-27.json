@@ -1,0 +1,222 @@
+{
+  "formatVersion" : "2027.4.0",
+  "number" : 27,
+  "individuals" : [ {
+    "id" : 302,
+    "input" : {
+      "x:0" : -0.1457744130590669,
+      "x:1" : 0.20049093083858624
+    },
+    "output" : {
+      "y:0" : 0.101643406199761
+    },
+    "fitness" : [ 0.101643406199761 ],
+    "relationships" : [ ],
+    "properties" : {
+      "restart" : 1
+    }
+  }, {
+    "id" : 306,
+    "input" : {
+      "x:0" : 0.36998740397558205,
+      "x:1" : -0.7555554050146387
+    },
+    "output" : {
+      "y:0" : 1.2786186191942601
+    },
+    "fitness" : [ 1.2786186191942601 ],
+    "relationships" : [ ],
+    "properties" : {
+      "restart" : 1
+    }
+  }, {
+    "id" : 303,
+    "input" : {
+      "x:0" : 1.4422302740255937,
+      "x:1" : 0.11172748450076964
+    },
+    "output" : {
+      "y:0" : 2.104994224901678
+    },
+    "fitness" : [ 2.104994224901678 ],
+    "relationships" : [ ],
+    "properties" : {
+      "restart" : 1
+    }
+  }, {
+    "id" : 297,
+    "input" : {
+      "x:0" : 1.7050709531731985,
+      "x:1" : 0.6093827154872835
+    },
+    "output" : {
+      "y:0" : 3.6499615432242707
+    },
+    "fitness" : [ 3.6499615432242707 ],
+    "relationships" : [ ],
+    "properties" : {
+      "restart" : 1
+    }
+  }, {
+    "id" : 305,
+    "input" : {
+      "x:0" : -1.3163172098693159,
+      "x:1" : 1.0448903641469218
+    },
+    "output" : {
+      "y:0" : 3.9162827431723146
+    },
+    "fitness" : [ 3.9162827431723146 ],
+    "relationships" : [ ],
+    "properties" : {
+      "restart" : 1
+    }
+  }, {
+    "id" : 298,
+    "input" : {
+      "x:0" : -1.8881331741173915,
+      "x:1" : -0.6671469766856395
+    },
+    "output" : {
+      "y:0" : 4.455217060204194
+    },
+    "fitness" : [ 4.455217060204194 ],
+    "relationships" : [ ],
+    "properties" : {
+      "restart" : 1
+    }
+  }, {
+    "id" : 299,
+    "input" : {
+      "x:0" : 1.4753626826453137,
+      "x:1" : 1.1595256464970718
+    },
+    "output" : {
+      "y:0" : 4.865694495111281
+    },
+    "fitness" : [ 4.865694495111281 ],
+    "relationships" : [ ],
+    "properties" : {
+      "restart" : 1
+    }
+  }, {
+    "id" : 300,
+    "input" : {
+      "x:0" : 2.9851289713579163,
+      "x:1" : 0.4149547601254947
+    },
+    "output" : {
+      "y:0" : 9.255369881541984
+    },
+    "fitness" : [ 9.255369881541984 ],
+    "relationships" : [ ],
+    "properties" : {
+      "restart" : 1
+    }
+  }, {
+    "id" : 301,
+    "input" : {
+      "x:0" : 2.3571751959292007,
+      "x:1" : 1.411639042350488
+    },
+    "output" : {
+      "y:0" : 9.541724476080272
+    },
+    "fitness" : [ 9.541724476080272 ],
+    "relationships" : [ ],
+    "properties" : {
+      "restart" : 1
+    }
+  }, {
+    "id" : 308,
+    "input" : {
+      "x:0" : -2.450136302873667,
+      "x:1" : 1.5400576163431006
+    },
+    "output" : {
+      "y:0" : 10.746722825972228
+    },
+    "fitness" : [ 10.746722825972228 ],
+    "relationships" : [ ],
+    "properties" : {
+      "restart" : 1
+    }
+  }, {
+    "id" : 307,
+    "input" : {
+      "x:0" : 3.134792731186743,
+      "x:1" : -0.8778031029694149
+    },
+    "output" : {
+      "y:0" : 11.368002042666706
+    },
+    "fitness" : [ 11.368002042666706 ],
+    "relationships" : [ ],
+    "properties" : {
+      "restart" : 1
+    }
+  }, {
+    "id" : 304,
+    "input" : {
+      "x:0" : 4.281105122743057,
+      "x:1" : 0.8241564550921832
+    },
+    "output" : {
+      "y:0" : 19.68632879691707
+    },
+    "fitness" : [ 19.68632879691707 ],
+    "relationships" : [ ],
+    "properties" : {
+      "restart" : 1
+    }
+  } ],
+  "steps" : [ ],
+  "ranks" : [ {
+    "number" : 0,
+    "members" : [ 302 ]
+  }, {
+    "number" : 1,
+    "members" : [ 306 ]
+  }, {
+    "number" : 2,
+    "members" : [ 303 ]
+  }, {
+    "number" : 3,
+    "members" : [ 297 ]
+  }, {
+    "number" : 4,
+    "members" : [ 305 ]
+  }, {
+    "number" : 5,
+    "members" : [ 298 ]
+  }, {
+    "number" : 6,
+    "members" : [ 299 ]
+  }, {
+    "number" : 7,
+    "members" : [ 300 ]
+  }, {
+    "number" : 8,
+    "members" : [ 301 ]
+  }, {
+    "number" : 9,
+    "members" : [ 308 ]
+  }, {
+    "number" : 10,
+    "members" : [ 307 ]
+  }, {
+    "number" : 11,
+    "members" : [ 304 ]
+  } ],
+  "bestSoFar" : 148,
+  "metrics" : {
+    "evaluations.real" : 210,
+    "evaluations.surrogate" : 0,
+    "sigma" : 1.5337561123977612,
+    "axis-ratio" : 3.190885669103257,
+    "population-size" : 12,
+    "restart" : 1,
+    "mean-x:0" : 0.18457089620229672,
+    "mean-x:1" : 0.4074463193132667
+  }
+}

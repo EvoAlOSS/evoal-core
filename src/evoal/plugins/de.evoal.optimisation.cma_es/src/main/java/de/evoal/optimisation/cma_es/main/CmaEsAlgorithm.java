@@ -48,6 +48,7 @@ import de.evoal.optimisation.cma_es.main.distribution.StrategyParameters;
 import de.evoal.optimisation.cma_es.main.distribution.TerminationCriteria;
 import de.evoal.optimisation.cma_es.main.restart.RestartStrategy;
 import de.evoal.optimisation.cma_es.main.restart.RunSetting;
+import de.evoal.optimisation.cma_es.main.termination.IterationLimit;
 
 /**
  * The covariance matrix adaptation evolution strategy (DL type {@code 'cma-es'}), a
@@ -155,6 +156,11 @@ public class CmaEsAlgorithm extends TemplateAlgorithm {
      * The termination criteria of CMA-ES.
      */
     private TerminationCriteria termination;
+
+    /**
+     * The iteration limit of every CMA-ES run ('maximum-iterations'), {@code null} for none.
+     */
+    private IterationLimit iterationLimit;
 
     /**
      * @return The bounds of the search features from the DDL; a side without bound is
@@ -328,7 +334,23 @@ public class CmaEsAlgorithm extends TemplateAlgorithm {
         }
     }
 
+    /**
+     * @param runPopulationSize The population size lambda of a CMA-ES run.
+     * @return The largest number of iterations of the run by 'maximum-iterations', or
+     *   {@link Long#MAX_VALUE} without a limit.
+     */
+    private long iterationLimitFor(final int runPopulationSize) {
+        if(iterationLimit == null) {
+            return Long.MAX_VALUE;
+        }
+
+        return iterationLimit.iterations(searchSpace.size(), runPopulationSize);
+    }
+
     private TerminationCriteria readTermination(final EObject configuration) {
+        final EObject limit = optional(configuration, "maximum-iterations");
+        iterationLimit = limit == null ? null : BeanFactory.createComponent(IterationLimit.class, limit);
+
         return new TerminationCriteria(helper.<Double>lookup(configuration, "tol-fun"),
                                        helper.<Double>lookup(configuration, "tol-x"),
                                        helper.<Double>lookup(configuration, "tol-x-up"),
@@ -378,6 +400,7 @@ public class CmaEsAlgorithm extends TemplateAlgorithm {
                             searchSpace,
                             means,
                             restartStrategy.schedule(populationSize),
+                            this::iterationLimitFor,
                             randomService.random("de.evoal.optimisation.cma_es/sampling"),
                             randomService.random("de.evoal.optimisation.cma_es/restart"));
     }
