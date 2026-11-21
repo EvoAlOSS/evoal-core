@@ -8,9 +8,11 @@ import de.evoal.models.v202704.optimisation.memory.IterationStep;
 import de.evoal.models.v202704.optimisation.memory.MemoryFactory;
 import de.evoal.models.v202704.optimisation.memory.UnorderedIterationStep;
 
+import de.evoal.optimisation.api.evaluation.EvaluationBudgetExhaustedException;
 import de.evoal.optimisation.api.events.RunEventDispatcher;
 import de.evoal.optimisation.api.events.StepExecuted;
 import de.evoal.optimisation.api.run.Candidate;
+import de.evoal.optimisation.api.run.ExecutedStep;
 import de.evoal.optimisation.api.run.Population;
 import de.evoal.optimisation.api.run.Progress;
 import de.evoal.optimisation.api.run.Ranking;
@@ -21,8 +23,10 @@ import de.evoal.optimisation.api.run.SearchProcedure;
  *   the steps of every further iteration. The run kernel executes the template.
  * <p>
  * After a step is executed, the template publishes a {@link StepExecuted} with the step's
- *   kind and description. The executed steps of an iteration become the steps of its
- *   memory state ({@link Population#steps()}).
+ *   kind and description. The executed steps of an iteration with their outputs
+ *   ({@link Step#outputs}) become the steps of its memory state ({@link Population#steps()}).
+ *   A step that an exhausted evaluation budget interrupts is recorded with the outputs it
+ *   has so far.
  * <p>
  * The population of an iteration consists of the {@link #members()}, by default the
  *   population of the search state, ranked by the optimisation values ({@link #ranks}). Afterwards, every member is replaced by a copy that is an
@@ -39,7 +43,7 @@ public class Template implements SearchProcedure {
     /**
      * The executed steps since the last population.
      */
-    private final List<IterationStep> executedSteps = new ArrayList<>();
+    private final List<ExecutedStep> executedSteps = new ArrayList<>();
 
     /**
      * The steps of the initialisation.
@@ -67,11 +71,16 @@ public class Template implements SearchProcedure {
 
     private void execute(final List<Step> steps) {
         for(final Step step : steps) {
-            step.execute(state);
+            try {
+                step.execute(state);
+            } catch(final EvaluationBudgetExhaustedException e) {
+                // the memory model shows what the interrupted step produced so far
+                record(step);
+                throw e;
+            }
 
-            final IterationStep executed = toIterationStep(step);
-            executedSteps.add(executed);
-            events.publish(new StepExecuted(state.getIteration(), executed));
+            record(step);
+            events.publish(new StepExecuted(state.getIteration(), toIterationStep(step)));
         }
     }
 
@@ -134,6 +143,14 @@ public class Template implements SearchProcedure {
     }
 
     /**
+     * Records the executed step with its outputs.
+     */
+    private void record(final Step step) {
+        final List<Candidate> outputs = step.outputs(state);
+        executedSteps.add(new ExecutedStep(step.kind(), step.description(), outputs));
+    }
+
+    /**
      * @return The search state, e.g., for tests.
      */
     public SearchState state() {
@@ -141,7 +158,7 @@ public class Template implements SearchProcedure {
     }
 
     /**
-     * @return The step for the memory model; its description is "kind: description".
+     * @return The step for the event; its description is "kind: description".
      */
     private static IterationStep toIterationStep(final Step step) {
         final UnorderedIterationStep executed = MemoryFactory.eINSTANCE.createUnorderedIterationStep();

@@ -244,10 +244,9 @@
           <details key="documentation" value="*&#xA;The values of the input space.&#xA;&#xA;@constraint individual.input.eClass() == execution.inputSpace&#xA;"/>
         </eAnnotations>
       </eStructuralFeatures>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="output" lowerBound="1"
-          eType="#//TypedEObject">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="output" eType="#//TypedEObject">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="*&#xA;The values of the output space.&#xA;&#xA;@constraint individual.output.eClass() == execution.outputSpace&#xA;"/>
+          <details key="documentation" value="*&#xA;The values of the output space; missing if the individual was not evaluated, e.g. a candidate created before the evaluation budget ran out.&#xA;&#xA;@constraint individual.output == null or individual.output.eClass() == execution.outputSpace&#xA;"/>
         </eAnnotations>
       </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="fitness" upperBound="-1"

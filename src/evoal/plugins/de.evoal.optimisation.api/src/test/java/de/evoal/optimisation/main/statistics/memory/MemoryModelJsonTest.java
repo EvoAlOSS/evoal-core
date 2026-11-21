@@ -322,6 +322,48 @@ public class MemoryModelJsonTest {
         }
 
         @Test
+        public void theFinalVersionHoldsOnlyTheMembersWithTheirRelationshipsToThePreviousIteration() {
+            // given: in the step, 3 mutates 4; in the ranks, 3 is a copy of 1 of the previous iteration
+            final Individual previous = MemoryModels.individual(1, new double[] {0.5, 1.0}, 2.0);
+            MemoryModels.relate(firstOfStep(), MemoryFactory.eINSTANCE.createMutation(), secondOfStep());
+            MemoryModels.relate(iteration.getRanks().getFirst().getMembers().getFirst(),
+                                MemoryFactory.eINSTANCE.createIdentity(), previous);
+
+            // when
+            final ObjectNode document = json.toIteration(iteration, false);
+
+            // then
+            final String expectedIndividuals = "[{\"id\":3,\"input\":{\"x:0\":0.5,\"x:1\":1.0},\"output\":{\"y:0\":2.0},"
+                    + "\"fitness\":[2.0],\"relationships\":[{\"kind\":\"identity\",\"targets\":[1]}]}]";
+            Assertions.assertEquals(expectedIndividuals, document.get("individuals").toString());
+            Assertions.assertEquals("[]", document.get("steps").toString());
+        }
+
+        @Test
+        public void theStepsVersionRelatesTheIndividualsOfTheStepsToTheirDirectPredecessors() {
+            // given
+            final Individual previous = MemoryModels.individual(1, new double[] {0.5, 1.0}, 2.0);
+            MemoryModels.relate(firstOfStep(), MemoryFactory.eINSTANCE.createMutation(), secondOfStep());
+            MemoryModels.relate(iteration.getRanks().getFirst().getMembers().getFirst(),
+                                MemoryFactory.eINSTANCE.createIdentity(), previous);
+
+            // when
+            final ObjectNode document = json.toIteration(iteration, true);
+
+            // then
+            Assertions.assertEquals("[{\"kind\":\"mutation\",\"targets\":[4]}]",
+                                    document.get("individuals").get(0).get("relationships").toString());
+        }
+
+        private Individual firstOfStep() {
+            return ((UnorderedIterationStep) iteration.getSteps().getFirst()).getIndividuals().get(0);
+        }
+
+        private Individual secondOfStep() {
+            return ((UnorderedIterationStep) iteration.getSteps().getFirst()).getIndividuals().get(1);
+        }
+
+        @Test
         public void anIdWithOtherValuesIsRejected() {
             // given
             final Individual different = MemoryModels.individual(4, new double[] {9.0, 9.0}, 9.0);

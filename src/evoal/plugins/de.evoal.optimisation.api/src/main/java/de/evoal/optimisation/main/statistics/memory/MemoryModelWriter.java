@@ -44,8 +44,10 @@ import de.evoal.optimisation.api.statistics.writer.StatisticsWriter;
  * <p>
  * The EvoAl version is the version of this module; all EvoAl modules share one version.
  * <p>
- * The executed steps of the iterations are written only if the configuration asks for
- *   them ({@code 'steps' := true}).
+ * By default, the final version of the memory model is written: an iteration holds its
+ *   ranked members. With {@code 'steps' := true}, the steps version is written: every executed
+ *   step additionally holds its outputs, and every individual is related to its direct
+ *   predecessor. Both versions have the same individual ids.
  * <p>
  * The writer is created while the metrics are still being defined. Therefore, it prepares
  *   the folder and writes {@code execution-information.json} when the run starts
@@ -151,7 +153,7 @@ public class MemoryModelWriter implements StatisticsWriter {
     private ExecutionRecorder recorder;
 
     /**
-     * Whether the executed steps of the iterations are written.
+     * Whether the steps version is written instead of the final version.
      */
     private boolean steps;
 

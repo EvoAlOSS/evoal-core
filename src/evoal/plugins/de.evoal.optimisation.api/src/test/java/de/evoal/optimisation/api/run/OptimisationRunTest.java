@@ -20,12 +20,14 @@ import de.evoal.models.v202704.optimisation.execution.TerminationCriterion;
 import de.evoal.models.v202704.optimisation.memory.Identity;
 import de.evoal.models.v202704.optimisation.memory.Individual;
 import de.evoal.models.v202704.optimisation.memory.Iteration;
+import de.evoal.models.v202704.optimisation.memory.IterationStep;
 import de.evoal.models.v202704.optimisation.memory.Mutation;
 import de.evoal.models.v202704.optimisation.memory.PropertyScope;
 import de.evoal.models.v202704.optimisation.memory.Rank;
 import de.evoal.models.v202704.optimisation.memory.Recombination;
 import de.evoal.models.v202704.optimisation.memory.Relationship;
 import de.evoal.models.v202704.optimisation.memory.Replacement;
+import de.evoal.models.v202704.optimisation.memory.UnorderedIterationStep;
 
 import de.evoal.optimisation.api.evaluation.EvaluationBudgetExhaustedException;
 import de.evoal.optimisation.api.evaluation.EvaluationSource;
@@ -115,12 +117,19 @@ public class OptimisationRunTest {
      */
     private static Candidate member(final double value, final Lineage lineage) {
         final TypedEObject input = Mockito.mock(TypedEObject.class);
+
+        return Candidate.evaluated(input, evaluation(value), lineage);
+    }
+
+    /**
+     * @return An evaluation whose fitness and optimisation value are {@code value}.
+     */
+    private static Evaluation evaluation(final double value) {
         final TypedEObject output = Mockito.mock(TypedEObject.class);
         final FitnessLayout layout = new FitnessLayout(List.of(FitnessComponent.named("f")));
         final Fitness fitness = new Fitness(layout, new double[] {value});
-        final Evaluation evaluation = new Evaluation(output, fitness, new Value(value));
 
-        return Candidate.evaluated(input, evaluation, lineage);
+        return new Evaluation(output, fitness, new Value(value));
     }
 
     private static List<Integer> idsOf(final Iteration iteration) {
@@ -553,6 +562,125 @@ public class OptimisationRunTest {
             final Relationship relationship = individual(iterations.get(1), 1).getRelationships().getFirst();
             Assertions.assertInstanceOf(Mutation.class, relationship);
             Assertions.assertEquals(List.of(0), targetIds(relationship));
+        }
+    }
+
+    @Nested
+    @DisplayName("given steps with outputs")
+    class StepOutputs {
+        /**
+         * Iteration 0 samples a (id 0) and b (id 1). Iteration 1 selects the survivor of a twice
+         *   (ids 2, 3), recombines it with the survivor of b, which occurs in no step, into r
+         *   (4), mutates r into m (5) and creates u (6), which is not evaluated, evaluates m and
+         *   keeps m and the survivor of a.
+         */
+        private final FakeProcedure procedure = new FakeProcedure((number, previous) -> {
+            if(number == 0) {
+                final Candidate a = member(1, Lineage.NONE);
+                final Candidate b = member(2, Lineage.NONE);
+                return new Population(List.of(a, b), List.of(List.of(0, 1)),
+                                      List.of(new ExecutedStep("Initialization", "sample", List.of(a, b))));
+            }
+
+            final Candidate parentA = previous.get(0).survivor();
+            final Candidate parentB = previous.get(1).survivor();
+            final Candidate recombined = new Candidate(Mockito.mock(TypedEObject.class),
+                                                       Lineage.recombination(List.of(parentA, parentB)));
+            final Candidate mutated = new Candidate(Mockito.mock(TypedEObject.class),
+                                                    Lineage.recombination(List.of(parentA, parentB)),
+                                                    Lineage.mutation(recombined));
+            mutated.evaluate(evaluation(3));
+            final Candidate unevaluated = new Candidate(Mockito.mock(TypedEObject.class), Lineage.mutation(parentA));
+
+            final List<ExecutedStep> steps = List.of(
+                    new ExecutedStep("Selection", "select", List.of(parentA, parentA)),
+                    new ExecutedStep("Adaption", "recombine", List.of(recombined)),
+                    new ExecutedStep("Adaption", "mutate", List.of(mutated, unevaluated)),
+                    new ExecutedStep("FitnessCalculation", "evaluate", List.of(mutated)),
+                    new ExecutedStep("Acceptance", "replace", List.of(mutated, parentA)),
+                    new ExecutedStep("ParameterAdjustment", "adjust", List.of()));
+            return new Population(List.of(mutated, parentA), List.of(List.of(0), List.of(1)), steps);
+        });
+
+        @BeforeEach
+        public void run() {
+            lastIteration = 1;
+            kernel.execute(criterion, procedure);
+        }
+
+        private List<IterationStep> steps() {
+            return iterations.get(1).getSteps();
+        }
+
+        private Individual inStep(final int step, final int index) {
+            return ((UnorderedIterationStep) steps().get(step)).getIndividuals().get(index);
+        }
+
+        private List<Integer> idsOfStep(final int step) {
+            return ((UnorderedIterationStep) steps().get(step)).getIndividuals()
+                                                                .stream()
+                                                                .map(Individual::getId)
+                                                                .toList();
+        }
+
+        @Test
+        public void everyStepHoldsItsOutputsWithIdsInTheOrderOfTheirFirstOccurrence() {
+            Assertions.assertEquals(List.of("Selection: select", "Adaption: recombine", "Adaption: mutate",
+                                            "FitnessCalculation: evaluate", "Acceptance: replace",
+                                            "ParameterAdjustment: adjust"),
+                                    steps().stream().map(IterationStep::getDescription).toList());
+            Assertions.assertEquals(List.of(2, 3), idsOfStep(0));
+            Assertions.assertEquals(List.of(4), idsOfStep(1));
+            Assertions.assertEquals(List.of(5, 6), idsOfStep(2));
+            Assertions.assertEquals(List.of(5), idsOfStep(3));
+            Assertions.assertEquals(List.of(5, 2), idsOfStep(4));
+            Assertions.assertEquals(List.of(), idsOfStep(5));
+            Assertions.assertEquals(List.of(2, 5), idsOf(iterations.get(1)));
+        }
+
+        @Test
+        public void anIndividualOfSeveralStepsIsACopyWithTheSameValues() {
+            final Individual mutated = inStep(2, 0);
+            final Individual evaluated = inStep(3, 0);
+
+            Assertions.assertNotSame(mutated, evaluated);
+            Assertions.assertSame(mutated.getInput(), evaluated.getInput());
+            Assertions.assertSame(mutated.getOutput(), evaluated.getOutput());
+            Assertions.assertEquals(mutated.getFitness(), evaluated.getFitness());
+        }
+
+        @Test
+        public void anUnevaluatedOutputHasNoOutput() {
+            final Individual unevaluated = inStep(2, 1);
+
+            Assertions.assertNull(unevaluated.getOutput());
+            Assertions.assertEquals(List.of(), unevaluated.getFitness());
+        }
+
+        @Test
+        public void theStepsRelateEveryIndividualToItsDirectPredecessor() {
+            // the selected survivor stands for a, the survivor of b that occurs in no step for b
+            Assertions.assertInstanceOf(Identity.class, inStep(0, 0).getRelationships().getFirst());
+            Assertions.assertEquals(List.of(0), targetIds(inStep(0, 1).getRelationships().getFirst()));
+            Assertions.assertInstanceOf(Recombination.class, inStep(1, 0).getRelationships().getFirst());
+            Assertions.assertEquals(List.of(1, 2), targetIds(inStep(1, 0).getRelationships().getFirst()));
+
+            final Relationship mutation = inStep(2, 0).getRelationships().getFirst();
+            Assertions.assertInstanceOf(Mutation.class, mutation);
+            Assertions.assertEquals(List.of(4), targetIds(mutation));
+            Assertions.assertEquals(List.of(2), targetIds(inStep(2, 1).getRelationships().getFirst()));
+        }
+
+        @Test
+        public void theRanksRelateTheMembersToThePreviousIteration() {
+            final Relationship recombination = individual(iterations.get(1), 5).getRelationships().getFirst();
+            Assertions.assertInstanceOf(Recombination.class, recombination);
+            Assertions.assertEquals(List.of(0, 1), targetIds(recombination));
+
+            final Relationship identity = individual(iterations.get(1), 2).getRelationships().getFirst();
+            Assertions.assertInstanceOf(Identity.class, identity);
+            Assertions.assertEquals(List.of(0), targetIds(identity));
+            Assertions.assertNotSame(inStep(4, 0), individual(iterations.get(1), 5));
         }
     }
 

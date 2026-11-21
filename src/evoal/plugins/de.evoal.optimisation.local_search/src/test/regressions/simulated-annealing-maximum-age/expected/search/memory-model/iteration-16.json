@@ -2,7 +2,7 @@
   "formatVersion" : "2027.4.0",
   "number" : 16,
   "individuals" : [ {
-    "id" : 16,
+    "id" : 30,
     "input" : {
       "x:0" : 3.696479442898308,
       "x:1" : 1.109097128351447
@@ -13,7 +13,7 @@
     "fitness" : [ 15769.729856382392 ],
     "relationships" : [ {
       "kind" : "mutation",
-      "targets" : [ 15 ]
+      "targets" : [ 29 ]
     } ]
   } ],
   "steps" : [ {
@@ -23,11 +23,11 @@
   }, {
     "kind" : "unordered",
     "description" : "FitnessCalculation: evaluate the offered candidates until one is accepted",
-    "individuals" : [ ]
+    "individuals" : [ 30 ]
   }, {
     "kind" : "unordered",
     "description" : "Acceptance: move to the accepted neighbour",
-    "individuals" : [ ]
+    "individuals" : [ 30 ]
   }, {
     "kind" : "unordered",
     "description" : "ParameterAdjustment: adjust the accepting strategy",
@@ -35,11 +35,11 @@
   }, {
     "kind" : "unordered",
     "description" : "Check: maximum-age (replace): 0 of 1 candidates failed",
-    "individuals" : [ ]
+    "individuals" : [ 30 ]
   } ],
   "ranks" : [ {
     "number" : 0,
-    "members" : [ 16 ]
+    "members" : [ 30 ]
   } ],
   "bestSoFar" : 0,
   "metrics" : {

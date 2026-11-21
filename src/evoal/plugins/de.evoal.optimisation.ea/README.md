@@ -207,11 +207,21 @@ replacement := 'plus-replacement' { selection := 'nsga2-selection' {}; };
 
 ## Memory model
 
-A child that was recombined refers to both parents (`Recombination`) and, if the sibling is
-recorded too, to its sibling (`partner`); a child that was only mutated refers to its parent
-(`Mutation`); an unchanged child is an `Identity` of its parent. The relationships have the
-properties `operators` (the operators that changed the child) and `changed-features` (the
-features whose genes differ from the parent whose place the child takes).
+In the final version (`'memory-model'`, default), a child relates to the population of the
+previous generation: a child that was recombined refers to both parents (`Recombination`) and,
+if the sibling is recorded too, to its sibling (`partner`); a child that was only mutated refers
+to its parent (`Mutation`); an unchanged child is an `Identity` of its parent. The relationships
+have the properties `operators` (the operators that changed the child) and `changed-features`
+(the features whose genes differ from the parent whose place the child takes).
+
+In the steps version (`'memory-model' { 'steps' := true; }`), every step holds its outputs: the
+selection the selected members, the recombination the recombined children, the mutation the
+mutated children, the checks the checked children, the evaluation the evaluated ones and the
+replacement the next population. A recombined child refers to the selected parents
+(`Recombination`, with the crossover operators and the features changed by them) and to its
+sibling; a mutated child refers to its recombined child (`Mutation`, with the mutation operators
+and the features changed by them). A child that the mutation left unchanged is the recombined
+child itself.
 
 ## Examples
 

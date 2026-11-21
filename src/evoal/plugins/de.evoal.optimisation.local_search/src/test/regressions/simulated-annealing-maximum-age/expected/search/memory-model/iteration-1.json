@@ -4,6 +4,20 @@
   "individuals" : [ {
     "id" : 1,
     "input" : {
+      "x:0" : 1.1,
+      "x:1" : 1.1
+    },
+    "output" : {
+      "y:0" : 1.2200000000000022
+    },
+    "fitness" : [ 1.2200000000000022 ],
+    "relationships" : [ {
+      "kind" : "mutation",
+      "targets" : [ 0 ]
+    } ]
+  }, {
+    "id" : 2,
+    "input" : {
       "x:0" : 1.0,
       "x:1" : 1.0
     },
@@ -23,11 +37,11 @@
   }, {
     "kind" : "unordered",
     "description" : "FitnessCalculation: evaluate the offered candidates until one is accepted",
-    "individuals" : [ ]
+    "individuals" : [ 1 ]
   }, {
     "kind" : "unordered",
     "description" : "Acceptance: move to the accepted neighbour",
-    "individuals" : [ ]
+    "individuals" : [ 2 ]
   }, {
     "kind" : "unordered",
     "description" : "ParameterAdjustment: adjust the accepting strategy",
@@ -35,11 +49,11 @@
   }, {
     "kind" : "unordered",
     "description" : "Check: maximum-age (replace): 0 of 1 candidates failed",
-    "individuals" : [ ]
+    "individuals" : [ 2 ]
   } ],
   "ranks" : [ {
     "number" : 0,
-    "members" : [ 1 ]
+    "members" : [ 2 ]
   } ],
   "bestSoFar" : 0,
   "metrics" : {

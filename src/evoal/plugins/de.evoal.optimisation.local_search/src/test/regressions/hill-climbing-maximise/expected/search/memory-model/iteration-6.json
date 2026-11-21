@@ -2,7 +2,7 @@
   "formatVersion" : "2027.4.0",
   "number" : 6,
   "individuals" : [ {
-    "id" : 6,
+    "id" : 18,
     "input" : {
       "x:0" : 1.3999999999999995,
       "x:1" : 5.0
@@ -13,15 +13,15 @@
     "fitness" : [ -924.3200000000011 ],
     "relationships" : [ {
       "kind" : "mutation",
-      "targets" : [ 5 ]
+      "targets" : [ 15 ]
     } ]
   } ],
   "steps" : [ ],
   "ranks" : [ {
     "number" : 0,
-    "members" : [ 6 ]
+    "members" : [ 18 ]
   } ],
-  "bestSoFar" : 6,
+  "bestSoFar" : 18,
   "metrics" : {
     "evaluations.real" : 19,
     "evaluations.surrogate" : 0

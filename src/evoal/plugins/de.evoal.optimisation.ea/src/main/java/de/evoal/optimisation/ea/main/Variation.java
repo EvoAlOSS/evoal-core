@@ -322,7 +322,9 @@ final class Variation {
     }
 
     /**
-     * @return The candidate of the child.
+     * @return The candidate of the child, related to its parents: an unchanged copy of the first
+     *   parent, a recombination of the parents or a mutation of the first parent, with the
+     *   operators that changed the child and the changed features.
      */
     Candidate toCandidate(final Offspring child) {
         final Candidate parent = child.parents.getFirst();
@@ -346,5 +348,44 @@ final class Variation {
         }
 
         return new Candidate(genotype.decode(child.genome), lineage);
+    }
+
+    /**
+     * The candidate of a child after its mutation ({@link #mutate}). Its lineage relates it to
+     *   the parents as {@link #toCandidate}; if the mutation changed it, its step lineage is the
+     *   mutation of the recombined child, with the operators and changed features of the
+     *   mutation. A child that the mutation left unchanged is the recombined child itself, and a
+     *   child equal to its first parent is an unchanged copy of it, as in {@link #toCandidate}.
+     *
+     * @param child The mutated child.
+     * @param recombined The candidate of the child after the recombination ({@link #toCandidate}).
+     * @param beforeMutation The genome of the child before the mutation.
+     * @param operatorsBefore The number of operators that changed the child before the mutation.
+     * @return The candidate of the child.
+     */
+    Candidate toMutatedCandidate(final Offspring child, final Candidate recombined, final Genome beforeMutation,
+                                 final int operatorsBefore) {
+        if(genotype.isUnchanged(beforeMutation, child.genome)) {
+            return recombined;
+        }
+
+        final Candidate candidate = toCandidate(child);
+        if(candidate.lineage().kind() == Lineage.Kind.IDENTITY) {
+            // equal to the first parent: the copy keeps its evaluation
+            return candidate;
+        }
+
+        final List<String> mutationOperators = child.operators.subList(operatorsBefore, child.operators.size());
+        Lineage step = Lineage.mutation(recombined)
+                              .withProperty(OPERATORS, List.copyOf(mutationOperators))
+                              .withProperty(CHANGED_FEATURES, genotype.changedFeatures(beforeMutation, child.genome));
+        if(!child.primaryFeatures.isEmpty()) {
+            step = step.withProperty(PRIMARY_FEATURES, List.copyOf(child.primaryFeatures));
+        }
+        if(!child.propagatedFeatures.isEmpty()) {
+            step = step.withProperty(PROPAGATED_FEATURES, List.copyOf(child.propagatedFeatures));
+        }
+
+        return new Candidate(candidate.input(), candidate.lineage(), step);
     }
 }

@@ -36,6 +36,11 @@ public final class EvaluateCandidates implements FitnessCalculation {
     private final BiPredicate<SearchState, Candidate> acceptable;
 
     /**
+     * The candidates the last execution evaluated or is about to evaluate, in their order.
+     */
+    private List<Candidate> evaluated = List.of();
+
+    /**
      * Evaluates the candidates.
      */
     private final Evaluator evaluator;
@@ -100,6 +105,8 @@ public final class EvaluateCandidates implements FitnessCalculation {
                                                  .stream()
                                                  .filter(candidate -> !candidate.isEvaluated())
                                                  .toList();
+        evaluated = unevaluated;
+
         final List<TypedEObject> inputs = unevaluated.stream()
                                                      .map(Candidate::input)
                                                      .toList();
@@ -122,18 +129,31 @@ public final class EvaluateCandidates implements FitnessCalculation {
      *   created when the previous one was rejected.
      */
     private void evaluateUntilAccepted(final SearchState state) {
-        final List<Candidate> evaluated = new ArrayList<>();
+        final List<Candidate> tested = new ArrayList<>();
+        evaluated = tested;
 
         state.getOffered()
              .filter(candidate -> {
                  evaluate(candidate);
 
-                 evaluated.add(candidate);
-                 state.setCandidates(evaluated);
+                 tested.add(candidate);
+                 state.setCandidates(tested);
 
                  return acceptable.test(state, candidate);
              })
              .findFirst()
              .ifPresent(state::setAccepted);
+    }
+
+    /**
+     * @return The candidates this execution evaluated, in their order: in batch mode the ones
+     *   that were not evaluated before, until accepted the evaluated offered ones. If the budget
+     *   ran out, only the ones evaluated before.
+     */
+    @Override
+    public List<Candidate> outputs(final SearchState state) {
+        return evaluated.stream()
+                        .filter(Candidate::isEvaluated)
+                        .toList();
     }
 }

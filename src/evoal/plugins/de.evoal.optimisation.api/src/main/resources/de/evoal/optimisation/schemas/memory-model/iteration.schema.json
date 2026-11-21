@@ -8,11 +8,12 @@
     "formatVersion": { "$ref": "common.schema.json#/$defs/formatVersion" },
     "number": { "type": "integer", "minimum": 0 },
     "individuals": {
+      "description": "The individuals of the iteration, each once. In the final version ('steps' := false) the members of the ranks; in the steps version also the outputs of the steps.",
       "type": "array",
       "items": { "$ref": "common.schema.json#/$defs/individual" }
     },
     "steps": {
-      "description": "Intermediate steps of the iteration (e.g. recombination, mutation, selection) in execution order.",
+      "description": "The executed steps of the iteration (e.g. selection, recombination, mutation, evaluation) in execution order, each with the ids of its outputs. Empty in the final version ('steps' := false).",
       "type": "array",
       "items": {
         "oneOf": [

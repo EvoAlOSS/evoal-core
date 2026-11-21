@@ -2,22 +2,21 @@ package de.evoal.optimisation.api.run;
 
 import java.util.List;
 
-import de.evoal.models.v202704.optimisation.memory.IterationStep;
-
 /**
  * The candidates an algorithm holds after an iteration and their ranking. All members are
  *   evaluated.
  * <p>
  * The ranks refer to the members by their index; the lineage of the members of the next
  *   population refers to the members themselves. The kernel creates the individuals in the
- *   order of the members, so the order determines the individual ids.
+ *   order in which the candidates first occur in the outputs of the steps and then in the
+ *   members, so this order determines the individual ids.
  *
  * @param members The evaluated candidates, indexed from 0.
  * @param ranks The indices of the members of every rank, the best rank first.
- * @param steps The steps executed in the iteration, in execution order. The kernel adds
- *   them to the iteration of the memory model.
+ * @param steps The steps executed in the iteration, in execution order, with their outputs.
+ *   The kernel adds them to the iteration of the memory model.
  */
-public record Population(List<Candidate> members, List<List<Integer>> ranks, List<IterationStep> steps) {
+public record Population(List<Candidate> members, List<List<Integer>> ranks, List<ExecutedStep> steps) {
     /**
      * @throws IllegalArgumentException if a member is not evaluated or a rank refers to an
      *   index that is not a member.

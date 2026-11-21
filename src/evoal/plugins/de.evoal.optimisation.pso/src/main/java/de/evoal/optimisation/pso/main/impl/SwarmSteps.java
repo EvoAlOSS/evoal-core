@@ -1,7 +1,10 @@
 package de.evoal.optimisation.pso.main.impl;
 
+import java.util.List;
+
 import lombok.extern.slf4j.Slf4j;
 
+import de.evoal.optimisation.api.run.Candidate;
 import de.evoal.optimisation.api.steps.Acceptance;
 import de.evoal.optimisation.api.steps.Adaption;
 import de.evoal.optimisation.api.steps.Initialization;
@@ -112,6 +115,15 @@ final class SwarmSteps {
             @Override
             public void execute(final SearchState state) {
                 swarm.updatePersonalBests();
+            }
+
+            /**
+             * @return None: the particles stay in the swarm, the members of the iteration are its
+             *   particles ({@link ParticleSwarmAlgorithm}), not the population of the search state.
+             */
+            @Override
+            public List<Candidate> outputs(final SearchState state) {
+                return List.of();
             }
         };
     }

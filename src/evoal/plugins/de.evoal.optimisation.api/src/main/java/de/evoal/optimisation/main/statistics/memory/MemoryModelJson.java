@@ -145,15 +145,19 @@ public class MemoryModelJson {
     }
 
     /**
-     * @return The individuals of the iteration (from its steps and its ranks), each once, in the
-     *   order of their first occurrence.
+     * @param withSteps Whether the individuals of the steps belong to the iteration (the steps
+     *   version) or only the members of its ranks (the final version).
+     * @return The individuals of the iteration, each once, in the order of their first
+     *   occurrence: in the steps version first the ones of the steps, which refer to their
+     *   direct predecessors, then the ones of the ranks.
      */
-    private static Collection<Individual> collectIndividuals(final Iteration iteration) {
+    private static Collection<Individual> collectIndividuals(final Iteration iteration, final boolean withSteps) {
         final Map<Integer, Individual> individuals = new LinkedHashMap<>();
 
-        final Stream<Individual> fromSteps = iteration.getSteps()
-                                                      .stream()
-                                                      .flatMap(MemoryModelJson::individualsOf);
+        final Stream<Individual> fromSteps = withSteps ? iteration.getSteps()
+                                                                  .stream()
+                                                                  .flatMap(MemoryModelJson::individualsOf)
+                                                       : Stream.empty();
         final Stream<Individual> fromRanks = iteration.getRanks()
                                                       .stream()
                                                       .flatMap(rank -> rank.getMembers().stream());
@@ -505,7 +509,8 @@ public class MemoryModelJson {
     }
 
     /**
-     * @return The individual with its id, values, fitness and relationships.
+     * @return The individual with its id, values, fitness and relationships; the output is
+     *   empty if it was not evaluated, e.g., because the evaluation budget ran out.
      */
     private ObjectNode toIndividual(final Individual individual) {
         final ObjectNode individualNode = NODES.objectNode();
@@ -543,7 +548,10 @@ public class MemoryModelJson {
 
     /**
      * @param iteration The iteration.
-     * @param withSteps Whether the executed steps are written; otherwise, the steps are empty.
+     * @param withSteps Whether the steps version is written: the executed steps with their
+     *   outputs, and all individuals of the iteration with their relationships to their direct
+     *   predecessors. Otherwise, the final version: the steps are empty, and the individuals are
+     *   the members, related to the individuals of the previous iteration.
      * @return The iteration file.
      */
     public ObjectNode toIteration(final Iteration iteration, final boolean withSteps) {
@@ -551,7 +559,7 @@ public class MemoryModelJson {
         document.put("number", iteration.getNumber());
 
         final ArrayNode individuals = document.putArray("individuals");
-        collectIndividuals(iteration).stream()
+        collectIndividuals(iteration, withSteps).stream()
                                      .map(this::toIndividual)
                                      .forEach(individuals::add);
 

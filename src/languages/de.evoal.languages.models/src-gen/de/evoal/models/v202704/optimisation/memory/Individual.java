@@ -100,15 +100,15 @@ public interface Individual extends EObject {
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * *
-	 * The values of the output space.
+	 * The values of the output space; missing if the individual was not evaluated, e.g. a candidate created before the evaluation budget ran out.
 	 * 
-	 * @constraint individual.output.eClass() == execution.outputSpace
+	 * @constraint individual.output == null or individual.output.eClass() == execution.outputSpace
 	 * 
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Output</em>' attribute.
 	 * @see #setOutput(TypedEObject)
 	 * @see de.evoal.models.v202704.optimisation.memory.MemoryPackage#getIndividual_Output()
-	 * @model dataType="de.evoal.models.v202704.optimisation.TypedEObject" required="true"
+	 * @model dataType="de.evoal.models.v202704.optimisation.TypedEObject"
 	 * @generated
 	 */
 	TypedEObject getOutput();

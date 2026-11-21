@@ -16,15 +16,15 @@
   "steps" : [ {
     "kind" : "unordered",
     "description" : "Initialization: sample 1 candidates",
-    "individuals" : [ ]
+    "individuals" : [ 0 ]
   }, {
     "kind" : "unordered",
     "description" : "FitnessCalculation: evaluate the candidates",
-    "individuals" : [ ]
+    "individuals" : [ 0 ]
   }, {
     "kind" : "unordered",
     "description" : "Acceptance: replace the population by the candidates",
-    "individuals" : [ ]
+    "individuals" : [ 0 ]
   } ],
   "ranks" : [ {
     "number" : 0,

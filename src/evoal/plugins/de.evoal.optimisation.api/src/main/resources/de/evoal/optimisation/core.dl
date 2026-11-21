@@ -721,9 +721,15 @@ module de.evoal.optimisation.core {
      */
     type 'memory-model' extends 'statistics-writer' {
         /**
-         * Whether the executed steps of every iteration (e.g. "Initialization: sample 10
-         *   candidates") are written into <tt>iteration-&lt;n&gt;.json</tt>. All algorithms
-         *   record their steps.
+         * Which version of the memory model is written into <tt>iteration-&lt;n&gt;.json</tt>.
+         *   <tt>false</tt>, the final version: the individuals of an iteration are its ranked
+         *   members, related to the individuals of the previous iteration. <tt>true</tt>, the
+         *   steps version: additionally, every executed step (e.g. "Selection: select 10
+         *   parents by tournament-selection") holds its outputs as individuals, e.g. the
+         *   selected members, the children or the evaluated candidates, and every individual is
+         *   related to its direct predecessor, possibly of the same iteration (e.g. a mutated
+         *   child to the recombined child). Both versions have the same individual ids. All
+         *   algorithms record their steps.
          */
         'steps' : boolean := false;
     }

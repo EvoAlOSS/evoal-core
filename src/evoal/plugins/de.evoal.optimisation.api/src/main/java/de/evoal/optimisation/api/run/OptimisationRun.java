@@ -1,7 +1,5 @@
 package de.evoal.optimisation.api.run;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,10 +15,6 @@ import de.evoal.models.v202704.optimisation.execution.TerminationCriterion;
 import de.evoal.models.v202704.optimisation.memory.Individual;
 import de.evoal.models.v202704.optimisation.memory.Iteration;
 import de.evoal.models.v202704.optimisation.memory.MemoryFactory;
-import de.evoal.models.v202704.optimisation.memory.PropertyScope;
-import de.evoal.models.v202704.optimisation.memory.Rank;
-import de.evoal.models.v202704.optimisation.memory.Recombination;
-import de.evoal.models.v202704.optimisation.memory.Relationship;
 
 import de.evoal.optimisation.api.evaluation.EvaluationBudgetExhaustedException;
 import de.evoal.optimisation.api.events.IterationFinished;
@@ -29,7 +23,6 @@ import de.evoal.optimisation.api.events.RunEventDispatcher;
 import de.evoal.optimisation.api.events.RunFinished;
 import de.evoal.optimisation.api.events.RunStarted;
 import de.evoal.optimisation.api.execution.ExecutionRecorder;
-import de.evoal.optimisation.api.fitness.Fitness;
 import de.evoal.optimisation.api.model.IndividualIDGenerator;
 import de.evoal.optimisation.api.statistics.writer.StatisticsWriter;
 import de.evoal.optimisation.api.statistics.writer.StatisticsWriterListener;
@@ -45,15 +38,15 @@ import de.evoal.optimisation.api.statistics.writer.StatisticsWriterListener;
  * </ol>
  * After every iteration, including one interrupted by an exhausted evaluation budget, the
  *   kernel creates the memory state of the iteration from the
- *   {@link SearchProcedure#population()} and publishes it. Every member becomes a new
- *   individual with the next id, related to the individuals of the previous iteration
- *   by its {@link Lineage}. A predecessor that is not a member of the previous iteration,
- *   but an unchanged copy of one ({@link Lineage.Kind#IDENTITY}), stands for its original.
- *   The properties of the member and of its lineage become the properties of the individual
- *   and of its relationship; they have to be defined in the {@link ExecutionRecorder}. The
- *   recombinations of two members whose lineages share a pair ({@link Lineage#pair()}) refer
- *   to each other as siblings ({@code other}).
- *   The best individual so far is the first individual whose
+ *   {@link SearchProcedure#population()} and publishes it: every executed step holds its
+ *   outputs as individuals, related to their direct predecessors, and the ranks hold the
+ *   members, related to the individuals of the previous iteration by their {@link Lineage}
+ *   ({@link IterationRecording}). The individuals get their ids in the order of their first
+ *   occurrence. A predecessor that is not a member of the previous iteration, but an unchanged
+ *   copy of one ({@link Lineage.Kind#IDENTITY}), stands for its original.
+ *   The properties of a candidate and of its lineage become the properties of the individual
+ *   and of its relationship; they have to be defined in the {@link ExecutionRecorder}.
+ *   The best individual so far is the first member whose
  *   optimisation value is better than the values of all earlier ones.
  * <p>
  * The run happens in the {@link de.evoal.core.api.cdi.RunScoped} context, and the
@@ -100,12 +93,6 @@ public class OptimisationRun {
     private Map<Candidate, Individual> previousIndividuals = new IdentityHashMap<>();
 
     /**
-     * The recombinations of the current iteration by the pair of their lineage, the first one
-     *   per member.
-     */
-    private final Map<Object, Map<Candidate, Recombination>> pairs = new IdentityHashMap<>();
-
-    /**
      * @param events Publishes the events of the run.
      * @param idGenerator Creates the ids of the individuals.
      * @param recorder Provides the execution of the run.
@@ -138,7 +125,6 @@ public class OptimisationRun {
             bestIndividual = null;
             bestValue = null;
             previousIndividuals = new IdentityHashMap<>();
-            pairs.clear();
 
             events.startRun(List.of(new StatisticsWriterListener(statistics)));
             events.publish(new RunStarted(recorder.getExecution()));
@@ -182,26 +168,34 @@ public class OptimisationRun {
     }
 
     /**
-     * Creates the memory state of an iteration and publishes it.
+     * Creates the memory state of an iteration and publishes it: the executed steps with their
+     *   outputs and the ranked members ({@link IterationRecording}).
      *
      * @return The memory state.
      */
     private Iteration finishIteration(final int number, final Population population) {
-        final Map<Candidate, Individual> individualsOfMembers = new IdentityHashMap<>();
-        final List<Individual> individuals = new ArrayList<>();
-        for(final Candidate member : population.members()) {
-            final Individual individual = toIndividual(member);
-
-            individuals.add(individual);
-            individualsOfMembers.put(member, individual);
-        }
-
-        linkSiblings();
+        final IterationRecording recording = new IterationRecording(idGenerator, recorder, previousIndividuals);
 
         final Iteration iteration = MemoryFactory.eINSTANCE.createIteration();
         iteration.setNumber(number);
-        iteration.getRanks().addAll(toRanks(population.ranks(), individuals));
-        iteration.getSteps().addAll(population.steps());
+        iteration.getSteps().addAll(recording.toSteps(population.steps()));
+
+        final List<IterationRecording.Occurrence> members = recording.occurrencesOf(population.members());
+        iteration.getRanks().addAll(recording.toRanks(members, population.ranks()));
+
+        final Map<Candidate, Individual> individualsOfMembers = new IdentityHashMap<>();
+        for(final IterationRecording.Occurrence occurrence : members) {
+            final Candidate member = occurrence.candidate();
+            final Individual individual = recording.inRanks(occurrence);
+
+            // on an equal value, the earlier individual stays the best
+            if(bestValue == null || member.value().isBetter(bestValue)) {
+                bestIndividual = individual;
+                bestValue = member.value();
+            }
+
+            individualsOfMembers.put(member, individual);
+        }
         iteration.setBestSoFar(bestIndividual);
 
         previousIndividuals = individualsOfMembers;
@@ -209,141 +203,6 @@ public class OptimisationRun {
         events.publish(new IterationFinished(iteration));
 
         return iteration;
-    }
-
-    /**
-     * @return The individual of the member with the next id, its objectives, fitness,
-     *   properties and degrees of constraint violation, related to its predecessors.
-     * @throws IllegalStateException if a property is not defined or does not match its
-     *   definition.
-     */
-    private Individual toIndividual(final Candidate member) {
-        final Individual individual = MemoryFactory.eINSTANCE.createIndividual();
-        individual.setId(idGenerator.nextId());
-        individual.setInput(member.input());
-        individual.setOutput(member.output());
-
-        final Fitness fitness = member.fitness();
-        if(fitness != null) {
-            Arrays.stream(fitness.values())
-                  .forEach(individual.getFitness()::add);
-        }
-
-        // on an equal value, the earlier individual stays the best
-        if(bestValue == null || member.value().isBetter(bestValue)) {
-            bestIndividual = individual;
-            bestValue = member.value();
-        }
-
-        member.properties().forEach((name, value) -> {
-            recorder.requireProperty(name, PropertyScope.INDIVIDUAL, value);
-            individual.getProperties().put(name, value);
-        });
-
-        final Map<String, Double> violations = member.isEvaluated()
-                ? member.evaluation().violations().toProperties()
-                : Map.of();
-        violations.forEach((name, degree) -> {
-            recorder.requireProperty(name, PropertyScope.INDIVIDUAL, degree);
-            individual.getProperties().put(name, degree);
-        });
-
-        final Lineage lineage = member.lineage();
-        if(lineage.kind() != Lineage.Kind.NONE) {
-            individual.getRelationships().add(toRelationship(member, lineage));
-        }
-
-        return individual;
-    }
-
-    /**
-     * Links the recombinations of the siblings of the current iteration. A member that occurs
-     *   several times is linked with its first individual. A recombination whose sibling is not
-     *   a member keeps no sibling.
-     *
-     * @throws IllegalStateException if more than two members share a pair.
-     */
-    private void linkSiblings() {
-        for(final Map<Candidate, Recombination> siblings : pairs.values()) {
-            if(siblings.size() > 2) {
-                throw new IllegalStateException(siblings.size() + " members share the pair of a recombination.");
-            }
-            if(siblings.size() == 2) {
-                final List<Recombination> recombinations = List.copyOf(siblings.values());
-                recombinations.get(0).setOther(recombinations.get(1));
-                recombinations.get(1).setOther(recombinations.get(0));
-            }
-        }
-
-        pairs.clear();
-    }
-
-    /**
-     * @return The ranks of the memory model.
-     */
-    private static List<Rank> toRanks(final List<List<Integer>> ranks, final List<Individual> individuals) {
-        final List<Rank> result = new ArrayList<>();
-
-        for(final List<Integer> indices : ranks) {
-            final Rank rank = MemoryFactory.eINSTANCE.createRank();
-            rank.setNumber(result.size());
-            indices.forEach(index -> rank.getMembers().add(individuals.get(index)));
-
-            result.add(rank);
-        }
-
-        return result;
-    }
-
-    /**
-     * @return The relationship of the lineage to the individuals of the previous iteration.
-     * @throws IllegalStateException if a predecessor does not belong to the previous iteration,
-     *   or if a property is not defined or does not match its definition.
-     */
-    private Relationship toRelationship(final Candidate member, final Lineage lineage) {
-        final Relationship relationship = switch(lineage.kind()) {
-            case IDENTITY -> MemoryFactory.eINSTANCE.createIdentity();
-            case MUTATION -> MemoryFactory.eINSTANCE.createMutation();
-            case RECOMBINATION -> MemoryFactory.eINSTANCE.createRecombination();
-            case REPLACEMENT -> MemoryFactory.eINSTANCE.createReplacement();
-            case NONE -> throw new IllegalArgumentException("A lineage without predecessors has no relationship.");
-        };
-
-        lineage.properties().forEach((name, value) -> {
-            recorder.requireProperty(name, PropertyScope.RELATIONSHIP, value);
-            relationship.getProperties().put(name, value);
-        });
-
-        if(lineage.pair() != null) {
-            pairs.computeIfAbsent(lineage.pair(), pair -> new IdentityHashMap<>())
-                 .putIfAbsent(member, (Recombination) relationship);
-        }
-
-        for(final Candidate predecessor : lineage.predecessors()) {
-            relationship.getTarget().add(individualOf(predecessor));
-        }
-
-        return relationship;
-    }
-
-    /**
-     * @return The individual of the previous iteration that the candidate stands for: its own
-     *   or, for an unchanged copy, the one of its original.
-     * @throws IllegalStateException if the candidate does not belong to the previous iteration.
-     */
-    private Individual individualOf(final Candidate predecessor) {
-        Candidate candidate = predecessor;
-
-        while(!previousIndividuals.containsKey(candidate)) {
-            if(candidate.lineage().kind() != Lineage.Kind.IDENTITY) {
-                throw new IllegalStateException("The predecessor " + predecessor + " is not a member of the "
-                                                + "previous iteration.");
-            }
-
-            candidate = candidate.lineage().predecessor();
-        }
-
-        return previousIndividuals.get(candidate);
     }
 
     private static void logExhaustedBudget(final EvaluationBudgetExhaustedException exception, final int iteration) {

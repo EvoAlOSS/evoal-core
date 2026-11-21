@@ -1,6 +1,6 @@
 {
   "formatVersion" : "2027.4.0",
   "numberOfIterations" : 11,
-  "best" : [ 10 ],
+  "best" : [ 30 ],
   "metrics" : { }
 }

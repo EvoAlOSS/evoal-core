@@ -124,7 +124,7 @@
       "additionalProperties": false
     },
     "relationship": {
-      "description": "Origin of an individual. Targets may be individuals of earlier iterations.",
+      "description": "Origin of an individual. In the final version, the targets are individuals of the previous iteration (or of earlier ones); in the steps version, the direct predecessors, which may be individuals of the same iteration, e.g. the recombined child of a mutated one.",
       "type": "object",
       "properties": {
         "kind": {
@@ -183,6 +183,7 @@
           "$ref": "#/$defs/values"
         },
         "output": {
+          "description": "The objectives. Empty if the individual is not evaluated, e.g. a candidate created before the evaluation budget ran out (only in the steps version).",
           "$ref": "#/$defs/values"
         },
         "fitness": {

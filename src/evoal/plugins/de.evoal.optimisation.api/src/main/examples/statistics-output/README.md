@@ -72,10 +72,27 @@ All files are in `output/search/`.
     iterations and the ids of the best individuals. Its existence shows that the
     run is complete.
 
+  This is the final version of the memory model (`'memory-model' {}`): an
+  iteration holds its ranked members, related to the previous iteration, and its
+  `steps` are empty. With `'memory-model' { 'steps' := true; }`, the steps version
+  is written: every executed step (e.g. `Adaption: move the particles`) is listed
+  with the ids of its outputs, the `individuals` of an iteration also contain
+  these outputs, and every individual is related to its direct predecessor, which
+  may belong to the same iteration. Both versions use the same ids. The particles
+  of a swarm stay in the swarm, so the steps of this example have no outputs;
+  in the steps version of an evolutionary algorithm, the selection lists the
+  selected parents, the recombination the recombined children (`recombination`
+  of the parents) and the mutation the mutated children (`mutation` of the
+  recombined child).
+
 The format of the JSON files is described by JSON schemas
 (`https://www.evoal.de/schemas/memory-model/2027.4.0/`).
 
 ## Try next
+
+- Write the steps version (`'memory-model' { 'steps' := true; }`) and compare
+  `iteration-1.json` with the final version; for the outputs of the steps, add the
+  writer to the example `ea-basic`.
 
 - Add `'prefix-data' := true` to a CSV writer: the columns are then named
   `search-space-value-x:0`, …, `optimisation-space-value-y:0`.

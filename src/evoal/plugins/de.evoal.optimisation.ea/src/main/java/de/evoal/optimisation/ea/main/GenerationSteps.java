@@ -11,6 +11,7 @@ import de.evoal.optimisation.api.steps.Adaption;
 import de.evoal.optimisation.api.steps.SearchState;
 import de.evoal.optimisation.api.steps.Selection;
 import de.evoal.optimisation.api.steps.StateKey;
+import de.evoal.optimisation.ea.api.genotype.Genome;
 import de.evoal.optimisation.ea.api.replacement.ReplacementStrategy;
 import de.evoal.optimisation.ea.api.selection.CandidateOrder;
 import de.evoal.optimisation.ea.api.selection.CrowdedOrder;
@@ -18,18 +19,24 @@ import de.evoal.optimisation.ea.api.selection.SelectionMethod;
 
 /**
  * The steps of a generation of the evolutionary algorithm. The children between the
- *   recombination and the mutation are kept in the strategy state.
+ *   recombination and the mutation are kept in the strategy state. The recombined children
+ *   are the outputs of the recombination; the mutated ones, which the mutation relates to them,
+ *   are the outputs of the mutation.
  */
 final class GenerationSteps {
     /**
-     * The children of the current generation before they become candidates.
+     * The children of the current generation and their candidates after the recombination.
      */
     private static final StateKey<OffspringList> OFFSPRING = new StateKey<>("offspring", OffspringList.class);
 
     /**
-     * A list of children; a class, so it can be a value of the strategy state.
+     * A list of children with their candidates after the recombination; a class, so it can be a
+     *   value of the strategy state.
+     *
+     * @param children The children.
+     * @param recombined The candidates of the children after the recombination, in their order.
      */
-    record OffspringList(List<Offspring> children) {
+    record OffspringList(List<Offspring> children, List<Candidate> recombined) {
     }
 
     private GenerationSteps() {
@@ -58,7 +65,7 @@ final class GenerationSteps {
 
     /**
      * The recombination: recombines every pair of parents into two children and keeps the
-     *   first lambda of them.
+     *   first lambda of them, which become the current candidates.
      */
     static Adaption recombine(final Variation variation, final int offspring) {
         return new Adaption() {
@@ -76,14 +83,21 @@ final class GenerationSteps {
                     children.addAll(variation.recombine(parents.get(i), parents.get(i + 1)));
                 }
 
-                state.setStrategy(OFFSPRING, new OffspringList(List.copyOf(children.subList(0, offspring))));
-                state.setCandidates(List.of());
+                final List<Offspring> kept = List.copyOf(children.subList(0, offspring));
+                final List<Candidate> recombined = kept.stream()
+                                                       .map(variation::toCandidate)
+                                                       .toList();
+
+                state.setStrategy(OFFSPRING, new OffspringList(kept, recombined));
+                state.setCandidates(recombined);
             }
         };
     }
 
     /**
-     * The mutation: mutates the children, which become the current candidates.
+     * The mutation: mutates the children, which become the current candidates. A mutated child
+     *   is a mutation of its recombined child; one that the mutation left unchanged is the
+     *   recombined child itself.
      */
     static Adaption mutate(final Variation variation, final int offspring) {
         return new Adaption() {
@@ -94,14 +108,19 @@ final class GenerationSteps {
 
             @Override
             public void execute(final SearchState state) {
-                final List<Offspring> children = state.strategy(OFFSPRING)
-                                                      .orElseThrow(() -> new IllegalStateException("No children to mutate."))
-                                                      .children();
+                final OffspringList recombination = state.strategy(OFFSPRING)
+                                                         .orElseThrow(() -> new IllegalStateException("No children to mutate."));
+                final List<Offspring> children = recombination.children();
 
                 final List<Candidate> candidates = new ArrayList<>(children.size());
-                for(final Offspring child : children) {
+                for(int i = 0; i < children.size(); ++i) {
+                    final Offspring child = children.get(i);
+                    final Genome beforeMutation = child.genome().copy();
+                    final int operatorsBefore = child.operators.size();
+
                     variation.mutate(child);
-                    candidates.add(variation.toCandidate(child));
+                    candidates.add(variation.toMutatedCandidate(child, recombination.recombined().get(i), beforeMutation,
+                                                                operatorsBefore));
                 }
 
                 state.setCandidates(candidates);
@@ -140,7 +159,7 @@ final class GenerationSteps {
             public void execute(final SearchState state) {
                 state.setPopulation(replacement.replace(state.getPopulation(), state.getCandidates(), size, order, random));
                 state.setCandidates(List.of());
-                state.setStrategy(OFFSPRING, new OffspringList(List.of()));
+                state.setStrategy(OFFSPRING, new OffspringList(List.of(), List.of()));
             }
         };
     }

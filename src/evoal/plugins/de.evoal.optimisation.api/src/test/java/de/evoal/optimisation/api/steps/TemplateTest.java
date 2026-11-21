@@ -13,8 +13,9 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import de.evoal.models.core.ecore.TypedEObject;
-import de.evoal.models.v202704.optimisation.memory.IterationStep;
 
+import de.evoal.optimisation.api.evaluation.EvaluationBudgetExhaustedException;
+import de.evoal.optimisation.api.evaluation.EvaluationSource;
 import de.evoal.optimisation.api.events.RunEventDispatcher;
 import de.evoal.optimisation.api.events.StepExecuted;
 import de.evoal.optimisation.api.execution.ExecutionRecorder;
@@ -22,6 +23,7 @@ import de.evoal.optimisation.api.fitness.Evaluation;
 import de.evoal.optimisation.api.fitness.Fitness;
 import de.evoal.optimisation.api.fitness.FitnessLayout;
 import de.evoal.optimisation.api.run.Candidate;
+import de.evoal.optimisation.api.run.ExecutedStep;
 import de.evoal.optimisation.api.run.Lineage;
 import de.evoal.optimisation.api.run.Population;
 import de.evoal.optimisation.api.run.Progress;
@@ -72,7 +74,7 @@ public class TemplateTest {
     private static List<String> descriptionsOf(final Population population) {
         return population.steps()
                          .stream()
-                         .map(IterationStep::getDescription)
+                         .map(step -> step.kind() + ": " + step.description())
                          .toList();
     }
 
@@ -218,5 +220,54 @@ public class TemplateTest {
         Assertions.assertEquals(List.of(Lineage.identity(initial)),
                                 population.members().stream().map(Candidate::lineage).toList());
         Assertions.assertEquals(List.of(), population.steps());
+    }
+
+    @Test
+    public void theStepsOfThePopulationHoldTheirOutputs() {
+        // given: the acceptance outputs the new population, the parameter adjustment nothing
+        final Candidate member = evaluated(2.0, Lineage.NONE);
+        final Template template = new Template(
+                List.of(acceptance("start", state -> state.setPopulation(List.of(member))),
+                        new ParameterAdjustment() {
+                            @Override
+                            public String description() {
+                                return "adjust";
+                            }
+
+                            @Override
+                            public void execute(final SearchState state) {
+                            }
+                        }),
+                List.of());
+        template.initialise(events);
+
+        // when
+        final Population population = template.population();
+
+        // then
+        Assertions.assertEquals(List.of(List.of(member), List.of()),
+                                population.steps().stream().map(ExecutedStep::outputs).toList());
+    }
+
+    @Test
+    public void aStepInterruptedByAnExhaustedBudgetIsRecordedWithItsOutputsSoFar() {
+        // given
+        final Candidate evaluated = evaluated(2.0, Lineage.NONE);
+        final Template template = new Template(
+                List.of(acceptance("start", state -> state.setPopulation(List.of(evaluated(1.0, Lineage.NONE))))),
+                List.of(acceptance("interrupted", state -> {
+                    state.setPopulation(List.of(evaluated));
+                    throw new EvaluationBudgetExhaustedException(EvaluationSource.REAL, 3);
+                })));
+        template.initialise(events);
+        template.population();
+
+        // when
+        Assertions.assertThrows(EvaluationBudgetExhaustedException.class, () -> template.iterate(1));
+        final Population population = template.population();
+
+        // then
+        Assertions.assertEquals(List.of("Acceptance: interrupted"), descriptionsOf(population));
+        Assertions.assertEquals(List.of(evaluated), population.steps().getFirst().outputs());
     }
 }

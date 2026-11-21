@@ -22,6 +22,12 @@ import de.evoal.optimisation.api.fitness.Fitness;
  *   stays unchanged in the next step or iteration is therefore a {@link #copy()} that refers
  *   to it as identity.
  * <p>
+ * The {@link #lineage()} relates a candidate to the population of the previous iteration; the
+ *   final version of the memory model records it. If a candidate came from another candidate
+ *   of the same iteration in a different way, e.g., a mutated child from the recombined child
+ *   of an earlier step, it also has a {@link #stepLineage()}, the relationship to its direct
+ *   predecessor; the steps version of the memory model records that one.
+ * <p>
  * The <em>age</em> of a candidate is the number of iterations it was carried over into
  *   unchanged ({@link #survivor()}). A new candidate, e.g., a mutated, recombined or
  *   replacing one, has age 0.
@@ -43,7 +49,7 @@ public final class Candidate {
     private final TypedEObject input;
 
     /**
-     * How the candidate came from other candidates.
+     * How the candidate came from other candidates, related to the previous iteration.
      */
     private final Lineage lineage;
 
@@ -58,18 +64,38 @@ public final class Candidate {
     private final Map<String, Object> properties = new LinkedHashMap<>();
 
     /**
+     * How the candidate came from its direct predecessor in the iteration; {@code null} if it is
+     *   the {@link #lineage}.
+     */
+    private final Lineage stepLineage;
+
+    /**
      * Creates a candidate that is not evaluated yet.
      *
      * @param input The candidate (a point of the search space).
      * @param lineage How the candidate came from other candidates.
      */
     public Candidate(final TypedEObject input, final Lineage lineage) {
-        this(input, lineage, 0);
+        this(input, lineage, null, 0);
     }
 
-    private Candidate(final TypedEObject input, final Lineage lineage, final int age) {
+    /**
+     * Creates a candidate that is not evaluated yet and that came from a candidate of the same
+     *   iteration in another way than from the previous iteration, e.g., a mutated child of a
+     *   recombined child.
+     *
+     * @param input The candidate (a point of the search space).
+     * @param lineage How the candidate came from the population of the previous iteration.
+     * @param stepLineage How the candidate came from its direct predecessor in the iteration.
+     */
+    public Candidate(final TypedEObject input, final Lineage lineage, final @NonNull Lineage stepLineage) {
+        this(input, lineage, stepLineage, 0);
+    }
+
+    private Candidate(final TypedEObject input, final Lineage lineage, final Lineage stepLineage, final int age) {
         this.input = input;
         this.lineage = lineage;
+        this.stepLineage = stepLineage;
         this.age = age;
     }
 
@@ -85,7 +111,7 @@ public final class Candidate {
      *   this candidate. Its properties are not copied.
      */
     public Candidate copy() {
-        final Candidate copy = new Candidate(input, Lineage.identity(this), age);
+        final Candidate copy = new Candidate(input, Lineage.identity(this), null, age);
         copy.evaluation = evaluation;
 
         return copy;
@@ -137,11 +163,19 @@ public final class Candidate {
     }
 
     /**
+     * @return How the candidate came from its direct predecessor in the iteration: the
+     *   {@link #lineage()}, unless the candidate was created with a step lineage of its own.
+     */
+    public Lineage stepLineage() {
+        return stepLineage == null ? lineage : stepLineage;
+    }
+
+    /**
      * @return A {@link #copy()} for the next iteration: the candidate was carried over
      *   unchanged, so its age grows by one.
      */
     public Candidate survivor() {
-        final Candidate survivor = new Candidate(input, Lineage.identity(this), age + 1);
+        final Candidate survivor = new Candidate(input, Lineage.identity(this), null, age + 1);
         survivor.evaluation = evaluation;
 
         return survivor;
@@ -203,7 +237,8 @@ public final class Candidate {
     }
 
     /**
-     * @return How the candidate came from other candidates.
+     * @return How the candidate came from other candidates, related to the population of the
+     *   previous iteration.
      */
     public Lineage lineage() {
         return lineage;

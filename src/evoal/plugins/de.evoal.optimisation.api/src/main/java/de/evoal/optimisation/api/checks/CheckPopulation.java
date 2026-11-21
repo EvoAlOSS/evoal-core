@@ -74,6 +74,15 @@ public final class CheckPopulation extends CheckStep {
     }
 
     /**
+     * @return The checked population, among them the evaluated replacements of the failed
+     *   members.
+     */
+    @Override
+    public List<Candidate> outputs(final SearchState state) {
+        return state.getPopulation();
+    }
+
+    /**
      * @return A replacement that refers to the replaced member if the member was carried
      *   over. If the failed candidate is a replacement of this step itself, the new one
      *   replaces the member that one replaced.

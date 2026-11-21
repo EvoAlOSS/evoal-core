@@ -2,15 +2,15 @@
   "formatVersion" : "2027.4.0",
   "number" : 1,
   "individuals" : [ {
-    "id" : 5,
+    "id" : 3,
     "input" : {
-      "x:0" : -2.8080957218967626,
-      "x:1" : 3.9499643357893572
+      "x:0" : -3.627650447822327,
+      "x:1" : 4.130542048405071
     },
     "output" : {
-      "y:0" : 30.408009818060012
+      "y:0" : 50.35295759491217
     },
-    "fitness" : [ 30.408009818060012 ],
+    "fitness" : [ 50.35295759491217 ],
     "relationships" : [ ]
   }, {
     "id" : 4,
@@ -24,29 +24,29 @@
     "fitness" : [ 40.21981092662235 ],
     "relationships" : [ ]
   }, {
-    "id" : 3,
+    "id" : 5,
     "input" : {
-      "x:0" : -3.627650447822327,
-      "x:1" : 4.130542048405071
+      "x:0" : -2.8080957218967626,
+      "x:1" : 3.9499643357893572
     },
     "output" : {
-      "y:0" : 50.35295759491217
+      "y:0" : 30.408009818060012
     },
-    "fitness" : [ 50.35295759491217 ],
+    "fitness" : [ 30.408009818060012 ],
     "relationships" : [ ]
   } ],
   "steps" : [ {
     "kind" : "unordered",
     "description" : "Initialization: sample 3 candidates",
-    "individuals" : [ ]
+    "individuals" : [ 3, 4, 5 ]
   }, {
     "kind" : "unordered",
     "description" : "FitnessCalculation: evaluate the candidates",
-    "individuals" : [ ]
+    "individuals" : [ 3, 4, 5 ]
   }, {
     "kind" : "unordered",
     "description" : "Acceptance: replace the population by the candidates",
-    "individuals" : [ ]
+    "individuals" : [ 3, 4, 5 ]
   } ],
   "ranks" : [ {
     "number" : 0,
