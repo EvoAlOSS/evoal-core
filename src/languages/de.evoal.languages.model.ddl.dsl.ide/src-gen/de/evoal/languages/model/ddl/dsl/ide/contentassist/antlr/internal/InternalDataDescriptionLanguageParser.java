@@ -18582,7 +18582,7 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
             int alt51=2;
             int LA51_0 = input.LA(1);
 
-            if ( ((LA51_0>=RULE_QUOTED_ID && LA51_0<=RULE_STRING)||LA51_0==15||LA51_0==60||LA51_0==66||LA51_0==70||LA51_0==75||(LA51_0>=77 && LA51_0<=78)||LA51_0==80||LA51_0==91) ) {
+            if ( ((LA51_0>=RULE_QUOTED_ID && LA51_0<=RULE_STRING)||LA51_0==15||(LA51_0>=30 && LA51_0<=31)||LA51_0==60||LA51_0==66||LA51_0==70||LA51_0==75||(LA51_0>=77 && LA51_0<=78)||LA51_0==80||(LA51_0>=90 && LA51_0<=91)) ) {
                 alt51=1;
             }
             switch (alt51) {
@@ -28352,28 +28352,28 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__ArrayRule__ValuesAssignment_2_0"
-    // InternalDataDescriptionLanguage.g:8557:1: rule__ArrayRule__ValuesAssignment_2_0 : ( ruleReadExpressionRule ) ;
+    // InternalDataDescriptionLanguage.g:8557:1: rule__ArrayRule__ValuesAssignment_2_0 : ( ruleOrExpressionRule ) ;
     public final void rule__ArrayRule__ValuesAssignment_2_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:8561:1: ( ( ruleReadExpressionRule ) )
-            // InternalDataDescriptionLanguage.g:8562:2: ( ruleReadExpressionRule )
+            // InternalDataDescriptionLanguage.g:8561:1: ( ( ruleOrExpressionRule ) )
+            // InternalDataDescriptionLanguage.g:8562:2: ( ruleOrExpressionRule )
             {
-            // InternalDataDescriptionLanguage.g:8562:2: ( ruleReadExpressionRule )
-            // InternalDataDescriptionLanguage.g:8563:3: ruleReadExpressionRule
+            // InternalDataDescriptionLanguage.g:8562:2: ( ruleOrExpressionRule )
+            // InternalDataDescriptionLanguage.g:8563:3: ruleOrExpressionRule
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getArrayRuleAccess().getValuesReadExpressionRuleParserRuleCall_2_0_0()); 
+               before(grammarAccess.getArrayRuleAccess().getValuesOrExpressionRuleParserRuleCall_2_0_0()); 
             }
             pushFollow(FOLLOW_2);
-            ruleReadExpressionRule();
+            ruleOrExpressionRule();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getArrayRuleAccess().getValuesReadExpressionRuleParserRuleCall_2_0_0()); 
+               after(grammarAccess.getArrayRuleAccess().getValuesOrExpressionRuleParserRuleCall_2_0_0()); 
             }
 
             }
@@ -28397,28 +28397,28 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__ArrayRule__ValuesAssignment_2_1_1"
-    // InternalDataDescriptionLanguage.g:8572:1: rule__ArrayRule__ValuesAssignment_2_1_1 : ( ruleReadExpressionRule ) ;
+    // InternalDataDescriptionLanguage.g:8572:1: rule__ArrayRule__ValuesAssignment_2_1_1 : ( ruleOrExpressionRule ) ;
     public final void rule__ArrayRule__ValuesAssignment_2_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:8576:1: ( ( ruleReadExpressionRule ) )
-            // InternalDataDescriptionLanguage.g:8577:2: ( ruleReadExpressionRule )
+            // InternalDataDescriptionLanguage.g:8576:1: ( ( ruleOrExpressionRule ) )
+            // InternalDataDescriptionLanguage.g:8577:2: ( ruleOrExpressionRule )
             {
-            // InternalDataDescriptionLanguage.g:8577:2: ( ruleReadExpressionRule )
-            // InternalDataDescriptionLanguage.g:8578:3: ruleReadExpressionRule
+            // InternalDataDescriptionLanguage.g:8577:2: ( ruleOrExpressionRule )
+            // InternalDataDescriptionLanguage.g:8578:3: ruleOrExpressionRule
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getArrayRuleAccess().getValuesReadExpressionRuleParserRuleCall_2_1_1_0()); 
+               before(grammarAccess.getArrayRuleAccess().getValuesOrExpressionRuleParserRuleCall_2_1_1_0()); 
             }
             pushFollow(FOLLOW_2);
-            ruleReadExpressionRule();
+            ruleOrExpressionRule();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getArrayRuleAccess().getValuesReadExpressionRuleParserRuleCall_2_1_1_0()); 
+               after(grammarAccess.getArrayRuleAccess().getValuesOrExpressionRuleParserRuleCall_2_1_1_0()); 
             }
 
             }

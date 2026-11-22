@@ -8,6 +8,7 @@ import de.evoal.languages.model.base.expressions.Expression;
 import de.evoal.languages.model.base.expressions.ValueReference;
 import de.evoal.languages.model.execution.*;
 import de.evoal.languages.model.execution.util.ExecutionSwitch;
+import de.evoal.languages.model.interpreter.numeric.NumericConversions;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.emf.ecore.EObject;
 
@@ -74,22 +75,31 @@ public class ProgramExecutionSwitch extends ExecutionSwitch<Object> {
     public Object caseCounterRange(final CounterRange range) {
         final ExpressionInterpreter helper = new ExpressionInterpreter(context);
 
-        final int start = (int)helper.execute(range.getStart());
-        final int end = (int)helper.execute(range.getEnd());
-        final int increment = (int)helper.execute(range.getIncrement());
+        // the bounds are expressions; a quotient is a real, so convert instead of casting
+        final int start = NumericConversions.toInteger(helper.execute(range.getStart()));
+        final int end = NumericConversions.toInteger(helper.execute(range.getEnd()));
+        final int increment = NumericConversions.toInteger(helper.execute(range.getIncrement()));
 
+        // start and end are inclusive: [0 to 10 increment by 2] counts 0, 2, ..., 10
+        requireIncrementTowardsEnd(start, end, increment);
+        // the increment points towards the end (checked above), also if start and end are equal
+        final boolean countsUp = increment > 0;
         final Iterator<Integer> loopCounter = new Iterator<>() {
-            int current = start;
-            final java.util.function.Function<Integer, Boolean> hasNext = start < end ? a -> a < end : a -> a > end;
+            // long, so that the step after the largest int does not wrap around
+            long current = start;
 
             @Override
             public boolean hasNext() {
-                return hasNext.apply(current);
+                if(countsUp) {
+                    return current <= end;
+                }
+
+                return current >= end;
             }
 
             @Override
             public Integer next() {
-                int value = current;
+                final int value = (int) current;
                 current += increment;
 
                 return value;
@@ -100,6 +110,31 @@ public class ProgramExecutionSwitch extends ExecutionSwitch<Object> {
                 Spliterators.spliteratorUnknownSize(loopCounter, Spliterator.ORDERED),
                 false
         );
+    }
+
+    /**
+     * Rejects a counter range that would never reach its end: an increment of 0, or an
+     *   increment whose sign points away from the end.
+     *
+     * @throws IllegalArgumentException if the increment does not lead from start to end.
+     */
+    private static void requireIncrementTowardsEnd(final int start, final int end, final int increment) {
+        final String range = "[" + start + " to " + end + " increment by " + increment + "]";
+
+        if(increment == 0) {
+            throw new IllegalArgumentException("The increment of the counter range " + range + " must not be 0.");
+        }
+
+        final boolean countsUp = start < end;
+        final boolean countsDown = start > end;
+
+        if(countsUp && increment < 0) {
+            throw new IllegalArgumentException("The counter range " + range + " counts up, so its increment must be positive.");
+        }
+
+        if(countsDown && increment > 0) {
+            throw new IllegalArgumentException("The counter range " + range + " counts down, so its increment must be negative.");
+        }
     }
 
     @Override

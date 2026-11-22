@@ -2654,7 +2654,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "ruleArrayRule"
-    // InternalInstanceLanguage.g:938:1: ruleArrayRule returns [EObject current=null] : ( () otherlv_1= '[' ( ( (lv_values_2_0= ruleReadExpressionRule ) ) (otherlv_3= ',' ( (lv_values_4_0= ruleReadExpressionRule ) ) )* )? otherlv_5= ']' ) ;
+    // InternalInstanceLanguage.g:938:1: ruleArrayRule returns [EObject current=null] : ( () otherlv_1= '[' ( ( (lv_values_2_0= ruleOrExpressionRule ) ) (otherlv_3= ',' ( (lv_values_4_0= ruleOrExpressionRule ) ) )* )? otherlv_5= ']' ) ;
     public final EObject ruleArrayRule() throws RecognitionException {
         EObject current = null;
 
@@ -2670,11 +2670,11 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
         	enterRule();
 
         try {
-            // InternalInstanceLanguage.g:944:2: ( ( () otherlv_1= '[' ( ( (lv_values_2_0= ruleReadExpressionRule ) ) (otherlv_3= ',' ( (lv_values_4_0= ruleReadExpressionRule ) ) )* )? otherlv_5= ']' ) )
-            // InternalInstanceLanguage.g:945:2: ( () otherlv_1= '[' ( ( (lv_values_2_0= ruleReadExpressionRule ) ) (otherlv_3= ',' ( (lv_values_4_0= ruleReadExpressionRule ) ) )* )? otherlv_5= ']' )
+            // InternalInstanceLanguage.g:944:2: ( ( () otherlv_1= '[' ( ( (lv_values_2_0= ruleOrExpressionRule ) ) (otherlv_3= ',' ( (lv_values_4_0= ruleOrExpressionRule ) ) )* )? otherlv_5= ']' ) )
+            // InternalInstanceLanguage.g:945:2: ( () otherlv_1= '[' ( ( (lv_values_2_0= ruleOrExpressionRule ) ) (otherlv_3= ',' ( (lv_values_4_0= ruleOrExpressionRule ) ) )* )? otherlv_5= ']' )
             {
-            // InternalInstanceLanguage.g:945:2: ( () otherlv_1= '[' ( ( (lv_values_2_0= ruleReadExpressionRule ) ) (otherlv_3= ',' ( (lv_values_4_0= ruleReadExpressionRule ) ) )* )? otherlv_5= ']' )
-            // InternalInstanceLanguage.g:946:3: () otherlv_1= '[' ( ( (lv_values_2_0= ruleReadExpressionRule ) ) (otherlv_3= ',' ( (lv_values_4_0= ruleReadExpressionRule ) ) )* )? otherlv_5= ']'
+            // InternalInstanceLanguage.g:945:2: ( () otherlv_1= '[' ( ( (lv_values_2_0= ruleOrExpressionRule ) ) (otherlv_3= ',' ( (lv_values_4_0= ruleOrExpressionRule ) ) )* )? otherlv_5= ']' )
+            // InternalInstanceLanguage.g:946:3: () otherlv_1= '[' ( ( (lv_values_2_0= ruleOrExpressionRule ) ) (otherlv_3= ',' ( (lv_values_4_0= ruleOrExpressionRule ) ) )* )? otherlv_5= ']'
             {
             // InternalInstanceLanguage.g:946:3: ()
             // InternalInstanceLanguage.g:947:4: 
@@ -2700,30 +2700,30 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
               			newLeafNode(otherlv_1, grammarAccess.getArrayRuleAccess().getLeftSquareBracketKeyword_1());
               		
             }
-            // InternalInstanceLanguage.g:960:3: ( ( (lv_values_2_0= ruleReadExpressionRule ) ) (otherlv_3= ',' ( (lv_values_4_0= ruleReadExpressionRule ) ) )* )?
+            // InternalInstanceLanguage.g:960:3: ( ( (lv_values_2_0= ruleOrExpressionRule ) ) (otherlv_3= ',' ( (lv_values_4_0= ruleOrExpressionRule ) ) )* )?
             int alt15=2;
             int LA15_0 = input.LA(1);
 
-            if ( ((LA15_0>=RULE_DOUBLE && LA15_0<=RULE_ID)||(LA15_0>=17 && LA15_0<=18)||LA15_0==27||(LA15_0>=29 && LA15_0<=30)||(LA15_0>=32 && LA15_0<=33)||(LA15_0>=37 && LA15_0<=38)) ) {
+            if ( ((LA15_0>=RULE_DOUBLE && LA15_0<=RULE_ID)||(LA15_0>=17 && LA15_0<=18)||LA15_0==25||LA15_0==27||(LA15_0>=29 && LA15_0<=30)||(LA15_0>=32 && LA15_0<=33)||(LA15_0>=37 && LA15_0<=38)||(LA15_0>=58 && LA15_0<=59)) ) {
                 alt15=1;
             }
             switch (alt15) {
                 case 1 :
-                    // InternalInstanceLanguage.g:961:4: ( (lv_values_2_0= ruleReadExpressionRule ) ) (otherlv_3= ',' ( (lv_values_4_0= ruleReadExpressionRule ) ) )*
+                    // InternalInstanceLanguage.g:961:4: ( (lv_values_2_0= ruleOrExpressionRule ) ) (otherlv_3= ',' ( (lv_values_4_0= ruleOrExpressionRule ) ) )*
                     {
-                    // InternalInstanceLanguage.g:961:4: ( (lv_values_2_0= ruleReadExpressionRule ) )
-                    // InternalInstanceLanguage.g:962:5: (lv_values_2_0= ruleReadExpressionRule )
+                    // InternalInstanceLanguage.g:961:4: ( (lv_values_2_0= ruleOrExpressionRule ) )
+                    // InternalInstanceLanguage.g:962:5: (lv_values_2_0= ruleOrExpressionRule )
                     {
-                    // InternalInstanceLanguage.g:962:5: (lv_values_2_0= ruleReadExpressionRule )
-                    // InternalInstanceLanguage.g:963:6: lv_values_2_0= ruleReadExpressionRule
+                    // InternalInstanceLanguage.g:962:5: (lv_values_2_0= ruleOrExpressionRule )
+                    // InternalInstanceLanguage.g:963:6: lv_values_2_0= ruleOrExpressionRule
                     {
                     if ( state.backtracking==0 ) {
 
-                      						newCompositeNode(grammarAccess.getArrayRuleAccess().getValuesReadExpressionRuleParserRuleCall_2_0_0());
+                      						newCompositeNode(grammarAccess.getArrayRuleAccess().getValuesOrExpressionRuleParserRuleCall_2_0_0());
                       					
                     }
                     pushFollow(FOLLOW_8);
-                    lv_values_2_0=ruleReadExpressionRule();
+                    lv_values_2_0=ruleOrExpressionRule();
 
                     state._fsp--;
                     if (state.failed) return current;
@@ -2736,7 +2736,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
                       							current,
                       							"values",
                       							lv_values_2_0,
-                      							"de.evoal.languages.model.base.dsl.BaseLanguage.ReadExpressionRule");
+                      							"de.evoal.languages.model.base.dsl.BaseLanguage.OrExpressionRule");
                       						afterParserOrEnumRuleCall();
                       					
                     }
@@ -2746,7 +2746,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
                     }
 
-                    // InternalInstanceLanguage.g:980:4: (otherlv_3= ',' ( (lv_values_4_0= ruleReadExpressionRule ) ) )*
+                    // InternalInstanceLanguage.g:980:4: (otherlv_3= ',' ( (lv_values_4_0= ruleOrExpressionRule ) ) )*
                     loop14:
                     do {
                         int alt14=2;
@@ -2759,7 +2759,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
                         switch (alt14) {
                     	case 1 :
-                    	    // InternalInstanceLanguage.g:981:5: otherlv_3= ',' ( (lv_values_4_0= ruleReadExpressionRule ) )
+                    	    // InternalInstanceLanguage.g:981:5: otherlv_3= ',' ( (lv_values_4_0= ruleOrExpressionRule ) )
                     	    {
                     	    otherlv_3=(Token)match(input,19,FOLLOW_12); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
@@ -2767,19 +2767,19 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
                     	      					newLeafNode(otherlv_3, grammarAccess.getArrayRuleAccess().getCommaKeyword_2_1_0());
                     	      				
                     	    }
-                    	    // InternalInstanceLanguage.g:985:5: ( (lv_values_4_0= ruleReadExpressionRule ) )
-                    	    // InternalInstanceLanguage.g:986:6: (lv_values_4_0= ruleReadExpressionRule )
+                    	    // InternalInstanceLanguage.g:985:5: ( (lv_values_4_0= ruleOrExpressionRule ) )
+                    	    // InternalInstanceLanguage.g:986:6: (lv_values_4_0= ruleOrExpressionRule )
                     	    {
-                    	    // InternalInstanceLanguage.g:986:6: (lv_values_4_0= ruleReadExpressionRule )
-                    	    // InternalInstanceLanguage.g:987:7: lv_values_4_0= ruleReadExpressionRule
+                    	    // InternalInstanceLanguage.g:986:6: (lv_values_4_0= ruleOrExpressionRule )
+                    	    // InternalInstanceLanguage.g:987:7: lv_values_4_0= ruleOrExpressionRule
                     	    {
                     	    if ( state.backtracking==0 ) {
 
-                    	      							newCompositeNode(grammarAccess.getArrayRuleAccess().getValuesReadExpressionRuleParserRuleCall_2_1_1_0());
+                    	      							newCompositeNode(grammarAccess.getArrayRuleAccess().getValuesOrExpressionRuleParserRuleCall_2_1_1_0());
                     	      						
                     	    }
                     	    pushFollow(FOLLOW_8);
-                    	    lv_values_4_0=ruleReadExpressionRule();
+                    	    lv_values_4_0=ruleOrExpressionRule();
 
                     	    state._fsp--;
                     	    if (state.failed) return current;
@@ -2792,7 +2792,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
                     	      								current,
                     	      								"values",
                     	      								lv_values_4_0,
-                    	      								"de.evoal.languages.model.base.dsl.BaseLanguage.ReadExpressionRule");
+                    	      								"de.evoal.languages.model.base.dsl.BaseLanguage.OrExpressionRule");
                     	      							afterParserOrEnumRuleCall();
                     	      						
                     	    }

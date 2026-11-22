@@ -805,9 +805,9 @@ ruleLiteralRangeRule returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getLiteralRangeRuleAccess().getElementsReadExpressionRuleParserRuleCall_1_0());
+					newCompositeNode(grammarAccess.getLiteralRangeRuleAccess().getElementsOrExpressionRuleParserRuleCall_1_0());
 				}
-				lv_elements_1_0=ruleReadExpressionRule
+				lv_elements_1_0=ruleOrExpressionRule
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getLiteralRangeRuleRule());
@@ -816,7 +816,7 @@ ruleLiteralRangeRule returns [EObject current=null]
 						$current,
 						"elements",
 						lv_elements_1_0,
-						"de.evoal.languages.model.base.dsl.BaseLanguage.ReadExpressionRule");
+						"de.evoal.languages.model.base.dsl.BaseLanguage.OrExpressionRule");
 					afterParserOrEnumRuleCall();
 				}
 			)
@@ -829,9 +829,9 @@ ruleLiteralRangeRule returns [EObject current=null]
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getLiteralRangeRuleAccess().getElementsReadExpressionRuleParserRuleCall_2_1_0());
+						newCompositeNode(grammarAccess.getLiteralRangeRuleAccess().getElementsOrExpressionRuleParserRuleCall_2_1_0());
 					}
-					lv_elements_3_0=ruleReadExpressionRule
+					lv_elements_3_0=ruleOrExpressionRule
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getLiteralRangeRuleRule());
@@ -840,7 +840,7 @@ ruleLiteralRangeRule returns [EObject current=null]
 							$current,
 							"elements",
 							lv_elements_3_0,
-							"de.evoal.languages.model.base.dsl.BaseLanguage.ReadExpressionRule");
+							"de.evoal.languages.model.base.dsl.BaseLanguage.OrExpressionRule");
 						afterParserOrEnumRuleCall();
 					}
 				)
@@ -876,9 +876,9 @@ ruleCounterRangeRule returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getCounterRangeRuleAccess().getStartIntegerLiteralRuleParserRuleCall_1_0());
+					newCompositeNode(grammarAccess.getCounterRangeRuleAccess().getStartOrExpressionRuleParserRuleCall_1_0());
 				}
-				lv_start_1_0=ruleIntegerLiteralRule
+				lv_start_1_0=ruleOrExpressionRule
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getCounterRangeRuleRule());
@@ -887,7 +887,7 @@ ruleCounterRangeRule returns [EObject current=null]
 						$current,
 						"start",
 						lv_start_1_0,
-						"de.evoal.languages.model.base.dsl.BaseLanguage.IntegerLiteralRule");
+						"de.evoal.languages.model.base.dsl.BaseLanguage.OrExpressionRule");
 					afterParserOrEnumRuleCall();
 				}
 			)
@@ -899,9 +899,9 @@ ruleCounterRangeRule returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getCounterRangeRuleAccess().getEndIntegerLiteralRuleParserRuleCall_3_0());
+					newCompositeNode(grammarAccess.getCounterRangeRuleAccess().getEndOrExpressionRuleParserRuleCall_3_0());
 				}
-				lv_end_3_0=ruleIntegerLiteralRule
+				lv_end_3_0=ruleOrExpressionRule
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getCounterRangeRuleRule());
@@ -910,7 +910,7 @@ ruleCounterRangeRule returns [EObject current=null]
 						$current,
 						"end",
 						lv_end_3_0,
-						"de.evoal.languages.model.base.dsl.BaseLanguage.IntegerLiteralRule");
+						"de.evoal.languages.model.base.dsl.BaseLanguage.OrExpressionRule");
 					afterParserOrEnumRuleCall();
 				}
 			)
@@ -926,9 +926,9 @@ ruleCounterRangeRule returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getCounterRangeRuleAccess().getIncrementIntegerLiteralRuleParserRuleCall_6_0());
+					newCompositeNode(grammarAccess.getCounterRangeRuleAccess().getIncrementOrExpressionRuleParserRuleCall_6_0());
 				}
-				lv_increment_6_0=ruleIntegerLiteralRule
+				lv_increment_6_0=ruleOrExpressionRule
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getCounterRangeRuleRule());
@@ -937,7 +937,7 @@ ruleCounterRangeRule returns [EObject current=null]
 						$current,
 						"increment",
 						lv_increment_6_0,
-						"de.evoal.languages.model.base.dsl.BaseLanguage.IntegerLiteralRule");
+						"de.evoal.languages.model.base.dsl.BaseLanguage.OrExpressionRule");
 					afterParserOrEnumRuleCall();
 				}
 			)
@@ -2038,9 +2038,9 @@ ruleArrayRule returns [EObject current=null]
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getArrayRuleAccess().getValuesReadExpressionRuleParserRuleCall_2_0_0());
+						newCompositeNode(grammarAccess.getArrayRuleAccess().getValuesOrExpressionRuleParserRuleCall_2_0_0());
 					}
-					lv_values_2_0=ruleReadExpressionRule
+					lv_values_2_0=ruleOrExpressionRule
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getArrayRuleRule());
@@ -2049,7 +2049,7 @@ ruleArrayRule returns [EObject current=null]
 							$current,
 							"values",
 							lv_values_2_0,
-							"de.evoal.languages.model.base.dsl.BaseLanguage.ReadExpressionRule");
+							"de.evoal.languages.model.base.dsl.BaseLanguage.OrExpressionRule");
 						afterParserOrEnumRuleCall();
 					}
 				)
@@ -2062,9 +2062,9 @@ ruleArrayRule returns [EObject current=null]
 				(
 					(
 						{
-							newCompositeNode(grammarAccess.getArrayRuleAccess().getValuesReadExpressionRuleParserRuleCall_2_1_1_0());
+							newCompositeNode(grammarAccess.getArrayRuleAccess().getValuesOrExpressionRuleParserRuleCall_2_1_1_0());
 						}
-						lv_values_4_0=ruleReadExpressionRule
+						lv_values_4_0=ruleOrExpressionRule
 						{
 							if ($current==null) {
 								$current = createModelElementForParent(grammarAccess.getArrayRuleRule());
@@ -2073,7 +2073,7 @@ ruleArrayRule returns [EObject current=null]
 								$current,
 								"values",
 								lv_values_4_0,
-								"de.evoal.languages.model.base.dsl.BaseLanguage.ReadExpressionRule");
+								"de.evoal.languages.model.base.dsl.BaseLanguage.OrExpressionRule");
 							afterParserOrEnumRuleCall();
 						}
 					)
@@ -4102,9 +4102,9 @@ fragment RULE_DIGIT : '0'..'9';
 
 fragment RULE_EXPONENT : 'e' ('+'|'-')? RULE_DIGIT+;
 
-RULE_INT : '-'? RULE_DIGIT+;
+RULE_INT : RULE_DIGIT+;
 
-RULE_DOUBLE : (RULE_INT RULE_EXPONENT|RULE_INT '.' RULE_DIGIT* RULE_EXPONENT?);
+RULE_DOUBLE : (RULE_DIGIT+ RULE_EXPONENT|RULE_DIGIT+ '.' RULE_DIGIT* RULE_EXPONENT?);
 
 RULE_STRING : '"' ('\\' .|~(('\\'|'"')))* '"';
 

@@ -2,6 +2,7 @@ package de.evoal.core.api.utils;
 
 import de.evoal.languages.model.base.expressions.*;
 import de.evoal.languages.model.base.expressions.util.ExpressionsSwitch;
+import de.evoal.languages.model.interpreter.numeric.ArithmeticNumberOperations;
 
 public class ConstantSwitch extends ExpressionsSwitch<Object> {
     private ConstantSwitch() {
@@ -61,27 +62,21 @@ public class ConstantSwitch extends ExpressionsSwitch<Object> {
         return this.doSwitch(object.getLeftOperand());
     }
 
+    /**
+     * Applies the signs to the constant: numbers have no sign of their own, so {@code -4} is a
+     *   unary minus applied to 4; each minus negates the value, a plus keeps it.
+     */
     @Override
-    public Object caseUnaryAddOrSubtractExpression(UnaryAddOrSubtractExpression object) {
-        Requirements.requireSize(object.getOperators(), 0);
+    public Object caseUnaryAddOrSubtractExpression(final UnaryAddOrSubtractExpression object) {
+        Object value = this.doSwitch(object.getSubExpression());
 
-        Object Object = this.doSwitch(object.getSubExpression());
-
-        /*
-        for(final AddOrSubtractOperator aso : object.getOperators()) {
-            if(AddOrSubtractOperator.ADD.equals(aso)) {
-                continue;
-            }
-
-            if(Object instanceof Integer) {
-                Object = Math.negateExact(Object.intValue());
-            } else if(Object instanceof Double) {
-                Object = -Object.doubleValue();
+        for(final AddOrSubtractOperator operator : object.getOperators()) {
+            if(AddOrSubtractOperator.SUBTRACT.equals(operator)) {
+                value = ArithmeticNumberOperations.multiply(value, -1);
             }
         }
-         */
 
-        return Object;
+        return value;
     }
     /*
         @Override

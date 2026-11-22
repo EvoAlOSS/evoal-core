@@ -5,6 +5,7 @@ package de.evoal.languages.model.execution.impl;
 
 import de.evoal.languages.model.base.expressions.Literal;
 
+import de.evoal.languages.model.base.expressions.ReadExpression;
 import de.evoal.languages.model.execution.CounterRange;
 import de.evoal.languages.model.execution.ExecutionPackage;
 
@@ -40,7 +41,7 @@ public class CounterRangeImpl extends RangeImpl implements CounterRange {
 	 * @generated
 	 * @ordered
 	 */
-	protected Literal start;
+	protected ReadExpression start;
 
 	/**
 	 * The cached value of the '{@link #getEnd() <em>End</em>}' containment reference.
@@ -50,7 +51,7 @@ public class CounterRangeImpl extends RangeImpl implements CounterRange {
 	 * @generated
 	 * @ordered
 	 */
-	protected Literal end;
+	protected ReadExpression end;
 
 	/**
 	 * The cached value of the '{@link #getIncrement() <em>Increment</em>}' containment reference.
@@ -60,7 +61,7 @@ public class CounterRangeImpl extends RangeImpl implements CounterRange {
 	 * @generated
 	 * @ordered
 	 */
-	protected Literal increment;
+	protected ReadExpression increment;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -87,7 +88,7 @@ public class CounterRangeImpl extends RangeImpl implements CounterRange {
 	 * @generated
 	 */
 	@Override
-	public Literal getStart() {
+	public ReadExpression getStart() {
 		return start;
 	}
 
@@ -96,8 +97,8 @@ public class CounterRangeImpl extends RangeImpl implements CounterRange {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetStart(Literal newStart, NotificationChain msgs) {
-		Literal oldStart = start;
+	public NotificationChain basicSetStart(ReadExpression newStart, NotificationChain msgs) {
+		ReadExpression oldStart = start;
 		start = newStart;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ExecutionPackage.COUNTER_RANGE__START, oldStart, newStart);
@@ -112,7 +113,7 @@ public class CounterRangeImpl extends RangeImpl implements CounterRange {
 	 * @generated
 	 */
 	@Override
-	public void setStart(Literal newStart) {
+	public void setStart(ReadExpression newStart) {
 		if (newStart != start) {
 			NotificationChain msgs = null;
 			if (start != null)
@@ -132,7 +133,7 @@ public class CounterRangeImpl extends RangeImpl implements CounterRange {
 	 * @generated
 	 */
 	@Override
-	public Literal getEnd() {
+	public ReadExpression getEnd() {
 		return end;
 	}
 
@@ -141,8 +142,8 @@ public class CounterRangeImpl extends RangeImpl implements CounterRange {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetEnd(Literal newEnd, NotificationChain msgs) {
-		Literal oldEnd = end;
+	public NotificationChain basicSetEnd(ReadExpression newEnd, NotificationChain msgs) {
+		ReadExpression oldEnd = end;
 		end = newEnd;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ExecutionPackage.COUNTER_RANGE__END, oldEnd, newEnd);
@@ -157,7 +158,7 @@ public class CounterRangeImpl extends RangeImpl implements CounterRange {
 	 * @generated
 	 */
 	@Override
-	public void setEnd(Literal newEnd) {
+	public void setEnd(ReadExpression newEnd) {
 		if (newEnd != end) {
 			NotificationChain msgs = null;
 			if (end != null)
@@ -177,7 +178,7 @@ public class CounterRangeImpl extends RangeImpl implements CounterRange {
 	 * @generated
 	 */
 	@Override
-	public Literal getIncrement() {
+	public ReadExpression getIncrement() {
 		return increment;
 	}
 
@@ -186,8 +187,8 @@ public class CounterRangeImpl extends RangeImpl implements CounterRange {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetIncrement(Literal newIncrement, NotificationChain msgs) {
-		Literal oldIncrement = increment;
+	public NotificationChain basicSetIncrement(ReadExpression newIncrement, NotificationChain msgs) {
+		ReadExpression oldIncrement = increment;
 		increment = newIncrement;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ExecutionPackage.COUNTER_RANGE__INCREMENT, oldIncrement, newIncrement);
@@ -202,7 +203,7 @@ public class CounterRangeImpl extends RangeImpl implements CounterRange {
 	 * @generated
 	 */
 	@Override
-	public void setIncrement(Literal newIncrement) {
+	public void setIncrement(ReadExpression newIncrement) {
 		if (newIncrement != increment) {
 			NotificationChain msgs = null;
 			if (increment != null)
@@ -261,13 +262,13 @@ public class CounterRangeImpl extends RangeImpl implements CounterRange {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case ExecutionPackage.COUNTER_RANGE__START:
-				setStart((Literal)newValue);
+				setStart((ReadExpression)newValue);
 				return;
 			case ExecutionPackage.COUNTER_RANGE__END:
-				setEnd((Literal)newValue);
+				setEnd((ReadExpression)newValue);
 				return;
 			case ExecutionPackage.COUNTER_RANGE__INCREMENT:
-				setIncrement((Literal)newValue);
+				setIncrement((ReadExpression)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -282,13 +283,13 @@ public class CounterRangeImpl extends RangeImpl implements CounterRange {
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case ExecutionPackage.COUNTER_RANGE__START:
-				setStart((Literal)null);
+				setStart((ReadExpression)null);
 				return;
 			case ExecutionPackage.COUNTER_RANGE__END:
-				setEnd((Literal)null);
+				setEnd((ReadExpression)null);
 				return;
 			case ExecutionPackage.COUNTER_RANGE__INCREMENT:
-				setIncrement((Literal)null);
+				setIncrement((ReadExpression)null);
 				return;
 		}
 		super.eUnset(featureID);

@@ -1,0 +1,18 @@
+import "definitions" from 'de.evoal.pipeline.base';
+
+import "data" from 'de.evoal.pipeline.test.data';
+
+module 'de.evoal.pipeline.test.counter-loop' {
+    pipeline 'main' [
+    ]
+
+    begin
+        for i in [10 / 5 to -4 increment by -2] begin
+            execute("main");
+        end
+
+        for j in [-1, 2 * 3, 1 / 2] begin
+            execute("main");
+        end
+    end
+}

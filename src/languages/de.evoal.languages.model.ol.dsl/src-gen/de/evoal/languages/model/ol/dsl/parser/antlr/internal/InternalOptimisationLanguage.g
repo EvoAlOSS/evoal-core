@@ -1539,9 +1539,9 @@ ruleArrayRule returns [EObject current=null]
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getArrayRuleAccess().getValuesReadExpressionRuleParserRuleCall_2_0_0());
+						newCompositeNode(grammarAccess.getArrayRuleAccess().getValuesOrExpressionRuleParserRuleCall_2_0_0());
 					}
-					lv_values_2_0=ruleReadExpressionRule
+					lv_values_2_0=ruleOrExpressionRule
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getArrayRuleRule());
@@ -1550,7 +1550,7 @@ ruleArrayRule returns [EObject current=null]
 							$current,
 							"values",
 							lv_values_2_0,
-							"de.evoal.languages.model.base.dsl.BaseLanguage.ReadExpressionRule");
+							"de.evoal.languages.model.base.dsl.BaseLanguage.OrExpressionRule");
 						afterParserOrEnumRuleCall();
 					}
 				)
@@ -1563,9 +1563,9 @@ ruleArrayRule returns [EObject current=null]
 				(
 					(
 						{
-							newCompositeNode(grammarAccess.getArrayRuleAccess().getValuesReadExpressionRuleParserRuleCall_2_1_1_0());
+							newCompositeNode(grammarAccess.getArrayRuleAccess().getValuesOrExpressionRuleParserRuleCall_2_1_1_0());
 						}
-						lv_values_4_0=ruleReadExpressionRule
+						lv_values_4_0=ruleOrExpressionRule
 						{
 							if ($current==null) {
 								$current = createModelElementForParent(grammarAccess.getArrayRuleRule());
@@ -1574,7 +1574,7 @@ ruleArrayRule returns [EObject current=null]
 								$current,
 								"values",
 								lv_values_4_0,
-								"de.evoal.languages.model.base.dsl.BaseLanguage.ReadExpressionRule");
+								"de.evoal.languages.model.base.dsl.BaseLanguage.OrExpressionRule");
 							afterParserOrEnumRuleCall();
 						}
 					)
@@ -3774,9 +3774,9 @@ fragment RULE_DIGIT : '0'..'9';
 
 fragment RULE_EXPONENT : 'e' ('+'|'-')? RULE_DIGIT+;
 
-RULE_INT : '-'? RULE_DIGIT+;
+RULE_INT : RULE_DIGIT+;
 
-RULE_DOUBLE : (RULE_INT RULE_EXPONENT|RULE_INT '.' RULE_DIGIT* RULE_EXPONENT?);
+RULE_DOUBLE : (RULE_DIGIT+ RULE_EXPONENT|RULE_DIGIT+ '.' RULE_DIGIT* RULE_EXPONENT?);
 
 RULE_STRING : '"' ('\\' .|~(('\\'|'"')))* '"';
 

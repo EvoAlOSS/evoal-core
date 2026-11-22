@@ -421,21 +421,25 @@ public class BaseLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 		private final Keyword cLeftSquareBracketKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
 		private final Assignment cValuesAssignment_2_0 = (Assignment)cGroup_2.eContents().get(0);
-		private final RuleCall cValuesReadExpressionRuleParserRuleCall_2_0_0 = (RuleCall)cValuesAssignment_2_0.eContents().get(0);
+		private final RuleCall cValuesOrExpressionRuleParserRuleCall_2_0_0 = (RuleCall)cValuesAssignment_2_0.eContents().get(0);
 		private final Group cGroup_2_1 = (Group)cGroup_2.eContents().get(1);
 		private final Keyword cCommaKeyword_2_1_0 = (Keyword)cGroup_2_1.eContents().get(0);
 		private final Assignment cValuesAssignment_2_1_1 = (Assignment)cGroup_2_1.eContents().get(1);
-		private final RuleCall cValuesReadExpressionRuleParserRuleCall_2_1_1_0 = (RuleCall)cValuesAssignment_2_1_1.eContents().get(0);
+		private final RuleCall cValuesOrExpressionRuleParserRuleCall_2_1_1_0 = (RuleCall)cValuesAssignment_2_1_1.eContents().get(0);
 		private final Keyword cRightSquareBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
+		///**
+		// * An array whose elements are expressions (e.g. [-1.0, 2 * 3, data 'x']). The elements use
+		// * OrExpressionRule, the expression rule whose type fits Array.values (ReadExpression).
+		// */
 		//ArrayRule returns Array:
 		//    {Array}
-		//    '[' (values += ReadExpressionRule (',' values += ReadExpressionRule)* )? ']'
+		//    '[' (values += OrExpressionRule (',' values += OrExpressionRule)* )? ']'
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{Array}
-		//'[' (values += ReadExpressionRule (',' values += ReadExpressionRule)* )? ']'
+		//'[' (values += OrExpressionRule (',' values += OrExpressionRule)* )? ']'
 		public Group getGroup() { return cGroup; }
 		
 		//{Array}
@@ -444,26 +448,26 @@ public class BaseLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 		//'['
 		public Keyword getLeftSquareBracketKeyword_1() { return cLeftSquareBracketKeyword_1; }
 		
-		//(values += ReadExpressionRule (',' values += ReadExpressionRule)* )?
+		//(values += OrExpressionRule (',' values += OrExpressionRule)* )?
 		public Group getGroup_2() { return cGroup_2; }
 		
-		//values += ReadExpressionRule
+		//values += OrExpressionRule
 		public Assignment getValuesAssignment_2_0() { return cValuesAssignment_2_0; }
 		
-		//ReadExpressionRule
-		public RuleCall getValuesReadExpressionRuleParserRuleCall_2_0_0() { return cValuesReadExpressionRuleParserRuleCall_2_0_0; }
+		//OrExpressionRule
+		public RuleCall getValuesOrExpressionRuleParserRuleCall_2_0_0() { return cValuesOrExpressionRuleParserRuleCall_2_0_0; }
 		
-		//(',' values += ReadExpressionRule)*
+		//(',' values += OrExpressionRule)*
 		public Group getGroup_2_1() { return cGroup_2_1; }
 		
 		//','
 		public Keyword getCommaKeyword_2_1_0() { return cCommaKeyword_2_1_0; }
 		
-		//values += ReadExpressionRule
+		//values += OrExpressionRule
 		public Assignment getValuesAssignment_2_1_1() { return cValuesAssignment_2_1_1; }
 		
-		//ReadExpressionRule
-		public RuleCall getValuesReadExpressionRuleParserRuleCall_2_1_1_0() { return cValuesReadExpressionRuleParserRuleCall_2_1_1_0; }
+		//OrExpressionRule
+		public RuleCall getValuesOrExpressionRuleParserRuleCall_2_1_1_0() { return cValuesOrExpressionRuleParserRuleCall_2_1_1_0; }
 		
 		//']'
 		public Keyword getRightSquareBracketKeyword_3() { return cRightSquareBracketKeyword_3; }
@@ -2477,9 +2481,13 @@ public class BaseLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 		return getReadExpressionRuleAccess().getRule();
 	}
 	
+	///**
+	// * An array whose elements are expressions (e.g. [-1.0, 2 * 3, data 'x']). The elements use
+	// * OrExpressionRule, the expression rule whose type fits Array.values (ReadExpression).
+	// */
 	//ArrayRule returns Array:
 	//    {Array}
-	//    '[' (values += ReadExpressionRule (',' values += ReadExpressionRule)* )? ']'
+	//    '[' (values += OrExpressionRule (',' values += OrExpressionRule)* )? ']'
 	//;
 	public ArrayRuleElements getArrayRuleAccess() {
 		return pArrayRule;
@@ -3002,13 +3010,17 @@ public class BaseLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 		return tEXPONENT;
 	}
 	
+	///*
+	// * Numbers have no sign: a negative number is a unary minus applied to the number, so that
+	// * '4-1' is a subtraction.
+	// */
 	//@Override
-	//terminal INT returns ecore::EInt: '-'? DIGIT+;
+	//terminal INT returns ecore::EInt: DIGIT+;
 	public TerminalRule getINTRule() {
 		return tINT;
 	}
 	
-	//terminal DOUBLE returns ecore::EDouble: INT EXPONENT | INT '.' DIGIT* EXPONENT?;
+	//terminal DOUBLE returns ecore::EDouble: DIGIT+ EXPONENT | DIGIT+ '.' DIGIT* EXPONENT?;
 	public TerminalRule getDOUBLERule() {
 		return tDOUBLE;
 	}

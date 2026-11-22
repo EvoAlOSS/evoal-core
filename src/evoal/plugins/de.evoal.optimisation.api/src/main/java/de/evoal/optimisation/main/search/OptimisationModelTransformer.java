@@ -2,6 +2,7 @@ package de.evoal.optimisation.main.search;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -19,6 +20,8 @@ import de.evoal.languages.model.base.definitions.DataDescription;
 import de.evoal.languages.model.base.expressions.Array;
 import de.evoal.languages.model.base.expressions.Expression;
 import de.evoal.languages.model.base.expressions.Instance;
+import de.evoal.languages.model.base.expressions.ReadExpression;
+import de.evoal.core.api.languages.base.ElementSwitch;
 import de.evoal.languages.model.ol.AlgorithmInstance;
 import de.evoal.languages.model.ol.Direction;
 import de.evoal.languages.model.ol.OptimisationGoal;
@@ -184,7 +187,9 @@ public class OptimisationModelTransformer extends ModelTransformer {
         }
 
         for(final Expression writer : documentation.getValues()) {
-            if(!(writer instanceof Instance instance)) {
+            // each element is an expression; a writer is an expression that is just an instance
+            final Optional<ReadExpression> element = ElementSwitch.elementOf(writer);
+            if(!(element.orElse(null) instanceof Instance instance)) {
                 final String message = "The documentation of " + owner + " may only contain instances, but contains '"
                         + writer + "'.";
                 throw new IllegalArgumentException(message);

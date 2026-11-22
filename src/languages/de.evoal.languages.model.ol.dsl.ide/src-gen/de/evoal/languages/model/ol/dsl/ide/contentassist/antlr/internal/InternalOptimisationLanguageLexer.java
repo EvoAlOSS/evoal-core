@@ -1873,42 +1873,24 @@ public class InternalOptimisationLanguageLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalOptimisationLanguage.g:8072:10: ( ( '-' )? ( RULE_DIGIT )+ )
-            // InternalOptimisationLanguage.g:8072:12: ( '-' )? ( RULE_DIGIT )+
+            // InternalOptimisationLanguage.g:8072:10: ( ( RULE_DIGIT )+ )
+            // InternalOptimisationLanguage.g:8072:12: ( RULE_DIGIT )+
             {
-            // InternalOptimisationLanguage.g:8072:12: ( '-' )?
-            int alt3=2;
-            int LA3_0 = input.LA(1);
-
-            if ( (LA3_0=='-') ) {
-                alt3=1;
-            }
-            switch (alt3) {
-                case 1 :
-                    // InternalOptimisationLanguage.g:8072:12: '-'
-                    {
-                    match('-'); 
-
-                    }
-                    break;
-
-            }
-
-            // InternalOptimisationLanguage.g:8072:17: ( RULE_DIGIT )+
-            int cnt4=0;
-            loop4:
+            // InternalOptimisationLanguage.g:8072:12: ( RULE_DIGIT )+
+            int cnt3=0;
+            loop3:
             do {
-                int alt4=2;
-                int LA4_0 = input.LA(1);
+                int alt3=2;
+                int LA3_0 = input.LA(1);
 
-                if ( ((LA4_0>='0' && LA4_0<='9')) ) {
-                    alt4=1;
+                if ( ((LA3_0>='0' && LA3_0<='9')) ) {
+                    alt3=1;
                 }
 
 
-                switch (alt4) {
+                switch (alt3) {
             	case 1 :
-            	    // InternalOptimisationLanguage.g:8072:17: RULE_DIGIT
+            	    // InternalOptimisationLanguage.g:8072:12: RULE_DIGIT
             	    {
             	    mRULE_DIGIT(); 
 
@@ -1916,12 +1898,12 @@ public class InternalOptimisationLanguageLexer extends Lexer {
             	    break;
 
             	default :
-            	    if ( cnt4 >= 1 ) break loop4;
+            	    if ( cnt3 >= 1 ) break loop3;
                         EarlyExitException eee =
-                            new EarlyExitException(4, input);
+                            new EarlyExitException(3, input);
                         throw eee;
                 }
-                cnt4++;
+                cnt3++;
             } while (true);
 
 
@@ -1940,27 +1922,55 @@ public class InternalOptimisationLanguageLexer extends Lexer {
         try {
             int _type = RULE_DOUBLE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalOptimisationLanguage.g:8074:13: ( ( RULE_INT RULE_EXPONENT | RULE_INT '.' ( RULE_DIGIT )* ( RULE_EXPONENT )? ) )
-            // InternalOptimisationLanguage.g:8074:15: ( RULE_INT RULE_EXPONENT | RULE_INT '.' ( RULE_DIGIT )* ( RULE_EXPONENT )? )
+            // InternalOptimisationLanguage.g:8074:13: ( ( ( RULE_DIGIT )+ RULE_EXPONENT | ( RULE_DIGIT )+ '.' ( RULE_DIGIT )* ( RULE_EXPONENT )? ) )
+            // InternalOptimisationLanguage.g:8074:15: ( ( RULE_DIGIT )+ RULE_EXPONENT | ( RULE_DIGIT )+ '.' ( RULE_DIGIT )* ( RULE_EXPONENT )? )
             {
-            // InternalOptimisationLanguage.g:8074:15: ( RULE_INT RULE_EXPONENT | RULE_INT '.' ( RULE_DIGIT )* ( RULE_EXPONENT )? )
-            int alt7=2;
-            alt7 = dfa7.predict(input);
-            switch (alt7) {
+            // InternalOptimisationLanguage.g:8074:15: ( ( RULE_DIGIT )+ RULE_EXPONENT | ( RULE_DIGIT )+ '.' ( RULE_DIGIT )* ( RULE_EXPONENT )? )
+            int alt8=2;
+            alt8 = dfa8.predict(input);
+            switch (alt8) {
                 case 1 :
-                    // InternalOptimisationLanguage.g:8074:16: RULE_INT RULE_EXPONENT
+                    // InternalOptimisationLanguage.g:8074:16: ( RULE_DIGIT )+ RULE_EXPONENT
                     {
-                    mRULE_INT(); 
+                    // InternalOptimisationLanguage.g:8074:16: ( RULE_DIGIT )+
+                    int cnt4=0;
+                    loop4:
+                    do {
+                        int alt4=2;
+                        int LA4_0 = input.LA(1);
+
+                        if ( ((LA4_0>='0' && LA4_0<='9')) ) {
+                            alt4=1;
+                        }
+
+
+                        switch (alt4) {
+                    	case 1 :
+                    	    // InternalOptimisationLanguage.g:8074:16: RULE_DIGIT
+                    	    {
+                    	    mRULE_DIGIT(); 
+
+                    	    }
+                    	    break;
+
+                    	default :
+                    	    if ( cnt4 >= 1 ) break loop4;
+                                EarlyExitException eee =
+                                    new EarlyExitException(4, input);
+                                throw eee;
+                        }
+                        cnt4++;
+                    } while (true);
+
                     mRULE_EXPONENT(); 
 
                     }
                     break;
                 case 2 :
-                    // InternalOptimisationLanguage.g:8074:39: RULE_INT '.' ( RULE_DIGIT )* ( RULE_EXPONENT )?
+                    // InternalOptimisationLanguage.g:8074:42: ( RULE_DIGIT )+ '.' ( RULE_DIGIT )* ( RULE_EXPONENT )?
                     {
-                    mRULE_INT(); 
-                    match('.'); 
-                    // InternalOptimisationLanguage.g:8074:52: ( RULE_DIGIT )*
+                    // InternalOptimisationLanguage.g:8074:42: ( RULE_DIGIT )+
+                    int cnt5=0;
                     loop5:
                     do {
                         int alt5=2;
@@ -1973,7 +1983,7 @@ public class InternalOptimisationLanguageLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // InternalOptimisationLanguage.g:8074:52: RULE_DIGIT
+                    	    // InternalOptimisationLanguage.g:8074:42: RULE_DIGIT
                     	    {
                     	    mRULE_DIGIT(); 
 
@@ -1981,20 +1991,50 @@ public class InternalOptimisationLanguageLexer extends Lexer {
                     	    break;
 
                     	default :
-                    	    break loop5;
+                    	    if ( cnt5 >= 1 ) break loop5;
+                                EarlyExitException eee =
+                                    new EarlyExitException(5, input);
+                                throw eee;
+                        }
+                        cnt5++;
+                    } while (true);
+
+                    match('.'); 
+                    // InternalOptimisationLanguage.g:8074:58: ( RULE_DIGIT )*
+                    loop6:
+                    do {
+                        int alt6=2;
+                        int LA6_0 = input.LA(1);
+
+                        if ( ((LA6_0>='0' && LA6_0<='9')) ) {
+                            alt6=1;
+                        }
+
+
+                        switch (alt6) {
+                    	case 1 :
+                    	    // InternalOptimisationLanguage.g:8074:58: RULE_DIGIT
+                    	    {
+                    	    mRULE_DIGIT(); 
+
+                    	    }
+                    	    break;
+
+                    	default :
+                    	    break loop6;
                         }
                     } while (true);
 
-                    // InternalOptimisationLanguage.g:8074:64: ( RULE_EXPONENT )?
-                    int alt6=2;
-                    int LA6_0 = input.LA(1);
+                    // InternalOptimisationLanguage.g:8074:70: ( RULE_EXPONENT )?
+                    int alt7=2;
+                    int LA7_0 = input.LA(1);
 
-                    if ( (LA6_0=='e') ) {
-                        alt6=1;
+                    if ( (LA7_0=='e') ) {
+                        alt7=1;
                     }
-                    switch (alt6) {
+                    switch (alt7) {
                         case 1 :
-                            // InternalOptimisationLanguage.g:8074:64: RULE_EXPONENT
+                            // InternalOptimisationLanguage.g:8074:70: RULE_EXPONENT
                             {
                             mRULE_EXPONENT(); 
 
@@ -2030,20 +2070,20 @@ public class InternalOptimisationLanguageLexer extends Lexer {
             {
             match('\"'); 
             // InternalOptimisationLanguage.g:8076:19: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
-            loop8:
+            loop9:
             do {
-                int alt8=3;
-                int LA8_0 = input.LA(1);
+                int alt9=3;
+                int LA9_0 = input.LA(1);
 
-                if ( (LA8_0=='\\') ) {
-                    alt8=1;
+                if ( (LA9_0=='\\') ) {
+                    alt9=1;
                 }
-                else if ( ((LA8_0>='\u0000' && LA8_0<='!')||(LA8_0>='#' && LA8_0<='[')||(LA8_0>=']' && LA8_0<='\uFFFF')) ) {
-                    alt8=2;
+                else if ( ((LA9_0>='\u0000' && LA9_0<='!')||(LA9_0>='#' && LA9_0<='[')||(LA9_0>=']' && LA9_0<='\uFFFF')) ) {
+                    alt9=2;
                 }
 
 
-                switch (alt8) {
+                switch (alt9) {
             	case 1 :
             	    // InternalOptimisationLanguage.g:8076:20: '\\\\' .
             	    {
@@ -2069,7 +2109,7 @@ public class InternalOptimisationLanguageLexer extends Lexer {
             	    break;
 
             	default :
-            	    break loop8;
+            	    break loop9;
                 }
             } while (true);
 
@@ -2095,20 +2135,20 @@ public class InternalOptimisationLanguageLexer extends Lexer {
             {
             match('\''); 
             // InternalOptimisationLanguage.g:8078:23: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
-            loop9:
+            loop10:
             do {
-                int alt9=3;
-                int LA9_0 = input.LA(1);
+                int alt10=3;
+                int LA10_0 = input.LA(1);
 
-                if ( (LA9_0=='\\') ) {
-                    alt9=1;
+                if ( (LA10_0=='\\') ) {
+                    alt10=1;
                 }
-                else if ( ((LA9_0>='\u0000' && LA9_0<='&')||(LA9_0>='(' && LA9_0<='[')||(LA9_0>=']' && LA9_0<='\uFFFF')) ) {
-                    alt9=2;
+                else if ( ((LA10_0>='\u0000' && LA10_0<='&')||(LA10_0>='(' && LA10_0<='[')||(LA10_0>=']' && LA10_0<='\uFFFF')) ) {
+                    alt10=2;
                 }
 
 
-                switch (alt9) {
+                switch (alt10) {
             	case 1 :
             	    // InternalOptimisationLanguage.g:8078:24: '\\\\' .
             	    {
@@ -2134,7 +2174,7 @@ public class InternalOptimisationLanguageLexer extends Lexer {
             	    break;
 
             	default :
-            	    break loop9;
+            	    break loop10;
                 }
             } while (true);
 
@@ -2159,13 +2199,13 @@ public class InternalOptimisationLanguageLexer extends Lexer {
             // InternalOptimisationLanguage.g:8080:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
             // InternalOptimisationLanguage.g:8080:11: ( '^' )?
-            int alt10=2;
-            int LA10_0 = input.LA(1);
+            int alt11=2;
+            int LA11_0 = input.LA(1);
 
-            if ( (LA10_0=='^') ) {
-                alt10=1;
+            if ( (LA11_0=='^') ) {
+                alt11=1;
             }
-            switch (alt10) {
+            switch (alt11) {
                 case 1 :
                     // InternalOptimisationLanguage.g:8080:11: '^'
                     {
@@ -2186,17 +2226,17 @@ public class InternalOptimisationLanguageLexer extends Lexer {
                 throw mse;}
 
             // InternalOptimisationLanguage.g:8080:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
-            loop11:
+            loop12:
             do {
-                int alt11=2;
-                int LA11_0 = input.LA(1);
+                int alt12=2;
+                int LA12_0 = input.LA(1);
 
-                if ( ((LA11_0>='0' && LA11_0<='9')||(LA11_0>='A' && LA11_0<='Z')||LA11_0=='_'||(LA11_0>='a' && LA11_0<='z')) ) {
-                    alt11=1;
+                if ( ((LA12_0>='0' && LA12_0<='9')||(LA12_0>='A' && LA12_0<='Z')||LA12_0=='_'||(LA12_0>='a' && LA12_0<='z')) ) {
+                    alt12=1;
                 }
 
 
-                switch (alt11) {
+                switch (alt12) {
             	case 1 :
             	    // InternalOptimisationLanguage.g:
             	    {
@@ -2214,7 +2254,7 @@ public class InternalOptimisationLanguageLexer extends Lexer {
             	    break;
 
             	default :
-            	    break loop11;
+            	    break loop12;
                 }
             } while (true);
 
@@ -2240,29 +2280,29 @@ public class InternalOptimisationLanguageLexer extends Lexer {
             match("/*"); 
 
             // InternalOptimisationLanguage.g:8082:24: ( options {greedy=false; } : . )*
-            loop12:
+            loop13:
             do {
-                int alt12=2;
-                int LA12_0 = input.LA(1);
+                int alt13=2;
+                int LA13_0 = input.LA(1);
 
-                if ( (LA12_0=='*') ) {
-                    int LA12_1 = input.LA(2);
+                if ( (LA13_0=='*') ) {
+                    int LA13_1 = input.LA(2);
 
-                    if ( (LA12_1=='/') ) {
-                        alt12=2;
+                    if ( (LA13_1=='/') ) {
+                        alt13=2;
                     }
-                    else if ( ((LA12_1>='\u0000' && LA12_1<='.')||(LA12_1>='0' && LA12_1<='\uFFFF')) ) {
-                        alt12=1;
+                    else if ( ((LA13_1>='\u0000' && LA13_1<='.')||(LA13_1>='0' && LA13_1<='\uFFFF')) ) {
+                        alt13=1;
                     }
 
 
                 }
-                else if ( ((LA12_0>='\u0000' && LA12_0<=')')||(LA12_0>='+' && LA12_0<='\uFFFF')) ) {
-                    alt12=1;
+                else if ( ((LA13_0>='\u0000' && LA13_0<=')')||(LA13_0>='+' && LA13_0<='\uFFFF')) ) {
+                    alt13=1;
                 }
 
 
-                switch (alt12) {
+                switch (alt13) {
             	case 1 :
             	    // InternalOptimisationLanguage.g:8082:52: .
             	    {
@@ -2272,7 +2312,7 @@ public class InternalOptimisationLanguageLexer extends Lexer {
             	    break;
 
             	default :
-            	    break loop12;
+            	    break loop13;
                 }
             } while (true);
 
@@ -2300,17 +2340,17 @@ public class InternalOptimisationLanguageLexer extends Lexer {
             match("//"); 
 
             // InternalOptimisationLanguage.g:8084:24: (~ ( ( '\\n' | '\\r' ) ) )*
-            loop13:
+            loop14:
             do {
-                int alt13=2;
-                int LA13_0 = input.LA(1);
+                int alt14=2;
+                int LA14_0 = input.LA(1);
 
-                if ( ((LA13_0>='\u0000' && LA13_0<='\t')||(LA13_0>='\u000B' && LA13_0<='\f')||(LA13_0>='\u000E' && LA13_0<='\uFFFF')) ) {
-                    alt13=1;
+                if ( ((LA14_0>='\u0000' && LA14_0<='\t')||(LA14_0>='\u000B' && LA14_0<='\f')||(LA14_0>='\u000E' && LA14_0<='\uFFFF')) ) {
+                    alt14=1;
                 }
 
 
-                switch (alt13) {
+                switch (alt14) {
             	case 1 :
             	    // InternalOptimisationLanguage.g:8084:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
@@ -2328,29 +2368,29 @@ public class InternalOptimisationLanguageLexer extends Lexer {
             	    break;
 
             	default :
-            	    break loop13;
+            	    break loop14;
                 }
             } while (true);
 
             // InternalOptimisationLanguage.g:8084:40: ( ( '\\r' )? '\\n' )?
-            int alt15=2;
-            int LA15_0 = input.LA(1);
+            int alt16=2;
+            int LA16_0 = input.LA(1);
 
-            if ( (LA15_0=='\n'||LA15_0=='\r') ) {
-                alt15=1;
+            if ( (LA16_0=='\n'||LA16_0=='\r') ) {
+                alt16=1;
             }
-            switch (alt15) {
+            switch (alt16) {
                 case 1 :
                     // InternalOptimisationLanguage.g:8084:41: ( '\\r' )? '\\n'
                     {
                     // InternalOptimisationLanguage.g:8084:41: ( '\\r' )?
-                    int alt14=2;
-                    int LA14_0 = input.LA(1);
+                    int alt15=2;
+                    int LA15_0 = input.LA(1);
 
-                    if ( (LA14_0=='\r') ) {
-                        alt14=1;
+                    if ( (LA15_0=='\r') ) {
+                        alt15=1;
                     }
-                    switch (alt14) {
+                    switch (alt15) {
                         case 1 :
                             // InternalOptimisationLanguage.g:8084:41: '\\r'
                             {
@@ -2388,18 +2428,18 @@ public class InternalOptimisationLanguageLexer extends Lexer {
             // InternalOptimisationLanguage.g:8086:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
             // InternalOptimisationLanguage.g:8086:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
-            int cnt16=0;
-            loop16:
+            int cnt17=0;
+            loop17:
             do {
-                int alt16=2;
-                int LA16_0 = input.LA(1);
+                int alt17=2;
+                int LA17_0 = input.LA(1);
 
-                if ( ((LA16_0>='\t' && LA16_0<='\n')||LA16_0=='\r'||LA16_0==' ') ) {
-                    alt16=1;
+                if ( ((LA17_0>='\t' && LA17_0<='\n')||LA17_0=='\r'||LA17_0==' ') ) {
+                    alt17=1;
                 }
 
 
-                switch (alt16) {
+                switch (alt17) {
             	case 1 :
             	    // InternalOptimisationLanguage.g:
             	    {
@@ -2417,12 +2457,12 @@ public class InternalOptimisationLanguageLexer extends Lexer {
             	    break;
 
             	default :
-            	    if ( cnt16 >= 1 ) break loop16;
+            	    if ( cnt17 >= 1 ) break loop17;
                         EarlyExitException eee =
-                            new EarlyExitException(16, input);
+                            new EarlyExitException(17, input);
                         throw eee;
                 }
-                cnt16++;
+                cnt17++;
             } while (true);
 
 
@@ -2458,9 +2498,9 @@ public class InternalOptimisationLanguageLexer extends Lexer {
 
     public void mTokens() throws RecognitionException {
         // InternalOptimisationLanguage.g:1:8: ( T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | T__38 | T__39 | T__40 | T__41 | T__42 | T__43 | T__44 | T__45 | T__46 | T__47 | T__48 | T__49 | T__50 | T__51 | T__52 | T__53 | T__54 | T__55 | T__56 | T__57 | T__58 | T__59 | T__60 | T__61 | T__62 | T__63 | T__64 | T__65 | T__66 | T__67 | T__68 | T__69 | T__70 | T__71 | T__72 | T__73 | T__74 | T__75 | T__76 | T__77 | T__78 | T__79 | T__80 | T__81 | T__82 | T__83 | T__84 | T__85 | T__86 | T__87 | T__88 | T__89 | T__90 | T__91 | T__92 | T__93 | T__94 | T__95 | RULE_INT | RULE_DOUBLE | RULE_STRING | RULE_QUOTED_ID | RULE_ID | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
-        int alt17=90;
-        alt17 = dfa17.predict(input);
-        switch (alt17) {
+        int alt18=90;
+        alt18 = dfa18.predict(input);
+        switch (alt18) {
             case 1 :
                 // InternalOptimisationLanguage.g:1:10: T__15
                 {
@@ -3097,129 +3137,128 @@ public class InternalOptimisationLanguageLexer extends Lexer {
     }
 
 
-    protected DFA7 dfa7 = new DFA7(this);
-    protected DFA17 dfa17 = new DFA17(this);
-    static final String DFA7_eotS =
-        "\5\uffff";
-    static final String DFA7_eofS =
-        "\5\uffff";
-    static final String DFA7_minS =
-        "\1\55\1\60\1\56\2\uffff";
-    static final String DFA7_maxS =
-        "\2\71\1\145\2\uffff";
-    static final String DFA7_acceptS =
-        "\3\uffff\1\1\1\2";
-    static final String DFA7_specialS =
-        "\5\uffff}>";
-    static final String[] DFA7_transitionS = {
-            "\1\1\2\uffff\12\2",
-            "\12\2",
-            "\1\4\1\uffff\12\2\53\uffff\1\3",
+    protected DFA8 dfa8 = new DFA8(this);
+    protected DFA18 dfa18 = new DFA18(this);
+    static final String DFA8_eotS =
+        "\4\uffff";
+    static final String DFA8_eofS =
+        "\4\uffff";
+    static final String DFA8_minS =
+        "\1\60\1\56\2\uffff";
+    static final String DFA8_maxS =
+        "\1\71\1\145\2\uffff";
+    static final String DFA8_acceptS =
+        "\2\uffff\1\2\1\1";
+    static final String DFA8_specialS =
+        "\4\uffff}>";
+    static final String[] DFA8_transitionS = {
+            "\12\1",
+            "\1\2\1\uffff\12\1\53\uffff\1\3",
             "",
             ""
     };
 
-    static final short[] DFA7_eot = DFA.unpackEncodedString(DFA7_eotS);
-    static final short[] DFA7_eof = DFA.unpackEncodedString(DFA7_eofS);
-    static final char[] DFA7_min = DFA.unpackEncodedStringToUnsignedChars(DFA7_minS);
-    static final char[] DFA7_max = DFA.unpackEncodedStringToUnsignedChars(DFA7_maxS);
-    static final short[] DFA7_accept = DFA.unpackEncodedString(DFA7_acceptS);
-    static final short[] DFA7_special = DFA.unpackEncodedString(DFA7_specialS);
-    static final short[][] DFA7_transition;
+    static final short[] DFA8_eot = DFA.unpackEncodedString(DFA8_eotS);
+    static final short[] DFA8_eof = DFA.unpackEncodedString(DFA8_eofS);
+    static final char[] DFA8_min = DFA.unpackEncodedStringToUnsignedChars(DFA8_minS);
+    static final char[] DFA8_max = DFA.unpackEncodedStringToUnsignedChars(DFA8_maxS);
+    static final short[] DFA8_accept = DFA.unpackEncodedString(DFA8_acceptS);
+    static final short[] DFA8_special = DFA.unpackEncodedString(DFA8_specialS);
+    static final short[][] DFA8_transition;
 
     static {
-        int numStates = DFA7_transitionS.length;
-        DFA7_transition = new short[numStates][];
+        int numStates = DFA8_transitionS.length;
+        DFA8_transition = new short[numStates][];
         for (int i=0; i<numStates; i++) {
-            DFA7_transition[i] = DFA.unpackEncodedString(DFA7_transitionS[i]);
+            DFA8_transition[i] = DFA.unpackEncodedString(DFA8_transitionS[i]);
         }
     }
 
-    class DFA7 extends DFA {
+    class DFA8 extends DFA {
 
-        public DFA7(BaseRecognizer recognizer) {
+        public DFA8(BaseRecognizer recognizer) {
             this.recognizer = recognizer;
-            this.decisionNumber = 7;
-            this.eot = DFA7_eot;
-            this.eof = DFA7_eof;
-            this.min = DFA7_min;
-            this.max = DFA7_max;
-            this.accept = DFA7_accept;
-            this.special = DFA7_special;
-            this.transition = DFA7_transition;
+            this.decisionNumber = 8;
+            this.eot = DFA8_eot;
+            this.eof = DFA8_eof;
+            this.min = DFA8_min;
+            this.max = DFA8_max;
+            this.accept = DFA8_accept;
+            this.special = DFA8_special;
+            this.transition = DFA8_transition;
         }
         public String getDescription() {
-            return "8074:15: ( RULE_INT RULE_EXPONENT | RULE_INT '.' ( RULE_DIGIT )* ( RULE_EXPONENT )? )";
+            return "8074:15: ( ( RULE_DIGIT )+ RULE_EXPONENT | ( RULE_DIGIT )+ '.' ( RULE_DIGIT )* ( RULE_EXPONENT )? )";
         }
     }
-    static final String DFA17_eotS =
-        "\1\uffff\1\77\1\102\1\uffff\1\105\1\107\1\uffff\1\112\1\uffff\1\116\1\uffff\1\120\1\121\1\122\1\123\1\124\1\125\1\126\1\127\1\130\1\133\1\135\1\141\1\uffff\1\143\1\144\1\147\1\150\1\151\2\uffff\2\100\2\uffff\2\100\1\167\1\uffff\3\100\1\174\4\uffff\2\100\1\uffff\4\100\1\u008b\2\73\3\uffff\3\100\12\uffff\1\u008b\17\uffff\1\u0094\1\100\1\uffff\1\100\1\uffff\3\100\4\uffff\2\100\5\uffff\4\100\2\uffff\4\100\3\uffff\1\u00a7\2\100\5\uffff\4\100\1\uffff\5\100\5\uffff\1\100\1\u00b5\2\100\1\uffff\3\100\1\u00bb\2\100\1\u00be\13\100\1\uffff\1\u00ca\1\u00cb\3\100\1\u00cf\7\100\1\uffff\1\u00d7\1\u00d8\3\100\1\uffff\2\100\1\uffff\3\100\1\u00e1\1\100\1\u00e3\2\100\1\u00e7\1\u00e8\1\100\2\uffff\1\100\1\u00eb\1\100\1\uffff\1\100\1\u00ee\2\100\1\u00f1\1\100\1\u00f3\2\uffff\5\100\1\u00f9\2\100\1\uffff\1\100\1\uffff\3\100\2\uffff\1\100\1\u0101\1\uffff\2\100\1\uffff\2\100\1\uffff\1\100\1\uffff\2\100\1\u0109\2\100\1\uffff\1\100\1\u010d\1\u010e\3\100\1\u0112\1\uffff\1\100\1\u0114\5\100\1\uffff\2\100\1\u011c\2\uffff\2\100\1\u011f\1\uffff\1\100\1\uffff\1\100\1\u0122\1\u0123\1\u0124\1\100\1\u0126\1\u0127\1\uffff\1\u0128\1\u0129\1\uffff\1\u012a\1\100\3\uffff\1\u012c\5\uffff\1\100\1\uffff\1\u012e\1\uffff";
-    static final String DFA17_eofS =
+    static final String DFA18_eotS =
+        "\1\uffff\1\100\1\102\1\uffff\1\105\1\107\3\uffff\1\115\1\uffff\1\117\1\120\1\121\1\122\1\123\1\124\1\125\1\126\1\127\1\132\1\134\1\140\1\uffff\1\142\1\143\1\146\1\147\1\150\2\uffff\2\77\2\uffff\2\77\1\166\1\uffff\3\77\1\173\4\uffff\2\77\1\uffff\4\77\1\u008a\2\73\3\uffff\3\77\31\uffff\1\u0094\1\77\1\uffff\1\77\1\uffff\3\77\4\uffff\2\77\5\uffff\4\77\2\uffff\4\77\3\uffff\1\u00a7\2\77\5\uffff\4\77\1\uffff\5\77\1\uffff\1\u008a\4\uffff\1\77\1\u00b5\2\77\1\uffff\3\77\1\u00bb\2\77\1\u00be\13\77\1\uffff\1\u00ca\1\u00cb\3\77\1\u00cf\7\77\1\uffff\1\u00d7\1\u00d8\3\77\1\uffff\2\77\1\uffff\3\77\1\u00e1\1\77\1\u00e3\2\77\1\u00e7\1\u00e8\1\77\2\uffff\1\77\1\u00eb\1\77\1\uffff\1\77\1\u00ee\2\77\1\u00f1\1\77\1\u00f3\2\uffff\5\77\1\u00f9\2\77\1\uffff\1\77\1\uffff\3\77\2\uffff\1\77\1\u0101\1\uffff\2\77\1\uffff\2\77\1\uffff\1\77\1\uffff\2\77\1\u0109\2\77\1\uffff\1\77\1\u010d\1\u010e\3\77\1\u0112\1\uffff\1\77\1\u0114\5\77\1\uffff\2\77\1\u011c\2\uffff\2\77\1\u011f\1\uffff\1\77\1\uffff\1\77\1\u0122\1\u0123\1\u0124\1\77\1\u0126\1\u0127\1\uffff\1\u0128\1\u0129\1\uffff\1\u012a\1\77\3\uffff\1\u012c\5\uffff\1\77\1\uffff\1\u012e\1\uffff";
+    static final String DFA18_eofS =
         "\u012f\uffff";
-    static final String DFA17_minS =
-        "\1\0\1\60\1\75\1\uffff\2\75\1\uffff\1\60\1\uffff\1\52\1\uffff\14\60\1\uffff\5\60\2\uffff\1\145\1\151\2\uffff\1\160\1\141\1\75\1\uffff\1\122\1\117\1\116\1\101\4\uffff\1\141\1\155\1\uffff\1\156\1\151\1\145\1\157\1\56\2\0\3\uffff\1\154\1\162\1\157\12\uffff\1\56\17\uffff\1\60\1\143\1\uffff\1\156\1\uffff\1\144\1\160\1\156\4\uffff\1\144\1\162\5\uffff\1\145\1\141\1\162\1\164\2\uffff\1\164\1\167\1\145\1\162\3\uffff\1\60\1\122\1\104\5\uffff\1\154\1\151\1\163\1\160\1\uffff\1\165\1\160\1\164\1\141\1\157\5\uffff\1\163\1\60\1\155\1\141\1\uffff\1\165\1\146\1\165\1\60\2\151\1\60\1\141\1\143\1\162\1\146\1\151\1\150\1\151\1\141\2\145\1\147\1\uffff\2\60\1\165\1\144\1\164\1\60\1\157\1\155\1\162\1\145\2\154\1\145\1\uffff\2\60\1\155\1\151\1\154\1\uffff\2\155\1\uffff\1\171\1\151\1\143\1\60\1\156\1\60\1\155\1\162\2\60\1\145\2\uffff\1\145\1\60\1\141\1\uffff\1\162\1\60\1\145\1\162\1\60\1\145\1\60\2\uffff\1\145\1\147\1\145\2\151\1\60\1\146\1\150\1\uffff\1\147\1\uffff\1\151\1\156\1\144\2\uffff\1\164\1\60\1\uffff\1\156\1\164\1\uffff\1\163\1\141\1\uffff\1\141\1\uffff\1\156\1\165\1\60\2\163\1\uffff\1\171\2\60\1\163\1\141\1\163\1\60\1\uffff\1\143\1\60\1\163\1\154\1\156\1\164\1\162\1\uffff\2\145\1\60\2\uffff\1\145\1\154\1\60\1\uffff\1\145\1\uffff\1\151\3\60\1\145\2\60\1\uffff\2\60\1\uffff\1\60\1\157\3\uffff\1\60\5\uffff\1\156\1\uffff\1\60\1\uffff";
-    static final String DFA17_maxS =
-        "\1\uffff\1\172\1\75\1\uffff\2\75\1\uffff\1\71\1\uffff\1\57\1\uffff\14\172\1\uffff\5\172\2\uffff\1\164\1\151\2\uffff\1\160\1\162\1\75\1\uffff\1\122\1\117\1\116\1\172\4\uffff\1\157\1\156\1\uffff\1\170\1\151\1\145\1\157\1\145\2\uffff\3\uffff\1\154\1\162\1\157\12\uffff\1\145\17\uffff\1\172\1\143\1\uffff\1\156\1\uffff\1\144\1\170\1\156\4\uffff\1\144\1\162\5\uffff\1\145\1\154\1\162\1\164\2\uffff\1\164\1\167\1\165\1\162\3\uffff\1\172\1\122\1\104\5\uffff\1\154\1\151\1\164\1\160\1\uffff\1\165\1\160\1\164\1\141\1\157\5\uffff\1\163\1\172\1\155\1\141\1\uffff\1\165\1\146\1\165\1\172\2\151\1\172\1\141\1\143\1\162\1\146\1\151\1\150\1\151\1\141\2\145\1\147\1\uffff\2\172\1\165\1\144\1\164\1\172\1\157\1\155\1\162\1\145\2\154\1\145\1\uffff\2\172\1\155\1\151\1\154\1\uffff\2\155\1\uffff\1\171\1\151\1\143\1\172\1\156\1\172\1\157\1\162\2\172\1\145\2\uffff\1\145\1\172\1\141\1\uffff\1\162\1\172\1\145\1\162\1\172\1\145\1\172\2\uffff\1\145\1\147\1\145\2\151\1\172\1\146\1\150\1\uffff\1\147\1\uffff\1\151\1\156\1\144\2\uffff\1\164\1\172\1\uffff\1\156\1\164\1\uffff\1\163\1\141\1\uffff\1\141\1\uffff\1\156\1\165\1\172\2\163\1\uffff\1\171\2\172\1\163\1\141\1\163\1\172\1\uffff\1\143\1\172\1\163\1\154\1\156\1\164\1\162\1\uffff\2\145\1\172\2\uffff\1\145\1\154\1\172\1\uffff\1\145\1\uffff\1\151\3\172\1\145\2\172\1\uffff\2\172\1\uffff\1\172\1\157\3\uffff\1\172\5\uffff\1\156\1\uffff\1\172\1\uffff";
-    static final String DFA17_acceptS =
-        "\3\uffff\1\4\2\uffff\1\10\1\uffff\1\12\1\uffff\1\14\14\uffff\1\32\5\uffff\1\42\1\43\2\uffff\1\52\1\54\3\uffff\1\63\4\uffff\1\70\1\71\1\72\1\73\2\uffff\1\101\7\uffff\1\126\1\131\1\132\3\uffff\1\35\1\126\1\3\1\2\1\4\1\5\1\117\1\6\1\7\1\10\1\uffff\1\11\1\12\1\127\1\130\1\13\1\14\1\15\1\16\1\17\1\20\1\21\1\22\1\23\1\24\1\25\2\uffff\1\27\1\uffff\1\30\3\uffff\1\31\1\32\1\33\1\34\2\uffff\1\36\1\37\1\40\1\42\1\43\4\uffff\1\52\1\54\4\uffff\1\62\1\102\1\63\3\uffff\1\67\1\70\1\71\1\72\1\73\4\uffff\1\101\5\uffff\1\122\1\123\1\124\1\125\1\131\4\uffff\1\26\22\uffff\1\64\15\uffff\1\46\5\uffff\1\47\2\uffff\1\51\13\uffff\1\65\1\66\3\uffff\1\107\7\uffff\1\115\1\77\10\uffff\1\74\1\uffff\1\50\3\uffff\1\76\1\120\2\uffff\1\112\2\uffff\1\103\2\uffff\1\110\1\uffff\1\1\5\uffff\1\113\7\uffff\1\75\7\uffff\1\41\3\uffff\1\45\1\105\3\uffff\1\116\1\uffff\1\114\7\uffff\1\44\2\uffff\1\60\2\uffff\1\104\1\111\1\53\1\uffff\1\55\1\56\1\57\1\121\1\100\1\uffff\1\61\1\uffff\1\106";
-    static final String DFA17_specialS =
-        "\1\2\66\uffff\1\0\1\1\u00f6\uffff}>";
-    static final String[] DFA17_transitionS = {
+    static final String DFA18_minS =
+        "\1\0\1\60\1\75\1\uffff\2\75\3\uffff\1\52\1\uffff\14\60\1\uffff\5\60\2\uffff\1\145\1\151\2\uffff\1\160\1\141\1\75\1\uffff\1\122\1\117\1\116\1\101\4\uffff\1\141\1\155\1\uffff\1\156\1\151\1\145\1\157\1\56\2\0\3\uffff\1\154\1\162\1\157\31\uffff\1\60\1\143\1\uffff\1\156\1\uffff\1\144\1\160\1\156\4\uffff\1\144\1\162\5\uffff\1\145\1\141\1\162\1\164\2\uffff\1\164\1\167\1\145\1\162\3\uffff\1\60\1\122\1\104\5\uffff\1\154\1\151\1\163\1\160\1\uffff\1\165\1\160\1\164\1\141\1\157\1\uffff\1\56\4\uffff\1\163\1\60\1\155\1\141\1\uffff\1\165\1\146\1\165\1\60\2\151\1\60\1\141\1\143\1\162\1\146\1\151\1\150\1\151\1\141\2\145\1\147\1\uffff\2\60\1\165\1\144\1\164\1\60\1\157\1\155\1\162\1\145\2\154\1\145\1\uffff\2\60\1\155\1\151\1\154\1\uffff\2\155\1\uffff\1\171\1\151\1\143\1\60\1\156\1\60\1\155\1\162\2\60\1\145\2\uffff\1\145\1\60\1\141\1\uffff\1\162\1\60\1\145\1\162\1\60\1\145\1\60\2\uffff\1\145\1\147\1\145\2\151\1\60\1\146\1\150\1\uffff\1\147\1\uffff\1\151\1\156\1\144\2\uffff\1\164\1\60\1\uffff\1\156\1\164\1\uffff\1\163\1\141\1\uffff\1\141\1\uffff\1\156\1\165\1\60\2\163\1\uffff\1\171\2\60\1\163\1\141\1\163\1\60\1\uffff\1\143\1\60\1\163\1\154\1\156\1\164\1\162\1\uffff\2\145\1\60\2\uffff\1\145\1\154\1\60\1\uffff\1\145\1\uffff\1\151\3\60\1\145\2\60\1\uffff\2\60\1\uffff\1\60\1\157\3\uffff\1\60\5\uffff\1\156\1\uffff\1\60\1\uffff";
+    static final String DFA18_maxS =
+        "\1\uffff\1\172\1\75\1\uffff\2\75\3\uffff\1\57\1\uffff\14\172\1\uffff\5\172\2\uffff\1\164\1\151\2\uffff\1\160\1\162\1\75\1\uffff\1\122\1\117\1\116\1\172\4\uffff\1\157\1\156\1\uffff\1\170\1\151\1\145\1\157\1\145\2\uffff\3\uffff\1\154\1\162\1\157\31\uffff\1\172\1\143\1\uffff\1\156\1\uffff\1\144\1\170\1\156\4\uffff\1\144\1\162\5\uffff\1\145\1\154\1\162\1\164\2\uffff\1\164\1\167\1\165\1\162\3\uffff\1\172\1\122\1\104\5\uffff\1\154\1\151\1\164\1\160\1\uffff\1\165\1\160\1\164\1\141\1\157\1\uffff\1\145\4\uffff\1\163\1\172\1\155\1\141\1\uffff\1\165\1\146\1\165\1\172\2\151\1\172\1\141\1\143\1\162\1\146\1\151\1\150\1\151\1\141\2\145\1\147\1\uffff\2\172\1\165\1\144\1\164\1\172\1\157\1\155\1\162\1\145\2\154\1\145\1\uffff\2\172\1\155\1\151\1\154\1\uffff\2\155\1\uffff\1\171\1\151\1\143\1\172\1\156\1\172\1\157\1\162\2\172\1\145\2\uffff\1\145\1\172\1\141\1\uffff\1\162\1\172\1\145\1\162\1\172\1\145\1\172\2\uffff\1\145\1\147\1\145\2\151\1\172\1\146\1\150\1\uffff\1\147\1\uffff\1\151\1\156\1\144\2\uffff\1\164\1\172\1\uffff\1\156\1\164\1\uffff\1\163\1\141\1\uffff\1\141\1\uffff\1\156\1\165\1\172\2\163\1\uffff\1\171\2\172\1\163\1\141\1\163\1\172\1\uffff\1\143\1\172\1\163\1\154\1\156\1\164\1\162\1\uffff\2\145\1\172\2\uffff\1\145\1\154\1\172\1\uffff\1\145\1\uffff\1\151\3\172\1\145\2\172\1\uffff\2\172\1\uffff\1\172\1\157\3\uffff\1\172\5\uffff\1\156\1\uffff\1\172\1\uffff";
+    static final String DFA18_acceptS =
+        "\3\uffff\1\4\2\uffff\1\10\1\11\1\12\1\uffff\1\14\14\uffff\1\32\5\uffff\1\42\1\43\2\uffff\1\52\1\54\3\uffff\1\63\4\uffff\1\70\1\71\1\72\1\73\2\uffff\1\101\7\uffff\1\126\1\131\1\132\3\uffff\1\126\1\35\1\3\1\2\1\4\1\5\1\117\1\6\1\7\1\10\1\11\1\12\1\127\1\130\1\13\1\14\1\15\1\16\1\17\1\20\1\21\1\22\1\23\1\24\1\25\2\uffff\1\27\1\uffff\1\30\3\uffff\1\31\1\32\1\33\1\34\2\uffff\1\36\1\37\1\40\1\42\1\43\4\uffff\1\52\1\54\4\uffff\1\62\1\102\1\63\3\uffff\1\67\1\70\1\71\1\72\1\73\4\uffff\1\101\5\uffff\1\122\1\uffff\1\123\1\124\1\125\1\131\4\uffff\1\26\22\uffff\1\64\15\uffff\1\46\5\uffff\1\47\2\uffff\1\51\13\uffff\1\65\1\66\3\uffff\1\107\7\uffff\1\115\1\77\10\uffff\1\74\1\uffff\1\50\3\uffff\1\76\1\120\2\uffff\1\112\2\uffff\1\103\2\uffff\1\110\1\uffff\1\1\5\uffff\1\113\7\uffff\1\75\7\uffff\1\41\3\uffff\1\45\1\105\3\uffff\1\116\1\uffff\1\114\7\uffff\1\44\2\uffff\1\60\2\uffff\1\104\1\111\1\53\1\uffff\1\55\1\56\1\57\1\121\1\100\1\uffff\1\61\1\uffff\1\106";
+    static final String DFA18_specialS =
+        "\1\0\66\uffff\1\1\1\2\u00f6\uffff}>";
+    static final String[] DFA18_transitionS = {
             "\11\73\2\72\2\73\1\72\22\73\1\72\1\4\1\67\2\73\1\12\1\73\1\70\1\55\1\56\1\10\1\6\1\41\1\7\1\42\1\11\12\66\1\45\1\46\1\5\1\3\1\2\1\73\1\61\1\51\3\71\1\15\1\71\1\20\5\71\1\21\1\71\1\47\1\16\3\71\1\17\3\71\1\50\1\13\1\14\1\53\1\73\1\54\1\52\1\71\1\73\1\32\1\65\1\25\1\24\1\62\1\1\1\71\1\23\1\60\1\71\1\22\1\63\1\26\1\30\1\43\1\31\1\71\1\64\1\37\1\44\1\71\1\57\1\40\1\71\1\34\1\33\1\35\1\73\1\36\67\73\1\27\uff4a\73",
-            "\12\100\7\uffff\32\100\4\uffff\1\100\1\uffff\1\74\15\100\1\75\2\100\1\76\10\100",
+            "\12\77\7\uffff\32\77\4\uffff\1\77\1\uffff\1\74\15\77\1\75\2\77\1\76\10\77",
             "\1\101",
             "",
             "\1\104",
             "\1\106",
             "",
-            "\12\111",
-            "",
-            "\1\114\4\uffff\1\115",
-            "",
-            "\12\100\7\uffff\32\100\4\uffff\1\100\1\uffff\32\100",
-            "\12\100\7\uffff\32\100\4\uffff\1\100\1\uffff\32\100",
-            "\12\100\7\uffff\32\100\4\uffff\1\100\1\uffff\32\100",
-            "\12\100\7\uffff\32\100\4\uffff\1\100\1\uffff\32\100",
-            "\12\100\7\uffff\32\100\4\uffff\1\100\1\uffff\32\100",
-            "\12\100\7\uffff\32\100\4\uffff\1\100\1\uffff\32\100",
-            "\12\100\7\uffff\32\100\4\uffff\1\100\1\uffff\32\100",
-            "\12\100\7\uffff\32\100\4\uffff\1\100\1\uffff\32\100",
-            "\12\100\7\uffff\32\100\4\uffff\1\100\1\uffff\32\100",
-            "\12\100\7\uffff\32\100\4\uffff\1\100\1\uffff\1\131\15\100\1\132\13\100",
-            "\12\100\7\uffff\32\100\4\uffff\1\100\1\uffff\16\100\1\134\13\100",
-            "\12\100\7\uffff\32\100\4\uffff\1\100\1\uffff\1\137\7\100\1\140\5\100\1\136\13\100",
-            "",
-            "\12\100\7\uffff\32\100\4\uffff\1\100\1\uffff\32\100",
-            "\12\100\7\uffff\32\100\4\uffff\1\100\1\uffff\32\100",
-            "\12\100\7\uffff\32\100\4\uffff\1\100\1\uffff\15\100\1\145\3\100\1\146\10\100",
-            "\12\100\7\uffff\32\100\4\uffff\1\100\1\uffff\32\100",
-            "\12\100\7\uffff\32\100\4\uffff\1\100\1\uffff\32\100",
             "",
             "",
-            "\1\155\12\uffff\1\154\3\uffff\1\156",
-            "\1\157",
+            "\1\113\4\uffff\1\114",
+            "",
+            "\12\77\7\uffff\32\77\4\uffff\1\77\1\uffff\32\77",
+            "\12\77\7\uffff\32\77\4\uffff\1\77\1\uffff\32\77",
+            "\12\77\7\uffff\32\77\4\uffff\1\77\1\uffff\32\77",
+            "\12\77\7\uffff\32\77\4\uffff\1\77\1\uffff\32\77",
+            "\12\77\7\uffff\32\77\4\uffff\1\77\1\uffff\32\77",
+            "\12\77\7\uffff\32\77\4\uffff\1\77\1\uffff\32\77",
+            "\12\77\7\uffff\32\77\4\uffff\1\77\1\uffff\32\77",
+            "\12\77\7\uffff\32\77\4\uffff\1\77\1\uffff\32\77",
+            "\12\77\7\uffff\32\77\4\uffff\1\77\1\uffff\32\77",
+            "\12\77\7\uffff\32\77\4\uffff\1\77\1\uffff\1\130\15\77\1\131\13\77",
+            "\12\77\7\uffff\32\77\4\uffff\1\77\1\uffff\16\77\1\133\13\77",
+            "\12\77\7\uffff\32\77\4\uffff\1\77\1\uffff\1\136\7\77\1\137\5\77\1\135\13\77",
+            "",
+            "\12\77\7\uffff\32\77\4\uffff\1\77\1\uffff\32\77",
+            "\12\77\7\uffff\32\77\4\uffff\1\77\1\uffff\32\77",
+            "\12\77\7\uffff\32\77\4\uffff\1\77\1\uffff\15\77\1\144\3\77\1\145\10\77",
+            "\12\77\7\uffff\32\77\4\uffff\1\77\1\uffff\32\77",
+            "\12\77\7\uffff\32\77\4\uffff\1\77\1\uffff\32\77",
             "",
             "",
-            "\1\162",
-            "\1\165\15\uffff\1\163\2\uffff\1\164",
-            "\1\166",
+            "\1\154\12\uffff\1\153\3\uffff\1\155",
+            "\1\156",
             "",
+            "",
+            "\1\161",
+            "\1\164\15\uffff\1\162\2\uffff\1\163",
+            "\1\165",
+            "",
+            "\1\170",
             "\1\171",
             "\1\172",
-            "\1\173",
-            "\32\100\4\uffff\1\100\1\uffff\32\100",
+            "\32\77\4\uffff\1\77\1\uffff\32\77",
             "",
             "",
             "",
             "",
-            "\1\u0081\15\uffff\1\u0082",
-            "\1\u0084\1\u0083",
+            "\1\u0080\15\uffff\1\u0081",
+            "\1\u0083\1\u0082",
             "",
-            "\1\u0086\11\uffff\1\u0087",
+            "\1\u0085\11\uffff\1\u0086",
+            "\1\u0087",
             "\1\u0088",
             "\1\u0089",
-            "\1\u008a",
-            "\1\u008c\1\uffff\12\111\53\uffff\1\u008c",
+            "\1\u008c\1\uffff\12\u008b\53\uffff\1\u008c",
             "\0\u008d",
             "\0\u008e",
             "",
@@ -3238,7 +3277,6 @@ public class InternalOptimisationLanguageLexer extends Lexer {
             "",
             "",
             "",
-            "\1\u008c\1\uffff\12\111\53\uffff\1\u008c",
             "",
             "",
             "",
@@ -3254,7 +3292,7 @@ public class InternalOptimisationLanguageLexer extends Lexer {
             "",
             "",
             "",
-            "\12\100\7\uffff\32\100\4\uffff\1\100\1\uffff\23\100\1\u0093\6\100",
+            "\12\77\7\uffff\32\77\4\uffff\1\77\1\uffff\23\77\1\u0093\6\77",
             "\1\u0095",
             "",
             "\1\u0096",
@@ -3286,7 +3324,7 @@ public class InternalOptimisationLanguageLexer extends Lexer {
             "",
             "",
             "",
-            "\12\100\7\uffff\32\100\4\uffff\1\100\1\uffff\32\100",
+            "\12\77\7\uffff\32\77\4\uffff\1\77\1\uffff\32\77",
             "\1\u00a8",
             "\1\u00a9",
             "",
@@ -3305,22 +3343,23 @@ public class InternalOptimisationLanguageLexer extends Lexer {
             "\1\u00b2",
             "\1\u00b3",
             "",
+            "\1\u008c\1\uffff\12\u008b\53\uffff\1\u008c",
             "",
             "",
             "",
             "",
             "\1\u00b4",
-            "\12\100\7\uffff\32\100\4\uffff\1\100\1\uffff\32\100",
+            "\12\77\7\uffff\32\77\4\uffff\1\77\1\uffff\32\77",
             "\1\u00b6",
             "\1\u00b7",
             "",
             "\1\u00b8",
             "\1\u00b9",
             "\1\u00ba",
-            "\12\100\7\uffff\32\100\4\uffff\1\100\1\uffff\32\100",
+            "\12\77\7\uffff\32\77\4\uffff\1\77\1\uffff\32\77",
             "\1\u00bc",
             "\1\u00bd",
-            "\12\100\7\uffff\32\100\4\uffff\1\100\1\uffff\32\100",
+            "\12\77\7\uffff\32\77\4\uffff\1\77\1\uffff\32\77",
             "\1\u00bf",
             "\1\u00c0",
             "\1\u00c1",
@@ -3333,12 +3372,12 @@ public class InternalOptimisationLanguageLexer extends Lexer {
             "\1\u00c8",
             "\1\u00c9",
             "",
-            "\12\100\7\uffff\32\100\4\uffff\1\100\1\uffff\32\100",
-            "\12\100\7\uffff\32\100\4\uffff\1\100\1\uffff\32\100",
+            "\12\77\7\uffff\32\77\4\uffff\1\77\1\uffff\32\77",
+            "\12\77\7\uffff\32\77\4\uffff\1\77\1\uffff\32\77",
             "\1\u00cc",
             "\1\u00cd",
             "\1\u00ce",
-            "\12\100\7\uffff\32\100\4\uffff\1\100\1\uffff\32\100",
+            "\12\77\7\uffff\32\77\4\uffff\1\77\1\uffff\32\77",
             "\1\u00d0",
             "\1\u00d1",
             "\1\u00d2",
@@ -3347,8 +3386,8 @@ public class InternalOptimisationLanguageLexer extends Lexer {
             "\1\u00d5",
             "\1\u00d6",
             "",
-            "\12\100\7\uffff\32\100\4\uffff\1\100\1\uffff\32\100",
-            "\12\100\7\uffff\32\100\4\uffff\1\100\1\uffff\32\100",
+            "\12\77\7\uffff\32\77\4\uffff\1\77\1\uffff\32\77",
+            "\12\77\7\uffff\32\77\4\uffff\1\77\1\uffff\32\77",
             "\1\u00d9",
             "\1\u00da",
             "\1\u00db",
@@ -3359,27 +3398,27 @@ public class InternalOptimisationLanguageLexer extends Lexer {
             "\1\u00de",
             "\1\u00df",
             "\1\u00e0",
-            "\12\100\7\uffff\32\100\4\uffff\1\100\1\uffff\32\100",
+            "\12\77\7\uffff\32\77\4\uffff\1\77\1\uffff\32\77",
             "\1\u00e2",
-            "\12\100\7\uffff\32\100\4\uffff\1\100\1\uffff\32\100",
+            "\12\77\7\uffff\32\77\4\uffff\1\77\1\uffff\32\77",
             "\1\u00e4\1\uffff\1\u00e5",
             "\1\u00e6",
-            "\12\100\7\uffff\32\100\4\uffff\1\100\1\uffff\32\100",
-            "\12\100\7\uffff\32\100\4\uffff\1\100\1\uffff\32\100",
+            "\12\77\7\uffff\32\77\4\uffff\1\77\1\uffff\32\77",
+            "\12\77\7\uffff\32\77\4\uffff\1\77\1\uffff\32\77",
             "\1\u00e9",
             "",
             "",
             "\1\u00ea",
-            "\12\100\7\uffff\32\100\4\uffff\1\100\1\uffff\32\100",
+            "\12\77\7\uffff\32\77\4\uffff\1\77\1\uffff\32\77",
             "\1\u00ec",
             "",
             "\1\u00ed",
-            "\12\100\7\uffff\32\100\4\uffff\1\100\1\uffff\32\100",
+            "\12\77\7\uffff\32\77\4\uffff\1\77\1\uffff\32\77",
             "\1\u00ef",
             "\1\u00f0",
-            "\12\100\7\uffff\32\100\4\uffff\1\100\1\uffff\32\100",
+            "\12\77\7\uffff\32\77\4\uffff\1\77\1\uffff\32\77",
             "\1\u00f2",
-            "\12\100\7\uffff\32\100\4\uffff\1\100\1\uffff\32\100",
+            "\12\77\7\uffff\32\77\4\uffff\1\77\1\uffff\32\77",
             "",
             "",
             "\1\u00f4",
@@ -3387,7 +3426,7 @@ public class InternalOptimisationLanguageLexer extends Lexer {
             "\1\u00f6",
             "\1\u00f7",
             "\1\u00f8",
-            "\12\100\7\uffff\32\100\4\uffff\1\100\1\uffff\32\100",
+            "\12\77\7\uffff\32\77\4\uffff\1\77\1\uffff\32\77",
             "\1\u00fa",
             "\1\u00fb",
             "",
@@ -3399,7 +3438,7 @@ public class InternalOptimisationLanguageLexer extends Lexer {
             "",
             "",
             "\1\u0100",
-            "\12\100\7\uffff\32\100\4\uffff\1\100\1\uffff\32\100",
+            "\12\77\7\uffff\32\77\4\uffff\1\77\1\uffff\32\77",
             "",
             "\1\u0102",
             "\1\u0103",
@@ -3411,20 +3450,20 @@ public class InternalOptimisationLanguageLexer extends Lexer {
             "",
             "\1\u0107",
             "\1\u0108",
-            "\12\100\7\uffff\32\100\4\uffff\1\100\1\uffff\32\100",
+            "\12\77\7\uffff\32\77\4\uffff\1\77\1\uffff\32\77",
             "\1\u010a",
             "\1\u010b",
             "",
             "\1\u010c",
-            "\12\100\7\uffff\32\100\4\uffff\1\100\1\uffff\32\100",
-            "\12\100\7\uffff\32\100\4\uffff\1\100\1\uffff\32\100",
+            "\12\77\7\uffff\32\77\4\uffff\1\77\1\uffff\32\77",
+            "\12\77\7\uffff\32\77\4\uffff\1\77\1\uffff\32\77",
             "\1\u010f",
             "\1\u0110",
             "\1\u0111",
-            "\12\100\7\uffff\32\100\4\uffff\1\100\1\uffff\32\100",
+            "\12\77\7\uffff\32\77\4\uffff\1\77\1\uffff\32\77",
             "",
             "\1\u0113",
-            "\12\100\7\uffff\32\100\4\uffff\1\100\1\uffff\32\100",
+            "\12\77\7\uffff\32\77\4\uffff\1\77\1\uffff\32\77",
             "\1\u0115",
             "\1\u0116",
             "\1\u0117",
@@ -3433,32 +3472,32 @@ public class InternalOptimisationLanguageLexer extends Lexer {
             "",
             "\1\u011a",
             "\1\u011b",
-            "\12\100\7\uffff\32\100\4\uffff\1\100\1\uffff\32\100",
+            "\12\77\7\uffff\32\77\4\uffff\1\77\1\uffff\32\77",
             "",
             "",
             "\1\u011d",
             "\1\u011e",
-            "\12\100\7\uffff\32\100\4\uffff\1\100\1\uffff\32\100",
+            "\12\77\7\uffff\32\77\4\uffff\1\77\1\uffff\32\77",
             "",
             "\1\u0120",
             "",
             "\1\u0121",
-            "\12\100\7\uffff\32\100\4\uffff\1\100\1\uffff\32\100",
-            "\12\100\7\uffff\32\100\4\uffff\1\100\1\uffff\32\100",
-            "\12\100\7\uffff\32\100\4\uffff\1\100\1\uffff\32\100",
+            "\12\77\7\uffff\32\77\4\uffff\1\77\1\uffff\32\77",
+            "\12\77\7\uffff\32\77\4\uffff\1\77\1\uffff\32\77",
+            "\12\77\7\uffff\32\77\4\uffff\1\77\1\uffff\32\77",
             "\1\u0125",
-            "\12\100\7\uffff\32\100\4\uffff\1\100\1\uffff\32\100",
-            "\12\100\7\uffff\32\100\4\uffff\1\100\1\uffff\32\100",
+            "\12\77\7\uffff\32\77\4\uffff\1\77\1\uffff\32\77",
+            "\12\77\7\uffff\32\77\4\uffff\1\77\1\uffff\32\77",
             "",
-            "\12\100\7\uffff\32\100\4\uffff\1\100\1\uffff\32\100",
-            "\12\100\7\uffff\32\100\4\uffff\1\100\1\uffff\32\100",
+            "\12\77\7\uffff\32\77\4\uffff\1\77\1\uffff\32\77",
+            "\12\77\7\uffff\32\77\4\uffff\1\77\1\uffff\32\77",
             "",
-            "\12\100\7\uffff\32\100\4\uffff\1\100\1\uffff\32\100",
+            "\12\77\7\uffff\32\77\4\uffff\1\77\1\uffff\32\77",
             "\1\u012b",
             "",
             "",
             "",
-            "\12\100\7\uffff\32\100\4\uffff\1\100\1\uffff\32\100",
+            "\12\77\7\uffff\32\77\4\uffff\1\77\1\uffff\32\77",
             "",
             "",
             "",
@@ -3466,38 +3505,38 @@ public class InternalOptimisationLanguageLexer extends Lexer {
             "",
             "\1\u012d",
             "",
-            "\12\100\7\uffff\32\100\4\uffff\1\100\1\uffff\32\100",
+            "\12\77\7\uffff\32\77\4\uffff\1\77\1\uffff\32\77",
             ""
     };
 
-    static final short[] DFA17_eot = DFA.unpackEncodedString(DFA17_eotS);
-    static final short[] DFA17_eof = DFA.unpackEncodedString(DFA17_eofS);
-    static final char[] DFA17_min = DFA.unpackEncodedStringToUnsignedChars(DFA17_minS);
-    static final char[] DFA17_max = DFA.unpackEncodedStringToUnsignedChars(DFA17_maxS);
-    static final short[] DFA17_accept = DFA.unpackEncodedString(DFA17_acceptS);
-    static final short[] DFA17_special = DFA.unpackEncodedString(DFA17_specialS);
-    static final short[][] DFA17_transition;
+    static final short[] DFA18_eot = DFA.unpackEncodedString(DFA18_eotS);
+    static final short[] DFA18_eof = DFA.unpackEncodedString(DFA18_eofS);
+    static final char[] DFA18_min = DFA.unpackEncodedStringToUnsignedChars(DFA18_minS);
+    static final char[] DFA18_max = DFA.unpackEncodedStringToUnsignedChars(DFA18_maxS);
+    static final short[] DFA18_accept = DFA.unpackEncodedString(DFA18_acceptS);
+    static final short[] DFA18_special = DFA.unpackEncodedString(DFA18_specialS);
+    static final short[][] DFA18_transition;
 
     static {
-        int numStates = DFA17_transitionS.length;
-        DFA17_transition = new short[numStates][];
+        int numStates = DFA18_transitionS.length;
+        DFA18_transition = new short[numStates][];
         for (int i=0; i<numStates; i++) {
-            DFA17_transition[i] = DFA.unpackEncodedString(DFA17_transitionS[i]);
+            DFA18_transition[i] = DFA.unpackEncodedString(DFA18_transitionS[i]);
         }
     }
 
-    class DFA17 extends DFA {
+    class DFA18 extends DFA {
 
-        public DFA17(BaseRecognizer recognizer) {
+        public DFA18(BaseRecognizer recognizer) {
             this.recognizer = recognizer;
-            this.decisionNumber = 17;
-            this.eot = DFA17_eot;
-            this.eof = DFA17_eof;
-            this.min = DFA17_min;
-            this.max = DFA17_max;
-            this.accept = DFA17_accept;
-            this.special = DFA17_special;
-            this.transition = DFA17_transition;
+            this.decisionNumber = 18;
+            this.eot = DFA18_eot;
+            this.eof = DFA18_eof;
+            this.min = DFA18_min;
+            this.max = DFA18_max;
+            this.accept = DFA18_accept;
+            this.special = DFA18_special;
+            this.transition = DFA18_transition;
         }
         public String getDescription() {
             return "1:1: Tokens : ( T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | T__38 | T__39 | T__40 | T__41 | T__42 | T__43 | T__44 | T__45 | T__46 | T__47 | T__48 | T__49 | T__50 | T__51 | T__52 | T__53 | T__54 | T__55 | T__56 | T__57 | T__58 | T__59 | T__60 | T__61 | T__62 | T__63 | T__64 | T__65 | T__66 | T__67 | T__68 | T__69 | T__70 | T__71 | T__72 | T__73 | T__74 | T__75 | T__76 | T__77 | T__78 | T__79 | T__80 | T__81 | T__82 | T__83 | T__84 | T__85 | T__86 | T__87 | T__88 | T__89 | T__90 | T__91 | T__92 | T__93 | T__94 | T__95 | RULE_INT | RULE_DOUBLE | RULE_STRING | RULE_QUOTED_ID | RULE_ID | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );";
@@ -3507,152 +3546,152 @@ public class InternalOptimisationLanguageLexer extends Lexer {
         	int _s = s;
             switch ( s ) {
                     case 0 : 
-                        int LA17_55 = input.LA(1);
+                        int LA18_0 = input.LA(1);
 
                         s = -1;
-                        if ( ((LA17_55>='\u0000' && LA17_55<='\uFFFF')) ) {s = 141;}
+                        if ( (LA18_0=='f') ) {s = 1;}
 
-                        else s = 59;
+                        else if ( (LA18_0=='>') ) {s = 2;}
+
+                        else if ( (LA18_0=='=') ) {s = 3;}
+
+                        else if ( (LA18_0=='!') ) {s = 4;}
+
+                        else if ( (LA18_0=='<') ) {s = 5;}
+
+                        else if ( (LA18_0=='+') ) {s = 6;}
+
+                        else if ( (LA18_0=='-') ) {s = 7;}
+
+                        else if ( (LA18_0=='*') ) {s = 8;}
+
+                        else if ( (LA18_0=='/') ) {s = 9;}
+
+                        else if ( (LA18_0=='%') ) {s = 10;}
+
+                        else if ( (LA18_0=='Y') ) {s = 11;}
+
+                        else if ( (LA18_0=='Z') ) {s = 12;}
+
+                        else if ( (LA18_0=='E') ) {s = 13;}
+
+                        else if ( (LA18_0=='P') ) {s = 14;}
+
+                        else if ( (LA18_0=='T') ) {s = 15;}
+
+                        else if ( (LA18_0=='G') ) {s = 16;}
+
+                        else if ( (LA18_0=='M') ) {s = 17;}
+
+                        else if ( (LA18_0=='k') ) {s = 18;}
+
+                        else if ( (LA18_0=='h') ) {s = 19;}
+
+                        else if ( (LA18_0=='d') ) {s = 20;}
+
+                        else if ( (LA18_0=='c') ) {s = 21;}
+
+                        else if ( (LA18_0=='m') ) {s = 22;}
+
+                        else if ( (LA18_0=='\u00B5') ) {s = 23;}
+
+                        else if ( (LA18_0=='n') ) {s = 24;}
+
+                        else if ( (LA18_0=='p') ) {s = 25;}
+
+                        else if ( (LA18_0=='a') ) {s = 26;}
+
+                        else if ( (LA18_0=='z') ) {s = 27;}
+
+                        else if ( (LA18_0=='y') ) {s = 28;}
+
+                        else if ( (LA18_0=='{') ) {s = 29;}
+
+                        else if ( (LA18_0=='}') ) {s = 30;}
+
+                        else if ( (LA18_0=='s') ) {s = 31;}
+
+                        else if ( (LA18_0=='w') ) {s = 32;}
+
+                        else if ( (LA18_0==',') ) {s = 33;}
+
+                        else if ( (LA18_0=='.') ) {s = 34;}
+
+                        else if ( (LA18_0=='o') ) {s = 35;}
+
+                        else if ( (LA18_0=='t') ) {s = 36;}
+
+                        else if ( (LA18_0==':') ) {s = 37;}
+
+                        else if ( (LA18_0==';') ) {s = 38;}
+
+                        else if ( (LA18_0=='O') ) {s = 39;}
+
+                        else if ( (LA18_0=='X') ) {s = 40;}
+
+                        else if ( (LA18_0=='A') ) {s = 41;}
+
+                        else if ( (LA18_0=='^') ) {s = 42;}
+
+                        else if ( (LA18_0=='[') ) {s = 43;}
+
+                        else if ( (LA18_0==']') ) {s = 44;}
+
+                        else if ( (LA18_0=='(') ) {s = 45;}
+
+                        else if ( (LA18_0==')') ) {s = 46;}
+
+                        else if ( (LA18_0=='v') ) {s = 47;}
+
+                        else if ( (LA18_0=='i') ) {s = 48;}
+
+                        else if ( (LA18_0=='@') ) {s = 49;}
+
+                        else if ( (LA18_0=='e') ) {s = 50;}
+
+                        else if ( (LA18_0=='l') ) {s = 51;}
+
+                        else if ( (LA18_0=='r') ) {s = 52;}
+
+                        else if ( (LA18_0=='b') ) {s = 53;}
+
+                        else if ( ((LA18_0>='0' && LA18_0<='9')) ) {s = 54;}
+
+                        else if ( (LA18_0=='\"') ) {s = 55;}
+
+                        else if ( (LA18_0=='\'') ) {s = 56;}
+
+                        else if ( ((LA18_0>='B' && LA18_0<='D')||LA18_0=='F'||(LA18_0>='H' && LA18_0<='L')||LA18_0=='N'||(LA18_0>='Q' && LA18_0<='S')||(LA18_0>='U' && LA18_0<='W')||LA18_0=='_'||LA18_0=='g'||LA18_0=='j'||LA18_0=='q'||LA18_0=='u'||LA18_0=='x') ) {s = 57;}
+
+                        else if ( ((LA18_0>='\t' && LA18_0<='\n')||LA18_0=='\r'||LA18_0==' ') ) {s = 58;}
+
+                        else if ( ((LA18_0>='\u0000' && LA18_0<='\b')||(LA18_0>='\u000B' && LA18_0<='\f')||(LA18_0>='\u000E' && LA18_0<='\u001F')||(LA18_0>='#' && LA18_0<='$')||LA18_0=='&'||LA18_0=='?'||LA18_0=='\\'||LA18_0=='`'||LA18_0=='|'||(LA18_0>='~' && LA18_0<='\u00B4')||(LA18_0>='\u00B6' && LA18_0<='\uFFFF')) ) {s = 59;}
 
                         if ( s>=0 ) return s;
                         break;
                     case 1 : 
-                        int LA17_56 = input.LA(1);
+                        int LA18_55 = input.LA(1);
 
                         s = -1;
-                        if ( ((LA17_56>='\u0000' && LA17_56<='\uFFFF')) ) {s = 142;}
+                        if ( ((LA18_55>='\u0000' && LA18_55<='\uFFFF')) ) {s = 141;}
 
                         else s = 59;
 
                         if ( s>=0 ) return s;
                         break;
                     case 2 : 
-                        int LA17_0 = input.LA(1);
+                        int LA18_56 = input.LA(1);
 
                         s = -1;
-                        if ( (LA17_0=='f') ) {s = 1;}
+                        if ( ((LA18_56>='\u0000' && LA18_56<='\uFFFF')) ) {s = 142;}
 
-                        else if ( (LA17_0=='>') ) {s = 2;}
-
-                        else if ( (LA17_0=='=') ) {s = 3;}
-
-                        else if ( (LA17_0=='!') ) {s = 4;}
-
-                        else if ( (LA17_0=='<') ) {s = 5;}
-
-                        else if ( (LA17_0=='+') ) {s = 6;}
-
-                        else if ( (LA17_0=='-') ) {s = 7;}
-
-                        else if ( (LA17_0=='*') ) {s = 8;}
-
-                        else if ( (LA17_0=='/') ) {s = 9;}
-
-                        else if ( (LA17_0=='%') ) {s = 10;}
-
-                        else if ( (LA17_0=='Y') ) {s = 11;}
-
-                        else if ( (LA17_0=='Z') ) {s = 12;}
-
-                        else if ( (LA17_0=='E') ) {s = 13;}
-
-                        else if ( (LA17_0=='P') ) {s = 14;}
-
-                        else if ( (LA17_0=='T') ) {s = 15;}
-
-                        else if ( (LA17_0=='G') ) {s = 16;}
-
-                        else if ( (LA17_0=='M') ) {s = 17;}
-
-                        else if ( (LA17_0=='k') ) {s = 18;}
-
-                        else if ( (LA17_0=='h') ) {s = 19;}
-
-                        else if ( (LA17_0=='d') ) {s = 20;}
-
-                        else if ( (LA17_0=='c') ) {s = 21;}
-
-                        else if ( (LA17_0=='m') ) {s = 22;}
-
-                        else if ( (LA17_0=='\u00B5') ) {s = 23;}
-
-                        else if ( (LA17_0=='n') ) {s = 24;}
-
-                        else if ( (LA17_0=='p') ) {s = 25;}
-
-                        else if ( (LA17_0=='a') ) {s = 26;}
-
-                        else if ( (LA17_0=='z') ) {s = 27;}
-
-                        else if ( (LA17_0=='y') ) {s = 28;}
-
-                        else if ( (LA17_0=='{') ) {s = 29;}
-
-                        else if ( (LA17_0=='}') ) {s = 30;}
-
-                        else if ( (LA17_0=='s') ) {s = 31;}
-
-                        else if ( (LA17_0=='w') ) {s = 32;}
-
-                        else if ( (LA17_0==',') ) {s = 33;}
-
-                        else if ( (LA17_0=='.') ) {s = 34;}
-
-                        else if ( (LA17_0=='o') ) {s = 35;}
-
-                        else if ( (LA17_0=='t') ) {s = 36;}
-
-                        else if ( (LA17_0==':') ) {s = 37;}
-
-                        else if ( (LA17_0==';') ) {s = 38;}
-
-                        else if ( (LA17_0=='O') ) {s = 39;}
-
-                        else if ( (LA17_0=='X') ) {s = 40;}
-
-                        else if ( (LA17_0=='A') ) {s = 41;}
-
-                        else if ( (LA17_0=='^') ) {s = 42;}
-
-                        else if ( (LA17_0=='[') ) {s = 43;}
-
-                        else if ( (LA17_0==']') ) {s = 44;}
-
-                        else if ( (LA17_0=='(') ) {s = 45;}
-
-                        else if ( (LA17_0==')') ) {s = 46;}
-
-                        else if ( (LA17_0=='v') ) {s = 47;}
-
-                        else if ( (LA17_0=='i') ) {s = 48;}
-
-                        else if ( (LA17_0=='@') ) {s = 49;}
-
-                        else if ( (LA17_0=='e') ) {s = 50;}
-
-                        else if ( (LA17_0=='l') ) {s = 51;}
-
-                        else if ( (LA17_0=='r') ) {s = 52;}
-
-                        else if ( (LA17_0=='b') ) {s = 53;}
-
-                        else if ( ((LA17_0>='0' && LA17_0<='9')) ) {s = 54;}
-
-                        else if ( (LA17_0=='\"') ) {s = 55;}
-
-                        else if ( (LA17_0=='\'') ) {s = 56;}
-
-                        else if ( ((LA17_0>='B' && LA17_0<='D')||LA17_0=='F'||(LA17_0>='H' && LA17_0<='L')||LA17_0=='N'||(LA17_0>='Q' && LA17_0<='S')||(LA17_0>='U' && LA17_0<='W')||LA17_0=='_'||LA17_0=='g'||LA17_0=='j'||LA17_0=='q'||LA17_0=='u'||LA17_0=='x') ) {s = 57;}
-
-                        else if ( ((LA17_0>='\t' && LA17_0<='\n')||LA17_0=='\r'||LA17_0==' ') ) {s = 58;}
-
-                        else if ( ((LA17_0>='\u0000' && LA17_0<='\b')||(LA17_0>='\u000B' && LA17_0<='\f')||(LA17_0>='\u000E' && LA17_0<='\u001F')||(LA17_0>='#' && LA17_0<='$')||LA17_0=='&'||LA17_0=='?'||LA17_0=='\\'||LA17_0=='`'||LA17_0=='|'||(LA17_0>='~' && LA17_0<='\u00B4')||(LA17_0>='\u00B6' && LA17_0<='\uFFFF')) ) {s = 59;}
+                        else s = 59;
 
                         if ( s>=0 ) return s;
                         break;
             }
             NoViableAltException nvae =
-                new NoViableAltException(getDescription(), 17, _s, input);
+                new NoViableAltException(getDescription(), 18, _s, input);
             error(nvae);
             throw nvae;
         }

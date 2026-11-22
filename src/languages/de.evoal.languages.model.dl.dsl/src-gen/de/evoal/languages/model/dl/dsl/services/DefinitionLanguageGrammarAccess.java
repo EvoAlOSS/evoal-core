@@ -599,9 +599,13 @@ public class DefinitionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 		return getReadExpressionRuleAccess().getRule();
 	}
 	
+	///**
+	// * An array whose elements are expressions (e.g. [-1.0, 2 * 3, data 'x']). The elements use
+	// * OrExpressionRule, the expression rule whose type fits Array.values (ReadExpression).
+	// */
 	//ArrayRule returns Array:
 	//    {Array}
-	//    '[' (values += ReadExpressionRule (',' values += ReadExpressionRule)* )? ']'
+	//    '[' (values += OrExpressionRule (',' values += OrExpressionRule)* )? ']'
 	//;
 	public BaseLanguageGrammarAccess.ArrayRuleElements getArrayRuleAccess() {
 		return gaBaseLanguage.getArrayRuleAccess();
@@ -1124,13 +1128,17 @@ public class DefinitionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 		return gaBaseLanguage.getEXPONENTRule();
 	}
 	
+	///*
+	// * Numbers have no sign: a negative number is a unary minus applied to the number, so that
+	// * '4-1' is a subtraction.
+	// */
 	//@Override
-	//terminal INT returns ecore::EInt: '-'? DIGIT+;
+	//terminal INT returns ecore::EInt: DIGIT+;
 	public TerminalRule getINTRule() {
 		return gaBaseLanguage.getINTRule();
 	}
 	
-	//terminal DOUBLE returns ecore::EDouble: INT EXPONENT | INT '.' DIGIT* EXPONENT?;
+	//terminal DOUBLE returns ecore::EDouble: DIGIT+ EXPONENT | DIGIT+ '.' DIGIT* EXPONENT?;
 	public TerminalRule getDOUBLERule() {
 		return gaBaseLanguage.getDOUBLERule();
 	}

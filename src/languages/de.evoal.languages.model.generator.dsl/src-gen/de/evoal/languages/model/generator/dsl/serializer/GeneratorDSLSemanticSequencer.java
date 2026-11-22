@@ -351,7 +351,7 @@ public class GeneratorDSLSemanticSequencer extends BaseLanguageSemanticSequencer
 	 *     CounterRangeRule returns CounterRange
 	 *
 	 * Constraint:
-	 *     (start=IntegerLiteralRule end=IntegerLiteralRule increment=IntegerLiteralRule)
+	 *     (start=OrExpressionRule end=OrExpressionRule increment=OrExpressionRule)
 	 * </pre>
 	 */
 	protected void sequence_CounterRangeRule(ISerializationContext context, CounterRange semanticObject) {
@@ -364,9 +364,9 @@ public class GeneratorDSLSemanticSequencer extends BaseLanguageSemanticSequencer
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ExecutionPackage.Literals.COUNTER_RANGE__INCREMENT));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getCounterRangeRuleAccess().getStartIntegerLiteralRuleParserRuleCall_1_0(), semanticObject.getStart());
-		feeder.accept(grammarAccess.getCounterRangeRuleAccess().getEndIntegerLiteralRuleParserRuleCall_3_0(), semanticObject.getEnd());
-		feeder.accept(grammarAccess.getCounterRangeRuleAccess().getIncrementIntegerLiteralRuleParserRuleCall_6_0(), semanticObject.getIncrement());
+		feeder.accept(grammarAccess.getCounterRangeRuleAccess().getStartOrExpressionRuleParserRuleCall_1_0(), semanticObject.getStart());
+		feeder.accept(grammarAccess.getCounterRangeRuleAccess().getEndOrExpressionRuleParserRuleCall_3_0(), semanticObject.getEnd());
+		feeder.accept(grammarAccess.getCounterRangeRuleAccess().getIncrementOrExpressionRuleParserRuleCall_6_0(), semanticObject.getIncrement());
 		feeder.finish();
 	}
 	
@@ -419,7 +419,7 @@ public class GeneratorDSLSemanticSequencer extends BaseLanguageSemanticSequencer
 	 *     LiteralRangeRule returns ValueRange
 	 *
 	 * Constraint:
-	 *     (elements+=ReadExpressionRule elements+=ReadExpressionRule*)
+	 *     (elements+=OrExpressionRule elements+=OrExpressionRule*)
 	 * </pre>
 	 */
 	protected void sequence_LiteralRangeRule(ISerializationContext context, ValueRange semanticObject) {

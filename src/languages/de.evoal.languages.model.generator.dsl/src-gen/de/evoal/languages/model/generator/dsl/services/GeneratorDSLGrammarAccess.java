@@ -472,41 +472,41 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cLeftSquareBracketKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cElementsAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cElementsReadExpressionRuleParserRuleCall_1_0 = (RuleCall)cElementsAssignment_1.eContents().get(0);
+		private final RuleCall cElementsOrExpressionRuleParserRuleCall_1_0 = (RuleCall)cElementsAssignment_1.eContents().get(0);
 		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
 		private final Keyword cCommaKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
 		private final Assignment cElementsAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
-		private final RuleCall cElementsReadExpressionRuleParserRuleCall_2_1_0 = (RuleCall)cElementsAssignment_2_1.eContents().get(0);
+		private final RuleCall cElementsOrExpressionRuleParserRuleCall_2_1_0 = (RuleCall)cElementsAssignment_2_1.eContents().get(0);
 		private final Keyword cRightSquareBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//LiteralRangeRule returns execution::ValueRange:
-		//    '[' elements += ReadExpressionRule (',' elements += ReadExpressionRule)* ']'
+		//    '[' elements += OrExpressionRule (',' elements += OrExpressionRule)* ']'
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'[' elements += ReadExpressionRule (',' elements += ReadExpressionRule)* ']'
+		//'[' elements += OrExpressionRule (',' elements += OrExpressionRule)* ']'
 		public Group getGroup() { return cGroup; }
 		
 		//'['
 		public Keyword getLeftSquareBracketKeyword_0() { return cLeftSquareBracketKeyword_0; }
 		
-		//elements += ReadExpressionRule
+		//elements += OrExpressionRule
 		public Assignment getElementsAssignment_1() { return cElementsAssignment_1; }
 		
-		//ReadExpressionRule
-		public RuleCall getElementsReadExpressionRuleParserRuleCall_1_0() { return cElementsReadExpressionRuleParserRuleCall_1_0; }
+		//OrExpressionRule
+		public RuleCall getElementsOrExpressionRuleParserRuleCall_1_0() { return cElementsOrExpressionRuleParserRuleCall_1_0; }
 		
-		//(',' elements += ReadExpressionRule)*
+		//(',' elements += OrExpressionRule)*
 		public Group getGroup_2() { return cGroup_2; }
 		
 		//','
 		public Keyword getCommaKeyword_2_0() { return cCommaKeyword_2_0; }
 		
-		//elements += ReadExpressionRule
+		//elements += OrExpressionRule
 		public Assignment getElementsAssignment_2_1() { return cElementsAssignment_2_1; }
 		
-		//ReadExpressionRule
-		public RuleCall getElementsReadExpressionRuleParserRuleCall_2_1_0() { return cElementsReadExpressionRuleParserRuleCall_2_1_0; }
+		//OrExpressionRule
+		public RuleCall getElementsOrExpressionRuleParserRuleCall_2_1_0() { return cElementsOrExpressionRuleParserRuleCall_2_1_0; }
 		
 		//']'
 		public Keyword getRightSquareBracketKeyword_3() { return cRightSquareBracketKeyword_3; }
@@ -516,41 +516,41 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cLeftSquareBracketKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cStartAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cStartIntegerLiteralRuleParserRuleCall_1_0 = (RuleCall)cStartAssignment_1.eContents().get(0);
+		private final RuleCall cStartOrExpressionRuleParserRuleCall_1_0 = (RuleCall)cStartAssignment_1.eContents().get(0);
 		private final Keyword cToKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		private final Assignment cEndAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cEndIntegerLiteralRuleParserRuleCall_3_0 = (RuleCall)cEndAssignment_3.eContents().get(0);
+		private final RuleCall cEndOrExpressionRuleParserRuleCall_3_0 = (RuleCall)cEndAssignment_3.eContents().get(0);
 		private final Keyword cIncrementKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		private final Keyword cByKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		private final Assignment cIncrementAssignment_6 = (Assignment)cGroup.eContents().get(6);
-		private final RuleCall cIncrementIntegerLiteralRuleParserRuleCall_6_0 = (RuleCall)cIncrementAssignment_6.eContents().get(0);
+		private final RuleCall cIncrementOrExpressionRuleParserRuleCall_6_0 = (RuleCall)cIncrementAssignment_6.eContents().get(0);
 		private final Keyword cRightSquareBracketKeyword_7 = (Keyword)cGroup.eContents().get(7);
 		
 		//CounterRangeRule returns execution::CounterRange:
-		//    '[' start = IntegerLiteralRule 'to' end = IntegerLiteralRule 'increment' 'by' increment = IntegerLiteralRule ']'
+		//    '[' start = OrExpressionRule 'to' end = OrExpressionRule 'increment' 'by' increment = OrExpressionRule ']'
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'[' start = IntegerLiteralRule 'to' end = IntegerLiteralRule 'increment' 'by' increment = IntegerLiteralRule ']'
+		//'[' start = OrExpressionRule 'to' end = OrExpressionRule 'increment' 'by' increment = OrExpressionRule ']'
 		public Group getGroup() { return cGroup; }
 		
 		//'['
 		public Keyword getLeftSquareBracketKeyword_0() { return cLeftSquareBracketKeyword_0; }
 		
-		//start = IntegerLiteralRule
+		//start = OrExpressionRule
 		public Assignment getStartAssignment_1() { return cStartAssignment_1; }
 		
-		//IntegerLiteralRule
-		public RuleCall getStartIntegerLiteralRuleParserRuleCall_1_0() { return cStartIntegerLiteralRuleParserRuleCall_1_0; }
+		//OrExpressionRule
+		public RuleCall getStartOrExpressionRuleParserRuleCall_1_0() { return cStartOrExpressionRuleParserRuleCall_1_0; }
 		
 		//'to'
 		public Keyword getToKeyword_2() { return cToKeyword_2; }
 		
-		//end = IntegerLiteralRule
+		//end = OrExpressionRule
 		public Assignment getEndAssignment_3() { return cEndAssignment_3; }
 		
-		//IntegerLiteralRule
-		public RuleCall getEndIntegerLiteralRuleParserRuleCall_3_0() { return cEndIntegerLiteralRuleParserRuleCall_3_0; }
+		//OrExpressionRule
+		public RuleCall getEndOrExpressionRuleParserRuleCall_3_0() { return cEndOrExpressionRuleParserRuleCall_3_0; }
 		
 		//'increment'
 		public Keyword getIncrementKeyword_4() { return cIncrementKeyword_4; }
@@ -558,11 +558,11 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 		//'by'
 		public Keyword getByKeyword_5() { return cByKeyword_5; }
 		
-		//increment = IntegerLiteralRule
+		//increment = OrExpressionRule
 		public Assignment getIncrementAssignment_6() { return cIncrementAssignment_6; }
 		
-		//IntegerLiteralRule
-		public RuleCall getIncrementIntegerLiteralRuleParserRuleCall_6_0() { return cIncrementIntegerLiteralRuleParserRuleCall_6_0; }
+		//OrExpressionRule
+		public RuleCall getIncrementOrExpressionRuleParserRuleCall_6_0() { return cIncrementOrExpressionRuleParserRuleCall_6_0; }
 		
 		//']'
 		public Keyword getRightSquareBracketKeyword_7() { return cRightSquareBracketKeyword_7; }
@@ -974,7 +974,7 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 	}
 	
 	//LiteralRangeRule returns execution::ValueRange:
-	//    '[' elements += ReadExpressionRule (',' elements += ReadExpressionRule)* ']'
+	//    '[' elements += OrExpressionRule (',' elements += OrExpressionRule)* ']'
 	//;
 	public LiteralRangeRuleElements getLiteralRangeRuleAccess() {
 		return pLiteralRangeRule;
@@ -985,7 +985,7 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 	}
 	
 	//CounterRangeRule returns execution::CounterRange:
-	//    '[' start = IntegerLiteralRule 'to' end = IntegerLiteralRule 'increment' 'by' increment = IntegerLiteralRule ']'
+	//    '[' start = OrExpressionRule 'to' end = OrExpressionRule 'increment' 'by' increment = OrExpressionRule ']'
 	//;
 	public CounterRangeRuleElements getCounterRangeRuleAccess() {
 		return pCounterRangeRule;
@@ -1217,9 +1217,13 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 		return getReadExpressionRuleAccess().getRule();
 	}
 	
+	///**
+	// * An array whose elements are expressions (e.g. [-1.0, 2 * 3, data 'x']). The elements use
+	// * OrExpressionRule, the expression rule whose type fits Array.values (ReadExpression).
+	// */
 	//ArrayRule returns Array:
 	//    {Array}
-	//    '[' (values += ReadExpressionRule (',' values += ReadExpressionRule)* )? ']'
+	//    '[' (values += OrExpressionRule (',' values += OrExpressionRule)* )? ']'
 	//;
 	public BaseLanguageGrammarAccess.ArrayRuleElements getArrayRuleAccess() {
 		return gaBaseLanguage.getArrayRuleAccess();
@@ -1728,13 +1732,17 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 		return gaBaseLanguage.getEXPONENTRule();
 	}
 	
+	///*
+	// * Numbers have no sign: a negative number is a unary minus applied to the number, so that
+	// * '4-1' is a subtraction.
+	// */
 	//@Override
-	//terminal INT returns ecore::EInt: '-'? DIGIT+;
+	//terminal INT returns ecore::EInt: DIGIT+;
 	public TerminalRule getINTRule() {
 		return gaBaseLanguage.getINTRule();
 	}
 	
-	//terminal DOUBLE returns ecore::EDouble: INT EXPONENT | INT '.' DIGIT* EXPONENT?;
+	//terminal DOUBLE returns ecore::EDouble: DIGIT+ EXPONENT | DIGIT+ '.' DIGIT* EXPONENT?;
 	public TerminalRule getDOUBLERule() {
 		return gaBaseLanguage.getDOUBLERule();
 	}

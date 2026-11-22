@@ -55,11 +55,12 @@ public class ComputedValuesTest {
     }
 
     @Test
-    public void anIntegerDivisionIsCheckedByItsIntegerResult() {
-        // 1 / 5 = 0 with integers, so an exclusive lower bound of 0 rejects it
-        final Expression zero = product(integer(1), MultiplyDivideModuloOperator.DIVIDE, integer(5));
+    public void aDivisionOfIntegersIsCheckedByItsRealResult() {
+        // 1 / 5 = 0.2, also with integers (#332), so an exclusive lower bound of 0 accepts it
+        final Expression fifth = product(integer(1), MultiplyDivideModuloOperator.DIVIDE, integer(5));
 
-        Assertions.assertInstanceOf(ConstraintCheck.Violated.class, check(new LowerBoundaryChecker(0.0, false), zero));
+        Assertions.assertInstanceOf(ConstraintCheck.Satisfied.class, check(new LowerBoundaryChecker(0.0, false), fifth));
+        Assertions.assertInstanceOf(ConstraintCheck.Violated.class, check(new UpperBoundaryChecker(0.1, true), fifth));
     }
 
     @Test

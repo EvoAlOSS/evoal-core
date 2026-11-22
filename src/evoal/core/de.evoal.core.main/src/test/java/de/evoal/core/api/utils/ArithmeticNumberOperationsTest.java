@@ -26,12 +26,29 @@ class ArithmeticNumberOperationsTest {
 
     @Test
     void testDivideWithIntegers() {
-        assertEquals(2, ArithmeticNumberOperations.divide(6, 3));
+        assertEquals(2.0, ArithmeticNumberOperations.divide(6, 3));
+    }
+
+    @Test
+    void testDivideWithIntegersIsARealDivision() {
+        assertEquals(0.2, ArithmeticNumberOperations.divide(1, 5));
     }
 
     @Test
     void testDivideWithLongs() {
-        assertEquals(2L, ArithmeticNumberOperations.divide(8L, 4L));
+        assertEquals(2.0, ArithmeticNumberOperations.divide(8L, 4L));
+        assertEquals(2.5, ArithmeticNumberOperations.divide(5L, 2L));
+    }
+
+    @Test
+    void testDivideWithMixedOperands() {
+        assertEquals(2.5, ArithmeticNumberOperations.divide(5, 2L));
+        assertEquals(0.25, ArithmeticNumberOperations.divide(1, 4.0));
+    }
+
+    @Test
+    void testDivideTwoIntegersByZeroIsInfinite() {
+        assertEquals(Double.POSITIVE_INFINITY, ArithmeticNumberOperations.divide(1, 0));
     }
 
     @Test

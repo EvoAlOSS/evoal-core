@@ -72,7 +72,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="AddOrSubtractExpression" eSuperTypes="#//ReadExpression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="leftOperand" lowerBound="1"
         eType="#//MultiplyDivideModuloExpression" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operators" upperBound="-1"
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operators" unique="false" upperBound="-1"
         eType="#//AddOrSubtractOperator">
       <eAnnotations source="http://www.eclipse.org/OCL/Collection">
         <details key="nullFree" value="false"/>
@@ -92,7 +92,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="MultiplyDivideModuloExpression" eSuperTypes="#//ReadExpression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="leftOperand" lowerBound="1"
         eType="#//PowerOfExpression" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operators" upperBound="-1"
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operators" unique="false" upperBound="-1"
         eType="#//MultiplyDivideModuloOperator">
       <eAnnotations source="http://www.eclipse.org/OCL/Collection">
         <details key="nullFree" value="false"/>
@@ -117,7 +117,7 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="UnaryAddOrSubtractExpression" eSuperTypes="#//ReadExpression">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operators" upperBound="-1"
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operators" unique="false" upperBound="-1"
         eType="#//AddOrSubtractOperator">
       <eAnnotations source="http://www.eclipse.org/OCL/Collection">
         <details key="nullFree" value="false"/>

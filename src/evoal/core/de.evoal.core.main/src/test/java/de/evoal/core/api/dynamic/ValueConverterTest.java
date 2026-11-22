@@ -27,7 +27,11 @@ import de.evoal.languages.model.base.expressions.Array;
 import de.evoal.languages.model.base.expressions.ExpressionsFactory;
 import de.evoal.languages.model.base.expressions.ExpressionsPackage;
 import de.evoal.languages.model.base.expressions.IntegerLiteral;
+import de.evoal.languages.model.base.expressions.MultiplyDivideModuloExpression;
+import de.evoal.languages.model.base.expressions.MultiplyDivideModuloOperator;
+import de.evoal.languages.model.base.expressions.PowerOfExpression;
 import de.evoal.languages.model.base.expressions.RealLiteral;
+import de.evoal.languages.model.base.expressions.UnaryAddOrSubtractExpression;
 
 public class ValueConverterTest {
     private static EAttribute attribute(final EClassifier type) {
@@ -168,5 +172,51 @@ public class ValueConverterTest {
                 .convert(integer(1));
 
         Assertions.assertEquals(1, value);
+    }
+
+    private static PowerOfExpression power(final int value) {
+        final UnaryAddOrSubtractExpression unary = ExpressionsFactory.eINSTANCE.createUnaryAddOrSubtractExpression();
+        unary.setSubExpression(integer(value));
+
+        final PowerOfExpression power = ExpressionsFactory.eINSTANCE.createPowerOfExpression();
+        power.setLeftOperand(unary);
+        return power;
+    }
+
+    /**
+     * @return {@code dividend / divisor}.
+     */
+    private static MultiplyDivideModuloExpression quotient(final int dividend, final int divisor) {
+        final MultiplyDivideModuloExpression quotient = ExpressionsFactory.eINSTANCE.createMultiplyDivideModuloExpression();
+        quotient.setLeftOperand(power(dividend));
+        quotient.getOperators().add(MultiplyDivideModuloOperator.DIVIDE);
+        quotient.getOperands().add(power(divisor));
+        return quotient;
+    }
+
+    @Test
+    public void aQuotientOfIntegersIsARealForARealAttribute() {
+        final Object value = new ValueConverter()
+                .setTargetType(attribute(EcorePackage.Literals.EDOUBLE))
+                .convert(quotient(1, 5));
+
+        Assertions.assertEquals(0.2, value);
+    }
+
+    @Test
+    public void anIntegralQuotientIsAcceptedForAnIntAttribute() {
+        final Object value = new ValueConverter()
+                .setTargetType(attribute(EcorePackage.Literals.EINT))
+                .convert(quotient(10, 2));
+
+        Assertions.assertEquals(5, value);
+    }
+
+    @Test
+    public void aFractionalQuotientIsRejectedForAnIntAttribute() {
+        final IllegalArgumentException e = Assertions.assertThrows(IllegalArgumentException.class, () -> new ValueConverter()
+                .setTargetType(attribute(EcorePackage.Literals.EINT))
+                .convert(quotient(7, 2)));
+        Assertions.assertTrue(e.getMessage().contains("'value'"), e.getMessage());
     }
 }

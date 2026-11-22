@@ -31,7 +31,8 @@ public interface UnaryAddOrSubtractExpression extends ReadExpression {
 	 * @return the value of the '<em>Operators</em>' attribute list.
 	 * @see de.evoal.languages.model.base.expressions.AddOrSubtractOperator
 	 * @see de.evoal.languages.model.base.expressions.ExpressionsPackage#getUnaryAddOrSubtractExpression_Operators()
-	 * @model annotation="http://www.eclipse.org/OCL/Collection nullFree='false'"
+	 * @model unique="false"
+	 *        annotation="http://www.eclipse.org/OCL/Collection nullFree='false'"
 	 * @generated
 	 */
 	EList<AddOrSubtractOperator> getOperators();

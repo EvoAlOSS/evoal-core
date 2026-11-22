@@ -54,7 +54,8 @@ public interface MultiplyDivideModuloExpression extends ReadExpression {
 	 * @return the value of the '<em>Operators</em>' attribute list.
 	 * @see de.evoal.languages.model.base.expressions.MultiplyDivideModuloOperator
 	 * @see de.evoal.languages.model.base.expressions.ExpressionsPackage#getMultiplyDivideModuloExpression_Operators()
-	 * @model annotation="http://www.eclipse.org/OCL/Collection nullFree='false'"
+	 * @model unique="false"
+	 *        annotation="http://www.eclipse.org/OCL/Collection nullFree='false'"
 	 * @generated
 	 */
 	EList<MultiplyDivideModuloOperator> getOperators();

@@ -69,6 +69,7 @@ public class ExecutionDSLConverter extends ExecutionSwitch<Object> {
 
         result.setStart(EcoreUtil.copy(obj.getStart()));
         result.setEnd(EcoreUtil.copy(obj.getEnd()));
+        result.setIncrement(EcoreUtil.copy(obj.getIncrement()));
 
         return result;
     }

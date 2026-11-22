@@ -260,7 +260,7 @@ public class BaseLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 	 *     ArrayRule returns Array
 	 *
 	 * Constraint:
-	 *     (values+=ReadExpressionRule values+=ReadExpressionRule*)?
+	 *     (values+=OrExpressionRule values+=OrExpressionRule*)?
 	 * </pre>
 	 */
 	protected void sequence_ArrayRule(ISerializationContext context, Array semanticObject) {

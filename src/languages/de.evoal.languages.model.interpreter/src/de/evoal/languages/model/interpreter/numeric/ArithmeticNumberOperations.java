@@ -72,24 +72,22 @@ public final class ArithmeticNumberOperations {
         throw new IllegalArgumentException("Parameters of types " + lOp + " and " + rOp + " are not supported.");
     }
     
+    /**
+     * Divides two numbers as reals, also two integers: {@code 1 / 5} is 0.2, not 0. An integer
+     *   attribute accepts an integral result (e.g. {@code 10 / 2}) and rejects any other.
+     *
+     * @return The quotient as a {@link Double}.
+     */
     public static Number divide(final Object op1, final Object op2) {
         return dispatch(op1,
                         op2,
                         ArithmeticNumberOperations::divideAsDouble,
-                        ArithmeticNumberOperations::divideAsLong,
-                        ArithmeticNumberOperations::divideAsInteger);
+                        ArithmeticNumberOperations::divideAsDouble,
+                        ArithmeticNumberOperations::divideAsDouble);
     }
 
     private static Number divideAsDouble(final Number op1, final Number op2) {
         return op1.doubleValue() / op2.doubleValue();
-    }
-
-    private static Number divideAsLong(final Number op1, final Number op2) {
-        return op1.longValue() / op2.longValue();
-    }
-
-    private static Number divideAsInteger(final Number op1, final Number op2) {
-        return op1.intValue() / op2.intValue();
     }
 
     public static Number minus(final Object op1, final Object op2) {

@@ -63,11 +63,11 @@ RangeRule returns execution::Range:
 ;
 
 LiteralRangeRule returns execution::ValueRange:
-	'[' elements += ReadExpressionRule (',' elements += ReadExpressionRule)* ']'
+	'[' elements += OrExpressionRule (',' elements += OrExpressionRule)* ']'
 ;
 
 CounterRangeRule returns execution::CounterRange:
-	'[' start = IntegerLiteralRule 'to' end = IntegerLiteralRule 'increment' 'by' increment = IntegerLiteralRule ']'
+	'[' start = OrExpressionRule 'to' end = OrExpressionRule 'increment' 'by' increment = OrExpressionRule ']'
 ;
 
 ApplyStatementRule returns ApplyStatement:

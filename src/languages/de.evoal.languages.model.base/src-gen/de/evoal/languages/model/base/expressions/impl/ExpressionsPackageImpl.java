@@ -1500,12 +1500,12 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 
 		initEClass(addOrSubtractExpressionEClass, AddOrSubtractExpression.class, "AddOrSubtractExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAddOrSubtractExpression_LeftOperand(), this.getMultiplyDivideModuloExpression(), null, "leftOperand", null, 1, 1, AddOrSubtractExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAddOrSubtractExpression_Operators(), this.getAddOrSubtractOperator(), "operators", null, 0, -1, AddOrSubtractExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAddOrSubtractExpression_Operators(), this.getAddOrSubtractOperator(), "operators", null, 0, -1, AddOrSubtractExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAddOrSubtractExpression_Operands(), this.getMultiplyDivideModuloExpression(), null, "operands", null, 0, -1, AddOrSubtractExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(multiplyDivideModuloExpressionEClass, MultiplyDivideModuloExpression.class, "MultiplyDivideModuloExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getMultiplyDivideModuloExpression_LeftOperand(), this.getPowerOfExpression(), null, "leftOperand", null, 1, 1, MultiplyDivideModuloExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getMultiplyDivideModuloExpression_Operators(), this.getMultiplyDivideModuloOperator(), "operators", null, 0, -1, MultiplyDivideModuloExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMultiplyDivideModuloExpression_Operators(), this.getMultiplyDivideModuloOperator(), "operators", null, 0, -1, MultiplyDivideModuloExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMultiplyDivideModuloExpression_Operands(), this.getPowerOfExpression(), null, "operands", null, 0, -1, MultiplyDivideModuloExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(powerOfExpressionEClass, PowerOfExpression.class, "PowerOfExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1513,7 +1513,7 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		initEReference(getPowerOfExpression_RightOperand(), this.getPowerOfExpression(), null, "rightOperand", null, 0, 1, PowerOfExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(unaryAddOrSubtractExpressionEClass, UnaryAddOrSubtractExpression.class, "UnaryAddOrSubtractExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getUnaryAddOrSubtractExpression_Operators(), this.getAddOrSubtractOperator(), "operators", null, 0, -1, UnaryAddOrSubtractExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getUnaryAddOrSubtractExpression_Operators(), this.getAddOrSubtractOperator(), "operators", null, 0, -1, UnaryAddOrSubtractExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getUnaryAddOrSubtractExpression_SubExpression(), this.getReadExpression(), null, "subExpression", null, 1, 1, UnaryAddOrSubtractExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(literalEClass, Literal.class, "Literal", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

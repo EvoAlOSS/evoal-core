@@ -75,9 +75,13 @@ ReadExpressionRule returns ReadExpression:
 	| ParanthesesRule
 	| ReferenceRule;
 
+/**
+ * An array whose elements are expressions (e.g. [-1.0, 2 * 3, data 'x']). The elements use
+ * OrExpressionRule, the expression rule whose type fits Array.values (ReadExpression).
+ */
 ArrayRule returns Array:
 	{Array}
-	'[' (values += ReadExpressionRule (',' values += ReadExpressionRule)* )? ']' 
+	'[' (values += OrExpressionRule (',' values += OrExpressionRule)* )? ']'
 ;
 
 ParanthesesRule returns Parantheses:
@@ -303,9 +307,13 @@ StringOrId:
 terminal fragment DIGIT: '0'..'9';
 terminal fragment EXPONENT: 'e' ('+'|'-')? DIGIT+;
 
+/*
+ * Numbers have no sign: a negative number is a unary minus applied to the number, so that
+ * '4-1' is a subtraction.
+ */
 @Override
-terminal INT returns ecore::EInt: '-'? DIGIT+;
-terminal DOUBLE returns ecore::EDouble: INT EXPONENT | INT '.' DIGIT* EXPONENT?;
+terminal INT returns ecore::EInt: DIGIT+;
+terminal DOUBLE returns ecore::EDouble: DIGIT+ EXPONENT | DIGIT+ '.' DIGIT* EXPONENT?;
 
 @Override
 terminal STRING:

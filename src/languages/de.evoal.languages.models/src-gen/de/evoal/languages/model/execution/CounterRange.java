@@ -4,6 +4,7 @@
 package de.evoal.languages.model.execution;
 
 import de.evoal.languages.model.base.expressions.Literal;
+import de.evoal.languages.model.base.expressions.ReadExpression;
 
 /**
  * <!-- begin-user-doc -->
@@ -40,12 +41,12 @@ public interface CounterRange extends Range {
 	 * 
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Start</em>' containment reference.
-	 * @see #setStart(Literal)
+	 * @see #setStart(ReadExpression)
 	 * @see de.evoal.languages.model.execution.ExecutionPackage#getCounterRange_Start()
 	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	Literal getStart();
+	ReadExpression getStart();
 
 	/**
 	 * Sets the value of the '{@link de.evoal.languages.model.execution.CounterRange#getStart <em>Start</em>}' containment reference.
@@ -55,7 +56,7 @@ public interface CounterRange extends Range {
 	 * @see #getStart()
 	 * @generated
 	 */
-	void setStart(Literal value);
+	void setStart(ReadExpression value);
 
 	/**
 	 * Returns the value of the '<em><b>End</b></em>' containment reference.
@@ -67,12 +68,12 @@ public interface CounterRange extends Range {
 	 * 
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>End</em>' containment reference.
-	 * @see #setEnd(Literal)
+	 * @see #setEnd(ReadExpression)
 	 * @see de.evoal.languages.model.execution.ExecutionPackage#getCounterRange_End()
 	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	Literal getEnd();
+	ReadExpression getEnd();
 
 	/**
 	 * Sets the value of the '{@link de.evoal.languages.model.execution.CounterRange#getEnd <em>End</em>}' containment reference.
@@ -82,7 +83,7 @@ public interface CounterRange extends Range {
 	 * @see #getEnd()
 	 * @generated
 	 */
-	void setEnd(Literal value);
+	void setEnd(ReadExpression value);
 
 	/**
 	 * Returns the value of the '<em><b>Increment</b></em>' containment reference.
@@ -94,12 +95,12 @@ public interface CounterRange extends Range {
 	 * 
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Increment</em>' containment reference.
-	 * @see #setIncrement(Literal)
+	 * @see #setIncrement(ReadExpression)
 	 * @see de.evoal.languages.model.execution.ExecutionPackage#getCounterRange_Increment()
 	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	Literal getIncrement();
+	ReadExpression getIncrement();
 
 	/**
 	 * Sets the value of the '{@link de.evoal.languages.model.execution.CounterRange#getIncrement <em>Increment</em>}' containment reference.
@@ -109,6 +110,6 @@ public interface CounterRange extends Range {
 	 * @see #getIncrement()
 	 * @generated
 	 */
-	void setIncrement(Literal value);
+	void setIncrement(ReadExpression value);
 
 } // CounterRange

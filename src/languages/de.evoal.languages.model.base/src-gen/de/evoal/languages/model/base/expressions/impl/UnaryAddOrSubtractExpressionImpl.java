@@ -19,7 +19,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
+import org.eclipse.emf.ecore.util.EDataTypeEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -83,7 +83,7 @@ public class UnaryAddOrSubtractExpressionImpl extends ReadExpressionImpl impleme
 	@Override
 	public EList<AddOrSubtractOperator> getOperators() {
 		if (operators == null) {
-			operators = new EDataTypeUniqueEList<AddOrSubtractOperator>(AddOrSubtractOperator.class, this, ExpressionsPackage.UNARY_ADD_OR_SUBTRACT_EXPRESSION__OPERATORS);
+			operators = new EDataTypeEList<AddOrSubtractOperator>(AddOrSubtractOperator.class, this, ExpressionsPackage.UNARY_ADD_OR_SUBTRACT_EXPRESSION__OPERATORS);
 		}
 		return operators;
 	}

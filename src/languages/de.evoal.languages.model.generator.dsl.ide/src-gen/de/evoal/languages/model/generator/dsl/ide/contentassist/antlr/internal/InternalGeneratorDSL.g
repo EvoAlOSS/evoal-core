@@ -7994,9 +7994,9 @@ rule__LiteralRangeRule__ElementsAssignment_1
 	}
 :
 	(
-		{ before(grammarAccess.getLiteralRangeRuleAccess().getElementsReadExpressionRuleParserRuleCall_1_0()); }
-		ruleReadExpressionRule
-		{ after(grammarAccess.getLiteralRangeRuleAccess().getElementsReadExpressionRuleParserRuleCall_1_0()); }
+		{ before(grammarAccess.getLiteralRangeRuleAccess().getElementsOrExpressionRuleParserRuleCall_1_0()); }
+		ruleOrExpressionRule
+		{ after(grammarAccess.getLiteralRangeRuleAccess().getElementsOrExpressionRuleParserRuleCall_1_0()); }
 	)
 ;
 finally {
@@ -8009,9 +8009,9 @@ rule__LiteralRangeRule__ElementsAssignment_2_1
 	}
 :
 	(
-		{ before(grammarAccess.getLiteralRangeRuleAccess().getElementsReadExpressionRuleParserRuleCall_2_1_0()); }
-		ruleReadExpressionRule
-		{ after(grammarAccess.getLiteralRangeRuleAccess().getElementsReadExpressionRuleParserRuleCall_2_1_0()); }
+		{ before(grammarAccess.getLiteralRangeRuleAccess().getElementsOrExpressionRuleParserRuleCall_2_1_0()); }
+		ruleOrExpressionRule
+		{ after(grammarAccess.getLiteralRangeRuleAccess().getElementsOrExpressionRuleParserRuleCall_2_1_0()); }
 	)
 ;
 finally {
@@ -8024,9 +8024,9 @@ rule__CounterRangeRule__StartAssignment_1
 	}
 :
 	(
-		{ before(grammarAccess.getCounterRangeRuleAccess().getStartIntegerLiteralRuleParserRuleCall_1_0()); }
-		ruleIntegerLiteralRule
-		{ after(grammarAccess.getCounterRangeRuleAccess().getStartIntegerLiteralRuleParserRuleCall_1_0()); }
+		{ before(grammarAccess.getCounterRangeRuleAccess().getStartOrExpressionRuleParserRuleCall_1_0()); }
+		ruleOrExpressionRule
+		{ after(grammarAccess.getCounterRangeRuleAccess().getStartOrExpressionRuleParserRuleCall_1_0()); }
 	)
 ;
 finally {
@@ -8039,9 +8039,9 @@ rule__CounterRangeRule__EndAssignment_3
 	}
 :
 	(
-		{ before(grammarAccess.getCounterRangeRuleAccess().getEndIntegerLiteralRuleParserRuleCall_3_0()); }
-		ruleIntegerLiteralRule
-		{ after(grammarAccess.getCounterRangeRuleAccess().getEndIntegerLiteralRuleParserRuleCall_3_0()); }
+		{ before(grammarAccess.getCounterRangeRuleAccess().getEndOrExpressionRuleParserRuleCall_3_0()); }
+		ruleOrExpressionRule
+		{ after(grammarAccess.getCounterRangeRuleAccess().getEndOrExpressionRuleParserRuleCall_3_0()); }
 	)
 ;
 finally {
@@ -8054,9 +8054,9 @@ rule__CounterRangeRule__IncrementAssignment_6
 	}
 :
 	(
-		{ before(grammarAccess.getCounterRangeRuleAccess().getIncrementIntegerLiteralRuleParserRuleCall_6_0()); }
-		ruleIntegerLiteralRule
-		{ after(grammarAccess.getCounterRangeRuleAccess().getIncrementIntegerLiteralRuleParserRuleCall_6_0()); }
+		{ before(grammarAccess.getCounterRangeRuleAccess().getIncrementOrExpressionRuleParserRuleCall_6_0()); }
+		ruleOrExpressionRule
+		{ after(grammarAccess.getCounterRangeRuleAccess().getIncrementOrExpressionRuleParserRuleCall_6_0()); }
 	)
 ;
 finally {
@@ -8531,9 +8531,9 @@ rule__ArrayRule__ValuesAssignment_2_0
 	}
 :
 	(
-		{ before(grammarAccess.getArrayRuleAccess().getValuesReadExpressionRuleParserRuleCall_2_0_0()); }
-		ruleReadExpressionRule
-		{ after(grammarAccess.getArrayRuleAccess().getValuesReadExpressionRuleParserRuleCall_2_0_0()); }
+		{ before(grammarAccess.getArrayRuleAccess().getValuesOrExpressionRuleParserRuleCall_2_0_0()); }
+		ruleOrExpressionRule
+		{ after(grammarAccess.getArrayRuleAccess().getValuesOrExpressionRuleParserRuleCall_2_0_0()); }
 	)
 ;
 finally {
@@ -8546,9 +8546,9 @@ rule__ArrayRule__ValuesAssignment_2_1_1
 	}
 :
 	(
-		{ before(grammarAccess.getArrayRuleAccess().getValuesReadExpressionRuleParserRuleCall_2_1_1_0()); }
-		ruleReadExpressionRule
-		{ after(grammarAccess.getArrayRuleAccess().getValuesReadExpressionRuleParserRuleCall_2_1_1_0()); }
+		{ before(grammarAccess.getArrayRuleAccess().getValuesOrExpressionRuleParserRuleCall_2_1_1_0()); }
+		ruleOrExpressionRule
+		{ after(grammarAccess.getArrayRuleAccess().getValuesOrExpressionRuleParserRuleCall_2_1_1_0()); }
 	)
 ;
 finally {
@@ -9034,9 +9034,9 @@ fragment RULE_DIGIT : '0'..'9';
 
 fragment RULE_EXPONENT : 'e' ('+'|'-')? RULE_DIGIT+;
 
-RULE_INT : '-'? RULE_DIGIT+;
+RULE_INT : RULE_DIGIT+;
 
-RULE_DOUBLE : (RULE_INT RULE_EXPONENT|RULE_INT '.' RULE_DIGIT* RULE_EXPONENT?);
+RULE_DOUBLE : (RULE_DIGIT+ RULE_EXPONENT|RULE_DIGIT+ '.' RULE_DIGIT* RULE_EXPONENT?);
 
 RULE_STRING : '"' ('\\' .|~(('\\'|'"')))* '"';
 
