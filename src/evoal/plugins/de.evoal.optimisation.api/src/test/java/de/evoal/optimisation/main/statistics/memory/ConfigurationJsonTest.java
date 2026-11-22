@@ -137,7 +137,7 @@ public class ConfigurationJsonTest {
         // given
         final EClass repair = type("repair");
         final EClass mutation = type("mutation");
-        attribute(mutation, "gene-probability", EcorePackage.Literals.EDOUBLE, 0);
+        attribute(mutation, "gene-probability", EcorePackage.Literals.EDOUBLE_OBJECT, 0);
         attribute(mutation, "group", EcorePackage.Literals.ESTRING, 0);
         reference(mutation, "repair", repair, true, 1);
         reference(mutation, "condition", ExpressionsPackage.Literals.EXPRESSION, false, 1);
@@ -157,7 +157,7 @@ public class ConfigurationJsonTest {
     public void aSetOptionalAttributeIsWritten() {
         // given
         final EClass mutation = type("mutation");
-        final EStructuralFeature geneProbability = attribute(mutation, "gene-probability", EcorePackage.Literals.EDOUBLE, 0);
+        final EStructuralFeature geneProbability = attribute(mutation, "gene-probability", EcorePackage.Literals.EDOUBLE_OBJECT, 0);
         final EObject configuration = EcoreUtil.create(mutation);
         configuration.eSet(geneProbability, 0.25);
 
@@ -166,6 +166,22 @@ public class ConfigurationJsonTest {
 
         // then
         Assertions.assertEquals("{\"type\":\"de.evoal.test.mutation\",\"attributes\":{\"gene-probability\":0.25}}",
+                                node.toString());
+    }
+
+    @Test
+    public void anOptionalAttributeSetToZeroIsWritten() {
+        // given
+        final EClass mutation = type("mutation");
+        final EStructuralFeature geneProbability = attribute(mutation, "gene-probability", EcorePackage.Literals.EDOUBLE_OBJECT, 0);
+        final EObject configuration = EcoreUtil.create(mutation);
+        configuration.eSet(geneProbability, 0.0);
+
+        // when
+        final ObjectNode node = json.toConfiguration(configuration);
+
+        // then
+        Assertions.assertEquals("{\"type\":\"de.evoal.test.mutation\",\"attributes\":{\"gene-probability\":0.0}}",
                                 node.toString());
     }
 }

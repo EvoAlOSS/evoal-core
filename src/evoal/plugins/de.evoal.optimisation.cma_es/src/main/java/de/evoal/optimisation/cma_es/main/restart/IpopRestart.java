@@ -8,6 +8,7 @@ import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 
 import de.evoal.core.api.math.EvoalMath;
 import de.evoal.core.api.utils.AttributeHelper;
@@ -54,8 +55,10 @@ public class IpopRestart implements RestartStrategy {
     @Override
     public RestartStrategy init(final EObject configuration) throws InitializationException {
         factor = helper.<Double>lookup(configuration, "population-factor");
-        final Integer maximum = helper.lookup(configuration, "maximum-restarts");
-        maximumRestarts = maximum == null ? Integer.MAX_VALUE : maximum;
+        final EStructuralFeature maximum = configuration.eClass().getEStructuralFeature("maximum-restarts");
+        maximumRestarts = maximum != null && configuration.eIsSet(maximum)
+                ? helper.<Integer>lookup(configuration, "maximum-restarts")
+                : Integer.MAX_VALUE;
 
         return this;
     }

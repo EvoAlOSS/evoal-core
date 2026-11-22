@@ -271,6 +271,72 @@ public class DynamicEClassProviderTest {
         Assertions.assertSame(((EEnum) topology.getEType()).getEEnumLiteral("star"), object.eGet(topology));
     }
 
+    /**
+     * Creates {@code type component { count : optional int; rate : optional real;
+     *   enabled : optional boolean; size : optional int := 3; steps : int; }}.
+     */
+    private static ClassDefinition createTypeWithOptionalAttributes() {
+        final DefinitionModule module = DlFactory.eINSTANCE.createDefinitionModule();
+        module.setName("com.example.plugin");
+        final ClassDefinition type = DefinitionsFactory.eINSTANCE.createClassDefinition();
+        type.setName("component");
+        module.getTypes().add(type);
+
+        type.getAttributes().add(optional(attribute("count", TypesFactory.eINSTANCE.createIntType(), null)));
+        type.getAttributes().add(optional(attribute("rate", TypesFactory.eINSTANCE.createRealType(), null)));
+        type.getAttributes().add(optional(attribute("enabled", TypesFactory.eINSTANCE.createBooleanType(), null)));
+        type.getAttributes().add(optional(attribute("size", TypesFactory.eINSTANCE.createIntType(), integer(3))));
+        type.getAttributes().add(attribute("steps", TypesFactory.eINSTANCE.createIntType(), null));
+
+        return type;
+    }
+
+    private static AttributeDefinition optional(final AttributeDefinition attribute) {
+        attribute.setOptional(true);
+        return attribute;
+    }
+
+    @Test
+    public void optionalScalarsAreMappedToObjectTypes() {
+        final EClass eClass = new DynamicEClassProvider().toEClass(createTypeWithOptionalAttributes());
+
+        Assertions.assertSame(EcorePackage.Literals.EINTEGER_OBJECT, eClass.getEStructuralFeature("count").getEType());
+        Assertions.assertSame(EcorePackage.Literals.EDOUBLE_OBJECT, eClass.getEStructuralFeature("rate").getEType());
+        Assertions.assertSame(EcorePackage.Literals.EBOOLEAN_OBJECT, eClass.getEStructuralFeature("enabled").getEType());
+        Assertions.assertSame(EcorePackage.Literals.EINTEGER_OBJECT, eClass.getEStructuralFeature("size").getEType());
+        Assertions.assertSame(EcorePackage.Literals.EINT, eClass.getEStructuralFeature("steps").getEType());
+
+        Assertions.assertEquals(0, eClass.getEStructuralFeature("count").getLowerBound());
+        Assertions.assertEquals("3", eClass.getEStructuralFeature("size").getDefaultValueLiteral());
+    }
+
+    @Test
+    public void optionalScalarsDistinguishZeroAndFalseFromUnset() {
+        final DynamicEClassProvider provider = new DynamicEClassProvider();
+        final EClass eClass = provider.toEClass(createTypeWithOptionalAttributes());
+        final EObject unset = provider.getEObject(eClass);
+        final EObject assigned = provider.getEObject(eClass);
+
+        for(final String name : List.of("count", "rate", "enabled")) {
+            final EStructuralFeature feature = eClass.getEStructuralFeature(name);
+            Assertions.assertNull(unset.eGet(feature), name);
+            Assertions.assertFalse(unset.eIsSet(feature), name);
+        }
+
+        assigned.eSet(eClass.getEStructuralFeature("count"), 0);
+        assigned.eSet(eClass.getEStructuralFeature("rate"), 0.0);
+        assigned.eSet(eClass.getEStructuralFeature("enabled"), false);
+        for(final String name : List.of("count", "rate", "enabled")) {
+            Assertions.assertTrue(assigned.eIsSet(eClass.getEStructuralFeature(name)), name);
+        }
+        Assertions.assertEquals(0, assigned.eGet(eClass.getEStructuralFeature("count")));
+        Assertions.assertEquals(0.0, assigned.eGet(eClass.getEStructuralFeature("rate")));
+        Assertions.assertEquals(false, assigned.eGet(eClass.getEStructuralFeature("enabled")));
+
+        // the default of an optional attribute still applies
+        Assertions.assertEquals(3, unset.eGet(eClass.getEStructuralFeature("size")));
+    }
+
     @Test
     public void noMappedSuperClassWithoutRegistration() {
         final DynamicEClassProvider provider = new DynamicEClassProvider();

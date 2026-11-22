@@ -346,7 +346,7 @@ public class DynamicEClassProvider {
         }
 
         result.setName(definition.getName());
-        result.setEType(toEClassifier(definition.getType()));
+        result.setEType(definition.isOptional() ? toOptionalEClassifier(definition.getType()) : toEClassifier(definition.getType()));
         toDefaultValueLiteral(definition, result.getEType()).ifPresent(result::setDefaultValueLiteral);
 
         // an attribute with a default value does not have to be specified
@@ -545,6 +545,25 @@ public class DynamicEClassProvider {
         toEPackage(((Module) definition.eContainer()).getName()).getEClassifiers().add(eEnum);
 
         return eEnum;
+    }
+
+    /**
+     * Returns the Ecore type of an {@code optional} attribute. A boolean, int or real becomes
+     *   the object type ({@code EBooleanObject}, {@code EIntegerObject}, {@code EDoubleObject}),
+     *   whose default is {@code null}: an unassigned attribute reads as {@code null} and an
+     *   assigned {@code false} or 0 counts as set. With the primitive types, EMF cannot tell
+     *   these values from unassigned ones. All other types are mapped as by
+     *   {@link #toEClassifier(Type)}.
+     */
+    private EClassifier toOptionalEClassifier(final Type type) {
+        if (type instanceof BooleanType) {
+            return ePackage.getEBooleanObject();
+        } else if (type instanceof IntType) {
+            return ePackage.getEIntegerObject();
+        } else if (type instanceof RealType) {
+            return ePackage.getEDoubleObject();
+        }
+        return toEClassifier(type);
     }
 
     private EClassifier toEClassifier(final Type type) {
