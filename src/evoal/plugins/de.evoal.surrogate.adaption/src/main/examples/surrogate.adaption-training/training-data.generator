@@ -1,0 +1,74 @@
+import "definitions" from de.evoal.core.math;
+import "definitions" from 'de.evoal.pipeline.base';
+import "definitions" from 'de.evoal.pipeline.benchmarks';
+import "definitions" from 'de.evoal.pipeline.sequences';
+
+import "data" from surrogate;
+
+module 'training-data' {
+	/**
+	 * The grid x:0 = 0.00, 0.01, ..., 0.69 and the Forrester function on it.
+	 */
+	pipeline 'left' [
+		step {
+			component 'sequence-generator' {
+				sequences := [
+					'expression-based-sequence' {
+						variable     := data 'k';
+						initial      := 0.0;
+						'expression' := data 'k' + 1.0;
+					},
+					'expression-based-sequence' {
+						variable     := data 'x:0';
+						initial      := 0.0;
+						'expression' := data 'k' / 100.0;
+					}
+				];
+			}
+
+			writes [data 'k', data 'x:0'];
+		}
+		step {
+			component forrester {}
+
+			reads [data 'x:0'];
+			writes [data 'y:0'];
+		}
+	]
+
+	/**
+	 * The grid x:0 = 0.81, 0.82, ..., 1.00 and the Forrester function on it.
+	 */
+	pipeline 'right' [
+		step {
+			component 'sequence-generator' {
+				sequences := [
+					'expression-based-sequence' {
+						variable     := data 'k';
+						initial      := 81.0;
+						'expression' := data 'k' + 1.0;
+					},
+					'expression-based-sequence' {
+						variable     := data 'x:0';
+						initial      := 0.81;
+						'expression' := data 'k' / 100.0;
+					}
+				];
+			}
+
+			writes [data 'k', data 'x:0'];
+		}
+		step {
+			component forrester {}
+
+			reads [data 'x:0'];
+			writes [data 'y:0'];
+		}
+	]
+
+	// The training data leaves out (0.69, 0.81): the gap around the global minimum at 0.757.
+	begin
+		write "output/left.csv" with 70 samples from executing ['left'];
+		write "output/right.csv" with 20 samples from executing ['right'];
+	end
+}

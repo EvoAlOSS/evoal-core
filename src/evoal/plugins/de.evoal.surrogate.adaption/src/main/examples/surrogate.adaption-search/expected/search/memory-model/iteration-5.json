@@ -2,27 +2,27 @@
   "formatVersion" : "2027.4.0",
   "number" : 5,
   "individuals" : [ {
-    "id" : 10,
+    "id" : 5,
     "input" : {
-      "x:0" : -5.000000000000001
+      "x:0" : 0.7000000000000001
     },
     "output" : {
-      "y:0" : -1.800000001763065E-8
+      "y:0" : -4.1688078947695075
     },
-    "fitness" : [ -4.459419657162757 ],
+    "fitness" : [ -4.1688078947695075 ],
     "relationships" : [ {
       "kind" : "mutation",
-      "targets" : [ 8 ]
+      "targets" : [ 4 ]
     } ]
   } ],
   "steps" : [ ],
   "ranks" : [ {
     "number" : 0,
-    "members" : [ 10 ]
+    "members" : [ 5 ]
   } ],
-  "bestSoFar" : 10,
+  "bestSoFar" : 5,
   "metrics" : {
     "evaluations.real" : 0,
-    "evaluations.surrogate" : 11
+    "evaluations.surrogate" : 6
   }
 }

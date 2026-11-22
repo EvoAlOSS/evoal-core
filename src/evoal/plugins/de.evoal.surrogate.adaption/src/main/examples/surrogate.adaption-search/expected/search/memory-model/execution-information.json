@@ -4,7 +4,7 @@
     "name" : "example-search",
     "goals" : [ {
       "feature" : "y:0",
-      "direction" : "maximise"
+      "direction" : "minimise"
     } ],
     "function" : {
       "type" : "de.evoal.optimisation.core.unknown-function",
@@ -24,7 +24,7 @@
                 "type" : "de.evoal.optimisation.core.variable",
                 "attributes" : {
                   "var" : "x:0",
-                  "val" : -4.0
+                  "val" : 0.6
                 }
               } ]
             }
@@ -50,24 +50,7 @@
           "maximum-iterations" : 20
         }
       } ],
-      "fitness-pipeline" : [ {
-        "type" : "de.evoal.surrogate.adaption.interval.optimisation.prediction-interval",
-        "attributes" : { }
-      }, {
-        "type" : "de.evoal.surrogate.adaption.density.optimisation.gaussian-density",
-        "attributes" : {
-          "kind" : "source-based",
-          "exponent" : 1.0,
-          "root-exponent" : 1.0
-        }
-      }, {
-        "type" : "de.evoal.surrogate.adaption.density.optimisation.kernel-density",
-        "attributes" : {
-          "kind" : "source-based",
-          "exponent" : 1.0,
-          "root-exponent" : 1.0
-        }
-      } ],
+      "fitness-pipeline" : [ ],
       "candidate-checks" : [ ],
       "constraint-measure" : {
         "type" : "de.evoal.optimisation.core.exact-measure",
@@ -82,7 +65,7 @@
             "type" : "de.evoal.optimisation.core.variable",
             "attributes" : {
               "var" : "x:0",
-              "val" : 0.2
+              "val" : 0.02
             }
           } ],
           "neighbour-order" : "fixed"
@@ -113,11 +96,11 @@
     "type" : "real",
     "scale" : "quotient",
     "lowerBound" : {
-      "value" : -5.12,
+      "value" : 0.0,
       "inclusive" : true
     },
     "upperBound" : {
-      "value" : 5.12,
+      "value" : 1.0,
       "inclusive" : true
     }
   } ],
@@ -131,24 +114,7 @@
       "name" : "y:0",
       "goal" : "y:0"
     } ],
-    "steps" : [ {
-      "type" : "de.evoal.surrogate.adaption.interval.optimisation.prediction-interval",
-      "attributes" : { }
-    }, {
-      "type" : "de.evoal.surrogate.adaption.density.optimisation.gaussian-density",
-      "attributes" : {
-        "kind" : "source-based",
-        "exponent" : 1.0,
-        "root-exponent" : 1.0
-      }
-    }, {
-      "type" : "de.evoal.surrogate.adaption.density.optimisation.kernel-density",
-      "attributes" : {
-        "kind" : "source-based",
-        "exponent" : 1.0,
-        "root-exponent" : 1.0
-      }
-    } ]
+    "steps" : [ ]
   },
   "metricDefinitions" : [ {
     "name" : "evaluations.real",
@@ -166,10 +132,6 @@
   "setup" : {
     "evoalVersion" : "${evoal.version}",
     "seed" : "42",
-    "run" : 0,
-    "reproducibility" : [ {
-      "component" : "prediction-interval",
-      "reason" : "uses native numeric libraries (BLAS/LAPACK); results may differ slightly between platforms"
-    } ]
+    "run" : 0
   }
 }

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Trains the surrogate model output/model.pson.
+# Trains the surrogate model output/model.pson on the data of 01-run-generator.sh.
 
 set -e
 

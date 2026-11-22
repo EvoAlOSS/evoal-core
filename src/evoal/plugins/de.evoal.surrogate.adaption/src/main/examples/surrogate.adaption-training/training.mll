@@ -11,31 +11,34 @@ module 'training' {
 	specify learning-task {
 		input features 'x:0'
 		output features 'y:0'
-		
-		learning from [ "data.csv" ] 
-		serialise to "output/model.pson" 
-	}
-	
-	specify validation steps []
-	
-	specify preparation steps []
-	
-	specify model 'epsilon-svr' {
-		'ε' := 1.4;
-		'soft-margin' := 0.15;
-		tolerance := 0.1;
-		'kernel' := gaussian { 'σ' := 1.0; };
-	}
-			
-	specify gof begin 
-	    'kernel-density-estimation'(0.2);
-	    'gaussian-density-estimation'(0.2);
-	    'predictive-error'();
 
+		// the two grid segments of training-data.generator, without (0.69, 0.81)
+		learning from [ "output/left.csv", "output/right.csv" ]
+		serialise to "output/model.pson"
+	}
+
+	specify validation steps []
+
+	specify preparation steps []
+
+	specify model 'epsilon-svr' {
+		'ε' := 0.05;
+		'soft-margin' := 100.0;
+		tolerance := 0.001;
+		'kernel' := gaussian { 'σ' := 0.2; };
+	}
+
+	specify gof begin
+	    'rmse'();
+	    'R²'();
+	    // information for the adaption steps, stored with the model
+	    'kernel-density-estimation'(0.05);
+	    'gaussian-density-estimation'(0.05);
+	    'predictive-error'();
 	end
-	
+
 	use cases
-	  specify learning 
+	  specify learning
 	  begin
 	  	'execute'([
 	  		step {
@@ -49,14 +52,14 @@ module 'training' {
 				reads [data 'x:0', data 'y:0']; // should be default
 			}
 	  	]);
-	  	
+
 		'gof-calculator'( );
-		
+
 		'store-model'();
 	  end;
 
-	  specify predicting 
-		begin 
+	  specify predicting
+		begin
             pipeline 'preparation'
             step {
                 component 'model-prediction' {}

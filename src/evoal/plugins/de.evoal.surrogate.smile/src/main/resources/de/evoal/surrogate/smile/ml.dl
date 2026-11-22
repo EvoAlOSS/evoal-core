@@ -375,23 +375,29 @@ module de.evoal.surrogate.smile.ml {
 	 *   Platt 1998; Fan, Chen and Lin 2005; Bordes et al. 2005; Glasmachers and Igel
 	 *   2008; Chang and Lin 2011 (LIBSVM).
 	 */
-	@MultiVariateConstraint{  'expression'  := self.'soft-margin' < self.tolerance; }
 	@Literature { keys := ["smola2004tutorial", "flake2002efficient", "burges1998tutorial", "platt1998sequential",
 	                       "fan2005working", "bordes2005fast", "glasmachers2008second", "chang2011libsvm"]; }
 	type 'epsilon-svr' extends surrogate {
 		/**
-	     * The soft margin penalty parameter.
+	     * The soft margin penalty parameter C: the weight of the training errors outside the
+	     *   ε-tube against the flatness of the model. A larger C fits the training data more
+	     *   closely.
 	     */
+		@LowerBoundary{ boundary := 0.0; inclusive := true; }
 		'soft-margin'   : real;
-		
+
 		/**
-		 * The tolerance of convergence test.
+		 * The tolerance of the convergence test of the solver; training stops when the
+		 *   optimality conditions hold up to this tolerance (e.g. 0.001).
 		 */
+		@LowerBoundary{ boundary := 0.0; inclusive := false; }
 		tolerance       : real;
-		
+
 		/**
-		 * The loss function error threshold
+		 * The width of the ε-tube: errors up to ε are not penalised. It is given in the unit of
+		 *   the output; an ε as large as the spread of the output gives a constant model.
 		 */
+		@LowerBoundary{ boundary := 0.0; inclusive := false; }
 		'ε'             : real;
 
 		/**

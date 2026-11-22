@@ -1,5 +1,7 @@
 // Regression: hill climbing on a surrogate whose maximised prediction is adapted by the
 // kernel density of input and prediction (kind 'both', former formula, see #288).
+// model.pson is the nearly constant SVR of the former adaption example; #288 chooses a new
+// model together with the new formulas.
 import "definitions" from de.evoal.core.math;
 
 import "definitions" from de.evoal.optimisation.core;

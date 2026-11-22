@@ -3,14 +3,14 @@ import "definitions" from 'de.evoal.core.constraints';
 module surrogate {
     data:
         /**
-         * Source dimension of the training data.
+         * Input of the surrogate.
          */
-        @LowerBoundary{ boundary := -5.12; 'inclusive' := true; }
-        @UpperBoundary{ boundary := 5.12; 'inclusive' := true; }
+        @LowerBoundary{ boundary := 0.0; 'inclusive' := true; }
+        @UpperBoundary{ boundary := 1.0; 'inclusive' := true; }
         quotient real data 'x:0';
 
         /**
-         * Target dimension of the training data.
+         * Prediction of the surrogate (trained on the Forrester function).
          */
         quotient real data 'y:0';
 }

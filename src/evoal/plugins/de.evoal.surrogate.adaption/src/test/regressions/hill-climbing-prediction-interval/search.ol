@@ -1,5 +1,7 @@
 // Regression: hill climbing on an SVR surrogate whose minimised prediction is adapted by
 // the width of its prediction interval (former formula, see #288).
+// model.pson is the nearly constant SVR of the former adaption example; #288 chooses a new
+// model together with the new formulas.
 import "definitions" from de.evoal.core.math;
 
 import "definitions" from de.evoal.optimisation.core;

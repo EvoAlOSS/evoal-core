@@ -220,6 +220,15 @@ module 'de.evoal.pipeline.benchmarks' {
 	 * The Rosenbrock function (Rosenbrock 1960).
 	 */
 	@Literature { keys := ["rosenbrock1960automatic"]; }
-	type 'rosenbrock' extends benchmark {	
+	type 'rosenbrock' extends benchmark {
 	}
+
+	/**
+	 * The Forrester function (Forrester, Sóbester and Keane 2008), a one-dimensional test
+	 *   function of surrogate modelling. It reads one variable x in [0, 1] and writes
+	 *   f(x) = (6x - 2)^2 sin(12x - 4). It has a local minimum near x = 0.14 and the global
+	 *   minimum f(0.7572) = -6.0207; f is 0 at x = 1/3 and rises to f(1) = 15.83.
+	 */
+	@Literature { keys := ["forrester2008engineering"]; }
+	type forrester extends benchmark {}
 }

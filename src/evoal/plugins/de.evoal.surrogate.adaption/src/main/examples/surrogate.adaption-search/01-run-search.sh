@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Runs a hill climbing search on a surrogate model with adapted predictions, see README.md.
+# Runs a hill climbing search on the surrogate model without adaption, see README.md.
 
 set -e
 
