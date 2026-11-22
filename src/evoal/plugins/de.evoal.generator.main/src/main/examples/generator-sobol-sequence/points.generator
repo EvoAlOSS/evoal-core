@@ -1,0 +1,56 @@
+import "definitions" from de.evoal.core.math;
+import "definitions" from 'de.evoal.pipeline.base';
+import "definitions" from 'de.evoal.pipeline.distributions';
+
+import "data" from points;
+
+module 'points' {
+	/**
+	 * Points of a two-dimensional Sobol' sequence on [0, 1)², randomised by a random shift.
+	 *   One sequence fills both x and y; two one-dimensional sequences would give the same
+	 *   value to x and y.
+	 */
+	pipeline 'sobol-pipeline' [
+		step {
+			component 'distribution-based-data' {
+				distributions := [
+					'sobol-sequence' {
+						'lower' := [0.0, 0.0];
+						'upper' := [1.0, 1.0];
+						'randomisation' := 'random-shift' {};
+					}
+				];
+			}
+
+			writes [data 'x', data 'y'];
+		}
+	]
+
+	/**
+	 * Independent uniform points on [0, 1)² for comparison.
+	 */
+	pipeline 'uniform-pipeline' [
+		step {
+			component 'distribution-based-data' {
+				distributions := [
+					'uniform-distribution' {
+						'lower' := 0.0;
+						'upper' := 1.0;
+					},
+					'uniform-distribution' {
+						'lower' := 0.0;
+						'upper' := 1.0;
+					}
+				];
+			}
+
+			writes [data 'x', data 'y'];
+		}
+	]
+
+	begin
+		// 2^8 points: the Sobol' points are evenly balanced for powers of two
+		write "output/sobol.csv" with 256 samples from executing ['sobol-pipeline'];
+		write "output/uniform.csv" with 256 samples from executing ['uniform-pipeline'];
+	end
+}

@@ -68,13 +68,33 @@ set once per execution (`write` or `execute`); a later execution replaces it.
 
 | DL module | Components |
 |---|---|
-| `de.evoal.pipeline.distributions` | `'distribution-based-data'` (processor), `'noise-data'`; distributions `'normal-distribution'`, `'uniform-distribution'`, `'multivariate-normal-distribution'` |
+| `de.evoal.pipeline.distributions` | `'distribution-based-data'` (processor), `'noise-data'`; distributions `'normal-distribution'`, `'uniform-distribution'`, `'multivariate-normal-distribution'`, `'sobol-sequence'`; randomisations `'no-randomisation'`, `'random-shift'` |
 | `de.evoal.pipeline.benchmarks` | `ackley`, `forrester`, `rastrigin`, `rosenbrock`, `'weighted-sphere'`, `zdt1` |
 | `de.evoal.pipeline.sequences` | `'sequence-generator'` (processor) with `'expression-based-sequence'` |
 | `de.evoal.pipeline.io` | `reader` (source), `writer`, `empty`, sinks `template` and `'csv-writer'` |
 | `de.evoal.pipeline.statistics` | sink `'correlation-estimation'` |
 | `de.evoal.pipeline.misc` | `constants`, `limit`, filters `'condition-filter'`, `'constraint-validation'` and `'rejection-sampling'` |
 | `de.evoal.pipeline.optimisation` | `'benchmark-function'`: the benchmarks as optimisation function of a search |
+
+### Low-discrepancy sequences
+
+A `'low-discrepancy-sequence'` is a distribution whose samples are the points of a sequence that
+covers the box [`lower`, `upper`) more evenly than independent uniform samples; the i-th row gets
+the i-th point. `LowDiscrepancySequence` checks the bounds (one pair per dimension), takes the
+next point of [0, 1)^d from the subclass, randomises it and scales it to the box.
+
+- `'sobol-sequence'` (`SobolSequence`): Sobol' (1967) with the direction numbers of Joe and Kuo
+  (2008) from Commons Math (`SobolSequenceGenerator`), up to 1000 dimensions. The first point,
+  the corner `lower`, is kept (Owen 2022, doi:10.1007/978-3-030-98319-2_4). The points are evenly
+  balanced for sample counts that are powers of two; a filter after the sequence breaks this.
+- `'randomisation'` (no default) maps the points of [0, 1)^d before scaling (`Randomisation`):
+  `'no-randomisation'` keeps them, so the seed is ignored; `'random-shift'` (Cranley and
+  Patterson 1976) adds one uniform vector Δ per sequence modulo 1. A sequence rejects
+  randomisations it does not support (`supports`); a randomisation that needs the structure of a
+  sequence, such as Owen's scrambling of digital sequences, would only be supported there.
+- Every sequence takes its own random stream (`RandomStreams`), also without randomisation.
+- One sequence has to fill all data that should cover the box together: separate sequences
+  return the same points (up to their shifts), so their data would be strongly correlated.
 
 ### `'correlation-estimation'`
 
@@ -123,5 +143,6 @@ nested values are rejected; an empty list writes an empty file.
 | `generator-timeseries` | sequences |
 | `generator-constraints` | keeping the samples that satisfy the DDL constraints (`'constraint-validation'`) |
 | `generator-rejection-sampling` | data with the density 2x by rejection sampling (`'rejection-sampling'`) |
+| `generator-sobol-sequence` | evenly covering data from a randomly shifted Sobol' sequence, compared with uniform data |
 | `correlation-estimation` | estimating correlations from data, rendering them into a DDL module and using them in a search |
 | `search-with-benchmark`, `search-with-benchmark-and-target`, `search-with-benchmark-and-training` | the benchmarks as optimisation function |

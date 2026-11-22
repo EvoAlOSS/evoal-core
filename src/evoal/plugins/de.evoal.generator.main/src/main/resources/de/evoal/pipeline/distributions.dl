@@ -56,6 +56,67 @@ module 'de.evoal.pipeline.distributions' {
 	}
 
 	/**
+	 * Base type for low-discrepancy sequences: point sets that cover the box [lower, upper)
+	 *   more evenly than independent uniform samples. Each sample is the next point of the
+	 *   sequence, so the i-th row gets the i-th point.
+	 *
+	 * Use one sequence for all data that should cover the box together: separate sequences
+	 *   for several data return the same points (up to their randomisation), so the data
+	 *   would be strongly correlated.
+	 */
+	abstract type 'low-discrepancy-sequence' extends distribution {
+		/**
+		 * The lower bound (inclusive) of every dimension. Its length is the dimension of the
+		 *   sequence.
+		 */
+		'lower' : array real;
+
+		/**
+		 * The upper bound (exclusive) of every dimension, one entry per lower bound.
+		 */
+		'upper' : array real;
+
+		/**
+		 * How the points are randomised. A sequence rejects randomisations that it does not
+		 *   support.
+		 */
+		'randomisation' : instance randomisation;
+	}
+
+	/**
+	 * Sobol' sequence with the direction numbers of Joe and Kuo (up to 1000 dimensions). It
+	 *   supports 'no-randomisation' and 'random-shift'.
+	 *
+	 * The first point is the lower corner of the box (before randomisation) and is kept. The
+	 *   points are evenly balanced for sample counts that are powers of two (e.g. 256 or
+	 *   1024); a filter after the sequence breaks this balance.
+	 */
+	@Literature { keys := ["sobol1967distribution", "joe2008constructing"]; }
+	type 'sobol-sequence' extends 'low-discrepancy-sequence' {}
+
+	/**
+	 * Base type for the randomisations of a low-discrepancy sequence. A randomisation maps
+	 *   the points of the unit cube [0, 1)^d to other points of the unit cube before they are
+	 *   scaled to the box.
+	 */
+	abstract type randomisation extends configuration {}
+
+	/**
+	 * Keeps the points of the sequence, so every execution gives the same points and the seed
+	 *   is ignored.
+	 */
+	type 'no-randomisation' extends randomisation {}
+
+	/**
+	 * Shifts every point by the same uniform random vector Δ and wraps it around: a point x
+	 *   becomes frac(x + Δ). Δ is drawn once per sequence from EvoAl's random numbers, so the
+	 *   same seed gives the same points and different seeds give different, equally even
+	 *   points.
+	 */
+	@Literature { keys := ["cranley1976randomization"]; }
+	type 'random-shift' extends randomisation {}
+
+	/**
 	 * Fills the written data of a row with samples of the distributions.
 	 */
 	type 'distribution-based-data' extends Processor {
