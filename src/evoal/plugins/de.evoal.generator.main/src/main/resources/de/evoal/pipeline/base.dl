@@ -1,4 +1,5 @@
 import "definitions" from 'de.evoal.core.base';
+import "definitions" from 'de.evoal.core.constraints';
 
 module 'de.evoal.pipeline.base' {
     /**
@@ -12,14 +13,32 @@ module 'de.evoal.pipeline.base' {
     abstract type Step extends Component {}
 
     /**
-     * A step that processes input data and generates output data.
+     * A step that processes input data and generates output data, e.g. it fills the data of a
+     *   row ('distribution-based-data', 'sequence-generator') or computes data from other data
+     *   (a benchmark).
      */
     abstract type Processor extends Step {}
 
     /**
-     * A component that generates data without consuming.
+     * A component that generates data without consuming, e.g. 'reader'. It is the first step
+     *   of a pipeline that execute runs.
      */
     abstract type Source extends Step {}
+
+    /**
+     * A step that passes on the rows that satisfy its condition and drops the others. In
+     *   write ... with n samples, the n rows are counted after the filters, so the file holds
+     *   n rows that passed every filter.
+     */
+    abstract type Filter extends Step {
+        /**
+         * The number of rows in a row that the filter may drop. If the filter drops that many
+         *   rows one after the other, the run stops with an error, e.g. when the data never
+         *   satisfies the condition.
+         */
+        @LowerBoundary { boundary := 1; }
+        'maximum-consecutive-rejections' : int;
+    }
 
     /**
      * A component that acts when the stream of rows has ended, e.g., to estimate values from

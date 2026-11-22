@@ -46,6 +46,7 @@ module de.evoal.generator.main {
     opens de.evoal.pipeline.api.board to weld.core.impl;
     opens de.evoal.pipeline.api.cdi to weld.core.impl;
     opens de.evoal.pipeline.api.distribution to weld.core.impl;
+    opens de.evoal.pipeline.api.model to weld.core.impl;
     opens de.evoal.pipeline.api.sequence to weld.core.impl;
     opens de.evoal.pipeline.impl to weld.core.impl;
     opens de.evoal.pipeline.impl.components.benchmarks to weld.core.impl;

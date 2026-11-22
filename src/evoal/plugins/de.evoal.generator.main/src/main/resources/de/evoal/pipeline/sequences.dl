@@ -8,7 +8,7 @@ module 'de.evoal.pipeline.sequences' {
     /**
      * The pipeline component for generating custom sequences.
      */
-    type 'sequence-generator' extends Source {
+    type 'sequence-generator' extends Processor {
         /**
          *  The different sequences to generate. The sequences are generated in order of appearance.
          *    Thus, if a value (let's name it b) generated here is based on a value generated here as

@@ -11,18 +11,44 @@ The `begin`/`end` block of a generator file runs pipelines with two statements:
 
 | Statement | What happens |
 |---|---|
-| `write "file" with n samples from executing ['p', …];` | an endless source of empty rows, the pipelines, a limit of n rows and a writer of all data to the file (format by its extension) |
+| `write "file" with n samples from executing ['p', …];` | an endless source of empty rows, the pipelines, a limit of n rows and a writer of all data to the file (format by its extension); the limit counts the rows that passed the filters |
 | `execute("p");` | the pipeline `p` once: its first step is the source (e.g. `'reader'`), the pipeline ends when the source has no more data; no limit, no writer |
 
 `execute` names the pipeline by a string, because a bare name in a generator expression links to
 a DL value, not to a pipeline. `ExecutionDSLConverter` turns the string into a reference to the
 converted pipeline, so an unknown name is rejected before the program runs.
 
-## Sources, processors and sinks
+## Sources, processors, filters and sinks
 
-`StreamExecutor` maps every row through the steps in order. A **sink** (`PipelineSink`, DL type
-`Sink`) passes the rows on unchanged and acts when the stream has ended: the executor calls
-`streamEnded()` on every sink in pipeline order after the last row and before `close()`.
+`StreamExecutor` passes every row through the steps in order. A **source** (`PipelineSource`, DL
+type `Source`, e.g. `reader`) starts the stream of `execute`. A **processor** (DL type `Processor`,
+e.g. `'distribution-based-data'`, `'sequence-generator'` or a benchmark) fills or computes data of
+the row. A **filter** (`PipelineFilter`, DL type `Filter`) passes on the rows that satisfy its
+condition and drops the others; the executor applies it with `stream.filter`. A **sink**
+(`PipelineSink`, DL type `Sink`) passes the rows on unchanged and acts when the stream has ended:
+the executor calls `streamEnded()` on every filter and sink in pipeline order after the last row
+and before `close()`.
+
+### Filters
+
+Every filter has `'maximum-consecutive-rejections'` (no default): if it drops that many rows one
+after the other, the run stops with an error that names the filter and the last violation, so a
+filter that the data never passes cannot run forever on the endless source of `write`. At the end
+of the stream, every filter logs how many rows it kept (`PipelineFilterImpl`).
+
+- `'condition-filter'` keeps the rows for which its `'condition'` is true, e.g.
+  `data 'x' < 0.7 OR data 'x' > 0.8`. The condition may only use data the step reads.
+- `'constraint-validation'` keeps the rows whose read data satisfy their data description:
+  the annotations of the data and of their data types that have a checker (`@LowerBoundary`,
+  `@UpperBoundary`; the checkers of the configuration checks, `ConstraintCheckers` in core), and
+  the declarations `constraint(comparison, "group")` of the DDL modules that declare the read
+  data (compiled by `ConstraintCompiler` of `de.evoal.optimisation.api`; a row passes if g >= 0,
+  g > 0 for `<` and `>`). The run stops at start-up if a constraint compares data the step does
+  not read, if a constraint is an equality (generated data almost never satisfies g = 0 exactly;
+  compute the dependent data in a step instead), or if a data description has a constraint that
+  is no annotation (`with constraints: ...`), which nothing evaluates.
+
+The generator never checks the DDL on its own; only a `'constraint-validation'` step does.
 
 Sinks share results as **pipeline values** (`PipelineValues`): one map per program, bound to the
 variable `pipeline-values` of the outermost interpreter state, so values outlive loop bodies. A
@@ -33,12 +59,12 @@ set once per execution (`write` or `execute`); a later execution replaces it.
 
 | DL module | Components |
 |---|---|
-| `de.evoal.pipeline.distributions` | `'distribution-based-data'` (source), `'noise-data'`; distributions `'normal-distribution'`, `'uniform-distribution'`, `'multivariate-normal-distribution'` |
+| `de.evoal.pipeline.distributions` | `'distribution-based-data'` (processor), `'noise-data'`; distributions `'normal-distribution'`, `'uniform-distribution'`, `'multivariate-normal-distribution'` |
 | `de.evoal.pipeline.benchmarks` | `ackley`, `forrester`, `rastrigin`, `rosenbrock`, `'weighted-sphere'`, `zdt1` |
-| `de.evoal.pipeline.sequences` | `'sequence-generator'` (source) with `'expression-based-sequence'` |
+| `de.evoal.pipeline.sequences` | `'sequence-generator'` (processor) with `'expression-based-sequence'` |
 | `de.evoal.pipeline.io` | `reader` (source), `writer`, `empty`, sinks `template` and `'csv-writer'` |
 | `de.evoal.pipeline.statistics` | sink `'correlation-estimation'` |
-| `de.evoal.pipeline.misc` | `constants`, `limit` |
+| `de.evoal.pipeline.misc` | `constants`, `limit`, filters `'condition-filter'` and `'constraint-validation'` |
 | `de.evoal.pipeline.optimisation` | `'benchmark-function'`: the benchmarks as optimisation function of a search |
 
 ### `'correlation-estimation'`
@@ -86,5 +112,6 @@ nested values are rejected; an empty list writes an empty file.
 | `generator-multivariate-with-noise` | a multivariate normal distribution and noise |
 | `generator-pipeline` | reading and recalculating data |
 | `generator-timeseries` | sequences |
+| `generator-constraints` | keeping the samples that satisfy the DDL constraints (`'constraint-validation'`) |
 | `correlation-estimation` | estimating correlations from data, rendering them into a DDL module and using them in a search |
 | `search-with-benchmark`, `search-with-benchmark-and-target`, `search-with-benchmark-and-training` | the benchmarks as optimisation function |

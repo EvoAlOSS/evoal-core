@@ -1,15 +1,16 @@
 import "definitions" from de.evoal.core.math;
 import "definitions" from 'de.evoal.pipeline.base';
 import "definitions" from 'de.evoal.pipeline.benchmarks';
+import "definitions" from 'de.evoal.pipeline.misc';
 import "definitions" from 'de.evoal.pipeline.sequences';
 
 import "data" from surrogate;
 
 module 'training-data' {
 	/**
-	 * The grid x:0 = 0.00, 0.01, ..., 0.69 and the Forrester function on it.
+	 * The grid x:0 = 0.00, 0.01, ..., 1.00.
 	 */
-	pipeline 'left' [
+	pipeline 'grid' [
 		step {
 			component 'sequence-generator' {
 				sequences := [
@@ -28,67 +29,42 @@ module 'training-data' {
 
 			writes [data 'k', data 'x:0'];
 		}
-		step {
-			component forrester {}
-
-			reads [data 'x:0'];
-			writes [data 'y:0'];
-		}
 	]
 
 	/**
-	 * The grid x:0 = 0.81, 0.82, ..., 1.00 and the Forrester function on it.
+	 * Keeps the points outside the gap (0.69, 0.81) around the global minimum at 0.757.
 	 */
-	pipeline 'right' [
+	pipeline 'training-region' [
 		step {
-			component 'sequence-generator' {
-				sequences := [
-					'expression-based-sequence' {
-						variable     := data 'k';
-						initial      := 81.0;
-						'expression' := data 'k' + 1.0;
-					},
-					'expression-based-sequence' {
-						variable     := data 'x:0';
-						initial      := 0.81;
-						'expression' := data 'k' / 100.0;
-					}
-				];
+			component 'condition-filter' {
+				// the gap holds 11 grid points
+				'maximum-consecutive-rejections' := 20;
+				'condition' := data 'x:0' < 0.695 OR data 'x:0' > 0.805;
 			}
 
-			writes [data 'k', data 'x:0'];
-		}
-		step {
-			component forrester {}
-
 			reads [data 'x:0'];
-			writes [data 'y:0'];
 		}
 	]
 
 	/**
-	 * The grid x:0 = 0.70, 0.71, ..., 0.80 in the gap of the training data and the Forrester
-	 * function on it.
+	 * Keeps the points in the gap: x:0 = 0.70, 0.71, ..., 0.80.
 	 */
 	pipeline 'gap' [
 		step {
-			component 'sequence-generator' {
-				sequences := [
-					'expression-based-sequence' {
-						variable     := data 'k';
-						initial      := 70.0;
-						'expression' := data 'k' + 1.0;
-					},
-					'expression-based-sequence' {
-						variable     := data 'x:0';
-						initial      := 0.70;
-						'expression' := data 'k' / 100.0;
-					}
-				];
+			component 'condition-filter' {
+				// the 70 grid points before the gap are dropped one after the other
+				'maximum-consecutive-rejections' := 100;
+				'condition' := data 'x:0' > 0.695 AND data 'x:0' < 0.805;
 			}
 
-			writes [data 'k', data 'x:0'];
+			reads [data 'x:0'];
 		}
+	]
+
+	/**
+	 * The Forrester function on the kept points.
+	 */
+	pipeline 'function' [
 		step {
 			component forrester {}
 
@@ -97,11 +73,10 @@ module 'training-data' {
 		}
 	]
 
-	// The training data leaves out (0.69, 0.81): the gap around the global minimum at 0.757.
-	// The test data lies in the gap, so testing shows how the surrogate extrapolates.
+	// The training data leaves out the gap, the test data lies in it, so testing shows how
+	// the surrogate extrapolates. The counts are the rows that pass the filter.
 	begin
-		write "output/left.csv" with 70 samples from executing ['left'];
-		write "output/right.csv" with 20 samples from executing ['right'];
-		write "output/test.csv" with 11 samples from executing ['gap'];
+		write "output/training.csv" with 90 samples from executing ['grid', 'training-region', 'function'];
+		write "output/test.csv" with 11 samples from executing ['grid', 'gap', 'function'];
 	end
 }

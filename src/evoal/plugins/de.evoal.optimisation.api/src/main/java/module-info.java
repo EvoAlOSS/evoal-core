@@ -65,6 +65,8 @@ module de.evoal.optimisation.api {
     exports de.evoal.optimisation.api.run;
     exports de.evoal.optimisation.api.steps;
 
+    // data generation checks the DDL constraints with the ConstraintCompiler
+    exports de.evoal.optimisation.main.constraints;
     exports de.evoal.optimisation.main.fitness;
 //    exports de.evoal.optimisation.main.constraints.constraint.strategies.constraint;
 //    exports de.evoal.optimisation.main.constraints.constraint.strategies.calculations;

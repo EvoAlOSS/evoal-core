@@ -10,10 +10,34 @@ module 'de.evoal.pipeline.misc' {
 		/**
 		 * The constant values to append.
 		 */
-		constants : array real;	
+		constants : array real;
 	}
-	
-	type 'constraint-validation' {	
+
+	/**
+	 * Passes on the rows whose read data satisfy the constraints of their data description
+	 *   language (DDL) and drops the others. It checks
+	 *   - the annotations of the read data and of their data types that have a checker, e.g.
+	 *     @LowerBoundary and @UpperBoundary, and
+	 *   - the declarations constraint(comparison, "group") in the constraints sections of the
+	 *     DDL modules that declare the read data.
+	 *   The run stops at start-up if a constraint compares data that the step does not read,
+	 *   if a constraint is an equality (generated data almost never satisfies g = 0 exactly;
+	 *   compute the dependent data in a step instead), or if a data description has a
+	 *   constraint that is no annotation (e.g. value < 1.0), which is not supported.
+	 */
+	type 'constraint-validation' extends Filter {
+	}
+
+	/**
+	 * Passes on the rows for which the condition is true and drops the others, e.g. to leave
+	 *   a gap in the data.
+	 */
+	type 'condition-filter' extends Filter {
+		/**
+		 * The condition, e.g. data 'x' < 0.7 OR data 'x' > 0.8. It may only use data the step
+		 *   reads.
+		 */
+		'condition' : expression;
 	}
 
 	type 'limit' extends configuration {

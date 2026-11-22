@@ -136,6 +136,15 @@ public class ConstraintCompiler {
     }
 
     /**
+     * @param features The features, e.g. the data that a pipeline step reads.
+     * @return The DDL declarations of the DDL modules that declare the features and of the
+     *   imported DDL modules, in their order.
+     */
+    public List<Call> declarations(final Collection<EStructuralFeature> features) {
+        return readCalls(features, List.of()).calls();
+    }
+
+    /**
      * @param searchFeatures The search features of the problem.
      * @param objectives The objectives of the problem.
      * @return The constraints of the problem.

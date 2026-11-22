@@ -1,0 +1,31 @@
+import "definitions" from 'de.evoal.pipeline.base';
+import "definitions" from 'de.evoal.pipeline.misc';
+
+import "data" from 'de.evoal.pipeline.test.constrained';
+
+module 'de.evoal.pipeline.test.filters' {
+    pipeline 'gap' [
+        step {
+            component 'condition-filter' {
+                'maximum-consecutive-rejections' := 3;
+                'condition' := data 'a' < 0.25 OR data 'a' > 0.75;
+            }
+
+            reads [data 'a'];
+        }
+    ]
+
+    pipeline 'positive-b' [
+        step {
+            component 'condition-filter' {
+                'maximum-consecutive-rejections' := 3;
+                'condition' := data 'b' > 0.0;
+            }
+
+            reads [data 'b'];
+        }
+    ]
+
+    begin
+    end
+}

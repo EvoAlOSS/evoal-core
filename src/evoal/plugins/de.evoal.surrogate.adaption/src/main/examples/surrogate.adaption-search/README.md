@@ -69,7 +69,8 @@ nothing (also part of #288).
 ## Try next
 
 - Start both searches at another point, e.g. `x:0` = 0.9, and compare.
-- Train the model with a different gap in `surrogate.adaption-training` and copy
+- Train the model with a different gap in `surrogate.adaption-training` (the
+  conditions of its pipelines `'training-region'` and `'gap'`) and copy
   `output/model.pson` here. The SVR training can find a slightly different
   model on another platform (e.g. another number of support vectors), so a
   retrained model can also change the search results.

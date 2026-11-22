@@ -55,7 +55,10 @@ module 'de.evoal.pipeline.distributions' {
 	    'upper' : real;
 	}
 
-	type 'distribution-based-data' extends Source {
+	/**
+	 * Fills the written data of a row with samples of the distributions.
+	 */
+	type 'distribution-based-data' extends Processor {
 		/**
 		 * The different distributions to use. Make sure it matches the size of
 		 *   the data the function writes.

@@ -9,12 +9,18 @@ import de.evoal.models.core.ecore.Space;
 import de.evoal.pipeline.api.executor.PipelineExecutor;
 import de.evoal.pipeline.api.model.PipelineComponent;
 import de.evoal.pipeline.api.model.PipelineComposite;
+import de.evoal.pipeline.api.model.PipelineFilter;
 import de.evoal.models.core.ecore.TypedEObject;
 import de.evoal.pipeline.api.model.PipelineSink;
 import de.evoal.pipeline.api.model.PipelineSource;
 import de.evoal.pipeline.impl.components.misc.Limit;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * Runs a pipeline as a stream of rows: a filter ({@link PipelineFilter}) drops the rows it
+ *   does not pass on, a limit shortens the stream, and every other step changes the row and
+ *   passes it on. After the last row, the filters and sinks act in pipeline order.
+ */
 @Slf4j
 public class StreamExecutor implements PipelineExecutor {
     private Space space;
@@ -78,6 +84,11 @@ public class StreamExecutor implements PipelineExecutor {
                 continue;
             }
 
+            if(component instanceof PipelineFilter rowFilter) {
+                stream = stream.filter(rowFilter::test);
+                continue;
+            }
+
             if(component instanceof Limit limit) {
                 stream = stream.limit(limit.getLimit());
             }
@@ -87,9 +98,11 @@ public class StreamExecutor implements PipelineExecutor {
 
         final T result = collector.apply(stream);
 
-        // the stream has ended: the sinks act in pipeline order
+        // the stream has ended: the filters and sinks act in pipeline order
         for(final PipelineComponent component : components) {
-            if(component instanceof PipelineSink sink) {
+            if(component instanceof PipelineFilter rowFilter) {
+                rowFilter.streamEnded();
+            } else if(component instanceof PipelineSink sink) {
                 sink.streamEnded();
             }
         }

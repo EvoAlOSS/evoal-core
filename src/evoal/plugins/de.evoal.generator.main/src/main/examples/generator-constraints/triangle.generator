@@ -1,0 +1,44 @@
+import "definitions" from de.evoal.core.math;
+import "definitions" from 'de.evoal.pipeline.base';
+import "definitions" from 'de.evoal.pipeline.distributions';
+import "definitions" from 'de.evoal.pipeline.misc';
+
+import "data" from triangle;
+
+module 'triangle' {
+	/**
+	 * Draws x and y from normal distributions around the centre of the unit square and keeps
+	 *   the points that satisfy the constraints of triangle.ddl.
+	 */
+	pipeline 'main-pipeline' [
+		step {
+			component 'distribution-based-data' {
+				distributions := [
+					'normal-distribution' {
+						'μ' := 0.5;
+						'σ' := 0.5;
+					},
+					'normal-distribution' {
+						'μ' := 0.5;
+						'σ' := 0.5;
+					}
+				];
+			}
+
+			writes [data 'x', data 'y'];
+		}
+		step {
+			component 'constraint-validation' {
+				// about one sample in four lies in the triangle
+				'maximum-consecutive-rejections' := 100;
+			}
+
+			reads [data 'x', data 'y'];
+		}
+	]
+
+	begin
+		// 200 points that passed 'constraint-validation'
+		write "output/triangle.csv" with 200 samples from executing ['main-pipeline'];
+	end
+}

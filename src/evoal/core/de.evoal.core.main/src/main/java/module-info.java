@@ -63,6 +63,7 @@ module de.evoal.core.main {
     exports de.evoal.core.api.utils;
     exports de.evoal.core.api.random;
     exports de.evoal.core.api.reproducibility;
+    exports de.evoal.core.api.validation.constraints;
     exports de.evoal.core.api.validation.context;
 
     exports de.evoal.core.main.validation;
@@ -86,6 +87,7 @@ module de.evoal.core.main {
     opens de.evoal.core.main.ecore to weld.core.impl;
     opens de.evoal.core.main.language to weld.core.impl;
     opens de.evoal.core.main.validation to weld.core.impl;
+    opens de.evoal.core.api.validation.constraints to weld.core.impl;
     opens de.evoal.core.api.validation.context to weld.core.impl;
     opens de.evoal.core.api.validation.components to weld.core.impl;
     opens de.evoal.core.api.validation.model to weld.core.impl;

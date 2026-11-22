@@ -24,6 +24,21 @@ public class Limit extends PipelineComponentImpl {
 	@Inject
 	private AttributeEvaluator evaluator;
 
+	/**
+	 * Creates a limit that is configured by {@link #init(EObject)}.
+	 */
+	public Limit() {
+	}
+
+	/**
+	 * Creates a configured limit, e.g., for tests.
+	 *
+	 * @param limit The number of rows passed on.
+	 */
+	public Limit(final int limit) {
+		this.limit = limit;
+	}
+
 	@Override
 	public @NonNull TypedEObject apply(final @NonNull TypedEObject obj) {
 		return obj;

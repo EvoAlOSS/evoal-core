@@ -6,7 +6,7 @@ module 'de.evoal.pipeline.io' {
 	/**
 	 * Reads the specified data from a file.
 	 */
-	type reader extends configuration {
+	type reader extends Source {
 		/**
 		 * Name of the file to read.
 		 */
@@ -14,9 +14,9 @@ module 'de.evoal.pipeline.io' {
 	}
 	
 	/**
-	 * Producer of empty instances.
+	 * Producer of empty instances, the source of write ... with n samples.
 	 */
-	type empty extends configuration {
+	type empty extends Source {
 	}
 
 	/**

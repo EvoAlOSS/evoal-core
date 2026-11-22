@@ -7,22 +7,17 @@ import java.util.Optional;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.event.Event;
 import jakarta.inject.Inject;
-import jakarta.inject.Provider;
 
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 
-import org.apache.deltaspike.core.api.provider.BeanProvider;
-import org.eclipse.emf.ecore.EObject;
-
-import de.evoal.core.api.dynamic.ValueConverter;
 import de.evoal.core.api.validation.constraints.ConstraintCheck;
 import de.evoal.core.api.validation.constraints.ConstraintCheckerComponent;
+import de.evoal.core.api.validation.constraints.ConstraintCheckers;
 import de.evoal.core.api.validation.context.DiagnosticsContext;
 import de.evoal.core.api.validation.context.EObjectContext;
 import de.evoal.core.api.validation.model.Diagnostics;
 import de.evoal.core.api.validation.model.InstanceValidator;
-import de.evoal.languages.model.base.Module;
 import de.evoal.languages.model.base.definitions.AttributeDefinition;
 import de.evoal.languages.model.base.definitions.ClassDefinition;
 import de.evoal.languages.model.base.expressions.Attribute;
@@ -57,10 +52,10 @@ public class ConstraintValidator implements InstanceValidator {
     private Event<Diagnostics> events;
 
     /**
-     * Converts the annotations into the configurations of their checkers.
+     * Creates the configured checkers of the annotations.
      */
     @Inject
-    private Provider<ValueConverter> converters;
+    private ConstraintCheckers checkerFactory;
 
     /**
      * The checker of every annotation, empty for annotations without a checker.
@@ -150,29 +145,12 @@ public class ConstraintValidator implements InstanceValidator {
     }
 
     private Optional<ConstraintCheckerComponent> createChecker(final DiagnosticsContext context, final Instance annotation) {
-        final String name = nameOf(annotation.getDefinition());
-        final ConstraintCheckerComponent checker = BeanProvider.getContextualReference(name, true, ConstraintCheckerComponent.class);
-        if(checker == null) {
-            log.debug("The annotation {} has no checker.", name);
-            return Optional.empty();
-        }
-
         try {
-            final EObject configuration = (EObject) converters.get()
-                                                              .setTargetType(null)
-                                                              .convert(annotation);
-            return Optional.of(checker.init(configuration));
+            return checkerFactory.create(annotation);
         } catch(final InitializationException | RuntimeException e) {
-            log.error("Unable to configure the checker of {}.", name, e);
+            log.error("Unable to configure the checker of {}.", ConstraintCheckers.nameOf(annotation.getDefinition()), e);
             events.fire(Diagnostics.of(Diagnostics.Level.Error, context, "The annotation @" + annotation.getDefinition().getName() + " is invalid: " + e.getMessage()));
             return Optional.empty();
         }
-    }
-
-    /**
-     * @return The fully-qualified name of the DL type, which names its checker.
-     */
-    static String nameOf(final ClassDefinition definition) {
-        return definition.eContainer() instanceof Module module ? module.getName() + "." + definition.getName() : definition.getName();
     }
 }

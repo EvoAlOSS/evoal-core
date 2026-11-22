@@ -12,8 +12,8 @@ module 'training' {
 		input features 'x:0'
 		output features 'y:0'
 
-		// the two grid segments of training-data.generator, without (0.69, 0.81)
-		learning from [ "output/left.csv", "output/right.csv" ]
+		// the grid of training-data.generator without the gap (0.69, 0.81)
+		learning from [ "output/training.csv" ]
 
 		// the gap (0.69, 0.81); the default testing use case assesses the model on it
 		testing with [ "output/test.csv" ]
