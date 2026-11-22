@@ -5,7 +5,7 @@ import "data" from 'de.evoal.optimisation.test.imported.data';
 
 import "optimisation" from 'de.evoal.optimisation.test.imported.problem';
 
-module de.evoal.optimisation.test.imported.two {
+module 'de.evoal.optimisation.test.imported.two-problems' {
     specify problem 'local' {
         search for data 'x'
 

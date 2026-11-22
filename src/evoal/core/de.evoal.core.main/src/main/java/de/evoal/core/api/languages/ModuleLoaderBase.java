@@ -108,7 +108,7 @@ public abstract class ModuleLoaderBase<T extends EObject> {
             EcoreUtil.resolveAll(resource);
 
             observedErrors = false;
-            validator.validate(resourceSet);
+            validate(resourceSet);
 
             if (observedErrors) {
                 log.error("An error was found while validating '{}'. Please fix the shown errors and rerun EvoAl.", modelURI);
@@ -121,6 +121,27 @@ public abstract class ModuleLoaderBase<T extends EObject> {
         } catch (final Exception e) {
             log.error("Unable to load configuration file '{}'.", modelURI, e);
             throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Runs the validators on all loaded resources. A validator may end the validation with an
+     *   exception after it reported an error, e.g. the {@code XtextResourceValidator} for a file
+     *   that cannot be parsed, so that no other validator sees the broken model. Such an
+     *   exception is not an error of its own: the reported errors stop EvoAl like every other
+     *   validation error.
+     *
+     * @param resourceSet The loaded resources.
+     */
+    private void validate(final XtextResourceSet resourceSet) {
+        try {
+            validator.validate(resourceSet);
+        } catch (final Exception e) {
+            if (!observedErrors) {
+                throw e;
+            }
+
+            log.debug("The validation ended after an error.", e);
         }
     }
 

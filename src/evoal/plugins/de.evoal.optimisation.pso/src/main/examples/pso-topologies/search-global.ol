@@ -1,14 +1,14 @@
-import "definitions" from de.evoal.core.math;
+import "definitions" from 'de.evoal.core.math';
 
-import "definitions" from de.evoal.optimisation.core;
-import "definitions" from de.evoal.pipeline.base;
-import "definitions" from de.evoal.pipeline.benchmarks;
-import "definitions" from de.evoal.pipeline.optimisation;
-import "definitions" from de.evoal.optimisation.pso.optimisation;
+import "definitions" from 'de.evoal.optimisation.core';
+import "definitions" from 'de.evoal.pipeline.base';
+import "definitions" from 'de.evoal.pipeline.benchmarks';
+import "definitions" from 'de.evoal.pipeline.optimisation';
+import "definitions" from 'de.evoal.optimisation.pso.optimisation';
 
 import "data" from 'search';
 
-module 'search' {
+module 'search-global' {
 	specify problem 'rastrigin' {
 		search for data 'x:0', data 'x:1'
 
