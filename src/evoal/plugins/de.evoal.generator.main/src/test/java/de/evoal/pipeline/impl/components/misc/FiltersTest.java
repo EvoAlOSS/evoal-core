@@ -1,7 +1,9 @@
 package de.evoal.pipeline.impl.components.misc;
 
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.Optional;
+import java.util.random.RandomGenerator;
 
 import de.evoal.core.api.dynamic.EClassProvider;
 import de.evoal.core.api.validation.constraints.ConstraintCheck;
@@ -22,8 +24,8 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 /**
- * The filters 'constraint-validation' ({@link ConstraintValidation}) and 'condition-filter'
- *   ({@link ConditionFilter}) on the data of {@code constrained.ddl}: 'a' has
+ * The filters 'constraint-validation' ({@link ConstraintValidation}), 'condition-filter'
+ *   ({@link ConditionFilter}) and 'rejection-sampling' ({@link RejectionSampling}) on the data of {@code constrained.ddl}: 'a' has
  *   {@code @UpperBoundary { boundary := 1.0; }}, and the DDL declares
  *   {@code constraint(data 'a' + data 'b' < 1.5, "sum")}.
  */
@@ -175,6 +177,86 @@ public class FiltersTest {
         public void aConditionOnUnreadDataStopsAtStartUp() {
             final InitializationException e = Assertions.assertThrows(InitializationException.class,
                                                                       () -> new ConditionFilter(10, condition, pipeline, reads(pipeline, "b")));
+
+            Assertions.assertTrue(e.getMessage().contains("'a'"), e.getMessage());
+        }
+    }
+
+    @Nested
+    public class Rejection {
+        private final GeneratorModule module = LanguageHelper.loadFromClasspath("de/evoal/pipeline/test/filters.generator");
+
+        private final Space pipeline = pipelineOf(module);
+
+        /**
+         * The acceptance probability of the pipeline 'more-where-a-is-large': data 'a'.
+         */
+        private final Expression probability = ((ConcreteStep) module.getPipelines()
+                                                                     .get(2)
+                                                                     .getSteps()
+                                                                     .getFirst()).getInstance()
+                                                                                 .findAttribute("acceptance-probability")
+                                                                                 .getValue();
+
+        /**
+         * Returns the given numbers as nextDouble(), in order.
+         */
+        private static RandomGenerator numbers(final double... values) {
+            final Iterator<Double> iterator = Arrays.stream(values).iterator();
+
+            return new RandomGenerator() {
+                @Override
+                public long nextLong() {
+                    throw new UnsupportedOperationException();
+                }
+
+                @Override
+                public double nextDouble() {
+                    return iterator.next();
+                }
+            };
+        }
+
+        private RejectionSampling sampling(final int maximum, final double... numbers) throws InitializationException {
+            return new RejectionSampling(maximum, probability, pipeline, reads(pipeline, "a"), numbers(numbers));
+        }
+
+        @Test
+        public void aRowIsKeptIfTheRandomNumberIsBelowTheProbability() throws InitializationException {
+            final RejectionSampling sampling = sampling(10, 0.3, 0.3, 0.0, 0.99);
+
+            Assertions.assertTrue(sampling.test(row(pipeline, "a", 0.5)));
+            Assertions.assertFalse(sampling.test(row(pipeline, "a", 0.3)));
+            Assertions.assertFalse(sampling.test(row(pipeline, "a", 0.0)));
+            Assertions.assertTrue(sampling.test(row(pipeline, "a", 1.0)));
+        }
+
+        @Test
+        public void tooManyRejectionsInARowStopTheRun() throws InitializationException {
+            final RejectionSampling sampling = sampling(2, 0.5, 0.5);
+
+            Assertions.assertFalse(sampling.test(row(pipeline, "a", 0.0)));
+
+            final IllegalStateException e = Assertions.assertThrows(IllegalStateException.class,
+                                                                    () -> sampling.test(row(pipeline, "a", 0.0)));
+            Assertions.assertTrue(e.getMessage().contains("acceptance probability 0.0"), e.getMessage());
+        }
+
+        @Test
+        public void aProbabilityOutsideTheUnitIntervalStopsTheRun() throws InitializationException {
+            final RejectionSampling sampling = sampling(10, 0.5, 0.5);
+
+            final IllegalStateException above = Assertions.assertThrows(IllegalStateException.class,
+                                                                        () -> sampling.test(row(pipeline, "a", 1.5)));
+            Assertions.assertTrue(above.getMessage().contains("1.5"), above.getMessage());
+            Assertions.assertThrows(IllegalStateException.class, () -> sampling.test(row(pipeline, "a", -0.1)));
+            Assertions.assertThrows(IllegalStateException.class, () -> sampling.test(row(pipeline, "a", Double.NaN)));
+        }
+
+        @Test
+        public void aProbabilityOnUnreadDataStopsAtStartUp() {
+            final InitializationException e = Assertions.assertThrows(InitializationException.class,
+                    () -> new RejectionSampling(10, probability, pipeline, reads(pipeline, "b"), numbers()));
 
             Assertions.assertTrue(e.getMessage().contains("'a'"), e.getMessage());
         }

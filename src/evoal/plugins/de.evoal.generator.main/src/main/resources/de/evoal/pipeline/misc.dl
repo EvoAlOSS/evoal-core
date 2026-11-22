@@ -1,6 +1,7 @@
 import "definitions" from 'de.evoal.core.math';
 import "definitions" from 'de.evoal.pipeline.base';
 import "definitions" from 'de.evoal.core.base';
+import "definitions" from 'de.evoal.core.constraints';
 
 module 'de.evoal.pipeline.misc' {
 	/**
@@ -38,6 +39,25 @@ module 'de.evoal.pipeline.misc' {
 		 *   reads.
 		 */
 		'condition' : expression;
+	}
+
+	/**
+	 * Rejection sampling: keeps a row with the probability p that the acceptance probability
+	 *   computes from the read data, so the kept rows follow a density shaped by p, e.g. with
+	 *   uniform x and p = x the density 2x. For every row, a uniform random number u in [0, 1) is
+	 *   drawn from EvoAl's random numbers ('core:seed', or the environment variable EVOAL_SEED),
+	 *   and the row is kept if u < p. The classical form keeps a sample of the proposal density g
+	 *   with the probability f(x) / (M g(x)) for the target density f and a bound M of f / g.
+	 */
+	@Literature { keys := ["neumann1951various", "devroye1986nonuniform"]; }
+	type 'rejection-sampling' extends Filter {
+		/**
+		 * The acceptance probability p, e.g. data 'x'. It may only use data the step reads, and its
+		 *   value has to be in [0, 1] for every row; otherwise the run stops.
+		 */
+		@LowerBoundary { boundary := 0.0; }
+		@UpperBoundary { boundary := 1.0; }
+		'acceptance-probability' : expression;
 	}
 
 	type 'limit' extends configuration {

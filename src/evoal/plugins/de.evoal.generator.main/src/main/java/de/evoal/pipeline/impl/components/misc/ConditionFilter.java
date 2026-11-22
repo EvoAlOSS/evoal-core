@@ -1,17 +1,9 @@
 package de.evoal.pipeline.impl.components.misc;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
-import java.util.Set;
-import java.util.TreeSet;
-import java.util.function.Consumer;
 
 import de.evoal.core.api.dynamic.EAnnotationHelper;
-import de.evoal.core.api.languages.ExpressionText;
-import de.evoal.core.api.languages.base.DynamicSwitch;
-import de.evoal.languages.model.base.definitions.DataDescription;
 import de.evoal.languages.model.base.expressions.Expression;
 import de.evoal.models.core.ecore.Space;
 import de.evoal.models.core.ecore.TypedEObject;
@@ -23,7 +15,6 @@ import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import lombok.NonNull;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EStructuralFeature;
 
 /**
  * Passes on the rows for which the {@code 'condition'} is true (DL type
@@ -38,17 +29,7 @@ public class ConditionFilter extends PipelineFilterImpl {
     /**
      * The condition.
      */
-    private Expression condition;
-
-    /**
-     * The values of the read data of the current row.
-     */
-    private final Map<EStructuralFeature, Object> symbolTable = new HashMap<>();
-
-    /**
-     * Evaluates the condition on {@link #symbolTable}.
-     */
-    private DynamicSwitch evaluator;
+    private ReadDataExpression condition;
 
     /**
      * Creates a filter that is configured by {@link #init(EObject)}.
@@ -75,57 +56,22 @@ public class ConditionFilter extends PipelineFilterImpl {
     @Override
     public PipelineComponentImpl init(final EObject configuration) throws InitializationException {
         super.init(configuration);
-
-        final EStructuralFeature feature = configuration.eClass().getEStructuralFeature("condition");
-        if(feature == null || !(configuration.eGet(feature) instanceof Expression expression)) {
-            throw new InitializationException("A 'condition-filter' needs a 'condition'.");
-        }
-        configure(expression);
+        configure(ReadDataExpression.of(configuration, "condition"));
 
         return this;
     }
 
     private void configure(final Expression expression) throws InitializationException {
-        condition = expression;
-
-        final Map<DataDescription, EStructuralFeature> features = readData(helper);
-        requireRead(features);
-
-        evaluator = new DynamicSwitch(symbolTable, features);
-    }
-
-    /**
-     * @throws InitializationException if the condition uses data that the step does not read.
-     */
-    private void requireRead(final Map<DataDescription, EStructuralFeature> features) throws InitializationException {
-        final Set<String> unread = new TreeSet<>();
-        final Consumer<EObject> check = element -> element.eCrossReferences()
-                                                          .stream()
-                                                          .filter(DataDescription.class::isInstance)
-                                                          .map(DataDescription.class::cast)
-                                                          .filter(description -> !features.containsKey(description))
-                                                          .forEach(description -> unread.add("'" + description.getName() + "'"));
-
-        check.accept(condition);
-        condition.eAllContents().forEachRemaining(check);
-
-        if(!unread.isEmpty()) {
-            throw new InitializationException("The condition '" + ExpressionText.of(condition) + "' uses the data " + unread
-                                              + ", which the step does not read.");
-        }
+        condition = new ReadDataExpression("condition", expression, readData(helper));
     }
 
     @Override
     protected Optional<String> violation(final @NonNull TypedEObject row) {
-        for(final EStructuralFeature feature : getReads()) {
-            symbolTable.put(feature, row.eGet(feature));
-        }
-
-        final Object result = evaluator.doSwitch(condition);
+        final Object result = condition.evaluate(row);
         if(!(result instanceof Boolean passes)) {
-            throw new IllegalStateException("The condition '" + ExpressionText.of(condition) + "' is no boolean, but " + result + ".");
+            throw new IllegalStateException("The condition '" + condition.text() + "' is no boolean, but " + result + ".");
         }
 
-        return passes ? Optional.empty() : Optional.of("does not satisfy '" + ExpressionText.of(condition) + "'");
+        return passes ? Optional.empty() : Optional.of("does not satisfy '" + condition.text() + "'");
     }
 }

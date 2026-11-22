@@ -26,6 +26,17 @@ module 'de.evoal.pipeline.test.filters' {
         }
     ]
 
+    pipeline 'more-where-a-is-large' [
+        step {
+            component 'rejection-sampling' {
+                'maximum-consecutive-rejections' := 2;
+                'acceptance-probability' := data 'a';
+            }
+
+            reads [data 'a'];
+        }
+    ]
+
     begin
     end
 }

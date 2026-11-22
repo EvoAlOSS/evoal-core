@@ -47,6 +47,15 @@ of the stream, every filter logs how many rows it kept (`PipelineFilterImpl`).
   not read, if a constraint is an equality (generated data almost never satisfies g = 0 exactly;
   compute the dependent data in a step instead), or if a data description has a constraint that
   is no annotation (`with constraints: ...`), which nothing evaluates.
+- `'rejection-sampling'` keeps a row with the probability p that its `'acceptance-probability'`
+  computes from the read data (acceptance-rejection method, von Neumann 1951; Devroye 1986). It
+  draws a uniform u in [0, 1) for every row from its own random stream (`RandomStreams`) and keeps
+  the row if u < p, so the same seed keeps the same rows. The DL bounds the attribute to [0, 1]:
+  a constant outside is rejected when the configuration is loaded, an expression of data is
+  checked for every row and stops the run with an error.
+
+`'condition-filter'` and `'rejection-sampling'` evaluate their expression with
+`ReadDataExpression`, which also rejects expressions on data the step does not read.
 
 The generator never checks the DDL on its own; only a `'constraint-validation'` step does.
 
@@ -64,7 +73,7 @@ set once per execution (`write` or `execute`); a later execution replaces it.
 | `de.evoal.pipeline.sequences` | `'sequence-generator'` (processor) with `'expression-based-sequence'` |
 | `de.evoal.pipeline.io` | `reader` (source), `writer`, `empty`, sinks `template` and `'csv-writer'` |
 | `de.evoal.pipeline.statistics` | sink `'correlation-estimation'` |
-| `de.evoal.pipeline.misc` | `constants`, `limit`, filters `'condition-filter'` and `'constraint-validation'` |
+| `de.evoal.pipeline.misc` | `constants`, `limit`, filters `'condition-filter'`, `'constraint-validation'` and `'rejection-sampling'` |
 | `de.evoal.pipeline.optimisation` | `'benchmark-function'`: the benchmarks as optimisation function of a search |
 
 ### `'correlation-estimation'`
@@ -113,5 +122,6 @@ nested values are rejected; an empty list writes an empty file.
 | `generator-pipeline` | reading and recalculating data |
 | `generator-timeseries` | sequences |
 | `generator-constraints` | keeping the samples that satisfy the DDL constraints (`'constraint-validation'`) |
+| `generator-rejection-sampling` | data with the density 2x by rejection sampling (`'rejection-sampling'`) |
 | `correlation-estimation` | estimating correlations from data, rendering them into a DDL module and using them in a search |
 | `search-with-benchmark`, `search-with-benchmark-and-target`, `search-with-benchmark-and-training` | the benchmarks as optimisation function |

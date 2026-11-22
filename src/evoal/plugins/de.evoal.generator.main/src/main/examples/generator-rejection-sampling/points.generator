@@ -1,0 +1,41 @@
+import "definitions" from de.evoal.core.math;
+import "definitions" from 'de.evoal.pipeline.base';
+import "definitions" from 'de.evoal.pipeline.distributions';
+import "definitions" from 'de.evoal.pipeline.misc';
+
+import "data" from points;
+
+module 'points' {
+	/**
+	 * Draws x uniformly from [0, 1) and keeps it with the probability x, so the kept points
+	 *   have the density 2x: few points near 0, many near 1.
+	 */
+	pipeline 'main-pipeline' [
+		step {
+			component 'distribution-based-data' {
+				distributions := [
+					'uniform-distribution' {
+						'lower' := 0.0;
+						'upper' := 1.0;
+					}
+				];
+			}
+
+			writes [data 'x'];
+		}
+		step {
+			component 'rejection-sampling' {
+				// half of the samples are kept on average; 50 rejections in a row are very unlikely
+				'maximum-consecutive-rejections' := 50;
+				'acceptance-probability' := data 'x';
+			}
+
+			reads [data 'x'];
+		}
+	]
+
+	begin
+		// 1000 points that rejection sampling kept
+		write "output/points.csv" with 1000 samples from executing ['main-pipeline'];
+	end
+}
