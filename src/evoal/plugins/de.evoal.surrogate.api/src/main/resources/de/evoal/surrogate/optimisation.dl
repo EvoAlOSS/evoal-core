@@ -1,89 +1,43 @@
 import "definitions" from de.evoal.optimisation.core;
 
 module de.evoal.surrogate.optimisation {
-	/**
-	 * Calculating fitness value by using a surrogate function:<br/>
-	 *
-	 * <mathml>
-	 *   <math>
-	 *     <mrow>
-	 *       <mi>f</mi>
-	 *       <mi>i</mi>
-	 *       <mi>t</mi>
-	 *       <mi>n</mi>
-	 *       <mi>e</mi>
-	 *       <mi>s</mi>
-	 *       <mi>s</mi>
-	 *       <mo>=</mo>
-	 *       <mi>s</mi>
-	 *       <mi>u</mi>
-	 *       <mi>r</mi>
-	 *       <mi>r</mi>
-	 *       <mi>o</mi>
-	 *       <mi>g</mi>
-	 *       <mi>a</mi>
-	 *       <mi>t</mi>
-	 *       <mi>e</mi>
-	 *       <mo form="prefix" stretchy="false">(</mo>
-	 *       <mi>i</mi>
-	 *       <mi>n</mi>
-	 *       <mi>d</mi>
-	 *       <mo form="postfix" stretchy="false">)</mo>
-	 *     </mrow>
-	 *   </math>
-	 * </mathml>
-	 */
-	type surrogate extends 'fitness-function' {
-	    /**
-	     * The pre-trained model to load.
-	     */
-        'model-file' : string;
-
-        /**
-         * The input space of the model.
-         */
-        'input-space' : array data;
-
-        /**
-         * The output space of the model.
-         */
-        'output-space' : array data;
-	}
-	
-	/**
-	 * Initial candidates drawn at random (with repetition) from training data. Also
-	 *   a 'replacement-source' of candidate checks.
-	 *
-	 * The data comes from 'training-file'. Without it, the population uses the training data
-	 *   of the run: the file given on the command line with
-	 *   <tt>-Bsurrogate:training-data-file=&lt;file&gt;</tt> (the fifth argument of
-	 *   <tt>evoal-search-with-surrogate.sh</tt>), read once per run. This is the only place
-	 *   where a run setting instead of the configuration decides what runs; without both, the
-	 *   configuration is rejected at start.
-	 */
-	type 'training-population' extends 'initial-population' {
-	    /**
-	     * The file with the training data.
-	     */
-	    'training-file' : optional string;
-	}
-	
-	/**
-     * Writes the prediction values (before adaption) of every individual of every generation:
-	 *
-	 * <ul>
-	 *   <li>generation</li>
-	 *   <li>prediction-variable-1</li>
-	 *   <li>prediction-variable-2</li>
-	 *   ...
-	 *   <li>prediction-variable-n</li>
-	 * </ul>
+    /**
+     * Calculating fitness value by using a surrogate function:<br/>
+     *
+     * <mathml>
+     *   <math>
+     *     <mrow>
+     *       <mi>f</mi>
+     *       <mi>i</mi>
+     *       <mi>t</mi>
+     *       <mi>n</mi>
+     *       <mi>e</mi>
+     *       <mi>s</mi>
+     *       <mi>s</mi>
+     *       <mo>=</mo>
+     *       <mi>s</mi>
+     *       <mi>u</mi>
+     *       <mi>r</mi>
+     *       <mi>r</mi>
+     *       <mi>o</mi>
+     *       <mi>g</mi>
+     *       <mi>a</mi>
+     *       <mi>t</mi>
+     *       <mi>e</mi>
+     *       <mo form="prefix" stretchy="false">(</mo>
+     *       <mi>i</mi>
+     *       <mi>n</mi>
+     *       <mi>d</mi>
+     *       <mo form="postfix" stretchy="false">)</mo>
+     *     </mrow>
+     *   </math>
+     * </mathml>
      */
-	type 'prediction-per-individual' extends 'statistics-writer' {
-	    /**
-	     * The pre-trained model to load.
-	     */
-        'pson-file' : string;
+    type surrogate extends 'fitness-function' {
+        /**
+         * The pre-trained model to load.
+         */
+        'model-file' : string;
 
         /**
          * The input space of the model.
@@ -96,4 +50,21 @@ module de.evoal.surrogate.optimisation {
         'output-space' : array data;
     }
 
+    /**
+     * Initial candidates drawn at random (with repetition) from training data. Also
+     *   a 'replacement-source' of candidate checks.
+     *
+     * The data comes from 'training-file'. Without it, the population uses the training data
+     *   of the run: the file given on the command line with
+     *   <tt>-Bsurrogate:training-data-file=&lt;file&gt;</tt> (the fifth argument of
+     *   <tt>evoal-search-with-surrogate.sh</tt>), read once per run. This is the only place
+     *   where a run setting instead of the configuration decides what runs; without both, the
+     *   configuration is rejected at start.
+     */
+    type 'training-population' extends 'initial-population' {
+        /**
+         * The file with the training data.
+         */
+        'training-file' : optional string;
+    }
 }

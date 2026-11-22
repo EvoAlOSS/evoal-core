@@ -655,6 +655,44 @@ module de.evoal.optimisation.core {
     }
 
     /**
+     * Evaluates a reference function on the surviving candidates of every iteration and
+     *   writes its values, e.g. the true function along a search on a surrogate model, the
+     *   prediction of a surrogate model along a search on the real function, or a second
+     *   model to compare with.
+     *   File: <tt>reference-values-per-individual.csv</tt> in the output folder. Columns:
+     *
+     * <ul>
+     *   <li>individual-id (id of the individual in the memory model; the same
+     *     individual has the same id in all files)</li>
+     *   <li>generation</li>
+     *   <li>optimisation-space-variable-1 ... optimisation-space-variable-n, as computed by
+     *     the reference</li>
+     * </ul>
+     *
+     * The rows are those of <tt>candidates-per-iteration</tt>, in the same order, so both
+     *   files join by <tt>individual-id</tt> and <tt>generation</tt> (a survivor appears in
+     *   every iteration it survives).
+     *
+     * The reference is evaluated in addition to the run: it uses no evaluation budget, does
+     *   not count as a real or surrogate evaluation, and the run does not change when the
+     *   writer is added. The number of its evaluations is the execution metric
+     *   <tt>evaluations.reference</tt> of the memory model. The reference has to be
+     *   deterministic: random numbers of an evaluation are only available in the evaluations
+     *   of the run, so a reference that draws them (e.g. <tt>random-fitness</tt>) fails.
+     *
+     * In the evaluation setup ({@code heuristic-search-evaluation}), the file
+     *   starts with the columns <tt>repetition</tt> and, if target points are used,
+     *   <tt>target</tt>. All runs append to the same file.
+     */
+    type 'reference-values-per-individual' extends 'statistics-writer' {
+        /**
+         * The function whose values are written. It maps the search space to the
+         *   optimisation space, like the optimisation function of the run.
+         */
+        reference : instance 'optimisation-function';
+    }
+
+    /**
      * Writes the metrics of every iteration, e.g., the number of evaluations.
      *   File: <tt>metrics-per-iteration.csv</tt> in the output folder.
      *   Columns: iteration, then one column per metric of the run, named after the

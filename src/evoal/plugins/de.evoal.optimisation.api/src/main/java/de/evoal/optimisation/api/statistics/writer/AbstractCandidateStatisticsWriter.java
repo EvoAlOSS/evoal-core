@@ -11,11 +11,9 @@ import jakarta.inject.Named;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
-import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
-import de.evoal.core.api.ecore.misc.EClassifierHelper;
 import de.evoal.core.api.languages.AttributeEvaluator;
 import de.evoal.models.core.ecore.Space;
 import de.evoal.models.v202704.optimisation.memory.Individual;
@@ -140,7 +138,8 @@ public abstract class AbstractCandidateStatisticsWriter implements StatisticsWri
                 columnName = prefix + columnName;
             }
 
-            columns.add(new Column(columnName, toColumnType(feature)));
+            final ColumnType columnType = ColumnType.of(feature);
+            columns.add(new Column(columnName, columnType));
         }
     }
 
@@ -179,26 +178,6 @@ public abstract class AbstractCandidateStatisticsWriter implements StatisticsWri
         writer = createWriter(configuration);
 
         return this;
-    }
-
-    /**
-     * @return The column type matching the Ecore type of the feature.
-     * @throws IllegalArgumentException if the feature has an unsupported type.
-     */
-    private ColumnType toColumnType(final EStructuralFeature spec) {
-        final EClassifier type = spec.getEType();
-
-        if(EClassifierHelper.isReal(type)) {
-            return ColumnType.Double;
-        } else if(EClassifierHelper.isLongOrShorter(type)) {
-            return ColumnType.Integer;
-        } else if(EClassifierHelper.isBoolean(type)) {
-            return ColumnType.Boolean;
-        } else if(EClassifierHelper.isString(type)) {
-            return ColumnType.String;
-        }
-
-        throw new IllegalArgumentException("Unsupported EStructuralFeature " + spec.getName());
     }
 
     /**
