@@ -34,7 +34,7 @@ set once per execution (`write` or `execute`); a later execution replaces it.
 | DL module | Components |
 |---|---|
 | `de.evoal.pipeline.distributions` | `'distribution-based-data'` (source), `'noise-data'`; distributions `'normal-distribution'`, `'uniform-distribution'`, `'multivariate-normal-distribution'` |
-| `de.evoal.pipeline.benchmarks` | `ackley`, `rastrigin`, `rosenbrock`, `'weighted-sphere'`, `zdt1` |
+| `de.evoal.pipeline.benchmarks` | `ackley`, `forrester`, `rastrigin`, `rosenbrock`, `'weighted-sphere'`, `zdt1` |
 | `de.evoal.pipeline.sequences` | `'sequence-generator'` (source) with `'expression-based-sequence'` |
 | `de.evoal.pipeline.io` | `reader` (source), `writer`, `empty`, sinks `template` and `'csv-writer'` |
 | `de.evoal.pipeline.statistics` | sink `'correlation-estimation'` |

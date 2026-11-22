@@ -33,7 +33,7 @@ public class Rastrigin extends PipelineComponentImpl {
             value += (EvoalMath.square(read_i) - a * EvoalMath.cos(2 * Math.PI * read_i));
         }
 
-        obj.eSet(getWrites().iterator().next(), value);
+        obj.eSet(getWrites().getFirst(), value);
 
         return obj;
     }

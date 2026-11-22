@@ -106,6 +106,11 @@ mvn -f src/evoal/pom.xml -Pregressions -Devoal.regressions.update=true verify
 mvn -f src/evoal/pom.xml -Pregressions -Devoal.regressions.update=true -Devoal.regressions.examples=true verify
 ```
 
+The libraries the plugins call (e.g. Smile, ONNX Runtime, native BLAS/LAPACK)
+do not use `EvoalMath`, so their results can differ between platforms. Examples
+that train or evaluate such models are smoke tests without `expected/` (e.g.
+`surrogate.adaption-training`, `training.gaussianprocess`).
+
 `ci/regressions-in-docker.sh [--update] [--examples]` does the same in the
 EvoAl CI image, e.g., to reproduce a pipeline failure.
 
