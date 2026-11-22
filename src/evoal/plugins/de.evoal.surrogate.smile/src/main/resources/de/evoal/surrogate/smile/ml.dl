@@ -125,14 +125,14 @@ module de.evoal.surrogate.smile.ml {
 	 */
 	type 'matérn' extends kernel {
 		/**
-		 * length scale of kernel.
+		 * The length scale of the kernel.
 		 */
+		@LowerBoundary{ boundary := 0.0; inclusive := false; }
 		'σ'				: real;
-		
+
 		/**
-		 * The smoothness of the kernel function.<br/>
-		 * 
-		 * TODO: Only 0.5, 1.5, 2.5 and Inf are accepted.
+		 * The smoothness of the kernel function: 0.5, 1.5 or 2.5; other values are rejected
+		 *   when the model is built. For an infinite ν use the 'gaussian' kernel.
 		 */
 	    'ν'				: real;
 	}
@@ -407,33 +407,51 @@ module de.evoal.surrogate.smile.ml {
 	}
 
     /**
-     * A Gaussian Process surrogate model.
+     * Gaussian process regression (kriging): the kernel is the covariance of the modelled
+     *   function, and the prediction at a point is the mean of the function given the training
+     *   data. It models a single output. With 'iterations' > 0 the hyperparameters of the
+     *   kernel (e.g. the length scale σ of a Gaussian kernel) and the noise are fitted by
+     *   maximising the log marginal likelihood of the training data; the configured values are
+     *   the starting point. The model file stores the fitted values.<br/>
+     * <br/>
+     * Reference: Rasmussen and Williams 2006.
      */
+    @Literature { keys := ["rasmussen2006gaussian"]; }
     type 'gaussian-process' extends surrogate {
 
         /**
-         * The kernel function to be used.
+         * The covariance function of the modelled function.
          */
         'kernel' : instance kernel;
 
         /**
-         * The noise level to be used.
+         * The noise variance added to the diagonal of the kernel matrix. With 'normalize' it
+         *   refers to the normalised output (variance 1). A small value (e.g. 1e-6) makes the
+         *   model interpolate the training data, a larger one smooths it. With
+         *   'iterations' > 0 it is the starting value of the fit, which stays in [1e-10, 1e5].
          */
+        @LowerBoundary{ boundary := 0.0; inclusive := false; }
         'noise' : real;
 
         /**
-         * Whether normalization should be applied.
+         * Whether the output is centred and scaled to variance 1 before fitting; the
+         *   predictions are scaled back.
          */
         'normalize' : boolean;
 
         /**
-         * The tolerance parameters.
+         * The convergence tolerance of the fit of the hyperparameters (BFGS); used only with
+         *   'iterations' > 0.
          */
+        @LowerBoundary{ boundary := 0.0; inclusive := false; }
         'tolerance' : real;
 
         /**
-         * The number of iterations.
+         * The maximum number of iterations of the fit of the kernel hyperparameters and the
+         *   noise (BFGS). 0 keeps the configured kernel and noise. During the fit a length scale
+         *   stays in [1e-5, 1e5]; the smoothness ν of a Matérn kernel is not fitted.
          */
+        @LowerBoundary{ boundary := 0; }
         'iterations' : int;
     }
 }

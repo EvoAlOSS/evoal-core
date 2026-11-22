@@ -1,0 +1,108 @@
+import "definitions" from de.evoal.core.math;
+import "definitions" from 'de.evoal.pipeline.base';
+import "definitions" from 'de.evoal.pipeline.benchmarks';
+import "definitions" from 'de.evoal.pipeline.sequences';
+
+import "data" from surrogate;
+
+module 'training-data' {
+	/**
+	 * The grid x:0 = 0.0, 0.1, ..., 0.6 and the Forrester function on it.
+	 */
+	pipeline 'left' [
+		step {
+			component 'sequence-generator' {
+				sequences := [
+					'expression-based-sequence' {
+						variable     := data 'k';
+						initial      := 0.0;
+						'expression' := data 'k' + 1.0;
+					},
+					'expression-based-sequence' {
+						variable     := data 'x:0';
+						initial      := 0.0;
+						'expression' := data 'k' / 10.0;
+					}
+				];
+			}
+
+			writes [data 'k', data 'x:0'];
+		}
+		step {
+			component forrester {}
+
+			reads [data 'x:0'];
+			writes [data 'y:0'];
+		}
+	]
+
+	/**
+	 * The grid x:0 = 0.9, 1.0 and the Forrester function on it.
+	 */
+	pipeline 'right' [
+		step {
+			component 'sequence-generator' {
+				sequences := [
+					'expression-based-sequence' {
+						variable     := data 'k';
+						initial      := 9.0;
+						'expression' := data 'k' + 1.0;
+					},
+					'expression-based-sequence' {
+						variable     := data 'x:0';
+						initial      := 0.9;
+						'expression' := data 'k' / 10.0;
+					}
+				];
+			}
+
+			writes [data 'k', data 'x:0'];
+		}
+		step {
+			component forrester {}
+
+			reads [data 'x:0'];
+			writes [data 'y:0'];
+		}
+	]
+
+	/**
+	 * The grid x:0 = 0.61, 0.62, ..., 0.89 in the gap of the training data and the Forrester
+	 * function on it.
+	 */
+	pipeline 'gap' [
+		step {
+			component 'sequence-generator' {
+				sequences := [
+					'expression-based-sequence' {
+						variable     := data 'k';
+						initial      := 61.0;
+						'expression' := data 'k' + 1.0;
+					},
+					'expression-based-sequence' {
+						variable     := data 'x:0';
+						initial      := 0.61;
+						'expression' := data 'k' / 100.0;
+					}
+				];
+			}
+
+			writes [data 'k', data 'x:0'];
+		}
+		step {
+			component forrester {}
+
+			reads [data 'x:0'];
+			writes [data 'y:0'];
+		}
+	]
+
+	// The training data leaves out (0.6, 0.9): the gap around the global minimum at 0.757.
+	// The test data lies in the gap, so testing shows how the model predicts where it has
+	// seen no data.
+	begin
+		write "output/left.csv" with 7 samples from executing ['left'];
+		write "output/right.csv" with 2 samples from executing ['right'];
+		write "output/test.csv" with 29 samples from executing ['gap'];
+	end
+}

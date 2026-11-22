@@ -2,11 +2,13 @@ import "definitions" from de.evoal.optimisation.core;
 
 module de.evoal.surrogate.adaption.interval.optimisation {
     /**
-     * Fitness step that adapts the prediction of an SVR surrogate by the width of its
-     *   prediction interval: {@code 2 · ŷ² / (upper − lower)}. The prediction error data has
-     *   to be calculated during training ('predictive-error'); it exists for the first output
-     *   of the surrogate only. Only objectives with a minimise or maximise goal can be
-     *   adapted, and the step must run before 'scaling'.
+     * Fitness step that adapts the prediction of a surrogate by the width of its prediction
+     *   interval: {@code 2 · ŷ² / (upper − lower)}. For a surrogate with a predictive standard
+     *   deviation σ (e.g. 'gaussian-process'), the interval is ŷ ± z · σ with the 95 % quantile
+     *   z of the standard normal distribution, for every output. For an SVR surrogate, the
+     *   prediction error data has to be calculated during training ('predictive-error'); it
+     *   exists for the first output of the surrogate only. Only objectives with a minimise or
+     *   maximise goal can be adapted, and the step must run before 'scaling'.
      */
     type 'prediction-interval' extends 'fitness-step' {}
 }

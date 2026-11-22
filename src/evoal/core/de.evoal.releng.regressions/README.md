@@ -108,8 +108,10 @@ mvn -f src/evoal/pom.xml -Pregressions -Devoal.regressions.update=true -Devoal.r
 
 The libraries the plugins call (e.g. Smile, ONNX Runtime, native BLAS/LAPACK)
 do not use `EvoalMath`, so their results can differ between platforms. Examples
-that train or evaluate such models are smoke tests without `expected/` (e.g.
-`surrogate.adaption-training`, `training.gaussianprocess`).
+that train or evaluate such models either compare with a tolerance (e.g.
+`training.gaussianprocess`, see [Tolerance](#tolerance)) or are smoke tests without
+`expected/` if their results differ by more (e.g. `surrogate.adaption-training`, whose SVR
+keeps a different number of support vectors on another platform).
 
 `ci/regressions-in-docker.sh [--update] [--examples]` does the same in the
 EvoAl CI image, e.g., to reproduce a pipeline failure.

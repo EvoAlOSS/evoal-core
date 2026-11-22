@@ -46,6 +46,30 @@ public final class KernelFactory {
 
 	public static final String SIGMA_PARAMETER = "σ";
 
+	private static final String NU_PARAMETER = "ν";
+
+	/**
+	 * Keys of the stored Gaussian process regression (the {@code regression} map of the model
+	 *   file).
+	 */
+	public static final String GP_REGRESSORS = "regressors";
+	public static final String GP_WEIGHTS = "weights";
+	public static final String GP_NOISE = "noise";
+	public static final String GP_MEAN = "mean";
+	public static final String GP_SD = "sd";
+
+	/**
+	 * The hyperparameters of the kernel after fitting ({@code MercerKernel.hyperparameters()}).
+	 *   Older model files lack them; their kernel is the configured one.
+	 */
+	public static final String GP_HYPERPARAMETERS = "hyperparameters";
+
+	/**
+	 * The log marginal likelihood of the training data under the fitted model, the measure
+	 *   that fitting the hyperparameters maximises. Older model files lack it.
+	 */
+	public static final String GP_LOG_MARGINAL_LIKELIHOOD = "log-marginal-likelihood";
+
 
 	/**
 	 * Logger instance
@@ -96,6 +120,19 @@ public final class KernelFactory {
 		log.info("    parameter σ={}.", sigma);
 
 		return new GaussianKernel(sigma);
+	}
+
+	/**
+	 * @param parameters The configuration of a {@code 'matérn'} kernel: length scale σ and
+	 *   smoothness ν.
+	 * @return The Matérn kernel; Smile rejects a ν other than 0.5, 1.5, 2.5 or infinity.
+	 */
+	public static MercerKernel<double []> toMaternKernel(final Map<String, Object> parameters) {
+		final double sigma = (double) parameters.get(SIGMA_PARAMETER);
+		final double nu = (double) parameters.get(NU_PARAMETER);
+		log.info("    parameter σ={} and ν={}.", sigma, nu);
+
+		return new MaternKernel(sigma, nu);
 	}
 
 	public static MercerKernel<double []> toHellingerKernel(final Map<String, Object> parameters) {
@@ -188,6 +225,7 @@ public final class KernelFactory {
 			case "de.evoal.surrogate.smile.ml.hellinger" 			-> toHellingerKernel(configuration);
 			case "de.evoal.surrogate.smile.ml.hyperbolic-tangent" 	-> toHyperbolicTangentKernel(configuration);
 			case "de.evoal.surrogate.smile.ml.laplacian" 			-> toLaplacianKernel(configuration);
+			case "de.evoal.surrogate.smile.ml.matérn" 				-> toMaternKernel(configuration);
 			case "de.evoal.surrogate.smile.ml.linear" 				-> toLinearKernel(configuration);
 			case "de.evoal.surrogate.smile.ml.pearson" 				-> toPearsonKernel(configuration);
 			case "de.evoal.surrogate.smile.ml.polynomial" 			-> toPolynomialKernel(configuration);
@@ -206,11 +244,14 @@ public final class KernelFactory {
 			result.put("intercept", machine.intercept());
 			result.put("instances", machine.vectors());
 		} else if(regression instanceof GaussianProcessRegression<double[]> gp) {
-			result.put("regressors", gp.regressors);
-			result.put("weights", gp.w);
-			result.put("noise", gp.noise);
-			result.put("mean", gp.mean);
-			result.put("sd", gp.sd);
+			result.put(GP_REGRESSORS, gp.regressors);
+			result.put(GP_WEIGHTS, gp.w.toArray(new double[0]));
+			result.put(GP_NOISE, gp.noise);
+			result.put(GP_MEAN, gp.mean);
+			result.put(GP_SD, gp.sd);
+			// the kernel of the MLL file with fitted hyperparameters ('iterations' > 0)
+			result.put(GP_HYPERPARAMETERS, gp.kernel.hyperparameters());
+			result.put(GP_LOG_MARGINAL_LIKELIHOOD, gp.L);
 		}
 
 		return result;

@@ -1,0 +1,25 @@
+{
+  "formatVersion" : "2027.4.0",
+  "number" : 0,
+  "individuals" : [ {
+    "id" : 0,
+    "input" : {
+      "x:0" : 0.75
+    },
+    "output" : {
+      "y:0" : -3.6841311579326943
+    },
+    "fitness" : [ 5.581337806772427 ],
+    "relationships" : [ ]
+  } ],
+  "steps" : [ ],
+  "ranks" : [ {
+    "number" : 0,
+    "members" : [ 0 ]
+  } ],
+  "bestSoFar" : 0,
+  "metrics" : {
+    "evaluations.real" : 0,
+    "evaluations.surrogate" : 1
+  }
+}

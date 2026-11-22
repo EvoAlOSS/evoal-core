@@ -1,31 +1,41 @@
 package de.evoal.surrogate.adaption.interval.fitness;
 
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
+import org.apache.commons.math3.distribution.NormalDistribution;
 import org.apache.commons.math3.util.Pair;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
 import de.evoal.core.api.dynamic.EAnnotationHelper;
 import de.evoal.core.api.reproducibility.ReproducibilityProtocol;
+import de.evoal.models.core.ecore.Space;
 import de.evoal.models.core.ecore.TypedEObject;
 import de.evoal.surrogate.adaption.AdaptionStep;
 import de.evoal.surrogate.adaption.interval.model.PredictiveErrorData;
 import de.evoal.surrogate.api.function.ModelFunction;
 import de.evoal.surrogate.api.function.ModelFunctionData;
+import de.evoal.surrogate.api.function.PredictiveStandardDeviation;
 import de.evoal.surrogate.api.io.ModelReader;
 import de.evoal.surrogate.smile.api.KernelBasedSVRFunction;
 import de.evoal.core.api.math.EvoalMath;
 
 /**
- * Adapts the prediction of an SVR surrogate by the width of its prediction interval
- *   (DL type {@code 'prediction-interval'}): {@code 2 · ŷ² / (upper − lower)}. The
- *   prediction error data has to be calculated during training (see the goodness-of-fit
- *   calculator {@code predictive-error}); it only exists for the surrogate's first output.
+ * Adapts the prediction of a surrogate by the width of its prediction interval (DL type
+ *   {@code 'prediction-interval'}): {@code 2 · ŷ² / width}. The interval comes from
+ * <ul>
+ *   <li>the predictive standard deviation σ of a model that provides it (e.g. a Gaussian
+ *     process): ŷ ± z · σ for every output, with z the {@link #CONFIDENCE} quantile of the
+ *     standard normal distribution;</li>
+ *   <li>otherwise the prediction error data of an SVR surrogate, calculated during training
+ *     (see the goodness-of-fit calculator {@code predictive-error}); it only exists for the
+ *     surrogate's first output.</li>
+ * </ul>
  */
 @Dependent
 @Named("de.evoal.surrogate.adaption.interval.optimisation.prediction-interval")
@@ -42,33 +52,21 @@ public class PredictionIntervalStep extends AdaptionStep {
     private EAnnotationHelper annotations;
 
     /**
-     * The prediction error data of the surrogate's first output feature.
+     * The width of the prediction interval of an objective at a candidate.
      */
-    private PredictiveErrorData errorData;
-
-    /**
-     * The surrogate function the error data belongs to.
-     */
-    private KernelBasedSVRFunction svr;
+    private IntervalWidth width;
 
     @Override
     protected double adapt(final TypedEObject candidate, final String objective, final double value) {
-        final Pair<Double, Double> boundaries = errorData.calculateBoundaries(candidate, 0, svr, CONFIDENCE, annotations);
-        final double lower = boundaries.getFirst();
-        final double upper = boundaries.getSecond();
-
-        return adapt(value, lower, upper);
+        return adapt(value, width.of(candidate, objective));
     }
 
     /**
      * @param value The (possibly already adapted) prediction.
-     * @param lower The lower end of the prediction interval.
-     * @param upper The upper end of the prediction interval.
-     * @return {@code 2 · value² / (upper − lower)}.
+     * @param width The width of the prediction interval.
+     * @return {@code 2 · value² / width}.
      */
-    static double adapt(final double value, final double lower, final double upper) {
-        final double width = upper - lower;
-
+    static double adapt(final double value, final double width) {
         return (2 * EvoalMath.square(value)) / width;
     }
 
@@ -78,16 +76,26 @@ public class PredictionIntervalStep extends AdaptionStep {
     }
 
     /**
-     * @throws IllegalStateException if the surrogate is no SVR or the model contains no
-     *   prediction error data.
+     * @throws IllegalStateException if the surrogate provides no predictive standard deviation
+     *   and is no SVR with prediction error data.
      */
     @Override
     protected Set<String> prepare() {
         final ModelFunctionData surrogate = surrogate();
         final ModelFunction function = surrogate.function();
 
+        if(function instanceof PredictiveStandardDeviation deviation) {
+            width = standardDeviationWidth(function, deviation);
+
+            return function.getOutput()
+                           .stream()
+                           .map(EStructuralFeature::getName)
+                           .collect(Collectors.toSet());
+        }
+
         if(!(function instanceof KernelBasedSVRFunction svrFunction)) {
-            throw new IllegalStateException("The prediction-interval adaption requires an SVR surrogate, but the surrogate is '"
+            throw new IllegalStateException("The prediction-interval adaption requires a surrogate with a predictive standard deviation"
+                                            + " (e.g. a Gaussian process) or an SVR surrogate, but the surrogate is '"
                                             + function.getClass().getName() + "'.");
         }
 
@@ -95,13 +103,47 @@ public class PredictionIntervalStep extends AdaptionStep {
                                             .orElseThrow(() -> new IllegalStateException("The surrogate model has no reader for its stored information."));
 
         reproducibility.reportNativeLibraries("prediction-interval");
-        svr = svrFunction;
-        errorData = new PredictiveErrorData(reader);
+        final PredictiveErrorData errorData = new PredictiveErrorData(reader);
+        width = (candidate, objective) -> {
+            final Pair<Double, Double> boundaries = errorData.calculateBoundaries(candidate, 0, svrFunction, CONFIDENCE, annotations);
+
+            return boundaries.getSecond() - boundaries.getFirst();
+        };
 
         // the predictive error calculator only stores data for the first output feature
-        final EStructuralFeature errorFeature = svr.getOutput().getFirst();
+        final EStructuralFeature errorFeature = svrFunction.getOutput().getFirst();
 
         return Set.of(errorFeature.getName());
+    }
+
+    /**
+     * @return The width {@code 2 · z · σ} of the interval ŷ ± z · σ.
+     */
+    static IntervalWidth standardDeviationWidth(final ModelFunction function, final PredictiveStandardDeviation deviation) {
+        final double quantile = new NormalDistribution(0.0, 1.0).inverseCumulativeProbability(CONFIDENCE);
+        final Space input = function.getInput();
+        final Space output = function.getOutput();
+
+        return (candidate, objective) -> {
+            final EStructuralFeature feature = output.find(objective).orElseThrow();
+            final TypedEObject point = input.newEObject();
+            input.forEach(f -> point.eSet(f, candidate.eGet(f)));
+
+            return 2 * quantile * deviation.standardDeviation(point, feature);
+        };
+    }
+
+    /**
+     * The width of the prediction interval of an objective at a candidate.
+     */
+    @FunctionalInterface
+    interface IntervalWidth {
+        /**
+         * @param candidate The candidate (a point of the search space).
+         * @param objective The name of the objective, an output of the surrogate.
+         * @return The width of the prediction interval.
+         */
+        double of(TypedEObject candidate, String objective);
     }
 
     @Override

@@ -2,24 +2,22 @@
 
 ## What it shows
 
-An evolutionary algorithm maximises the prediction of a Gaussian process
-regression model with six inputs `x:0`, ..., `x:5` and one output `y:0`
-(`gaussian-process.pson`). The example `training.gaussianprocess` shows how
-such a model is trained; its training data lies roughly in [-18, 18] for every
-input. The search space is [-15, 15] for every input.
+An evolutionary algorithm minimises the prediction of a Gaussian process regression model
+instead of a real function. The model `gaussian-process.pson` is the one of the example
+`training.gaussianprocess`: it learned the Forrester function
+f(x) = (6x − 2)² · sin(12x − 4) on [0, 1] from nine points with a gap (0.6, 0.9) around the
+global minimum f(0.757) ≈ −6.02.
 
-The configuration of the EA is the same as in the example `surrogate.simple`:
-the six real variables form one double chromosome.
+The configuration of the EA is the same as in the example `surrogate.simple`; only the model
+and the goal differ.
 
 ## Files
 
-- `surrogate.ddl`: the six inputs with their bounds and the prediction `y:0`.
-  The EA needs a lower and an upper bound for every variable that is not
-  boolean.
-- `gaussian-process.pson`: the trained model.
-- `search.ol`: the problem and the EA (see the example `surrogate.simple` for
-  the configuration); `'optimisation-function' := 'surrogate' { ... }` loads the
-  model.
+- `surrogate.ddl`: the variable `x:0` in [0, 1] and the prediction `y:0`.
+- `gaussian-process.pson`: the trained model (output of `training.gaussianprocess`).
+- `search.ol`: the problem and the EA (see the example `surrogate.simple` for the
+  configuration); `'optimisation-function' := 'surrogate' { 'model-file' :=
+  "gaussian-process.pson"; ... }` loads the model.
 
 ## Run
 
@@ -27,22 +25,23 @@ the six real variables form one double chromosome.
 ./01-run-search.sh
 ```
 
-The output is written to `output/search/`. The model uses native numeric
-libraries, whose results can differ slightly between platforms; such a
-difference can change which candidates the EA selects, so a run with the same
-seed can differ between platforms. The example has no reference output and is
-only checked to run.
+The output is written to `output/search/`. Repeat a run with its seed, for example
+`EVOAL_SEED=42 ./01-run-search.sh`.
 
 ## What to look at
 
-- `output/search/best-candidate-per-iteration.csv`: the best prediction rises
-  only a little (about 14.3 to 14.4 within the 10 generations); the prediction
-  is flat in large parts of the search space.
-- `output/search/candidates-per-iteration.csv`: which values of the six inputs
-  the population keeps.
+- `output/search/best-candidate-per-iteration.csv`: the EA finds the minimum of the model,
+  about x = 0.744 with a prediction of −3.70. The true function is −5.93 there. The search
+  finds the region of the true minimum, because the model bends down into the gap, but the
+  model predicts it too shallow: it has no data in the gap. The search is only as good as the
+  model where the model is uncertain.
+- `output/search/candidates-per-iteration.csv`: how the population gathers around the minimum
+  of the model.
 
 ## Try next
 
-- Run more generations (`'maximum-iterations' := 50`).
-- Restrict the search space to the region with most training data, e.g.
-  [-5, 5], in `surrogate.ddl`.
+- Train the model with the gap closed (see "Try next" of `training.gaussianprocess`), copy
+  `output/gaussian-process.pson` here and compare the found minimum.
+- Adapt the prediction by the model's uncertainty with the fitness step
+  `'prediction-interval'` (plugin surrogate.adaption), which uses the predictive standard
+  deviation of the Gaussian process.

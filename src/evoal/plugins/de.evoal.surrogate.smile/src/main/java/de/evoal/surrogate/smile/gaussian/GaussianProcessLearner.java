@@ -106,7 +106,7 @@ public class GaussianProcessLearner extends AbstractModelLearner {
 
     @Override
     public void learn() {
-        log.info("Calculate SVR surrogate from {} to {}.", inputFeatures, outputFeatures);
+        log.info("Fitting a Gaussian process from {} to {}.", inputFeatures, outputFeatures);
 
         Requirements.requireSizeGreaterThan(inputFeatures, 0);
         Requirements.requireSize(outputFeatures, 1);
@@ -137,21 +137,18 @@ public class GaussianProcessLearner extends AbstractModelLearner {
         GaussianProcessRegression.Options options = new GaussianProcessRegression.Options(noise, normalize, tolerance, iterations);
 
         try {
-            regression= GaussianProcessRegression.<double []>fit(sourceArray, targetArray, mercerKernel, options);
-        }
-        catch (Exception e){
+            regression = GaussianProcessRegression.fit(sourceArray, targetArray, mercerKernel, options);
+        } catch(final RuntimeException e) {
+            if(iterations == 0) {
+                throw e;
+            }
+
+            log.warn("Fitting the kernel hyperparameters and the noise failed ({}); using the configured kernel and noise instead.", e.getMessage(), e);
             options = new GaussianProcessRegression.Options(noise, normalize, tolerance, 0);
             regression = GaussianProcessRegression.fit(sourceArray, targetArray, mercerKernel, options);
         }
 
-        /*
-        if (StringToKernel(KernelToString(gaussianProcessRegression.kernel)) == null){
-            properties.remove("smile.gaussian_process.iterations");
-            properties.setProperty("smile.gaussian_process.iterations", "0");
-            regression = GaussianProcessRegression.fit(x, y, mercerKernel, properties);
-        }
-         */
-
+        log.info("Gaussian process with kernel {}, noise {} and log marginal likelihood {}.", regression.kernel, regression.noise, regression.L);
     }
 
     @Override

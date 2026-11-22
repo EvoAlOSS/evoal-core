@@ -8,11 +8,11 @@ import "data" from surrogate;
 
 module 'search' {
 	specify problem 'example-search' {
-		search for data 'x:0', data 'x:1', data 'x:2', data 'x:3', data 'x:4', data 'x:5'
+		search for data 'x:0'
 
 		map with 'unknown-function' {}
 
-		and maximise data 'y:0'
+		and minimise data 'y:0'
 
 		document ['candidates-per-iteration' {}, 'best-candidate-per-iteration' {}].
 	}
@@ -27,7 +27,7 @@ module 'search' {
 		genotype := genotype {
 			chromosomes := [
 				'double-chromosome' {
-					features := [data 'x:0', data 'x:1', data 'x:2', data 'x:3', data 'x:4', data 'x:5'];
+					features := [data 'x:0'];
 					recombination := [ 'arithmetic-crossover' { probability := 0.5; alpha := 0.5; } ];
 					mutation := [ 'polynomial-mutation' {} ];
 				}
@@ -51,7 +51,7 @@ module 'search' {
 		'comparator' := 'numeric-comparator' {};
 		'optimisation-function' := 'surrogate' {
 			'model-file' := "gaussian-process.pson";
-			'input-space' := [data 'x:0', data 'x:1', data 'x:2', data 'x:3', data 'x:4', data 'x:5'];
+			'input-space' := [data 'x:0'];
 			'output-space' := [data 'y:0'];
 		};
 
