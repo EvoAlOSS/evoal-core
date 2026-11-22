@@ -20,6 +20,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mll.ecore#//MachineLearningModule/gof"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mll.ecore#//MachineLearningModule/learningUseCase"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mll.ecore#//MachineLearningModule/predictionUseCase"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mll.ecore#//MachineLearningModule/testingUseCase"/>
     </genClasses>
     <genClasses ecoreClass="mll.ecore#//TaskDescription">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference mll.ecore#//TaskDescription/inputs"/>

@@ -63,7 +63,11 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 		private final Assignment cPredictionUseCaseAssignment_11_3_0 = (Assignment)cGroup_11_3.eContents().get(0);
 		private final RuleCall cPredictionUseCasePredictionUseCaseRuleParserRuleCall_11_3_0_0 = (RuleCall)cPredictionUseCaseAssignment_11_3_0.eContents().get(0);
 		private final Keyword cSemicolonKeyword_11_3_1 = (Keyword)cGroup_11_3.eContents().get(1);
-		private final Keyword cEndKeyword_11_4 = (Keyword)cGroup_11.eContents().get(4);
+		private final Group cGroup_11_4 = (Group)cGroup_11.eContents().get(4);
+		private final Assignment cTestingUseCaseAssignment_11_4_0 = (Assignment)cGroup_11_4.eContents().get(0);
+		private final RuleCall cTestingUseCaseTestingUseCaseRuleParserRuleCall_11_4_0_0 = (RuleCall)cTestingUseCaseAssignment_11_4_0.eContents().get(0);
+		private final Keyword cSemicolonKeyword_11_4_1 = (Keyword)cGroup_11_4.eContents().get(1);
+		private final Keyword cEndKeyword_11_5 = (Keyword)cGroup_11.eContents().get(5);
 		private final Keyword cRightCurlyBracketKeyword_12 = (Keyword)cGroup.eContents().get(12);
 		
 		//MachineLearningModuleRule returns MachineLearningModule:
@@ -81,6 +85,7 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 		//            'use' 'cases'
 		//                (learningUseCase=LearningUseCaseRule ';')?
 		//                (predictionUseCase=PredictionUseCaseRule ';')?
+		//                (testingUseCase=TestingUseCaseRule ';')?
 		//            'end'
 		//        )?
 		//    '}'
@@ -101,6 +106,7 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 		//        'use' 'cases'
 		//            (learningUseCase=LearningUseCaseRule ';')?
 		//            (predictionUseCase=PredictionUseCaseRule ';')?
+		//            (testingUseCase=TestingUseCaseRule ';')?
 		//        'end'
 		//    )?
 		//'}'
@@ -176,6 +182,7 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 		//    'use' 'cases'
 		//        (learningUseCase=LearningUseCaseRule ';')?
 		//        (predictionUseCase=PredictionUseCaseRule ';')?
+		//        (testingUseCase=TestingUseCaseRule ';')?
 		//    'end'
 		//)?
 		public Group getGroup_11() { return cGroup_11; }
@@ -210,8 +217,20 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 		//';'
 		public Keyword getSemicolonKeyword_11_3_1() { return cSemicolonKeyword_11_3_1; }
 		
+		//(testingUseCase=TestingUseCaseRule ';')?
+		public Group getGroup_11_4() { return cGroup_11_4; }
+		
+		//testingUseCase=TestingUseCaseRule
+		public Assignment getTestingUseCaseAssignment_11_4_0() { return cTestingUseCaseAssignment_11_4_0; }
+		
+		//TestingUseCaseRule
+		public RuleCall getTestingUseCaseTestingUseCaseRuleParserRuleCall_11_4_0_0() { return cTestingUseCaseTestingUseCaseRuleParserRuleCall_11_4_0_0; }
+		
+		//';'
+		public Keyword getSemicolonKeyword_11_4_1() { return cSemicolonKeyword_11_4_1; }
+		
 		//'end'
-		public Keyword getEndKeyword_11_4() { return cEndKeyword_11_4; }
+		public Keyword getEndKeyword_11_5() { return cEndKeyword_11_5; }
 		
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_12() { return cRightCurlyBracketKeyword_12; }
@@ -610,6 +629,52 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 		//'end'
 		public Keyword getEndKeyword_5() { return cEndKeyword_5; }
 	}
+	public class TestingUseCaseRuleElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.mll.dsl.MachineLearningLanguage.TestingUseCaseRule");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cBlockAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cSpecifyKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Keyword cTestingKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Keyword cBeginKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Assignment cStatementsAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cStatementsStatementRuleParserRuleCall_4_0 = (RuleCall)cStatementsAssignment_4.eContents().get(0);
+		private final Keyword cEndKeyword_5 = (Keyword)cGroup.eContents().get(5);
+		
+		//TestingUseCaseRule returns execution::Block:
+		//    {execution::Block}
+		//    'specify' 'testing' 'begin'
+		//      (statements += StatementRule)*
+		//    'end'
+		//;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//{execution::Block}
+		//'specify' 'testing' 'begin'
+		//  (statements += StatementRule)*
+		//'end'
+		public Group getGroup() { return cGroup; }
+		
+		//{execution::Block}
+		public Action getBlockAction_0() { return cBlockAction_0; }
+		
+		//'specify'
+		public Keyword getSpecifyKeyword_1() { return cSpecifyKeyword_1; }
+		
+		//'testing'
+		public Keyword getTestingKeyword_2() { return cTestingKeyword_2; }
+		
+		//'begin'
+		public Keyword getBeginKeyword_3() { return cBeginKeyword_3; }
+		
+		//(statements += StatementRule)*
+		public Assignment getStatementsAssignment_4() { return cStatementsAssignment_4; }
+		
+		//StatementRule
+		public RuleCall getStatementsStatementRuleParserRuleCall_4_0() { return cStatementsStatementRuleParserRuleCall_4_0; }
+		
+		//'end'
+		public Keyword getEndKeyword_5() { return cEndKeyword_5; }
+	}
 	public class PredictionUseCaseRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.mll.dsl.MachineLearningLanguage.PredictionUseCaseRule");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -708,6 +773,7 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 	private final ValidationPipelineDefinitionRuleElements pValidationPipelineDefinitionRule;
 	private final PreparationPipelineDefinitionRuleElements pPreparationPipelineDefinitionRule;
 	private final LearningUseCaseRuleElements pLearningUseCaseRule;
+	private final TestingUseCaseRuleElements pTestingUseCaseRule;
 	private final PredictionUseCaseRuleElements pPredictionUseCaseRule;
 	private final LiteralRuleElements pLiteralRule;
 	
@@ -733,6 +799,7 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 		this.pValidationPipelineDefinitionRule = new ValidationPipelineDefinitionRuleElements();
 		this.pPreparationPipelineDefinitionRule = new PreparationPipelineDefinitionRuleElements();
 		this.pLearningUseCaseRule = new LearningUseCaseRuleElements();
+		this.pTestingUseCaseRule = new TestingUseCaseRuleElements();
 		this.pPredictionUseCaseRule = new PredictionUseCaseRuleElements();
 		this.pLiteralRule = new LiteralRuleElements();
 	}
@@ -787,6 +854,7 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 	//            'use' 'cases'
 	//                (learningUseCase=LearningUseCaseRule ';')?
 	//                (predictionUseCase=PredictionUseCaseRule ';')?
+	//                (testingUseCase=TestingUseCaseRule ';')?
 	//            'end'
 	//        )?
 	//    '}'
@@ -856,6 +924,20 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 	
 	public ParserRule getLearningUseCaseRuleRule() {
 		return getLearningUseCaseRuleAccess().getRule();
+	}
+	
+	//TestingUseCaseRule returns execution::Block:
+	//    {execution::Block}
+	//    'specify' 'testing' 'begin'
+	//      (statements += StatementRule)*
+	//    'end'
+	//;
+	public TestingUseCaseRuleElements getTestingUseCaseRuleAccess() {
+		return pTestingUseCaseRule;
+	}
+	
+	public ParserRule getTestingUseCaseRuleRule() {
+		return getTestingUseCaseRuleAccess().getRule();
 	}
 	
 	//PredictionUseCaseRule returns generator::PipelineDefinition:

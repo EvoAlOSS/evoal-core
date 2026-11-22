@@ -201,6 +201,16 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 	 * @generated
 	 */
 	@Override
+	public EReference getMachineLearningModule_TestingUseCase() {
+		return (EReference)machineLearningModuleEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getTaskDescription() {
 		return taskDescriptionEClass;
 	}
@@ -302,6 +312,7 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 		createEReference(machineLearningModuleEClass, MACHINE_LEARNING_MODULE__GOF);
 		createEReference(machineLearningModuleEClass, MACHINE_LEARNING_MODULE__LEARNING_USE_CASE);
 		createEReference(machineLearningModuleEClass, MACHINE_LEARNING_MODULE__PREDICTION_USE_CASE);
+		createEReference(machineLearningModuleEClass, MACHINE_LEARNING_MODULE__TESTING_USE_CASE);
 
 		taskDescriptionEClass = createEClass(TASK_DESCRIPTION);
 		createEReference(taskDescriptionEClass, TASK_DESCRIPTION__INPUTS);
@@ -359,6 +370,7 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 		initEReference(getMachineLearningModule_Gof(), theExecutionPackage.getBlock(), null, "gof", null, 0, 1, MachineLearningModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMachineLearningModule_LearningUseCase(), theExecutionPackage.getBlock(), null, "learningUseCase", null, 0, 1, MachineLearningModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMachineLearningModule_PredictionUseCase(), theGeneratorPackage.getPipelineDefinition(), null, "predictionUseCase", null, 1, 1, MachineLearningModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMachineLearningModule_TestingUseCase(), theExecutionPackage.getBlock(), null, "testingUseCase", null, 0, 1, MachineLearningModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(taskDescriptionEClass, TaskDescription.class, "TaskDescription", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTaskDescription_Inputs(), theDefinitionsPackage.getDataDescription(), null, "inputs", null, 1, -1, TaskDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);

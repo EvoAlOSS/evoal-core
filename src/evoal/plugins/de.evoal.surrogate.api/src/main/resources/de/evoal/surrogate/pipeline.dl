@@ -63,9 +63,41 @@ module 'de.evoal.surrogate.pipeline' {
 	}
 
 	type 'model-prediction' extends Processor {}
+
+	/**
+	 * Source of the testing use case: reads the test data of the learning task
+	 * (<code>testing with [...]</code>).
+	 */
+	type 'test-data-loader' extends configuration {}
+
+	/**
+	 * Collects the data that reaches it as the data set that the next
+	 * <code>'gof-calculator'()</code> assesses: the goodness-of-fit measures predict the
+	 * outputs from the inputs of each data object and compare them with its outputs.
+	 */
+	type 'assessment-data' extends Processor {
+		/**
+		 * The name of the data set, the key of its values, e.g. "test".
+		 */
+		'data-set' : string;
+	}
 	
+	/**
+	 * Runs the calculators of <code>specify gof</code>. The goodness-of-fit measures assess
+	 * the current data set: the training data while learning, the data collected by
+	 * <code>'assessment-data'</code> while testing. The other calculators describe the
+	 * training data and run only while learning.
+	 */
 	def void 'gof-calculator'();
-		
+
+	/**
+	 * Stores the model with its prediction pipeline and its goodness-of-fit values: one entry
+	 * per output feature and measure, named by the qualified measure, with the value of each
+	 * data set, e.g. <code>de.evoal.surrogate.ml.rmse</code> → { training: 0.1, test: 0.3 }.
+	 * If the learning task names a goodness-of-fit file
+	 * (<code>serialise to "model.pson" and "gof.json"</code>), the values are written to it as
+	 * JSON as well. Storing again writes all values recorded so far.
+	 */
 	def void 'store-model'();
 
 }

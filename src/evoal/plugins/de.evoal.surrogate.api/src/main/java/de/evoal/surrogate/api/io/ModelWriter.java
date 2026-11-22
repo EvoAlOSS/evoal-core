@@ -31,7 +31,8 @@ public interface ModelWriter<F extends ModelFunction, S extends ModelStorage> {
     void store(final @NonNull F function);
 
     /**
-     * Adds an information for the given input feature.
+     * Adds an information for the given input feature. The name of the value identifies the
+     *   information: a value with the name of an earlier one replaces it.
      *
      * @param feature The feature.
      * @param value The value to store.
@@ -48,7 +49,8 @@ public interface ModelWriter<F extends ModelFunction, S extends ModelStorage> {
     ModelWriter<F, S> addPredictionPipeline(final @NonNull PipelineDefinition pipeline);
 
     /**
-     * Adds an information for the given output feature.
+     * Adds an information for the given output feature. The name of the value identifies the
+     *   information: a value with the name of an earlier one replaces it.
      *
      * @param feature The feature.
      * @param value The value to store.

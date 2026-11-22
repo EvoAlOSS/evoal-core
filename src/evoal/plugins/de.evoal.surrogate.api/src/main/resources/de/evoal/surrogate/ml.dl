@@ -16,7 +16,7 @@ module de.evoal.surrogate.ml {
 
     /**
      * Calculates the coefficient of determination <i>R²</i> of every output feature on the
-     * training data:
+     * assessed data set (the training data while learning, the test data while testing):
      *
      * <math display="block">
      *   <mrow>
@@ -59,7 +59,8 @@ module de.evoal.surrogate.ml {
 	def void 'R²'();
 
 	/**
-	 * Calculates the <i>root mean squared error</i>:
+	 * Calculates the <i>root mean squared error</i> of every output feature on the assessed data
+	 * set (the training data while learning, the test data while testing):
 	 *
 	 * <math display="block" class="tml-display" style="display:block math;">
      *   <mrow>
@@ -110,7 +111,7 @@ module de.evoal.surrogate.ml {
 
 	/**
 	 * Calculates the <i>root relative squared error</i> of every output feature on the
-	 * training data (Witten, Frank and Hall, <i>Data Mining</i>, section "Evaluating numeric
+	 * assessed data set (the training data while learning, the test data while testing; Witten, Frank and Hall, <i>Data Mining</i>, section "Evaluating numeric
 	 * prediction"):
 	 *
 	 * <math display="block">
@@ -146,7 +147,7 @@ module de.evoal.surrogate.ml {
      *   </mrow>
      * </math>
 	 *
-	 * where <i>y<sub>i</sub></i> are the values of the training data, <i>ŷ<sub>i</sub></i> the
+	 * where <i>y<sub>i</sub></i> are the values of the data set, <i>ŷ<sub>i</sub></i> the
 	 * predictions of the surrogate and <i>ȳ</i> the mean of the values. It compares the error
 	 * of the surrogate with the error of always predicting the mean: 0 is a perfect surrogate,
 	 * 1 is as good as the mean. The value is a ratio, not a percentage. If all values of a

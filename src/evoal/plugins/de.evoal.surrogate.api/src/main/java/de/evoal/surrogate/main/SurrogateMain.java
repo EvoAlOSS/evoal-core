@@ -23,9 +23,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
+import java.util.List;
+
 /**
- * Program for pre-calculating regressions to minimize runtime overhead of
- *   recalculating them.
+ * Trains a surrogate model as configured in an MLL file: runs the learning use case and, if
+ *   the module has one (written out or added for {@code testing with [...]}), the testing use
+ *   case.
  */
 @Slf4j
 @ApplicationScoped
@@ -64,11 +67,17 @@ public class SurrogateMain implements MainClass {
         log.info("Making implicit behaviour explicit in model.");
         new DefaultBehaviourInjector(dlLoader, module.getTask().getInputs(), module.getTask().getOutputs()).inject(module);
 
-        log.info("Converting machine learning model to pipeline model.");
-        final EStructuralFeature learningUseCase = MllPackage.eINSTANCE.getMachineLearningModule_LearningUseCase();
-        final PipelineModule pModule = transformer.transform(module, space, learningUseCase, dlLoader, helper);
+        if(module.getLearningUseCase() == null) {
+            throw new IllegalStateException("The MLL file has no learning use case: add 'specify learning begin ... end;' to its 'use cases'.");
+        }
 
-        log.info("Running use case: learning");
+        log.info("Converting machine learning model to pipeline model.");
+        final List<EStructuralFeature> useCases = List.of(
+                MllPackage.eINSTANCE.getMachineLearningModule_LearningUseCase(),
+                MllPackage.eINSTANCE.getMachineLearningModule_TestingUseCase());
+        final PipelineModule pModule = transformer.transform(module, space, useCases, dlLoader, helper);
+
+        log.info("Running use cases: learning{}", module.getTestingUseCase() != null ? ", testing" : "");
         final ProgramInterpreter executor = new ProgramInterpreter((state) -> {
             state.setSpace(space);
             return BeanFactory.create(MLLProgramExecutionSwitch.class)

@@ -90,6 +90,7 @@ public class ModelLearnerComponent extends PipelineComponentImpl {
         final NamedVariable variable = ExecutionFactory.eINSTANCE.createNamedVariable();
         variable.setName("model-function");
 
-        getContext().put(variable, data);
+        // the outermost state, so that the testing use case sees the model as well
+        getContext().root().put(variable, data);
     }
 }

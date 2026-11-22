@@ -27,23 +27,25 @@ public class SurrogateModelTransformer extends ModelTransformer {
     }
 
     /**
-     * Converts the use case of a machine-learning module into a pipeline module.
+     * Converts the use cases of a machine-learning module into a pipeline module whose main
+     *   function runs them in the given order.
      *
      * @param module The parsed machine-learning module.
      * @param space The space of the pipeline.
-     * @param useCase The use case attribute of the module to convert.
+     * @param useCases The use case attributes of the module to convert; absent use cases are
+     *   skipped.
      * @param loader For loading definition modules.
      * @param helper For mapping between data descriptions and features.
      * @return The runtime pipeline module.
      */
     public PipelineModule transform(final @NonNull MachineLearningModule module,
                                     final @NonNull Space space,
-                                    final @NonNull EStructuralFeature useCase,
+                                    final @NonNull List<EStructuralFeature> useCases,
                                     final @NonNull DefinitionModuleLoader loader,
                                     final @NonNull EAnnotationHelper helper) {
         this.space = space;
 
-        return checkConfiguredBy(new MLLModelConverter(loader, helper, space, useCase, this).convert(module));
+        return checkConfiguredBy(new MLLModelConverter(loader, helper, space, useCases, this).convert(module));
     }
 
     /**

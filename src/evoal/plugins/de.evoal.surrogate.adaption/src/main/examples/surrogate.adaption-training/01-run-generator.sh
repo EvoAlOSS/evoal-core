@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-# Generates the training data output/left.csv and output/right.csv from the Forrester function.
+# Generates the training data output/left.csv and output/right.csv and the test data
+# output/test.csv (the gap between them) from the Forrester function.
 
 set -e
 

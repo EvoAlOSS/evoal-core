@@ -123,6 +123,10 @@ public class MachineLearningLanguageSemanticSequencer extends GeneratorDSLSemant
 					sequence_LearningUseCaseRule(context, (Block) semanticObject); 
 					return; 
 				}
+				else if (rule == grammarAccess.getTestingUseCaseRuleRule()) {
+					sequence_TestingUseCaseRule(context, (Block) semanticObject); 
+					return; 
+				}
 				else break;
 			case ExecutionPackage.CALL_BUILTIN_FUNCTION:
 				sequence_CallBuiltInFunctionRule(context, (CallBuiltinFunction) semanticObject); 
@@ -342,7 +346,8 @@ public class MachineLearningLanguageSemanticSequencer extends GeneratorDSLSemant
 	 *         model=InstanceLiteralRule 
 	 *         gof=BodyRule? 
 	 *         learningUseCase=LearningUseCaseRule? 
-	 *         predictionUseCase=PredictionUseCaseRule?
+	 *         predictionUseCase=PredictionUseCaseRule? 
+	 *         testingUseCase=TestingUseCaseRule?
 	 *     )
 	 * </pre>
 	 */
@@ -400,6 +405,20 @@ public class MachineLearningLanguageSemanticSequencer extends GeneratorDSLSemant
 	 * </pre>
 	 */
 	protected void sequence_TaskDescriptionRule(ISerializationContext context, TaskDescription semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     TestingUseCaseRule returns Block
+	 *
+	 * Constraint:
+	 *     statements+=StatementRule*
+	 * </pre>
+	 */
+	protected void sequence_TestingUseCaseRule(ISerializationContext context, Block semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

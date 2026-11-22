@@ -45,7 +45,36 @@ public class TrainingTaskHelper {
         return inputs;
     }
 
+    /**
+     * Loads the training data of the learning task ({@code learning from [...]}).
+     *
+     * @param context The state of the interpreter, which holds the learning task.
+     * @return The data objects of all training files, file after file.
+     */
     public Stream<TypedEObject> loadInputStreams(final InterpreterState context) {
+        final TaskDescription task = (TaskDescription)context.getByName("learning-task");
+
+        return loadData(context, task.getLearningData());
+    }
+
+    /**
+     * Loads the test data of the learning task ({@code testing with [...]}).
+     *
+     * @param context The state of the interpreter, which holds the learning task.
+     * @return The data objects of all test files, file after file.
+     * @throws IllegalStateException if the learning task has no test data.
+     */
+    public Stream<TypedEObject> loadTestData(final InterpreterState context) {
+        final TaskDescription task = (TaskDescription)context.getByName("learning-task");
+
+        if(task.getTestingData().isEmpty()) {
+            throw new IllegalStateException("The testing use case needs test data: add 'testing with [\"<file>\"]' to 'specify learning-task' of the MLL file.");
+        }
+
+        return loadData(context, task.getTestingData());
+    }
+
+    private Stream<TypedEObject> loadData(final InterpreterState context, final EList<String> files) {
         final TaskDescription task = (TaskDescription)context.getByName("learning-task");
 
         // collect data to load and mapping from specifications to features
@@ -55,13 +84,13 @@ public class TrainingTaskHelper {
                     task.getOutputs().stream())
                     .toList();
 
-        final Space trainingSpace = provider.subSpaceOf(context.getSpace(), specifications);
-        final List<File> inputs = collectInputFiles(task.getLearningData());
+        final Space dataSpace = provider.subSpaceOf(context.getSpace(), specifications);
+        final List<File> inputs = collectInputFiles(files);
 
         Stream<@NonNull TypedEObject> result = Stream.empty();
 
         for(final File input : inputs) {
-            final Stream<TypedEObject> stream = load(input, trainingSpace);
+            final Stream<TypedEObject> stream = load(input, dataSpace);
             result = Stream.concat(result, stream);
         }
 

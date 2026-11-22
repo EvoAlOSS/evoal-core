@@ -156,13 +156,22 @@ public interface MllPackage extends EPackage {
 	int MACHINE_LEARNING_MODULE__PREDICTION_USE_CASE = BasePackage.MODULE_FEATURE_COUNT + 6;
 
 	/**
+	 * The feature id for the '<em><b>Testing Use Case</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MACHINE_LEARNING_MODULE__TESTING_USE_CASE = BasePackage.MODULE_FEATURE_COUNT + 7;
+
+	/**
 	 * The number of structural features of the '<em>Machine Learning Module</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MACHINE_LEARNING_MODULE_FEATURE_COUNT = BasePackage.MODULE_FEATURE_COUNT + 7;
+	int MACHINE_LEARNING_MODULE_FEATURE_COUNT = BasePackage.MODULE_FEATURE_COUNT + 8;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.mll.impl.TaskDescriptionImpl <em>Task Description</em>}' class.
@@ -335,6 +344,17 @@ public interface MllPackage extends EPackage {
 	EReference getMachineLearningModule_PredictionUseCase();
 
 	/**
+	 * Returns the meta object for the containment reference '{@link de.evoal.languages.model.mll.MachineLearningModule#getTestingUseCase <em>Testing Use Case</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Testing Use Case</em>'.
+	 * @see de.evoal.languages.model.mll.MachineLearningModule#getTestingUseCase()
+	 * @see #getMachineLearningModule()
+	 * @generated
+	 */
+	EReference getMachineLearningModule_TestingUseCase();
+
+	/**
 	 * Returns the meta object for class '{@link de.evoal.languages.model.mll.TaskDescription <em>Task Description</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -497,6 +517,14 @@ public interface MllPackage extends EPackage {
 		 * @generated
 		 */
 		EReference MACHINE_LEARNING_MODULE__PREDICTION_USE_CASE = eINSTANCE.getMachineLearningModule_PredictionUseCase();
+
+		/**
+		 * The meta object literal for the '<em><b>Testing Use Case</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MACHINE_LEARNING_MODULE__TESTING_USE_CASE = eINSTANCE.getMachineLearningModule_TestingUseCase();
 
 		/**
 		 * The meta object literal for the '{@link de.evoal.languages.model.mll.impl.TaskDescriptionImpl <em>Task Description</em>}' class.

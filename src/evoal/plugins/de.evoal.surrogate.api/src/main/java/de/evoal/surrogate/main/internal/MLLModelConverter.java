@@ -67,9 +67,9 @@ public class MLLModelConverter extends GeneratorSwitch<Object> {
     private final List<Runnable> referenceResolution = new LinkedList<>();
 
     /**
-     * The usecase attribute to convert.
+     * The use case attributes to convert, in the order in which they run.
      */
-    private final EStructuralFeature usecase;
+    private final List<EStructuralFeature> useCases;
 
     /**
      * The variable mapping from the input model to the output model.
@@ -86,18 +86,20 @@ public class MLLModelConverter extends GeneratorSwitch<Object> {
      */
     private final ModelTransformer transformer;
 
-    public MLLModelConverter(final DefinitionModuleLoader loader, final EAnnotationHelper helper, final Space space, final EStructuralFeature usecaseAttribute, final ModelTransformer transformer) {
+    public MLLModelConverter(final DefinitionModuleLoader loader, final EAnnotationHelper helper, final Space space, final List<EStructuralFeature> useCaseAttributes, final ModelTransformer transformer) {
         this.loader = loader;
         this.helper = helper;
         this.space = space;
-        this.usecase = usecaseAttribute;
+        this.useCases = useCaseAttributes;
         this.transformer = transformer;
         this.exprConverter = new ExpressionConverter(this);
         this.execConverter = new ExecutionModelConverter(variableMapping, exprConverter);
     }
 
     /**
-     * Actual conversion routine for converting the configured use-case.
+     * Converts the configured use cases: each use case that the module contains becomes a
+     *   function named after it (e.g. {@code learning}), and the main function calls them in
+     *   the configured order.
      *
      * @param inputModule A valid machine-learning module.
      * @return An equivalent pipeline module.
@@ -138,10 +140,22 @@ public class MLLModelConverter extends GeneratorSwitch<Object> {
         final ModelFunction gofFunction = createFunction(program, "goodness-of-fit", gofBlock);
         execConverter.setGofFunction(gofFunction);
 
-        // convert use-case pipeline and set as main
-        log.info("Converting usecase '{}'.", usecase.getName());
-        final Block usecaseStatements = (Block)inputModule.eGet(usecase);
-        final Block mainBlock = execConverter.caseBlock(usecaseStatements);
+        // convert the use cases and call them from main
+        final Block mainBlock = execFactory.createBlock();
+        for(final EStructuralFeature useCase : useCases) {
+            final Block useCaseStatements = (Block)inputModule.eGet(useCase);
+            if(useCaseStatements == null) {
+                continue;
+            }
+
+            final String name = useCase.getName().replace("UseCase", "");
+            log.info("Converting use case '{}'.", name);
+            final ModelFunction useCaseFunction = createFunction(program, name, execConverter.caseBlock(useCaseStatements));
+
+            final CallModelFunction call = execFactory.createCallModelFunction();
+            call.setFunction(useCaseFunction);
+            mainBlock.getStatements().add(call);
+        }
 
         final ModelFunction mainFunction = createFunction(program,"main", mainBlock);
 

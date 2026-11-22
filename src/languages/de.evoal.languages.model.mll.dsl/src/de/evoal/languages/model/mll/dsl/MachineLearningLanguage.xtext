@@ -30,6 +30,8 @@ MachineLearningModuleRule returns MachineLearningModule:
 				(learningUseCase=LearningUseCaseRule ';')?
 			
 				(predictionUseCase=PredictionUseCaseRule ';')?
+
+				(testingUseCase=TestingUseCaseRule ';')?
 	    	'end'
 	    )?
 	'}'
@@ -65,6 +67,13 @@ PreparationPipelineDefinitionRule returns generator::PipelineDefinition:
 LearningUseCaseRule returns execution::Block:
 	{execution::Block}
 	'specify' 'learning' 'begin'
+	  (statements += StatementRule)*
+	'end'
+;
+
+TestingUseCaseRule returns execution::Block:
+	{execution::Block}
+	'specify' 'testing' 'begin'
 	  (statements += StatementRule)*
 	'end'
 ;

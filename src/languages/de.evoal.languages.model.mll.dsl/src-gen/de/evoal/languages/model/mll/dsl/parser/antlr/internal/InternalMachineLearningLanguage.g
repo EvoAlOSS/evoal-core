@@ -302,14 +302,39 @@ ruleMachineLearningModuleRule returns [EObject current=null]
 					newLeafNode(otherlv_18, grammarAccess.getMachineLearningModuleRuleAccess().getSemicolonKeyword_11_3_1());
 				}
 			)?
-			otherlv_19='end'
+			(
+				(
+					(
+						{
+							newCompositeNode(grammarAccess.getMachineLearningModuleRuleAccess().getTestingUseCaseTestingUseCaseRuleParserRuleCall_11_4_0_0());
+						}
+						lv_testingUseCase_19_0=ruleTestingUseCaseRule
+						{
+							if ($current==null) {
+								$current = createModelElementForParent(grammarAccess.getMachineLearningModuleRuleRule());
+							}
+							set(
+								$current,
+								"testingUseCase",
+								lv_testingUseCase_19_0,
+								"de.evoal.languages.model.mll.dsl.MachineLearningLanguage.TestingUseCaseRule");
+							afterParserOrEnumRuleCall();
+						}
+					)
+				)
+				otherlv_20=';'
+				{
+					newLeafNode(otherlv_20, grammarAccess.getMachineLearningModuleRuleAccess().getSemicolonKeyword_11_4_1());
+				}
+			)?
+			otherlv_21='end'
 			{
-				newLeafNode(otherlv_19, grammarAccess.getMachineLearningModuleRuleAccess().getEndKeyword_11_4());
+				newLeafNode(otherlv_21, grammarAccess.getMachineLearningModuleRuleAccess().getEndKeyword_11_5());
 			}
 		)?
-		otherlv_20='}'
+		otherlv_22='}'
 		{
-			newLeafNode(otherlv_20, grammarAccess.getMachineLearningModuleRuleAccess().getRightCurlyBracketKeyword_12());
+			newLeafNode(otherlv_22, grammarAccess.getMachineLearningModuleRuleAccess().getRightCurlyBracketKeyword_12());
 		}
 	)
 ;
@@ -847,6 +872,70 @@ ruleLearningUseCaseRule returns [EObject current=null]
 		otherlv_5='end'
 		{
 			newLeafNode(otherlv_5, grammarAccess.getLearningUseCaseRuleAccess().getEndKeyword_5());
+		}
+	)
+;
+
+// Entry rule entryRuleTestingUseCaseRule
+entryRuleTestingUseCaseRule returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getTestingUseCaseRuleRule()); }
+	iv_ruleTestingUseCaseRule=ruleTestingUseCaseRule
+	{ $current=$iv_ruleTestingUseCaseRule.current; }
+	EOF;
+
+// Rule TestingUseCaseRule
+ruleTestingUseCaseRule returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			{
+				/* */
+			}
+			{
+				$current = forceCreateModelElement(
+					grammarAccess.getTestingUseCaseRuleAccess().getBlockAction_0(),
+					$current);
+			}
+		)
+		otherlv_1='specify'
+		{
+			newLeafNode(otherlv_1, grammarAccess.getTestingUseCaseRuleAccess().getSpecifyKeyword_1());
+		}
+		otherlv_2='testing'
+		{
+			newLeafNode(otherlv_2, grammarAccess.getTestingUseCaseRuleAccess().getTestingKeyword_2());
+		}
+		otherlv_3='begin'
+		{
+			newLeafNode(otherlv_3, grammarAccess.getTestingUseCaseRuleAccess().getBeginKeyword_3());
+		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getTestingUseCaseRuleAccess().getStatementsStatementRuleParserRuleCall_4_0());
+				}
+				lv_statements_4_0=ruleStatementRule
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getTestingUseCaseRuleRule());
+					}
+					add(
+						$current,
+						"statements",
+						lv_statements_4_0,
+						"de.evoal.languages.model.generator.dsl.GeneratorDSL.StatementRule");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)*
+		otherlv_5='end'
+		{
+			newLeafNode(otherlv_5, grammarAccess.getTestingUseCaseRuleAccess().getEndKeyword_5());
 		}
 	)
 ;

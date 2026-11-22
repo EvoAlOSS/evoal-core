@@ -66,9 +66,42 @@ module 'training-data' {
 		}
 	]
 
+	/**
+	 * The grid x:0 = 0.70, 0.71, ..., 0.80 in the gap of the training data and the Forrester
+	 * function on it.
+	 */
+	pipeline 'gap' [
+		step {
+			component 'sequence-generator' {
+				sequences := [
+					'expression-based-sequence' {
+						variable     := data 'k';
+						initial      := 70.0;
+						'expression' := data 'k' + 1.0;
+					},
+					'expression-based-sequence' {
+						variable     := data 'x:0';
+						initial      := 0.70;
+						'expression' := data 'k' / 100.0;
+					}
+				];
+			}
+
+			writes [data 'k', data 'x:0'];
+		}
+		step {
+			component forrester {}
+
+			reads [data 'x:0'];
+			writes [data 'y:0'];
+		}
+	]
+
 	// The training data leaves out (0.69, 0.81): the gap around the global minimum at 0.757.
+	// The test data lies in the gap, so testing shows how the surrogate extrapolates.
 	begin
 		write "output/left.csv" with 70 samples from executing ['left'];
 		write "output/right.csv" with 20 samples from executing ['right'];
+		write "output/test.csv" with 11 samples from executing ['gap'];
 	end
 }

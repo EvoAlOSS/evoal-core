@@ -14,7 +14,11 @@ module 'training' {
 
 		// the two grid segments of training-data.generator, without (0.69, 0.81)
 		learning from [ "output/left.csv", "output/right.csv" ]
-		serialise to "output/model.pson"
+
+		// the gap (0.69, 0.81); the default testing use case assesses the model on it
+		testing with [ "output/test.csv" ]
+
+		serialise to "output/model.pson" and "output/gof.json"
 	}
 
 	specify validation steps []

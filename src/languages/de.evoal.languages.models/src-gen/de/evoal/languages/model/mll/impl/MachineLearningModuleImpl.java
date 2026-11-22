@@ -34,6 +34,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *   <li>{@link de.evoal.languages.model.mll.impl.MachineLearningModuleImpl#getGof <em>Gof</em>}</li>
  *   <li>{@link de.evoal.languages.model.mll.impl.MachineLearningModuleImpl#getLearningUseCase <em>Learning Use Case</em>}</li>
  *   <li>{@link de.evoal.languages.model.mll.impl.MachineLearningModuleImpl#getPredictionUseCase <em>Prediction Use Case</em>}</li>
+ *   <li>{@link de.evoal.languages.model.mll.impl.MachineLearningModuleImpl#getTestingUseCase <em>Testing Use Case</em>}</li>
  * </ul>
  *
  * @generated
@@ -108,6 +109,16 @@ public class MachineLearningModuleImpl extends ModuleImpl implements MachineLear
 	 * @ordered
 	 */
 	protected PipelineDefinition predictionUseCase;
+
+	/**
+	 * The cached value of the '{@link #getTestingUseCase() <em>Testing Use Case</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTestingUseCase()
+	 * @generated
+	 * @ordered
+	 */
+	protected Block testingUseCase;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -449,6 +460,51 @@ public class MachineLearningModuleImpl extends ModuleImpl implements MachineLear
 	 * @generated
 	 */
 	@Override
+	public Block getTestingUseCase() {
+		return testingUseCase;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetTestingUseCase(Block newTestingUseCase, NotificationChain msgs) {
+		Block oldTestingUseCase = testingUseCase;
+		testingUseCase = newTestingUseCase;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MllPackage.MACHINE_LEARNING_MODULE__TESTING_USE_CASE, oldTestingUseCase, newTestingUseCase);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setTestingUseCase(Block newTestingUseCase) {
+		if (newTestingUseCase != testingUseCase) {
+			NotificationChain msgs = null;
+			if (testingUseCase != null)
+				msgs = ((InternalEObject)testingUseCase).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MllPackage.MACHINE_LEARNING_MODULE__TESTING_USE_CASE, null, msgs);
+			if (newTestingUseCase != null)
+				msgs = ((InternalEObject)newTestingUseCase).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MllPackage.MACHINE_LEARNING_MODULE__TESTING_USE_CASE, null, msgs);
+			msgs = basicSetTestingUseCase(newTestingUseCase, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, MllPackage.MACHINE_LEARNING_MODULE__TESTING_USE_CASE, newTestingUseCase, newTestingUseCase));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case MllPackage.MACHINE_LEARNING_MODULE__TASK:
@@ -465,6 +521,8 @@ public class MachineLearningModuleImpl extends ModuleImpl implements MachineLear
 				return basicSetLearningUseCase(null, msgs);
 			case MllPackage.MACHINE_LEARNING_MODULE__PREDICTION_USE_CASE:
 				return basicSetPredictionUseCase(null, msgs);
+			case MllPackage.MACHINE_LEARNING_MODULE__TESTING_USE_CASE:
+				return basicSetTestingUseCase(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -491,6 +549,8 @@ public class MachineLearningModuleImpl extends ModuleImpl implements MachineLear
 				return getLearningUseCase();
 			case MllPackage.MACHINE_LEARNING_MODULE__PREDICTION_USE_CASE:
 				return getPredictionUseCase();
+			case MllPackage.MACHINE_LEARNING_MODULE__TESTING_USE_CASE:
+				return getTestingUseCase();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -523,6 +583,9 @@ public class MachineLearningModuleImpl extends ModuleImpl implements MachineLear
 				return;
 			case MllPackage.MACHINE_LEARNING_MODULE__PREDICTION_USE_CASE:
 				setPredictionUseCase((PipelineDefinition)newValue);
+				return;
+			case MllPackage.MACHINE_LEARNING_MODULE__TESTING_USE_CASE:
+				setTestingUseCase((Block)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -557,6 +620,9 @@ public class MachineLearningModuleImpl extends ModuleImpl implements MachineLear
 			case MllPackage.MACHINE_LEARNING_MODULE__PREDICTION_USE_CASE:
 				setPredictionUseCase((PipelineDefinition)null);
 				return;
+			case MllPackage.MACHINE_LEARNING_MODULE__TESTING_USE_CASE:
+				setTestingUseCase((Block)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -583,6 +649,8 @@ public class MachineLearningModuleImpl extends ModuleImpl implements MachineLear
 				return learningUseCase != null;
 			case MllPackage.MACHINE_LEARNING_MODULE__PREDICTION_USE_CASE:
 				return predictionUseCase != null;
+			case MllPackage.MACHINE_LEARNING_MODULE__TESTING_USE_CASE:
+				return testingUseCase != null;
 		}
 		return super.eIsSet(featureID);
 	}

@@ -97,7 +97,7 @@ public interface TaskDescription extends NamedVariable {
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * 
-	 * A set of files (or directories) containing training data.
+	 * A set of files (or directories) containing test data.
 	 * 
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Testing Data</em>' attribute list.

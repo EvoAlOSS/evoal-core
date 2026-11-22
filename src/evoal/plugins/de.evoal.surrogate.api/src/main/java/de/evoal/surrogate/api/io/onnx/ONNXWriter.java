@@ -65,16 +65,18 @@ public class ONNXWriter implements ModelWriter {
 
     @Override
     public void addInputFeatureInformation(final EStructuralFeature feature, final Parameter value) {
-        this.inputInformation
-                .computeIfAbsent(feature.getName(), k -> new ArrayList<>())
-                .add(value);
+        // a name identifies the information: a second value replaces the first
+        final List<Parameter> information = this.inputInformation.computeIfAbsent(feature.getName(), k -> new ArrayList<>());
+        information.removeIf(p -> p.getName().equals(value.getName()));
+        information.add(value);
     }
 
     @Override
     public void addOutputFeatureInformation(final EStructuralFeature feature, final Parameter value) {
-        this.outputInformation
-                .computeIfAbsent(feature.getName(), k -> new ArrayList<>())
-                .add(value);
+        // a name identifies the information: a second value replaces the first
+        final List<Parameter> information = this.outputInformation.computeIfAbsent(feature.getName(), k -> new ArrayList<>());
+        information.removeIf(p -> p.getName().equals(value.getName()));
+        information.add(value);
     }
 
     @Override

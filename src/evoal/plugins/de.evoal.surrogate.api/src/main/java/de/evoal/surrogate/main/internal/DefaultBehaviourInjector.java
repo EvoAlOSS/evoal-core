@@ -3,17 +3,24 @@ package de.evoal.surrogate.main.internal;
 import de.evoal.languages.model.base.definitions.AttributeDefinition;
 import de.evoal.languages.model.base.definitions.ClassDefinition;
 import de.evoal.languages.model.base.definitions.DataDescription;
+import de.evoal.languages.model.base.definitions.FunctionDefinition;
 import de.evoal.languages.model.base.expressions.*;
 import de.evoal.languages.model.dl.DefinitionModule;
+import de.evoal.languages.model.execution.Block;
+import de.evoal.languages.model.execution.CallBuiltinFunction;
+import de.evoal.languages.model.execution.ExecutionFactory;
 import de.evoal.languages.model.generator.ConcreteStep;
+import de.evoal.languages.model.generator.PipelineStep;
 import de.evoal.languages.model.generator.GeneratorFactory;
 import de.evoal.languages.model.mll.MachineLearningModule;
 import de.evoal.pipeline.api.cdi.DefinitionModuleLoader;
+import de.evoal.surrogate.api.training.GoodnessOfFit;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import java.util.Collection;
@@ -30,6 +37,16 @@ public class DefaultBehaviourInjector {
      * For creating expression elements.
      */
     private final static ExpressionsFactory exprFactory = ExpressionsFactory.eINSTANCE;
+
+    /**
+     * The DL module of the {@code 'execute'} function.
+     */
+    private final static String PIPELINE_BASE = "de.evoal.pipeline.base";
+
+    /**
+     * The DL module of the surrogate pipeline components and functions.
+     */
+    private final static String SURROGATE_PIPELINE = "de.evoal.surrogate.pipeline";
 
     /**
      * For loading definition modules.
@@ -58,8 +75,8 @@ public class DefaultBehaviourInjector {
         log.info("Injecting default behaviour into machine learning module {}.", module.getName());
 
         injectDefaultPipelines(module);
-        injectDefaultPipelineComponents(module);
         injectAccessedData(module);
+        injectTestingUseCase(module);
 
         linkLearner(module);
     }
@@ -156,43 +173,111 @@ public class DefaultBehaviourInjector {
         }
     }
 
-    private void injectDefaultPipelineComponents(MachineLearningModule module) {
-        log.info("Injecting default components pipelines into machine learning module {}.", module.getName());
-        injectReaderComponentIntoLearningPipeline(module);
+    /**
+     * Adds the default testing use case if the learning task has test data
+     *   ({@code testing with [...]}) and the module does not write out the use case:
+     *
+     * <pre>
+     *   specify testing begin
+     *     'execute'([
+     *       step { component 'test-data-loader' {} writes [inputs, outputs] },
+     *       pipeline 'validation',
+     *       step { component 'assessment-data' { 'data-set' := "test"; } reads [inputs, outputs] }
+     *     ]);
+     *     'gof-calculator'();
+     *     'store-model'();
+     *   end;
+     * </pre>
+     */
+    private void injectTestingUseCase(final MachineLearningModule module) {
+        if(module.getTestingUseCase() != null || module.getTask().getTestingData().isEmpty()) {
+            return;
+        }
+
+        log.info("Adding the default testing use case for the test data {}.", module.getTask().getTestingData());
+
+        final DefinitionModule pipelineBase = findDefinitionModule(module, PIPELINE_BASE);
+        final DefinitionModule surrogatePipeline = findDefinitionModule(module, SURROGATE_PIPELINE);
+
+        final ConcreteStep loaderStep = concreteStep(findType(surrogatePipeline, "test-data-loader"));
+        loaderStep.getWrites().addAll(combinedSpaces());
+
+        final PipelineStep validationStep = GeneratorFactory.eINSTANCE.createPipelineStep();
+        validationStep.setDefinition(module.getValidation());
+
+        final ConcreteStep assessmentStep = concreteStep(findType(surrogatePipeline, "assessment-data"));
+        final StringLiteral dataSet = exprFactory.createStringLiteral();
+        dataSet.setLiteral(GoodnessOfFit.TEST);
+        final Attribute dataSetAttribute = exprFactory.createAttribute();
+        dataSetAttribute.setDefinition(assessmentStep.getInstance().getDefinition().findAttribute("data-set"));
+        dataSetAttribute.setValue(dataSet);
+        assessmentStep.getInstance().getAttributes().add(dataSetAttribute);
+        assessmentStep.getReads().addAll(combinedSpaces());
+
+        final Array steps = exprFactory.createArray();
+        steps.getValues().add(loaderStep);
+        steps.getValues().add(validationStep);
+        steps.getValues().add(assessmentStep);
+
+        final Block testing = ExecutionFactory.eINSTANCE.createBlock();
+        testing.getStatements().add(call(findFunction(pipelineBase, "execute"), steps));
+        testing.getStatements().add(call(findFunction(surrogatePipeline, "gof-calculator")));
+        testing.getStatements().add(call(findFunction(surrogatePipeline, "store-model")));
+
+        module.setTestingUseCase(testing);
     }
 
-    private void injectReaderComponentIntoLearningPipeline(final MachineLearningModule mlm) {
-        log.info("Injecting reader step into learning pipeline.");
-        final DefinitionModule pipeModule = loader.load(URI.createURI("classpath:/de/evoal/pipeline/io.dl"));
-        final ClassDefinition readerDefinition = pipeModule.getTypes()
-                .stream()
-                .filter(t -> "reader".equals(t.getName()))
-                .findFirst()
-                .get();
+    private static ConcreteStep concreteStep(final ClassDefinition type) {
+        final Instance instance = exprFactory.createInstance();
+        instance.setDefinition(type);
 
-        final AttributeDefinition filenameDefinition = readerDefinition.getAttributes()
-                .stream()
-                .filter(a -> "filename".equals(a.getName()))
-                .findFirst()
-                .get();
+        final ConcreteStep step = GeneratorFactory.eINSTANCE.createConcreteStep();
+        step.setInstance(instance);
 
-        final StringLiteral filenameLiteral = exprFactory.createStringLiteral();
-        filenameLiteral.setLiteral(mlm.getTask().getLearningData().get(0)); // TODO Merge multiple files
+        return step;
+    }
 
-        final Attribute filenameAttribute = exprFactory.createAttribute();
-        filenameAttribute.setDefinition(filenameDefinition);
-        filenameAttribute.setValue(filenameLiteral);
+    private static CallBuiltinFunction call(final FunctionDefinition function, final Expression... parameters) {
+        final CallBuiltinFunction call = ExecutionFactory.eINSTANCE.createCallBuiltinFunction();
+        call.setDefinition(function);
+        call.getParameters().addAll(List.of(parameters));
 
-        final Instance readerInstance = exprFactory.createInstance();
-        readerInstance.getAttributes().add(filenameAttribute);
-        readerInstance.setDefinition(readerDefinition);
+        return call;
+    }
 
-        final ConcreteStep readerStep = GeneratorFactory.eINSTANCE.createConcreteStep();
-        readerStep.getWrites()
-                  .addAll(combinedSpaces());
-        readerStep.setInstance(readerInstance);
+    /**
+     * Finds a DL module among the modules that the MLL file imports, or loads it from the class
+     *   path.
+     */
+    private DefinitionModule findDefinitionModule(final MachineLearningModule module, final String name) {
+        if(module.eResource() != null && module.eResource().getResourceSet() != null) {
+            for(final Resource resource : module.eResource().getResourceSet().getResources()) {
+                if(!resource.getContents().isEmpty()
+                        && resource.getContents().get(0) instanceof DefinitionModule definitions
+                        && name.equals(definitions.getName())) {
+                    return definitions;
+                }
+            }
+        }
 
-        // TODO mlm.getLearningUseCase().getSteps().add(0, readerStep);
+        log.info("Loading DL module '{}' for the default testing use case.", name);
+        return loader.load(URI.createURI("classpath:/" + name.replace('.', '/') + ".dl"));
+    }
+
+    private static ClassDefinition findType(final DefinitionModule module, final String name) {
+        return module.getTypes()
+                     .stream()
+                     .filter(t -> name.equals(t.getName()))
+                     .findFirst()
+                     .orElseThrow(() -> new IllegalStateException("DL module '" + module.getName() + "' has no type '" + name + "'."));
+    }
+
+    private static FunctionDefinition findFunction(final DefinitionModule module, final String name) {
+        return module.getFunctions()
+                     .stream()
+                     .filter(f -> name.equals(f.getName()))
+                     .findFirst()
+                     .orElseThrow(() -> new IllegalStateException("DL module '" + module.getName() + "' has no function '" + name + "'."));
     }
 
     private Collection<? extends TypeDefinitionReference> combinedSpaces() {
