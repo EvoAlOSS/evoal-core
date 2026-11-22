@@ -11,7 +11,7 @@ import org.eclipse.emf.ecore.EObject;
 import de.evoal.core.api.random.RandomService;
 import de.evoal.core.api.utils.AttributeHelper;
 import de.evoal.core.api.utils.Requirements;
-import de.evoal.pipeline.api.distribution.Distribution;
+import de.evoal.pipeline.api.distribution.UnivariateDistribution;
 
 /**
  * Normal distribution with mean {@code μ} and standard deviation {@code σ}. The random
@@ -19,7 +19,7 @@ import de.evoal.pipeline.api.distribution.Distribution;
  */
 @Named(NormalDistribution.NAME)
 @Dependent
-public class NormalDistribution implements Distribution {
+public class NormalDistribution implements UnivariateDistribution {
     /**
      * The CDI name of the distribution.
      */
@@ -46,16 +46,36 @@ public class NormalDistribution implements Distribution {
      */
     private double σ;
 
+    /**
+     * Creates a distribution that is configured by {@link #init(EObject)}.
+     */
+    public NormalDistribution() {
+    }
+
+    /**
+     * Creates a configured distribution, e.g., for tests.
+     *
+     * @throws IllegalArgumentException if σ is not positive.
+     */
+    NormalDistribution(final double μ, final double σ, final RandomGenerator randomness) {
+        configure(μ, σ);
+        this.randomness = randomness;
+    }
+
     @Override
     public NormalDistribution init(final EObject configuration) {
-        μ = helper.lookup(configuration, "μ");
-        σ = helper.lookup(configuration, "σ");
-        Requirements.requireTrue(σ > 0,
-                "The standard deviation σ of the normal distribution has to be positive, but is " + σ + ".");
-
+        configure(helper.lookup(configuration, "μ"), helper.lookup(configuration, "σ"));
         randomness = randomStreams.forNewInstance(NAME);
 
         return this;
+    }
+
+    private void configure(final double μ, final double σ) {
+        Requirements.requireTrue(σ > 0,
+                "The standard deviation σ of the normal distribution has to be positive, but is " + σ + ".");
+
+        this.μ = μ;
+        this.σ = σ;
     }
 
     @Override
@@ -63,5 +83,10 @@ public class NormalDistribution implements Distribution {
         final double standardNormal = randomness.nextGaussian();
 
         return new double[] {μ + σ * standardNormal};
+    }
+
+    @Override
+    public double quantile(final double p) {
+        return μ + σ * StandardNormal.quantile(p);
     }
 }

@@ -1,0 +1,82 @@
+import "definitions" from 'de.evoal.core.math';
+import "definitions" from 'de.evoal.pipeline.base';
+import "definitions" from 'de.evoal.pipeline.distributions';
+import "definitions" from 'de.evoal.pipeline.io';
+import "definitions" from 'de.evoal.pipeline.statistics';
+
+import "data" from points;
+
+module 'points' {
+	/**
+	 * A standard normal x and a log-normal y, coupled by a Gaussian copula with the
+	 *   correlation 0.8 of the normal scores. The copula transforms the points of a randomly
+	 *   shifted Sobol' sequence on the unit square.
+	 */
+	pipeline 'copula-pipeline' [
+		step {
+			component 'distribution-based-data' {
+				distributions := [
+					'copula-distribution' {
+						copula := 'gaussian-copula' {
+							correlation := [
+								[1.0, 0.8],
+								[0.8, 1.0]
+							];
+						};
+						marginals := [
+							'normal-distribution' {
+								'μ' := 0.0;
+								'σ' := 1.0;
+							},
+							'log-normal-distribution' {
+								'μ' := 0.0;
+								'σ' := 0.5;
+							}
+						];
+						points := 'sobol-sequence' {
+							'lower' := [0.0, 0.0];
+							'upper' := [1.0, 1.0];
+							'randomisation' := 'random-shift' {};
+						};
+					}
+				];
+			}
+
+			writes [data 'x', data 'y'];
+		}
+	]
+
+	/**
+	 * Estimates Pearson's correlation of the generated data.
+	 */
+	pipeline 'estimate-pipeline' [
+		step {
+			component 'reader' {
+				filename := "output/points.csv";
+			}
+
+			writes [data 'x', data 'y'];
+		}
+		step {
+			component 'correlation-estimation' {
+				result := "correlations";
+				'minimum-correlation' := 0.0;
+				'confidence-level' := 0.95;
+			}
+
+			reads [data 'x', data 'y'];
+		}
+		step {
+			component 'csv-writer' {
+				name := "correlations";
+				filename := "output/correlations.csv";
+			}
+		}
+	]
+
+	begin
+		// 2^10 points: the Sobol' points are evenly balanced for powers of two
+		write "output/points.csv" with 1024 samples from executing ['copula-pipeline'];
+		execute("estimate-pipeline");
+	end
+}

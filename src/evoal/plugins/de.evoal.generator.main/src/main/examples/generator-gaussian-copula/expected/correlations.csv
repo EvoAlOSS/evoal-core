@@ -1,0 +1,2 @@
+first,second,firstLower,firstUpper,secondLower,secondUpper,ranged,kind,n,coefficient,absoluteCoefficient,confidenceLower,confidenceUpper,confidenceLevel,intervalMethod
+x,y,,,,,false,pearson,1024,0.7543120545807402,0.7543120545807402,0.7266280281738048,0.7795504992103884,0.95,fisher

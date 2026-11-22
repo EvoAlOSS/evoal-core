@@ -2,62 +2,32 @@ package de.evoal.pipeline.impl.components.distributions;
 
 import java.util.random.RandomGenerator;
 
-import jakarta.inject.Inject;
-
 import lombok.NonNull;
 import org.eclipse.emf.ecore.EObject;
 
 import de.evoal.core.api.cdi.BeanFactory;
-import de.evoal.core.api.languages.AttributeEvaluator;
 import de.evoal.core.api.utils.Requirements;
-import de.evoal.pipeline.api.distribution.Distribution;
 import de.evoal.pipeline.api.distribution.Randomisation;
 
 /**
  * Base class of the low-discrepancy sequences (DL type {@code 'low-discrepancy-sequence'}).
- *   Each {@link #sample()} takes the next point of the unit cube [0, 1)^d from the subclass
- *   ({@link #next()}), randomises it ({@link Randomisation}) and scales it to the box
- *   [lower, upper).
- * <p>
- * Every instance takes its own random stream ({@link RandomStreams}), also without
- *   randomisation, so the streams of the other instances do not depend on the chosen
- *   randomisations.
+ *   Each point is the next point of the sequence ({@link #next()}), randomised by the
+ *   configured {@link Randomisation}, which the random stream of the instance drives.
  */
-public abstract class LowDiscrepancySequence implements Distribution {
-    @Inject
-    private AttributeEvaluator evaluator;
-
-    /**
-     * The lower bounds (inclusive) of the box.
-     */
-    private double [] lower;
-
+public abstract class LowDiscrepancySequence extends UniformPointSetBase {
     /**
      * The randomisation of the points.
      */
     private Randomisation randomisation;
 
-    @Inject
-    private RandomStreams randomStreams;
-
-    /**
-     * The upper bounds (exclusive) of the box.
-     */
-    private double [] upper;
-
     @Override
-    public LowDiscrepancySequence init(final EObject configuration) {
-        final double [] lower = evaluator.attributeToDoubleArray(configuration, "lower");
-        final double [] upper = evaluator.attributeToDoubleArray(configuration, "upper");
-        final Randomisation randomisation = BeanFactory.createComponentForAttribute(Randomisation.class, configuration, "randomisation");
-
-        configure(lower, upper, randomisation, randomStreams.forNewInstance(name()));
-
-        return this;
+    protected void configurePoints(final EObject configuration, final RandomGenerator randomness) {
+        configureSequence(BeanFactory.createComponentForAttribute(Randomisation.class, configuration, "randomisation"), randomness);
     }
 
     /**
-     * Checks and sets the configuration and prepares the sequence and the randomisation.
+     * Checks and sets the configuration and prepares the sequence and the randomisation, e.g.,
+     *   for tests.
      *
      * @param lower The lower bounds (inclusive).
      * @param upper The upper bounds (exclusive).
@@ -68,55 +38,24 @@ public abstract class LowDiscrepancySequence implements Distribution {
      */
     protected void configure(final double @NonNull [] lower, final double @NonNull [] upper, final @NonNull Randomisation randomisation,
                              final @NonNull RandomGenerator randomness) {
-        final String type = typeName();
-        Requirements.requireTrue(lower.length == upper.length,
-                "The " + type + " has " + lower.length + " lower but " + upper.length + " upper bounds.");
-        Requirements.requireTrue(lower.length >= 1 && lower.length <= maximumDimension(),
-                "The " + type + " supports 1 to " + maximumDimension() + " dimensions, but has " + lower.length + ".");
+        configureBox(lower, upper);
+        configureSequence(randomisation, randomness);
+    }
 
-        for(int j = 0; j < lower.length; ++j) {
-            Requirements.requireTrue(lower[j] < upper[j],
-                    "The lower bound of dimension " + j + " of the " + type + " (" + lower[j]
-                    + ") has to be less than its upper bound (" + upper[j] + ").");
-        }
-
+    private void configureSequence(final @NonNull Randomisation randomisation, final @NonNull RandomGenerator randomness) {
         Requirements.requireTrue(supports(randomisation),
-                "The " + type + " does not support the randomisation " + randomisation.getClass().getSimpleName() + ".");
+                "The " + typeName() + " does not support the randomisation " + randomisation.getClass().getSimpleName() + ".");
 
-        this.lower = lower.clone();
-        this.upper = upper.clone();
         this.randomisation = randomisation;
 
-        start(lower.length);
-        randomisation.prepare(lower.length, randomness);
+        start(dimension());
+        randomisation.prepare(dimension(), randomness);
     }
 
     @Override
-    public double [] sample() {
-        final double [] point = randomisation.apply(next());
-
-        for(int j = 0; j < point.length; ++j) {
-            // the product can round up to the upper bound, which is excluded
-            point[j] = Math.min(lower[j] + point[j] * (upper[j] - lower[j]), Math.nextDown(upper[j]));
-        }
-
-        return point;
+    protected double [] nextUnitPoint() {
+        return randomisation.apply(next());
     }
-
-    /**
-     * @return The CDI name of the sequence, which also names its random streams.
-     */
-    protected abstract String name();
-
-    /**
-     * @return The name of the sequence for messages, e.g., "Sobol' sequence".
-     */
-    protected abstract String typeName();
-
-    /**
-     * @return The largest dimension the sequence supports.
-     */
-    protected abstract int maximumDimension();
 
     /**
      * Prepares the sequence. Called once, before the first point.

@@ -13,6 +13,10 @@ module 'de.evoal.pipeline.distributions' {
 
     /**
      * Multivariate normal distribution.
+     *
+     * A 'copula-distribution' with a 'gaussian-copula' and normal marginals gives the same
+     *   data; it takes the correlation matrix and the standard deviations instead of the
+     *   covariance matrix. Use the copula for correlated data with other marginals.
      */
 	type 'multivariate-normal-distribution' extends distribution {
 	    /**
@@ -27,9 +31,15 @@ module 'de.evoal.pipeline.distributions' {
 	}
 
 	/**
+	 * Base type for distributions of one value that have a quantile function (inverse
+	 *   distribution function) F⁻¹. A 'copula-distribution' uses them as marginals.
+	 */
+	abstract type 'univariate-distribution' extends distribution {}
+
+	/**
 	 * A distribution specification.
 	 */
-	type 'normal-distribution' extends distribution {
+	type 'normal-distribution' extends 'univariate-distribution' {
 		/**
 		 * The distribution's expected value.
 		 */
@@ -44,7 +54,7 @@ module 'de.evoal.pipeline.distributions' {
 	/**
 	 * Specification for uniform distribution.
 	 */
-	type 'uniform-distribution' extends distribution {
+	type 'uniform-distribution' extends 'univariate-distribution' {
 	    /**
 	    * parameter for lower bound
 	    */
@@ -56,6 +66,44 @@ module 'de.evoal.pipeline.distributions' {
 	}
 
 	/**
+	 * Log-normal distribution: ln X is normally distributed with mean μ and standard deviation
+	 *   σ, so X is positive and skewed to the right, with median exp(μ).
+	 */
+	type 'log-normal-distribution' extends 'univariate-distribution' {
+		/**
+		 * The mean of ln X.
+		 */
+		'μ' : real;
+
+		/**
+		 * The standard deviation of ln X, positive.
+		 */
+		'σ' : real;
+	}
+
+	/**
+	 * Base type for sets of points in the box [lower, upper) whose coordinates are uniformly
+	 *   distributed. Each sample is the next point.
+	 */
+	abstract type 'uniform-point-set' extends distribution {
+		/**
+		 * The lower bound (inclusive) of every dimension. Its length is the dimension of the
+		 *   points.
+		 */
+		'lower' : array real;
+
+		/**
+		 * The upper bound (exclusive) of every dimension, one entry per lower bound.
+		 */
+		'upper' : array real;
+	}
+
+	/**
+	 * Independent uniform random points in the box.
+	 */
+	type 'random-points' extends 'uniform-point-set' {}
+
+	/**
 	 * Base type for low-discrepancy sequences: point sets that cover the box [lower, upper)
 	 *   more evenly than independent uniform samples. Each sample is the next point of the
 	 *   sequence, so the i-th row gets the i-th point.
@@ -64,18 +112,7 @@ module 'de.evoal.pipeline.distributions' {
 	 *   for several data return the same points (up to their randomisation), so the data
 	 *   would be strongly correlated.
 	 */
-	abstract type 'low-discrepancy-sequence' extends distribution {
-		/**
-		 * The lower bound (inclusive) of every dimension. Its length is the dimension of the
-		 *   sequence.
-		 */
-		'lower' : array real;
-
-		/**
-		 * The upper bound (exclusive) of every dimension, one entry per lower bound.
-		 */
-		'upper' : array real;
-
+	abstract type 'low-discrepancy-sequence' extends 'uniform-point-set' {
 		/**
 		 * How the points are randomised. A sequence rejects randomisations that it does not
 		 *   support.
@@ -115,6 +152,67 @@ module 'de.evoal.pipeline.distributions' {
 	 */
 	@Literature { keys := ["cranley1976randomization"]; }
 	type 'random-shift' extends randomisation {}
+
+	/**
+	 * Base type for copulas: joint distributions on the unit cube whose marginals are uniform.
+	 *   A copula maps a point of [0, 1)^k to d dependent uniform values, one per marginal of
+	 *   its 'copula-distribution'.
+	 */
+	abstract type copula extends configuration {}
+
+	/**
+	 * Keeps the point (k = d), so the values are independent. With a low-discrepancy sequence
+	 *   as points, this gives evenly covering data with any marginals.
+	 */
+	type 'independence-copula' extends copula {}
+
+	/**
+	 * Gaussian copula (k = d): a point u becomes Φ(A·z) with z = Φ⁻¹(u) and A·Aᵀ = R.
+	 *
+	 * R is the correlation of the normal scores Φ⁻¹(U), not of the data: with normal
+	 *   marginals, the data has the Pearson correlation R; with other marginals, Pearson's
+	 *   coefficient differs. The rank correlations follow from R for any marginals:
+	 *   Spearman ρ_S = (6/π)·arcsin(ρ/2) and Kendall τ = (2/π)·arcsin(ρ).
+	 */
+	@Literature { keys := ["kruskal1958ordinal"]; }
+	type 'gaussian-copula' extends copula {
+		/**
+		 * The correlation matrix R, one row and column per marginal: symmetric, with ones on
+		 *   the diagonal, and positive semi-definite. It is rejected otherwise, not repaired.
+		 */
+		correlation : array array real;
+	}
+
+	/**
+	 * Couples univariate marginals by a copula (Sklar's theorem). Each sample takes the next
+	 *   point of 'points', applies the copula, and maps the j-th value u_j to F_j⁻¹(u_j) of the
+	 *   j-th marginal.
+	 *
+	 * A coordinate 0 maps to −∞ for a marginal without a lower bound, e.g. for the first point
+	 *   of a Sobol' sequence with 'no-randomisation'; the run then stops with an error. Use
+	 *   'random-shift' in this case.
+	 *
+	 * Every marginal draws from its own random stream, so a later distribution of the same type
+	 *   in the configuration gets the next stream.
+	 */
+	@Literature { keys := ["sklar1959fonctions", "nelsen2006introduction", "joe2014dependence"]; }
+	type 'copula-distribution' extends distribution {
+		/**
+		 * The copula that couples the marginals.
+		 */
+		copula : instance copula;
+
+		/**
+		 * The marginals, one per value of a sample.
+		 */
+		marginals : array instance 'univariate-distribution';
+
+		/**
+		 * The points the copula transforms: on the unit cube (every lower bound 0, every upper
+		 *   bound 1), with as many dimensions as the copula needs.
+		 */
+		points : instance 'uniform-point-set';
+	}
 
 	/**
 	 * Fills the written data of a row with samples of the distributions.

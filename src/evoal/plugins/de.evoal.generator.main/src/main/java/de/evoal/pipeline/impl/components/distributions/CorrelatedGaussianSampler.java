@@ -50,10 +50,21 @@ final class CorrelatedGaussianSampler {
      * @throws IllegalArgumentException if the covariance matrix does not fulfil these requirements.
      */
     CorrelatedGaussianSampler(final double @NonNull [] means, final double @NonNull [][] covariance) {
-        requireMatchingSizes(means, covariance);
+        this(means, covariance, "covariance matrix");
+    }
+
+    /**
+     * @param means The means of the distribution.
+     * @param covariance The covariance matrix: square, of the size of {@code means},
+     *   symmetric, and positive semi-definite.
+     * @param matrixName The name of the matrix in error messages, e.g., "correlation matrix".
+     * @throws IllegalArgumentException if the covariance matrix does not fulfil these requirements.
+     */
+    CorrelatedGaussianSampler(final double @NonNull [] means, final double @NonNull [][] covariance, final @NonNull String matrixName) {
+        requireMatchingSizes(means, covariance, matrixName);
 
         this.means = means.clone();
-        this.samplingMatrix = toSamplingMatrix(covariance);
+        this.samplingMatrix = toSamplingMatrix(covariance, matrixName);
     }
 
     /**
@@ -69,14 +80,14 @@ final class CorrelatedGaussianSampler {
     /**
      * Ensures that the covariance matrix has one row and one column per mean.
      */
-    private static void requireMatchingSizes(final double [] means, final double [][] covariance) {
+    private static void requireMatchingSizes(final double [] means, final double [][] covariance, final String matrixName) {
         final int size = means.length;
         Requirements.requireTrue(covariance.length == size,
-                "The covariance matrix has " + covariance.length + " rows, but there are " + size + " means.");
+                "The " + matrixName + " has " + covariance.length + " rows, but there are " + size + " means.");
 
         for(final double [] row : covariance) {
             Requirements.requireTrue(row.length == size,
-                    "The covariance matrix has a row with " + row.length + " columns, but there are "
+                    "The " + matrixName + " has a row with " + row.length + " columns, but there are "
                     + size + " means.");
         }
     }
@@ -92,6 +103,15 @@ final class CorrelatedGaussianSampler {
             standardNormals[i] = randomness.nextGaussian();
         }
 
+        return transform(standardNormals);
+    }
+
+    /**
+     * Turns independent standard normal numbers into a sample: {@code means + A·z}.
+     *
+     * @param standardNormals The numbers z, one per mean.
+     */
+    double [] transform(final double @NonNull [] standardNormals) {
         final double [] sample = samplingMatrix.operate(standardNormals);
         for(int i = 0; i < sample.length; ++i) {
             sample[i] += means[i];
@@ -105,10 +125,10 @@ final class CorrelatedGaussianSampler {
      *
      * @throws IllegalArgumentException if the matrix is not symmetric or not positive semi-definite.
      */
-    private static RealMatrix toSamplingMatrix(final double [][] covariance) {
+    private static RealMatrix toSamplingMatrix(final double [][] covariance, final String matrixName) {
         final RealMatrix covarianceMatrix = MatrixUtils.createRealMatrix(covariance);
         final boolean isSymmetric = MatrixUtils.isSymmetric(covarianceMatrix, RELATIVE_SYMMETRY_TOLERANCE);
-        Requirements.requireTrue(isSymmetric, "The covariance matrix is not symmetric.");
+        Requirements.requireTrue(isSymmetric, "The " + matrixName + " is not symmetric.");
 
         final EigenDecomposition decomposition = new EigenDecomposition(covarianceMatrix);
         final double [] eigenvalues = decomposition.getRealEigenvalues();
@@ -117,9 +137,10 @@ final class CorrelatedGaussianSampler {
         final double [] roots = new double[eigenvalues.length];
         for(int i = 0; i < eigenvalues.length; ++i) {
             Requirements.requireTrue(eigenvalues[i] >= -tolerance,
-                    "The covariance matrix is not positive semi-definite (eigenvalue " + eigenvalues[i] + ").");
+                    "The " + matrixName + " is not positive semi-definite (eigenvalue " + eigenvalues[i] + ").");
 
-            roots[i] = Math.sqrt(Math.max(0.0, eigenvalues[i]));
+            // a rounding error of 1e-16 would otherwise contribute its root, 1e-8
+            roots[i] = eigenvalues[i] <= tolerance ? 0.0 : Math.sqrt(eigenvalues[i]);
         }
 
         final RealMatrix eigenvectors = decomposition.getV();

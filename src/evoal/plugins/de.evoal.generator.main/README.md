@@ -68,7 +68,7 @@ set once per execution (`write` or `execute`); a later execution replaces it.
 
 | DL module | Components |
 |---|---|
-| `de.evoal.pipeline.distributions` | `'distribution-based-data'` (processor), `'noise-data'`; distributions `'normal-distribution'`, `'uniform-distribution'`, `'multivariate-normal-distribution'`, `'sobol-sequence'`; randomisations `'no-randomisation'`, `'random-shift'` |
+| `de.evoal.pipeline.distributions` | `'distribution-based-data'` (processor), `'noise-data'`; distributions `'normal-distribution'`, `'uniform-distribution'`, `'log-normal-distribution'`, `'multivariate-normal-distribution'`, `'copula-distribution'`; point sets `'random-points'`, `'sobol-sequence'`; randomisations `'no-randomisation'`, `'random-shift'`; copulas `'independence-copula'`, `'gaussian-copula'` |
 | `de.evoal.pipeline.benchmarks` | `ackley`, `forrester`, `rastrigin`, `rosenbrock`, `'weighted-sphere'`, `zdt1` |
 | `de.evoal.pipeline.sequences` | `'sequence-generator'` (processor) with `'expression-based-sequence'` |
 | `de.evoal.pipeline.io` | `reader` (source), `writer`, `empty`, sinks `template` and `'csv-writer'` |
@@ -76,12 +76,17 @@ set once per execution (`write` or `execute`); a later execution replaces it.
 | `de.evoal.pipeline.misc` | `constants`, `limit`, filters `'condition-filter'`, `'constraint-validation'` and `'rejection-sampling'` |
 | `de.evoal.pipeline.optimisation` | `'benchmark-function'`: the benchmarks as optimisation function of a search |
 
-### Low-discrepancy sequences
+### Uniform point sets and low-discrepancy sequences
 
-A `'low-discrepancy-sequence'` is a distribution whose samples are the points of a sequence that
-covers the box [`lower`, `upper`) more evenly than independent uniform samples; the i-th row gets
-the i-th point. `LowDiscrepancySequence` checks the bounds (one pair per dimension), takes the
-next point of [0, 1)^d from the subclass, randomises it and scales it to the box.
+A `'uniform-point-set'` (`UniformPointSet`) is a distribution whose samples are points of the box
+[`lower`, `upper`) with uniformly distributed coordinates. `UniformPointSetBase` checks the bounds
+(one pair per dimension), takes the next point of [0, 1)^d from the subclass and scales it to the
+box. `'random-points'` (`RandomPoints`) draws independent uniform coordinates from its own random
+stream.
+
+A `'low-discrepancy-sequence'` is a uniform point set whose points cover the box more evenly than
+independent uniform samples; the i-th row gets the i-th point. `LowDiscrepancySequence` takes the
+next point of the sequence from the subclass and randomises it.
 
 - `'sobol-sequence'` (`SobolSequence`): Sobol' (1967) with the direction numbers of Joe and Kuo
   (2008) from Commons Math (`SobolSequenceGenerator`), up to 1000 dimensions. The first point,
@@ -95,6 +100,36 @@ next point of [0, 1)^d from the subclass, randomises it and scales it to the box
 - Every sequence takes its own random stream (`RandomStreams`), also without randomisation.
 - One sequence has to fill all data that should cover the box together: separate sequences
   return the same points (up to their shifts), so their data would be strongly correlated.
+
+### Copulas
+
+A `'copula-distribution'` (`CopulaDistribution`) couples univariate marginals by a copula
+(Sklar 1959; Nelsen 2006; Joe 2014): a sample takes the next point of `points`, applies the
+`copula` and maps the j-th value uⱼ to the quantile Fⱼ⁻¹(uⱼ) of the j-th marginal. None of the
+three attributes has a default.
+
+- Marginals are `'univariate-distribution'`s (`UnivariateDistribution`, with `quantile`):
+  `'normal-distribution'`, `'uniform-distribution'` and `'log-normal-distribution'` (μ and σ of
+  ln X). Φ and Φ⁻¹ come from Commons Math (`StandardNormal`); in the far tails (p < 1e-10), Φ⁻¹
+  loses relative precision, but its absolute error stays around 1e-7.
+- `points` is a uniform point set on the unit cube (every lower bound 0, every upper bound 1)
+  with as many dimensions as the copula needs (`Copula.pointDimension`); otherwise the
+  configuration is rejected. With `'random-points'` the data is random, with a low-discrepancy
+  sequence it covers the distribution evenly.
+- `'independence-copula'` keeps the point. With a Sobol' sequence, this gives evenly covering
+  data with any marginals.
+- `'gaussian-copula'` (`GaussianCopula`) takes the correlation matrix R of the normal scores and
+  maps u to Φ(A·Φ⁻¹(u)) with the symmetric square root A of R (`CorrelatedGaussianSampler`,
+  which also accepts a singular R). R has to be symmetric, with ones on the diagonal and positive
+  semi-definite; it is rejected otherwise, not repaired. With normal marginals, the data has the
+  Pearson correlation R; for any marginals, Spearman ρ_S = (6/π)·arcsin(ρ/2) and Kendall
+  τ = (2/π)·arcsin ρ (Kruskal 1958).
+- A non-finite value stops the run with an error: a coordinate 0 maps to −∞ for a marginal
+  without lower bound, e.g. for the first point of a Sobol' sequence with `'no-randomisation'`.
+- Every marginal takes a stream of its type, so a later distribution of the same type in the
+  configuration gets the next stream.
+- `'multivariate-normal-distribution'` gives the same data as a Gaussian copula with normal
+  marginals; it takes the covariance matrix instead of the correlation matrix and the marginals.
 
 ### `'correlation-estimation'`
 
@@ -144,5 +179,6 @@ nested values are rejected; an empty list writes an empty file.
 | `generator-constraints` | keeping the samples that satisfy the DDL constraints (`'constraint-validation'`) |
 | `generator-rejection-sampling` | data with the density 2x by rejection sampling (`'rejection-sampling'`) |
 | `generator-sobol-sequence` | evenly covering data from a randomly shifted Sobol' sequence, compared with uniform data |
+| `generator-gaussian-copula` | a normal and a log-normal variable coupled by a Gaussian copula on Sobol' points; Pearson vs. Spearman |
 | `correlation-estimation` | estimating correlations from data, rendering them into a DDL module and using them in a search |
 | `search-with-benchmark`, `search-with-benchmark-and-target`, `search-with-benchmark-and-training` | the benchmarks as optimisation function |
