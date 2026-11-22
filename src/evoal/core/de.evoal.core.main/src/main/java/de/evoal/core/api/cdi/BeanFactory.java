@@ -7,6 +7,8 @@ import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Collection;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Consumer;
@@ -228,9 +230,22 @@ public final class BeanFactory {
         return BeanProvider.injectFields(instance);
     }
 
-    public static <T extends Validator> Collection<? extends T> createComponents(final Class<T> clazz) {
+    /**
+     * Orders beans by the fully-qualified name of their bean class.
+     */
+    static final Comparator<Bean<?>> BY_CLASS_NAME = Comparator.comparing(bean -> bean.getBeanClass().getName());
+
+    /**
+     * Creates a reference to every bean of a validator type.
+     *
+     * @param clazz The validator type.
+     * @return The validators, ordered by the name of their bean class. The order does not depend
+     *   on the order in which the CDI container finds the beans.
+     */
+    public static <T extends Validator> List<? extends T> createComponents(final Class<T> clazz) {
         return BeanProvider.getBeanDefinitions(clazz, true, true)
                 .stream()
+                .sorted(BY_CLASS_NAME)
                 .peek(b -> log.info("Creating bean {}.", b.getBeanClass().getSimpleName()))
                 .map(bean -> BeanProvider.getContextualReference(clazz, bean))
                 .toList();
