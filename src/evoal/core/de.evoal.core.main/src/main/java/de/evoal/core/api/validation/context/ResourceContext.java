@@ -14,10 +14,21 @@ public class ResourceContext extends DiagnosticsContext {
         this.resource = resource;
     }
 
+    /**
+     * @return The file relative to the working directory, e.g. {@code File: "search.ol"}; for
+     *   a file in an archive (e.g. the DL file of a plugin) its path in the archive, e.g.
+     *   {@code File: "de/evoal/optimisation/ea/optimisation.dl"}.
+     */
     @Override
     public String toString() {
-        if (resource == null || this.resource.getURI() == null || this.resource.getURI().toFileString() == null) {
+        if (resource == null || this.resource.getURI() == null) {
             return "File: Unknown";
+        }
+
+        if (this.resource.getURI().toFileString() == null) {
+            final String uri = this.resource.getURI().toString();
+            final int entry = uri.lastIndexOf("!/");
+            return "File: \"" + (entry < 0 ? uri : uri.substring(entry + 2)) + "\"";
         }
 
         final Path localDir = Paths.get(".").toAbsolutePath();

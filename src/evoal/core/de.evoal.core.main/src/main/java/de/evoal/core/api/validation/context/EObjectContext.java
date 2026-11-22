@@ -3,6 +3,8 @@ package de.evoal.core.api.validation.context;
 import lombok.Getter;
 import lombok.NonNull;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 
 public class EObjectContext extends DiagnosticsContext {
     @Getter
@@ -47,7 +49,14 @@ public class EObjectContext extends DiagnosticsContext {
         return new EObjectContext(context, p, object);
     }
 
+    /**
+     * @return The file, the line of the object (if it was parsed) and the path, e.g.
+     *   {@code File: "search.ol" Line: 12 Path: "algorithm.mutation.probability"}.
+     */
     public String toString() {
-        return context.toString() + " Path: \"" + path + "\"";
+        final INode node = NodeModelUtils.findActualNodeFor(object);
+        final String line = node == null ? "" : " Line: " + node.getStartLine();
+
+        return context.toString() + line + " Path: \"" + path + "\"";
     }
 }
