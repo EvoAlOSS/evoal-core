@@ -93,7 +93,7 @@
       "steps" : false
     }
   } ],
-  "citations" : [ "berger2024evoal" ],
+  "citations" : [ "berger2024evoal", "smola2004tutorial", "flake2002efficient", "burges1998tutorial", "platt1998sequential", "fan2005working", "bordes2005fast", "glasmachers2008second", "chang2011libsvm" ],
   "searchSpace" : [ {
     "name" : "x:0",
     "type" : "real",

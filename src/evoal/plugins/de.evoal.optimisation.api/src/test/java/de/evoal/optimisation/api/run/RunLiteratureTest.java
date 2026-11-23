@@ -28,6 +28,7 @@ import org.junit.jupiter.api.io.TempDir;
 import org.mockito.Mockito;
 
 import de.evoal.core.api.languages.AttributeEvaluator;
+import de.evoal.core.api.literature.LiteratureContributor;
 import de.evoal.languages.model.base.definitions.ClassDefinition;
 import de.evoal.languages.model.base.definitions.FunctionDefinition;
 import de.evoal.languages.model.base.expressions.Call;
@@ -104,6 +105,7 @@ public class RunLiteratureTest {
 
         // the components read the attributes with their defaults; the test stores them directly
         final AttributeEvaluator evaluator = Mockito.mock(AttributeEvaluator.class);
+        Mockito.when(evaluator.readAttribute(Mockito.any(), Mockito.any())).thenCallRealMethod();
         Mockito.when(evaluator.attributeToJava(Mockito.any(), Mockito.anyString(), Mockito.any()))
                .thenAnswer(invocation -> {
                    final EObject configuration = invocation.getArgument(0);
@@ -113,6 +115,7 @@ public class RunLiteratureTest {
 
         inject(literature, "constraintCompiler", compiler);
         inject(literature, "evaluator", evaluator);
+        inject(literature, "contributors", List.of());
     }
 
     private ClassDefinition type(final String name) {
@@ -181,6 +184,22 @@ public class RunLiteratureTest {
 
         // then: the EvoAl paper of core.main first, then in the order of the configuration
         Assertions.assertEquals(List.of("berger2024evoal", "algorithm2000paper", "operator2001paper", "base2002paper"),
+                                keys);
+    }
+
+    @Test
+    public void aContributorAddsTheLiteratureOfWhatAConfigurationLoads() throws Exception {
+        // given: a contributor that knows the algorithm, e.g. as the user of a model file
+        final LiteratureContributor contributor = configuration -> configuration.eClass().getName().equals("algorithm")
+                ? List.of(function("building-block"))
+                : List.of();
+        inject(literature, "contributors", List.of(contributor));
+
+        // when
+        final List<String> keys = literature.collect(configuration()).keys();
+
+        // then: right after the algorithm's own literature
+        Assertions.assertEquals(List.of("berger2024evoal", "algorithm2000paper", "block2003paper", "operator2001paper", "base2002paper"),
                                 keys);
     }
 

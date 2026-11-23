@@ -327,6 +327,36 @@
 	<build>
 		<plugins>
 			<plugin>
+				<!-- the build identity (commit, its time, uncommitted changes) for the provenance of a run;
+				     no build time, so the file stays the same for two builds of the same commit -->
+				<groupId>io.github.git-commit-id</groupId>
+				<artifactId>git-commit-id-maven-plugin</artifactId>
+				<version>9.0.2</version>
+				<executions>
+					<execution>
+						<id>build-identity</id>
+						<phase>initialize</phase>
+						<goals>
+							<goal>revision</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<generateGitPropertiesFile>true</generateGitPropertiesFile>
+					<generateGitPropertiesFilename>${project.build.outputDirectory}/META-INF/evoal/build.properties</generateGitPropertiesFilename>
+					<includeOnlyProperties>
+						<includeOnlyProperty>^git.commit.id$</includeOnlyProperty>
+						<includeOnlyProperty>^git.commit.time$</includeOnlyProperty>
+						<includeOnlyProperty>^git.dirty$</includeOnlyProperty>
+					</includeOnlyProperties>
+					<commitIdGenerationMode>flat</commitIdGenerationMode>
+					<dateFormat>yyyy-MM-dd'T'HH:mm:ssXXX</dateFormat>
+					<dateFormatTimeZone>UTC</dateFormatTimeZone>
+					<failOnNoGitDirectory>false</failOnNoGitDirectory>
+				</configuration>
+			</plugin>
+
+			<plugin>
 				<!-- prepare-package as in the aggregation POM: the credits check needs the copied jars -->
 				<artifactId>maven-dependency-plugin</artifactId>
 				<executions>

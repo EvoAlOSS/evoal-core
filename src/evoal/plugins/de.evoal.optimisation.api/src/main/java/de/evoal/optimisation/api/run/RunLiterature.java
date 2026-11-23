@@ -2,16 +2,9 @@ package de.evoal.optimisation.api.run;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.Set;
 
 import jakarta.enterprise.context.ApplicationScoped;
@@ -20,28 +13,25 @@ import jakarta.inject.Inject;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.EStructuralFeature;
 
-import de.evoal.core.api.dynamic.DynamicDefinitions;
 import de.evoal.core.api.languages.AttributeEvaluator;
 import de.evoal.core.api.literature.CitationList;
+import de.evoal.core.api.literature.ConfigurationLiterature;
+import de.evoal.core.api.literature.LiteratureContributor;
 import de.evoal.core.api.literature.LiteratureIndex;
 import de.evoal.languages.model.base.definitions.ClassDefinition;
 import de.evoal.languages.model.base.expressions.Call;
 import de.evoal.models.v202704.optimisation.model.ModelPackage;
 import de.evoal.models.v202704.optimisation.model.OptimisationModule;
 import de.evoal.optimisation.main.constraints.ConstraintCompiler;
-import de.evoal.optimisation.main.statistics.memory.ConfigurationJson;
 
 /**
  * The literature of the optimisation runs: the methods that a configuration uses, as
  *   {@code citations.bib} in the output folder and as keys for the memory model.
  * <p>
- * The configuration is walked like the memory model writes it: the algorithm, the
- *   optimisation function, the target distances and the statistics writers with every nested
- *   configuration, in the order of their attributes. Every DL type found adds its
+ * The configuration is walked like the memory model writes it ({@link ConfigurationLiterature}):
+ *   the algorithm, the optimisation function, the target distances and the statistics writers
+ *   with every nested configuration, in the order of their attributes. Every DL type found adds its
  *   {@code @Literature} (with that of its super types) and the citations of its module; then
  *   every DDL declaration of the problem (e.g. {@code 'building-block'}) adds its
  *   {@code @Literature}. The list starts with the EvoAl paper. The constraint measure of the
@@ -53,7 +43,7 @@ public class RunLiterature {
     /**
      * The name of the file in the output folder.
      */
-    public static final String FILE_NAME = "citations.bib";
+    public static final String FILE_NAME = CitationList.FILE_NAME;
 
     /**
      * The DL type of the constraint measures. Every algorithm has one (by default
@@ -70,6 +60,12 @@ public class RunLiterature {
      */
     @Inject
     private AttributeEvaluator evaluator;
+
+    /**
+     * The contributors of further literature (e.g. of a surrogate's model file), found at the
+     *   first use.
+     */
+    private List<LiteratureContributor> contributors;
 
     /**
      * The entries of the installed modules, read at the first use.
@@ -107,8 +103,11 @@ public class RunLiterature {
                                                                       && ConstraintCompiler.CONSTRAINT.equals(function.getName()));
 
         final CitationList list = new CitationList(index());
-        final Set<EObject> visited = Collections.newSetFromMap(new IdentityHashMap<>());
-        walk(configuration, list, visited, constrained);
+        new ConfigurationLiterature(evaluator,
+                                    Set.of(ModelPackage.eINSTANCE),
+                                    definition -> !constrained && isConstraintMeasure(definition),
+                                    contributors())
+                .addTo(list, configuration);
 
         declarations.stream()
                     .map(Call::getFunction)
@@ -154,10 +153,7 @@ public class RunLiterature {
         }
 
         try {
-            Files.createDirectories(target);
-            Files.writeString(target.resolve(FILE_NAME), citations.toBibTeX(), StandardCharsets.UTF_8);
-            log.info("Wrote the literature of the run ({} entries) to '{}'.", citations.keys().size(),
-                     target.resolve(FILE_NAME));
+            citations.write(target);
         } catch(final IOException e) {
             log.error("Failed to write the literature of the run to '{}'.", target.resolve(FILE_NAME), e);
         }
@@ -170,64 +166,20 @@ public class RunLiterature {
         return citations == null ? List.of() : citations.keys();
     }
 
+    private List<LiteratureContributor> contributors() {
+        if(contributors == null) {
+            contributors = ConfigurationLiterature.installedContributors();
+        }
+
+        return contributors;
+    }
+
     private LiteratureIndex index() {
         if(index == null) {
             index = LiteratureIndex.load(RunLiterature.class.getClassLoader());
         }
 
         return index;
-    }
-
-    /**
-     * Visits the object and then the objects that its features hold, in the order of the
-     *   features: objects of the runtime model (their references) and configurations of DL
-     *   types (all attributes as the memory model writes them, with default values applied,
-     *   since nested instances are attributes of the dynamic classes); other objects (e.g. data
-     *   descriptions, classes of the spaces) are not entered.
-     */
-    private void walk(final EObject object, final CitationList list, final Set<EObject> visited, final boolean constrained) {
-        if(!visited.add(object)) {
-            return;
-        }
-
-        final Optional<ClassDefinition> definition = DynamicDefinitions.definitionOf(object.eClass());
-        if(definition.isPresent()) {
-            if(!constrained && isConstraintMeasure(definition.get())) {
-                return;
-            }
-
-            list.add(definition.get());
-            for(final EStructuralFeature attribute : object.eClass().getEAllStructuralFeatures()) {
-                walkValue(read(object, attribute), list, visited, constrained);
-            }
-        } else if(object.eClass().getEPackage() == ModelPackage.eINSTANCE) {
-            for(final EReference reference : object.eClass().getEAllReferences()) {
-                walkValue(object.eGet(reference), list, visited, constrained);
-            }
-        }
-    }
-
-    private void walkValue(final Object value, final CitationList list, final Set<EObject> visited, final boolean constrained) {
-        switch(value) {
-            case EObject child -> walk(child, list, visited, constrained);
-            case Collection<?> children -> children.forEach(child -> walkValue(child, list, visited, constrained));
-            case Object[] children -> Arrays.stream(children).forEach(child -> walkValue(child, list, visited, constrained));
-            case null, default -> { }
-        }
-    }
-
-    /**
-     * @return The value of the attribute as the components read it; the stored value if it
-     *   cannot be read so.
-     */
-    private Object read(final EObject configuration, final EStructuralFeature attribute) {
-        try {
-            return ConfigurationJson.readAttribute(evaluator, configuration, attribute);
-        } catch(final RuntimeException e) {
-            log.debug("Reading '{}' of {} for its literature failed, using the stored value.", attribute.getName(),
-                      configuration.eClass().getName(), e);
-            return configuration.eGet(attribute);
-        }
     }
 
     private static Path toPath(final Object folder) {

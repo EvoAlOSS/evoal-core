@@ -28,6 +28,7 @@ import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import freemarker.template.TemplateExceptionHandler;
 
+import de.evoal.core.api.provenance.RunRecord;
 import de.evoal.core.api.languages.AttributeEvaluator;
 import de.evoal.models.core.ecore.Space;
 import de.evoal.models.core.ecore.TypedEObject;
@@ -132,6 +133,8 @@ public class TemplateSink extends PipelineComponentImpl implements PipelineSink 
 
         try {
             final Template parsed = configuration().getTemplate(template.getName());
+            RunRecord.current().input(template.toPath());
+            RunRecord.current().output(output.toPath());
 
             final File parent = output.getAbsoluteFile().getParentFile();
             if(parent != null) {

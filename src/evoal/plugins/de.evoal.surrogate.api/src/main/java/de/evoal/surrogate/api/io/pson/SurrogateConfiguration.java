@@ -47,6 +47,12 @@ public class SurrogateConfiguration {
 	private String name;
 
 	/**
+	 * The fully qualified names of the DL types of the training configuration, whose literature
+	 *   a run that uses the model cites; empty in model files written before they were recorded.
+	 */
+	private List<String> definitions = new ArrayList<>();
+
+	/**
 	 * List of calculated properties.
 	 */
 	private List<String> outputFeatures = new ArrayList<>();

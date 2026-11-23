@@ -1,5 +1,6 @@
 package de.evoal.core.api.languages;
 
+import de.evoal.core.api.provenance.RunRecord;
 import com.google.inject.Injector;
 import de.evoal.core.api.board.Blackboard;
 import de.evoal.core.api.utils.EvoAlShutDownException;
@@ -109,6 +110,10 @@ public abstract class ModuleLoaderBase<T extends EObject> {
 
             observedErrors = false;
             validate(resourceSet);
+
+            // the files of the configuration (with their imports) belong to the provenance of the run
+            resourceSet.getResources()
+                       .forEach(loaded -> RunRecord.current().configuration(loaded.getURI()));
 
             if (observedErrors) {
                 log.error("An error was found while validating '{}'. Please fix the shown errors and rerun EvoAl.", modelURI);

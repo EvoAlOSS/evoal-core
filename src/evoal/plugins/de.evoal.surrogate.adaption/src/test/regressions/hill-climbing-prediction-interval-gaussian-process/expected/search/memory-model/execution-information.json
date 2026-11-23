@@ -93,7 +93,7 @@
       "steps" : false
     }
   } ],
-  "citations" : [ "berger2024evoal" ],
+  "citations" : [ "berger2024evoal", "rasmussen2006gaussian" ],
   "searchSpace" : [ {
     "name" : "x:0",
     "type" : "real",

@@ -232,6 +232,28 @@ public class AttributeEvaluator {
     }
 
     /**
+     * Reads an attribute of a configuration as the components read it: with its default value
+     *   applied, and {@code null} for a single-valued optional attribute without value and
+     *   without default ({@code eIsSet}, e.g., {@code 'gene-probability'} of the mutations).
+     *   An unset array is read as an empty array.
+     *
+     * @param configuration A configuration.
+     * @param attribute One of its attributes.
+     * @return The value of the attribute.
+     */
+    public Object readAttribute(final EObject configuration, final EStructuralFeature attribute) {
+        final boolean isUnsetOptional = attribute.getLowerBound() == 0
+                                        && !attribute.isMany()
+                                        && attribute.getDefaultValueLiteral() == null
+                                        && !configuration.eIsSet(attribute);
+        if(isUnsetOptional) {
+            return null;
+        }
+
+        return attributeToJava(configuration, attribute.getName(), attribute.getEType());
+    }
+
+    /**
      * Reads the attribute and converts it to the Java type of the given Ecore classifier,
      *   i.e., the type of the attribute's feature. Numeric values are converted using
      *   {@link NumericConversions} (element-wise for multi-valued features), booleans and

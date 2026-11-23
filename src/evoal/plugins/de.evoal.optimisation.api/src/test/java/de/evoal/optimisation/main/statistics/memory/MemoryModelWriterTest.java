@@ -208,6 +208,7 @@ public class MemoryModelWriterTest {
             inject(writer, "goals", new Goals(List.of(goal)));
 
             final AttributeEvaluator evaluator = Mockito.mock(AttributeEvaluator.class);
+            Mockito.when(evaluator.readAttribute(Mockito.any(), Mockito.any())).thenCallRealMethod();
             Mockito.when(evaluator.attributeToJava(Mockito.any(), Mockito.anyString(), Mockito.any()))
                    .thenAnswer(invocation -> {
                        final EObject configuration = invocation.getArgument(0);

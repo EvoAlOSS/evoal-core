@@ -20,6 +20,7 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
 import org.eclipse.emf.ecore.EObject;
 
+import de.evoal.core.api.provenance.RunRecord;
 import de.evoal.core.api.languages.AttributeEvaluator;
 import de.evoal.models.core.ecore.Space;
 import de.evoal.models.core.ecore.TypedEObject;
@@ -104,6 +105,7 @@ public class CsvValueWriter extends PipelineComponentImpl implements PipelineSin
                 Files.createDirectories(parent.toPath());
             }
 
+            RunRecord.current().output(output.toPath());
             try(Writer writer = Files.newBufferedWriter(output.toPath(), StandardCharsets.UTF_8)) {
                 if(rows.isEmpty()) {
                     log.warn("The pipeline value '{}' is empty; '{}' stays empty.", name, output);

@@ -1,5 +1,6 @@
 package de.evoal.surrogate.api.io;
 
+import java.util.List;
 import de.evoal.models.v202704.pipeline.PipelineDefinition;
 import de.evoal.surrogate.api.function.ModelFunction;
 import de.evoal.surrogate.api.io.pson.Parameter;
@@ -57,4 +58,14 @@ public interface ModelWriter<F extends ModelFunction, S extends ModelStorage> {
      */
     void addOutputFeatureInformation(final EStructuralFeature feature, final Parameter value);
 
+    /**
+     * Sets the DL types of the training configuration, which a run that uses the model cites.
+     *   A storage that cannot record them ignores them.
+     *
+     * @param definitions The fully qualified names of the DL types.
+     * @return The writer itself.
+     */
+    default ModelWriter<F, S> addTrainingDefinitions(final @NonNull List<String> definitions) {
+        return this;
+    }
 }

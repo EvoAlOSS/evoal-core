@@ -26,6 +26,10 @@ import java.util.stream.Stream;
  * Only the EvoAl version in the memory model ({@code "evoalVersion" : "..."}) is masked
  *   ({@value #VERSION_PLACEHOLDER}), in the references and in the compared output. It
  *   changes with every project version, while the results stay the same.
+ * <p>
+ * The provenance of a run (every folder named {@value #PROVENANCE}: environment, hashes,
+ *   configuration copies) is neither compared nor written as a reference: it changes with
+ *   every build and every execution.
  */
 public final class OutputComparison {
     /**
@@ -210,7 +214,13 @@ public final class OutputComparison {
     }
 
     /**
-     * @return The paths of all files in the folder (recursively), relative to the folder.
+     * The name of the folders with the provenance of a run, which are skipped.
+     */
+    static final String PROVENANCE = "provenance";
+
+    /**
+     * @return The paths of all files in the folder (recursively), relative to the folder,
+     *   without those in a {@value #PROVENANCE} folder.
      */
     private static SortedSet<String> filesIn(final Path folder) {
         if(!Files.isDirectory(folder)) {
@@ -220,6 +230,7 @@ public final class OutputComparison {
         try(Stream<Path> paths = Files.walk(folder)) {
             return paths.filter(Files::isRegularFile)
                         .map(folder::relativize)
+                        .filter(file -> !isProvenance(file))
                         .map(Path::toString)
                         .collect(Collectors.toCollection(TreeSet::new));
         } catch(final IOException e) {
@@ -249,5 +260,18 @@ public final class OutputComparison {
         } catch(final IOException e) {
             throw new UncheckedIOException("Cannot read " + file, e);
         }
+    }
+
+    /**
+     * @return {@code true} if one of the folders of the relative path is {@value #PROVENANCE}.
+     */
+    private static boolean isProvenance(final Path file) {
+        for(int i = 0; i < file.getNameCount() - 1; ++i) {
+            if(PROVENANCE.equals(file.getName(i).toString())) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

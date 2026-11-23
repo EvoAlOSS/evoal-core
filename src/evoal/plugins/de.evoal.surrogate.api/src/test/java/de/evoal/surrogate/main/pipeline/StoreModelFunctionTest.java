@@ -1,5 +1,6 @@
 package de.evoal.surrogate.main.pipeline;
 
+import de.evoal.surrogate.main.literature.SurrogateLiterature;
 import de.evoal.core.api.interpreter.InterpreterState;
 import de.evoal.languages.model.execution.ExecutionFactory;
 import de.evoal.languages.model.execution.NamedVariable;
@@ -21,6 +22,7 @@ import org.mockito.Mockito;
 import tools.jackson.databind.json.JsonMapper;
 
 import java.io.File;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -42,6 +44,8 @@ public class StoreModelFunctionTest {
         context.put(variable, value);
     }
 
+    private final SurrogateLiterature literature = new SurrogateLiterature();
+
     @BeforeEach
     void setUp() {
         y = EcoreFactory.eINSTANCE.createEAttribute();
@@ -52,6 +56,7 @@ public class StoreModelFunctionTest {
 
         writer = Mockito.mock(ModelWriter.class);
         Mockito.when(writer.addPredictionPipeline(Mockito.any())).thenReturn(writer);
+        Mockito.when(writer.addTrainingDefinitions(Mockito.any())).thenReturn(writer);
         bind("model-function", new ModelFunctionData(Mockito.mock(ModelFunction.class), Optional.empty(), Optional.of(writer)));
 
         task = MllFactory.eINSTANCE.createTaskDescription();
@@ -67,11 +72,12 @@ public class StoreModelFunctionTest {
     @Test
     public void everyMeasureIsStoredWithTheValuesOfAllDataSets() {
         // when
-        new StoreModelFunction().call(context, new Object[0]);
+        new StoreModelFunction(literature).call(context, new Object[0]);
 
         // then
         Mockito.verify(writer).addOutputFeatureInformation(y, Parameter.from(RMSE, Map.of(GoodnessOfFit.TRAINING, 0.0, GoodnessOfFit.TEST, 0.5)));
         Mockito.verify(writer).addOutputFeatureInformation(y, Parameter.from(R_SQUARE, Map.of(GoodnessOfFit.TRAINING, 1.0)));
+        Mockito.verify(writer).addTrainingDefinitions(List.of());
         Mockito.verify(writer).store(Mockito.any());
     }
 
@@ -82,7 +88,7 @@ public class StoreModelFunctionTest {
         task.setGofFile(file.getPath());
 
         // when
-        new StoreModelFunction().call(context, new Object[0]);
+        new StoreModelFunction(literature).call(context, new Object[0]);
 
         // then
         final Map<?, ?> content = JsonMapper.builder().build().readValue(file, Map.class);

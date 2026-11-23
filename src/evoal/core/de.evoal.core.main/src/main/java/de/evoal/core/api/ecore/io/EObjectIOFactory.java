@@ -1,6 +1,7 @@
 package de.evoal.core.api.ecore.io;
 
 import de.evoal.core.api.cdi.BeanFactory;
+import de.evoal.core.api.provenance.RunRecord;
 import de.evoal.models.core.ecore.Space;
 import de.evoal.core.api.utils.EvoalIOException;
 
@@ -16,6 +17,7 @@ public final class EObjectIOFactory {
         final String [] parts = filename.toString().split("\\.");
         final String extension = parts[parts.length - 1];
         final String name = extension + "-eObject-reader";
+        RunRecord.current().input(filename.toPath());
 
         return BeanFactory.create(name, EObjectReader.class).init(filename, specification);
     }
@@ -24,6 +26,7 @@ public final class EObjectIOFactory {
         final String [] parts = filename.toString().split("\\.");
         final String extension = parts[parts.length - 1];
         final String name = extension + "-eObject-writer";
+        RunRecord.current().output(filename.toPath());
 
         return BeanFactory.create(name, EObjectWriter.class).init(filename, specification);
     }

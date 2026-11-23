@@ -22,6 +22,11 @@ public abstract class AbstractPSONWriter implements ModelWriter {
 
     private PipelineDefinition pipeline;
 
+    /**
+     * The DL types of the training configuration.
+     */
+    private final List<String> definitions = new ArrayList<>();
+
     @Override
     public void addInputFeatureInformation(final EStructuralFeature feature, final Parameter value) {
         // a name identifies the information: a second value replaces the first
@@ -45,6 +50,19 @@ public abstract class AbstractPSONWriter implements ModelWriter {
         return this;
     }
 
+    /**
+     * The writer implements the raw {@link ModelWriter}, so the list is raw as well; its elements
+     *   are the fully qualified names of the DL types.
+     */
+    @Override
+    @SuppressWarnings({"rawtypes", "unchecked"})
+    public ModelWriter addTrainingDefinitions(final @NonNull List definitions) {
+        this.definitions.clear();
+        this.definitions.addAll(definitions);
+
+        return this;
+    }
+
     @Override
     public void store(final ModelFunction function) {
         final SurrogateConfiguration configuration = new SurrogateConfiguration();
@@ -52,6 +70,7 @@ public abstract class AbstractPSONWriter implements ModelWriter {
         final Space outputSpace = function.getOutput();
 
         configuration.setName(function.getModelName());
+        configuration.setDefinitions(new ArrayList<>(definitions));
         configuration.setPredictionPipeline(pipeline);
         configuration.setInputData(inputSpace);
         configuration.setOutputData(outputSpace);

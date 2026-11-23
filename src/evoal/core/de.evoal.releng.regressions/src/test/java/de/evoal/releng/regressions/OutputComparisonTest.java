@@ -59,6 +59,35 @@ public class OutputComparisonTest {
     }
 
     @Nested
+    @DisplayName("given an output with the provenance of the run")
+    class Provenance {
+        @BeforeEach
+        public void createOutput() throws IOException {
+            write(actualFolder, CANDIDATES, "individual-id;x:0", "0;1.0", "1;2.0");
+            write(actualFolder, "search/provenance/environment.json", "{}");
+        }
+
+        @Test
+        public void theProvenanceIsNotCompared() {
+            // when
+            final List<String> differences = OutputComparison.differences(expectedFolder, actualFolder);
+
+            // then
+            Assertions.assertEquals(List.of(), differences);
+        }
+
+        @Test
+        public void theProvenanceIsNoReference() throws IOException {
+            // when
+            OutputComparison.replace(expectedFolder, actualFolder);
+
+            // then
+            Assertions.assertTrue(Files.exists(expectedFolder.resolve(CANDIDATES)));
+            Assertions.assertFalse(Files.exists(expectedFolder.resolve("search/provenance")));
+        }
+    }
+
+    @Nested
     @DisplayName("given an output with a changed value")
     class ChangedValue {
         @BeforeEach

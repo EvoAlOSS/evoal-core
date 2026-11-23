@@ -1,11 +1,14 @@
 package de.evoal.optimisation.api.run;
 
+import java.nio.file.Path;
+
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Provider;
 
 import de.evoal.core.api.board.Blackboard;
 import de.evoal.core.api.cdi.BeanFactory;
+import de.evoal.core.api.provenance.RunRecord;
 import de.evoal.core.api.random.RandomService;
 import de.evoal.models.v202704.optimisation.model.OptimisationModule;
 import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
@@ -80,7 +83,11 @@ public class SearchRunner {
      *   {@code null} for a single run.
      */
     public void run(final OptimisationModule configuration, final long run, final EvaluationPosition position) {
-        literature.start(configuration, board.getOrNull(OptimisationBlackboardEntries.EVALUATION_OUTPUT_FOLDER));
+        final Object outputFolder = board.getOrNull(OptimisationBlackboardEntries.EVALUATION_OUTPUT_FOLDER);
+        literature.start(configuration, outputFolder);
+        if(outputFolder != null) {
+            RunRecord.current().setFolder(Path.of(outputFolder.toString()).resolve(RunRecord.FOLDER));
+        }
         randomService.startRun(run);
         idGenerator.startRun();
         executionRecorder.startRun(position);

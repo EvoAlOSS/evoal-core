@@ -1,5 +1,6 @@
 package de.evoal.surrogate.api.io.pson;
 
+import de.evoal.core.api.provenance.RunRecord;
 import de.evoal.models.core.ecore.Space;
 import de.evoal.models.v202704.pipeline.PipelineDefinition;
 import de.evoal.pipeline.api.cdi.DefinitionModuleLoader;
@@ -51,6 +52,7 @@ public class PSONModelStorage implements ModelStorage {
     @SneakyThrows
     public void store(final SurrogateConfiguration configuration) {
         log.info("Storing predictive configuration from {}.", file);
+        RunRecord.current().output(file.toPath());
 
         final SimpleModule module = new SimpleModule();
         module.addSerializer(PipelineDefinition.class, new PipelineSerializer());
@@ -86,6 +88,7 @@ public class PSONModelStorage implements ModelStorage {
     @SneakyThrows
     public void load() {
         log.info("Loading predictive configuration from {}.", file);
+        RunRecord.current().input(file.toPath());
 
         try(final InputStream is = new FileInputStream(file)) {
             final Space functionSpace = inputSpace.merge(outputSpace);

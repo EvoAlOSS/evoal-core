@@ -17,6 +17,10 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
+        <!-- reproducible builds: the entries of every jar get this time, so two builds of the same
+             commit give the same jars and hashes (the provenance of a run records them) -->
+        <project.build.outputTimestamp>2026-11-23T00:00:00Z</project.build.outputTimestamp>
+
         <evoal.languages.version>2026.10.0-SNAPSHOT</evoal.languages.version>
 
         <deltaspike.version>2.0.1</deltaspike.version>

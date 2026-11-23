@@ -18,6 +18,15 @@ The `begin`/`end` block of a generator file runs pipelines with two statements:
 a DL value, not to a pipeline. `ExecutionDSLConverter` turns the string into a reference to the
 converted pipeline, so an unknown name is rejected before the program runs.
 
+Every run records its provenance in `provenance/<generator file>/` of the execution folder
+(`RunRecord` of core, written by core's main class after the run): `environment.json`,
+`files.json` (configuration files, the files of `reader`, `writer`, `template` and `'csv-writer'`
+with their SHA-256) and copies of the configuration files. `PipelineRunner` writes the literature
+of the pipelines' components into the same folder (`citations.bib`, `ConfigurationLiterature` of
+core over the pipeline, execution and expression packages of the runtime model); a
+`'trained-model'` step also cites the types its model file records (`SurrogateLiterature` of
+surrogate.api).
+
 ## Sources, processors, filters and sinks
 
 `StreamExecutor` passes every row through the steps in order. A **source** (`PipelineSource`, DL

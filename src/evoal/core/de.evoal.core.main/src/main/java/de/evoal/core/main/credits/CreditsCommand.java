@@ -2,12 +2,8 @@ package de.evoal.core.main.credits;
 
 import java.io.IOException;
 import java.io.PrintStream;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -42,45 +38,10 @@ public final class CreditsCommand {
     }
 
     /**
-     * @return The folder of core.main's jar.
-     */
-    private static Path coreFolder() {
-        try {
-            final URI location = CreditsCommand.class.getProtectionDomain()
-                                                     .getCodeSource()
-                                                     .getLocation()
-                                                     .toURI();
-
-            return Path.of(location)
-                       .getParent();
-        } catch(final URISyntaxException e) {
-            throw new IllegalStateException("Cannot find the jar of core.main.", e);
-        }
-    }
-
-    /**
      * @return Whether the argument is one of the {@link #SWITCHES}.
      */
     public static boolean isCreditsSwitch(final String argument) {
         return SWITCHES.contains(argument);
-    }
-
-    /**
-     * @return The jars of the boot layer's modules.
-     */
-    private static List<Path> moduleJars() {
-        return ModuleLayer.boot()
-                          .configuration()
-                          .modules()
-                          .stream()
-                          .map(module -> module.reference().location())
-                          .flatMap(Optional::stream)
-                          .filter(location -> location.getScheme().equals("file"))
-                          .map(Path::of)
-                          .filter(Files::isRegularFile)
-                          .filter(path -> path.getFileName().toString().endsWith(".jar"))
-                          .sorted()
-                          .toList();
     }
 
     /**
@@ -103,8 +64,8 @@ public final class CreditsCommand {
         }
 
         try {
-            final List<Path> jars = moduleJars();
-            final Path coreFolder = coreFolder();
+            final List<Path> jars = InstalledJars.moduleJars();
+            final Path coreFolder = InstalledJars.coreFolder();
             final InstalledCredits credits = CreditsCollector.collect(jars, coreFolder);
 
             if(printsBibTeX) {

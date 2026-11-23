@@ -1,5 +1,8 @@
 package de.evoal.surrogate.main.pipeline;
 
+import jakarta.inject.Inject;
+
+import de.evoal.surrogate.main.literature.SurrogateLiterature;
 import de.evoal.core.api.interpreter.InterpreterState;
 import de.evoal.core.api.cdi.EvoalBuiltinFunction;
 import de.evoal.languages.model.mll.TaskDescription;
@@ -32,6 +35,25 @@ import java.util.Optional;
 @Named("de.evoal.surrogate.pipeline.store-model")
 @Slf4j
 public class StoreModelFunction implements EvoalBuiltinFunction {
+	/**
+	 * The DL types of the training, which the model file records.
+	 */
+	@Inject
+	private SurrogateLiterature literature;
+
+	/**
+	 * Creates the function; the literature is injected.
+	 */
+	public StoreModelFunction() {
+	}
+
+	/**
+	 * Creates the function with the given literature, e.g., for tests.
+	 */
+	StoreModelFunction(final SurrogateLiterature literature) {
+		this.literature = literature;
+	}
+
 	@Override
 	public Optional<Object> call(final InterpreterState context, final Object[] arguments) {
 		final ModelFunctionData memento = (ModelFunctionData) context.getByName("model-function");
@@ -42,7 +64,8 @@ public class StoreModelFunction implements EvoalBuiltinFunction {
 		final ModelWriter writer = memento.writer().get();
 		addGoodnessOfFit(writer, goodnessOfFit);
 
-		writer.addPredictionPipeline(def)
+		writer.addTrainingDefinitions(literature.trainingDefinitions())
+			  .addPredictionPipeline(def)
 			  .store(memento.function());
 
 		if(task.getGofFile() != null) {

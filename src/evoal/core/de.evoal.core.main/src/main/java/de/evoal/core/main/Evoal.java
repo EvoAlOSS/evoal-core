@@ -17,6 +17,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.deltaspike.cdise.api.CdiContainer;
 import org.apache.deltaspike.cdise.api.CdiContainerLoader;
 import org.apache.deltaspike.core.api.provider.BeanProvider;
+
+import de.evoal.core.api.provenance.RunRecord;
+import de.evoal.core.main.provenance.RunRecordWriter;
 import org.apache.deltaspike.core.util.metadata.AnnotationInstanceProvider;
 import org.slf4j.bridge.SLF4JBridgeHandler;
 
@@ -85,6 +88,9 @@ public final class Evoal {
                 log.info("Handing over control to main.");
                 main.run();
                 log.info("Main finished processing.");
+
+                final Object seed = board.getOrNull(CoreBlackboardEntries.SEED);
+                RunRecordWriter.write(RunRecord.current(), mainName, List.of(args), seed == null ? null : seed.toString());
             } catch(final EvoAlShutDownException e) {
                 errorCode = e.getErrorCode();
             } catch (final Throwable e) {

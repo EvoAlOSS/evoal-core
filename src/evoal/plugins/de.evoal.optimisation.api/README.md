@@ -54,6 +54,13 @@ both; CSV writers and reports show the objectives only.
 An algorithm therefore does not number iterations, check the criterion, assign ids,
 build the memory model or call the statistics writers.
 
+Before a run, `SearchRunner` writes the literature of the configuration (`RunLiterature`,
+`citations.bib` in the output folder) and names `<output folder>/provenance` as the folder of
+the run's provenance (`RunRecord` of core, written by core's main class when the application
+finished). `RunLiterature` walks the configuration with `ConfigurationLiterature` of core; a
+`LiteratureContributor` (e.g. `SurrogateLiterature` for the model file of a surrogate) adds what
+a configuration loads.
+
 ## Writing an algorithm
 
 ### 1. The DL type

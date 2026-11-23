@@ -1,5 +1,9 @@
 package de.evoal.core.api.literature;
 
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -21,6 +25,11 @@ import de.evoal.languages.model.base.definitions.Definition;
  */
 @Slf4j
 public final class CitationList {
+    /**
+     * The name of the file that {@link #write(Path)} writes.
+     */
+    public static final String FILE_NAME = "citations.bib";
+
     /**
      * The entries of the keys.
      */
@@ -73,5 +82,22 @@ public final class CitationList {
         });
 
         return String.join("\n", entries);
+    }
+
+    /**
+     * Writes the entries ({@link #toBibTeX()}) as {@value #FILE_NAME} into a folder, which is
+     *   created if needed.
+     *
+     * @param folder The folder.
+     * @return The written file.
+     * @throws IOException if the file cannot be written.
+     */
+    public Path write(final @NonNull Path folder) throws IOException {
+        final Path file = folder.resolve(FILE_NAME);
+        Files.createDirectories(folder);
+        Files.writeString(file, toBibTeX(), StandardCharsets.UTF_8);
+        log.info("Wrote the literature of the run ({} entries) to '{}'.", keys.size(), file);
+
+        return file;
     }
 }

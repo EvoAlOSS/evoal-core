@@ -70,24 +70,7 @@ public class ConfigurationJson {
     public static Object readAttribute(final @NonNull AttributeEvaluator evaluator,
                                        final @NonNull EObject configuration,
                                        final @NonNull EStructuralFeature attribute) {
-        if(isUnsetOptional(configuration, attribute)) {
-            return null;
-        }
-
-        return evaluator.attributeToJava(configuration, attribute.getName(), attribute.getEType());
-    }
-
-    /**
-     * @return {@code true} if the attribute is single-valued, optional and has no value, as the
-     *   components see it ({@code eIsSet}, e.g., {@code 'gene-probability'} of the mutations).
-     *   An attribute with a default value literal is never unset; arrays are written as they
-     *   are, an unset one as an empty array.
-     */
-    private static boolean isUnsetOptional(final EObject configuration, final EStructuralFeature attribute) {
-        return attribute.getLowerBound() == 0
-               && !attribute.isMany()
-               && attribute.getDefaultValueLiteral() == null
-               && !configuration.eIsSet(attribute);
+        return evaluator.readAttribute(configuration, attribute);
     }
 
     private ArrayNode toArray(final Collection<?> elements) {
