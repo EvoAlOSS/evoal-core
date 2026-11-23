@@ -45,6 +45,16 @@ public final class PipelineComposite implements PipelineComponent {
     }
 
     /**
+     * {@inheritDoc}
+     * <p>
+     * A composite is thread-safe iff all its children are.
+     */
+    @Override
+    public boolean isThreadSafe() {
+        return children.stream().allMatch(PipelineComponent::isThreadSafe);
+    }
+
+    /**
      * @return A collection of all child components.
      */
     public @NonNull Collection<PipelineComponent> getChildren() {

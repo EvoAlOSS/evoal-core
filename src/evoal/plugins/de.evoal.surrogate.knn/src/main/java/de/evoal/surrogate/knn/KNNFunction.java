@@ -77,4 +77,14 @@ public class KNNFunction extends ModelFunction {
         // Store information
         consumer.accept(output, average);
     }
+
+    /**
+     * {@inheritDoc}
+     * <p>
+     * The training data is an unmodifiable list; the distances are kept in a list per call.
+     */
+    @Override
+    public boolean isThreadSafe() {
+        return true;
+    }
 }

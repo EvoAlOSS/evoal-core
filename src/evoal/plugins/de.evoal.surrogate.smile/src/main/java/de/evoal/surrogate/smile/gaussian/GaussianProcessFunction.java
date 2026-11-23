@@ -18,6 +18,13 @@ import java.util.Map;
  */
 public class GaussianProcessFunction extends ModelFunction implements PredictiveStandardDeviation {
 
+    /**
+     * Serialises the standard deviations of all Gaussian processes. Smile computes them with
+     *   native BLAS and LAPACK, and the OpenBLAS of the CI gave wrong values when several
+     *   threads called it at the same time.
+     */
+    private static final Object NATIVE_LOCK = new Object();
+
     @Getter
     private final Map<String, Object> parameters;
 
@@ -47,8 +54,21 @@ public class GaussianProcessFunction extends ModelFunction implements Predictive
     }
 
     /**
+     * {@inheritDoc}
+     * <p>
+     * Smile's Gaussian process predicts the mean in Java from its final weights and
+     *   regressors, and the kernels have final parameters only. The standard deviation uses
+     *   native code and is computed by one thread at a time.
+     */
+    @Override
+    public boolean isThreadSafe() {
+        return true;
+    }
+
+    /**
      * The standard deviation of the latent function, without the noise. A negative variance
-     *   from rounding (at a training point with a tiny noise) gives 0.
+     *   from rounding (at a training point with a tiny noise) gives 0. One thread at a time
+     *   computes it (see {@link #NATIVE_LOCK}).
      */
     @Override
     public double standardDeviation(final @NonNull TypedEObject input, final @NonNull EStructuralFeature output) {
@@ -56,8 +76,11 @@ public class GaussianProcessFunction extends ModelFunction implements Predictive
             throw new IllegalArgumentException("'" + output.getName() + "' is not the output of the Gaussian process.");
         }
 
+        final double[] point = toArray(input);
         final double[] estimation = new double[2];
-        regression.predict(toArray(input), estimation);
+        synchronized (NATIVE_LOCK) {
+            regression.predict(point, estimation);
+        }
 
         final double deviation = estimation[1];
         return Double.isNaN(deviation) ? 0.0 : deviation;

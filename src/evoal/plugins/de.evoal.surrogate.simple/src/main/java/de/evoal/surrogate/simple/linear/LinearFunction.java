@@ -46,4 +46,14 @@ public class LinearFunction extends ModelFunction {
 	public void apply(final TypedEObject input, final TypedEObject output) {
 		regression.accept(input, output);
 	}
+
+	/**
+	 * {@inheritDoc}
+	 * <p>
+	 * The prediction only reads the final slope and intercept.
+	 */
+	@Override
+	public boolean isThreadSafe() {
+		return true;
+	}
 }

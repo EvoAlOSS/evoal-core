@@ -43,4 +43,16 @@ public abstract class ModelFunction {
 	 * @return The parameter.
 	 */
 	public abstract void apply(final @NonNull TypedEObject input, final @NonNull TypedEObject output);
+
+	/**
+	 * Whether several threads may {@linkplain #apply(TypedEObject, TypedEObject) apply} the
+	 *   model to different objects at the same time. A surrogate whose model and prediction
+	 *   pipeline are thread-safe evaluates the candidates of a batch in parallel.
+	 *
+	 * @return {@code true} iff {@link #apply(TypedEObject, TypedEObject)} is thread-safe;
+	 *   {@code false} by default.
+	 */
+	public boolean isThreadSafe() {
+		return false;
+	}
 }

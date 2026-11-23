@@ -70,6 +70,17 @@ public class KernelBasedSVRFunction extends ModelFunction {
 		output.eSet(oFeature, predictedValue);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * <p>
+	 * Smile's kernel machine sums the kernel values of the final support vectors, and the
+	 *   kernels have final parameters only.
+	 */
+	@Override
+	public boolean isThreadSafe() {
+		return true;
+	}
+
 	public KernelMachine<double []> getRegression() {
 		return regression;
 	}

@@ -171,6 +171,17 @@ public abstract class FittedPreparationComponent extends PipelineComponentImpl i
         FittedParameters.of(getContext()).record(configuration, fitted);
     }
 
+    /**
+     * {@inheritDoc}
+     * <p>
+     * With stated parameters the step only reads its configuration, so it is thread-safe;
+     *   without them it fits the parameters on the stream first.
+     */
+    @Override
+    public boolean isThreadSafe() {
+        return parameters != null;
+    }
+
     @Override
     public @NonNull TypedEObject apply(final @NonNull TypedEObject row) {
         if(parameters == null) {

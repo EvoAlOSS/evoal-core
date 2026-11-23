@@ -1,6 +1,7 @@
 package de.evoal.surrogate.api.function;
 
 import de.evoal.core.api.dynamic.DynamicEClassProvider;
+import de.evoal.core.api.ecore.misc.ConcurrentEClassAccess;
 import de.evoal.core.api.interpreter.InterpreterState;
 import de.evoal.languages.model.execution.ExecutionFactory;
 import de.evoal.languages.model.execution.NamedVariable;
@@ -113,6 +114,10 @@ public final class PredictionPipeline {
         preparation.setContext(context);
         all.setContext(context);
         postparation.setContext(context);
+
+        // predictions in parallel create rows and inputs of the model; build the classes' caches now
+        ConcurrentEClassAccess.prepare(space.getEClass());
+        ConcurrentEClassAccess.prepare(function.getInput().getEClass());
 
         return new PredictionPipeline(function, definition, space, preparation, all, postparation);
     }
@@ -253,6 +258,17 @@ public final class PredictionPipeline {
      */
     public Optional<PipelineDefinition> definition() {
         return Optional.ofNullable(definition);
+    }
+
+    /**
+     * Whether several threads may {@linkplain #predict predict} at the same time: the model
+     *   function and every step of the pipeline are thread-safe. Each prediction runs on rows of
+     *   its own.
+     *
+     * @return {@code true} iff {@link #predict} is thread-safe.
+     */
+    public boolean isThreadSafe() {
+        return definition == null ? function.isThreadSafe() : all.isThreadSafe();
     }
 
     /**

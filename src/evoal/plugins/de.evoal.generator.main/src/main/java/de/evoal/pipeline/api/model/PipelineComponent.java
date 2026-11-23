@@ -54,4 +54,16 @@ public interface PipelineComponent {
      * @return The component itself.
      */
     public PipelineComponent setContext(final @NonNull InterpreterState context);
+
+    /**
+     * Whether several threads may {@linkplain #apply(TypedEObject) apply} the component to
+     *   different objects at the same time, e.g. when a surrogate model predicts in parallel.
+     *   A component that changes its own state while it applies is not thread-safe.
+     *
+     * @return {@code true} iff {@link #apply(TypedEObject)} is thread-safe; {@code false} by
+     *   default.
+     */
+    public default boolean isThreadSafe() {
+        return false;
+    }
 }

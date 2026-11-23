@@ -524,7 +524,12 @@ called on several threads at the same time. A function that is not thread-safe i
 evaluated on the thread of the run, one candidate after the other (logged once per run);
 the result is the same. Thread-safe are the benchmark functions, `'search-space-distance'`
 and `'random-fitness'`; the problem function forwards the answer of the function it
-delegates to. Surrogate functions are not thread-safe yet.
+delegates to. A `'surrogate'` is thread-safe if its prediction pipeline is: the model
+(`ModelFunction.isThreadSafe()`, `true` for every model of EvoAl: identity, linear and
+quadratic regression, k-nearest neighbours, ε-SVR, Gaussian process, ONNX) and every step
+of the pipeline (`PipelineComponent.isThreadSafe()`, `true` for the preparation steps with
+fitted parameters and `'model-prediction'`). A predicting use case with another step is
+evaluated one candidate after the other.
 
 A function that returns `true` has to follow these rules:
 

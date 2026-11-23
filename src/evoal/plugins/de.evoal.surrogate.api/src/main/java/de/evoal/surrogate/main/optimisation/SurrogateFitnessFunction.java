@@ -13,6 +13,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
 import de.evoal.core.api.dynamic.EAnnotationHelper;
+import de.evoal.core.api.ecore.misc.ConcurrentEClassAccess;
 import de.evoal.core.api.utils.AttributeHelper;
 import de.evoal.models.core.ecore.Space;
 import de.evoal.models.core.ecore.TypedEObject;
@@ -68,9 +69,20 @@ public class SurrogateFitnessFunction extends OptimisationFunctionImpl
 
         memento.predict(input, output);
 
-        log.info(" {} -> {}.", input, output);
+        log.debug(" {} -> {}.", input, output);
 
         return output;
+    }
+
+    /**
+     * {@inheritDoc}
+     * <p>
+     * The surrogate is thread-safe iff its prediction pipeline is, i.e. the model function and
+     *   every step of the pipeline.
+     */
+    @Override
+    public boolean isThreadSafe() {
+        return memento.pipeline().isThreadSafe();
     }
 
     @Override
@@ -83,7 +95,10 @@ public class SurrogateFitnessFunction extends OptimisationFunctionImpl
         final List<EStructuralFeature> output = attribute.lookup(configuration, "output-space");
 
         memento = producer.load(new File(surrogateConfiguration), searchSpace, optimisationSpace);
-        log.info("Function is {}.", memento.function());
+        log.info("Function is {}; it {} thread-safe.", memento.function(), isThreadSafe() ? "is" : "is not");
+
+        // the evaluations create objects of the optimisation space in parallel
+        ConcurrentEClassAccess.prepare(optimisationSpace.getEClass());
         return this;
     }
 }

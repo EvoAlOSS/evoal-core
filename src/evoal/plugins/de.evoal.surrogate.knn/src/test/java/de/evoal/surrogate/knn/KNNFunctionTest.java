@@ -1,6 +1,7 @@
 package de.evoal.surrogate.knn;
 
 import de.evoal.core.api.ecore.EObjectPair;
+import de.evoal.core.api.ecore.misc.ConcurrentEClassAccess;
 import de.evoal.models.core.ecore.Space;
 import de.evoal.models.core.ecore.TypedEObject;
 import org.eclipse.emf.ecore.EAttribute;
@@ -12,7 +13,13 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class KNNFunctionTest {
@@ -78,6 +85,42 @@ public class KNNFunctionTest {
 
             // then
             Assertions.assertEquals(99.0, input.eGetAsDouble(y));
+        }
+
+        @Test
+        public void itIsThreadSafe() {
+            Assertions.assertTrue(function.isThreadSafe());
+        }
+
+        @Test
+        public void predictionsInParallelEqualTheSequentialOnes() throws Exception {
+            // given
+            final List<TypedEObject> inputs = IntStream.range(0, 1000)
+                                                       .mapToObj(i -> point(i / 200.0, 0.0))
+                                                       .toList();
+            final List<Double> sequential = inputs.stream().map(this::predict).toList();
+
+            // when
+            ConcurrentEClassAccess.prepare(space.getEClass());
+            final List<Callable<Double>> tasks = inputs.stream()
+                                                       .<Callable<Double>>map(input -> () -> predict(input))
+                                                       .toList();
+            final List<Double> parallel = new ArrayList<>();
+            try(final ExecutorService threads = Executors.newFixedThreadPool(8)) {
+                for(final Future<Double> future : threads.invokeAll(tasks)) {
+                    parallel.add(future.get());
+                }
+            }
+
+            // then
+            Assertions.assertEquals(sequential, parallel);
+        }
+
+        private double predict(final TypedEObject input) {
+            final TypedEObject output = space.newEObject();
+            function.apply(input, output);
+
+            return output.eGetAsDouble(y);
         }
     }
 }

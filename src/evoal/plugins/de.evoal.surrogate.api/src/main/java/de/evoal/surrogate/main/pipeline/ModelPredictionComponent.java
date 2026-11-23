@@ -24,11 +24,21 @@ public class ModelPredictionComponent extends PipelineComponentImpl {
 
     @Override
     public @NonNull TypedEObject apply(@NonNull TypedEObject object) {
-        log.info("Applying model prediction to {}.", object);
+        log.debug("Applying model prediction to {}.", object);
         memento.function()
                .apply(object, object);
 
         return object;
+    }
+
+    /**
+     * {@inheritDoc}
+     * <p>
+     * The step only calls the model function, so it is thread-safe iff the function is.
+     */
+    @Override
+    public boolean isThreadSafe() {
+        return memento != null && memento.function().isThreadSafe();
     }
 
 

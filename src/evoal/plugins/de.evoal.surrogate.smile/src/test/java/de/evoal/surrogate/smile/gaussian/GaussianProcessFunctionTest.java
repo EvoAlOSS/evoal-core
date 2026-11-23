@@ -1,5 +1,6 @@
 package de.evoal.surrogate.smile.gaussian;
 
+import de.evoal.core.api.ecore.misc.ConcurrentEClassAccess;
 import de.evoal.models.core.ecore.Space;
 import de.evoal.models.core.ecore.TypedEObject;
 import org.eclipse.emf.ecore.EAttribute;
@@ -12,11 +13,19 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.function.Function;
+import java.util.stream.IntStream;
 
 /**
- * The predictive standard deviation of a Gaussian process surrogate.
+ * The predictive standard deviation of a Gaussian process surrogate and its use by several
+ *   threads (#293).
  */
 public class GaussianProcessFunctionTest {
     private final EAttribute x = attribute("x:0");
@@ -55,6 +64,84 @@ public class GaussianProcessFunctionTest {
         @Test
         public void anotherFeatureIsRejected() {
             Assertions.assertThrows(IllegalArgumentException.class, () -> function.standardDeviation(at(0.5), x));
+        }
+
+        @Test
+        public void itIsThreadSafe() {
+            Assertions.assertTrue(function.isThreadSafe());
+        }
+
+        @Test
+        public void predictionsInParallelEqualTheSequentialOnes() throws Exception {
+            // given
+            final List<TypedEObject> inputs = inputs();
+            final List<Double> sequential = inputs.stream().map(this::predict).toList();
+
+            // when
+            final List<Double> parallel = inParallel(inputs, this::predict);
+
+            // then
+            Assertions.assertEquals(sequential, parallel);
+        }
+
+        /**
+         * The standard deviation uses the native BLAS and LAPACK (dot product, Cholesky
+         *   solve). They are not bitwise reproducible: on macOS (Accelerate) even two
+         *   sequential runs differ in the last digits (up to 3e-11 for the Forrester process),
+         *   so the values are compared with a tolerance. Without the lock in
+         *   {@code standardDeviation}, the OpenBLAS of the CI gave wrong values here (0.034
+         *   instead of 0.0086).
+         */
+        @Test
+        public void standardDeviationsInParallelEqualTheSequentialOnes() throws Exception {
+            // given
+            final List<TypedEObject> inputs = inputs();
+            final List<Double> sequential = inputs.stream().map(input -> function.standardDeviation(input, y)).toList();
+
+            // when
+            final List<Double> parallel = inParallel(inputs, input -> function.standardDeviation(input, y));
+
+            // then
+            for(int i = 0; i < inputs.size(); ++i) {
+                Assertions.assertEquals(sequential.get(i), parallel.get(i), 1e-9, "at " + inputs.get(i).eGetAsDouble(x));
+            }
+        }
+
+        private double predict(final TypedEObject input) {
+            final TypedEObject output = data.newEObject();
+            function.apply(input, output);
+
+            return output.eGetAsDouble(y);
+        }
+    }
+
+    /**
+     * @return 1000 points in [0, 1].
+     */
+    private List<TypedEObject> inputs() {
+        return IntStream.range(0, 1000)
+                        .mapToObj(i -> at(i / 999.0))
+                        .toList();
+    }
+
+    /**
+     * Computes the values on 8 threads at once.
+     *
+     * @return The values in the order of the inputs.
+     */
+    private List<Double> inParallel(final List<TypedEObject> inputs, final Function<TypedEObject, Double> value) throws Exception {
+        ConcurrentEClassAccess.prepare(data.getEClass());
+
+        final List<Callable<Double>> tasks = inputs.stream()
+                                                   .<Callable<Double>>map(input -> () -> value.apply(input))
+                                                   .toList();
+        try(final ExecutorService threads = Executors.newFixedThreadPool(8)) {
+            final List<Double> result = new ArrayList<>();
+            for(final Future<Double> future : threads.invokeAll(tasks)) {
+                result.add(future.get());
+            }
+
+            return result;
         }
     }
 

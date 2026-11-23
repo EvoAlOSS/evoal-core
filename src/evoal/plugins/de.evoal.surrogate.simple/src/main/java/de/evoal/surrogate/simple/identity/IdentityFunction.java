@@ -23,4 +23,14 @@ public class IdentityFunction extends ModelFunction {
 			output.eSet(feature, input.eGet(feature));
 		}
 	}
+
+	/**
+	 * {@inheritDoc}
+	 * <p>
+	 * The identity has no state.
+	 */
+	@Override
+	public boolean isThreadSafe() {
+		return true;
+	}
 }
