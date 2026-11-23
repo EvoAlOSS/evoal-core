@@ -8,6 +8,8 @@ import de.evoal.languages.model.mll.MllFactory;
 import de.evoal.languages.model.mll.TaskDescription;
 import de.evoal.surrogate.api.function.ModelFunction;
 import de.evoal.surrogate.api.function.ModelFunctionData;
+import de.evoal.surrogate.api.function.PredictionPipeline;
+import de.evoal.models.v202704.pipeline.PipelineFactory;
 import de.evoal.surrogate.api.io.ModelWriter;
 import de.evoal.surrogate.api.io.pson.Parameter;
 import de.evoal.surrogate.api.training.GoodnessOfFit;
@@ -57,7 +59,9 @@ public class StoreModelFunctionTest {
         writer = Mockito.mock(ModelWriter.class);
         Mockito.when(writer.addPredictionPipeline(Mockito.any())).thenReturn(writer);
         Mockito.when(writer.addTrainingDefinitions(Mockito.any())).thenReturn(writer);
-        bind("model-function", new ModelFunctionData(Mockito.mock(ModelFunction.class), Optional.empty(), Optional.of(writer)));
+        final PredictionPipeline pipeline = Mockito.mock(PredictionPipeline.class);
+        Mockito.when(pipeline.definition()).thenReturn(Optional.of(PipelineFactory.eINSTANCE.createPipelineDefinition()));
+        bind("model-function", new ModelFunctionData(Mockito.mock(ModelFunction.class), Optional.empty(), Optional.of(writer), pipeline));
 
         task = MllFactory.eINSTANCE.createTaskDescription();
         task.setName("learning-task");

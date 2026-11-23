@@ -1,6 +1,7 @@
 import "definitions" from 'de.evoal.pipeline.base';
 import "definitions" from 'de.evoal.surrogate.ml';
 import "definitions" from 'de.evoal.core.base';
+import "definitions" from 'de.evoal.core.constraints';
 
 /**
  * Generator extensions based on surrogate models.
@@ -77,6 +78,99 @@ module 'de.evoal.surrogate.pipeline' {
 	 * <code>writes</code> writes the output features of the learning task.
 	 */
 	type 'model-prediction' extends Processor {}
+
+	/**
+	 * A step that is not an <code>'invertible-preparation-step'</code> must not transform an
+	 * output feature of the learning task: the prediction of a model is in the prepared unit of
+	 * its outputs, and only an invertible step can be undone afterwards. Checked when an MLL
+	 * module is loaded.
+	 */
+	type InvertibleOnOutputs extends Constraint {}
+
+	/**
+	 * A preparation step transforms the features it names with parameters that are fitted on
+	 * the training data. In <code>specify preparation</code> of an MLL file, a step fits its
+	 * parameters while learning if the module does not state them; stated parameters are kept,
+	 * and stating only some of them is an error. Predicting and testing never refit: the model
+	 * file stores the steps with their fitted parameters in its prediction pipeline, which
+	 * prepares the inputs, predicts and undoes the steps on the outputs. The step reads and
+	 * writes the features it names. The optional attributes of a preparation step are its
+	 * fitted parameters, arrays with one value per feature in the order of
+	 * <code>features</code>.
+	 */
+	@InvertibleOnOutputs {}
+	abstract type 'preparation-step' extends Processor {
+		/**
+		 * The features to transform, features of the learning task; written
+		 * <code>'features'</code> in an MLL file, where <code>features</code> is a keyword.
+		 */
+		features : array data;
+	}
+
+	/**
+	 * A preparation step that can be undone. On an output feature, the prediction pipeline of
+	 * the model file undoes it after the prediction ("postparation"), so the prediction is in
+	 * the original unit of the output.
+	 */
+	abstract type 'invertible-preparation-step' extends 'preparation-step' {
+		/**
+		 * Whether the step undoes the transformation; derived for the prediction pipeline of the
+		 * model file, never stated in an MLL file.
+		 */
+		inverse : boolean := false;
+	}
+
+	/**
+	 * Min-max normalisation (Han, Kamber and Pei 2012): maps every feature linearly from its
+	 * range [minimum, maximum] on the training data to [<code>'new-minimum'</code>,
+	 * <code>'new-maximum'</code>]:
+	 * v' = (v - minimum) / (maximum - minimum) * ('new-maximum' - 'new-minimum') + 'new-minimum'.
+	 * A feature with minimum = maximum is only shifted (its range counts as 1), with a warning.
+	 */
+	@Literature { keys := ["han2012datapreprocessing"]; }
+	type 'min-max-normalisation' extends 'invertible-preparation-step' {
+		/**
+		 * The minimum of each feature, in the order of <code>features</code>; fitted on the
+		 * training data if left out.
+		 */
+		minimum : optional array real;
+
+		/**
+		 * The maximum of each feature, in the order of <code>features</code>; fitted on the
+		 * training data if left out.
+		 */
+		maximum : optional array real;
+
+		/**
+		 * The lower end of the target range.
+		 */
+		'new-minimum' : real := 0.0;
+
+		/**
+		 * The upper end of the target range.
+		 */
+		'new-maximum' : real := 1.0;
+	}
+
+	/**
+	 * Z-score normalisation (Han, Kamber and Pei 2012): v' = (v - μ) / σ with the mean μ and
+	 * the standard deviation σ (of the n training values, divided by n) of every feature on the
+	 * training data. A feature with σ = 0 is only shifted (σ counts as 1), with a warning.
+	 */
+	@Literature { keys := ["han2012datapreprocessing"]; }
+	type 'z-score-normalisation' extends 'invertible-preparation-step' {
+		/**
+		 * The mean of each feature, in the order of <code>features</code>; fitted on the
+		 * training data if left out.
+		 */
+		'μ' : optional array real;
+
+		/**
+		 * The standard deviation of each feature, in the order of <code>features</code>;
+		 * fitted on the training data if left out.
+		 */
+		'σ' : optional array real;
+	}
 
 	/**
 	 * Source of the testing use case: reads the test data. In an MLL file, a step without

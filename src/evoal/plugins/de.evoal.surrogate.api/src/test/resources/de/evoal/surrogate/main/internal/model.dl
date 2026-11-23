@@ -1,8 +1,14 @@
 import "definitions" from 'de.evoal.surrogate.ml';
+import "definitions" from 'de.evoal.surrogate.pipeline';
 
 module 'de.evoal.surrogate.main.internal.model' {
 	/**
 	 * A surrogate for parsing tests; it is never trained.
 	 */
 	type 'test-model' extends surrogate {}
+
+	/**
+	 * A preparation step that cannot be undone, for testing @InvertibleOnOutputs.
+	 */
+	type 'test-preparation' extends 'preparation-step' {}
 }

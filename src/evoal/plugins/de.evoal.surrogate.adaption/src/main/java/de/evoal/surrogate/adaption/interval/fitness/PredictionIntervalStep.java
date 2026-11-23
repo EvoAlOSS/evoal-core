@@ -20,6 +20,7 @@ import de.evoal.surrogate.adaption.AdaptionStep;
 import de.evoal.surrogate.adaption.interval.model.PredictiveErrorData;
 import de.evoal.surrogate.api.function.ModelFunction;
 import de.evoal.surrogate.api.function.ModelFunctionData;
+import de.evoal.surrogate.api.function.PredictionPipeline;
 import de.evoal.surrogate.api.function.PredictiveStandardDeviation;
 import de.evoal.surrogate.api.io.ModelReader;
 import de.evoal.surrogate.smile.api.KernelBasedSVRFunction;
@@ -85,7 +86,7 @@ public class PredictionIntervalStep extends AdaptionStep {
         final ModelFunction function = surrogate.function();
 
         if(function instanceof PredictiveStandardDeviation deviation) {
-            width = standardDeviationWidth(function, deviation);
+            width = standardDeviationWidth(function, deviation, surrogate.pipeline());
 
             return function.getOutput()
                            .stream()
@@ -105,7 +106,7 @@ public class PredictionIntervalStep extends AdaptionStep {
         reproducibility.reportNativeLibraries("prediction-interval");
         final PredictiveErrorData errorData = new PredictiveErrorData(reader);
         width = (candidate, objective) -> {
-            final Pair<Double, Double> boundaries = errorData.calculateBoundaries(candidate, 0, svrFunction, CONFIDENCE, annotations);
+            final Pair<Double, Double> boundaries = errorData.calculateBoundaries(candidate, 0, svrFunction, surrogate.pipeline(), CONFIDENCE, annotations);
 
             return boundaries.getSecond() - boundaries.getFirst();
         };
@@ -117,19 +118,26 @@ public class PredictionIntervalStep extends AdaptionStep {
     }
 
     /**
-     * @return The width {@code 2 · z · σ} of the interval ŷ ± z · σ.
+     * @return The width {@code 2 · z · σ} of the interval ŷ ± z · σ, in the original unit: the
+     *   model computes σ' at the prepared candidate in its own unit, and σ = |dy/dy'| · σ' with
+     *   the slope of the steps after the prediction at the model's prediction y' (exact for
+     *   affine steps).
      */
-    static IntervalWidth standardDeviationWidth(final ModelFunction function, final PredictiveStandardDeviation deviation) {
+    static IntervalWidth standardDeviationWidth(final ModelFunction function, final PredictiveStandardDeviation deviation, final PredictionPipeline pipeline) {
         final double quantile = new NormalDistribution(0.0, 1.0).inverseCumulativeProbability(CONFIDENCE);
-        final Space input = function.getInput();
         final Space output = function.getOutput();
 
         return (candidate, objective) -> {
             final EStructuralFeature feature = output.find(objective).orElseThrow();
-            final TypedEObject point = input.newEObject();
-            input.forEach(f -> point.eSet(f, candidate.eGet(f)));
+            final TypedEObject point = pipeline.prepare(candidate);
+            double slope = 1.0;
+            if(pipeline.hasPostparation()) {
+                final TypedEObject predicted = output.newEObject();
+                function.apply(point, predicted);
+                slope = pipeline.slope(feature, predicted.eGetAsDouble(feature));
+            }
 
-            return 2 * quantile * deviation.standardDeviation(point, feature);
+            return 2 * quantile * Math.abs(slope) * deviation.standardDeviation(point, feature);
         };
     }
 

@@ -62,7 +62,12 @@ public class ModelFunctionFactory {
         final Optional<ModelReader> reader = reader(storage, storage.getModelName());
         final Optional<ModelWriter> writer = writer(storage, storage.getModelName());
 
-        return new ModelFunctionData(reader.get().load(), reader, writer);
+        final ModelFunction function = reader.get().load();
+        final ModelFunctionData data = new ModelFunctionData(function, reader, writer);
+
+        return storage.getPredictionPipeline()
+                      .map(pipeline -> data.withPipeline(PredictionPipeline.of(pipeline, storage.getPipelineSpace(), function)))
+                      .orElse(data);
     }
 
     public ModelFunctionData load(final URI location, final Space inputSpace, final Space outputSpace) {

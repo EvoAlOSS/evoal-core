@@ -1,0 +1,12 @@
+{
+  "y:0" : {
+    "de.evoal.surrogate.ml.rmse" : {
+      "training" : 24.873307213750035,
+      "test" : 39.54553645532228
+    },
+    "de.evoal.surrogate.ml.R²" : {
+      "training" : 0.9972478584886584,
+      "test" : 0.9906345103992141
+    }
+  }
+}

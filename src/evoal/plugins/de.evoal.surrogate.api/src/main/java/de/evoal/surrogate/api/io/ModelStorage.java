@@ -1,8 +1,10 @@
 package de.evoal.surrogate.api.io;
 
 import de.evoal.models.core.ecore.Space;
+import de.evoal.models.v202704.pipeline.PipelineDefinition;
 
 import java.net.URI;
+import java.util.Optional;
 
 /**
  * <p>
@@ -57,4 +59,21 @@ public interface ModelStorage {
      * @return The model storage itself.
      */
     ModelStorage setSpaces(final Space inputSpace, final Space outputSpace);
+
+    /**
+     * @return The executable prediction pipeline stored with the model, or empty for a storage
+     *   that stores none (e.g. a foreign ONNX model).
+     * @throws IllegalStateException if the storage should contain a pipeline but does not.
+     */
+    default Optional<PipelineDefinition> getPredictionPipeline() {
+        return Optional.empty();
+    }
+
+    /**
+     * @return The space of the rows of the prediction pipeline: the input and output features
+     *   of the model.
+     */
+    default Space getPipelineSpace() {
+        return getInputSpace().merge(getOutputSpace());
+    }
 }

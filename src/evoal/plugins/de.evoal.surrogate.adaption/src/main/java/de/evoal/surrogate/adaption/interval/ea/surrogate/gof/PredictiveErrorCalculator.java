@@ -37,6 +37,11 @@ public class PredictiveErrorCalculator extends SurrogateInformationCalculator {
      */
     private final List<EObjectPair> training = new ArrayList<>();
 
+    /**
+     * The inputs of {@link #training} after the preparation steps of the model.
+     */
+    private final List<TypedEObject> prepared = new ArrayList<>();
+
     private EObjectPairStreamSupplier trainingStream;
 
     @Override
@@ -71,7 +76,8 @@ public class PredictiveErrorCalculator extends SurrogateInformationCalculator {
             final TypedEObject calculated = training.get(pointIndex).getSecond();
             final TypedEObject predicted = kernelFunction.getOutput().newEObject();
 
-            kernelFunction.apply(source, predicted);
+            // in the original unit, like the calculated value
+            functionData.predict(source, predicted);
 
 //            for(int i = 0; i < calculated.size(); ++i) {
             for(final EStructuralFeature feature : kernelFunction.getOutput()) {
@@ -159,8 +165,7 @@ public class PredictiveErrorCalculator extends SurrogateInformationCalculator {
 
         final double [][] trainingPoints = new double[training.size()][];
         for(int ti = 0; ti < trainingPoints.length; ++ti) {
-            final EObjectPair trainingPoint = training.get(ti);
-            final TypedEObject value = trainingPoint.getFirst();
+            final TypedEObject value = prepared.get(ti);
 
             int index = 0;
             trainingPoints[ti] = new double[inputSpace.size()];
@@ -184,14 +189,18 @@ public class PredictiveErrorCalculator extends SurrogateInformationCalculator {
         EObjectPairStreamFactory.createFromList(input, output, trainingStream)
                 .get()
                 .forEach(training::add);
+
+        // the kernel compares the inputs that the model sees
+        prepared.clear();
+        training.forEach(pair -> prepared.add(functionData.pipeline().prepare(pair.getFirst())));
     }
 
     private Double calculateKernelValue(final KernelBasedSVRFunction regression,
                                         final Space space,
                                         final Integer index1,
                                         final Integer index2) {
-        final TypedEObject sp1 = training.get(index1).getFirst();
-        final TypedEObject sp2 = training.get(index2).getFirst();
+        final TypedEObject sp1 = prepared.get(index1);
+        final TypedEObject sp2 = prepared.get(index2);
 
         final double [] data1 = new double[space.size()];
         final double [] data2 = new double[space.size()];

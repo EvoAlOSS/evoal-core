@@ -49,6 +49,11 @@ public class PSONModelStorage implements ModelStorage {
     @Getter
     private Space outputSpace;
 
+    /**
+     * The space of the rows of the stored prediction pipeline, set when the file is loaded.
+     */
+    private Space functionSpace;
+
     @SneakyThrows
     public void store(final SurrogateConfiguration configuration) {
         log.info("Storing predictive configuration from {}.", file);
@@ -87,11 +92,15 @@ public class PSONModelStorage implements ModelStorage {
 
     @SneakyThrows
     public void load() {
+        if(configuration.isPresent()) {
+            return;
+        }
+
         log.info("Loading predictive configuration from {}.", file);
         RunRecord.current().input(file.toPath());
 
         try(final InputStream is = new FileInputStream(file)) {
-            final Space functionSpace = inputSpace.merge(outputSpace);
+            functionSpace = inputSpace.merge(outputSpace);
             final PipelineDeserializer pipelineDeserializer = new PipelineDeserializer(loader, functionSpace, transformer.setSpace(functionSpace));
             final ParameterDeserializer parameterDeserializer = new ParameterDeserializer();
             parameterDeserializer.setSourceSpace(inputSpace);
@@ -120,5 +129,25 @@ public class PSONModelStorage implements ModelStorage {
     public String getModelName() {
         load();
         return configuration.get().getName();
+    }
+
+    /**
+     * @throws IllegalStateException if the model file has no prediction pipeline.
+     */
+    @Override
+    public Optional<PipelineDefinition> getPredictionPipeline() {
+        load();
+        final PipelineDefinition pipeline = configuration.get().getPredictionPipeline();
+        if(pipeline == null) {
+            throw new IllegalStateException("The model file '" + file + "' has no prediction pipeline; train the model again.");
+        }
+
+        return Optional.of(pipeline);
+    }
+
+    @Override
+    public Space getPipelineSpace() {
+        load();
+        return functionSpace;
     }
 }

@@ -64,11 +64,9 @@ public class SurrogateFitnessFunction extends OptimisationFunctionImpl
 
     @Override
     public TypedEObject evaluate(final TypedEObject input) {
-        final ModelFunction function = memento.function();
-
         final TypedEObject output = optimisationSpace.newEObject();
 
-        function.apply(input, output);
+        memento.predict(input, output);
 
         log.info(" {} -> {}.", input, output);
 

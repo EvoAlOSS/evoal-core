@@ -21,8 +21,8 @@ import java.util.Map;
 public record PredictedValues(double[] actual, double[] predicted) {
 
     /**
-     * Applies the surrogate to every input of the data and collects the values per output
-     *   feature.
+     * Predicts the outputs of every input of the data through the prediction pipeline of the
+     *   surrogate (in the original unit) and collects the values per output feature.
      *
      * @param function The trained surrogate.
      * @param data Pairs of input and expected output.
@@ -42,7 +42,7 @@ public record PredictedValues(double[] actual, double[] predicted) {
             final TypedEObject expected = pair.getSecond();
             final TypedEObject calculated = new TypedEObject(expected.eSpace());
 
-            function.function().apply(pair.getFirst(), calculated);
+            function.predict(pair.getFirst(), calculated);
 
             for (final EStructuralFeature feature : outputSpace) {
                 actual.get(feature).add(expected.eGetAsDouble(feature));

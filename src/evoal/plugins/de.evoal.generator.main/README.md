@@ -36,7 +36,11 @@ the row. A **filter** (`PipelineFilter`, DL type `Filter`) passes on the rows th
 condition and drops the others; the executor applies it with `stream.filter`. A **sink**
 (`PipelineSink`, DL type `Sink`) passes the rows on unchanged and acts when the stream has ended:
 the executor calls `streamEnded()` on every filter and sink in pipeline order after the last row
-and before `close()`.
+and before `close()`. A **stream processor** (`PipelineStreamProcessor`) processes the whole
+stream instead of one row at a time: the executor calls `process(stream)`, e.g. for a step that
+has to see all rows before it changes the first one (the preparation steps of the MLL, which fit
+their parameters on the training data). `StreamExecutor.execute(pipeline, rows)` runs a pipeline
+without source on given rows, e.g. the prediction pipeline stored with a surrogate model.
 
 ### Filters
 

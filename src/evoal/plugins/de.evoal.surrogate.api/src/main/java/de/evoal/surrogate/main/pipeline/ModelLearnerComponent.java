@@ -10,9 +10,12 @@ import de.evoal.languages.model.base.expressions.Instance;
 import de.evoal.languages.model.execution.ExecutionFactory;
 import de.evoal.languages.model.execution.NamedVariable;
 import de.evoal.pipeline.api.model.PipelineComponentImpl;
+import de.evoal.models.v202704.pipeline.PipelineDefinition;
+import de.evoal.surrogate.api.function.FittedParameters;
 import de.evoal.surrogate.api.function.ModelFunction;
 import de.evoal.surrogate.api.function.ModelFunctionData;
 import de.evoal.surrogate.api.function.ModelFunctionFactory;
+import de.evoal.surrogate.api.function.PredictionPipeline;
 import de.evoal.surrogate.api.training.ModelLearner;
 import de.evoal.surrogate.main.training.ModelLearnerFactory;
 import lombok.NonNull;
@@ -85,12 +88,16 @@ public class ModelLearnerComponent extends PipelineComponentImpl {
     public void close() {
         learner.learn();
         final ModelFunction function = learner.toFunction();
-        final ModelFunctionData data = functionFactory.create(modelURI, function);
+        final PipelineDefinition predicting = (PipelineDefinition) getContext().getByName("predicting");
+        final PipelineDefinition executable = PredictionPipeline.executable(predicting, FittedParameters.of(getContext()), function.getOutput());
+        final ModelFunctionData data = functionFactory.create(modelURI, function)
+                                                     .withPipeline(PredictionPipeline.of(executable, getPipelineSpace(), function));
 
         final NamedVariable variable = ExecutionFactory.eINSTANCE.createNamedVariable();
         variable.setName("model-function");
 
-        // the outermost state, so that the testing use case sees the model as well
+        // the outermost state, so that the testing use case sees the model as well; it predicts
+        // through the executable prediction pipeline, which 'store-model' writes
         getContext().root().put(variable, data);
     }
 }

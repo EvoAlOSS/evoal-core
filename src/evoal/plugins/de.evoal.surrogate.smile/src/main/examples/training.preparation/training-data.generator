@@ -1,0 +1,70 @@
+import "definitions" from de.evoal.core.math;
+import "definitions" from 'de.evoal.pipeline.base';
+import "definitions" from 'de.evoal.pipeline.sequences';
+
+import "data" from surrogate;
+
+module 'training-data' {
+	/**
+	 * The grid x:0 = 250, 260, ..., 350 and y:0 = 20000 + 30 (x:0 - 250) - 0.4 (x:0 - 250)².
+	 */
+	pipeline 'training' [
+		step {
+			component 'sequence-generator' {
+				sequences := [
+					'expression-based-sequence' {
+						variable     := data 'k';
+						initial      := 0.0;
+						'expression' := data 'k' + 1.0;
+					},
+					'expression-based-sequence' {
+						variable     := data 'x:0';
+						initial      := 250.0;
+						'expression' := 250.0 + 10.0 * data 'k';
+					},
+					'expression-based-sequence' {
+						variable     := data 'y:0';
+						initial      := 20000.0;
+						'expression' := 20000.0 + 30.0 * (data 'x:0' - 250.0) - 0.4 * (data 'x:0' - 250.0) * (data 'x:0' - 250.0);
+					}
+				];
+			}
+
+			writes [data 'k', data 'x:0', data 'y:0'];
+		}
+	]
+
+	/**
+	 * The grid x:0 = 255, 265, ..., 345 between the training points and the same function.
+	 */
+	pipeline 'test' [
+		step {
+			component 'sequence-generator' {
+				sequences := [
+					'expression-based-sequence' {
+						variable     := data 'k';
+						initial      := 0.0;
+						'expression' := data 'k' + 1.0;
+					},
+					'expression-based-sequence' {
+						variable     := data 'x:0';
+						initial      := 255.0;
+						'expression' := 255.0 + 10.0 * data 'k';
+					},
+					'expression-based-sequence' {
+						variable     := data 'y:0';
+						initial      := 20140.0;
+						'expression' := 20000.0 + 30.0 * (data 'x:0' - 250.0) - 0.4 * (data 'x:0' - 250.0) * (data 'x:0' - 250.0);
+					}
+				];
+			}
+
+			writes [data 'k', data 'x:0', data 'y:0'];
+		}
+	]
+
+	begin
+		write "output/training.csv" with 11 samples from executing ['training'];
+		write "output/test.csv" with 10 samples from executing ['test'];
+	end
+}

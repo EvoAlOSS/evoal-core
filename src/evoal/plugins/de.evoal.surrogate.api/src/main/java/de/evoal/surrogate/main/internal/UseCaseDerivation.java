@@ -1,6 +1,7 @@
 package de.evoal.surrogate.main.internal;
 
 import de.evoal.core.api.languages.base.ElementSwitch;
+import de.evoal.languages.model.base.definitions.AttributeDefinition;
 import de.evoal.languages.model.base.definitions.ClassDefinition;
 import de.evoal.languages.model.base.definitions.DataDescription;
 import de.evoal.languages.model.base.definitions.FunctionDefinition;
@@ -72,6 +73,10 @@ public class UseCaseDerivation {
     private final static String MODEL_LEARNER = "model-learner";
     private final static String MODEL_PREDICTION = "model-prediction";
     private final static String ASSESSMENT_DATA = "assessment-data";
+
+    private final static String PREPARATION_STEP = "preparation-step";
+    private final static String FEATURES = "features";
+    private final static String INVERSE = "inverse";
 
     private final static String INPUT_FEATURES = "input-features";
     private final static String OUTPUT_FEATURES = "output-features";
@@ -240,8 +245,35 @@ public class UseCaseDerivation {
             }
             case ASSESSMENT_DATA -> deriveFeatures(step.getReads(), task.getInputs(), task.getOutputs());
             default -> {
+                if(isPreparationStep(instance.getDefinition())) {
+                    // a preparation step reads and writes the features it names (those of the
+                    // task; the others are reported by the check)
+                    final List<DataDescription> features = featuresOf(instance, FEATURES).stream()
+                                                                                         .filter(DataDescription.class::isInstance)
+                                                                                         .map(DataDescription.class::cast)
+                                                                                         .filter(f -> task.getInputs().contains(f) || task.getOutputs().contains(f))
+                                                                                         .toList();
+                    deriveFeatures(step.getReads(), features);
+                    deriveFeatures(step.getWrites(), features);
+                }
             }
         }
+    }
+
+    /**
+     * @return Whether the type is a preparation step, i.e. extends {@value #PREPARATION_STEP} of
+     *   {@value #SURROGATE_PIPELINE}.
+     */
+    private static boolean isPreparationStep(final ClassDefinition type) {
+        for(ClassDefinition current = type; current != null; current = current.getSuperType()) {
+            if(PREPARATION_STEP.equals(current.getName())
+                    && current.eContainer() instanceof DefinitionModule module
+                    && SURROGATE_PIPELINE.equals(module.getName())) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     @SafeVarargs
@@ -279,11 +311,61 @@ public class UseCaseDerivation {
         checkFeatures(featuresOf(step.getInstance(), OUTPUT_FEATURES), task.getOutputs(),
                       where + ": '" + OUTPUT_FEATURES + "' contains '%s', which is not an output feature of the learning task.", errors);
 
+        if(isPreparationStep(step.getInstance().getDefinition())) {
+            checkPreparationStep(step.getInstance(), taskFeatures, where, errors);
+        }
+
         if(TEST_DATA_LOADER.equals(step.getInstance().getDefinition().getName())
                 && arrayOf(step.getInstance().findAttribute("testing-files")) instanceof Array files
                 && files.getValues().isEmpty()) {
             errors.add(where + ": no test data; add 'testing with [\"<file>\"]' to 'specify learning-task' or 'testing-files' to the step.");
         }
+    }
+
+    /**
+     * Checks a preparation step: its features belong to the task, its fitted parameters (its
+     *   optional attributes) are either all left out or all stated with one value per feature,
+     *   and it does not state {@code inverse}, which only the stored prediction pipeline sets.
+     */
+    private static void checkPreparationStep(final Instance instance, final List<DataDescription> taskFeatures, final String where, final List<String> errors) {
+        final List<TypeDefinition> features = featuresOf(instance, FEATURES);
+        checkFeatures(features, taskFeatures,
+                      where + ": '" + FEATURES + "' contains '%s', which is not an input or output feature of the learning task.", errors);
+
+        if(instance.findAttribute(INVERSE) != null) {
+            errors.add(where + ": '" + INVERSE + "' is derived for the stored prediction pipeline and must not be stated.");
+        }
+
+        final List<String> stated = new ArrayList<>();
+        final List<String> missing = new ArrayList<>();
+        for(final AttributeDefinition parameter : instance.getDefinition().getAllAttributes()) {
+            if(!parameter.isOptional()) {
+                continue;
+            }
+
+            final Attribute attribute = instance.findAttribute(parameter.getName());
+            if(attribute == null) {
+                missing.add(parameter.getName());
+                continue;
+            }
+
+            stated.add(parameter.getName());
+            final Array values = arrayOf(attribute);
+            if(values != null && values.getValues().size() != features.size()) {
+                errors.add(where + ": '" + parameter.getName() + "' has " + values.getValues().size() + " values but the step has "
+                           + features.size() + " features.");
+            }
+        }
+
+        if(!stated.isEmpty() && !missing.isEmpty()) {
+            errors.add(where + ": states " + quoted(stated) + " but not " + quoted(missing) + "; state all fitted parameters or none.");
+        }
+    }
+
+    private static String quoted(final List<String> names) {
+        return names.stream()
+                    .map(n -> "'" + n + "'")
+                    .collect(java.util.stream.Collectors.joining(", "));
     }
 
     private static void checkFeatures(final List<TypeDefinition> stated, final List<DataDescription> allowed, final String message, final List<String> errors) {
@@ -351,15 +433,17 @@ public class UseCaseDerivation {
     }
 
     /**
-     * @return All steps of the module whose type belongs to {@value #SURROGATE_PIPELINE}.
+     * @return All steps of the module whose type belongs to {@value #SURROGATE_PIPELINE} or is a
+     *   preparation step.
      */
     private static List<ConcreteStep> standardSteps(final MachineLearningModule module) {
         final List<ConcreteStep> steps = new ArrayList<>();
         module.eAllContents().forEachRemaining(element -> {
             if(element instanceof ConcreteStep step
                     && step.getInstance() != null
-                    && step.getInstance().getDefinition().eContainer() instanceof DefinitionModule definitions
-                    && SURROGATE_PIPELINE.equals(definitions.getName())) {
+                    && (step.getInstance().getDefinition().eContainer() instanceof DefinitionModule definitions
+                        && SURROGATE_PIPELINE.equals(definitions.getName())
+                        || isPreparationStep(step.getInstance().getDefinition()))) {
                 steps.add(step);
             }
         });

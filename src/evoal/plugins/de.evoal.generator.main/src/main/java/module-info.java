@@ -41,6 +41,7 @@ module de.evoal.generator.main {
     exports de.evoal.pipeline.api.model;
     exports de.evoal.pipeline.api.sequence;
     exports de.evoal.pipeline.api.values;
+    exports de.evoal.pipeline.impl.internal to de.evoal.surrogate.api;
 
     opens de.evoal.pipeline;
     opens de.evoal.pipeline.api.board to weld.core.impl;

@@ -32,8 +32,7 @@ public class SurrogateGenerator extends PipelineComponentImpl {
 
     @Override
     public @NonNull TypedEObject apply(final @NonNull TypedEObject object) {
-        function.function()
-                .apply(object, object);
+        function.predict(object, object);
 
         return object;
     }

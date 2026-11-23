@@ -6,7 +6,6 @@ import de.evoal.surrogate.main.literature.SurrogateLiterature;
 import de.evoal.core.api.interpreter.InterpreterState;
 import de.evoal.core.api.cdi.EvoalBuiltinFunction;
 import de.evoal.languages.model.mll.TaskDescription;
-import de.evoal.models.v202704.pipeline.PipelineDefinition;
 import de.evoal.surrogate.api.function.ModelFunctionData;
 import de.evoal.surrogate.api.io.ModelWriter;
 import de.evoal.surrogate.api.io.pson.Parameter;
@@ -58,14 +57,15 @@ public class StoreModelFunction implements EvoalBuiltinFunction {
 	public Optional<Object> call(final InterpreterState context, final Object[] arguments) {
 		final ModelFunctionData memento = (ModelFunctionData) context.getByName("model-function");
 		final TaskDescription task = (TaskDescription) context.getByName("learning-task");
-		final PipelineDefinition def = (PipelineDefinition) context.getByName("predicting");
 		final GoodnessOfFit goodnessOfFit = GoodnessOfFit.of(context);
 
 		final ModelWriter writer = memento.writer().get();
 		addGoodnessOfFit(writer, goodnessOfFit);
 
 		writer.addTrainingDefinitions(literature.trainingDefinitions())
-			  .addPredictionPipeline(def)
+			  .addPredictionPipeline(memento.pipeline()
+											.definition()
+											.orElseThrow(() -> new IllegalStateException("The model has no executable prediction pipeline.")))
 			  .store(memento.function());
 
 		if(task.getGofFile() != null) {

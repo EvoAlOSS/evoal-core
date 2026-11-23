@@ -1,5 +1,6 @@
 package de.evoal.surrogate.adaption.interval.model;
 
+import de.evoal.surrogate.api.function.PredictionPipeline;
 import de.evoal.surrogate.api.io.ModelReader;
 import de.evoal.surrogate.api.io.ModelWriter;
 import de.evoal.surrogate.api.io.pson.Parameter;
@@ -112,20 +113,30 @@ public final class PredictiveErrorData {
         return parameters.stream().collect(Collectors.toMap(Parameter::getName, Parameter::getValue));
     }
 
-    public Pair<Double, Double> calculateBoundaries(final TypedEObject candidate, final int regressionIndex, final KernelBasedSVRFunction function, final double confidence, final EAnnotationHelper helper) {
+    /**
+     * The boundaries of the prediction interval at a candidate. The kernel compares the prepared
+     *   inputs (the inputs that the model sees); the prediction, the errors and the boundaries
+     *   are in the original unit of the output.
+     *
+     * @param candidate The candidate, in the original unit.
+     * @param regressionIndex The index of the output feature.
+     * @param function The SVR of the model.
+     * @param pipeline The prediction pipeline of the model.
+     * @param confidence The confidence of the interval.
+     * @param helper Unused.
+     * @return The lower and the upper boundary.
+     */
+    public Pair<Double, Double> calculateBoundaries(final TypedEObject candidate, final int regressionIndex, final KernelBasedSVRFunction function,
+                                                    final PredictionPipeline pipeline, final double confidence, final EAnnotationHelper helper) {
         final Space inputSpace = function.getInput();
         final Space outputSpace = function.getOutput();
 
         final EStructuralFeature oFeature = new ArrayList<>(outputSpace).get(regressionIndex);
 
-        final TypedEObject input = inputSpace.newEObject();
+        final TypedEObject prepared = pipeline.prepare(candidate);
         final TypedEObject output = outputSpace.newEObject();
 
-        inputSpace.forEach(f -> {
-              input.eSet(f, candidate.eGet(f));
-          });
-
-        function.apply(input, output);
+        pipeline.predict(candidate, output);
 
         // Calculating Ω
         final DenseMatrix omega = DenseMatrix.zeros(ScalarType.Float64, 1, numberOfPoints);
@@ -136,7 +147,7 @@ public final class PredictiveErrorData {
 
                     int j = 0;
                     for(final EStructuralFeature feature : inputSpace) {
-                        v1[j] = candidate.eGetAsDouble(feature);
+                        v1[j] = prepared.eGetAsDouble(feature);
                         v2[j] = trainingPoints[i][j];
 
                         j++;

@@ -1,0 +1,46 @@
+import "definitions" from de.evoal.core.math;
+import "definitions" from 'de.evoal.pipeline.base';
+import "definitions" from 'de.evoal.pipeline.sequences';
+import "definitions" from 'de.evoal.surrogate.pipeline';
+
+import "data" from surrogate;
+
+module prediction {
+	/**
+	 * Predicts y:0 with the trained model for x:0 = 250, 275, ..., 350. The model file prepares
+	 * the temperature and undoes the preparation of y:0, so the predictions are in the
+	 * original unit.
+	 */
+	pipeline 'prediction' [
+		step {
+			component 'sequence-generator' {
+				sequences := [
+					'expression-based-sequence' {
+						variable     := data 'k';
+						initial      := 0.0;
+						'expression' := data 'k' + 1.0;
+					},
+					'expression-based-sequence' {
+						variable     := data 'x:0';
+						initial      := 250.0;
+						'expression' := 250.0 + 25.0 * data 'k';
+					}
+				];
+			}
+
+			writes [data 'k', data 'x:0'];
+		}
+		step {
+			component 'trained-model' {
+				'model-file' := "output/model.pson";
+			}
+
+			reads [data 'x:0'];
+			writes [data 'y:0'];
+		}
+	]
+
+	begin
+		write "output/predictions.csv" with 5 samples from executing ['prediction'];
+	end
+}

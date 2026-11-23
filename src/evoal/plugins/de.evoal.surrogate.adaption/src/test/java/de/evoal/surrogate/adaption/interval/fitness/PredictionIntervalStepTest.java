@@ -1,5 +1,7 @@
 package de.evoal.surrogate.adaption.interval.fitness;
 
+import de.evoal.surrogate.api.function.PredictionPipeline;
+
 import java.util.List;
 
 import org.eclipse.emf.ecore.EAttribute;
@@ -69,7 +71,7 @@ public class PredictionIntervalStepTest {
             candidate.eSet(x, 1.0);
 
             // when
-            final double width = PredictionIntervalStep.standardDeviationWidth(model, model).of(candidate, "y");
+            final double width = PredictionIntervalStep.standardDeviationWidth(model, model, PredictionPipeline.implicit(model)).of(candidate, "y");
 
             // then: z = Φ⁻¹(0.95) = 1.6448536...
             Assertions.assertEquals(2 * 1.6448536269514722 * 3.0, width, 1e-12);

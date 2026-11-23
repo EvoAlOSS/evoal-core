@@ -15,8 +15,12 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import tools.jackson.core.JsonParser;
 import tools.jackson.core.JsonToken;
 import tools.jackson.databind.DeserializationContext;
+import tools.jackson.databind.JsonNode;
 import tools.jackson.databind.deser.std.StdDeserializer;
 
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 @Slf4j
@@ -176,28 +180,65 @@ public class PipelineDeserializer extends StdDeserializer<PipelineDefinition> {
     }
 
     /**
-     * Reads the configuration of a pipeline step. Only the DL type is stored in the file,
-     *   so the runtime configuration gets the default values of the type. The
-     *   {@code attributes} array is skipped.
+     * Reads the configuration of a pipeline step: its DL type and the stored values of its
+     *   attributes ({@code value} as plain values, {@code data} as names of features of the
+     *   space). Attributes without stored value get the default values of the type.
      */
     private Configuration getConfiguration(final JsonParser parser) {
         parser.nextValue();
 
         assertFieldName(parser.currentName(), "class-definition");
         final String className = parser.getValueAsString();
-        final Configuration result = transformer.createDynamic(findClassDefinition(className), Map.of());
 
         parser.nextValue();
         assertFieldName(parser.currentName(), "attributes");
+        final JsonNode attributes = parser.readValueAsTree();
 
-        while(!parser.hasToken(JsonToken.END_ARRAY)) {
-            parser.nextValue();
+        final Map<String, Object> values = new LinkedHashMap<>();
+        for(final JsonNode attribute : attributes) {
+            final String name = attribute.get("name").asString();
+            if(attribute.has("data")) {
+                values.put(name, featuresOf(attribute.get("data")));
+            } else {
+                values.put(name, valueOf(attribute.get("value")));
+            }
         }
+
+        final Configuration result = transformer.createDynamic(findClassDefinition(className), values);
 
         parser.nextValue();
         assertObjectEnd(parser);
 
         return result;
+    }
+
+    private Object featuresOf(final JsonNode data) {
+        final List<EStructuralFeature> features = new ArrayList<>();
+        for(final JsonNode name : data) {
+            final EStructuralFeature feature = space.getEClass().getEStructuralFeature(name.asString());
+            if(feature == null) {
+                throw new IllegalStateException("The model file refers to the unknown feature '" + name.asString() + "'.");
+            }
+            features.add(feature);
+        }
+
+        return features;
+    }
+
+    private static Object valueOf(final JsonNode value) {
+        if(value.isArray()) {
+            final List<Object> values = new ArrayList<>();
+            value.forEach(v -> values.add(valueOf(v)));
+            return values;
+        } else if(value.isBoolean()) {
+            return value.booleanValue();
+        } else if(value.isIntegralNumber()) {
+            return value.longValue();
+        } else if(value.isNumber()) {
+            return value.doubleValue();
+        }
+
+        return value.asString();
     }
 
     private ClassDefinition findClassDefinition(final String name) {

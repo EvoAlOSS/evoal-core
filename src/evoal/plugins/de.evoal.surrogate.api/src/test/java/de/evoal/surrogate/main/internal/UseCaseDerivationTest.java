@@ -272,4 +272,54 @@ public class UseCaseDerivationTest {
             Assertions.assertTrue(printed.contains("\n      pipeline 'validation',\n"), printed);
         }
     }
+
+    @Nested
+    @DisplayName("given preparation steps")
+    class PreparationSteps {
+        private final MachineLearningModule module = loadAndDerive("preparation.mll");
+
+        private ConcreteStep step(final int index) {
+            return (ConcreteStep) module.getPreparation().getSteps().get(index);
+        }
+
+        @Test
+        public void theyReadAndWriteTheFeaturesTheyName() {
+            // then
+            Assertions.assertEquals(List.of("x:0", "x:1"), names(step(0).getReads()));
+            Assertions.assertEquals(List.of("x:0", "x:1"), names(step(0).getWrites()));
+            Assertions.assertEquals(List.of("y:0"), names(step(1).getReads()));
+        }
+
+        @Test
+        public void statedParametersAreKept() {
+            // then
+            Assertions.assertEquals(1, ((Array) ElementSwitch.elementOf(step(1).getInstance().findAttribute("μ").getValue()).orElseThrow()).getValues().size());
+        }
+
+        @Test
+        public void theDefaultUseCasesPrepareTheData() {
+            // then
+            Assertions.assertEquals(List.of("step training-data-loader", "pipeline validation", "pipeline preparation", "step model-learner"),
+                                    executedSteps(module.getLearningUseCase().getStatements()).stream().map(UseCaseDerivationTest::describe).toList());
+            Assertions.assertEquals("pipeline preparation", describe(module.getPredictionUseCase().getSteps().getFirst()));
+        }
+    }
+
+    @Nested
+    @DisplayName("given wrong preparation steps")
+    class WrongPreparationSteps {
+        @Test
+        public void theModuleIsRejectedWithEveryError() {
+            // when
+            final IllegalStateException e = Assertions.assertThrows(IllegalStateException.class,
+                                                                     () -> loadAndDerive("wrong-preparation.mll"));
+
+            // then
+            final String where = "Module 'wrong-preparation', pipeline 'preparation', step ";
+            Assertions.assertTrue(e.getMessage().contains(where + "'min-max-normalisation': 'features' contains 'z:0'"), e.getMessage());
+            Assertions.assertTrue(e.getMessage().contains(where + "'min-max-normalisation': 'inverse' is derived"), e.getMessage());
+            Assertions.assertTrue(e.getMessage().contains(where + "'z-score-normalisation': 'μ' has 2 values but the step has 1 features."), e.getMessage());
+            Assertions.assertTrue(e.getMessage().contains(where + "'z-score-normalisation': states 'μ' but not 'σ'"), e.getMessage());
+        }
+    }
 }
