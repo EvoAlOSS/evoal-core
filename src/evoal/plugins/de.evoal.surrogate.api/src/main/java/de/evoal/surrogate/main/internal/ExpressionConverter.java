@@ -13,7 +13,9 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 
 /**
  * A copy converter for expressions. The implementation is similar to {@link org.eclipse.emf.ecore.util.EcoreUtil#copy}
- *   with the exception that it converts {@link Step} using the {@link MLLModelConverter}.
+ *   with the exception that it converts {@link Step} using the {@link MLLModelConverter}. It
+ *   also copies the elements of an expression that are no expressions themselves, e.g. the
+ *   attributes of an instance passed to a function.
  */
 @Slf4j
 public class ExpressionConverter extends ExpressionsSwitch<Expression> {
@@ -33,7 +35,13 @@ public class ExpressionConverter extends ExpressionsSwitch<Expression> {
 
     @Override
     public Expression defaultCase(final EObject object) {
-//        log.info("Converting '{}'.", object);
+        return (Expression) copyElement(object);
+    }
+
+    /**
+     * Copies an element of an expression, e.g. an expression or an attribute of an instance.
+     */
+    private EObject copyElement(final EObject object) {
         final EObject result = exprFactory.create(object.eClass());
 
         for(final EStructuralFeature feature : object.eClass().getEAllStructuralFeatures()) {
@@ -59,14 +67,16 @@ public class ExpressionConverter extends ExpressionsSwitch<Expression> {
 
         }
 
-        return (Expression)result;
+        return result;
     }
 
     private @NonNull Object copy(final @NonNull Object value, final boolean isCrossReference) {
         if(value instanceof Step step) {
             return mllConverter.doSwitch(step);
+        } else if(value instanceof Expression expression && !isCrossReference) {
+            return doSwitch(expression);
         } else if(value instanceof EObject eValue && !isCrossReference) {
-            return doSwitch(eValue);
+            return copyElement(eValue);
         } else {
             return value;
         }

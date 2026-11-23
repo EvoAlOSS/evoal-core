@@ -9,11 +9,6 @@ module de.evoal.surrogate.ml {
 	
 	type 'r-squared' {}
 
-	/**
-	 * Runs a cross validation for a model training.
-	 */
-	def void 'cross-validation'(int times);
-
     /**
      * Calculates the coefficient of determination <i>R²</i> of every output feature on the
      * assessed data set (the training data while learning, the test data while testing):

@@ -32,6 +32,8 @@ MachineLearningModuleRule returns MachineLearningModule:
 				(predictionUseCase=PredictionUseCaseRule ';')?
 
 				(testingUseCase=TestingUseCaseRule ';')?
+
+				(resamplingUseCase=ResamplingUseCaseRule ';')?
 	    	'end'
 	    )?
 	'}'
@@ -45,6 +47,8 @@ TaskDescriptionRule returns TaskDescription:
     	'learning' 'from' '[' learningData+=STRING (',' learningData+=STRING)* ']' 
     	
     	('testing' 'with' '[' testingData+=STRING (',' testingData+=STRING)* ']')?
+
+    	('assessing' 'with' '[' resampling+=InstanceLiteralRule (',' resampling+=InstanceLiteralRule)* ']')?
 
 	    'serialise' 'to' modelFile = STRING ('and' gofFile=STRING)?
 	'}'
@@ -74,6 +78,13 @@ LearningUseCaseRule returns execution::Block:
 TestingUseCaseRule returns execution::Block:
 	{execution::Block}
 	'specify' 'testing' 'begin'
+	  (statements += StatementRule)*
+	'end'
+;
+
+ResamplingUseCaseRule returns execution::Block:
+	{execution::Block}
+	'specify' 'resampling' 'begin'
 	  (statements += StatementRule)*
 	'end'
 ;

@@ -9,6 +9,7 @@ import de.evoal.core.api.literature.ConfigurationLiterature;
 import de.evoal.core.api.provenance.RunRecord;
 import de.evoal.languages.model.base.definitions.Definition;
 import de.evoal.surrogate.api.SurrogateBlackboardEntries;
+import de.evoal.surrogate.main.gof.GofCalculatorFunction;
 import de.evoal.surrogate.main.literature.SurrogateLiterature;
 
 import jakarta.enterprise.context.ApplicationScoped;
@@ -23,6 +24,7 @@ import de.evoal.models.v202704.pipeline.PipelineModule;
 import de.evoal.models.v202704.pipeline.PipelinePackage;
 import de.evoal.languages.model.base.expressions.ExpressionsPackage;
 import de.evoal.languages.model.execution.ExecutionPackage;
+import de.evoal.languages.model.execution.ModelFunction;
 import org.eclipse.emf.ecore.EPackage;
 import de.evoal.core.api.dynamic.EClassProvider;
 import de.evoal.pipeline.api.cdi.DefinitionModuleLoader;
@@ -37,12 +39,14 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 /**
  * Trains a surrogate model as configured in an MLL file: runs the learning use case and, if
- *   the module has one (written out or derived for {@code testing with [...]}), the testing use
- *   case. Use cases and settings that the module leaves out are derived from the learning task
+ *   the module has them (written out, or derived for {@code testing with [...]} and
+ *   {@code assessing with [...]}), the testing and the resampling use case. Use cases and
+ *   settings that the module leaves out are derived from the learning task
  *   ({@link UseCaseDerivation}).
  */
 @Slf4j
@@ -106,20 +110,36 @@ public class SurrogateMain implements MainClass {
         log.info("Converting machine learning model to pipeline model.");
         final List<EStructuralFeature> useCases = List.of(
                 MllPackage.eINSTANCE.getMachineLearningModule_LearningUseCase(),
-                MllPackage.eINSTANCE.getMachineLearningModule_TestingUseCase());
+                MllPackage.eINSTANCE.getMachineLearningModule_TestingUseCase(),
+                MllPackage.eINSTANCE.getMachineLearningModule_ResamplingUseCase());
         final PipelineModule pModule = transformer.transform(module, space, useCases, dlLoader, helper);
 
         writeLiterature(pModule);
 
-        log.info("Running use cases: learning{}", module.getTestingUseCase() != null ? ", testing" : "");
+        log.info("Running use cases: learning{}{}", module.getTestingUseCase() != null ? ", testing" : "",
+                 module.getResamplingUseCase() != null ? ", resampling" : "");
         final ProgramInterpreter executor = new ProgramInterpreter((state) -> {
             state.setSpace(space);
+            goodnessOfFitFunction(pModule).ifPresent(function -> GofCalculatorFunction.bind(state, function));
             return BeanFactory.create(MLLProgramExecutionSwitch.class)
                               .setState(state);
         });
         executor.execute(pModule.getProgram(), space);
 
         log.info("Finished surrogate model training.");
+    }
+
+    /**
+     * @return The program function {@code goodness-of-fit}, whose body is {@code specify gof}.
+     */
+    private static Optional<ModelFunction> goodnessOfFitFunction(final PipelineModule pModule) {
+        return pModule.getProgram()
+                      .getFunctions()
+                      .stream()
+                      .filter(ModelFunction.class::isInstance)
+                      .map(ModelFunction.class::cast)
+                      .filter(function -> "goodness-of-fit".equals(function.getName()))
+                      .findFirst();
     }
 
     /**

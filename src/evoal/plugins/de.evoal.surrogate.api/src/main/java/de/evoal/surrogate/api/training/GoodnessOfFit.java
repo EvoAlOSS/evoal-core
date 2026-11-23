@@ -16,8 +16,9 @@ import java.util.Optional;
  * The goodness-of-fit values of a training run and the data set that is assessed next.
  *   The values are kept per output feature, per measure (the qualified name of its DL
  *   function, e.g. {@code de.evoal.surrogate.ml.rmse}) and per data set ({@value #TRAINING},
- *   {@value #TEST}). They live in the outermost interpreter state, so the learning and the
- *   testing use case share them, and {@code 'store-model'} writes them.
+ *   {@value #TEST}, or the name of a resampling scheme). A value is a number, or the
+ *   {@link ResampledValues} of a resampling scheme. They live in the outermost interpreter
+ *   state, so the use cases share them, and {@code 'store-model'} writes them.
  */
 public final class GoodnessOfFit {
     /**
@@ -36,9 +37,10 @@ public final class GoodnessOfFit {
     private static final String VARIABLE = "goodness-of-fit";
 
     /**
-     * Output feature → measure → data set → value, in the order of recording.
+     * Output feature → measure → data set → value ({@link Double} or {@link ResampledValues}),
+     *   in the order of recording.
      */
-    private final Map<EStructuralFeature, Map<String, Map<String, Double>>> values = new LinkedHashMap<>();
+    private final Map<EStructuralFeature, Map<String, Map<String, Object>>> values = new LinkedHashMap<>();
 
     /**
      * The data set that is assessed.
@@ -114,15 +116,33 @@ public final class GoodnessOfFit {
      * @param value The value.
      */
     public void record(final @NonNull EStructuralFeature feature, final @NonNull String measure, final @NonNull String dataSet, final double value) {
+        put(feature, measure, dataSet, value);
+    }
+
+    /**
+     * Records the values of a resampling scheme. A second value for the same feature, measure
+     *   and data set replaces the first.
+     *
+     * @param feature The output feature.
+     * @param measure The qualified name of the measure.
+     * @param dataSet The name of the scheme.
+     * @param value The values of the parts and their summary.
+     */
+    public void record(final @NonNull EStructuralFeature feature, final @NonNull String measure, final @NonNull String dataSet, final @NonNull ResampledValues value) {
+        put(feature, measure, dataSet, value);
+    }
+
+    private void put(final EStructuralFeature feature, final String measure, final String dataSet, final Object value) {
         values.computeIfAbsent(feature, f -> new LinkedHashMap<>())
               .computeIfAbsent(measure, m -> new LinkedHashMap<>())
               .put(dataSet, value);
     }
 
     /**
-     * @return Output feature → measure → data set → value, in the order of recording.
+     * @return Output feature → measure → data set → value ({@link Double} or
+     *   {@link ResampledValues}), in the order of recording.
      */
-    public Map<EStructuralFeature, Map<String, Map<String, Double>>> values() {
+    public Map<EStructuralFeature, Map<String, Map<String, Object>>> values() {
         return Collections.unmodifiableMap(values);
     }
 }

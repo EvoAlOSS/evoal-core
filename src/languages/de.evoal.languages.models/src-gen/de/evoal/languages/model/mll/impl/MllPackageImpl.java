@@ -211,6 +211,16 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 	 * @generated
 	 */
 	@Override
+	public EReference getMachineLearningModule_ResamplingUseCase() {
+		return (EReference)machineLearningModuleEClass.getEStructuralFeatures().get(8);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getTaskDescription() {
 		return taskDescriptionEClass;
 	}
@@ -261,8 +271,18 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 	 * @generated
 	 */
 	@Override
+	public EReference getTaskDescription_Resampling() {
+		return (EReference)taskDescriptionEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EAttribute getTaskDescription_ModelFile() {
-		return (EAttribute)taskDescriptionEClass.getEStructuralFeatures().get(4);
+		return (EAttribute)taskDescriptionEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -272,7 +292,7 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 	 */
 	@Override
 	public EAttribute getTaskDescription_GofFile() {
-		return (EAttribute)taskDescriptionEClass.getEStructuralFeatures().get(5);
+		return (EAttribute)taskDescriptionEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -313,12 +333,14 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 		createEReference(machineLearningModuleEClass, MACHINE_LEARNING_MODULE__LEARNING_USE_CASE);
 		createEReference(machineLearningModuleEClass, MACHINE_LEARNING_MODULE__PREDICTION_USE_CASE);
 		createEReference(machineLearningModuleEClass, MACHINE_LEARNING_MODULE__TESTING_USE_CASE);
+		createEReference(machineLearningModuleEClass, MACHINE_LEARNING_MODULE__RESAMPLING_USE_CASE);
 
 		taskDescriptionEClass = createEClass(TASK_DESCRIPTION);
 		createEReference(taskDescriptionEClass, TASK_DESCRIPTION__INPUTS);
 		createEReference(taskDescriptionEClass, TASK_DESCRIPTION__OUTPUTS);
 		createEAttribute(taskDescriptionEClass, TASK_DESCRIPTION__LEARNING_DATA);
 		createEAttribute(taskDescriptionEClass, TASK_DESCRIPTION__TESTING_DATA);
+		createEReference(taskDescriptionEClass, TASK_DESCRIPTION__RESAMPLING);
 		createEAttribute(taskDescriptionEClass, TASK_DESCRIPTION__MODEL_FILE);
 		createEAttribute(taskDescriptionEClass, TASK_DESCRIPTION__GOF_FILE);
 	}
@@ -371,12 +393,14 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 		initEReference(getMachineLearningModule_LearningUseCase(), theExecutionPackage.getBlock(), null, "learningUseCase", null, 0, 1, MachineLearningModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMachineLearningModule_PredictionUseCase(), theGeneratorPackage.getPipelineDefinition(), null, "predictionUseCase", null, 0, 1, MachineLearningModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMachineLearningModule_TestingUseCase(), theExecutionPackage.getBlock(), null, "testingUseCase", null, 0, 1, MachineLearningModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMachineLearningModule_ResamplingUseCase(), theExecutionPackage.getBlock(), null, "resamplingUseCase", null, 0, 1, MachineLearningModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(taskDescriptionEClass, TaskDescription.class, "TaskDescription", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTaskDescription_Inputs(), theDefinitionsPackage.getDataDescription(), null, "inputs", null, 1, -1, TaskDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getTaskDescription_Outputs(), theDefinitionsPackage.getDataDescription(), null, "outputs", null, 1, -1, TaskDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEAttribute(getTaskDescription_LearningData(), ecorePackage.getEString(), "learningData", null, 1, -1, TaskDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEAttribute(getTaskDescription_TestingData(), ecorePackage.getEString(), "testingData", null, 0, -1, TaskDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getTaskDescription_Resampling(), theExpressionsPackage.getInstance(), null, "resampling", null, 0, -1, TaskDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTaskDescription_ModelFile(), ecorePackage.getEString(), "modelFile", null, 1, 1, TaskDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTaskDescription_GofFile(), ecorePackage.getEString(), "gofFile", null, 0, 1, TaskDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 

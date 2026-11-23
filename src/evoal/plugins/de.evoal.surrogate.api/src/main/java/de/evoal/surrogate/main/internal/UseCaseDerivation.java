@@ -39,14 +39,18 @@ import java.util.stream.Stream;
  *   learning task, unless the module states them:
  *
  * <ul>
- *   <li>A use case that the module does not write out gets its default: learning, predicting
- *     and, if the learning task has test data ({@code testing with [...]}), testing.</li>
+ *   <li>A use case that the module does not write out gets its default: learning, predicting,
+ *     testing if the learning task has test data ({@code testing with [...]}), and resampling
+ *     if it states resampling schemes ({@code assessing with [...]}).</li>
  *   <li>A standard step of {@value #SURROGATE_PIPELINE} without {@code reads} or {@code writes}
  *     gets the features of the learning task, and its left-out attributes are derived from
  *     the module.</li>
  *   <li>Every feature that a standard step states in {@code reads}, {@code writes} or its
  *     feature attributes must belong to the learning task: a deliberate subset is allowed,
  *     a feature outside the task stops the run.</li>
+ *   <li>Every resampling scheme is stated at most once, since its name is the name of its data
+ *     set, and the feature of {@code 'given-blocks'} is neither an input nor an output
+ *     feature.</li>
  * </ul>
  *
  * The effective use cases are logged.
@@ -73,6 +77,7 @@ public class UseCaseDerivation {
     private final static String MODEL_LEARNER = "model-learner";
     private final static String MODEL_PREDICTION = "model-prediction";
     private final static String ASSESSMENT_DATA = "assessment-data";
+    private final static String GIVEN_BLOCKS = "given-blocks";
 
     private final static String PREPARATION_STEP = "preparation-step";
     private final static String FEATURES = "features";
@@ -113,11 +118,16 @@ public class UseCaseDerivation {
             module.setTestingUseCase(defaultTesting(module));
         }
 
+        if(module.getResamplingUseCase() == null && !module.getTask().getResampling().isEmpty()) {
+            module.setResamplingUseCase(defaultResampling(module));
+        }
+
         final List<ConcreteStep> steps = standardSteps(module);
         steps.forEach(step -> derive(module, step));
 
         final List<String> errors = new ArrayList<>();
         steps.forEach(step -> check(module, step, errors));
+        checkResampling(module, errors);
         if(!errors.isEmpty()) {
             errors.forEach(log::error);
             throw new IllegalStateException(String.join("\n", errors));
@@ -195,6 +205,65 @@ public class UseCaseDerivation {
                        concreteStep(findType(surrogatePipeline, TEST_DATA_LOADER)),
                        pipelineStep(module.getValidation()),
                        assessmentStep);
+    }
+
+    /**
+     * <pre>
+     *   specify resampling begin
+     *     'resample'(&lt;scheme&gt;,
+     *                [pipeline 'validation', pipeline 'preparation', step { component 'model-learner' {} }],
+     *                [pipeline 'validation']);     // per scheme of assessing with [...]
+     *     'store-model'();
+     *   end;
+     * </pre>
+     */
+    private Block defaultResampling(final MachineLearningModule module) {
+        log.info("Adding the default resampling use case for the schemes {}.",
+                 module.getTask().getResampling().stream().map(scheme -> scheme.getDefinition().getName()).toList());
+        final DefinitionModule surrogatePipeline = findDefinitionModule(module, SURROGATE_PIPELINE);
+
+        final Block block = ExecutionFactory.eINSTANCE.createBlock();
+        for(final Instance scheme : module.getTask().getResampling()) {
+            final Array learning = exprFactory.createArray();
+            learning.getValues().addAll(List.of(pipelineStep(module.getValidation()),
+                                                pipelineStep(module.getPreparation()),
+                                                concreteStep(findType(surrogatePipeline, MODEL_LEARNER))));
+
+            final Array assessment = exprFactory.createArray();
+            assessment.getValues().add(pipelineStep(module.getValidation()));
+
+            block.getStatements().add(call(findFunction(surrogatePipeline, "resample"), EcoreUtil.copy(scheme), learning, assessment));
+        }
+        block.getStatements().add(call(findFunction(surrogatePipeline, "store-model")));
+
+        return block;
+    }
+
+    /**
+     * Checks the resampling schemes of the learning task: each scheme at most once, and the
+     *   feature of {@code 'given-blocks'} neither an input nor an output feature.
+     */
+    private static void checkResampling(final MachineLearningModule module, final List<String> errors) {
+        final TaskDescription task = module.getTask();
+        final String where = "Module '" + module.getName() + "', 'assessing with'";
+
+        final java.util.Set<String> seen = new java.util.HashSet<>();
+        for(final Instance scheme : task.getResampling()) {
+            final String name = scheme.getDefinition().getName();
+            if(!seen.add(name)) {
+                errors.add(where + ": '" + name + "' is stated twice; each scheme names its data set and may be stated once.");
+            }
+        }
+
+        task.getResampling()
+            .forEach(scheme -> scheme.eAllContents().forEachRemaining(element -> {
+                if(element instanceof Instance blocks && GIVEN_BLOCKS.equals(blocks.getDefinition().getName())) {
+                    featuresOf(blocks, "feature").stream()
+                                                 .filter(feature -> task.getInputs().contains(feature) || task.getOutputs().contains(feature))
+                                                 .forEach(feature -> errors.add(where + ": the feature '" + feature.getName() + "' of '" + GIVEN_BLOCKS
+                                                                                + "' is a feature of the learning task; the blocks need a feature of their own."));
+                }
+            }));
     }
 
     /**
@@ -376,16 +445,22 @@ public class UseCaseDerivation {
     }
 
     /**
-     * @return The data features of a feature attribute, or an empty list if the step has no
-     *   such attribute or its value is not an array of data references.
+     * @return The data features of a feature attribute (an array of data references or a
+     *   single one), or an empty list if the instance has no such attribute or its value is no
+     *   data reference.
      */
     private static List<TypeDefinition> featuresOf(final Instance instance, final String name) {
-        if(!(arrayOf(instance.findAttribute(name)) instanceof Array array)) {
+        final Attribute attribute = instance.findAttribute(name);
+        final List<? extends Expression> values;
+        if(arrayOf(attribute) instanceof Array array) {
+            values = array.getValues();
+        } else if(attribute != null) {
+            values = List.of(attribute.getValue());
+        } else {
             return List.of();
         }
 
-        return array.getValues()
-                    .stream()
+        return values.stream()
                     .map(ElementSwitch::elementOf)
                     .flatMap(Optional::stream)
                     .filter(TypeDefinitionReference.class::isInstance)
@@ -425,6 +500,8 @@ public class UseCaseDerivation {
             return "use case 'predicting'";
         } else if(current == module.getTestingUseCase()) {
             return "use case 'testing'";
+        } else if(current == module.getResamplingUseCase()) {
+            return "use case 'resampling'";
         } else if(current instanceof PipelineDefinition pipeline) {
             return "pipeline '" + pipeline.getName() + "'";
         }

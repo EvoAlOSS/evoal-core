@@ -14,6 +14,8 @@ interface MachineLearningModule {
 	gof?: Block
 	learningUseCase?: Block
 	predictionUseCase?: PipelineDefinition
+	testingUseCase?: Block
+	resamplingUseCase?: Block
 }
 
 interface TaskDescription extends NamedVariable {
@@ -21,6 +23,7 @@ interface TaskDescription extends NamedVariable {
 	outputs: @DataDescription[]
 	learningData: string[]
 	testingData: string[]
+	resampling: Instance[]
 	modelFile: string
 	gofFile?: string
 }

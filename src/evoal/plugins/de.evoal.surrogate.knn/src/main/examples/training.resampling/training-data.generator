@@ -1,0 +1,39 @@
+import "definitions" from 'de.evoal.pipeline.base';
+import "definitions" from 'de.evoal.pipeline.sequences';
+
+import "data" from surrogate;
+
+module 'training-data' {
+	/**
+	 * The grid x:0 = 1, 1.25, ..., 11 and y:0 = x:0 (12 - x:0).
+	 */
+	pipeline 'training' [
+		step {
+			component 'sequence-generator' {
+				sequences := [
+					'expression-based-sequence' {
+						variable     := data 'k';
+						initial      := 0.0;
+						'expression' := data 'k' + 1.0;
+					},
+					'expression-based-sequence' {
+						variable     := data 'x:0';
+						initial      := 1.0;
+						'expression' := 1.0 + 0.25 * data 'k';
+					},
+					'expression-based-sequence' {
+						variable     := data 'y:0';
+						initial      := 11.0;
+						'expression' := data 'x:0' * (12.0 - data 'x:0');
+					}
+				];
+			}
+
+			writes [data 'k', data 'x:0', data 'y:0'];
+		}
+	]
+
+	begin
+		write "output/training.csv" with 41 samples from executing ['training'];
+	end
+}

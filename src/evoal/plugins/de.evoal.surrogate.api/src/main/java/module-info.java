@@ -22,6 +22,7 @@ module de.evoal.surrogate.api {
     requires de.evoal.languages.model.base.dsl;
     requires de.evoal.languages.model.mll.dsl;
     requires de.evoal.languages.model.utils;
+    requires de.evoal.languages.model.interpreter;
 
     requires de.evoal.core.main;
     requires de.evoal.optimisation.api;
@@ -58,10 +59,10 @@ module de.evoal.surrogate.api {
     opens de.evoal.surrogate.main.literature to weld.core.impl;
     opens de.evoal.surrogate.main.jackson to weld.core.impl, com.fasterxml.jackson.databind;
     opens de.evoal.surrogate.main.gof to weld.core.impl;
-    opens de.evoal.surrogate.main.gof.cross to weld.core.impl;
     opens de.evoal.surrogate.main.gof.rmse to weld.core.impl;
     opens de.evoal.surrogate.main.gof.rsquare to weld.core.impl;
     opens de.evoal.surrogate.main.optimisation to weld.core.impl;
+    opens de.evoal.surrogate.main.resampling to weld.core.impl;
 //    opens de.evoal.surrogate.main.optimisation.constraints.strategies.malus to weld.core.impl;
 //    opens de.evoal.surrogate.main.optimisation.fitness to weld.core.impl;
     opens de.evoal.surrogate.main.pipeline to weld.core.impl;

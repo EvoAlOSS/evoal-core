@@ -36,6 +36,7 @@ class UseCasePrinter {
         block(1, "learning", module.getLearningUseCase());
         predicting(module.getPredictionUseCase());
         block(1, "testing", module.getTestingUseCase());
+        block(1, "resampling", module.getResamplingUseCase());
         line(0, "end");
 
         return out.toString();

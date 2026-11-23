@@ -210,7 +210,9 @@ public class EClassProvider {
 
     /**
      * Returns the class for the data of a machine learning module's task: first
-     *   the inputs, then the outputs, each in the order of the task definition.
+     *   the inputs, then the outputs, each in the order of the task definition,
+     *   then the data that its resampling schemes name (e.g. the feature of
+     *   {@code 'given-blocks'}), in the order of their occurrence.
      *
      * @param module The machine learning module.
      * @return The cached or newly created class.
@@ -229,6 +231,14 @@ public class EClassProvider {
                             module.getTask().getOutputs().stream()
                         )
                       .collect(Collectors.toCollection(LinkedHashSet::new));
+
+        EcoreUtil.<Object>getAllContents(module.getTask().getResampling(), true)
+                 .forEachRemaining(element -> {
+                     if(element instanceof TypeDefinitionReference reference
+                             && reference.getDefinition() instanceof DataDescription description) {
+                         references.add(description);
+                     }
+                 });
 
         final EClass result = eClassOf(references);
 

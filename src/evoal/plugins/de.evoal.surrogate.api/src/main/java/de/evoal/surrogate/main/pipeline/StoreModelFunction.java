@@ -10,6 +10,7 @@ import de.evoal.surrogate.api.function.ModelFunctionData;
 import de.evoal.surrogate.api.io.ModelWriter;
 import de.evoal.surrogate.api.io.pson.Parameter;
 import de.evoal.surrogate.api.training.GoodnessOfFit;
+import de.evoal.surrogate.api.training.ResampledValues;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import tools.jackson.databind.ObjectMapper;
@@ -76,11 +77,11 @@ public class StoreModelFunction implements EvoalBuiltinFunction {
 	}
 
 	private static void addGoodnessOfFit(final ModelWriter writer, final GoodnessOfFit goodnessOfFit) {
-		for(final Map.Entry<EStructuralFeature, Map<String, Map<String, Double>>> feature : goodnessOfFit.values().entrySet()) {
-			for(final Map.Entry<String, Map<String, Double>> measure : feature.getValue().entrySet()) {
+		for(final Map.Entry<EStructuralFeature, Map<String, Map<String, Object>>> feature : goodnessOfFit.values().entrySet()) {
+			for(final Map.Entry<String, Map<String, Object>> measure : feature.getValue().entrySet()) {
 				final Parameter parameter = Parameter.builder()
 						.name(measure.getKey())
-						.value(new LinkedHashMap<>(measure.getValue()))
+						.value(storable(measure.getValue()))
 						.build();
 
 				writer.addOutputFeatureInformation(feature.getKey(), parameter);
@@ -89,7 +90,20 @@ public class StoreModelFunction implements EvoalBuiltinFunction {
 	}
 
 	/**
-	 * Writes the goodness-of-fit values as JSON: output feature → measure → data set → value.
+	 * @return Data set → value, with the values of a resampling scheme as a map of
+	 *   {@code mean}, {@code standard-deviation} and {@code values}.
+	 */
+	private static Map<String, Object> storable(final Map<String, Object> dataSets) {
+		final Map<String, Object> result = new LinkedHashMap<>();
+		dataSets.forEach((dataSet, value) -> result.put(dataSet, value instanceof ResampledValues resampled ? resampled.asMap() : value));
+
+		return result;
+	}
+
+	/**
+	 * Writes the goodness-of-fit values as JSON: output feature → measure → data set → value;
+	 *   the value of a resampling scheme is an object with {@code mean},
+	 *   {@code standard-deviation} and {@code values}.
 	 *
 	 * @param file The file to write.
 	 * @param goodnessOfFit The values to write.
@@ -97,9 +111,13 @@ public class StoreModelFunction implements EvoalBuiltinFunction {
 	static void writeGoodnessOfFitFile(final File file, final GoodnessOfFit goodnessOfFit) {
 		log.info("Writing goodness-of-fit values to '{}'.", file);
 
-		final Map<String, Map<String, Map<String, Double>>> content = new LinkedHashMap<>();
+		final Map<String, Map<String, Map<String, Object>>> content = new LinkedHashMap<>();
 		goodnessOfFit.values()
-					 .forEach((feature, measures) -> content.put(feature.getName(), measures));
+					 .forEach((feature, measures) -> {
+						 final Map<String, Map<String, Object>> storedMeasures = new LinkedHashMap<>();
+						 measures.forEach((measure, dataSets) -> storedMeasures.put(measure, storable(dataSets)));
+						 content.put(feature.getName(), storedMeasures);
+					 });
 
 		final File parent = file.getAbsoluteFile().getParentFile();
 		if(parent != null) {

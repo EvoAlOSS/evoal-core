@@ -4,6 +4,7 @@ package de.evoal.languages.model.mll;
 
 import de.evoal.languages.model.base.definitions.DataDescription;
 
+import de.evoal.languages.model.base.expressions.Instance;
 import de.evoal.languages.model.execution.NamedVariable;
 
 import org.eclipse.emf.common.util.EList;
@@ -27,6 +28,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link de.evoal.languages.model.mll.TaskDescription#getOutputs <em>Outputs</em>}</li>
  *   <li>{@link de.evoal.languages.model.mll.TaskDescription#getLearningData <em>Learning Data</em>}</li>
  *   <li>{@link de.evoal.languages.model.mll.TaskDescription#getTestingData <em>Testing Data</em>}</li>
+ *   <li>{@link de.evoal.languages.model.mll.TaskDescription#getResampling <em>Resampling</em>}</li>
  *   <li>{@link de.evoal.languages.model.mll.TaskDescription#getModelFile <em>Model File</em>}</li>
  *   <li>{@link de.evoal.languages.model.mll.TaskDescription#getGofFile <em>Gof File</em>}</li>
  * </ul>
@@ -107,6 +109,24 @@ public interface TaskDescription extends NamedVariable {
 	 * @generated
 	 */
 	EList<String> getTestingData();
+
+	/**
+	 * Returns the value of the '<em><b>Resampling</b></em>' containment reference list.
+	 * The list contents are of type {@link de.evoal.languages.model.base.expressions.Instance}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * 
+	 * The resampling schemes that assess the learned model on the training data
+	 *   (assessing with [...]), instances of 'resampling-scheme'.
+	 * 
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Resampling</em>' containment reference list.
+	 * @see de.evoal.languages.model.mll.MllPackage#getTaskDescription_Resampling()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<Instance> getResampling();
 
 	/**
 	 * Returns the value of the '<em><b>Model File</b></em>' attribute.

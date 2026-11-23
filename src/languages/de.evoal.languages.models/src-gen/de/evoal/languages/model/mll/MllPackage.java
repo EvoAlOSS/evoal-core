@@ -165,13 +165,22 @@ public interface MllPackage extends EPackage {
 	int MACHINE_LEARNING_MODULE__TESTING_USE_CASE = BasePackage.MODULE_FEATURE_COUNT + 7;
 
 	/**
+	 * The feature id for the '<em><b>Resampling Use Case</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MACHINE_LEARNING_MODULE__RESAMPLING_USE_CASE = BasePackage.MODULE_FEATURE_COUNT + 8;
+
+	/**
 	 * The number of structural features of the '<em>Machine Learning Module</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MACHINE_LEARNING_MODULE_FEATURE_COUNT = BasePackage.MODULE_FEATURE_COUNT + 8;
+	int MACHINE_LEARNING_MODULE_FEATURE_COUNT = BasePackage.MODULE_FEATURE_COUNT + 9;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.mll.impl.TaskDescriptionImpl <em>Task Description</em>}' class.
@@ -229,13 +238,22 @@ public interface MllPackage extends EPackage {
 	int TASK_DESCRIPTION__TESTING_DATA = ExecutionPackage.NAMED_VARIABLE_FEATURE_COUNT + 3;
 
 	/**
+	 * The feature id for the '<em><b>Resampling</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TASK_DESCRIPTION__RESAMPLING = ExecutionPackage.NAMED_VARIABLE_FEATURE_COUNT + 4;
+
+	/**
 	 * The feature id for the '<em><b>Model File</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TASK_DESCRIPTION__MODEL_FILE = ExecutionPackage.NAMED_VARIABLE_FEATURE_COUNT + 4;
+	int TASK_DESCRIPTION__MODEL_FILE = ExecutionPackage.NAMED_VARIABLE_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Gof File</b></em>' attribute.
@@ -244,7 +262,7 @@ public interface MllPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TASK_DESCRIPTION__GOF_FILE = ExecutionPackage.NAMED_VARIABLE_FEATURE_COUNT + 5;
+	int TASK_DESCRIPTION__GOF_FILE = ExecutionPackage.NAMED_VARIABLE_FEATURE_COUNT + 6;
 
 	/**
 	 * The number of structural features of the '<em>Task Description</em>' class.
@@ -253,7 +271,7 @@ public interface MllPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TASK_DESCRIPTION_FEATURE_COUNT = ExecutionPackage.NAMED_VARIABLE_FEATURE_COUNT + 6;
+	int TASK_DESCRIPTION_FEATURE_COUNT = ExecutionPackage.NAMED_VARIABLE_FEATURE_COUNT + 7;
 
 
 	/**
@@ -355,6 +373,17 @@ public interface MllPackage extends EPackage {
 	EReference getMachineLearningModule_TestingUseCase();
 
 	/**
+	 * Returns the meta object for the containment reference '{@link de.evoal.languages.model.mll.MachineLearningModule#getResamplingUseCase <em>Resampling Use Case</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Resampling Use Case</em>'.
+	 * @see de.evoal.languages.model.mll.MachineLearningModule#getResamplingUseCase()
+	 * @see #getMachineLearningModule()
+	 * @generated
+	 */
+	EReference getMachineLearningModule_ResamplingUseCase();
+
+	/**
 	 * Returns the meta object for class '{@link de.evoal.languages.model.mll.TaskDescription <em>Task Description</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -407,6 +436,17 @@ public interface MllPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getTaskDescription_TestingData();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.mll.TaskDescription#getResampling <em>Resampling</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Resampling</em>'.
+	 * @see de.evoal.languages.model.mll.TaskDescription#getResampling()
+	 * @see #getTaskDescription()
+	 * @generated
+	 */
+	EReference getTaskDescription_Resampling();
 
 	/**
 	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.mll.TaskDescription#getModelFile <em>Model File</em>}'.
@@ -527,6 +567,14 @@ public interface MllPackage extends EPackage {
 		EReference MACHINE_LEARNING_MODULE__TESTING_USE_CASE = eINSTANCE.getMachineLearningModule_TestingUseCase();
 
 		/**
+		 * The meta object literal for the '<em><b>Resampling Use Case</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MACHINE_LEARNING_MODULE__RESAMPLING_USE_CASE = eINSTANCE.getMachineLearningModule_ResamplingUseCase();
+
+		/**
 		 * The meta object literal for the '{@link de.evoal.languages.model.mll.impl.TaskDescriptionImpl <em>Task Description</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -567,6 +615,14 @@ public interface MllPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute TASK_DESCRIPTION__TESTING_DATA = eINSTANCE.getTaskDescription_TestingData();
+
+		/**
+		 * The meta object literal for the '<em><b>Resampling</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TASK_DESCRIPTION__RESAMPLING = eINSTANCE.getTaskDescription_Resampling();
 
 		/**
 		 * The meta object literal for the '<em><b>Model File</b></em>' attribute feature.

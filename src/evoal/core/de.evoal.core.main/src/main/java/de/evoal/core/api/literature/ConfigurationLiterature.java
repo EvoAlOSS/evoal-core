@@ -22,13 +22,16 @@ import de.evoal.core.api.dynamic.DynamicDefinitions;
 import de.evoal.core.api.languages.AttributeEvaluator;
 import de.evoal.languages.model.base.definitions.ClassDefinition;
 import de.evoal.languages.model.base.definitions.Definition;
+import de.evoal.languages.model.base.expressions.Instance;
 
 /**
  * Collects the literature of a configuration by walking its runtime model: every configuration
  *   of a DL type adds its definition ({@code @Literature} with that of its super types, and the
  *   citations of its module) and then the values of all its attributes, as the components read
  *   them (defaults applied, {@link AttributeEvaluator#readAttribute}); objects of the given
- *   runtime model packages are entered through their references. Other objects (e.g. data
+ *   runtime model packages are entered through their references. An instance literal that is
+ *   not converted into a configuration (e.g. an argument of a builtin function) adds the
+ *   definition of its DL type, and its attribute values are entered. Other objects (e.g. data
  *   descriptions) are not entered. Every {@link LiteratureContributor} may add further
  *   definitions for a configuration, e.g. those recorded in a model file it loads.
  */
@@ -138,6 +141,14 @@ public final class ConfigurationLiterature {
             for(final EStructuralFeature attribute : object.eClass().getEAllStructuralFeatures()) {
                 walkValue(read(object, attribute), list, visited);
             }
+        } else if(object instanceof Instance instance && instance.getDefinition() != null) {
+            if(skipped.test(instance.getDefinition())) {
+                return;
+            }
+
+            list.add(instance.getDefinition());
+            instance.getAttributes()
+                    .forEach(attribute -> walkValue(attribute.getValue(), list, visited));
         } else if(runtimePackages.contains(object.eClass().getEPackage())) {
             for(final EReference reference : object.eClass().getEAllReferences()) {
                 walkValue(object.eGet(reference), list, visited);

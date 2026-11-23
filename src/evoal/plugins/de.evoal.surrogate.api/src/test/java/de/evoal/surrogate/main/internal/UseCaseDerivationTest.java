@@ -306,6 +306,106 @@ public class UseCaseDerivationTest {
     }
 
     @Nested
+    @DisplayName("given resampling schemes")
+    class ResamplingSchemes {
+        private final MachineLearningModule module = loadAndDerive("resampling.mll");
+
+        private List<Statement> statements() {
+            return module.getResamplingUseCase().getStatements();
+        }
+
+        private List<String> stepsOf(final Statement statement, final int parameter) {
+            final CallBuiltinFunction call = (CallBuiltinFunction) statement;
+            final Array steps = (Array) ElementSwitch.elementOf(call.getParameters().get(parameter)).orElseThrow();
+
+            return steps.getValues()
+                        .stream()
+                        .map(v -> describe((EObject) ElementSwitch.elementOf(v).orElseThrow()))
+                        .toList();
+        }
+
+        @Test
+        public void eachSchemeIsResampledInOrderAndTheModelIsStoredAgain() {
+            // then
+            Assertions.assertEquals(List.of("de.evoal.surrogate.pipeline.resample",
+                                            "de.evoal.surrogate.pipeline.resample",
+                                            "de.evoal.surrogate.pipeline.resample",
+                                            "de.evoal.surrogate.pipeline.resample",
+                                            "de.evoal.surrogate.pipeline.store-model"),
+                                    statements().stream().map(UseCaseDerivationTest::nameOf).toList());
+            Assertions.assertEquals(List.of("k-fold-cross-validation", "leave-one-out-cross-validation", "bootstrap", "block-cross-validation"),
+                                    statements().subList(0, 4)
+                                                .stream()
+                                                .map(s -> ((Instance) ElementSwitch.elementOf(((CallBuiltinFunction) s).getParameters().get(0)).orElseThrow())
+                                                        .getDefinition().getName())
+                                                .toList());
+        }
+
+        @Test
+        public void aPartLearnsLikeTheLearningUseCaseAndIsAssessedAfterValidation() {
+            // then
+            Assertions.assertEquals(List.of("pipeline validation", "pipeline preparation", "step model-learner"), stepsOf(statements().get(0), 1));
+            Assertions.assertEquals(List.of("pipeline validation"), stepsOf(statements().get(0), 2));
+        }
+
+        @Test
+        public void theLearnerOfAPartGetsTheDerivedSettings() {
+            // when
+            final CallBuiltinFunction call = (CallBuiltinFunction) statements().get(0);
+            final Array steps = (Array) ElementSwitch.elementOf(call.getParameters().get(1)).orElseThrow();
+            final ConcreteStep learner = (ConcreteStep) ElementSwitch.elementOf(steps.getValues().get(2)).orElseThrow();
+
+            // then
+            Assertions.assertEquals(List.of("x:0", "x:1", "y:0"), names(learner.getReads()));
+            Assertions.assertEquals(List.of("x:0", "x:1"), featuresOf(learner.getInstance(), "input-features"));
+            Assertions.assertNotNull(learner.getInstance().findAttribute("model"));
+        }
+
+        @Test
+        public void theResamplingUseCaseIsPrinted() {
+            // when
+            final String printed = new UseCasePrinter().print(module);
+
+            // then
+            Assertions.assertTrue(printed.contains("specify resampling"), printed);
+            Assertions.assertTrue(printed.contains("'resample'('k-fold-cross-validation' { 'k' := 5; }, ["), printed);
+        }
+
+        @Test
+        public void withoutSchemesThereIsNoResamplingUseCase() {
+            // when
+            final MachineLearningModule withoutSchemes = loadAndDerive("default-use-cases.mll");
+
+            // then
+            Assertions.assertNull(withoutSchemes.getResamplingUseCase());
+        }
+    }
+
+    @Nested
+    @DisplayName("given wrong resampling schemes")
+    class WrongResamplingSchemes {
+        @Test
+        public void aSchemeStatedTwiceIsRejected() {
+            // when
+            final IllegalStateException e = Assertions.assertThrows(IllegalStateException.class,
+                                                                     () -> loadAndDerive("resampling-twice.mll"));
+
+            // then
+            Assertions.assertTrue(e.getMessage().contains("'k-fold-cross-validation' is stated twice"), e.getMessage());
+        }
+
+        @Test
+        public void blocksNamedByAFeatureOfTheTaskAreRejected() {
+            // when
+            final IllegalStateException e = Assertions.assertThrows(IllegalStateException.class,
+                                                                     () -> loadAndDerive("given-blocks-on-input.mll"));
+
+            // then
+            Assertions.assertTrue(e.getMessage().contains("the feature 'x:1' of 'given-blocks' is a feature of the learning task"), e.getMessage());
+        }
+    }
+
+    @Nested
     @DisplayName("given wrong preparation steps")
     class WrongPreparationSteps {
         @Test

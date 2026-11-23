@@ -327,14 +327,39 @@ ruleMachineLearningModuleRule returns [EObject current=null]
 					newLeafNode(otherlv_20, grammarAccess.getMachineLearningModuleRuleAccess().getSemicolonKeyword_11_4_1());
 				}
 			)?
-			otherlv_21='end'
+			(
+				(
+					(
+						{
+							newCompositeNode(grammarAccess.getMachineLearningModuleRuleAccess().getResamplingUseCaseResamplingUseCaseRuleParserRuleCall_11_5_0_0());
+						}
+						lv_resamplingUseCase_21_0=ruleResamplingUseCaseRule
+						{
+							if ($current==null) {
+								$current = createModelElementForParent(grammarAccess.getMachineLearningModuleRuleRule());
+							}
+							set(
+								$current,
+								"resamplingUseCase",
+								lv_resamplingUseCase_21_0,
+								"de.evoal.languages.model.mll.dsl.MachineLearningLanguage.ResamplingUseCaseRule");
+							afterParserOrEnumRuleCall();
+						}
+					)
+				)
+				otherlv_22=';'
+				{
+					newLeafNode(otherlv_22, grammarAccess.getMachineLearningModuleRuleAccess().getSemicolonKeyword_11_5_1());
+				}
+			)?
+			otherlv_23='end'
 			{
-				newLeafNode(otherlv_21, grammarAccess.getMachineLearningModuleRuleAccess().getEndKeyword_11_5());
+				newLeafNode(otherlv_23, grammarAccess.getMachineLearningModuleRuleAccess().getEndKeyword_11_6());
 			}
 		)?
-		otherlv_22='}'
+		otherlv_24='}'
 		{
-			newLeafNode(otherlv_22, grammarAccess.getMachineLearningModuleRuleAccess().getRightCurlyBracketKeyword_12());
+			newLeafNode(otherlv_24, grammarAccess.getMachineLearningModuleRuleAccess().getRightCurlyBracketKeyword_12());
 		}
 	)
 ;
@@ -599,19 +624,81 @@ ruleTaskDescriptionRule returns [EObject current=null]
 				newLeafNode(otherlv_26, grammarAccess.getTaskDescriptionRuleAccess().getRightSquareBracketKeyword_17_5());
 			}
 		)?
-		otherlv_27='serialise'
+		(
+			otherlv_27='assessing'
+			{
+				newLeafNode(otherlv_27, grammarAccess.getTaskDescriptionRuleAccess().getAssessingKeyword_18_0());
+			}
+			otherlv_28='with'
+			{
+				newLeafNode(otherlv_28, grammarAccess.getTaskDescriptionRuleAccess().getWithKeyword_18_1());
+			}
+			otherlv_29='['
+			{
+				newLeafNode(otherlv_29, grammarAccess.getTaskDescriptionRuleAccess().getLeftSquareBracketKeyword_18_2());
+			}
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getTaskDescriptionRuleAccess().getResamplingInstanceLiteralRuleParserRuleCall_18_3_0());
+					}
+					lv_resampling_30_0=ruleInstanceLiteralRule
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getTaskDescriptionRuleRule());
+						}
+						add(
+							$current,
+							"resampling",
+							lv_resampling_30_0,
+							"de.evoal.languages.model.base.dsl.BaseLanguage.InstanceLiteralRule");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+			(
+				otherlv_31=','
+				{
+					newLeafNode(otherlv_31, grammarAccess.getTaskDescriptionRuleAccess().getCommaKeyword_18_4_0());
+				}
+				(
+					(
+						{
+							newCompositeNode(grammarAccess.getTaskDescriptionRuleAccess().getResamplingInstanceLiteralRuleParserRuleCall_18_4_1_0());
+						}
+						lv_resampling_32_0=ruleInstanceLiteralRule
+						{
+							if ($current==null) {
+								$current = createModelElementForParent(grammarAccess.getTaskDescriptionRuleRule());
+							}
+							add(
+								$current,
+								"resampling",
+								lv_resampling_32_0,
+								"de.evoal.languages.model.base.dsl.BaseLanguage.InstanceLiteralRule");
+							afterParserOrEnumRuleCall();
+						}
+					)
+				)
+			)*
+			otherlv_33=']'
+			{
+				newLeafNode(otherlv_33, grammarAccess.getTaskDescriptionRuleAccess().getRightSquareBracketKeyword_18_5());
+			}
+		)?
+		otherlv_34='serialise'
 		{
-			newLeafNode(otherlv_27, grammarAccess.getTaskDescriptionRuleAccess().getSerialiseKeyword_18());
+			newLeafNode(otherlv_34, grammarAccess.getTaskDescriptionRuleAccess().getSerialiseKeyword_19());
 		}
-		otherlv_28='to'
+		otherlv_35='to'
 		{
-			newLeafNode(otherlv_28, grammarAccess.getTaskDescriptionRuleAccess().getToKeyword_19());
+			newLeafNode(otherlv_35, grammarAccess.getTaskDescriptionRuleAccess().getToKeyword_20());
 		}
 		(
 			(
-				lv_modelFile_29_0=RULE_STRING
+				lv_modelFile_36_0=RULE_STRING
 				{
-					newLeafNode(lv_modelFile_29_0, grammarAccess.getTaskDescriptionRuleAccess().getModelFileSTRINGTerminalRuleCall_20_0());
+					newLeafNode(lv_modelFile_36_0, grammarAccess.getTaskDescriptionRuleAccess().getModelFileSTRINGTerminalRuleCall_21_0());
 				}
 				{
 					if ($current==null) {
@@ -620,21 +707,21 @@ ruleTaskDescriptionRule returns [EObject current=null]
 					setWithLastConsumed(
 						$current,
 						"modelFile",
-						lv_modelFile_29_0,
+						lv_modelFile_36_0,
 						"de.evoal.languages.model.base.dsl.BaseLanguage.STRING");
 				}
 			)
 		)
 		(
-			otherlv_30='and'
+			otherlv_37='and'
 			{
-				newLeafNode(otherlv_30, grammarAccess.getTaskDescriptionRuleAccess().getAndKeyword_21_0());
+				newLeafNode(otherlv_37, grammarAccess.getTaskDescriptionRuleAccess().getAndKeyword_22_0());
 			}
 			(
 				(
-					lv_gofFile_31_0=RULE_STRING
+					lv_gofFile_38_0=RULE_STRING
 					{
-						newLeafNode(lv_gofFile_31_0, grammarAccess.getTaskDescriptionRuleAccess().getGofFileSTRINGTerminalRuleCall_21_1_0());
+						newLeafNode(lv_gofFile_38_0, grammarAccess.getTaskDescriptionRuleAccess().getGofFileSTRINGTerminalRuleCall_22_1_0());
 					}
 					{
 						if ($current==null) {
@@ -643,15 +730,15 @@ ruleTaskDescriptionRule returns [EObject current=null]
 						setWithLastConsumed(
 							$current,
 							"gofFile",
-							lv_gofFile_31_0,
+							lv_gofFile_38_0,
 							"de.evoal.languages.model.base.dsl.BaseLanguage.STRING");
 					}
 				)
 			)
 		)?
-		otherlv_32='}'
+		otherlv_39='}'
 		{
-			newLeafNode(otherlv_32, grammarAccess.getTaskDescriptionRuleAccess().getRightCurlyBracketKeyword_22());
+			newLeafNode(otherlv_39, grammarAccess.getTaskDescriptionRuleAccess().getRightCurlyBracketKeyword_23());
 		}
 	)
 ;
@@ -936,6 +1023,70 @@ ruleTestingUseCaseRule returns [EObject current=null]
 		otherlv_5='end'
 		{
 			newLeafNode(otherlv_5, grammarAccess.getTestingUseCaseRuleAccess().getEndKeyword_5());
+		}
+	)
+;
+
+// Entry rule entryRuleResamplingUseCaseRule
+entryRuleResamplingUseCaseRule returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getResamplingUseCaseRuleRule()); }
+	iv_ruleResamplingUseCaseRule=ruleResamplingUseCaseRule
+	{ $current=$iv_ruleResamplingUseCaseRule.current; }
+	EOF;
+
+// Rule ResamplingUseCaseRule
+ruleResamplingUseCaseRule returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			{
+				/* */
+			}
+			{
+				$current = forceCreateModelElement(
+					grammarAccess.getResamplingUseCaseRuleAccess().getBlockAction_0(),
+					$current);
+			}
+		)
+		otherlv_1='specify'
+		{
+			newLeafNode(otherlv_1, grammarAccess.getResamplingUseCaseRuleAccess().getSpecifyKeyword_1());
+		}
+		otherlv_2='resampling'
+		{
+			newLeafNode(otherlv_2, grammarAccess.getResamplingUseCaseRuleAccess().getResamplingKeyword_2());
+		}
+		otherlv_3='begin'
+		{
+			newLeafNode(otherlv_3, grammarAccess.getResamplingUseCaseRuleAccess().getBeginKeyword_3());
+		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getResamplingUseCaseRuleAccess().getStatementsStatementRuleParserRuleCall_4_0());
+				}
+				lv_statements_4_0=ruleStatementRule
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getResamplingUseCaseRuleRule());
+					}
+					add(
+						$current,
+						"statements",
+						lv_statements_4_0,
+						"de.evoal.languages.model.generator.dsl.GeneratorDSL.StatementRule");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)*
+		otherlv_5='end'
+		{
+			newLeafNode(otherlv_5, grammarAccess.getResamplingUseCaseRuleAccess().getEndKeyword_5());
 		}
 	)
 ;

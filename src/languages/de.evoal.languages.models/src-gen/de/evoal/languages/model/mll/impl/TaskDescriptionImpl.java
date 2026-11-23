@@ -4,6 +4,7 @@ package de.evoal.languages.model.mll.impl;
 
 import de.evoal.languages.model.base.definitions.DataDescription;
 
+import de.evoal.languages.model.base.expressions.Instance;
 import de.evoal.languages.model.execution.impl.NamedVariableImpl;
 
 import de.evoal.languages.model.mll.MllPackage;
@@ -13,14 +14,18 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -34,6 +39,7 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
  *   <li>{@link de.evoal.languages.model.mll.impl.TaskDescriptionImpl#getOutputs <em>Outputs</em>}</li>
  *   <li>{@link de.evoal.languages.model.mll.impl.TaskDescriptionImpl#getLearningData <em>Learning Data</em>}</li>
  *   <li>{@link de.evoal.languages.model.mll.impl.TaskDescriptionImpl#getTestingData <em>Testing Data</em>}</li>
+ *   <li>{@link de.evoal.languages.model.mll.impl.TaskDescriptionImpl#getResampling <em>Resampling</em>}</li>
  *   <li>{@link de.evoal.languages.model.mll.impl.TaskDescriptionImpl#getModelFile <em>Model File</em>}</li>
  *   <li>{@link de.evoal.languages.model.mll.impl.TaskDescriptionImpl#getGofFile <em>Gof File</em>}</li>
  * </ul>
@@ -80,6 +86,16 @@ public class TaskDescriptionImpl extends NamedVariableImpl implements TaskDescri
 	 * @ordered
 	 */
 	protected EList<String> testingData;
+
+	/**
+	 * The cached value of the '{@link #getResampling() <em>Resampling</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getResampling()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Instance> resampling;
 
 	/**
 	 * The default value of the '{@link #getModelFile() <em>Model File</em>}' attribute.
@@ -198,6 +214,19 @@ public class TaskDescriptionImpl extends NamedVariableImpl implements TaskDescri
 	 * @generated
 	 */
 	@Override
+	public EList<Instance> getResampling() {
+		if (resampling == null) {
+			resampling = new EObjectContainmentEList<Instance>(Instance.class, this, MllPackage.TASK_DESCRIPTION__RESAMPLING);
+		}
+		return resampling;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public String getModelFile() {
 		return modelFile;
 	}
@@ -244,6 +273,20 @@ public class TaskDescriptionImpl extends NamedVariableImpl implements TaskDescri
 	 * @generated
 	 */
 	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case MllPackage.TASK_DESCRIPTION__RESAMPLING:
+				return ((InternalEList<?>)getResampling()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case MllPackage.TASK_DESCRIPTION__INPUTS:
@@ -254,6 +297,8 @@ public class TaskDescriptionImpl extends NamedVariableImpl implements TaskDescri
 				return getLearningData();
 			case MllPackage.TASK_DESCRIPTION__TESTING_DATA:
 				return getTestingData();
+			case MllPackage.TASK_DESCRIPTION__RESAMPLING:
+				return getResampling();
 			case MllPackage.TASK_DESCRIPTION__MODEL_FILE:
 				return getModelFile();
 			case MllPackage.TASK_DESCRIPTION__GOF_FILE:
@@ -287,6 +332,10 @@ public class TaskDescriptionImpl extends NamedVariableImpl implements TaskDescri
 				getTestingData().clear();
 				getTestingData().addAll((Collection<? extends String>)newValue);
 				return;
+			case MllPackage.TASK_DESCRIPTION__RESAMPLING:
+				getResampling().clear();
+				getResampling().addAll((Collection<? extends Instance>)newValue);
+				return;
 			case MllPackage.TASK_DESCRIPTION__MODEL_FILE:
 				setModelFile((String)newValue);
 				return;
@@ -317,6 +366,9 @@ public class TaskDescriptionImpl extends NamedVariableImpl implements TaskDescri
 			case MllPackage.TASK_DESCRIPTION__TESTING_DATA:
 				getTestingData().clear();
 				return;
+			case MllPackage.TASK_DESCRIPTION__RESAMPLING:
+				getResampling().clear();
+				return;
 			case MllPackage.TASK_DESCRIPTION__MODEL_FILE:
 				setModelFile(MODEL_FILE_EDEFAULT);
 				return;
@@ -343,6 +395,8 @@ public class TaskDescriptionImpl extends NamedVariableImpl implements TaskDescri
 				return learningData != null && !learningData.isEmpty();
 			case MllPackage.TASK_DESCRIPTION__TESTING_DATA:
 				return testingData != null && !testingData.isEmpty();
+			case MllPackage.TASK_DESCRIPTION__RESAMPLING:
+				return resampling != null && !resampling.isEmpty();
 			case MllPackage.TASK_DESCRIPTION__MODEL_FILE:
 				return MODEL_FILE_EDEFAULT == null ? modelFile != null : !MODEL_FILE_EDEFAULT.equals(modelFile);
 			case MllPackage.TASK_DESCRIPTION__GOF_FILE:

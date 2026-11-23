@@ -220,11 +220,140 @@ module 'de.evoal.surrogate.pipeline' {
 	/**
 	 * Stores the model with its prediction pipeline and its goodness-of-fit values: one entry
 	 * per output feature and measure, named by the qualified measure, with the value of each
-	 * data set, e.g. <code>de.evoal.surrogate.ml.rmse</code> → { training: 0.1, test: 0.3 }.
+	 * data set, e.g. <code>de.evoal.surrogate.ml.rmse</code> → { training: 0.1, test: 0.3 }; the
+	 * value of a resampling scheme is an object with its mean, standard deviation and values
+	 * (see <code>'resampling-scheme'</code>).
 	 * If the learning task names a goodness-of-fit file
 	 * (<code>serialise to "model.pson" and "gof.json"</code>), the values are written to it as
 	 * JSON as well. Storing again writes all values recorded so far.
 	 */
 	def void 'store-model'();
+
+	/**
+	 * A resampling scheme estimates the prediction error of a surrogate from its training data
+	 * alone: it splits the data that <code>'training-data-loader'</code> loaded into parts, and
+	 * for each part learns on the training rows of the part and assesses the held-out rows with
+	 * the measures of <code>specify gof</code>. The schemes are stated in the learning task of
+	 * an MLL file (<code>assessing with [...]</code>); every scheme is stated at most once,
+	 * because its name is the name of its data set. Per output feature and measure, the data
+	 * set of the scheme holds the mean, the standard deviation (divided by m - 1 for m parts;
+	 * 0 for one part) and the values of the parts, e.g. "k-fold-cross-validation":
+	 * { "mean": 31.2, "standard-deviation": 6.8, "values": [...] }. A part on which a measure
+	 * is undefined (e.g. R² on a single held-out row) adds no value; the warning names it.
+	 * The splits use the random stream <code>de.evoal.surrogate.pipeline.resample/&lt;scheme&gt;</code>
+	 * of the run (<code>core:seed</code>), so the same seed gives the same parts.
+	 */
+	abstract type 'resampling-scheme' {}
+
+	/**
+	 * k-fold cross-validation (Stone 1974; Arlot and Celisse 2010): shuffles the rows and
+	 * splits them into <code>'k'</code> folds whose sizes differ by at most one; each fold is
+	 * held out once.
+	 */
+	@Literature { keys := ["stone1974crossvalidatory", "arlot2010survey"]; }
+	type 'k-fold-cross-validation' extends 'resampling-scheme' {
+		/**
+		 * The number of folds, at most the number of rows.
+		 */
+		@LowerBoundary { boundary := 2; }
+		'k' : int;
+	}
+
+	/**
+	 * Leave-one-out cross-validation (Stone 1974; Arlot and Celisse 2010): each row is held
+	 * out once, so there are as many parts as rows. Measures that are undefined on a single
+	 * row (R², rrse) give no values.
+	 */
+	@Literature { keys := ["stone1974crossvalidatory", "arlot2010survey"]; }
+	type 'leave-one-out-cross-validation' extends 'resampling-scheme' {}
+
+	/**
+	 * Bootstrap (Efron 1979): each repetition draws as many rows as there are with
+	 * replacement, learns on the drawn rows and assesses the rows that were not drawn (out of
+	 * bag). A repetition without out-of-bag rows is skipped with a warning.
+	 */
+	@Literature { keys := ["efron1979bootstrap"]; }
+	type 'bootstrap' extends 'resampling-scheme' {
+		/**
+		 * The number of repetitions.
+		 */
+		@LowerBoundary { boundary := 1; }
+		'repetitions' : int;
+	}
+
+	/**
+	 * Block cross-validation (Roberts et al. 2017): the folds are blocks of rows, e.g. regions
+	 * of the input space, and each block is held out once. The surrogate then predicts rows
+	 * outside the region it learned from, so the estimate is the extrapolation error.
+	 */
+	@Literature { keys := ["roberts2017crossvalidation"]; }
+	type 'block-cross-validation' extends 'resampling-scheme' {
+		/**
+		 * How the rows are divided into blocks; at least two blocks are needed.
+		 */
+		blocks : instance 'block-definition';
+	}
+
+	/**
+	 * Divides the rows of a block cross-validation into blocks.
+	 */
+	abstract type 'block-definition' {}
+
+	/**
+	 * Clusters the rows by their input features with k-means (Lloyd 1982): the inputs are
+	 * min-max normalised on the training data, the k-means++ seeding chooses the initial
+	 * centres, and Lloyd iterations move them until no row changes its cluster. Each
+	 * non-empty cluster is a block. The seeding uses the random stream
+	 * <code>de.evoal.surrogate.pipeline.resample/block-cross-validation/k-means-blocks</code>.
+	 */
+	@Literature { keys := ["lloyd1982least"]; }
+	type 'k-means-blocks' extends 'block-definition' {
+		/**
+		 * The number of clusters, at most the number of rows.
+		 */
+		@LowerBoundary { boundary := 2; }
+		'k' : int;
+	}
+
+	/**
+	 * Divides the range of every input feature on the training data into
+	 * <code>intervals</code> equal intervals; each non-empty cell of the grid is a block.
+	 * The number of cells grows with the number of inputs, so many cells hold few rows; a
+	 * warning is logged if there are more blocks than half the rows.
+	 */
+	type 'grid-blocks' extends 'block-definition' {
+		/**
+		 * The number of intervals per input feature.
+		 */
+		@LowerBoundary { boundary := 1; }
+		intervals : int;
+	}
+
+	/**
+	 * The training data names the block of each row: rows with the same value of
+	 * <code>feature</code> form a block. The feature is read from the training files in
+	 * addition to the features of the learning task; it must not be an input or output
+	 * feature.
+	 */
+	type 'given-blocks' extends 'block-definition' {
+		/**
+		 * The feature whose value names the block of a row.
+		 */
+		feature : data;
+	}
+
+	/**
+	 * Assesses the learning with a resampling scheme (see <code>'resampling-scheme'</code>):
+	 * loads the training data as <code>'training-data-loader'</code> loaded it, and for each
+	 * part of the scheme, in an interpreter state of its own, runs the <code>learning</code>
+	 * steps on the training rows and the <code>assessment</code> steps on the held-out rows,
+	 * and assesses the rows that leave them with the measures of <code>specify gof</code>
+	 * through the prediction pipeline of the part's model. The values of the parts are
+	 * recorded in the data set of the scheme. The final model, its fitted preparation and its
+	 * other values are not changed; <code>'store-model'</code> stores them with the new values.
+	 * In an MLL file, the derived resampling use case calls it for each scheme of
+	 * <code>assessing with [...]</code>.
+	 */
+	def void 'resample'(instance 'resampling-scheme' scheme, array literal 'learning', array literal 'assessment');
 
 }

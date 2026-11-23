@@ -67,7 +67,11 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 		private final Assignment cTestingUseCaseAssignment_11_4_0 = (Assignment)cGroup_11_4.eContents().get(0);
 		private final RuleCall cTestingUseCaseTestingUseCaseRuleParserRuleCall_11_4_0_0 = (RuleCall)cTestingUseCaseAssignment_11_4_0.eContents().get(0);
 		private final Keyword cSemicolonKeyword_11_4_1 = (Keyword)cGroup_11_4.eContents().get(1);
-		private final Keyword cEndKeyword_11_5 = (Keyword)cGroup_11.eContents().get(5);
+		private final Group cGroup_11_5 = (Group)cGroup_11.eContents().get(5);
+		private final Assignment cResamplingUseCaseAssignment_11_5_0 = (Assignment)cGroup_11_5.eContents().get(0);
+		private final RuleCall cResamplingUseCaseResamplingUseCaseRuleParserRuleCall_11_5_0_0 = (RuleCall)cResamplingUseCaseAssignment_11_5_0.eContents().get(0);
+		private final Keyword cSemicolonKeyword_11_5_1 = (Keyword)cGroup_11_5.eContents().get(1);
+		private final Keyword cEndKeyword_11_6 = (Keyword)cGroup_11.eContents().get(6);
 		private final Keyword cRightCurlyBracketKeyword_12 = (Keyword)cGroup.eContents().get(12);
 		
 		//MachineLearningModuleRule returns MachineLearningModule:
@@ -86,6 +90,7 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 		//                (learningUseCase=LearningUseCaseRule ';')?
 		//                (predictionUseCase=PredictionUseCaseRule ';')?
 		//                (testingUseCase=TestingUseCaseRule ';')?
+		//                (resamplingUseCase=ResamplingUseCaseRule ';')?
 		//            'end'
 		//        )?
 		//    '}'
@@ -107,6 +112,7 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 		//            (learningUseCase=LearningUseCaseRule ';')?
 		//            (predictionUseCase=PredictionUseCaseRule ';')?
 		//            (testingUseCase=TestingUseCaseRule ';')?
+		//            (resamplingUseCase=ResamplingUseCaseRule ';')?
 		//        'end'
 		//    )?
 		//'}'
@@ -183,6 +189,7 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 		//        (learningUseCase=LearningUseCaseRule ';')?
 		//        (predictionUseCase=PredictionUseCaseRule ';')?
 		//        (testingUseCase=TestingUseCaseRule ';')?
+		//        (resamplingUseCase=ResamplingUseCaseRule ';')?
 		//    'end'
 		//)?
 		public Group getGroup_11() { return cGroup_11; }
@@ -229,8 +236,20 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 		//';'
 		public Keyword getSemicolonKeyword_11_4_1() { return cSemicolonKeyword_11_4_1; }
 		
+		//(resamplingUseCase=ResamplingUseCaseRule ';')?
+		public Group getGroup_11_5() { return cGroup_11_5; }
+		
+		//resamplingUseCase=ResamplingUseCaseRule
+		public Assignment getResamplingUseCaseAssignment_11_5_0() { return cResamplingUseCaseAssignment_11_5_0; }
+		
+		//ResamplingUseCaseRule
+		public RuleCall getResamplingUseCaseResamplingUseCaseRuleParserRuleCall_11_5_0_0() { return cResamplingUseCaseResamplingUseCaseRuleParserRuleCall_11_5_0_0; }
+		
+		//';'
+		public Keyword getSemicolonKeyword_11_5_1() { return cSemicolonKeyword_11_5_1; }
+		
 		//'end'
-		public Keyword getEndKeyword_11_5() { return cEndKeyword_11_5; }
+		public Keyword getEndKeyword_11_6() { return cEndKeyword_11_6; }
 		
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_12() { return cRightCurlyBracketKeyword_12; }
@@ -283,15 +302,26 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 		private final Assignment cTestingDataAssignment_17_4_1 = (Assignment)cGroup_17_4.eContents().get(1);
 		private final RuleCall cTestingDataSTRINGTerminalRuleCall_17_4_1_0 = (RuleCall)cTestingDataAssignment_17_4_1.eContents().get(0);
 		private final Keyword cRightSquareBracketKeyword_17_5 = (Keyword)cGroup_17.eContents().get(5);
-		private final Keyword cSerialiseKeyword_18 = (Keyword)cGroup.eContents().get(18);
-		private final Keyword cToKeyword_19 = (Keyword)cGroup.eContents().get(19);
-		private final Assignment cModelFileAssignment_20 = (Assignment)cGroup.eContents().get(20);
-		private final RuleCall cModelFileSTRINGTerminalRuleCall_20_0 = (RuleCall)cModelFileAssignment_20.eContents().get(0);
-		private final Group cGroup_21 = (Group)cGroup.eContents().get(21);
-		private final Keyword cAndKeyword_21_0 = (Keyword)cGroup_21.eContents().get(0);
-		private final Assignment cGofFileAssignment_21_1 = (Assignment)cGroup_21.eContents().get(1);
-		private final RuleCall cGofFileSTRINGTerminalRuleCall_21_1_0 = (RuleCall)cGofFileAssignment_21_1.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_22 = (Keyword)cGroup.eContents().get(22);
+		private final Group cGroup_18 = (Group)cGroup.eContents().get(18);
+		private final Keyword cAssessingKeyword_18_0 = (Keyword)cGroup_18.eContents().get(0);
+		private final Keyword cWithKeyword_18_1 = (Keyword)cGroup_18.eContents().get(1);
+		private final Keyword cLeftSquareBracketKeyword_18_2 = (Keyword)cGroup_18.eContents().get(2);
+		private final Assignment cResamplingAssignment_18_3 = (Assignment)cGroup_18.eContents().get(3);
+		private final RuleCall cResamplingInstanceLiteralRuleParserRuleCall_18_3_0 = (RuleCall)cResamplingAssignment_18_3.eContents().get(0);
+		private final Group cGroup_18_4 = (Group)cGroup_18.eContents().get(4);
+		private final Keyword cCommaKeyword_18_4_0 = (Keyword)cGroup_18_4.eContents().get(0);
+		private final Assignment cResamplingAssignment_18_4_1 = (Assignment)cGroup_18_4.eContents().get(1);
+		private final RuleCall cResamplingInstanceLiteralRuleParserRuleCall_18_4_1_0 = (RuleCall)cResamplingAssignment_18_4_1.eContents().get(0);
+		private final Keyword cRightSquareBracketKeyword_18_5 = (Keyword)cGroup_18.eContents().get(5);
+		private final Keyword cSerialiseKeyword_19 = (Keyword)cGroup.eContents().get(19);
+		private final Keyword cToKeyword_20 = (Keyword)cGroup.eContents().get(20);
+		private final Assignment cModelFileAssignment_21 = (Assignment)cGroup.eContents().get(21);
+		private final RuleCall cModelFileSTRINGTerminalRuleCall_21_0 = (RuleCall)cModelFileAssignment_21.eContents().get(0);
+		private final Group cGroup_22 = (Group)cGroup.eContents().get(22);
+		private final Keyword cAndKeyword_22_0 = (Keyword)cGroup_22.eContents().get(0);
+		private final Assignment cGofFileAssignment_22_1 = (Assignment)cGroup_22.eContents().get(1);
+		private final RuleCall cGofFileSTRINGTerminalRuleCall_22_1_0 = (RuleCall)cGofFileAssignment_22_1.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_23 = (Keyword)cGroup.eContents().get(23);
 		
 		//TaskDescriptionRule returns TaskDescription:
 		//    'specify' name='learning-task' '{'
@@ -299,6 +329,7 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 		//        'output' 'features' outputs += [defs::DataDescription|QualifiedName] ("," outputs += [defs::DataDescription|QualifiedName])*
 		//        'learning' 'from' '[' learningData+=STRING (',' learningData+=STRING)* ']'
 		//        ('testing' 'with' '[' testingData+=STRING (',' testingData+=STRING)* ']')?
+		//        ('assessing' 'with' '[' resampling+=InstanceLiteralRule (',' resampling+=InstanceLiteralRule)* ']')?
 		//        'serialise' 'to' modelFile = STRING ('and' gofFile=STRING)?
 		//    '}'
 		//;
@@ -309,6 +340,7 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 		//    'output' 'features' outputs += [defs::DataDescription|QualifiedName] ("," outputs += [defs::DataDescription|QualifiedName])*
 		//    'learning' 'from' '[' learningData+=STRING (',' learningData+=STRING)* ']'
 		//    ('testing' 'with' '[' testingData+=STRING (',' testingData+=STRING)* ']')?
+		//    ('assessing' 'with' '[' resampling+=InstanceLiteralRule (',' resampling+=InstanceLiteralRule)* ']')?
 		//    'serialise' 'to' modelFile = STRING ('and' gofFile=STRING)?
 		//'}'
 		public Group getGroup() { return cGroup; }
@@ -448,32 +480,65 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 		//']'
 		public Keyword getRightSquareBracketKeyword_17_5() { return cRightSquareBracketKeyword_17_5; }
 		
+		//('assessing' 'with' '[' resampling+=InstanceLiteralRule (',' resampling+=InstanceLiteralRule)* ']')?
+		public Group getGroup_18() { return cGroup_18; }
+		
+		//'assessing'
+		public Keyword getAssessingKeyword_18_0() { return cAssessingKeyword_18_0; }
+		
+		//'with'
+		public Keyword getWithKeyword_18_1() { return cWithKeyword_18_1; }
+		
+		//'['
+		public Keyword getLeftSquareBracketKeyword_18_2() { return cLeftSquareBracketKeyword_18_2; }
+		
+		//resampling+=InstanceLiteralRule
+		public Assignment getResamplingAssignment_18_3() { return cResamplingAssignment_18_3; }
+		
+		//InstanceLiteralRule
+		public RuleCall getResamplingInstanceLiteralRuleParserRuleCall_18_3_0() { return cResamplingInstanceLiteralRuleParserRuleCall_18_3_0; }
+		
+		//(',' resampling+=InstanceLiteralRule)*
+		public Group getGroup_18_4() { return cGroup_18_4; }
+		
+		//','
+		public Keyword getCommaKeyword_18_4_0() { return cCommaKeyword_18_4_0; }
+		
+		//resampling+=InstanceLiteralRule
+		public Assignment getResamplingAssignment_18_4_1() { return cResamplingAssignment_18_4_1; }
+		
+		//InstanceLiteralRule
+		public RuleCall getResamplingInstanceLiteralRuleParserRuleCall_18_4_1_0() { return cResamplingInstanceLiteralRuleParserRuleCall_18_4_1_0; }
+		
+		//']'
+		public Keyword getRightSquareBracketKeyword_18_5() { return cRightSquareBracketKeyword_18_5; }
+		
 		//'serialise'
-		public Keyword getSerialiseKeyword_18() { return cSerialiseKeyword_18; }
+		public Keyword getSerialiseKeyword_19() { return cSerialiseKeyword_19; }
 		
 		//'to'
-		public Keyword getToKeyword_19() { return cToKeyword_19; }
+		public Keyword getToKeyword_20() { return cToKeyword_20; }
 		
 		//modelFile = STRING
-		public Assignment getModelFileAssignment_20() { return cModelFileAssignment_20; }
+		public Assignment getModelFileAssignment_21() { return cModelFileAssignment_21; }
 		
 		//STRING
-		public RuleCall getModelFileSTRINGTerminalRuleCall_20_0() { return cModelFileSTRINGTerminalRuleCall_20_0; }
+		public RuleCall getModelFileSTRINGTerminalRuleCall_21_0() { return cModelFileSTRINGTerminalRuleCall_21_0; }
 		
 		//('and' gofFile=STRING)?
-		public Group getGroup_21() { return cGroup_21; }
+		public Group getGroup_22() { return cGroup_22; }
 		
 		//'and'
-		public Keyword getAndKeyword_21_0() { return cAndKeyword_21_0; }
+		public Keyword getAndKeyword_22_0() { return cAndKeyword_22_0; }
 		
 		//gofFile=STRING
-		public Assignment getGofFileAssignment_21_1() { return cGofFileAssignment_21_1; }
+		public Assignment getGofFileAssignment_22_1() { return cGofFileAssignment_22_1; }
 		
 		//STRING
-		public RuleCall getGofFileSTRINGTerminalRuleCall_21_1_0() { return cGofFileSTRINGTerminalRuleCall_21_1_0; }
+		public RuleCall getGofFileSTRINGTerminalRuleCall_22_1_0() { return cGofFileSTRINGTerminalRuleCall_22_1_0; }
 		
 		//'}'
-		public Keyword getRightCurlyBracketKeyword_22() { return cRightCurlyBracketKeyword_22; }
+		public Keyword getRightCurlyBracketKeyword_23() { return cRightCurlyBracketKeyword_23; }
 	}
 	public class ValidationPipelineDefinitionRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.mll.dsl.MachineLearningLanguage.ValidationPipelineDefinitionRule");
@@ -675,6 +740,52 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 		//'end'
 		public Keyword getEndKeyword_5() { return cEndKeyword_5; }
 	}
+	public class ResamplingUseCaseRuleElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.mll.dsl.MachineLearningLanguage.ResamplingUseCaseRule");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cBlockAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cSpecifyKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Keyword cResamplingKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Keyword cBeginKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Assignment cStatementsAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cStatementsStatementRuleParserRuleCall_4_0 = (RuleCall)cStatementsAssignment_4.eContents().get(0);
+		private final Keyword cEndKeyword_5 = (Keyword)cGroup.eContents().get(5);
+		
+		//ResamplingUseCaseRule returns execution::Block:
+		//    {execution::Block}
+		//    'specify' 'resampling' 'begin'
+		//      (statements += StatementRule)*
+		//    'end'
+		//;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//{execution::Block}
+		//'specify' 'resampling' 'begin'
+		//  (statements += StatementRule)*
+		//'end'
+		public Group getGroup() { return cGroup; }
+		
+		//{execution::Block}
+		public Action getBlockAction_0() { return cBlockAction_0; }
+		
+		//'specify'
+		public Keyword getSpecifyKeyword_1() { return cSpecifyKeyword_1; }
+		
+		//'resampling'
+		public Keyword getResamplingKeyword_2() { return cResamplingKeyword_2; }
+		
+		//'begin'
+		public Keyword getBeginKeyword_3() { return cBeginKeyword_3; }
+		
+		//(statements += StatementRule)*
+		public Assignment getStatementsAssignment_4() { return cStatementsAssignment_4; }
+		
+		//StatementRule
+		public RuleCall getStatementsStatementRuleParserRuleCall_4_0() { return cStatementsStatementRuleParserRuleCall_4_0; }
+		
+		//'end'
+		public Keyword getEndKeyword_5() { return cEndKeyword_5; }
+	}
 	public class PredictionUseCaseRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.mll.dsl.MachineLearningLanguage.PredictionUseCaseRule");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -774,6 +885,7 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 	private final PreparationPipelineDefinitionRuleElements pPreparationPipelineDefinitionRule;
 	private final LearningUseCaseRuleElements pLearningUseCaseRule;
 	private final TestingUseCaseRuleElements pTestingUseCaseRule;
+	private final ResamplingUseCaseRuleElements pResamplingUseCaseRule;
 	private final PredictionUseCaseRuleElements pPredictionUseCaseRule;
 	private final LiteralRuleElements pLiteralRule;
 	
@@ -800,6 +912,7 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 		this.pPreparationPipelineDefinitionRule = new PreparationPipelineDefinitionRuleElements();
 		this.pLearningUseCaseRule = new LearningUseCaseRuleElements();
 		this.pTestingUseCaseRule = new TestingUseCaseRuleElements();
+		this.pResamplingUseCaseRule = new ResamplingUseCaseRuleElements();
 		this.pPredictionUseCaseRule = new PredictionUseCaseRuleElements();
 		this.pLiteralRule = new LiteralRuleElements();
 	}
@@ -855,6 +968,7 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 	//                (learningUseCase=LearningUseCaseRule ';')?
 	//                (predictionUseCase=PredictionUseCaseRule ';')?
 	//                (testingUseCase=TestingUseCaseRule ';')?
+	//                (resamplingUseCase=ResamplingUseCaseRule ';')?
 	//            'end'
 	//        )?
 	//    '}'
@@ -873,6 +987,7 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 	//        'output' 'features' outputs += [defs::DataDescription|QualifiedName] ("," outputs += [defs::DataDescription|QualifiedName])*
 	//        'learning' 'from' '[' learningData+=STRING (',' learningData+=STRING)* ']'
 	//        ('testing' 'with' '[' testingData+=STRING (',' testingData+=STRING)* ']')?
+	//        ('assessing' 'with' '[' resampling+=InstanceLiteralRule (',' resampling+=InstanceLiteralRule)* ']')?
 	//        'serialise' 'to' modelFile = STRING ('and' gofFile=STRING)?
 	//    '}'
 	//;
@@ -938,6 +1053,20 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 	
 	public ParserRule getTestingUseCaseRuleRule() {
 		return getTestingUseCaseRuleAccess().getRule();
+	}
+	
+	//ResamplingUseCaseRule returns execution::Block:
+	//    {execution::Block}
+	//    'specify' 'resampling' 'begin'
+	//      (statements += StatementRule)*
+	//    'end'
+	//;
+	public ResamplingUseCaseRuleElements getResamplingUseCaseRuleAccess() {
+		return pResamplingUseCaseRule;
+	}
+	
+	public ParserRule getResamplingUseCaseRuleRule() {
+		return getResamplingUseCaseRuleAccess().getRule();
 	}
 	
 	//PredictionUseCaseRule returns generator::PipelineDefinition:

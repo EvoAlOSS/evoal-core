@@ -81,6 +81,36 @@ public class TrainingTaskHelper {
     }
 
     /**
+     * Loads the training data as {@link #loadInputStreams(InterpreterState)} does, with
+     *   additional features read from the same files, e.g. the feature that names the block of
+     *   a row in a block cross-validation.
+     *
+     * @param context The state of the interpreter, which holds the learning task.
+     * @param additional Features to read in addition to the loaded ones.
+     * @return The data objects of all training files, file after file.
+     */
+    public Stream<TypedEObject> loadInputStreams(final InterpreterState context, final @NonNull List<EStructuralFeature> additional) {
+        final List<String> files;
+        final List<EStructuralFeature> features = new ArrayList<>();
+        if(context.root().getByName(TRAINING_DATA) instanceof TrainingData loaded) {
+            files = loaded.files();
+            features.addAll(loaded.features());
+        } else {
+            final TaskDescription task = (TaskDescription)context.getByName("learning-task");
+            files = task.getLearningData();
+            features.addAll(provider.subSpaceOf(context.getSpace(), Stream.concat(task.getInputs().stream(), task.getOutputs().stream()).toList())
+                                    .stream()
+                                    .toList());
+        }
+
+        additional.stream()
+                  .filter(feature -> !features.contains(feature))
+                  .forEach(features::add);
+
+        return load(context, files, features);
+    }
+
+    /**
      * Loads the training data of {@code 'training-data-loader'} and records the files and
      *   features, so that the goodness of fit on the training data and the estimates of the
      *   adaption use the same data.

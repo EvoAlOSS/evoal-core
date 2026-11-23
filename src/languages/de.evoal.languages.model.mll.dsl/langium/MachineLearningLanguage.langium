@@ -9,11 +9,11 @@ import 'generator-types'
 import 'types-types'
 
 entry MachineLearningModuleRule returns MachineLearningModule:
-    (imports+=ImportRule )* "module" name=QualifiedName  "{" task=TaskDescriptionRule  validation=ValidationPipelineDefinitionRule  preparation=PreparationPipelineDefinitionRule  'specify' 'model' model=InstanceLiteralRule  ('specify' 'gof' gof=BodyRule  )? ('use' 'cases' (learningUseCase=LearningUseCaseRule  ';' )? (predictionUseCase=PredictionUseCaseRule  ';' )? 'end' )? '}'  
+    (imports+=ImportRule )* "module" name=QualifiedName  "{" task=TaskDescriptionRule  validation=ValidationPipelineDefinitionRule  preparation=PreparationPipelineDefinitionRule  'specify' 'model' model=InstanceLiteralRule  ('specify' 'gof' gof=BodyRule  )? ('use' 'cases' (learningUseCase=LearningUseCaseRule  ';' )? (predictionUseCase=PredictionUseCaseRule  ';' )? (testingUseCase=TestingUseCaseRule  ';' )? (resamplingUseCase=ResamplingUseCaseRule  ';' )? 'end' )? '}'  
 ;
 
 TaskDescriptionRule returns TaskDescription:
-    'specify' name='learning-task'  '{' 'input' 'features' inputs+=[DataDescription:QualifiedName ] ("," inputs+=[DataDescription:QualifiedName ] )* 'output' 'features' outputs+=[DataDescription:QualifiedName ] ("," outputs+=[DataDescription:QualifiedName ] )* 'learning' 'from' '[' learningData+=STRING  (',' learningData+=STRING  )* ']' ('testing' 'with' '[' testingData+=STRING  (',' testingData+=STRING  )* ']' )? 'serialise' 'to' modelFile=STRING  ('and' gofFile=STRING  )? '}'  
+    'specify' name='learning-task'  '{' 'input' 'features' inputs+=[DataDescription:QualifiedName ] ("," inputs+=[DataDescription:QualifiedName ] )* 'output' 'features' outputs+=[DataDescription:QualifiedName ] ("," outputs+=[DataDescription:QualifiedName ] )* 'learning' 'from' '[' learningData+=STRING  (',' learningData+=STRING  )* ']' ('testing' 'with' '[' testingData+=STRING  (',' testingData+=STRING  )* ']' )? ('assessing' 'with' '[' resampling+=InstanceLiteralRule  (',' resampling+=InstanceLiteralRule  )* ']' )? 'serialise' 'to' modelFile=STRING  ('and' gofFile=STRING  )? '}'  
 ;
 
 ValidationPipelineDefinitionRule returns PipelineDefinition:
@@ -26,6 +26,14 @@ PreparationPipelineDefinitionRule returns PipelineDefinition:
 
 LearningUseCaseRule returns Block:
     {Block} 'specify' 'learning' 'begin' (statements+=StatementRule )* 'end'  
+;
+
+TestingUseCaseRule returns Block:
+    {Block} 'specify' 'testing' 'begin' (statements+=StatementRule )* 'end'  
+;
+
+ResamplingUseCaseRule returns Block:
+    {Block} 'specify' 'resampling' 'begin' (statements+=StatementRule )* 'end'  
 ;
 
 PredictionUseCaseRule returns PipelineDefinition:

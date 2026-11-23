@@ -13,6 +13,7 @@ import de.evoal.models.v202704.pipeline.PipelineFactory;
 import de.evoal.surrogate.api.io.ModelWriter;
 import de.evoal.surrogate.api.io.pson.Parameter;
 import de.evoal.surrogate.api.training.GoodnessOfFit;
+import de.evoal.surrogate.api.training.ResampledValues;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
@@ -99,5 +100,25 @@ public class StoreModelFunctionTest {
         Assertions.assertEquals(Map.of("y:0", Map.of(RMSE, Map.of("training", 0.0, "test", 0.5),
                                                      R_SQUARE, Map.of("training", 1.0))),
                                 content);
+    }
+
+    @Test
+    public void theValuesOfAResamplingSchemeAreStoredWithTheirSummary(@TempDir final File directory) {
+        // given
+        final File file = new File(directory, "gof.json");
+        task.setGofFile(file.getPath());
+        GoodnessOfFit.of(context).record(y, RMSE, "bootstrap", ResampledValues.of(List.of(1.0, 3.0)));
+
+        // when
+        new StoreModelFunction(literature).call(context, new Object[0]);
+
+        // then
+        final Map<?, ?> content = JsonMapper.builder().build().readValue(file, Map.class);
+        Assertions.assertEquals(Map.of("mean", 2.0, "standard-deviation", Math.sqrt(2.0), "values", List.of(1.0, 3.0)),
+                                ((Map<?, ?>) ((Map<?, ?>) content.get("y:0")).get(RMSE)).get("bootstrap"));
+        Mockito.verify(writer).addOutputFeatureInformation(Mockito.eq(y), Mockito.argThat(parameter ->
+                RMSE.equals(parameter.getName())
+                && ((Map<?, ?>) parameter.getValue()).get("bootstrap") instanceof Map<?, ?> stored
+                && Double.valueOf(2.0).equals(stored.get("mean"))));
     }
 }

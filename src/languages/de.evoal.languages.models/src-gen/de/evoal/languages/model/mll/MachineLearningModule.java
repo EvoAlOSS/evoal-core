@@ -29,6 +29,7 @@ import de.evoal.languages.model.generator.PipelineDefinition;
  *   <li>{@link de.evoal.languages.model.mll.MachineLearningModule#getLearningUseCase <em>Learning Use Case</em>}</li>
  *   <li>{@link de.evoal.languages.model.mll.MachineLearningModule#getPredictionUseCase <em>Prediction Use Case</em>}</li>
  *   <li>{@link de.evoal.languages.model.mll.MachineLearningModule#getTestingUseCase <em>Testing Use Case</em>}</li>
+ *   <li>{@link de.evoal.languages.model.mll.MachineLearningModule#getResamplingUseCase <em>Resampling Use Case</em>}</li>
  * </ul>
  *
  * @see de.evoal.languages.model.mll.MllPackage#getMachineLearningModule()
@@ -254,5 +255,34 @@ public interface MachineLearningModule extends de.evoal.languages.model.base.Mod
 	 * @generated
 	 */
 	void setTestingUseCase(Block value);
+
+	/**
+	 * Returns the value of the '<em><b>Resampling Use Case</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * 
+	 * The resampling use case: assesses the learning on parts of the training data;
+	 *   derived from the learning task if the module does not write it out and the task
+	 *   states resampling schemes.
+	 * 
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Resampling Use Case</em>' containment reference.
+	 * @see #setResamplingUseCase(Block)
+	 * @see de.evoal.languages.model.mll.MllPackage#getMachineLearningModule_ResamplingUseCase()
+	 * @model containment="true"
+	 * @generated
+	 */
+	Block getResamplingUseCase();
+
+	/**
+	 * Sets the value of the '{@link de.evoal.languages.model.mll.MachineLearningModule#getResamplingUseCase <em>Resampling Use Case</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Resampling Use Case</em>' containment reference.
+	 * @see #getResamplingUseCase()
+	 * @generated
+	 */
+	void setResamplingUseCase(Block value);
 
 } // MachineLearningModule

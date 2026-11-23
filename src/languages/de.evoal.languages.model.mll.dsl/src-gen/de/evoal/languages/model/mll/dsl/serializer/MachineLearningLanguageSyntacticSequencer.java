@@ -25,7 +25,7 @@ public class MachineLearningLanguageSyntacticSequencer extends AbstractSyntactic
 	protected MachineLearningLanguageGrammarAccess grammarAccess;
 	protected AbstractElementAlias match_ConcreteStepRule___ReadsKeyword_4_0_LeftSquareBracketKeyword_4_1_RightSquareBracketKeyword_4_3_SemicolonKeyword_4_4__q;
 	protected AbstractElementAlias match_ConcreteStepRule___WritesKeyword_5_0_LeftSquareBracketKeyword_5_1_RightSquareBracketKeyword_5_3_SemicolonKeyword_5_4__q;
-	protected AbstractElementAlias match_MachineLearningModuleRule___UseKeyword_11_0_CasesKeyword_11_1_EndKeyword_11_5__q;
+	protected AbstractElementAlias match_MachineLearningModuleRule___UseKeyword_11_0_CasesKeyword_11_1_EndKeyword_11_6__q;
 	protected AbstractElementAlias match_SelfReferenceRule_SelfKeyword_0_1_or_ValueKeyword_1_1;
 	
 	@Inject
@@ -33,7 +33,7 @@ public class MachineLearningLanguageSyntacticSequencer extends AbstractSyntactic
 		grammarAccess = (MachineLearningLanguageGrammarAccess) access;
 		match_ConcreteStepRule___ReadsKeyword_4_0_LeftSquareBracketKeyword_4_1_RightSquareBracketKeyword_4_3_SemicolonKeyword_4_4__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getConcreteStepRuleAccess().getReadsKeyword_4_0()), new TokenAlias(false, false, grammarAccess.getConcreteStepRuleAccess().getLeftSquareBracketKeyword_4_1()), new TokenAlias(false, false, grammarAccess.getConcreteStepRuleAccess().getRightSquareBracketKeyword_4_3()), new TokenAlias(false, false, grammarAccess.getConcreteStepRuleAccess().getSemicolonKeyword_4_4()));
 		match_ConcreteStepRule___WritesKeyword_5_0_LeftSquareBracketKeyword_5_1_RightSquareBracketKeyword_5_3_SemicolonKeyword_5_4__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getConcreteStepRuleAccess().getWritesKeyword_5_0()), new TokenAlias(false, false, grammarAccess.getConcreteStepRuleAccess().getLeftSquareBracketKeyword_5_1()), new TokenAlias(false, false, grammarAccess.getConcreteStepRuleAccess().getRightSquareBracketKeyword_5_3()), new TokenAlias(false, false, grammarAccess.getConcreteStepRuleAccess().getSemicolonKeyword_5_4()));
-		match_MachineLearningModuleRule___UseKeyword_11_0_CasesKeyword_11_1_EndKeyword_11_5__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getMachineLearningModuleRuleAccess().getUseKeyword_11_0()), new TokenAlias(false, false, grammarAccess.getMachineLearningModuleRuleAccess().getCasesKeyword_11_1()), new TokenAlias(false, false, grammarAccess.getMachineLearningModuleRuleAccess().getEndKeyword_11_5()));
+		match_MachineLearningModuleRule___UseKeyword_11_0_CasesKeyword_11_1_EndKeyword_11_6__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getMachineLearningModuleRuleAccess().getUseKeyword_11_0()), new TokenAlias(false, false, grammarAccess.getMachineLearningModuleRuleAccess().getCasesKeyword_11_1()), new TokenAlias(false, false, grammarAccess.getMachineLearningModuleRuleAccess().getEndKeyword_11_6()));
 		match_SelfReferenceRule_SelfKeyword_0_1_or_ValueKeyword_1_1 = new AlternativeAlias(false, false, new TokenAlias(false, false, grammarAccess.getSelfReferenceRuleAccess().getSelfKeyword_0_1()), new TokenAlias(false, false, grammarAccess.getSelfReferenceRuleAccess().getValueKeyword_1_1()));
 	}
 	
@@ -53,8 +53,8 @@ public class MachineLearningLanguageSyntacticSequencer extends AbstractSyntactic
 				emit_ConcreteStepRule___ReadsKeyword_4_0_LeftSquareBracketKeyword_4_1_RightSquareBracketKeyword_4_3_SemicolonKeyword_4_4__q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_ConcreteStepRule___WritesKeyword_5_0_LeftSquareBracketKeyword_5_1_RightSquareBracketKeyword_5_3_SemicolonKeyword_5_4__q.equals(syntax))
 				emit_ConcreteStepRule___WritesKeyword_5_0_LeftSquareBracketKeyword_5_1_RightSquareBracketKeyword_5_3_SemicolonKeyword_5_4__q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if (match_MachineLearningModuleRule___UseKeyword_11_0_CasesKeyword_11_1_EndKeyword_11_5__q.equals(syntax))
-				emit_MachineLearningModuleRule___UseKeyword_11_0_CasesKeyword_11_1_EndKeyword_11_5__q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_MachineLearningModuleRule___UseKeyword_11_0_CasesKeyword_11_1_EndKeyword_11_6__q.equals(syntax))
+				emit_MachineLearningModuleRule___UseKeyword_11_0_CasesKeyword_11_1_EndKeyword_11_6__q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_SelfReferenceRule_SelfKeyword_0_1_or_ValueKeyword_1_1.equals(syntax))
 				emit_SelfReferenceRule_SelfKeyword_0_1_or_ValueKeyword_1_1(semanticObject, getLastNavigableState(), syntaxNodes);
 			else acceptNodes(getLastNavigableState(), syntaxNodes);
@@ -102,7 +102,7 @@ public class MachineLearningLanguageSyntacticSequencer extends AbstractSyntactic
 	 
 	 * </pre>
 	 */
-	protected void emit_MachineLearningModuleRule___UseKeyword_11_0_CasesKeyword_11_1_EndKeyword_11_5__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+	protected void emit_MachineLearningModuleRule___UseKeyword_11_0_CasesKeyword_11_1_EndKeyword_11_6__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	

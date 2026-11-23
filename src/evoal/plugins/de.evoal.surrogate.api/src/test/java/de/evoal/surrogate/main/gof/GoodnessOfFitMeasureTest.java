@@ -119,7 +119,7 @@ public class GoodnessOfFitMeasureTest {
             new RMSECalculator().call(new InterpreterState(context), new Object[0]);
 
             // then: errors 0 and 1
-            final Map<String, Double> values = GoodnessOfFit.of(context).values().get(y).get(RMSE);
+            final Map<String, Object> values = GoodnessOfFit.of(context).values().get(y).get(RMSE);
             Assertions.assertEquals(Map.of(GoodnessOfFit.TEST, Math.sqrt(0.5)), values);
         }
 

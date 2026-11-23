@@ -21,12 +21,14 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mll.ecore#//MachineLearningModule/learningUseCase"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mll.ecore#//MachineLearningModule/predictionUseCase"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mll.ecore#//MachineLearningModule/testingUseCase"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mll.ecore#//MachineLearningModule/resamplingUseCase"/>
     </genClasses>
     <genClasses ecoreClass="mll.ecore#//TaskDescription">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference mll.ecore#//TaskDescription/inputs"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference mll.ecore#//TaskDescription/outputs"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mll.ecore#//TaskDescription/learningData"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mll.ecore#//TaskDescription/testingData"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mll.ecore#//TaskDescription/resampling"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mll.ecore#//TaskDescription/modelFile"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mll.ecore#//TaskDescription/gofFile"/>
     </genClasses>

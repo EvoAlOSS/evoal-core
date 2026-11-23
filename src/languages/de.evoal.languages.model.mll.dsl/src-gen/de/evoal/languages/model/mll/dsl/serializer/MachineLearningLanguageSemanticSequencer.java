@@ -123,6 +123,10 @@ public class MachineLearningLanguageSemanticSequencer extends GeneratorDSLSemant
 					sequence_LearningUseCaseRule(context, (Block) semanticObject); 
 					return; 
 				}
+				else if (rule == grammarAccess.getResamplingUseCaseRuleRule()) {
+					sequence_ResamplingUseCaseRule(context, (Block) semanticObject); 
+					return; 
+				}
 				else if (rule == grammarAccess.getTestingUseCaseRuleRule()) {
 					sequence_TestingUseCaseRule(context, (Block) semanticObject); 
 					return; 
@@ -347,7 +351,8 @@ public class MachineLearningLanguageSemanticSequencer extends GeneratorDSLSemant
 	 *         gof=BodyRule? 
 	 *         learningUseCase=LearningUseCaseRule? 
 	 *         predictionUseCase=PredictionUseCaseRule? 
-	 *         testingUseCase=TestingUseCaseRule?
+	 *         testingUseCase=TestingUseCaseRule? 
+	 *         resamplingUseCase=ResamplingUseCaseRule?
 	 *     )
 	 * </pre>
 	 */
@@ -387,6 +392,20 @@ public class MachineLearningLanguageSemanticSequencer extends GeneratorDSLSemant
 	/**
 	 * <pre>
 	 * Contexts:
+	 *     ResamplingUseCaseRule returns Block
+	 *
+	 * Constraint:
+	 *     statements+=StatementRule*
+	 * </pre>
+	 */
+	protected void sequence_ResamplingUseCaseRule(ISerializationContext context, Block semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
 	 *     TaskDescriptionRule returns TaskDescription
 	 *
 	 * Constraint:
@@ -399,6 +418,7 @@ public class MachineLearningLanguageSemanticSequencer extends GeneratorDSLSemant
 	 *         learningData+=STRING 
 	 *         learningData+=STRING* 
 	 *         (testingData+=STRING testingData+=STRING*)? 
+	 *         (resampling+=InstanceLiteralRule resampling+=InstanceLiteralRule*)? 
 	 *         modelFile=STRING 
 	 *         gofFile=STRING?
 	 *     )
