@@ -48,6 +48,8 @@ public final class KernelFactory {
 
 	private static final String NU_PARAMETER = "ν";
 
+	private static final String OMEGA_PARAMETER = "ω";
+
 	/**
 	 * Keys of the stored Gaussian process regression (the {@code regression} map of the model
 	 *   file).
@@ -115,7 +117,6 @@ public final class KernelFactory {
 	}
 
 	public static MercerKernel<double []> toGaussianKernel(final Map<String, Object> parameters) {
-		log.info("  Using kernel 'gaussian'");
 		final double sigma = (double) parameters.get(SIGMA_PARAMETER);
 		log.info("    parameter σ={}.", sigma);
 
@@ -135,18 +136,21 @@ public final class KernelFactory {
 		return new MaternKernel(sigma, nu);
 	}
 
+	/**
+	 * @param parameters The configuration of a {@code 'hellinger'} kernel, which has no
+	 *   parameters.
+	 * @return The Hellinger kernel.
+	 */
 	public static MercerKernel<double []> toHellingerKernel(final Map<String, Object> parameters) {
-		log.info("  Using kernel 'hellinger'");
-		final double sigma = (double) parameters.get(SIGMA_PARAMETER);
-		log.info("    parameter σ={}.", sigma);
-
 		return new HellingerKernel();
 	}
 
+	/**
+	 * @param parameters The configuration of a {@code 'hyperbolic-tangent'} kernel: scale γ and
+	 *   offset λ of tanh(γ uᵀv + λ).
+	 * @return The hyperbolic tangent kernel.
+	 */
 	public static MercerKernel<double []> toHyperbolicTangentKernel(final Map<String, Object> parameters) {
-		log.info("  Using kernel 'hyperbolic-tangent'");
-		final double sigma = (double) parameters.get(SIGMA_PARAMETER);
-		log.info("    parameter σ={}.", sigma);
 		final double scale = (double)parameters.get(SCALE_PARAMETER);
 		final double offset = (double)parameters.get(OFFSET_PARAMETER);
 
@@ -156,7 +160,6 @@ public final class KernelFactory {
 	}
 
 	public static MercerKernel<double []> toLaplacianKernel(final Map<String, Object> parameters) {
-		log.info("  Using kernel 'laplacian'");
 		final double sigma = (double) parameters.get(SIGMA_PARAMETER);
 
 		log.info("    parameter σ is {}.", sigma);
@@ -168,30 +171,35 @@ public final class KernelFactory {
 		return new LinearKernel();
 	}
 
+	/**
+	 * @param parameters The configuration of a {@code 'pearson'} kernel: width σ and tailing
+	 *   factor ω.
+	 * @return The Pearson VII universal kernel.
+	 */
 	public static MercerKernel<double []> toPearsonKernel(final Map<String, Object> parameters) {
-		log.info("  Using kernel 'pearson'");
 		final double sigma = (double) parameters.get(SIGMA_PARAMETER);
-		final double omega = (double) parameters.get("ω");
-		log.info("    parameter ω={} and σ={}.", omega, sigma);
+		final double omega = (double) parameters.get(OMEGA_PARAMETER);
+		log.info("    parameter σ={} and ω={}.", sigma, omega);
 
-		return new PearsonKernel(omega, sigma);
+		return new PearsonKernel(sigma, omega);
 	}
 
+	/**
+	 * @param parameters The configuration of a {@code 'polynomial'} kernel: degree d, scale γ
+	 *   and offset λ of (γ uᵀv + λ)^d.
+	 * @return The polynomial kernel; Smile rejects a degree below 1 and a negative offset.
+	 */
 	public static MercerKernel<double []> toPolynomialKernel(final Map<String, Object> parameters) {
-		log.info("  Using kernel 'polynomial'");
-		final double sigma = (double) parameters.get(SIGMA_PARAMETER);
 		final int degree = (int) parameters.get(DEGREE_PARAMETER);
 		final double scale = (double) parameters.get(SCALE_PARAMETER);
 		final double offset = (double) parameters.get(OFFSET_PARAMETER);
 
-		log.info("    parameter σ={}.", sigma);
-		log.info("    parameter degeree is {}, scale is {}, and offset is {}.", degree, scale, offset);
+		log.info("    parameter degree is {}, scale is {}, and offset is {}.", degree, scale, offset);
 
 		return new PolynomialKernel(degree, scale, offset);
 	}
 
 	public static MercerKernel<double []> toThinPlateSplineKernel(final Map<String, Object> parameters) {
-		log.info("  Using kernel 'thin-plate-spline'");
 		final double sigma = (double) parameters.get(SIGMA_PARAMETER);
 		log.info("    parameter σ={}.", sigma);
 
@@ -199,7 +207,6 @@ public final class KernelFactory {
 	}
 
 	public static MercerKernel<double []> toSumKernel(final Map<String, Object> parameters) {
-		log.info("  Using kernel 'sum'");
 		final Map<String, Object> k1Parameters = (Map<String, Object>) parameters.get(KERNEL_1_PARAMETER);
 		final Map<String, Object> k2Parameters = (Map<String, Object>) parameters.get(KERNEL_2_PARAMETER);
 
@@ -208,7 +215,6 @@ public final class KernelFactory {
 
 
 	public static MercerKernel<double []> toProductKernel(final Map<String, Object> parameters) {
-		log.info("  Using kernel 'product'");
 		final Map<String, Object> k1Parameters = (Map<String, Object>) parameters.get(KERNEL_1_PARAMETER);
 		final Map<String, Object> k2Parameters = (Map<String, Object>) parameters.get(KERNEL_2_PARAMETER);
 

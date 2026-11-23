@@ -15,18 +15,40 @@ module 'de.evoal.pipeline.misc' {
 	}
 
 	/**
-	 * Passes on the rows whose read data satisfy the constraints of their data description
-	 *   language (DDL) and drops the others. It checks
+	 * The reaction of 'constraint-validation' to a row that violates a constraint:
+	 *   - drop: the row is dropped;
+	 *   - keep: the row is passed on, and at the end the step logs how many passed rows
+	 *     violated the constraint;
+	 *   - stop: the run stops with the row and the violated constraint.
+	 */
+	nominal enum 'row-reaction' ( drop, keep, stop );
+
+	/**
+	 * Checks the rows against the constraints of the data description language (DDL) of their
+	 *   read data. It checks
 	 *   - the annotations of the read data and of their data types that have a checker, e.g.
 	 *     @LowerBoundary and @UpperBoundary, and
 	 *   - the declarations constraint(comparison, "group") in the constraints sections of the
 	 *     DDL modules that declare the read data.
+	 *   A violated annotation leads to the reaction to its severity; a violated declaration
+	 *   has no severity and leads to the reaction to errors. If a row violates several
+	 *   constraints, stop takes precedence over drop, and drop over keep.
 	 *   The run stops at start-up if a constraint compares data that the step does not read,
 	 *   if a constraint is an equality (generated data almost never satisfies g = 0 exactly;
 	 *   compute the dependent data in a step instead), or if a data description has a
 	 *   constraint that is no annotation (e.g. value < 1.0), which is not supported.
 	 */
 	type 'constraint-validation' extends Filter {
+		/**
+		 * The reaction to a row that violates an annotation with severity error or a
+		 *   constraint(...) declaration.
+		 */
+		'error-reaction' : enum 'row-reaction' := 'row-reaction.drop';
+
+		/**
+		 * The reaction to a row that violates an annotation with severity warning.
+		 */
+		'warning-reaction' : enum 'row-reaction' := 'row-reaction.keep';
 	}
 
 	/**

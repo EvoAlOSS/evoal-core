@@ -37,7 +37,7 @@ module de.evoal.surrogate.smile.ml {
 	 *       <mi class="tml-sml-pad">T</mi>
 	 *     </msup>
 	 *     <mi>v</mi>
-	 *     <mo>−</mo>
+	 *     <mo>+</mo>
 	 *     <mi>λ</mi>
 	 *     <msup>
 	 *       <mo form="postfix" stretchy="false">)</mo>
@@ -52,6 +52,7 @@ module de.evoal.surrogate.smile.ml {
 		/**
 		 * Order of the polynomial.
 		 */
+		@LowerBoundary{ boundary := 1; }
 		'degree'        : int;
 		
 		/**
@@ -62,6 +63,7 @@ module de.evoal.surrogate.smile.ml {
 		/**
 		 * Offset of the inner product.
 		 */
+		@LowerBoundary{ boundary := 0.0; }
 		'offset'        : real;
 	}
 	
@@ -123,6 +125,7 @@ module de.evoal.surrogate.smile.ml {
      *   intermediate values are 3/2 (once differentiable functions) and 5/2 (twice
      *   differentiable functions).
 	 */
+	@MultiVariateConstraint { 'expression' := self.'ν' = 0.5 OR self.'ν' = 1.5 OR self.'ν' = 2.5; }
 	type 'matérn' extends kernel {
 		/**
 		 * The length scale of the kernel.
@@ -131,8 +134,8 @@ module de.evoal.surrogate.smile.ml {
 		'σ'				: real;
 
 		/**
-		 * The smoothness of the kernel function: 0.5, 1.5 or 2.5; other values are rejected
-		 *   when the model is built. For an infinite ν use the 'gaussian' kernel.
+		 * The smoothness of the kernel function: 0.5, 1.5 or 2.5. For an infinite ν use the
+		 *   'gaussian' kernel.
 		 */
 	    'ν'				: real;
 	}
@@ -197,7 +200,7 @@ module de.evoal.surrogate.smile.ml {
 	 *       <mi class="tml-sml-pad">T</mi>
 	 *     </msup>
 	 *     <mi>v</mi>
-	 *     <mo>−</mo>
+	 *     <mo>+</mo>
 	 *     <mi>λ</mi>
 	 *     <mo form="postfix" stretchy="false">)</mo>
 	 *   </mrow>
@@ -207,8 +210,9 @@ module de.evoal.surrogate.smile.ml {
 	 * used inner product. If the offset is negative the likelihood of obtaining
 	 * a kernel matrix that is not positive definite is much higher (since then
 	 * even some diagonal elements may be negative), hence if this kernel has to
-	 * be used, the offset should always be positive. Note, however, that this is
-	 * no guarantee that the kernel will be positive.<br/>
+	 * be used, the offset should always be positive; a negative offset gives a
+	 * warning. Note, however, that this is no guarantee that the kernel will be
+	 * positive.<br/>
 	 * The hyperbolic tangent kernel was quite popular for support vector machines
 	 * due to its origin from neural networks. However, it should be used carefully
 	 * since the kernel matrix may not be positive semi-definite. Besides, it was
@@ -222,8 +226,9 @@ module de.evoal.surrogate.smile.ml {
 		scale           : real;
 		
 		/**
-		 * The offset parameter 
+		 * The offset parameter.
 		 */
+		@LowerBoundary{ boundary := 0.0; severity := Severity.warning; }
 		offset          : real;		
 	}
 	
@@ -239,11 +244,13 @@ module de.evoal.surrogate.smile.ml {
 		/**
 		 * Pearson width.
 		 */
+		@LowerBoundary{ boundary := 0.0; inclusive := false; }
 		'σ'             : real;
 
 		/**
 		 * The tailing factor of the peak.
 		 */
+		@LowerBoundary{ boundary := 0.0; inclusive := false; }
 		'ω'             : real;
 	}
 	
@@ -394,8 +401,10 @@ module de.evoal.surrogate.smile.ml {
 		tolerance       : real;
 
 		/**
-		 * The width of the ε-tube: errors up to ε are not penalised. It is given in the unit of
-		 *   the output; an ε as large as the spread of the output gives a constant model.
+		 * The width of the ε-tube: errors up to ε are not penalised. The learner standardises
+		 *   the output (mean 0, standard deviation 1) before training, so ε is given in standard
+		 *   deviations of the training output. An ε of at least half the range of the
+		 *   standardised output gives a constant model; the learner warns about it.
 		 */
 		@LowerBoundary{ boundary := 0.0; inclusive := false; }
 		'ε'             : real;

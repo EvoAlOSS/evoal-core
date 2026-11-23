@@ -51,12 +51,16 @@ of the stream, every filter logs how many rows it kept (`PipelineFilterImpl`).
 
 - `'condition-filter'` keeps the rows for which its `'condition'` is true, e.g.
   `data 'x' < 0.7 OR data 'x' > 0.8`. The condition may only use data the step reads.
-- `'constraint-validation'` keeps the rows whose read data satisfy their data description:
+- `'constraint-validation'` checks the rows against the data description of their read data:
   the annotations of the data and of their data types that have a checker (`@LowerBoundary`,
   `@UpperBoundary`; the checkers of the configuration checks, `ConstraintCheckers` in core), and
   the declarations `constraint(comparison, "group")` of the DDL modules that declare the read
-  data (compiled by `ConstraintCompiler` of `de.evoal.optimisation.api`; a row passes if g >= 0,
-  g > 0 for `<` and `>`). The run stops at start-up if a constraint compares data the step does
+  data (compiled by `ConstraintCompiler` of `de.evoal.optimisation.api`; a row satisfies one if
+  g >= 0, g > 0 for `<` and `>`). A violated annotation leads to the reaction to its `severity`,
+  a violated declaration to the reaction to errors: `'error-reaction'` (default `drop`) and
+  `'warning-reaction'` (default `keep`), each one of `drop`, `keep` (pass the row and log the
+  number of such rows per constraint at the end) and `stop`; stop takes precedence over drop,
+  drop over keep. The run stops at start-up if a constraint compares data the step does
   not read, if a constraint is an equality (generated data almost never satisfies g = 0 exactly;
   compute the dependent data in a step instead), or if a data description has a constraint that
   is no annotation (`with constraints: ...`), which nothing evaluates.

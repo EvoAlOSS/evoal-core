@@ -1,8 +1,24 @@
 module 'de.evoal.core.constraints' {
     /**
+     * How serious the violation of a constraint is:
+     *   - error: the value cannot work, e.g. a parameter the library rejects; a configuration
+     *     with such a value does not start, and 'constraint-validation' drops such a row by
+     *     default.
+     *   - warning: the value works but is likely a mistake, e.g. a kernel that is likely not
+     *     positive definite; the run reports it and continues, and 'constraint-validation'
+     *     keeps such a row by default.
+     */
+    nominal enum Severity ( error, warning );
+
+    /**
      * Base type for EvoAl constraints.
      */
     abstract type Constraint {
+        /**
+         * How serious a violation of the constraint is. Annotations without a checker (e.g.
+         *   @Literature) ignore it.
+         */
+        severity : enum Severity := Severity.error;
     }
 
     /**

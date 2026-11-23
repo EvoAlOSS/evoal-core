@@ -1,24 +1,31 @@
 package de.evoal.pipeline.impl.components.misc;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Optional;
 import java.util.random.RandomGenerator;
+import java.util.stream.Stream;
 
 import de.evoal.core.api.dynamic.EClassProvider;
+import de.evoal.core.api.validation.constraints.ConfiguredChecker;
 import de.evoal.core.api.validation.constraints.ConstraintCheck;
-import de.evoal.core.api.validation.constraints.ConstraintCheckerComponent;
 import de.evoal.core.api.validation.constraints.ConstraintCheckers;
+import de.evoal.core.api.validation.constraints.Severity;
 import de.evoal.core.junit.dsl.LanguageHelper;
 import de.evoal.languages.model.base.expressions.Expression;
 import de.evoal.languages.model.base.expressions.Instance;
+import de.evoal.languages.model.base.expressions.ValueDefinitionReference;
 import de.evoal.languages.model.ddl.DataDescriptionModule;
 import de.evoal.languages.model.generator.ConcreteStep;
 import de.evoal.languages.model.generator.GeneratorModule;
 import de.evoal.models.core.ecore.Space;
 import de.evoal.models.core.ecore.TypedEObject;
 import de.evoal.models.core.exceptions.InitializationException;
+import de.evoal.pipeline.impl.components.misc.ConstraintValidation.RowReaction;
 import lombok.NonNull;
+import org.eclipse.emf.ecore.EObject;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -26,24 +33,55 @@ import org.junit.jupiter.api.Test;
 /**
  * The filters 'constraint-validation' ({@link ConstraintValidation}), 'condition-filter'
  *   ({@link ConditionFilter}) and 'rejection-sampling' ({@link RejectionSampling}) on the data of {@code constrained.ddl}: 'a' has
- *   {@code @UpperBoundary { boundary := 1.0; }}, and the DDL declares
- *   {@code constraint(data 'a' + data 'b' < 1.5, "sum")}.
+ *   {@code @UpperBoundary { boundary := 1.0; }}, 'd' has
+ *   {@code @LowerBoundary { boundary := 0.0; severity := Severity.warning; }}, and the DDL
+ *   declares {@code constraint(data 'a' + data 'b' < 1.5, "sum")}.
  */
 public class FiltersTest {
     /**
-     * Checks {@code @UpperBoundary { boundary := 1.0; }} like its checker in core, which needs
-     *   CDI.
+     * Checks {@code @UpperBoundary { boundary := 1.0; }} and
+     *   {@code @LowerBoundary { boundary := 0.0; }} like their checkers in core, which need
+     *   CDI; the severity is read from the parsed annotation.
      */
     private static final ConstraintCheckers CHECKERS = new ConstraintCheckers() {
         @Override
-        public Optional<ConstraintCheckerComponent> create(final @NonNull Instance annotation) {
-            if(!"UpperBoundary".equals(annotation.getDefinition().getName())) {
-                return Optional.empty();
-            }
+        public Optional<ConfiguredChecker> create(final @NonNull Instance annotation) {
+            return switch(annotation.getDefinition().getName()) {
+                case "UpperBoundary" -> Optional.of(new ConfiguredChecker(
+                        value -> ((Number) value).doubleValue() > 1.0
+                                 ? ConstraintCheck.violated("is " + value + ", but must be <= 1.0")
+                                 : ConstraintCheck.satisfied(),
+                        severityOf(annotation)));
+                case "LowerBoundary" -> Optional.of(new ConfiguredChecker(
+                        value -> ((Number) value).doubleValue() < 0.0
+                                 ? ConstraintCheck.violated("is " + value + ", but must be >= 0.0")
+                                 : ConstraintCheck.satisfied(),
+                        severityOf(annotation)));
+                default -> Optional.empty();
+            };
+        }
 
-            return Optional.of(value -> ((Number) value).doubleValue() > 1.0
-                                        ? ConstraintCheck.violated("is " + value + ", but must be <= 1.0")
-                                        : ConstraintCheck.satisfied());
+        /**
+         * @return The severity the annotation states with a resolved literal, otherwise error.
+         */
+        private static Severity severityOf(final Instance annotation) {
+            return annotation.getAttributes()
+                             .stream()
+                             .filter(attribute -> "severity".equals(attribute.getDefinition().getName()))
+                             .flatMap(attribute -> stream(attribute.getValue()))
+                             .filter(ValueDefinitionReference.class::isInstance)
+                             .map(reference -> ((ValueDefinitionReference) reference).getDefinition())
+                             .filter(definition -> definition != null && !definition.eIsProxy())
+                             .map(definition -> Severity.of(definition.getName()))
+                             .findFirst()
+                             .orElse(Severity.ERROR);
+        }
+
+        private static Stream<EObject> stream(final Expression expression) {
+            final List<EObject> contents = new ArrayList<>();
+            contents.add(expression);
+            expression.eAllContents().forEachRemaining(contents::add);
+            return contents.stream();
         }
     };
 
@@ -80,7 +118,66 @@ public class FiltersTest {
         }
 
         private ConstraintValidation validation(final Space data, final int maximum, final String... reads) throws InitializationException {
-            return new ConstraintValidation(maximum, CHECKERS, data, reads(data, reads));
+            return validation(data, maximum, RowReaction.DROP, RowReaction.KEEP, reads);
+        }
+
+        private ConstraintValidation validation(final Space data, final int maximum, final RowReaction errors, final RowReaction warnings,
+                                                final String... reads) throws InitializationException {
+            return new ConstraintValidation(maximum, errors, warnings, CHECKERS, data, reads(data, reads));
+        }
+
+        @Test
+        public void aRowThatViolatesAWarningIsKeptAndCounted() throws InitializationException {
+            final ConstraintValidation validation = validation(10, "a", "b", "d");
+
+            Assertions.assertTrue(validation.test(row(pipeline, "a", 0.5, "b", 0.5, "d", -1.0)));
+            Assertions.assertTrue(validation.test(row(pipeline, "a", 0.5, "b", 0.5, "d", -2.0)));
+            Assertions.assertTrue(validation.test(row(pipeline, "a", 0.5, "b", 0.5, "d", 1.0)));
+            Assertions.assertEquals(2, validation.keptViolations("'d' (@LowerBoundary)"));
+        }
+
+        @Test
+        public void aRowThatAlsoViolatesAnErrorIsDroppedAndNotCountedAsKept() throws InitializationException {
+            final ConstraintValidation validation = validation(10, "a", "b", "d");
+
+            Assertions.assertFalse(validation.test(row(pipeline, "a", 1.2, "b", 0.0, "d", -1.0)));
+            Assertions.assertEquals(0, validation.keptViolations("'d' (@LowerBoundary)"));
+        }
+
+        @Test
+        public void warningsMayDropRows() throws InitializationException {
+            final ConstraintValidation validation = validation(pipeline, 10, RowReaction.DROP, RowReaction.DROP, "a", "b", "d");
+
+            Assertions.assertFalse(validation.test(row(pipeline, "a", 0.5, "b", 0.5, "d", -1.0)));
+        }
+
+        @Test
+        public void errorsMayBeKept() throws InitializationException {
+            final ConstraintValidation validation = validation(pipeline, 10, RowReaction.KEEP, RowReaction.KEEP, "a", "b");
+
+            Assertions.assertTrue(validation.test(row(pipeline, "a", 1.2, "b", 0.0)));
+            Assertions.assertTrue(validation.test(row(pipeline, "a", 0.9, "b", 0.7)));
+            Assertions.assertEquals(1, validation.keptViolations("'a' (@UpperBoundary)"));
+            Assertions.assertEquals(1, validation.keptViolations("'data 'a' + data 'b' < 1.5'"));
+        }
+
+        @Test
+        public void stopEndsTheRunWithTheRowAndTheConstraint() throws InitializationException {
+            final ConstraintValidation validation = validation(pipeline, 10, RowReaction.STOP, RowReaction.KEEP, "a", "b");
+
+            final IllegalStateException e = Assertions.assertThrows(IllegalStateException.class,
+                                                                    () -> validation.test(row(pipeline, "a", 1.2, "b", 0.0)));
+            Assertions.assertTrue(e.getMessage().contains("'a' = 1.2"), e.getMessage());
+            Assertions.assertTrue(e.getMessage().contains("@UpperBoundary"), e.getMessage());
+        }
+
+        @Test
+        public void stopTakesPrecedenceOverDrop() throws InitializationException {
+            final ConstraintValidation validation = validation(pipeline, 10, RowReaction.DROP, RowReaction.STOP, "a", "b", "d");
+
+            final IllegalStateException e = Assertions.assertThrows(IllegalStateException.class,
+                                                                    () -> validation.test(row(pipeline, "a", 1.2, "b", 0.0, "d", -1.0)));
+            Assertions.assertTrue(e.getMessage().contains("@LowerBoundary"), e.getMessage());
         }
 
         @Test

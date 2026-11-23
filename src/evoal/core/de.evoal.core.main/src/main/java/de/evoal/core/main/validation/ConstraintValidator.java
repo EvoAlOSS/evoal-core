@@ -11,9 +11,10 @@ import jakarta.inject.Inject;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 
+import de.evoal.core.api.validation.constraints.ConfiguredChecker;
 import de.evoal.core.api.validation.constraints.ConstraintCheck;
-import de.evoal.core.api.validation.constraints.ConstraintCheckerComponent;
 import de.evoal.core.api.validation.constraints.ConstraintCheckers;
+import de.evoal.core.api.validation.constraints.Severity;
 import de.evoal.core.api.validation.context.DiagnosticsContext;
 import de.evoal.core.api.validation.context.EObjectContext;
 import de.evoal.core.api.validation.model.Diagnostics;
@@ -38,7 +39,8 @@ import de.evoal.models.core.exceptions.InitializationException;
  *   <li>an annotation on a type, or on one of its super types, against the instance.</li>
  * </ul>
  *
- * A violation is an error, so the run stops. A value that is only known during the run
+ * A violation is reported at the {@code severity} of the annotation: an error stops the run,
+ *   a warning is printed and the run continues. A value that is only known during the run
  *   (e.g. data, or an expression that is evaluated per sample) is reported as an info.
  *   Annotations without a checker (e.g. {@code @Literature}) are skipped.
  *
@@ -60,7 +62,7 @@ public class ConstraintValidator implements InstanceValidator {
     /**
      * The checker of every annotation, empty for annotations without a checker.
      */
-    private final Map<Instance, Optional<ConstraintCheckerComponent>> checkers = new HashMap<>();
+    private final Map<Instance, Optional<ConfiguredChecker>> checkers = new HashMap<>();
 
     /**
      * Computes the values of the attributes.
@@ -129,7 +131,7 @@ public class ConstraintValidator implements InstanceValidator {
             final ConstraintCheck result = checker.check(value);
             switch(result) {
                 case ConstraintCheck.Violated violated ->
-                        events.fire(Diagnostics.of(Diagnostics.Level.Error, context, subject + " " + violated.message() + "."));
+                        events.fire(Diagnostics.of(levelOf(checker.severity()), context, subject + " " + violated.message() + "."));
                 case ConstraintCheck.NotCheckable notCheckable ->
                         events.fire(Diagnostics.of(Diagnostics.Level.Info, context, subject + " is not checked against @" + annotation.getDefinition().getName() + ": " + notCheckable.reason() + "."));
                 case ConstraintCheck.Satisfied satisfied -> {}
@@ -138,13 +140,23 @@ public class ConstraintValidator implements InstanceValidator {
     }
 
     /**
+     * @return The level of the diagnostics that reports a violation of the given severity.
+     */
+    static Diagnostics.Level levelOf(final Severity severity) {
+        return switch(severity) {
+            case ERROR -> Diagnostics.Level.Error;
+            case WARNING -> Diagnostics.Level.Warning;
+        };
+    }
+
+    /**
      * @return The configured checker of the annotation, or empty if its type has none.
      */
-    private Optional<ConstraintCheckerComponent> checkerFor(final DiagnosticsContext context, final Instance annotation) {
+    private Optional<ConfiguredChecker> checkerFor(final DiagnosticsContext context, final Instance annotation) {
         return checkers.computeIfAbsent(annotation, a -> createChecker(context, a));
     }
 
-    private Optional<ConstraintCheckerComponent> createChecker(final DiagnosticsContext context, final Instance annotation) {
+    private Optional<ConfiguredChecker> createChecker(final DiagnosticsContext context, final Instance annotation) {
         try {
             return checkerFactory.create(annotation);
         } catch(final InitializationException | RuntimeException e) {

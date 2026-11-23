@@ -16,6 +16,12 @@ module 'de.evoal.pipeline.test.constrained' {
 
         quotient real data 'c';
 
+        /**
+         * At least 0, as a warning.
+         */
+        @LowerBoundary { boundary := 0.0; severity := Severity.warning; }
+        quotient real data 'd';
+
     constraints:
         constraint(data 'a' + data 'b' < 1.5, "sum");
 }

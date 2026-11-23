@@ -9,6 +9,7 @@ import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.deltaspike.core.api.provider.BeanProvider;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 
 import de.evoal.core.api.dynamic.ValueConverter;
 import de.evoal.languages.model.base.Module;
@@ -21,11 +22,17 @@ import de.evoal.models.core.exceptions.InitializationException;
  *   {@code @LowerBoundary { boundary := 0.0; }}. The checker is the component named by the
  *   fully-qualified name of the annotation's type; it is configured with the annotation,
  *   converted like any other DL instance. The configuration checks use it, and so does data
- *   generation, which checks the annotations of data descriptions on every row.
+ *   generation, which checks the annotations of data descriptions on every row. The checker
+ *   comes with the {@code severity} of the annotation, which every constraint has.
  */
 @ApplicationScoped
 @Slf4j
 public class ConstraintCheckers {
+    /**
+     * The attribute of every constraint that states how serious a violation is.
+     */
+    public static final String SEVERITY = "severity";
+
     /**
      * Converts the annotations into the configurations of their checkers.
      */
@@ -34,11 +41,11 @@ public class ConstraintCheckers {
 
     /**
      * @param annotation The annotation, e.g. {@code @UpperBoundary { boundary := 1.0; }}.
-     * @return The configured checker of the annotation, or empty if its type has none (e.g.
-     *   {@code @Literature}).
+     * @return The configured checker of the annotation with its severity, or empty if its type
+     *   has none (e.g. {@code @Literature}).
      * @throws InitializationException if the annotation cannot configure its checker.
      */
-    public Optional<ConstraintCheckerComponent> create(final @NonNull Instance annotation) throws InitializationException {
+    public Optional<ConfiguredChecker> create(final @NonNull Instance annotation) throws InitializationException {
         final String name = nameOf(annotation.getDefinition());
         final ConstraintCheckerComponent checker = BeanProvider.getContextualReference(name, true, ConstraintCheckerComponent.class);
         if(checker == null) {
@@ -55,7 +62,26 @@ public class ConstraintCheckers {
             throw new InitializationException(e.getMessage(), e);
         }
 
-        return Optional.of(checker.init(configuration));
+        return Optional.of(new ConfiguredChecker(checker.init(configuration), severityOf(configuration)));
+    }
+
+    /**
+     * @param configuration The converted annotation.
+     * @return The severity of the annotation; {@code error} for an annotation type that does not
+     *   extend {@code Constraint}.
+     * @throws InitializationException if the severity is no literal of {@code Severity}.
+     */
+    private static Severity severityOf(final EObject configuration) throws InitializationException {
+        final EStructuralFeature feature = configuration.eClass().getEStructuralFeature(SEVERITY);
+        if(feature == null) {
+            return Severity.ERROR;
+        }
+
+        try {
+            return Severity.of(configuration.eGet(feature));
+        } catch(final IllegalArgumentException e) {
+            throw new InitializationException(e.getMessage(), e);
+        }
     }
 
     /**

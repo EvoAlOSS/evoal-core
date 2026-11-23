@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Dependent
 @Named("de.evoal.surrogate.knn.ml.knn-learner")
@@ -47,8 +48,27 @@ public class KNNLerner extends AbstractModelLearner {
         return this;
     }
 
+    /**
+     * kNN has no training; it only warns if k exceeds the number of training rows.
+     */
     @Override
     public void learn() {
+        constantModelWarning(k, trainingData.size()).ifPresent(log::warn);
+    }
+
+    /**
+     * @param k The number of neighbours.
+     * @param rows The number of training rows.
+     * @return A warning if k exceeds the number of training rows: every prediction then
+     *   averages all rows, so the model is constant.
+     */
+    static Optional<String> constantModelWarning(final int k, final int rows) {
+        if(k <= rows) {
+            return Optional.empty();
+        }
+
+        return Optional.of("k = " + k + " exceeds the number of training rows (" + rows + "); every prediction averages all rows, "
+                           + "so the kNN model is constant.");
     }
 
     @Override
