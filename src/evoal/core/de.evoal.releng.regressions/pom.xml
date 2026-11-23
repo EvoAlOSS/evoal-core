@@ -37,6 +37,9 @@
         <!-- number of regressions that run at the same time; the output does not depend on it -->
         <evoal.regressions.parallelism>1</evoal.regressions.parallelism>
 
+        <!-- further JVM options of the runs (EVOAL_VM), e.g. -XX:ActiveProcessorCount=2 -->
+        <evoal.regressions.vm-options></evoal.regressions.vm-options>
+
         <!-- true rewrites the references instead of comparing against them -->
         <evoal.regressions.update>false</evoal.regressions.update>
 
@@ -214,6 +217,7 @@
                                 <evoal.regressions.shell>${evoal.regressions.shell}</evoal.regressions.shell>
                                 <evoal.regressions.threads>${evoal.regressions.threads}</evoal.regressions.threads>
                                 <evoal.regressions.update>${evoal.regressions.update}</evoal.regressions.update>
+                                <evoal.regressions.vm-options>${evoal.regressions.vm-options}</evoal.regressions.vm-options>
                             </systemPropertyVariables>
                         </configuration>
                     </plugin>

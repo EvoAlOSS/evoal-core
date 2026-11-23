@@ -39,6 +39,8 @@ import org.junit.jupiter.api.TestFactory;
  *   <li>{@code evoal.regressions.parallelism}: number of regressions that run at the same
  *     time (default 1).</li>
  *   <li>{@code evoal.regressions.agent}: Java agent for the runs (set by JaCoCo).</li>
+ *   <li>{@code evoal.regressions.vm-options}: further JVM options of the runs, e.g.
+ *     {@code -XX:ActiveProcessorCount=2} so that parallel runs fit the CPUs of a CI job.</li>
  * </ul>
  */
 public class RegressionIT {
@@ -87,11 +89,12 @@ public class RegressionIT {
         final String shell = System.getProperty("evoal.regressions.shell", "bash");
         final String agent = System.getProperty("evoal.regressions.agent", "");
         final int threads = Integer.getInteger("evoal.regressions.threads", 1);
+        final String vmOptions = System.getProperty("evoal.regressions.vm-options", "");
 
         this.root = Path.of(rootName);
 
         final Path release = root.resolve(RELEASE_FOLDER);
-        this.runner = new RegressionRunner(release, shell, agent, threads);
+        this.runner = new RegressionRunner(release, shell, agent, threads, vmOptions);
         this.update = Boolean.getBoolean("evoal.regressions.update");
         this.withExamples = Boolean.getBoolean("evoal.regressions.examples");
         this.repetitions = Integer.getInteger("evoal.regressions.repetitions", 1);

@@ -7,6 +7,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Stream;
@@ -81,18 +82,26 @@ public final class RegressionRunner {
     private final int threads;
 
     /**
+     * Further JVM options of the runs ({@code EVOAL_VM}), empty for none.
+     */
+    private final String vmOptions;
+
+    /**
      * Creates a runner for regressions.
      *
      * @param release The folder of the assembled release.
      * @param shell The shell that executes the launcher.
      * @param agent The Java agent for the runs, empty for none.
      * @param threads The number of threads that evaluate the candidates of a run.
+     * @param vmOptions Further JVM options of the runs, empty for none.
      */
-    public RegressionRunner(final Path release, final String shell, final String agent, final int threads) {
+    public RegressionRunner(final Path release, final String shell, final String agent, final int threads,
+                            final String vmOptions) {
         this.release = release;
         this.shell = shell;
         this.agent = agent;
         this.threads = threads;
+        this.vmOptions = vmOptions;
     }
 
     /**
@@ -106,10 +115,15 @@ public final class RegressionRunner {
     public Path run(final Regression regression, final Path workingFolder) throws InterruptedException {
         copyConfiguration(regression.folder(), workingFolder);
 
+        final long start = System.nanoTime();
         final Path logFile = workingFolder.resolve(LOG_FILE);
         for(final List<String> command : commandsOf(regression)) {
             runCommand(regression, command, workingFolder, logFile);
         }
+
+        // the duration of every run, e.g. to find slow or hanging regressions in CI
+        final double seconds = (System.nanoTime() - start) / 1e9;
+        System.out.printf(Locale.ROOT, "Regression %s (%s) took %.1f s.%n", regression, workingFolder.getFileName(), seconds);
 
         return workingFolder.resolve(OUTPUT_FOLDER);
     }
@@ -209,8 +223,9 @@ public final class RegressionRunner {
         environment.remove("EVOAL_DEBUG");
         environment.remove("EVOAL_VM");
 
-        if(!agent.isBlank()) {
-            environment.put("EVOAL_VM", agent);
+        final String vm = (agent + " " + vmOptions).strip();
+        if(!vm.isEmpty()) {
+            environment.put("EVOAL_VM", vm);
         }
 
         final File log = logFile.toFile();

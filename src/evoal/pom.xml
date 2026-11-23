@@ -257,7 +257,8 @@
                     <execution>
                         <id>attach-sources</id>
                         <goals>
-                            <goal>jar</goal>
+                            <!-- jar-no-fork: the goal jar forks the lifecycle up to generate-sources in every module -->
+                            <goal>jar-no-fork</goal>
                         </goals>
                     </execution>
                 </executions>

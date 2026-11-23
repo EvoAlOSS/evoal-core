@@ -82,14 +82,19 @@ mvn -f src/evoal/pom.xml -Pregressions verify
 | `-Devoal.regressions.parallelism=2` | number of regressions that run at the same time (default 1) |
 | `-Devoal.regressions.shell=zsh` | shell for the launcher (default `bash`, version 4 or newer) |
 | `-Devoal.regressions.threads=4` | number of threads that evaluate the candidates (`EVOAL_THREADS`, default 1) |
+| `-Devoal.regressions.vm-options=-XX:ActiveProcessorCount=2` | further JVM options of every run (`EVOAL_VM`, after the coverage agent) |
 
-In the pipeline (see the comment at the top of `.gitlab-ci.yml`), all runs use 4
-threads and a parallelism of 2:
+The runner prints the duration of every run (`Regression <name> (run-<n>) took <s> s.`).
+
+In the pipeline (see `REGRESSION_OPTS` in `.gitlab-ci.yml`), 2 runs start at the same
+time with 4 evaluation threads each, and every JVM is limited to 4 CPUs
+(`-XX:ActiveProcessorCount=4`): the jobs have a quota of 8 CPUs, and a JVM that sees more
+CPUs starts more garbage collection and compiler threads than the quota allows.
 
 | Pipeline | Runs |
 |---|---|
-| merge request into `develop` | regressions, with coverage |
-| `develop` after a merge | regressions and examples, with coverage |
+| merge request into `develop` (the gate) | regressions and examples, with coverage |
+| `develop` after a merge | none (the project merges fast-forward only, so the gate tested the same tree) |
 | merge request `develop` → `release` | regressions and examples, 2 repetitions |
 
 ## References
