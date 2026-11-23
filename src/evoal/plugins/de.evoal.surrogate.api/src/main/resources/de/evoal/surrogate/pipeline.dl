@@ -301,12 +301,12 @@ module 'de.evoal.surrogate.pipeline' {
 
 	/**
 	 * Clusters the rows by their input features with k-means (Lloyd 1982): the inputs are
-	 * min-max normalised on the training data, the k-means++ seeding chooses the initial
-	 * centres, and Lloyd iterations move them until no row changes its cluster. Each
+	 * min-max normalised on the training data, the k-means++ seeding (Arthur and Vassilvitskii
+	 * 2007) chooses the initial centres, and Lloyd iterations move them until no row changes its cluster. Each
 	 * non-empty cluster is a block. The seeding uses the random stream
 	 * <code>de.evoal.surrogate.pipeline.resample/block-cross-validation/k-means-blocks</code>.
 	 */
-	@Literature { keys := ["lloyd1982least"]; }
+	@Literature { keys := ["lloyd1982least", "arthur2007kmeans"]; }
 	type 'k-means-blocks' extends 'block-definition' {
 		/**
 		 * The number of clusters, at most the number of rows.
