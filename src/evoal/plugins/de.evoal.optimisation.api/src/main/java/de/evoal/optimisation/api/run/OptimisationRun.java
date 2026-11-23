@@ -13,6 +13,8 @@ import de.evoal.core.api.cdi.Component;
 import de.evoal.models.v202704.optimisation.execution.OptimisationValue;
 import de.evoal.models.v202704.optimisation.execution.TerminationCriterion;
 import de.evoal.models.v202704.optimisation.memory.Individual;
+import de.evoal.models.v202704.optimisation.memory.IndividualRecord;
+import de.evoal.models.v202704.optimisation.memory.IndividualStub;
 import de.evoal.models.v202704.optimisation.memory.Iteration;
 import de.evoal.models.v202704.optimisation.memory.MemoryFactory;
 
@@ -84,11 +86,13 @@ public class OptimisationRun {
      * The best individual of the run so far and its optimisation value, {@code null}
      *   before the first iteration.
      */
-    private Individual bestIndividual;
+    private IndividualRecord bestIndividual;
     private OptimisationValue bestValue;
 
     /**
-     * The individuals of the members of the previous iteration.
+     * The stubs of the members of the previous iteration. The relationships of the next
+     *   iteration refer to them instead of the records, so a record never refers to an
+     *   earlier iteration and the run keeps only the iterations it needs in memory.
      */
     private Map<Candidate, Individual> previousIndividuals = new IdentityHashMap<>();
 
@@ -186,7 +190,7 @@ public class OptimisationRun {
         final Map<Candidate, Individual> individualsOfMembers = new IdentityHashMap<>();
         for(final IterationRecording.Occurrence occurrence : members) {
             final Candidate member = occurrence.candidate();
-            final Individual individual = recording.inRanks(occurrence);
+            final IndividualRecord individual = recording.inRanks(occurrence);
 
             // on an equal value, the earlier individual stays the best
             if(bestValue == null || member.value().isBetter(bestValue)) {
@@ -194,7 +198,7 @@ public class OptimisationRun {
                 bestValue = member.value();
             }
 
-            individualsOfMembers.put(member, individual);
+            individualsOfMembers.put(member, stubOf(individual, number));
         }
         iteration.setBestSoFar(bestIndividual);
 
@@ -202,7 +206,26 @@ public class OptimisationRun {
 
         events.publish(new IterationFinished(iteration));
 
+        // the iteration is recorded: the members no longer need their predecessors, and
+        // keeping them would keep every earlier candidate in memory
+        members.forEach(occurrence -> occurrence.candidate().forgetPredecessors());
+
         return iteration;
+    }
+
+    /**
+     * @return The stub of a record of the given iteration: the same id and values, shared
+     *   input and output, a copy of the fitness, no relationships and no properties.
+     */
+    static IndividualStub stubOf(final IndividualRecord record, final int iteration) {
+        final IndividualStub stub = MemoryFactory.eINSTANCE.createIndividualStub();
+        stub.setId(record.getId());
+        stub.setInput(record.getInput());
+        stub.setOutput(record.getOutput());
+        stub.getFitness().addAll(record.getFitness());
+        stub.setIteration(iteration);
+
+        return stub;
     }
 
     private static void logExhaustedBudget(final EvaluationBudgetExhaustedException exception, final int iteration) {

@@ -540,7 +540,9 @@ module de.evoal.optimisation.ea.optimisation {
 
     /**
      * Elitism: the 'count' best candidates are selected first, the
-     *   remaining ones by 'rest' from all candidates.
+     *   remaining ones by 'rest' from all candidates. The result starts with the best
+     *   candidates in their order, so as 'parent-selection' the best candidates are paired
+     *   with each other.
      */
     type 'elite-selection' extends selection {
         /**
@@ -609,9 +611,11 @@ module de.evoal.optimisation.ea.optimisation {
     /**
      * Roulette wheel selection, fitness-proportional for minimisation
      *   with windowing: a candidate with fitness f is selected with a probability
-     *   proportional to f_max - f, where f_max is the largest fitness of the candidates.
-     *   If all have the same fitness, it selects uniformly. Needs a fitness with one
-     *   component.
+     *   proportional to f_max - f, where f_max is the largest finite fitness of the
+     *   candidates. If all have the same fitness, it selects uniformly. A fitness of
+     *   Infinity (worst) is not selected while another candidate has a finite fitness; if a
+     *   fitness is -Infinity (best), only the candidates with -Infinity are selected; NaN is
+     *   an error. Needs a fitness with one component.
      */
     type 'roulette-wheel-selection' extends selection {}
 
@@ -619,7 +623,9 @@ module de.evoal.optimisation.ea.optimisation {
      * Stochastic universal sampling (Baker 1987): the probabilities of the roulette wheel
      *   selection, but all candidates are selected with one spin and equally spaced
      *   pointers, so a candidate is selected floor or ceil of its expected number of
-     *   times. Needs a fitness with one component.
+     *   times. The selected candidates are returned in random order, so as
+     *   'parent-selection' the pairs are random. Infinite fitness and NaN as in the
+     *   roulette wheel selection. Needs a fitness with one component.
      */
     @Literature { keys := ["baker1987reducing"]; }
     type 'stochastic-universal-sampling' extends selection {}
@@ -627,7 +633,8 @@ module de.evoal.optimisation.ea.optimisation {
     /**
      * Boltzmann selection: a candidate with fitness f is selected with a probability
      *   proportional to exp(-(f - f_min) / temperature), where f_min is the smallest
-     *   fitness of the candidates. Needs a fitness with one component.
+     *   finite fitness of the candidates. Infinite fitness and NaN as in the roulette
+     *   wheel selection. Needs a fitness with one component.
      */
     type 'boltzmann-selection' extends selection {
         /**

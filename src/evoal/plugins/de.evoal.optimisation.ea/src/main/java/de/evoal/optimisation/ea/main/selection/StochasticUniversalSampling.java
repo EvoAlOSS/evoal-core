@@ -2,6 +2,7 @@ package de.evoal.optimisation.ea.main.selection;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.random.RandomGenerator;
 
@@ -17,7 +18,8 @@ import de.evoal.optimisation.ea.api.selection.SelectionMethod;
  * Stochastic universal sampling (DL type {@code 'stochastic-universal-sampling'}): the
  *   probabilities of the {@link RouletteWheelSelection}, but all candidates are selected with
  *   one spin and {@code count} equally spaced pointers. A candidate with the expected number
- *   e of selections is selected floor(e) or ceil(e) times.
+ *   e of selections is selected floor(e) or ceil(e) times. The selected candidates are
+ *   returned in random order. Non-finite fitness as in the {@link RouletteWheelSelection}.
  */
 @Dependent
 @Named("de.evoal.optimisation.ea.optimisation.stochastic-universal-sampling")
@@ -40,7 +42,7 @@ public class StochasticUniversalSampling implements SelectionMethod {
             return selected;
         }
 
-        double[] weights = RouletteWheelSelection.windowedWeights(candidates);
+        double[] weights = RouletteWheelSelection.windowedWeights(candidates, name());
         double total = Rankings.sum(weights);
         if(total <= 0.0) {
             weights = new double[candidates.size()];
@@ -61,6 +63,10 @@ public class StochasticUniversalSampling implements SelectionMethod {
             }
             selected.add(candidates.get(index));
         }
+
+        // the pointers follow the order of the candidates, so the copies of a candidate are
+        // adjacent; consecutive parents form a pair, so the result is shuffled
+        Collections.shuffle(selected, random);
 
         return selected;
     }

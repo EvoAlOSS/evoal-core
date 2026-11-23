@@ -554,38 +554,6 @@
   }, {
     "id" : 50,
     "input" : {
-      "x:0" : 1.9199756602879268,
-      "n:0" : 4,
-      "k:0" : 0,
-      "b:0" : false
-    },
-    "output" : {
-      "y:0" : 20.923976588463375
-    },
-    "fitness" : [ 20.923976588463375 ],
-    "relationships" : [ {
-      "kind" : "identity",
-      "targets" : [ 5 ]
-    } ]
-  }, {
-    "id" : 51,
-    "input" : {
-      "x:0" : -3.333108020751562,
-      "n:0" : 3,
-      "k:0" : 0,
-      "b:0" : false
-    },
-    "output" : {
-      "y:0" : 35.09734391718766
-    },
-    "fitness" : [ 35.09734391718766 ],
-    "relationships" : [ {
-      "kind" : "identity",
-      "targets" : [ 12 ]
-    } ]
-  }, {
-    "id" : 52,
-    "input" : {
       "x:0" : -1.849239680940542,
       "n:0" : 1,
       "k:0" : 0,
@@ -600,7 +568,7 @@
       "targets" : [ 17 ]
     } ]
   }, {
-    "id" : 53,
+    "id" : 51,
     "input" : {
       "x:0" : 0.5341660851126084,
       "n:0" : -3,
@@ -614,6 +582,38 @@
     "relationships" : [ {
       "kind" : "identity",
       "targets" : [ 19 ]
+    } ]
+  }, {
+    "id" : 52,
+    "input" : {
+      "x:0" : 1.9199756602879268,
+      "n:0" : 4,
+      "k:0" : 0,
+      "b:0" : false
+    },
+    "output" : {
+      "y:0" : 20.923976588463375
+    },
+    "fitness" : [ 20.923976588463375 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 5 ]
+    } ]
+  }, {
+    "id" : 53,
+    "input" : {
+      "x:0" : -3.333108020751562,
+      "n:0" : 3,
+      "k:0" : 0,
+      "b:0" : false
+    },
+    "output" : {
+      "y:0" : 35.09734391718766
+    },
+    "fitness" : [ 35.09734391718766 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 12 ]
     } ]
   } ],
   "steps" : [ {
@@ -635,17 +635,17 @@
   }, {
     "kind" : "unordered",
     "description" : "Acceptance: survivor-replacement by stochastic-universal-sampling",
-    "individuals" : [ 28, 22, 50, 26, 27, 51, 23, 52, 24, 53, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49 ]
+    "individuals" : [ 50, 51, 24, 26, 23, 52, 53, 28, 22, 27, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49 ]
   } ],
   "ranks" : [ {
     "number" : 0,
-    "members" : [ 52 ]
-  }, {
-    "number" : 1,
     "members" : [ 50 ]
   }, {
+    "number" : 1,
+    "members" : [ 52 ]
+  }, {
     "number" : 2,
-    "members" : [ 53 ]
+    "members" : [ 51 ]
   }, {
     "number" : 3,
     "members" : [ 47 ]
@@ -660,7 +660,7 @@
     "members" : [ 24 ]
   }, {
     "number" : 7,
-    "members" : [ 51 ]
+    "members" : [ 53 ]
   }, {
     "number" : 8,
     "members" : [ 22 ]

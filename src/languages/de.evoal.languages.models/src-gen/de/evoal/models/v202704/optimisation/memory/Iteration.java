@@ -129,14 +129,18 @@ public interface Iteration extends State {
 	 *   e.g., if a local search moved to a worse candidate. Not set if the
 	 *   algorithm does not track the best individual.
 	 * 
+	 * It is the record, so its properties (e.g., its violations) are available. Since
+	 *   the relationships of a record refer to stubs of the previous iteration, it keeps
+	 *   at most the one iteration alive that contains it.
+	 * 
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Best So Far</em>' reference.
-	 * @see #setBestSoFar(Individual)
+	 * @see #setBestSoFar(IndividualRecord)
 	 * @see de.evoal.models.v202704.optimisation.memory.MemoryPackage#getIteration_BestSoFar()
 	 * @model
 	 * @generated
 	 */
-	Individual getBestSoFar();
+	IndividualRecord getBestSoFar();
 
 	/**
 	 * Sets the value of the '{@link de.evoal.models.v202704.optimisation.memory.Iteration#getBestSoFar <em>Best So Far</em>}' reference.
@@ -146,7 +150,7 @@ public interface Iteration extends State {
 	 * @see #getBestSoFar()
 	 * @generated
 	 */
-	void setBestSoFar(Individual value);
+	void setBestSoFar(IndividualRecord value);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -156,10 +160,10 @@ public interface Iteration extends State {
 	 * Returns a stream of the best individuals that survived the iteration.
 	 * 
 	 * <!-- end-model-doc -->
-	 * @model type="de.evoal.models.v202704.optimisation.Stream&lt;de.evoal.models.v202704.optimisation.memory.Individual&gt;" required="true"
+	 * @model type="de.evoal.models.v202704.optimisation.Stream&lt;de.evoal.models.v202704.optimisation.memory.IndividualRecord&gt;" required="true"
 	 * @generated
 	 */
-	Stream<Individual> bestIndividuals();
+	Stream<IndividualRecord> bestIndividuals();
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -169,10 +173,10 @@ public interface Iteration extends State {
 	 * Returns a stream of the individuals that survived the iteration.
 	 * 
 	 * <!-- end-model-doc -->
-	 * @model type="de.evoal.models.v202704.optimisation.Stream&lt;de.evoal.models.v202704.optimisation.memory.Individual&gt;" required="true"
+	 * @model type="de.evoal.models.v202704.optimisation.Stream&lt;de.evoal.models.v202704.optimisation.memory.IndividualRecord&gt;" required="true"
 	 * @generated
 	 */
-	Stream<Individual> survivedIndividuals();
+	Stream<IndividualRecord> survivedIndividuals();
 
 	/**
 	 * <!-- begin-user-doc -->

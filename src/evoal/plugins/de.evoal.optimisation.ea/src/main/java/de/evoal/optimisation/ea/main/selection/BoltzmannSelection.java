@@ -20,7 +20,9 @@ import de.evoal.optimisation.ea.api.selection.SelectionMethod;
 /**
  * Boltzmann selection (DL type {@code 'boltzmann-selection'}): a candidate with fitness f is
  *   selected with a probability proportional to exp(-(f - f_min) / temperature), where f_min
- *   is the smallest fitness of the candidates.
+ *   is the smallest finite fitness of the candidates. A fitness of +Infinity is never
+ *   selected while a candidate has another fitness; if a fitness is -Infinity, only the
+ *   candidates with -Infinity are selected; NaN is an error.
  */
 @Dependent
 @Named("de.evoal.optimisation.ea.optimisation.boltzmann-selection")
@@ -60,22 +62,12 @@ public class BoltzmannSelection implements SelectionMethod {
     }
 
     /**
-     * @return The weights exp(-(f - f_min) / temperature) of the candidates.
+     * @return The weights exp(-(f - f_min) / temperature) of the candidates, with f_min the
+     *   smallest finite fitness; non-finite fitness as in {@link Rankings#proportionalWeights}.
      */
     double[] weights(final List<Candidate> candidates) {
-        final double[] fitness = Rankings.singleFitness(candidates);
-
-        double minimum = Double.POSITIVE_INFINITY;
-        for(final double value : fitness) {
-            minimum = Math.min(minimum, value);
-        }
-
-        final double[] weights = new double[fitness.length];
-        for(int i = 0; i < fitness.length; ++i) {
-            weights[i] = EvoalMath.exp(-(fitness[i] - minimum) / temperature);
-        }
-
-        return weights;
+        return Rankings.proportionalWeights(candidates, name(),
+                                            (fitness, best, worst) -> EvoalMath.exp(-(fitness - best) / temperature));
     }
 
     @Override

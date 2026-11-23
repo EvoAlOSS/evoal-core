@@ -24,7 +24,7 @@ import org.eclipse.emf.common.util.EList;
 public interface UnorderedIterationStep extends IterationStep {
 	/**
 	 * Returns the value of the '<em><b>Individuals</b></em>' containment reference list.
-	 * The list contents are of type {@link de.evoal.models.v202704.optimisation.memory.Individual}.
+	 * The list contents are of type {@link de.evoal.models.v202704.optimisation.memory.IndividualRecord}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
@@ -37,6 +37,6 @@ public interface UnorderedIterationStep extends IterationStep {
 	 * @model containment="true" ordered="false"
 	 * @generated
 	 */
-	EList<Individual> getIndividuals();
+	EList<IndividualRecord> getIndividuals();
 
 } // UnorderedIterationStep

@@ -3,7 +3,7 @@
  */
 package de.evoal.models.v202704.optimisation.memory.impl;
 
-import de.evoal.models.v202704.optimisation.memory.Individual;
+import de.evoal.models.v202704.optimisation.memory.IndividualRecord;
 import de.evoal.models.v202704.optimisation.memory.MemoryPackage;
 import de.evoal.models.v202704.optimisation.memory.UnorderedIterationStep;
 
@@ -41,7 +41,7 @@ public class UnorderedIterationStepImpl extends IterationStepImpl implements Uno
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Individual> individuals;
+	protected EList<IndividualRecord> individuals;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -68,9 +68,9 @@ public class UnorderedIterationStepImpl extends IterationStepImpl implements Uno
 	 * @generated
 	 */
 	@Override
-	public EList<Individual> getIndividuals() {
+	public EList<IndividualRecord> getIndividuals() {
 		if (individuals == null) {
-			individuals = new EObjectContainmentEList<Individual>(Individual.class, this, MemoryPackage.UNORDERED_ITERATION_STEP__INDIVIDUALS);
+			individuals = new EObjectContainmentEList<IndividualRecord>(IndividualRecord.class, this, MemoryPackage.UNORDERED_ITERATION_STEP__INDIVIDUALS);
 		}
 		return individuals;
 	}
@@ -114,7 +114,7 @@ public class UnorderedIterationStepImpl extends IterationStepImpl implements Uno
 		switch (featureID) {
 			case MemoryPackage.UNORDERED_ITERATION_STEP__INDIVIDUALS:
 				getIndividuals().clear();
-				getIndividuals().addAll((Collection<? extends Individual>)newValue);
+				getIndividuals().addAll((Collection<? extends IndividualRecord>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

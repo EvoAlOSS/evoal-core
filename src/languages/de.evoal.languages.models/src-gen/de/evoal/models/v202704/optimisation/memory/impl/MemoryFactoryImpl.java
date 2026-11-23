@@ -67,7 +67,8 @@ public class MemoryFactoryImpl extends EFactoryImpl implements MemoryFactory {
 			case MemoryPackage.ORDERED_ITERATION_STEP: return createOrderedIterationStep();
 			case MemoryPackage.UNORDERED_ITERATION_STEP: return createUnorderedIterationStep();
 			case MemoryPackage.RANK: return createRank();
-			case MemoryPackage.INDIVIDUAL: return createIndividual();
+			case MemoryPackage.INDIVIDUAL_RECORD: return createIndividualRecord();
+			case MemoryPackage.INDIVIDUAL_STUB: return createIndividualStub();
 			case MemoryPackage.IDENTITY: return createIdentity();
 			case MemoryPackage.MUTATION: return createMutation();
 			case MemoryPackage.RECOMBINATION: return createRecombination();
@@ -210,9 +211,20 @@ public class MemoryFactoryImpl extends EFactoryImpl implements MemoryFactory {
 	 * @generated
 	 */
 	@Override
-	public Individual createIndividual() {
-		IndividualImpl individual = new IndividualImpl();
-		return individual;
+	public IndividualRecord createIndividualRecord() {
+		IndividualRecordImpl individualRecord = new IndividualRecordImpl();
+		return individualRecord;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public IndividualStub createIndividualStub() {
+		IndividualStubImpl individualStub = new IndividualStubImpl();
+		return individualStub;
 	}
 
 	/**

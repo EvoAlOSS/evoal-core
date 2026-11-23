@@ -16,7 +16,7 @@ final class FitnessValues {
      * @param individuals The individuals.
      * @return The first fitness component of every individual that has a fitness.
      */
-    static DoubleStream of(final Stream<Individual> individuals) {
+    static DoubleStream of(final Stream<? extends Individual> individuals) {
         return individuals.filter(individual -> !individual.getFitness().isEmpty())
                           .mapToDouble(individual -> individual.getFitness().getFirst());
     }

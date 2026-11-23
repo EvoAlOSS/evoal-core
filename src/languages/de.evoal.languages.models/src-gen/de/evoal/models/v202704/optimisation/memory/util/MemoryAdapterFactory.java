@@ -111,6 +111,14 @@ public class MemoryAdapterFactory extends AdapterFactoryImpl {
 				return createIndividualAdapter();
 			}
 			@Override
+			public Adapter caseIndividualRecord(IndividualRecord object) {
+				return createIndividualRecordAdapter();
+			}
+			@Override
+			public Adapter caseIndividualStub(IndividualStub object) {
+				return createIndividualStubAdapter();
+			}
+			@Override
 			public Adapter caseRelationship(Relationship object) {
 				return createRelationshipAdapter();
 			}
@@ -303,6 +311,34 @@ public class MemoryAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createIndividualAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.evoal.models.v202704.optimisation.memory.IndividualRecord <em>Individual Record</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.evoal.models.v202704.optimisation.memory.IndividualRecord
+	 * @generated
+	 */
+	public Adapter createIndividualRecordAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.evoal.models.v202704.optimisation.memory.IndividualStub <em>Individual Stub</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.evoal.models.v202704.optimisation.memory.IndividualStub
+	 * @generated
+	 */
+	public Adapter createIndividualStubAdapter() {
 		return null;
 	}
 

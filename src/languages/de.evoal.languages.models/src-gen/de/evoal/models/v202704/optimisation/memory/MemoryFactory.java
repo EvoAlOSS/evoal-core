@@ -86,13 +86,22 @@ public interface MemoryFactory extends EFactory {
 	Rank createRank();
 
 	/**
-	 * Returns a new object of class '<em>Individual</em>'.
+	 * Returns a new object of class '<em>Individual Record</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Individual</em>'.
+	 * @return a new object of class '<em>Individual Record</em>'.
 	 * @generated
 	 */
-	Individual createIndividual();
+	IndividualRecord createIndividualRecord();
+
+	/**
+	 * Returns a new object of class '<em>Individual Stub</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Individual Stub</em>'.
+	 * @generated
+	 */
+	IndividualStub createIndividualStub();
 
 	/**
 	 * Returns a new object of class '<em>Identity</em>'.

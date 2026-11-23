@@ -6,8 +6,6 @@ package de.evoal.models.v202704.optimisation.memory;
 import de.evoal.models.core.ecore.TypedEObject;
 
 import org.eclipse.emf.common.util.EList;
-
-import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -17,7 +15,9 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <!-- begin-model-doc -->
  * *
- * A single individual at a given point of the execution.
+ * A single individual at a given point of the execution: its id and values. An
+ *   iteration contains the {@link IndividualRecord}s of its individuals; a reference to
+ *   an individual of an earlier iteration is an {@link IndividualStub}.
  * 
  * <!-- end-model-doc -->
  *
@@ -29,12 +29,10 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link de.evoal.models.v202704.optimisation.memory.Individual#getInput <em>Input</em>}</li>
  *   <li>{@link de.evoal.models.v202704.optimisation.memory.Individual#getOutput <em>Output</em>}</li>
  *   <li>{@link de.evoal.models.v202704.optimisation.memory.Individual#getFitness <em>Fitness</em>}</li>
- *   <li>{@link de.evoal.models.v202704.optimisation.memory.Individual#getRelationships <em>Relationships</em>}</li>
- *   <li>{@link de.evoal.models.v202704.optimisation.memory.Individual#getProperties <em>Properties</em>}</li>
  * </ul>
  *
  * @see de.evoal.models.v202704.optimisation.memory.MemoryPackage#getIndividual()
- * @model
+ * @model abstract="true"
  * @generated
  */
 public interface Individual extends EObject {
@@ -143,42 +141,5 @@ public interface Individual extends EObject {
 	 * @generated
 	 */
 	EList<Double> getFitness();
-
-	/**
-	 * Returns the value of the '<em><b>Relationships</b></em>' containment reference list.
-	 * The list contents are of type {@link de.evoal.models.v202704.optimisation.memory.Relationship}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * *
-	 * The relations to other individuals.
-	 * 
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Relationships</em>' containment reference list.
-	 * @see de.evoal.models.v202704.optimisation.memory.MemoryPackage#getIndividual_Relationships()
-	 * @model containment="true" ordered="false"
-	 * @generated
-	 */
-	EList<Relationship> getRelationships();
-
-	/**
-	 * Returns the value of the '<em><b>Properties</b></em>' map.
-	 * The key is of type {@link java.lang.String},
-	 * and the value is of type {@link java.lang.Object},
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * *
-	 * Further details of the individual, e.g., its age, by property name. The properties
-	 *   are defined in {@link Execution#getPropertyDefinitions()} with the scope
-	 *   {@link PropertyScope#INDIVIDUAL}.
-	 * 
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Properties</em>' map.
-	 * @see de.evoal.models.v202704.optimisation.memory.MemoryPackage#getIndividual_Properties()
-	 * @model mapType="de.evoal.models.v202704.optimisation.memory.PropertyEntry&lt;org.eclipse.emf.ecore.EString, org.eclipse.emf.ecore.EJavaObject&gt;"
-	 * @generated
-	 */
-	EMap<String, Object> getProperties();
 
 } // Individual

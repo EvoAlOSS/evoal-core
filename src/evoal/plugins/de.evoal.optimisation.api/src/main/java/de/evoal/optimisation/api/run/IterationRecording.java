@@ -9,6 +9,7 @@ import java.util.Map;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import de.evoal.models.v202704.optimisation.memory.Individual;
+import de.evoal.models.v202704.optimisation.memory.IndividualRecord;
 import de.evoal.models.v202704.optimisation.memory.IterationStep;
 import de.evoal.models.v202704.optimisation.memory.MemoryFactory;
 import de.evoal.models.v202704.optimisation.memory.PropertyScope;
@@ -57,7 +58,7 @@ final class IterationRecording {
     private final Map<Candidate, List<Occurrence>> occurrences = new IdentityHashMap<>();
 
     /**
-     * The individuals of the members of the previous iteration.
+     * The stubs of the members of the previous iteration.
      */
     private final Map<Candidate, Individual> previous;
 
@@ -74,7 +75,7 @@ final class IterationRecording {
     /**
      * @param idGenerator Creates the ids of the individuals.
      * @param recorder Checks and defines the properties.
-     * @param previous The individuals of the members of the previous iteration.
+     * @param previous The stubs of the members of the previous iteration.
      */
     IterationRecording(final IndividualIDGenerator idGenerator,
                        final ExecutionRecorder recorder,
@@ -85,9 +86,9 @@ final class IterationRecording {
     }
 
     /**
-     * @return The individual of a predecessor in the steps version: its own individual if it
+     * @return The individual of a predecessor in the steps version: its own record if it
      *   occurred in a step of this iteration before the individual with the given id, else the
-     *   one of the previous iteration that it stands for.
+     *   stub of the previous iteration that it stands for.
      * @throws IllegalStateException if the predecessor belongs to neither.
      */
     private Individual directIndividualOf(final Candidate predecessor, final int id) {
@@ -117,8 +118,9 @@ final class IterationRecording {
      * @return The individual of the occurrence in the ranks, related to the individuals of the
      *   previous iteration; created at the first call.
      */
-    Individual inRanks(final Occurrence occurrence) {
+    IndividualRecord inRanks(final Occurrence occurrence) {
         if(occurrence.inRanks == null) {
+            requireNotRecorded(occurrence.candidate);
             occurrence.inRanks = newIndividual(occurrence);
 
             final Lineage lineage = occurrence.candidate.lineage();
@@ -138,8 +140,9 @@ final class IterationRecording {
      * @return The individual of the occurrence in the steps, related to its direct
      *   predecessors; created at the first call.
      */
-    private Individual inSteps(final Occurrence occurrence) {
+    private IndividualRecord inSteps(final Occurrence occurrence) {
         if(occurrence.inSteps == null) {
+            requireNotRecorded(occurrence.candidate);
             occurrence.inSteps = newIndividual(occurrence);
 
             final Lineage lineage = occurrence.candidate.stepLineage();
@@ -153,6 +156,18 @@ final class IterationRecording {
         }
 
         return occurrence.inSteps;
+    }
+
+    /**
+     * @throws IllegalStateException if the candidate belongs to an iteration that is already
+     *   recorded; a candidate is carried over into the next iteration with
+     *   {@link Candidate#survivor()} or {@link Candidate#copy()}.
+     */
+    private static void requireNotRecorded(final Candidate candidate) {
+        if(candidate.lineage().kind() == Lineage.Kind.RECORDED) {
+            throw new IllegalStateException("The candidate " + candidate + " was already recorded in an earlier "
+                                            + "iteration; carry it over with Candidate.survivor().");
+        }
     }
 
     /**
@@ -204,16 +219,16 @@ final class IterationRecording {
     }
 
     /**
-     * @return The individual of the occurrence with its id, values, fitness, properties and
+     * @return The record of the occurrence with its id, values, fitness, properties and
      *   degrees of constraint violation, without relationships. A candidate that was not
      *   evaluated, e.g., because the evaluation budget ran out, has no output.
      * @throws IllegalStateException if a property is not defined or does not match its
      *   definition.
      */
-    private Individual newIndividual(final Occurrence occurrence) {
+    private IndividualRecord newIndividual(final Occurrence occurrence) {
         final Candidate candidate = occurrence.candidate;
 
-        final Individual individual = MemoryFactory.eINSTANCE.createIndividual();
+        final IndividualRecord individual = MemoryFactory.eINSTANCE.createIndividualRecord();
         individual.setId(occurrence.id);
         individual.setInput(candidate.input());
         individual.setOutput(candidate.output());
@@ -263,8 +278,8 @@ final class IterationRecording {
     }
 
     /**
-     * @return The individual of the previous iteration that a predecessor stands for: its own
-     *   or, for an unchanged copy, the one of its original.
+     * @return The stub of the previous iteration that a predecessor stands for: its own or,
+     *   for an unchanged copy, the one of its original.
      * @throws IllegalStateException if the predecessor does not belong to the previous iteration.
      */
     private Individual previousIndividualOf(final Candidate predecessor) {
@@ -321,7 +336,7 @@ final class IterationRecording {
             case MUTATION -> MemoryFactory.eINSTANCE.createMutation();
             case RECOMBINATION -> MemoryFactory.eINSTANCE.createRecombination();
             case REPLACEMENT -> MemoryFactory.eINSTANCE.createReplacement();
-            case NONE -> throw new IllegalArgumentException("A lineage without predecessors has no relationship.");
+            case NONE, RECORDED -> throw new IllegalArgumentException("A lineage without predecessors has no relationship.");
         };
 
         lineage.properties().forEach((name, value) -> {
@@ -357,7 +372,7 @@ final class IterationRecording {
             executed.setDescription(step.kind() + ": " + step.description());
 
             for(final Occurrence occurrence : outputs.get(i)) {
-                final Individual individual = inSteps(occurrence);
+                final IndividualRecord individual = inSteps(occurrence);
                 final boolean contained = individual.eContainer() != null;
                 executed.getIndividuals().add(contained ? EcoreUtil.copy(individual) : individual);
             }
@@ -385,12 +400,12 @@ final class IterationRecording {
         /**
          * The individual in the ranks, {@code null} until it is created.
          */
-        private Individual inRanks;
+        private IndividualRecord inRanks;
 
         /**
          * The individual in the steps, {@code null} until it is created.
          */
-        private Individual inSteps;
+        private IndividualRecord inSteps;
 
         Occurrence(final Candidate candidate, final int id) {
             this.candidate = candidate;

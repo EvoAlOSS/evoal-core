@@ -49,9 +49,10 @@ public final class Candidate {
     private final TypedEObject input;
 
     /**
-     * How the candidate came from other candidates, related to the previous iteration.
+     * How the candidate came from other candidates, related to the previous iteration;
+     *   {@link Lineage#RECORDED} once its iteration is recorded.
      */
-    private final Lineage lineage;
+    private Lineage lineage;
 
     /**
      * The degrees of the constraints measured before the evaluation.
@@ -67,7 +68,7 @@ public final class Candidate {
      * How the candidate came from its direct predecessor in the iteration; {@code null} if it is
      *   the {@link #lineage}.
      */
-    private final Lineage stepLineage;
+    private Lineage stepLineage;
 
     /**
      * Creates a candidate that is not evaluated yet.
@@ -242,6 +243,17 @@ public final class Candidate {
      */
     public Lineage lineage() {
         return lineage;
+    }
+
+    /**
+     * Forgets the predecessors once the iteration of the candidate is recorded: its lineage
+     *   becomes {@link Lineage#RECORDED}. Otherwise a candidate keeps all its ancestors in
+     *   memory, e.g., a candidate carried over for k iterations is a chain of k candidates.
+     *   Its successors in the next iteration still refer to it, so they can be recorded.
+     */
+    public void forgetPredecessors() {
+        lineage = Lineage.RECORDED;
+        stepLineage = null;
     }
 
     /**

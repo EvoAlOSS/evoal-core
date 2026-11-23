@@ -41,12 +41,19 @@ swarm optimisation are written the same way.
    (`IterationFinished(n)`),
 4. `RunFinished`, then ends the context.
 
-Recording an iteration means: every member of the population becomes an `Individual`
-with the next id, its objectives (`output`) and its fitness (`fitness`, one value per
-component, canonical minimisation), its lineage becomes a relationship to the individuals
-of the previous iteration, the ranks are added, and the best individual so far
+Recording an iteration means: every member of the population becomes an
+`IndividualRecord` with the next id, its objectives (`output`) and its fitness (`fitness`,
+one value per component, canonical minimisation), its lineage becomes a relationship to the
+individuals of the previous iteration, the ranks are added, and the best individual so far
 (`Iteration.bestSoFar`) is updated. On an equal optimisation value, the earlier
-individual stays the best. The components of the fitness are recorded once per run in
+individual stays the best.
+
+The run keeps only what the next iteration needs. A relationship to the previous iteration
+refers to an `IndividualStub` (id, values and the number of the iteration that holds the
+record, but no relationships or properties), not to the record, so a record never keeps
+an earlier iteration alive; `bestSoFar` is the record and keeps at most the one iteration
+that contains it. Once an iteration is published, its members forget their predecessors
+(`Candidate.forgetPredecessors()`, lineage `Lineage.RECORDED`). The components of the fitness are recorded once per run in
 `Execution.fitnessComponents`; the applications define them from the fitness pipeline
 before the run (`ExecutionRecorder.defineFitness`). The `'memory-model'` writer writes
 both; CSV writers and reports show the objectives only.
@@ -194,7 +201,10 @@ kernel maps it to its individual.
 - After every iteration the template replaces each member by a `survivor()`: a copy with
   an identity lineage whose age is one higher. A member that no step replaces is therefore
   recorded as the same candidate in the next iteration. Steps create new candidates with a
-  lineage to the members they come from; a new candidate has age 0.
+  lineage to the members they come from; a new candidate has age 0. A member of a
+  recorded iteration has forgotten its predecessors: it can be the predecessor of a new
+  candidate, but it cannot be a member again (the kernel rejects it); carry it over with
+  `survivor()`.
 - Further details go into properties: `candidate.setProperty(name, value)` for the
   individual, `lineage.withProperty(name, value)` for the relationship. A value is a
   `Long`, `Double`, `String` or `Boolean`, or a `List` of one of these. Every name is

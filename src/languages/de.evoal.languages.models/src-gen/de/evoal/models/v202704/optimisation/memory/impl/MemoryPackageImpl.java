@@ -17,6 +17,8 @@ import de.evoal.models.v202704.optimisation.memory.Execution;
 import de.evoal.models.v202704.optimisation.memory.FitnessComponentDefinition;
 import de.evoal.models.v202704.optimisation.memory.Identity;
 import de.evoal.models.v202704.optimisation.memory.Individual;
+import de.evoal.models.v202704.optimisation.memory.IndividualRecord;
+import de.evoal.models.v202704.optimisation.memory.IndividualStub;
 import de.evoal.models.v202704.optimisation.memory.Iteration;
 import de.evoal.models.v202704.optimisation.memory.IterationStep;
 import de.evoal.models.v202704.optimisation.memory.MemoryFactory;
@@ -130,6 +132,20 @@ public class MemoryPackageImpl extends EPackageImpl implements MemoryPackage {
 	 * @generated
 	 */
 	private EClass individualEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass individualRecordEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass individualStubEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -672,8 +688,8 @@ public class MemoryPackageImpl extends EPackageImpl implements MemoryPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getIndividual_Relationships() {
-		return (EReference)individualEClass.getEStructuralFeatures().get(4);
+	public EClass getIndividualRecord() {
+		return individualRecordEClass;
 	}
 
 	/**
@@ -682,8 +698,38 @@ public class MemoryPackageImpl extends EPackageImpl implements MemoryPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getIndividual_Properties() {
-		return (EReference)individualEClass.getEStructuralFeatures().get(5);
+	public EReference getIndividualRecord_Relationships() {
+		return (EReference)individualRecordEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getIndividualRecord_Properties() {
+		return (EReference)individualRecordEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getIndividualStub() {
+		return individualStubEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getIndividualStub_Iteration() {
+		return (EAttribute)individualStubEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1070,8 +1116,13 @@ public class MemoryPackageImpl extends EPackageImpl implements MemoryPackage {
 		createEAttribute(individualEClass, INDIVIDUAL__INPUT);
 		createEAttribute(individualEClass, INDIVIDUAL__OUTPUT);
 		createEAttribute(individualEClass, INDIVIDUAL__FITNESS);
-		createEReference(individualEClass, INDIVIDUAL__RELATIONSHIPS);
-		createEReference(individualEClass, INDIVIDUAL__PROPERTIES);
+
+		individualRecordEClass = createEClass(INDIVIDUAL_RECORD);
+		createEReference(individualRecordEClass, INDIVIDUAL_RECORD__RELATIONSHIPS);
+		createEReference(individualRecordEClass, INDIVIDUAL_RECORD__PROPERTIES);
+
+		individualStubEClass = createEClass(INDIVIDUAL_STUB);
+		createEAttribute(individualStubEClass, INDIVIDUAL_STUB__ITERATION);
 
 		relationshipEClass = createEClass(RELATIONSHIP);
 		createEReference(relationshipEClass, RELATIONSHIP__TARGET);
@@ -1150,6 +1201,8 @@ public class MemoryPackageImpl extends EPackageImpl implements MemoryPackage {
 		iterationEClass.getESuperTypes().add(this.getState());
 		orderedIterationStepEClass.getESuperTypes().add(this.getIterationStep());
 		unorderedIterationStepEClass.getESuperTypes().add(this.getIterationStep());
+		individualRecordEClass.getESuperTypes().add(this.getIndividual());
+		individualStubEClass.getESuperTypes().add(this.getIndividual());
 		identityEClass.getESuperTypes().add(this.getRelationship());
 		mutationEClass.getESuperTypes().add(this.getRelationship());
 		recombinationEClass.getESuperTypes().add(this.getRelationship());
@@ -1181,17 +1234,17 @@ public class MemoryPackageImpl extends EPackageImpl implements MemoryPackage {
 		initEReference(getIteration_Steps(), this.getIterationStep(), null, "steps", null, 0, -1, Iteration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getIteration_Ranks(), this.getRank(), null, "ranks", null, 0, -1, Iteration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getIteration_Metrics(), this.getMetricEntry(), null, "metrics", null, 0, -1, Iteration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getIteration_BestSoFar(), this.getIndividual(), null, "bestSoFar", null, 0, 1, Iteration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getIteration_BestSoFar(), this.getIndividualRecord(), null, "bestSoFar", null, 0, 1, Iteration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		EOperation op = addEOperation(iterationEClass, null, "bestIndividuals", 1, 1, IS_UNIQUE, IS_ORDERED);
 		EGenericType g1 = createEGenericType(theOptimisationPackage.getStream());
-		EGenericType g2 = createEGenericType(this.getIndividual());
+		EGenericType g2 = createEGenericType(this.getIndividualRecord());
 		g1.getETypeArguments().add(g2);
 		initEOperation(op, g1);
 
 		op = addEOperation(iterationEClass, null, "survivedIndividuals", 1, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(theOptimisationPackage.getStream());
-		g2 = createEGenericType(this.getIndividual());
+		g2 = createEGenericType(this.getIndividualRecord());
 		g1.getETypeArguments().add(g2);
 		initEOperation(op, g1);
 
@@ -1204,19 +1257,24 @@ public class MemoryPackageImpl extends EPackageImpl implements MemoryPackage {
 		initEReference(getOrderedIterationStep_Ranks(), this.getRank(), null, "ranks", null, 0, -1, OrderedIterationStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(unorderedIterationStepEClass, UnorderedIterationStep.class, "UnorderedIterationStep", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getUnorderedIterationStep_Individuals(), this.getIndividual(), null, "individuals", null, 0, -1, UnorderedIterationStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getUnorderedIterationStep_Individuals(), this.getIndividualRecord(), null, "individuals", null, 0, -1, UnorderedIterationStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		initEClass(rankEClass, Rank.class, "Rank", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getRank_Number(), ecorePackage.getEInt(), "number", null, 1, 1, Rank.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getRank_Members(), this.getIndividual(), null, "members", null, 0, -1, Rank.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getRank_Members(), this.getIndividualRecord(), null, "members", null, 0, -1, Rank.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
-		initEClass(individualEClass, Individual.class, "Individual", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(individualEClass, Individual.class, "Individual", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getIndividual_Id(), ecorePackage.getEInt(), "id", null, 1, 1, Individual.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getIndividual_Input(), theOptimisationPackage.getTypedEObject(), "input", null, 1, 1, Individual.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getIndividual_Output(), theOptimisationPackage.getTypedEObject(), "output", null, 0, 1, Individual.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getIndividual_Fitness(), ecorePackage.getEDouble(), "fitness", null, 0, -1, Individual.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getIndividual_Relationships(), this.getRelationship(), null, "relationships", null, 0, -1, Individual.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEReference(getIndividual_Properties(), this.getPropertyEntry(), null, "properties", null, 0, -1, Individual.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(individualRecordEClass, IndividualRecord.class, "IndividualRecord", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getIndividualRecord_Relationships(), this.getRelationship(), null, "relationships", null, 0, -1, IndividualRecord.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getIndividualRecord_Properties(), this.getPropertyEntry(), null, "properties", null, 0, -1, IndividualRecord.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(individualStubEClass, IndividualStub.class, "IndividualStub", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getIndividualStub_Iteration(), ecorePackage.getEInt(), "iteration", null, 1, 1, IndividualStub.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(relationshipEClass, Relationship.class, "Relationship", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getRelationship_Target(), this.getIndividual(), null, "target", null, 1, -1, Relationship.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);

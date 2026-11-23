@@ -105,8 +105,13 @@
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EAttribute optimisation.ecore#//memory/Individual/output"/>
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute optimisation.ecore#//memory/Individual/fitness"/>
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference optimisation.ecore#//memory/Individual/relationships"/>
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference optimisation.ecore#//memory/Individual/properties"/>
+      </genClasses>
+      <genClasses ecoreClass="optimisation.ecore#//memory/IndividualRecord">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference optimisation.ecore#//memory/IndividualRecord/relationships"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference optimisation.ecore#//memory/IndividualRecord/properties"/>
+      </genClasses>
+      <genClasses ecoreClass="optimisation.ecore#//memory/IndividualStub">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute optimisation.ecore#//memory/IndividualStub/iteration"/>
       </genClasses>
       <genClasses ecoreClass="optimisation.ecore#//memory/Relationship">
         <genFeatures notify="false" createChild="false" propertySortChoices="true"

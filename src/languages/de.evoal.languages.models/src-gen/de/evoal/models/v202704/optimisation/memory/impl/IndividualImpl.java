@@ -7,27 +7,15 @@ import de.evoal.models.core.ecore.TypedEObject;
 
 import de.evoal.models.v202704.optimisation.memory.Individual;
 import de.evoal.models.v202704.optimisation.memory.MemoryPackage;
-import de.evoal.models.v202704.optimisation.memory.Relationship;
-
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
-import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.EcoreEMap;
-import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -41,13 +29,11 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link de.evoal.models.v202704.optimisation.memory.impl.IndividualImpl#getInput <em>Input</em>}</li>
  *   <li>{@link de.evoal.models.v202704.optimisation.memory.impl.IndividualImpl#getOutput <em>Output</em>}</li>
  *   <li>{@link de.evoal.models.v202704.optimisation.memory.impl.IndividualImpl#getFitness <em>Fitness</em>}</li>
- *   <li>{@link de.evoal.models.v202704.optimisation.memory.impl.IndividualImpl#getRelationships <em>Relationships</em>}</li>
- *   <li>{@link de.evoal.models.v202704.optimisation.memory.impl.IndividualImpl#getProperties <em>Properties</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class IndividualImpl extends MinimalEObjectImpl.Container implements Individual {
+public abstract class IndividualImpl extends MinimalEObjectImpl.Container implements Individual {
 	/**
 	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -117,26 +103,6 @@ public class IndividualImpl extends MinimalEObjectImpl.Container implements Indi
 	 * @ordered
 	 */
 	protected EList<Double> fitness;
-
-	/**
-	 * The cached value of the '{@link #getRelationships() <em>Relationships</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getRelationships()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Relationship> relationships;
-
-	/**
-	 * The cached value of the '{@link #getProperties() <em>Properties</em>}' map.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getProperties()
-	 * @generated
-	 * @ordered
-	 */
-	protected EMap<String, Object> properties;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -245,48 +211,6 @@ public class IndividualImpl extends MinimalEObjectImpl.Container implements Indi
 	 * @generated
 	 */
 	@Override
-	public EList<Relationship> getRelationships() {
-		if (relationships == null) {
-			relationships = new EObjectContainmentEList<Relationship>(Relationship.class, this, MemoryPackage.INDIVIDUAL__RELATIONSHIPS);
-		}
-		return relationships;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EMap<String, Object> getProperties() {
-		if (properties == null) {
-			properties = new EcoreEMap<String,Object>(MemoryPackage.Literals.PROPERTY_ENTRY, PropertyEntryImpl.class, this, MemoryPackage.INDIVIDUAL__PROPERTIES);
-		}
-		return properties;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case MemoryPackage.INDIVIDUAL__RELATIONSHIPS:
-				return ((InternalEList<?>)getRelationships()).basicRemove(otherEnd, msgs);
-			case MemoryPackage.INDIVIDUAL__PROPERTIES:
-				return ((InternalEList<?>)getProperties()).basicRemove(otherEnd, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case MemoryPackage.INDIVIDUAL__ID:
@@ -297,11 +221,6 @@ public class IndividualImpl extends MinimalEObjectImpl.Container implements Indi
 				return getOutput();
 			case MemoryPackage.INDIVIDUAL__FITNESS:
 				return getFitness();
-			case MemoryPackage.INDIVIDUAL__RELATIONSHIPS:
-				return getRelationships();
-			case MemoryPackage.INDIVIDUAL__PROPERTIES:
-				if (coreType) return getProperties();
-				else return getProperties().map();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -328,13 +247,6 @@ public class IndividualImpl extends MinimalEObjectImpl.Container implements Indi
 				getFitness().clear();
 				getFitness().addAll((Collection<? extends Double>)newValue);
 				return;
-			case MemoryPackage.INDIVIDUAL__RELATIONSHIPS:
-				getRelationships().clear();
-				getRelationships().addAll((Collection<? extends Relationship>)newValue);
-				return;
-			case MemoryPackage.INDIVIDUAL__PROPERTIES:
-				((EStructuralFeature.Setting)getProperties()).set(newValue);
-				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -359,12 +271,6 @@ public class IndividualImpl extends MinimalEObjectImpl.Container implements Indi
 			case MemoryPackage.INDIVIDUAL__FITNESS:
 				getFitness().clear();
 				return;
-			case MemoryPackage.INDIVIDUAL__RELATIONSHIPS:
-				getRelationships().clear();
-				return;
-			case MemoryPackage.INDIVIDUAL__PROPERTIES:
-				getProperties().clear();
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -385,10 +291,6 @@ public class IndividualImpl extends MinimalEObjectImpl.Container implements Indi
 				return OUTPUT_EDEFAULT == null ? output != null : !OUTPUT_EDEFAULT.equals(output);
 			case MemoryPackage.INDIVIDUAL__FITNESS:
 				return fitness != null && !fitness.isEmpty();
-			case MemoryPackage.INDIVIDUAL__RELATIONSHIPS:
-				return relationships != null && !relationships.isEmpty();
-			case MemoryPackage.INDIVIDUAL__PROPERTIES:
-				return properties != null && !properties.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

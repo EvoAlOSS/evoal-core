@@ -26,7 +26,7 @@ import org.mockito.Mockito;
 import de.evoal.core.api.languages.AttributeEvaluator;
 import de.evoal.models.core.ecore.Space;
 import de.evoal.models.core.ecore.TypedEObject;
-import de.evoal.models.v202704.optimisation.memory.Individual;
+import de.evoal.models.v202704.optimisation.memory.IndividualRecord;
 import de.evoal.models.v202704.optimisation.memory.Iteration;
 import de.evoal.models.v202704.optimisation.memory.MemoryFactory;
 import de.evoal.models.v202704.optimisation.memory.Rank;
@@ -48,7 +48,7 @@ public class CandidateWritersTest {
 
     private final CsvStrategy strategy = new CsvStrategy();
 
-    private Individual individual(final int id, final double x, final double y) {
+    private IndividualRecord individual(final int id, final double x, final double y) {
         final TypedEObject input = searchSpace.newEObject();
         final EAttribute xFeature = (EAttribute) searchSpace.getEClass().getEStructuralFeature("x");
         input.eSet(xFeature, x);
@@ -57,7 +57,7 @@ public class CandidateWritersTest {
         final EAttribute yFeature = (EAttribute) optimisationSpace.getEClass().getEStructuralFeature("y");
         output.eSet(yFeature, y);
 
-        final Individual individual = MemoryFactory.eINSTANCE.createIndividual();
+        final IndividualRecord individual = MemoryFactory.eINSTANCE.createIndividualRecord();
         individual.setId(id);
         individual.setInput(input);
         individual.setOutput(output);
@@ -92,7 +92,7 @@ public class CandidateWritersTest {
         return Files.readAllLines(file);
     }
 
-    private Rank rank(final int number, final Individual... members) {
+    private Rank rank(final int number, final IndividualRecord... members) {
         final Rank rank = MemoryFactory.eINSTANCE.createRank();
         rank.setNumber(number);
         rank.getMembers().addAll(List.of(members));

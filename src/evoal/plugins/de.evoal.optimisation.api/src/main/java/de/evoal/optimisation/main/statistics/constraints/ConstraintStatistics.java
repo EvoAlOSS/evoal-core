@@ -12,7 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.eclipse.emf.ecore.EObject;
 
 import de.evoal.models.core.exceptions.InitializationException;
-import de.evoal.models.v202704.optimisation.memory.Individual;
+import de.evoal.models.v202704.optimisation.memory.IndividualRecord;
 import de.evoal.models.v202704.optimisation.memory.Iteration;
 
 import de.evoal.optimisation.api.constraints.Constraint;
@@ -135,7 +135,7 @@ public class ConstraintStatistics implements StatisticsWriter {
      * @return The row of the iteration.
      */
     Object[] toRecord(final Iteration iteration) {
-        final List<Individual> individuals = iteration.survivedIndividuals().toList();
+        final List<IndividualRecord> individuals = iteration.survivedIndividuals().toList();
         final Object[] record = new Object[1 + 2 * constraints.groups().size()];
         record[0] = iteration.getNumber();
 
@@ -145,7 +145,7 @@ public class ConstraintStatistics implements StatisticsWriter {
             long infeasible = 0;
             double violation = 0.0;
 
-            for(final Individual individual : individuals) {
+            for(final IndividualRecord individual : individuals) {
                 final double individualViolation = violationOf(individual, inGroup);
                 if(individualViolation > 0.0) {
                     infeasible += 1;
@@ -163,7 +163,7 @@ public class ConstraintStatistics implements StatisticsWriter {
     /**
      * @return The sum of the degrees of the constraints that the individual records.
      */
-    private static double violationOf(final Individual individual, final List<Constraint> inGroup) {
+    private static double violationOf(final IndividualRecord individual, final List<Constraint> inGroup) {
         double sum = 0.0;
 
         for(final Constraint constraint : inGroup) {

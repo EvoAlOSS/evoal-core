@@ -20,7 +20,7 @@ import de.evoal.core.api.dynamic.EAnnotationHelper;
 import de.evoal.models.v202704.core.Configuration;
 import de.evoal.models.v202704.optimisation.memory.Execution;
 import de.evoal.models.v202704.optimisation.memory.FitnessComponentDefinition;
-import de.evoal.models.v202704.optimisation.memory.Individual;
+import de.evoal.models.v202704.optimisation.memory.IndividualRecord;
 import de.evoal.models.v202704.optimisation.memory.Iteration;
 import de.evoal.models.v202704.optimisation.memory.MemoryFactory;
 import de.evoal.models.v202704.optimisation.memory.PropertyDefinition;
@@ -120,8 +120,8 @@ public class MemoryModelJsonTest {
         @Test
         public void replacementsAreWrittenWithTheirProperties() throws Exception {
             // given
-            final Individual replaced = MemoryModels.individual(0, new double[] {0.0, 0.0}, 0.0);
-            final Individual replacement = MemoryModels.individual(1, new double[] {0.5, 0.0}, 0.25);
+            final IndividualRecord replaced = MemoryModels.individual(0, new double[] {0.0, 0.0}, 0.0);
+            final IndividualRecord replacement = MemoryModels.individual(1, new double[] {0.5, 0.0}, 0.25);
             final Replacement relationship = MemoryModels.relate(replacement, MemoryFactory.eINSTANCE.createReplacement(), replaced);
             relationship.getProperties().put("reason", "maximum-age: age 3 exceeds 2 iterations");
 
@@ -138,12 +138,12 @@ public class MemoryModelJsonTest {
         @Test
         public void individualPropertiesAreWrittenInOrderAndEmptyOnesAreLeftOut() throws Exception {
             // given
-            final Individual withProperties = MemoryModels.individual(0, new double[] {0.0, 0.0}, 0.0);
+            final IndividualRecord withProperties = MemoryModels.individual(0, new double[] {0.0, 0.0}, 0.0);
             withProperties.getProperties().put("reason", "too old");
             withProperties.getProperties().put("sizes", List.of(1L, 2L));
             withProperties.getProperties().put("valid", true);
             withProperties.getProperties().put("share", 0.5);
-            final Individual without = MemoryModels.individual(1, new double[] {0.5, 0.0}, 0.25);
+            final IndividualRecord without = MemoryModels.individual(1, new double[] {0.5, 0.0}, 0.25);
 
             // when
             final ObjectNode document = json.toIteration(MemoryModels.iteration(0, withProperties, without));
@@ -303,9 +303,9 @@ public class MemoryModelJsonTest {
 
         @BeforeEach
         public void createIteration() {
-            final Individual first = MemoryModels.individual(3, new double[] {0.5, 1.0}, 2.0);
-            final Individual second = MemoryModels.individual(4, new double[] {1.5, 2.0}, 1.0);
-            final Individual firstAgain = MemoryModels.individual(3, new double[] {0.5, 1.0}, 2.0);
+            final IndividualRecord first = MemoryModels.individual(3, new double[] {0.5, 1.0}, 2.0);
+            final IndividualRecord second = MemoryModels.individual(4, new double[] {1.5, 2.0}, 1.0);
+            final IndividualRecord firstAgain = MemoryModels.individual(3, new double[] {0.5, 1.0}, 2.0);
 
             final UnorderedIterationStep step = MemoryFactory.eINSTANCE.createUnorderedIterationStep();
             step.setDescription("neighbours");
@@ -343,7 +343,7 @@ public class MemoryModelJsonTest {
         @Test
         public void theFinalVersionHoldsOnlyTheMembersWithTheirRelationshipsToThePreviousIteration() {
             // given: in the step, 3 mutates 4; in the ranks, 3 is a copy of 1 of the previous iteration
-            final Individual previous = MemoryModels.individual(1, new double[] {0.5, 1.0}, 2.0);
+            final IndividualRecord previous = MemoryModels.individual(1, new double[] {0.5, 1.0}, 2.0);
             MemoryModels.relate(firstOfStep(), MemoryFactory.eINSTANCE.createMutation(), secondOfStep());
             MemoryModels.relate(iteration.getRanks().getFirst().getMembers().getFirst(),
                                 MemoryFactory.eINSTANCE.createIdentity(), previous);
@@ -361,7 +361,7 @@ public class MemoryModelJsonTest {
         @Test
         public void theStepsVersionRelatesTheIndividualsOfTheStepsToTheirDirectPredecessors() {
             // given
-            final Individual previous = MemoryModels.individual(1, new double[] {0.5, 1.0}, 2.0);
+            final IndividualRecord previous = MemoryModels.individual(1, new double[] {0.5, 1.0}, 2.0);
             MemoryModels.relate(firstOfStep(), MemoryFactory.eINSTANCE.createMutation(), secondOfStep());
             MemoryModels.relate(iteration.getRanks().getFirst().getMembers().getFirst(),
                                 MemoryFactory.eINSTANCE.createIdentity(), previous);
@@ -374,18 +374,18 @@ public class MemoryModelJsonTest {
                                     document.get("individuals").get(0).get("relationships").toString());
         }
 
-        private Individual firstOfStep() {
+        private IndividualRecord firstOfStep() {
             return ((UnorderedIterationStep) iteration.getSteps().getFirst()).getIndividuals().get(0);
         }
 
-        private Individual secondOfStep() {
+        private IndividualRecord secondOfStep() {
             return ((UnorderedIterationStep) iteration.getSteps().getFirst()).getIndividuals().get(1);
         }
 
         @Test
         public void anIdWithOtherValuesIsRejected() {
             // given
-            final Individual different = MemoryModels.individual(4, new double[] {9.0, 9.0}, 9.0);
+            final IndividualRecord different = MemoryModels.individual(4, new double[] {9.0, 9.0}, 9.0);
             iteration.getRanks().getFirst().getMembers().add(different);
 
             // when / then
@@ -395,7 +395,7 @@ public class MemoryModelJsonTest {
         @Test
         public void anIdWithAnotherFitnessIsRejected() {
             // given
-            final Individual different = MemoryModels.individual(4, new double[] {1.5, 2.0}, 1.0);
+            final IndividualRecord different = MemoryModels.individual(4, new double[] {1.5, 2.0}, 1.0);
             different.getFitness().set(0, -1.0);
             iteration.getRanks().getFirst().getMembers().add(different);
 
@@ -410,8 +410,8 @@ public class MemoryModelJsonTest {
         @Test
         public void mutationsReferToTheirTargetsById() {
             // given
-            final Individual parent = MemoryModels.individual(0, new double[] {0.0, 0.0}, 0.0);
-            final Individual child = MemoryModels.individual(1, new double[] {0.5, 0.0}, 0.25);
+            final IndividualRecord parent = MemoryModels.individual(0, new double[] {0.0, 0.0}, 0.0);
+            final IndividualRecord child = MemoryModels.individual(1, new double[] {0.5, 0.0}, 0.25);
             MemoryModels.relate(child, MemoryFactory.eINSTANCE.createMutation(), parent);
 
             // when
@@ -425,10 +425,10 @@ public class MemoryModelJsonTest {
         @Test
         public void recombinationsWriteTheirPartner() {
             // given
-            final Individual father = MemoryModels.individual(0, new double[] {0.0, 0.0}, 0.0);
-            final Individual mother = MemoryModels.individual(1, new double[] {1.0, 1.0}, 2.0);
-            final Individual son = MemoryModels.individual(2, new double[] {0.0, 1.0}, 1.0);
-            final Individual daughter = MemoryModels.individual(3, new double[] {1.0, 0.0}, 1.0);
+            final IndividualRecord father = MemoryModels.individual(0, new double[] {0.0, 0.0}, 0.0);
+            final IndividualRecord mother = MemoryModels.individual(1, new double[] {1.0, 1.0}, 2.0);
+            final IndividualRecord son = MemoryModels.individual(2, new double[] {0.0, 1.0}, 1.0);
+            final IndividualRecord daughter = MemoryModels.individual(3, new double[] {1.0, 0.0}, 1.0);
 
             final Recombination sonsOrigin =
                     MemoryModels.relate(son, MemoryFactory.eINSTANCE.createRecombination(), father, mother);
@@ -448,9 +448,9 @@ public class MemoryModelJsonTest {
         @Test
         public void aRecombinationWithoutRecordedSiblingHasNoPartner() throws Exception {
             // given
-            final Individual father = MemoryModels.individual(0, new double[] {0.0, 0.0}, 0.0);
-            final Individual mother = MemoryModels.individual(1, new double[] {1.0, 1.0}, 2.0);
-            final Individual son = MemoryModels.individual(2, new double[] {0.0, 1.0}, 1.0);
+            final IndividualRecord father = MemoryModels.individual(0, new double[] {0.0, 0.0}, 0.0);
+            final IndividualRecord mother = MemoryModels.individual(1, new double[] {1.0, 1.0}, 2.0);
+            final IndividualRecord son = MemoryModels.individual(2, new double[] {0.0, 1.0}, 1.0);
             MemoryModels.relate(son, MemoryFactory.eINSTANCE.createRecombination(), father, mother);
 
             // when
@@ -465,8 +465,8 @@ public class MemoryModelJsonTest {
         @Test
         public void theBestSoFarIsWrittenAsIdEvenFromAnEarlierIteration() {
             // given
-            final Individual best = MemoryModels.individual(0, new double[] {0.0, 0.0}, 0.0);
-            final Individual worse = MemoryModels.individual(1, new double[] {0.5, 0.0}, 0.25);
+            final IndividualRecord best = MemoryModels.individual(0, new double[] {0.0, 0.0}, 0.0);
+            final IndividualRecord worse = MemoryModels.individual(1, new double[] {0.5, 0.0}, 0.25);
             final Iteration iteration = MemoryModels.iteration(1, worse);
             iteration.setBestSoFar(best);
 
@@ -493,7 +493,7 @@ public class MemoryModelJsonTest {
         @Test
         public void nonFiniteNumbersAreWrittenAsStrings() {
             // given
-            final Individual individual = MemoryModels.individual(0,
+            final IndividualRecord individual = MemoryModels.individual(0,
                                                                   new double[] {Double.NaN, Double.NEGATIVE_INFINITY},
                                                                   Double.POSITIVE_INFINITY);
 
@@ -510,7 +510,7 @@ public class MemoryModelJsonTest {
         @Test
         public void zeroIsWrittenAsANumber() {
             // given
-            final Individual individual = MemoryModels.individual(0, new double[] {0.0, -0.0}, 0.0);
+            final IndividualRecord individual = MemoryModels.individual(0, new double[] {0.0, -0.0}, 0.0);
 
             // when
             final ObjectNode document = json.toIteration(MemoryModels.iteration(0, individual));
@@ -523,7 +523,7 @@ public class MemoryModelJsonTest {
         @Test
         public void unevaluatedIndividualsHaveNoOutputValuesAndNoFitness() {
             // given
-            final Individual individual = MemoryModels.individual(0, new double[] {1.0, 1.0}, 0.0);
+            final IndividualRecord individual = MemoryModels.individual(0, new double[] {1.0, 1.0}, 0.0);
             individual.setOutput(null);
             individual.getFitness().clear();
 

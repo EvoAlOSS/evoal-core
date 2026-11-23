@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import de.evoal.models.core.exceptions.InitializationException;
-import de.evoal.models.v202704.optimisation.memory.Individual;
+import de.evoal.models.v202704.optimisation.memory.IndividualRecord;
 import de.evoal.models.v202704.optimisation.memory.Iteration;
 import de.evoal.models.v202704.optimisation.memory.MemoryFactory;
 import de.evoal.models.v202704.optimisation.memory.Rank;
@@ -22,8 +22,8 @@ public class ConstraintStatisticsTest {
      */
     private final Constraints constraints = TestConstraints.constraints("b", "a", "b");
 
-    private static Individual individual(final double first, final double second, final double third) {
-        final Individual individual = MemoryFactory.eINSTANCE.createIndividual();
+    private static IndividualRecord individual(final double first, final double second, final double third) {
+        final IndividualRecord individual = MemoryFactory.eINSTANCE.createIndividualRecord();
         individual.getProperties().put("violation-1", first);
         individual.getProperties().put("violation-2", second);
         individual.getProperties().put("violation-3", third);

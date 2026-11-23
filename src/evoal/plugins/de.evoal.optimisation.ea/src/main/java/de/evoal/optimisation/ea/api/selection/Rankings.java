@@ -64,6 +64,85 @@ public final class Rankings {
     }
 
     /**
+     * Computes the weight of a candidate with a finite fitness.
+     */
+    @FunctionalInterface
+    public interface FiniteWeight {
+        /**
+         * @param fitness The finite fitness of the candidate.
+         * @param best The smallest finite fitness of the candidates.
+         * @param worst The largest finite fitness of the candidates.
+         * @return The non-negative weight.
+         */
+        double weight(double fitness, double best, double worst);
+    }
+
+    /**
+     * Computes the weights of a fitness-proportional selection from the single fitness of
+     *   the candidates, which is canonical (smaller is better):
+     *   <ul>
+     *     <li>NaN is rejected;</li>
+     *     <li>if a fitness is -Infinity, the candidates with -Infinity get weight 1 and all
+     *       others 0;</li>
+     *     <li>otherwise +Infinity gets weight 0, and a finite fitness gets the weight of
+     *       {@code finiteWeight}, with the best and worst fitness taken over the finite
+     *       values only.</li>
+     *   </ul>
+     *
+     * @param candidates The evaluated candidates.
+     * @param selection The name of the selection, for the error message.
+     * @param finiteWeight The weight of a finite fitness.
+     * @return The weights, in the order of the candidates.
+     * @throws IllegalStateException if a fitness is NaN or has not exactly one component.
+     */
+    public static double[] proportionalWeights(final List<Candidate> candidates, final String selection,
+                                               final FiniteWeight finiteWeight) {
+        final double[] fitness = singleFitness(candidates);
+        final double[] weights = new double[fitness.length];
+
+        boolean negativeInfinity = false;
+        boolean positiveInfinity = false;
+        boolean finite = false;
+        double best = Double.POSITIVE_INFINITY;
+        double worst = Double.NEGATIVE_INFINITY;
+        for(int i = 0; i < fitness.length; ++i) {
+            final double value = fitness[i];
+            if(Double.isNaN(value)) {
+                throw new IllegalStateException("'" + selection + "' needs a fitness that is a number, but the fitness of "
+                                                + candidates.get(i) + " is NaN.");
+            }
+            if(value == Double.NEGATIVE_INFINITY) {
+                negativeInfinity = true;
+            } else if(value == Double.POSITIVE_INFINITY) {
+                positiveInfinity = true;
+            } else {
+                finite = true;
+                best = Math.min(best, value);
+                worst = Math.max(worst, value);
+            }
+        }
+
+        for(int i = 0; i < fitness.length; ++i) {
+            final double value = fitness[i];
+            if(negativeInfinity) {
+                weights[i] = value == Double.NEGATIVE_INFINITY ? 1.0 : 0.0;
+            } else if(Double.isFinite(value)) {
+                weights[i] = finiteWeight.weight(value, best, worst);
+            }
+        }
+
+        // all finite weights 0 (e.g. equal fitness with windowing): the uniform fallback of the
+        // callers must not include the candidates with +Infinity
+        if(positiveInfinity && finite && sum(weights) <= 0.0) {
+            for(int i = 0; i < fitness.length; ++i) {
+                weights[i] = Double.isFinite(fitness[i]) ? 1.0 : 0.0;
+            }
+        }
+
+        return weights;
+    }
+
+    /**
      * @return The sum of the weights.
      */
     public static double sum(final double[] weights) {

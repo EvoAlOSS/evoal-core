@@ -155,6 +155,14 @@ public class StochasticRankingSelection implements SelectionMethod {
     }
 
     /**
+     * @return The number of candidates: the selection chooses without replacement.
+     */
+    @Override
+    public int maximumCount(final int candidates) {
+        return candidates;
+    }
+
+    /**
      * @throws IllegalArgumentException if more candidates are to be selected than there are.
      */
     @Override

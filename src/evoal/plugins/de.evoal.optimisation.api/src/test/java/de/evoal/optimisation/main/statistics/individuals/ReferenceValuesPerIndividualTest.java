@@ -32,7 +32,7 @@ import de.evoal.core.api.utils.AttributeHelper;
 import de.evoal.models.core.ecore.Space;
 import de.evoal.models.core.ecore.TypedEObject;
 import de.evoal.models.v202704.optimisation.execution.OptimisationFunction;
-import de.evoal.models.v202704.optimisation.memory.Individual;
+import de.evoal.models.v202704.optimisation.memory.IndividualRecord;
 import de.evoal.models.v202704.optimisation.memory.Iteration;
 import de.evoal.models.v202704.optimisation.memory.MemoryFactory;
 import de.evoal.models.v202704.optimisation.memory.MetricDefinition;
@@ -68,7 +68,7 @@ public class ReferenceValuesPerIndividualTest {
         return (EAttribute) space.getEClass().getEStructuralFeature(name);
     }
 
-    private Individual individual(final int id, final double x, final double y) {
+    private IndividualRecord individual(final int id, final double x, final double y) {
         final EAttribute xFeature = feature(searchSpace, "x");
         final TypedEObject input = searchSpace.newEObject();
         input.eSet(xFeature, x);
@@ -77,7 +77,7 @@ public class ReferenceValuesPerIndividualTest {
         final TypedEObject output = optimisationSpace.newEObject();
         output.eSet(yFeature, y);
 
-        final Individual individual = MemoryFactory.eINSTANCE.createIndividual();
+        final IndividualRecord individual = MemoryFactory.eINSTANCE.createIndividualRecord();
         individual.setId(id);
         individual.setInput(input);
         individual.setOutput(output);
@@ -122,7 +122,7 @@ public class ReferenceValuesPerIndividualTest {
         return Files.readAllLines(file);
     }
 
-    private Rank rank(final int number, final Individual... members) {
+    private Rank rank(final int number, final IndividualRecord... members) {
         final Rank rank = MemoryFactory.eINSTANCE.createRank();
         rank.setNumber(number);
         rank.getMembers().addAll(List.of(members));

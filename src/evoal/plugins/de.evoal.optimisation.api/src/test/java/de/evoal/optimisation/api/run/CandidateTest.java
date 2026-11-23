@@ -45,6 +45,32 @@ public class CandidateTest {
     }
 
     @Test
+    public void aRecordedCandidateForgetsItsPredecessorsButItsSurvivorStillRefersToIt() {
+        // given
+        final Candidate child = new Candidate(candidate.input(), Lineage.mutation(candidate),
+                                              Lineage.identity(candidate));
+
+        // when
+        child.forgetPredecessors();
+        final Candidate survivor = child.survivor();
+
+        // then
+        Assertions.assertEquals(Lineage.Kind.RECORDED, child.lineage().kind());
+        Assertions.assertSame(child.lineage(), child.stepLineage());
+        Assertions.assertThrows(IllegalStateException.class, () -> child.lineage().predecessors());
+        Assertions.assertThrows(IllegalStateException.class, () -> child.lineage().predecessor());
+        Assertions.assertSame(child, survivor.lineage().predecessor());
+    }
+
+    @Test
+    public void aRecordedLineageHasNoPredecessorsAndNoProperties() {
+        Assertions.assertThrows(IllegalArgumentException.class,
+                                () -> new Lineage(Lineage.Kind.RECORDED, List.of(candidate)));
+        Assertions.assertThrows(IllegalArgumentException.class,
+                                () -> Lineage.RECORDED.withProperty("reason", "test"));
+    }
+
+    @Test
     public void lineagePropertiesKeepTheirOrder() {
         // when
         final Lineage lineage = Lineage.replacement(candidate)

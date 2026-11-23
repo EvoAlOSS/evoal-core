@@ -38,7 +38,10 @@ import de.evoal.optimisation.ea.main.correlation.Linkage;
  *   {@code linkage-children-<g>}, {@code linkage-preserved-<g>} and
  *   {@code linkage-preserved-before-<g>}. The evolutionary algorithm defines them
  *   ({@link #define}) when the DDL declares groups; otherwise the bean records nothing. The
- *   counts are synchronised, since resampled children are recombined during the evaluation.
+ *   recombinations, including those of resampled children in the candidate checks, run on
+ *   the algorithm thread before the evaluation, so today every call comes from that thread;
+ *   the methods are synchronised so that the application-scoped bean stays consistent if
+ *   recombinations ever run in parallel.
  */
 @ApplicationScoped
 public class LinkageStatistics implements MetricContributor {

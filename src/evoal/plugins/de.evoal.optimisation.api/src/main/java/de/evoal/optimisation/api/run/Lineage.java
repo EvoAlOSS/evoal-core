@@ -25,6 +25,12 @@ public record Lineage(Kind kind, List<Candidate> predecessors, Map<String, Objec
     public static final Lineage NONE = new Lineage(Kind.NONE, List.of());
 
     /**
+     * The lineage of a candidate whose iteration is recorded: it forgot its predecessors
+     *   ({@link Candidate#forgetPredecessors()}).
+     */
+    public static final Lineage RECORDED = new Lineage(Kind.RECORDED, List.of());
+
+    /**
      * @throws IllegalArgumentException if the number of predecessors does not fit the kind.
      */
     public Lineage {
@@ -33,7 +39,7 @@ public record Lineage(Kind kind, List<Candidate> predecessors, Map<String, Objec
         properties = Collections.unmodifiableMap(new LinkedHashMap<>(properties));
 
         final boolean fits = switch(kind) {
-            case NONE -> predecessors.isEmpty();
+            case NONE, RECORDED -> predecessors.isEmpty();
             case IDENTITY, MUTATION, REPLACEMENT -> predecessors.size() == 1;
             case RECOMBINATION -> !predecessors.isEmpty();
         };
@@ -47,7 +53,7 @@ public record Lineage(Kind kind, List<Candidate> predecessors, Map<String, Objec
             throw new IllegalArgumentException("Only a recombination has siblings, not a lineage of kind " + kind + ".");
         }
 
-        if(kind == Kind.NONE && !properties.isEmpty()) {
+        if((kind == Kind.NONE || kind == Kind.RECORDED) && !properties.isEmpty()) {
             throw new IllegalArgumentException("A lineage without predecessors has no relationship for the properties "
                                                + properties.keySet() + ".");
         }
@@ -133,12 +139,31 @@ public record Lineage(Kind kind, List<Candidate> predecessors, Map<String, Objec
      * @throws IllegalStateException if the lineage has not exactly one predecessor.
      */
     public Candidate predecessor() {
+        requireNotRecorded();
         if(predecessors.size() != 1) {
             throw new IllegalStateException("A lineage of kind " + kind + " has " + predecessors.size()
                                             + " predecessors.");
         }
 
         return predecessors.getFirst();
+    }
+
+    /**
+     * @return The predecessors.
+     * @throws IllegalStateException if the candidate forgot its predecessors
+     *   ({@link Kind#RECORDED}).
+     */
+    @Override
+    public List<Candidate> predecessors() {
+        requireNotRecorded();
+        return predecessors;
+    }
+
+    private void requireNotRecorded() {
+        if(kind == Kind.RECORDED) {
+            throw new IllegalStateException("The candidate was recorded in an earlier iteration and forgot its "
+                                            + "predecessors.");
+        }
     }
 
     /**
@@ -169,6 +194,13 @@ public record Lineage(Kind kind, List<Candidate> predecessors, Map<String, Objec
          * A candidate that took the place of its predecessor, e.g., because the predecessor
          *   failed a check.
          */
-        REPLACEMENT
+        REPLACEMENT,
+
+        /**
+         * The candidate belongs to an iteration that is recorded and forgot its predecessors
+         *   ({@link Candidate#forgetPredecessors()}), so that it does not keep earlier
+         *   candidates in memory. It has no relationship; recording it again is an error.
+         */
+        RECORDED
     }
 }

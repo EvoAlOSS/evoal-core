@@ -3,14 +3,14 @@ package de.evoal.optimisation.main.stopping;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import de.evoal.models.v202704.optimisation.memory.Individual;
+import de.evoal.models.v202704.optimisation.memory.IndividualRecord;
 import de.evoal.models.v202704.optimisation.memory.Iteration;
 import de.evoal.models.v202704.optimisation.memory.MemoryFactory;
 import de.evoal.models.v202704.optimisation.memory.Rank;
 
 public class FitnessMeasuresTest {
-    private static Individual individual(final double... fitness) {
-        final Individual individual = MemoryFactory.eINSTANCE.createIndividual();
+    private static IndividualRecord individual(final double... fitness) {
+        final IndividualRecord individual = MemoryFactory.eINSTANCE.createIndividualRecord();
         for(final double value : fitness) {
             individual.getFitness().add(value);
         }
@@ -18,9 +18,9 @@ public class FitnessMeasuresTest {
         return individual;
     }
 
-    private static Rank rank(final Individual... members) {
+    private static Rank rank(final IndividualRecord... members) {
         final Rank rank = MemoryFactory.eINSTANCE.createRank();
-        for(final Individual member : members) {
+        for(final IndividualRecord member : members) {
             rank.getMembers().add(member);
         }
 

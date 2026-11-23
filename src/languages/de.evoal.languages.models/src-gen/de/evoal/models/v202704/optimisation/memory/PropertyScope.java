@@ -30,7 +30,7 @@ public enum PropertyScope implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * *
-	 * On individuals ({@link Individual#getProperties()}).
+	 * On individuals ({@link IndividualRecord#getProperties()}).
 	 * 
 	 * <!-- end-model-doc -->
 	 * @see #INDIVIDUAL_VALUE
@@ -60,7 +60,7 @@ public enum PropertyScope implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * *
-	 * On individuals ({@link Individual#getProperties()}).
+	 * On individuals ({@link IndividualRecord#getProperties()}).
 	 * 
 	 * <!-- end-model-doc -->
 	 * @see #INDIVIDUAL

@@ -34,7 +34,7 @@ import de.evoal.core.api.languages.AttributeEvaluator;
 import de.evoal.core.api.utils.AttributeHelper;
 import de.evoal.core.api.random.RandomService;
 import de.evoal.models.v202704.optimisation.memory.Execution;
-import de.evoal.models.v202704.optimisation.memory.Individual;
+import de.evoal.models.v202704.optimisation.memory.IndividualRecord;
 import de.evoal.models.v202704.optimisation.memory.Iteration;
 import de.evoal.models.v202704.optimisation.memory.Mutation;
 import de.evoal.models.v202704.optimisation.memory.MemoryFactory;
@@ -145,10 +145,10 @@ public class MemoryModelWriterTest {
     private static void addTwoIterations(final MemoryModelWriter writer) {
         writer.start();
 
-        final Individual start = MemoryModels.individual(0, new double[] {1.0, 1.0}, 2.0);
+        final IndividualRecord start = MemoryModels.individual(0, new double[] {1.0, 1.0}, 2.0);
         writer.add(MemoryModels.iteration(0, start));
 
-        final Individual neighbour = MemoryModels.individual(1, new double[] {0.5, 1.0}, 1.25);
+        final IndividualRecord neighbour = MemoryModels.individual(1, new double[] {0.5, 1.0}, 1.25);
         final Mutation mutation = MemoryFactory.eINSTANCE.createMutation();
         MemoryModels.relate(neighbour, mutation, start);
         writer.add(MemoryModels.iteration(1, neighbour));

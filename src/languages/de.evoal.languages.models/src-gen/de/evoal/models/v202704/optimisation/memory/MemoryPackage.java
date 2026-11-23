@@ -496,13 +496,68 @@ public interface MemoryPackage extends EPackage {
 	int INDIVIDUAL__FITNESS = 3;
 
 	/**
+	 * The number of structural features of the '<em>Individual</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INDIVIDUAL_FEATURE_COUNT = 4;
+
+	/**
+	 * The meta object id for the '{@link de.evoal.models.v202704.optimisation.memory.impl.IndividualRecordImpl <em>Individual Record</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.evoal.models.v202704.optimisation.memory.impl.IndividualRecordImpl
+	 * @see de.evoal.models.v202704.optimisation.memory.impl.MemoryPackageImpl#getIndividualRecord()
+	 * @generated
+	 */
+	int INDIVIDUAL_RECORD = 10;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INDIVIDUAL_RECORD__ID = INDIVIDUAL__ID;
+
+	/**
+	 * The feature id for the '<em><b>Input</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INDIVIDUAL_RECORD__INPUT = INDIVIDUAL__INPUT;
+
+	/**
+	 * The feature id for the '<em><b>Output</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INDIVIDUAL_RECORD__OUTPUT = INDIVIDUAL__OUTPUT;
+
+	/**
+	 * The feature id for the '<em><b>Fitness</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INDIVIDUAL_RECORD__FITNESS = INDIVIDUAL__FITNESS;
+
+	/**
 	 * The feature id for the '<em><b>Relationships</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INDIVIDUAL__RELATIONSHIPS = 4;
+	int INDIVIDUAL_RECORD__RELATIONSHIPS = INDIVIDUAL_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Properties</b></em>' map.
@@ -511,16 +566,80 @@ public interface MemoryPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INDIVIDUAL__PROPERTIES = 5;
+	int INDIVIDUAL_RECORD__PROPERTIES = INDIVIDUAL_FEATURE_COUNT + 1;
 
 	/**
-	 * The number of structural features of the '<em>Individual</em>' class.
+	 * The number of structural features of the '<em>Individual Record</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INDIVIDUAL_FEATURE_COUNT = 6;
+	int INDIVIDUAL_RECORD_FEATURE_COUNT = INDIVIDUAL_FEATURE_COUNT + 2;
+
+	/**
+	 * The meta object id for the '{@link de.evoal.models.v202704.optimisation.memory.impl.IndividualStubImpl <em>Individual Stub</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.evoal.models.v202704.optimisation.memory.impl.IndividualStubImpl
+	 * @see de.evoal.models.v202704.optimisation.memory.impl.MemoryPackageImpl#getIndividualStub()
+	 * @generated
+	 */
+	int INDIVIDUAL_STUB = 11;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INDIVIDUAL_STUB__ID = INDIVIDUAL__ID;
+
+	/**
+	 * The feature id for the '<em><b>Input</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INDIVIDUAL_STUB__INPUT = INDIVIDUAL__INPUT;
+
+	/**
+	 * The feature id for the '<em><b>Output</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INDIVIDUAL_STUB__OUTPUT = INDIVIDUAL__OUTPUT;
+
+	/**
+	 * The feature id for the '<em><b>Fitness</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INDIVIDUAL_STUB__FITNESS = INDIVIDUAL__FITNESS;
+
+	/**
+	 * The feature id for the '<em><b>Iteration</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INDIVIDUAL_STUB__ITERATION = INDIVIDUAL_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Individual Stub</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INDIVIDUAL_STUB_FEATURE_COUNT = INDIVIDUAL_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.models.v202704.optimisation.memory.impl.RelationshipImpl <em>Relationship</em>}' class.
@@ -530,7 +649,7 @@ public interface MemoryPackage extends EPackage {
 	 * @see de.evoal.models.v202704.optimisation.memory.impl.MemoryPackageImpl#getRelationship()
 	 * @generated
 	 */
-	int RELATIONSHIP = 10;
+	int RELATIONSHIP = 12;
 
 	/**
 	 * The feature id for the '<em><b>Target</b></em>' reference list.
@@ -567,7 +686,7 @@ public interface MemoryPackage extends EPackage {
 	 * @see de.evoal.models.v202704.optimisation.memory.impl.MemoryPackageImpl#getIdentity()
 	 * @generated
 	 */
-	int IDENTITY = 11;
+	int IDENTITY = 13;
 
 	/**
 	 * The feature id for the '<em><b>Target</b></em>' reference list.
@@ -604,7 +723,7 @@ public interface MemoryPackage extends EPackage {
 	 * @see de.evoal.models.v202704.optimisation.memory.impl.MemoryPackageImpl#getMutation()
 	 * @generated
 	 */
-	int MUTATION = 12;
+	int MUTATION = 14;
 
 	/**
 	 * The feature id for the '<em><b>Target</b></em>' reference list.
@@ -641,7 +760,7 @@ public interface MemoryPackage extends EPackage {
 	 * @see de.evoal.models.v202704.optimisation.memory.impl.MemoryPackageImpl#getRecombination()
 	 * @generated
 	 */
-	int RECOMBINATION = 13;
+	int RECOMBINATION = 15;
 
 	/**
 	 * The feature id for the '<em><b>Target</b></em>' reference list.
@@ -687,7 +806,7 @@ public interface MemoryPackage extends EPackage {
 	 * @see de.evoal.models.v202704.optimisation.memory.impl.MemoryPackageImpl#getReplacement()
 	 * @generated
 	 */
-	int REPLACEMENT = 14;
+	int REPLACEMENT = 16;
 
 	/**
 	 * The feature id for the '<em><b>Target</b></em>' reference list.
@@ -724,7 +843,7 @@ public interface MemoryPackage extends EPackage {
 	 * @see de.evoal.models.v202704.optimisation.memory.impl.MemoryPackageImpl#getPropertyEntry()
 	 * @generated
 	 */
-	int PROPERTY_ENTRY = 15;
+	int PROPERTY_ENTRY = 17;
 
 	/**
 	 * The feature id for the '<em><b>Key</b></em>' attribute.
@@ -761,7 +880,7 @@ public interface MemoryPackage extends EPackage {
 	 * @see de.evoal.models.v202704.optimisation.memory.impl.MemoryPackageImpl#getPropertyDefinition()
 	 * @generated
 	 */
-	int PROPERTY_DEFINITION = 16;
+	int PROPERTY_DEFINITION = 18;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -825,7 +944,7 @@ public interface MemoryPackage extends EPackage {
 	 * @see de.evoal.models.v202704.optimisation.memory.impl.MemoryPackageImpl#getMetricEntry()
 	 * @generated
 	 */
-	int METRIC_ENTRY = 17;
+	int METRIC_ENTRY = 19;
 
 	/**
 	 * The feature id for the '<em><b>Key</b></em>' attribute.
@@ -862,7 +981,7 @@ public interface MemoryPackage extends EPackage {
 	 * @see de.evoal.models.v202704.optimisation.memory.impl.MemoryPackageImpl#getMetricDefinition()
 	 * @generated
 	 */
-	int METRIC_DEFINITION = 18;
+	int METRIC_DEFINITION = 20;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -926,7 +1045,7 @@ public interface MemoryPackage extends EPackage {
 	 * @see de.evoal.models.v202704.optimisation.memory.impl.MemoryPackageImpl#getPropertyScope()
 	 * @generated
 	 */
-	int PROPERTY_SCOPE = 19;
+	int PROPERTY_SCOPE = 21;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.models.v202704.optimisation.memory.PropertyValueType <em>Property Value Type</em>}' enum.
@@ -936,7 +1055,7 @@ public interface MemoryPackage extends EPackage {
 	 * @see de.evoal.models.v202704.optimisation.memory.impl.MemoryPackageImpl#getPropertyValueType()
 	 * @generated
 	 */
-	int PROPERTY_VALUE_TYPE = 20;
+	int PROPERTY_VALUE_TYPE = 22;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.models.v202704.optimisation.memory.MetricKind <em>Metric Kind</em>}' enum.
@@ -946,7 +1065,7 @@ public interface MemoryPackage extends EPackage {
 	 * @see de.evoal.models.v202704.optimisation.memory.impl.MemoryPackageImpl#getMetricKind()
 	 * @generated
 	 */
-	int METRIC_KIND = 21;
+	int METRIC_KIND = 23;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.models.v202704.optimisation.memory.MetricValueType <em>Metric Value Type</em>}' enum.
@@ -956,7 +1075,7 @@ public interface MemoryPackage extends EPackage {
 	 * @see de.evoal.models.v202704.optimisation.memory.impl.MemoryPackageImpl#getMetricValueType()
 	 * @generated
 	 */
-	int METRIC_VALUE_TYPE = 22;
+	int METRIC_VALUE_TYPE = 24;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.models.v202704.optimisation.memory.MetricScope <em>Metric Scope</em>}' enum.
@@ -966,7 +1085,7 @@ public interface MemoryPackage extends EPackage {
 	 * @see de.evoal.models.v202704.optimisation.memory.impl.MemoryPackageImpl#getMetricScope()
 	 * @generated
 	 */
-	int METRIC_SCOPE = 23;
+	int METRIC_SCOPE = 25;
 
 
 	/**
@@ -1356,26 +1475,57 @@ public interface MemoryPackage extends EPackage {
 	EAttribute getIndividual_Fitness();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link de.evoal.models.v202704.optimisation.memory.Individual#getRelationships <em>Relationships</em>}'.
+	 * Returns the meta object for class '{@link de.evoal.models.v202704.optimisation.memory.IndividualRecord <em>Individual Record</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Individual Record</em>'.
+	 * @see de.evoal.models.v202704.optimisation.memory.IndividualRecord
+	 * @generated
+	 */
+	EClass getIndividualRecord();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link de.evoal.models.v202704.optimisation.memory.IndividualRecord#getRelationships <em>Relationships</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Relationships</em>'.
-	 * @see de.evoal.models.v202704.optimisation.memory.Individual#getRelationships()
-	 * @see #getIndividual()
+	 * @see de.evoal.models.v202704.optimisation.memory.IndividualRecord#getRelationships()
+	 * @see #getIndividualRecord()
 	 * @generated
 	 */
-	EReference getIndividual_Relationships();
+	EReference getIndividualRecord_Relationships();
 
 	/**
-	 * Returns the meta object for the map '{@link de.evoal.models.v202704.optimisation.memory.Individual#getProperties <em>Properties</em>}'.
+	 * Returns the meta object for the map '{@link de.evoal.models.v202704.optimisation.memory.IndividualRecord#getProperties <em>Properties</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the map '<em>Properties</em>'.
-	 * @see de.evoal.models.v202704.optimisation.memory.Individual#getProperties()
-	 * @see #getIndividual()
+	 * @see de.evoal.models.v202704.optimisation.memory.IndividualRecord#getProperties()
+	 * @see #getIndividualRecord()
 	 * @generated
 	 */
-	EReference getIndividual_Properties();
+	EReference getIndividualRecord_Properties();
+
+	/**
+	 * Returns the meta object for class '{@link de.evoal.models.v202704.optimisation.memory.IndividualStub <em>Individual Stub</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Individual Stub</em>'.
+	 * @see de.evoal.models.v202704.optimisation.memory.IndividualStub
+	 * @generated
+	 */
+	EClass getIndividualStub();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.evoal.models.v202704.optimisation.memory.IndividualStub#getIteration <em>Iteration</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Iteration</em>'.
+	 * @see de.evoal.models.v202704.optimisation.memory.IndividualStub#getIteration()
+	 * @see #getIndividualStub()
+	 * @generated
+	 */
+	EAttribute getIndividualStub_Iteration();
 
 	/**
 	 * Returns the meta object for class '{@link de.evoal.models.v202704.optimisation.memory.Relationship <em>Relationship</em>}'.
@@ -2039,12 +2189,22 @@ public interface MemoryPackage extends EPackage {
 		EAttribute INDIVIDUAL__FITNESS = eINSTANCE.getIndividual_Fitness();
 
 		/**
+		 * The meta object literal for the '{@link de.evoal.models.v202704.optimisation.memory.impl.IndividualRecordImpl <em>Individual Record</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.evoal.models.v202704.optimisation.memory.impl.IndividualRecordImpl
+		 * @see de.evoal.models.v202704.optimisation.memory.impl.MemoryPackageImpl#getIndividualRecord()
+		 * @generated
+		 */
+		EClass INDIVIDUAL_RECORD = eINSTANCE.getIndividualRecord();
+
+		/**
 		 * The meta object literal for the '<em><b>Relationships</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference INDIVIDUAL__RELATIONSHIPS = eINSTANCE.getIndividual_Relationships();
+		EReference INDIVIDUAL_RECORD__RELATIONSHIPS = eINSTANCE.getIndividualRecord_Relationships();
 
 		/**
 		 * The meta object literal for the '<em><b>Properties</b></em>' map feature.
@@ -2052,7 +2212,25 @@ public interface MemoryPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference INDIVIDUAL__PROPERTIES = eINSTANCE.getIndividual_Properties();
+		EReference INDIVIDUAL_RECORD__PROPERTIES = eINSTANCE.getIndividualRecord_Properties();
+
+		/**
+		 * The meta object literal for the '{@link de.evoal.models.v202704.optimisation.memory.impl.IndividualStubImpl <em>Individual Stub</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.evoal.models.v202704.optimisation.memory.impl.IndividualStubImpl
+		 * @see de.evoal.models.v202704.optimisation.memory.impl.MemoryPackageImpl#getIndividualStub()
+		 * @generated
+		 */
+		EClass INDIVIDUAL_STUB = eINSTANCE.getIndividualStub();
+
+		/**
+		 * The meta object literal for the '<em><b>Iteration</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute INDIVIDUAL_STUB__ITERATION = eINSTANCE.getIndividualStub_Iteration();
 
 		/**
 		 * The meta object literal for the '{@link de.evoal.models.v202704.optimisation.memory.impl.RelationshipImpl <em>Relationship</em>}' class.

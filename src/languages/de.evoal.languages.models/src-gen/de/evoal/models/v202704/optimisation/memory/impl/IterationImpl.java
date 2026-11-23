@@ -3,7 +3,7 @@
  */
 package de.evoal.models.v202704.optimisation.memory.impl;
 
-import de.evoal.models.v202704.optimisation.memory.Individual;
+import de.evoal.models.v202704.optimisation.memory.IndividualRecord;
 import de.evoal.models.v202704.optimisation.memory.Iteration;
 import de.evoal.models.v202704.optimisation.memory.IterationStep;
 import de.evoal.models.v202704.optimisation.memory.MemoryPackage;
@@ -105,7 +105,7 @@ public class IterationImpl extends StateImpl implements Iteration {
 	 * @generated
 	 * @ordered
 	 */
-	protected Individual bestSoFar;
+	protected IndividualRecord bestSoFar;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -194,10 +194,10 @@ public class IterationImpl extends StateImpl implements Iteration {
 	 * @generated
 	 */
 	@Override
-	public Individual getBestSoFar() {
+	public IndividualRecord getBestSoFar() {
 		if (bestSoFar != null && bestSoFar.eIsProxy()) {
 			InternalEObject oldBestSoFar = (InternalEObject)bestSoFar;
-			bestSoFar = (Individual)eResolveProxy(oldBestSoFar);
+			bestSoFar = (IndividualRecord)eResolveProxy(oldBestSoFar);
 			if (bestSoFar != oldBestSoFar) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, MemoryPackage.ITERATION__BEST_SO_FAR, oldBestSoFar, bestSoFar));
@@ -211,7 +211,7 @@ public class IterationImpl extends StateImpl implements Iteration {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Individual basicGetBestSoFar() {
+	public IndividualRecord basicGetBestSoFar() {
 		return bestSoFar;
 	}
 
@@ -221,8 +221,8 @@ public class IterationImpl extends StateImpl implements Iteration {
 	 * @generated
 	 */
 	@Override
-	public void setBestSoFar(Individual newBestSoFar) {
-		Individual oldBestSoFar = bestSoFar;
+	public void setBestSoFar(IndividualRecord newBestSoFar) {
+		IndividualRecord oldBestSoFar = bestSoFar;
 		bestSoFar = newBestSoFar;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, MemoryPackage.ITERATION__BEST_SO_FAR, oldBestSoFar, bestSoFar));
@@ -234,7 +234,7 @@ public class IterationImpl extends StateImpl implements Iteration {
 	 * @generated
 	 */
 	@Override
-	public Stream<Individual> bestIndividuals() {
+	public Stream<IndividualRecord> bestIndividuals() {
 		return getRanks()
 		.get(0)
 		.getMembers()
@@ -248,7 +248,7 @@ public class IterationImpl extends StateImpl implements Iteration {
 	 * @generated
 	 */
 	@Override
-	public Stream<Individual> survivedIndividuals() {
+	public Stream<IndividualRecord> survivedIndividuals() {
 		return getRanks()
 		.stream()
 		.flatMap(r -> r.getMembers().stream());
@@ -332,7 +332,7 @@ public class IterationImpl extends StateImpl implements Iteration {
 				((EStructuralFeature.Setting)getMetrics()).set(newValue);
 				return;
 			case MemoryPackage.ITERATION__BEST_SO_FAR:
-				setBestSoFar((Individual)newValue);
+				setBestSoFar((IndividualRecord)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -359,7 +359,7 @@ public class IterationImpl extends StateImpl implements Iteration {
 				getMetrics().clear();
 				return;
 			case MemoryPackage.ITERATION__BEST_SO_FAR:
-				setBestSoFar((Individual)null);
+				setBestSoFar((IndividualRecord)null);
 				return;
 		}
 		super.eUnset(featureID);

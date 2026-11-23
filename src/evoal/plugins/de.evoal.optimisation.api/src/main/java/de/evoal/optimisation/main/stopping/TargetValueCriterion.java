@@ -16,7 +16,7 @@ import de.evoal.core.api.utils.AttributeHelper;
 import de.evoal.models.core.exceptions.InitializationException;
 import de.evoal.models.v202704.optimisation.execution.TerminationCriterion;
 import de.evoal.models.v202704.optimisation.execution.impl.TerminationCriterionImpl;
-import de.evoal.models.v202704.optimisation.memory.Individual;
+import de.evoal.models.v202704.optimisation.memory.IndividualRecord;
 import de.evoal.models.v202704.optimisation.memory.Iteration;
 
 import de.evoal.optimisation.api.constraints.ViolationRecord;
@@ -83,7 +83,7 @@ public class TargetValueCriterion extends TerminationCriterionImpl {
 
     @Override
     public boolean shouldTerminate(final Iteration iteration) {
-        final Individual best = iteration.getBestSoFar();
+        final IndividualRecord best = iteration.getBestSoFar();
         if(best == null) {
             return false;
         }
@@ -117,7 +117,7 @@ public class TargetValueCriterion extends TerminationCriterionImpl {
     /**
      * @return Whether no degree of violation of the individual is above 0.
      */
-    private static boolean isFeasible(final Individual individual) {
+    private static boolean isFeasible(final IndividualRecord individual) {
         for(final Map.Entry<String, Object> property : individual.getProperties()) {
             final boolean isViolation = property.getKey().startsWith(ViolationRecord.PROPERTY_PREFIX);
             if(isViolation && ((Number) property.getValue()).doubleValue() > 0.0) {

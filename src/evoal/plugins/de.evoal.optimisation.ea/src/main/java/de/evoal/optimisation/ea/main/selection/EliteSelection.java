@@ -81,6 +81,20 @@ public class EliteSelection implements SelectionMethod {
         return rest.ranksStochastically();
     }
 
+    /**
+     * @return The elite plus what {@code rest} can choose, since {@code rest} chooses from all
+     *   candidates.
+     */
+    @Override
+    public int maximumCount(final int candidates) {
+        final int remaining = rest.maximumCount(candidates);
+        if(remaining == Integer.MAX_VALUE) {
+            return Integer.MAX_VALUE;
+        }
+
+        return Math.min(count, candidates) + remaining;
+    }
+
     @Override
     public List<Candidate> select(final List<Candidate> candidates, final int count, final CandidateOrder order,
                                   final RandomGenerator random) {

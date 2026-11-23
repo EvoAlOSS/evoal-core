@@ -38,6 +38,7 @@ import de.evoal.models.v202704.optimisation.memory.Execution;
 import de.evoal.models.v202704.optimisation.memory.FitnessComponentDefinition;
 import de.evoal.models.v202704.optimisation.memory.Identity;
 import de.evoal.models.v202704.optimisation.memory.Individual;
+import de.evoal.models.v202704.optimisation.memory.IndividualRecord;
 import de.evoal.models.v202704.optimisation.memory.Iteration;
 import de.evoal.models.v202704.optimisation.memory.IterationStep;
 import de.evoal.models.v202704.optimisation.memory.MetricDefinition;
@@ -130,8 +131,8 @@ public class MemoryModelJson {
      *
      * @throws IllegalStateException if the already collected individual has other values.
      */
-    private static void collect(final Map<Integer, Individual> individuals, final Individual individual) {
-        final Individual collected = individuals.putIfAbsent(individual.getId(), individual);
+    private static void collect(final Map<Integer, IndividualRecord> individuals, final IndividualRecord individual) {
+        final IndividualRecord collected = individuals.putIfAbsent(individual.getId(), individual);
         if(collected == null || collected == individual) {
             return;
         }
@@ -152,14 +153,14 @@ public class MemoryModelJson {
      *   occurrence: in the steps version first the ones of the steps, which refer to their
      *   direct predecessors, then the ones of the ranks.
      */
-    private static Collection<Individual> collectIndividuals(final Iteration iteration, final boolean withSteps) {
-        final Map<Integer, Individual> individuals = new LinkedHashMap<>();
+    private static Collection<IndividualRecord> collectIndividuals(final Iteration iteration, final boolean withSteps) {
+        final Map<Integer, IndividualRecord> individuals = new LinkedHashMap<>();
 
-        final Stream<Individual> fromSteps = withSteps ? iteration.getSteps()
+        final Stream<IndividualRecord> fromSteps = withSteps ? iteration.getSteps()
                                                                   .stream()
                                                                   .flatMap(MemoryModelJson::individualsOf)
                                                        : Stream.empty();
-        final Stream<Individual> fromRanks = iteration.getRanks()
+        final Stream<IndividualRecord> fromRanks = iteration.getRanks()
                                                       .stream()
                                                       .flatMap(rank -> rank.getMembers().stream());
 
@@ -189,7 +190,7 @@ public class MemoryModelJson {
     /**
      * @return The individuals the step refers to.
      */
-    private static Stream<Individual> individualsOf(final IterationStep step) {
+    private static Stream<IndividualRecord> individualsOf(final IterationStep step) {
         return switch(step) {
             case OrderedIterationStep ordered -> ordered.getRanks()
                                                         .stream()
@@ -514,7 +515,7 @@ public class MemoryModelJson {
     /**
      * @return The ids of the individuals.
      */
-    private static ArrayNode toIds(final List<Individual> individuals) {
+    private static ArrayNode toIds(final List<? extends Individual> individuals) {
         final ArrayNode ids = NODES.arrayNode();
         individuals.stream()
                    .map(Individual::getId)
@@ -527,7 +528,7 @@ public class MemoryModelJson {
      * @return The individual with its id, values, fitness and relationships; the output is
      *   empty if it was not evaluated, e.g., because the evaluation budget ran out.
      */
-    private ObjectNode toIndividual(final Individual individual) {
+    private ObjectNode toIndividual(final IndividualRecord individual) {
         final ObjectNode individualNode = NODES.objectNode();
         individualNode.put("id", individual.getId());
 

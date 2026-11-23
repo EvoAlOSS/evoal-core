@@ -158,7 +158,7 @@ public interface Execution extends EObject {
 	 * <!-- begin-model-doc -->
 	 * *
 	 * The properties the individuals and relationships of this execution record. Every
-	 *   key of {@link Individual#getProperties()} and of {@link Relationship#getProperties()}
+	 *   key of {@link IndividualRecord#getProperties()} and of {@link Relationship#getProperties()}
 	 *   is defined here.
 	 * 
 	 * <!-- end-model-doc -->

@@ -198,6 +198,7 @@ public class EvolutionaryAlgorithm extends TemplateAlgorithm {
         final EObject comparator = helper.lookup(configuration, "comparator");
         crowded = CrowdedComparator.TYPE.equals(DynamicEClassProvider.dlTypeOf(comparator));
         checkNsga2(parentSelection, replacement, crowded, pipelines.get().layout().components().size());
+        checkParentCount(parentSelection, size, offspring);
         order = crowded ? new CrowdedOrder() : CandidateOrder.BY_VALUE;
 
         recorder.defineProperty(Variation.OPERATORS, PropertyScope.RELATIONSHIP, PropertyValueType.TEXT, true,
@@ -231,6 +232,28 @@ public class EvolutionaryAlgorithm extends TemplateAlgorithm {
             recorder.defineProperty(StochasticRankingSelection.RANK, PropertyScope.INDIVIDUAL, PropertyValueType.INTEGER, false,
                                     "The place of the candidate in its last stochastic ranking of the iteration, 0 for the first.");
             stochasticRankingStatistics.define(recorder);
+        }
+    }
+
+    /**
+     * Checks that the parent selection can choose the 2 * ceil(lambda / 2) parents from the
+     *   mu candidates of the population, i.e. a selection without replacement does not need
+     *   more parents than there are candidates.
+     *
+     * @param parentSelection The parent selection.
+     * @param size The size of the population, mu.
+     * @param offspring The number of offspring, lambda.
+     * @throws InitializationException if the selection cannot choose enough parents.
+     */
+    static void checkParentCount(final SelectionMethod parentSelection, final int size, final int offspring)
+            throws InitializationException {
+        final int parents = 2 * ((offspring + 1) / 2);
+        final int maximum = parentSelection.maximumCount(size);
+        if(parents > maximum) {
+            throw new InitializationException("The 'parent-selection' '" + parentSelection.name() + "' can choose at most "
+                                              + maximum + " of the " + size + " candidates, but " + offspring
+                                              + " offspring need " + parents + " parents; use a selection with "
+                                              + "replacement, e.g. 'tournament-selection', or fewer offspring.");
         }
     }
 

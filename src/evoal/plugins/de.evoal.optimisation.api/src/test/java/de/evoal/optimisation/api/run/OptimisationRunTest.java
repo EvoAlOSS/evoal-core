@@ -19,6 +19,8 @@ import de.evoal.models.v202704.optimisation.execution.OptimisationValue;
 import de.evoal.models.v202704.optimisation.execution.TerminationCriterion;
 import de.evoal.models.v202704.optimisation.memory.Identity;
 import de.evoal.models.v202704.optimisation.memory.Individual;
+import de.evoal.models.v202704.optimisation.memory.IndividualRecord;
+import de.evoal.models.v202704.optimisation.memory.IndividualStub;
 import de.evoal.models.v202704.optimisation.memory.Iteration;
 import de.evoal.models.v202704.optimisation.memory.IterationStep;
 import de.evoal.models.v202704.optimisation.memory.Mutation;
@@ -142,7 +144,7 @@ public class OptimisationRunTest {
                         .toList();
     }
 
-    private static Individual individual(final Iteration iteration, final int id) {
+    private static IndividualRecord individual(final Iteration iteration, final int id) {
         return iteration.getRanks()
                         .stream()
                         .map(Rank::getMembers)
@@ -227,13 +229,73 @@ public class OptimisationRunTest {
             kernel.execute(criterion, procedure);
 
             // then
-            final Individual mutated = individual(iterations.get(2), 4);
+            final IndividualRecord mutated = individual(iterations.get(2), 4);
             final Relationship relationship = mutated.getRelationships().getFirst();
             Assertions.assertInstanceOf(Mutation.class, relationship);
             Assertions.assertEquals(List.of(2), targetIds(relationship));
 
-            final Individual unrelated = individual(iterations.get(2), 5);
+            final IndividualRecord unrelated = individual(iterations.get(2), 5);
             Assertions.assertEquals(List.of(), unrelated.getRelationships());
+        }
+
+        @Test
+        public void relationshipsToThePreviousIterationEndInStubs() {
+            // when
+            kernel.execute(criterion, procedure);
+
+            // then
+            final Individual target = individual(iterations.get(2), 4).getRelationships().getFirst().getTarget().getFirst();
+            final IndividualStub stub = Assertions.assertInstanceOf(IndividualStub.class, target);
+            Assertions.assertEquals(2, stub.getId());
+            Assertions.assertEquals(1, stub.getIteration());
+            Assertions.assertNull(stub.eContainer());
+            Assertions.assertEquals(individual(iterations.get(1), 2).getFitness(), stub.getFitness());
+            Assertions.assertSame(individual(iterations.get(1), 2).getInput(), stub.getInput());
+        }
+
+        @Test
+        public void theBestSoFarIsARecordOfItsIteration() {
+            // when
+            kernel.execute(criterion, procedure);
+
+            // then
+            final IndividualRecord best = iterations.get(2).getBestSoFar();
+            Assertions.assertNotNull(best.eContainer());
+            best.getRelationships()
+                .forEach(relationship -> relationship.getTarget()
+                                                     .forEach(target -> Assertions.assertInstanceOf(IndividualStub.class, target)));
+        }
+
+        @Test
+        public void theMembersOfARecordedIterationForgetTheirPredecessors() {
+            // given
+            final List<Candidate> members = new ArrayList<>();
+            final FakeProcedure recording = new FakeProcedure((number, previous) -> {
+                final Lineage lineage = number == 0 ? Lineage.NONE : Lineage.mutation(previous.getFirst());
+                final Candidate member = member(number, lineage);
+                members.add(member);
+                return Population.of(member);
+            });
+
+            // when
+            kernel.execute(criterion, recording);
+
+            // then
+            members.forEach(member -> Assertions.assertEquals(Lineage.Kind.RECORDED, member.lineage().kind()));
+        }
+
+        @Test
+        public void aRecordedCandidateCannotBeRecordedAgain() {
+            // given: the same candidate object is a member of every iteration
+            final Candidate member = member(1, Lineage.NONE);
+            final FakeProcedure same = new FakeProcedure((number, previous) -> Population.of(member));
+
+            // when
+            final IllegalStateException exception = Assertions.assertThrows(IllegalStateException.class,
+                                                                            () -> kernel.execute(criterion, same));
+
+            // then
+            Assertions.assertTrue(exception.getMessage().contains("already recorded"), exception.getMessage());
         }
     }
 
@@ -510,7 +572,7 @@ public class OptimisationRunTest {
             kernel.execute(criterion, procedure);
 
             // then
-            final Individual replacement = individual(iterations.get(1), 1);
+            final IndividualRecord replacement = individual(iterations.get(1), 1);
             final Relationship relationship = replacement.getRelationships().getFirst();
             Assertions.assertInstanceOf(Replacement.class, relationship);
             Assertions.assertEquals(List.of(0), targetIds(relationship));
@@ -612,7 +674,7 @@ public class OptimisationRunTest {
             return iterations.get(1).getSteps();
         }
 
-        private Individual inStep(final int step, final int index) {
+        private IndividualRecord inStep(final int step, final int index) {
             return ((UnorderedIterationStep) steps().get(step)).getIndividuals().get(index);
         }
 
@@ -640,8 +702,8 @@ public class OptimisationRunTest {
 
         @Test
         public void anIndividualOfSeveralStepsIsACopyWithTheSameValues() {
-            final Individual mutated = inStep(2, 0);
-            final Individual evaluated = inStep(3, 0);
+            final IndividualRecord mutated = inStep(2, 0);
+            final IndividualRecord evaluated = inStep(3, 0);
 
             Assertions.assertNotSame(mutated, evaluated);
             Assertions.assertSame(mutated.getInput(), evaluated.getInput());
@@ -651,7 +713,7 @@ public class OptimisationRunTest {
 
         @Test
         public void anUnevaluatedOutputHasNoOutput() {
-            final Individual unevaluated = inStep(2, 1);
+            final IndividualRecord unevaluated = inStep(2, 1);
 
             Assertions.assertNull(unevaluated.getOutput());
             Assertions.assertEquals(List.of(), unevaluated.getFitness());

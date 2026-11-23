@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 
 import de.evoal.models.core.ecore.Space;
 import de.evoal.models.core.ecore.TypedEObject;
-import de.evoal.models.v202704.optimisation.memory.Individual;
+import de.evoal.models.v202704.optimisation.memory.IndividualRecord;
 import de.evoal.models.v202704.optimisation.memory.Iteration;
 import de.evoal.models.v202704.optimisation.memory.MemoryFactory;
 import de.evoal.models.v202704.optimisation.memory.Rank;
@@ -57,7 +57,7 @@ public class CorrelationStatisticsTest {
             input.eSet(x, point[0]);
             input.eSet(y, point[1]);
 
-            final Individual individual = MemoryFactory.eINSTANCE.createIndividual();
+            final IndividualRecord individual = MemoryFactory.eINSTANCE.createIndividualRecord();
             individual.setInput(input);
             rank.getMembers().add(individual);
         }

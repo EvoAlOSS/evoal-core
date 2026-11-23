@@ -42,6 +42,16 @@ public interface SelectionMethod extends EvoalComponent<SelectionMethod> {
     }
 
     /**
+     * @param candidates The number of candidates to choose from.
+     * @return The largest number of candidates the selection can choose from that many
+     *   candidates; {@link Integer#MAX_VALUE} for a selection with replacement. Includes
+     *   nested selections. The algorithms check it when a run starts.
+     */
+    default int maximumCount(final int candidates) {
+        return Integer.MAX_VALUE;
+    }
+
+    /**
      * @param candidates The evaluated candidates to choose from; not empty.
      * @param count The number of candidates to choose.
      * @param order The order in which the candidates are compared.

@@ -25,6 +25,7 @@ import de.evoal.models.v202704.core.CorePackage;
 import de.evoal.models.v202704.optimisation.memory.Execution;
 import de.evoal.models.v202704.optimisation.memory.FitnessComponentDefinition;
 import de.evoal.models.v202704.optimisation.memory.Individual;
+import de.evoal.models.v202704.optimisation.memory.IndividualRecord;
 import de.evoal.models.v202704.optimisation.memory.Iteration;
 import de.evoal.models.v202704.optimisation.memory.MemoryFactory;
 import de.evoal.models.v202704.optimisation.memory.MetricDefinition;
@@ -188,7 +189,7 @@ final class MemoryModels {
      * @return An individual with the search space values {@code x}, the optimisation space
      *   value {@code y} and the fitness {@code y}.
      */
-    static Individual individual(final int id, final double[] x, final double y) {
+    static IndividualRecord individual(final int id, final double[] x, final double y) {
         final TypedEObject input = SEARCH_SPACE.newEObject();
         final List<EAttribute> searchFeatures = SEARCH_SPACE.getEClass().getEAllAttributes();
         for(int i = 0; i < x.length; ++i) {
@@ -199,7 +200,7 @@ final class MemoryModels {
         final EAttribute outputFeature = OPTIMISATION_SPACE.getEClass().getEAllAttributes().getFirst();
         output.eSet(outputFeature, y);
 
-        final Individual individual = MemoryFactory.eINSTANCE.createIndividual();
+        final IndividualRecord individual = MemoryFactory.eINSTANCE.createIndividualRecord();
         individual.setId(id);
         individual.setInput(input);
         individual.setOutput(output);
@@ -212,7 +213,7 @@ final class MemoryModels {
      * @return An iteration with one rank 0 that contains the individuals, and the counter
      *   {@code evaluations.real}.
      */
-    static Iteration iteration(final int number, final Individual... best) {
+    static Iteration iteration(final int number, final IndividualRecord... best) {
         final Iteration iteration = MemoryFactory.eINSTANCE.createIteration();
         iteration.setNumber(number);
         iteration.getRanks().add(rank(0, best));
@@ -276,7 +277,7 @@ final class MemoryModels {
         return problem;
     }
 
-    static Rank rank(final int number, final Individual... members) {
+    static Rank rank(final int number, final IndividualRecord... members) {
         final Rank rank = MemoryFactory.eINSTANCE.createRank();
         rank.setNumber(number);
         rank.getMembers().addAll(List.of(members));
@@ -287,7 +288,7 @@ final class MemoryModels {
     /**
      * Adds the relationship to the individual, pointing to the targets.
      */
-    static <T extends Relationship> T relate(final Individual individual,
+    static <T extends Relationship> T relate(final IndividualRecord individual,
                                              final T relationship,
                                              final Individual... targets) {
         relationship.getTarget().addAll(List.of(targets));

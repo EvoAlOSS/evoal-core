@@ -3,7 +3,7 @@
  */
 package de.evoal.models.v202704.optimisation.memory.impl;
 
-import de.evoal.models.v202704.optimisation.memory.Individual;
+import de.evoal.models.v202704.optimisation.memory.IndividualRecord;
 import de.evoal.models.v202704.optimisation.memory.MemoryPackage;
 import de.evoal.models.v202704.optimisation.memory.Rank;
 
@@ -66,7 +66,7 @@ public class RankImpl extends MinimalEObjectImpl.Container implements Rank {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Individual> members;
+	protected EList<IndividualRecord> members;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -116,9 +116,9 @@ public class RankImpl extends MinimalEObjectImpl.Container implements Rank {
 	 * @generated
 	 */
 	@Override
-	public EList<Individual> getMembers() {
+	public EList<IndividualRecord> getMembers() {
 		if (members == null) {
-			members = new EObjectContainmentEList<Individual>(Individual.class, this, MemoryPackage.RANK__MEMBERS);
+			members = new EObjectContainmentEList<IndividualRecord>(IndividualRecord.class, this, MemoryPackage.RANK__MEMBERS);
 		}
 		return members;
 	}
@@ -167,7 +167,7 @@ public class RankImpl extends MinimalEObjectImpl.Container implements Rank {
 				return;
 			case MemoryPackage.RANK__MEMBERS:
 				getMembers().clear();
-				getMembers().addAll((Collection<? extends Individual>)newValue);
+				getMembers().addAll((Collection<? extends IndividualRecord>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

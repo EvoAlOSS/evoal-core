@@ -39,7 +39,7 @@ public abstract class AbstractCandidateStatisticsWriter implements StatisticsWri
     /**
      * Selects the individuals of an iteration that are written.
      */
-    private final Function<Iteration, Stream<Individual>> candidatesProducer;
+    private final Function<Iteration, Stream<? extends Individual>> candidatesProducer;
 
     /**
      * Evaluates the attributes of the writer's configuration.
@@ -96,7 +96,7 @@ public abstract class AbstractCandidateStatisticsWriter implements StatisticsWri
      * @param candidatesProducer Selects the individuals of an iteration that are written.
      * @param outputName Name of the output, the writer's DL type.
      */
-    protected AbstractCandidateStatisticsWriter(final Function<Iteration, Stream<Individual>> candidatesProducer,
+    protected AbstractCandidateStatisticsWriter(final Function<Iteration, Stream<? extends Individual>> candidatesProducer,
                                                 final String outputName) {
         this.candidatesProducer = candidatesProducer;
         this.outputName = outputName;

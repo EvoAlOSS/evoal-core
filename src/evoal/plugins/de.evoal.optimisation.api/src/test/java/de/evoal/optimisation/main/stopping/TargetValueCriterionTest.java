@@ -22,7 +22,7 @@ import de.evoal.core.api.utils.AttributeHelper;
 import de.evoal.models.core.ecore.Space;
 import de.evoal.models.core.ecore.TypedEObject;
 import de.evoal.models.core.exceptions.InitializationException;
-import de.evoal.models.v202704.optimisation.memory.Individual;
+import de.evoal.models.v202704.optimisation.memory.IndividualRecord;
 import de.evoal.models.v202704.optimisation.memory.Iteration;
 import de.evoal.models.v202704.optimisation.memory.MemoryFactory;
 
@@ -75,12 +75,12 @@ public class TargetValueCriterionTest {
      * @return An individual with the objectives and the degrees of violation (properties
      *   {@code violation-1}, {@code violation-2}, ...).
      */
-    private static Individual individual(final double y, final double z, final double... violations) {
+    private static IndividualRecord individual(final double y, final double z, final double... violations) {
         final TypedEObject output = SPACE.newEObject();
         output.eSet(Y, y);
         output.eSet(Z, z);
 
-        final Individual individual = MemoryFactory.eINSTANCE.createIndividual();
+        final IndividualRecord individual = MemoryFactory.eINSTANCE.createIndividualRecord();
         individual.setOutput(output);
         for(int index = 0; index < violations.length; ++index) {
             individual.getProperties().put("violation-" + (index + 1), violations[index]);
@@ -89,7 +89,7 @@ public class TargetValueCriterionTest {
         return individual;
     }
 
-    private static Iteration iteration(final Individual bestSoFar) {
+    private static Iteration iteration(final IndividualRecord bestSoFar) {
         final Iteration iteration = MemoryFactory.eINSTANCE.createIteration();
         iteration.setBestSoFar(bestSoFar);
 
@@ -140,7 +140,7 @@ public class TargetValueCriterionTest {
             // given: the best individual so far stems from an earlier iteration, the current
             //   iteration (e.g. of simulated annealing) only holds a worse one
             final TargetValueCriterion criterion = criterion(0.01, new Goal.Minimise(Y));
-            final Individual earlier = individual(0.001, 0.0);
+            final IndividualRecord earlier = individual(0.001, 0.0);
             final Iteration iteration = iteration(earlier);
             iteration.setNumber(7);
 

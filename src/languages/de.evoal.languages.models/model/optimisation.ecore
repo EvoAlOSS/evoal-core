@@ -70,7 +70,7 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="propertyDefinitions"
           upperBound="-1" eType="#//memory/PropertyDefinition" containment="true">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="*&#xA;The properties the individuals and relationships of this execution record. Every&#xA;  key of {@link Individual#getProperties()} and of {@link Relationship#getProperties()}&#xA;  is defined here.&#xA;"/>
+          <details key="documentation" value="*&#xA;The properties the individuals and relationships of this execution record. Every&#xA;  key of {@link IndividualRecord#getProperties()} and of {@link Relationship#getProperties()}&#xA;  is defined here.&#xA;"/>
         </eAnnotations>
       </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EReference" name="fitnessComponents" upperBound="-1"
@@ -134,7 +134,7 @@
           <details key="documentation" value="*&#xA;Returns a stream of the best individuals that survived the iteration.&#xA;"/>
         </eAnnotations>
         <eGenericType eClassifier="#//Stream">
-          <eTypeArguments eClassifier="#//memory/Individual"/>
+          <eTypeArguments eClassifier="#//memory/IndividualRecord"/>
         </eGenericType>
       </eOperations>
       <eOperations name="survivedIndividuals" lowerBound="1">
@@ -143,7 +143,7 @@
           <details key="documentation" value="*&#xA;Returns a stream of the individuals that survived the iteration.&#xA;"/>
         </eAnnotations>
         <eGenericType eClassifier="#//Stream">
-          <eTypeArguments eClassifier="#//memory/Individual"/>
+          <eTypeArguments eClassifier="#//memory/IndividualRecord"/>
         </eGenericType>
       </eOperations>
       <eOperations name="numberOfSurvivedIndividuals" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
@@ -176,9 +176,9 @@
           <details key="documentation" value="*&#xA;The values of the metrics at the end of the iteration, by metric&#xA;  name. The metrics are defined in {@link Execution#getMetricDefinitions()}&#xA;  with the scope {@link MetricScope#ITERATION}.&#xA;"/>
         </eAnnotations>
       </eStructuralFeatures>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="bestSoFar" eType="#//memory/Individual">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="bestSoFar" eType="#//memory/IndividualRecord">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="*&#xA;The best individual the algorithm has found up to and including&#xA;  this iteration. It is contained in this or an earlier iteration,&#xA;  e.g., if a local search moved to a worse candidate. Not set if the&#xA;  algorithm does not track the best individual.&#xA;"/>
+          <details key="documentation" value="*&#xA;The best individual the algorithm has found up to and including&#xA;  this iteration. It is contained in this or an earlier iteration,&#xA;  e.g., if a local search moved to a worse candidate. Not set if the&#xA;  algorithm does not track the best individual.&#xA;&#xA;It is the record, so its properties (e.g., its violations) are available. Since&#xA;  the relationships of a record refer to stubs of the previous iteration, it keeps&#xA;  at most the one iteration alive that contains it.&#xA;"/>
         </eAnnotations>
       </eStructuralFeatures>
     </eClassifiers>
@@ -206,7 +206,7 @@
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="UnorderedIterationStep" eSuperTypes="#//memory/IterationStep">
       <eStructuralFeatures xsi:type="ecore:EReference" name="individuals" ordered="false"
-          upperBound="-1" eType="#//memory/Individual" containment="true">
+          upperBound="-1" eType="#//memory/IndividualRecord" containment="true">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
           <details key="documentation" value="*&#xA;List of ranks (result of this step).&#xA;"/>
         </eAnnotations>
@@ -223,15 +223,15 @@
         </eAnnotations>
       </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EReference" name="members" ordered="false"
-          upperBound="-1" eType="#//memory/Individual" containment="true">
+          upperBound="-1" eType="#//memory/IndividualRecord" containment="true">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
           <details key="documentation" value="*&#xA;The members of the rank.&#xA;"/>
         </eAnnotations>
       </eStructuralFeatures>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Individual">
+    <eClassifiers xsi:type="ecore:EClass" name="Individual" abstract="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="*&#xA;A single individual at a given point of the execution.&#xA;"/>
+        <details key="documentation" value="*&#xA;A single individual at a given point of the execution: its id and values. An&#xA;  iteration contains the {@link IndividualRecord}s of its individuals; a reference to&#xA;  an individual of an earlier iteration is an {@link IndividualStub}.&#xA;"/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -255,6 +255,11 @@
           <details key="documentation" value="*&#xA;The fitness computed from the output: one value per fitness component, in the&#xA;  order of {@link Execution#getFitnessComponents()}. The fitness is canonical,&#xA;  i.e., smaller values are better. Empty if the algorithm computes no fitness.&#xA;&#xA;@constraint individual.fitness.isEmpty() || individual.fitness.size() == execution.fitnessComponents.size()&#xA;"/>
         </eAnnotations>
       </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="IndividualRecord" eSuperTypes="#//memory/Individual">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="*&#xA;The complete record of an individual, contained in the iteration that produced it:&#xA;  its values, its relationships and its properties.&#xA;"/>
+      </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="relationships" ordered="false"
           upperBound="-1" eType="#//memory/Relationship" containment="true">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -265,6 +270,17 @@
           eType="#//memory/PropertyEntry" containment="true">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
           <details key="documentation" value="*&#xA;Further details of the individual, e.g., its age, by property name. The properties&#xA;  are defined in {@link Execution#getPropertyDefinitions()} with the scope&#xA;  {@link PropertyScope#INDIVIDUAL}.&#xA;"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="IndividualStub" eSuperTypes="#//memory/Individual">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="*&#xA;Stands for the record of an individual of an earlier iteration: it has the id and&#xA;  the values of the record, but neither its relationships nor its properties, and&#xA;  it is not contained in an iteration. A stub refers to no other individual, so a&#xA;  run keeps only the iterations it needs, not every earlier one. The record is in&#xA;  the ranks of iteration {@link #getIteration()}; in the written memory model,&#xA;  iteration and id find it.&#xA;"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="iteration" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="*&#xA;The number of the iteration whose ranks contain the record.&#xA;"/>
         </eAnnotations>
       </eStructuralFeatures>
     </eClassifiers>
@@ -367,7 +383,7 @@
       </eAnnotations>
       <eLiterals name="Individual">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="*&#xA;On individuals ({@link Individual#getProperties()}).&#xA;"/>
+          <details key="documentation" value="*&#xA;On individuals ({@link IndividualRecord#getProperties()}).&#xA;"/>
         </eAnnotations>
       </eLiterals>
       <eLiterals name="Relationship" value="1">
