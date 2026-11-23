@@ -27,35 +27,26 @@ module 'training' {
 		'R²'();
 	end
 	
+	// The use cases are derived from the learning task when they are left out. This module
+	// writes out the learning use case to show the derivation: the steps get their reads,
+	// writes and settings (files, features, model, model file) from the learning task.
 	use cases
-	  specify learning 
+	  specify learning
 	  begin
 	  	'execute'([
 	  		step {
 	  			component 'training-data-loader' {}
-	  			writes [data 'x:0', data 'y:0']; // should be default
 	  		},
 		  	pipeline 'validation',
 			pipeline 'preparation',
 			step {
 				component 'model-learner' {}
-				reads [data 'x:0', data 'y:0']; // should be default
 			}
 	  	]);
-	  	
-		'gof-calculator'( );
-		
+
+		'gof-calculator'();
+
 		'store-model'();
 	  end;
-
-	  specify predicting 
-		begin 
-            pipeline 'preparation'
-            step {
-                component 'model-prediction' {}
-    			reads [data 'x:0']; // should be default
-    			writes [data 'y:0']; // should be default
-            }
-		end;
 	end
 }

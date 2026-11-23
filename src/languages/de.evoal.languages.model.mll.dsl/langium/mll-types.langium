@@ -13,7 +13,7 @@ interface MachineLearningModule {
 	model: Instance
 	gof?: Block
 	learningUseCase?: Block
-	predictionUseCase: PipelineDefinition
+	predictionUseCase?: PipelineDefinition
 }
 
 interface TaskDescription extends NamedVariable {

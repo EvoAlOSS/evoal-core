@@ -26,7 +26,7 @@ import org.mockito.Mockito;
 import java.util.List;
 
 /**
- * The testing use case of an MLL file: parsed, added by default for {@code testing with [...]},
+ * The testing use case of an MLL file: parsed, derived for {@code testing with [...]},
  *   and run after the learning use case (#234).
  */
 public class TestingUseCaseTest {
@@ -34,11 +34,10 @@ public class TestingUseCaseTest {
         return LanguageHelper.loadFromClasspath("de/evoal/surrogate/main/internal/" + file);
     }
 
-    private static MachineLearningModule loadAndInject(final String file) {
+    private static MachineLearningModule loadAndDerive(final String file) {
         final MachineLearningModule module = load(file);
 
-        new DefaultBehaviourInjector(Mockito.mock(DefinitionModuleLoader.class), module.getTask().getInputs(), module.getTask().getOutputs())
-                .inject(module);
+        new UseCaseDerivation(Mockito.mock(DefinitionModuleLoader.class)).derive(module);
 
         return module;
     }
@@ -56,7 +55,7 @@ public class TestingUseCaseTest {
     @Nested
     @DisplayName("given test data and no testing use case")
     class DefaultTestingUseCase {
-        private final MachineLearningModule module = loadAndInject("with-test-data.mll");
+        private final MachineLearningModule module = loadAndDerive("with-test-data.mll");
 
         @Test
         public void theUseCaseExecutesThePipelineAssessesAndStores() {
@@ -129,9 +128,9 @@ public class TestingUseCaseTest {
     @DisplayName("given no test data")
     class NoTestData {
         @Test
-        public void noTestingUseCaseIsAdded() {
+        public void noTestingUseCaseIsDerived() {
             // when
-            final MachineLearningModule module = loadAndInject("without-test-data.mll");
+            final MachineLearningModule module = loadAndDerive("without-test-data.mll");
 
             // then
             Assertions.assertNull(module.getTestingUseCase());
@@ -154,7 +153,7 @@ public class TestingUseCaseTest {
         @Test
         public void theUseCaseIsKept() {
             // when
-            final MachineLearningModule module = loadAndInject("written-testing.mll");
+            final MachineLearningModule module = loadAndDerive("written-testing.mll");
 
             // then
             Assertions.assertEquals(1, module.getTestingUseCase().getStatements().size());

@@ -27,9 +27,9 @@ import org.eclipse.emf.ecore.EPackage;
 import de.evoal.core.api.dynamic.EClassProvider;
 import de.evoal.pipeline.api.cdi.DefinitionModuleLoader;
 import de.evoal.surrogate.main.cdi.MachineLearningModuleLoader;
-import de.evoal.surrogate.main.internal.DefaultBehaviourInjector;
 import de.evoal.surrogate.main.internal.SurrogateModelTransformer;
 import de.evoal.surrogate.main.internal.MLLProgramExecutionSwitch;
+import de.evoal.surrogate.main.internal.UseCaseDerivation;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -41,8 +41,9 @@ import java.util.Set;
 
 /**
  * Trains a surrogate model as configured in an MLL file: runs the learning use case and, if
- *   the module has one (written out or added for {@code testing with [...]}), the testing use
- *   case.
+ *   the module has one (written out or derived for {@code testing with [...]}), the testing use
+ *   case. Use cases and settings that the module leaves out are derived from the learning task
+ *   ({@link UseCaseDerivation}).
  */
 @Slf4j
 @ApplicationScoped
@@ -100,12 +101,7 @@ public class SurrogateMain implements MainClass {
         final EClass model = provider.eClassFor(module);
         final Space space = new Space(model);
 
-        log.info("Making implicit behaviour explicit in model.");
-        new DefaultBehaviourInjector(dlLoader, module.getTask().getInputs(), module.getTask().getOutputs()).inject(module);
-
-        if(module.getLearningUseCase() == null) {
-            throw new IllegalStateException("The MLL file has no learning use case: add 'specify learning begin ... end;' to its 'use cases'.");
-        }
+        new UseCaseDerivation(dlLoader).derive(module);
 
         log.info("Converting machine learning model to pipeline model.");
         final List<EStructuralFeature> useCases = List.of(

@@ -18,62 +18,95 @@ module 'de.evoal.surrogate.pipeline' {
 	}
 
 	/**
-	 * Component for loading training data and using it for the pipeline. 
-	 */	
+	 * Source of the learning use case: reads the training data. The goodness of fit on the
+	 * training data and the estimates of the adaption use the same files and features.
+	 * In an MLL file, a step without <code>writes</code> writes the input and output features
+	 * of the learning task, and left-out attributes are derived from the learning task.
+	 */
 	type 'training-data-loader' extends configuration {
 		/**
-		 * List of files or directories to use
+		 * The files to read, relative to the working folder; derived from
+		 * <code>learning from [...]</code> if left out.
 		 */
 		'training-files' : optional array string;
-		
+
 		/**
-		 * The input features of the model.
+		 * The input features to read; derived from <code>input features</code> if left out.
 		 */
          'input-features' : optional array data;
-         
+
          /**
-          * The output features of the model.
+          * The output features to read; derived from <code>output features</code> if left out.
           */
          'output-features' : optional array data;
 	}
 
     /**
-     * Pipeline step for learning a model.
+     * Pipeline step for learning a model. In an MLL file, a step without <code>reads</code>
+     * reads the input and output features of the learning task, and left-out attributes are
+     * derived from the module.
      */
 	type 'model-learner' extends Processor {
         /**
-         * The model (and the hyper parameters) to learn.
+         * The model (and the hyper parameters) to learn; derived from
+         * <code>specify model</code> if left out.
          */
          'model' : optional instance surrogate;
-         
+
 	    /**
-	     * Location for storing the model.
+	     * Location for storing the model; derived from <code>serialise to</code> if left out.
 	     */
 	    'model-file' : optional string;
 
 		/**
-		 * The input features of the model.
+		 * The input features of the model; derived from <code>input features</code> if left
+		 * out.
 		 */
          'input-features' : optional array data;
-         
+
          /**
-          * The output features of the model.
+          * The output features of the model; derived from <code>output features</code> if
+          * left out.
           */
          'output-features' : optional array data;
 	}
 
+	/**
+	 * Predicts the outputs of each data object with the learned model. In an MLL file, a step
+	 * without <code>reads</code> reads the input features and a step without
+	 * <code>writes</code> writes the output features of the learning task.
+	 */
 	type 'model-prediction' extends Processor {}
 
 	/**
-	 * Source of the testing use case: reads the test data of the learning task
-	 * (<code>testing with [...]</code>).
+	 * Source of the testing use case: reads the test data. In an MLL file, a step without
+	 * <code>writes</code> writes the input and output features of the learning task, and
+	 * left-out attributes are derived from the learning task.
 	 */
-	type 'test-data-loader' extends configuration {}
+	type 'test-data-loader' extends configuration {
+		/**
+		 * The files to read, relative to the working folder; derived from
+		 * <code>testing with [...]</code> if left out.
+		 */
+		'testing-files' : optional array string;
+
+		/**
+		 * The input features to read; derived from <code>input features</code> if left out.
+		 */
+		'input-features' : optional array data;
+
+		/**
+		 * The output features to read; derived from <code>output features</code> if left out.
+		 */
+		'output-features' : optional array data;
+	}
 
 	/**
 	 * Collects the data that reaches it as the data set that the next
 	 * <code>'gof-calculator'()</code> assesses: the goodness-of-fit measures predict the
 	 * outputs from the inputs of each data object and compare them with its outputs.
+	 * In an MLL file, a step without <code>reads</code> reads the input and output features
+	 * of the learning task.
 	 */
 	type 'assessment-data' extends Processor {
 		/**

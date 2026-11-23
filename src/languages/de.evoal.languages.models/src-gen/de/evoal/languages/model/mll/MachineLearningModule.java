@@ -177,7 +177,8 @@ public interface MachineLearningModule extends de.evoal.languages.model.base.Mod
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * 
-	 * The learning use-case pipeline.
+	 * The learning use-case pipeline; derived from the learning task if the
+	 *   module does not write it out.
 	 * 
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Learning Use Case</em>' containment reference.
@@ -204,13 +205,14 @@ public interface MachineLearningModule extends de.evoal.languages.model.base.Mod
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * 
-	 * The prediction use-case pipeline.
+	 * The prediction use-case pipeline; derived from the learning task if the
+	 *   module does not write it out.
 	 * 
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Prediction Use Case</em>' containment reference.
 	 * @see #setPredictionUseCase(PipelineDefinition)
 	 * @see de.evoal.languages.model.mll.MllPackage#getMachineLearningModule_PredictionUseCase()
-	 * @model containment="true" required="true"
+	 * @model containment="true"
 	 * @generated
 	 */
 	PipelineDefinition getPredictionUseCase();
@@ -231,7 +233,8 @@ public interface MachineLearningModule extends de.evoal.languages.model.base.Mod
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * 
-	 * The testing use case: assesses the learned model on the test data.
+	 * The testing use case: assesses the learned model on the test data; derived
+	 *   from the learning task if the module does not write it out and the task has test data.
 	 * 
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Testing Use Case</em>' containment reference.

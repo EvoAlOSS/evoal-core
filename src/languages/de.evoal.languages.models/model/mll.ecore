@@ -48,19 +48,19 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="learningUseCase" eType="ecore:EClass execution.ecore#//Block"
         containment="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="&#xA;The learning use-case pipeline.&#xA;"/>
+        <details key="documentation" value="&#xA;The learning use-case pipeline; derived from the learning task if the&#xA;  module does not write it out.&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="predictionUseCase" lowerBound="1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="predictionUseCase"
         eType="ecore:EClass generator.ecore#//PipelineDefinition" containment="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="&#xA;The prediction use-case pipeline.&#xA;"/>
+        <details key="documentation" value="&#xA;The prediction use-case pipeline; derived from the learning task if the&#xA;  module does not write it out.&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="testingUseCase" eType="ecore:EClass execution.ecore#//Block"
         containment="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="&#xA;The testing use case: assesses the learned model on the test data.&#xA;"/>
+        <details key="documentation" value="&#xA;The testing use case: assesses the learned model on the test data; derived&#xA;  from the learning task if the module does not write it out and the task has test data.&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>

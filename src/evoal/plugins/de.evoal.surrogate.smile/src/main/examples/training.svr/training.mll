@@ -30,36 +30,4 @@ module training {
 	specify gof begin 
 		'R²'();
 	end
-	
-	use cases
-	  specify learning 
-	  begin
-	  	'execute'([
-	  		step {
-	  			component 'training-data-loader' {}
-	  			writes [data 'x:0', data 'y:0']; // should be default
-	  		},
-		  	pipeline 'validation',
-			pipeline 'preparation',
-			step {
-				component 'model-learner' {}
-				reads [data 'x:0', data 'y:0']; // should be default
-			}
-	  	]);
-	  	
-		'gof-calculator'( );
-		
-		'store-model'();
-	  end;
-
-	  specify predicting 
-		begin 
-            pipeline 'preparation'
-            step {
-                component 'model-prediction' {}
-    			reads [data 'x:0']; // should be default
-    			writes [data 'y:0']; // should be default
-            }
-		end;
-	end
 }
