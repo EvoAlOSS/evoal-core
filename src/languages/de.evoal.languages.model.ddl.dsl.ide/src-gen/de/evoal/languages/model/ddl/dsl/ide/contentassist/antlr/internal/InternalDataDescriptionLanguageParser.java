@@ -25569,7 +25569,7 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
             // InternalDataDescriptionLanguage.g:7638:1: ( rule__ParameterRule__Group__0__Impl rule__ParameterRule__Group__1 )
             // InternalDataDescriptionLanguage.g:7639:2: rule__ParameterRule__Group__0__Impl rule__ParameterRule__Group__1
             {
-            pushFollow(FOLLOW_5);
+            pushFollow(FOLLOW_58);
             rule__ParameterRule__Group__0__Impl();
 
             state._fsp--;
@@ -25598,34 +25598,52 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__ParameterRule__Group__0__Impl"
-    // InternalDataDescriptionLanguage.g:7646:1: rule__ParameterRule__Group__0__Impl : ( ( rule__ParameterRule__TypeAssignment_0 ) ) ;
+    // InternalDataDescriptionLanguage.g:7646:1: rule__ParameterRule__Group__0__Impl : ( ( rule__ParameterRule__ConstraintsAssignment_0 )* ) ;
     public final void rule__ParameterRule__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:7650:1: ( ( ( rule__ParameterRule__TypeAssignment_0 ) ) )
-            // InternalDataDescriptionLanguage.g:7651:1: ( ( rule__ParameterRule__TypeAssignment_0 ) )
+            // InternalDataDescriptionLanguage.g:7650:1: ( ( ( rule__ParameterRule__ConstraintsAssignment_0 )* ) )
+            // InternalDataDescriptionLanguage.g:7651:1: ( ( rule__ParameterRule__ConstraintsAssignment_0 )* )
             {
-            // InternalDataDescriptionLanguage.g:7651:1: ( ( rule__ParameterRule__TypeAssignment_0 ) )
-            // InternalDataDescriptionLanguage.g:7652:2: ( rule__ParameterRule__TypeAssignment_0 )
+            // InternalDataDescriptionLanguage.g:7651:1: ( ( rule__ParameterRule__ConstraintsAssignment_0 )* )
+            // InternalDataDescriptionLanguage.g:7652:2: ( rule__ParameterRule__ConstraintsAssignment_0 )*
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getParameterRuleAccess().getTypeAssignment_0()); 
+               before(grammarAccess.getParameterRuleAccess().getConstraintsAssignment_0()); 
             }
-            // InternalDataDescriptionLanguage.g:7653:2: ( rule__ParameterRule__TypeAssignment_0 )
-            // InternalDataDescriptionLanguage.g:7653:3: rule__ParameterRule__TypeAssignment_0
-            {
-            pushFollow(FOLLOW_2);
-            rule__ParameterRule__TypeAssignment_0();
+            // InternalDataDescriptionLanguage.g:7653:2: ( rule__ParameterRule__ConstraintsAssignment_0 )*
+            loop62:
+            do {
+                int alt62=2;
+                int LA62_0 = input.LA(1);
 
-            state._fsp--;
-            if (state.failed) return ;
+                if ( (LA62_0==83) ) {
+                    alt62=1;
+                }
 
-            }
+
+                switch (alt62) {
+            	case 1 :
+            	    // InternalDataDescriptionLanguage.g:7653:3: rule__ParameterRule__ConstraintsAssignment_0
+            	    {
+            	    pushFollow(FOLLOW_15);
+            	    rule__ParameterRule__ConstraintsAssignment_0();
+
+            	    state._fsp--;
+            	    if (state.failed) return ;
+
+            	    }
+            	    break;
+
+            	default :
+            	    break loop62;
+                }
+            } while (true);
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getParameterRuleAccess().getTypeAssignment_0()); 
+               after(grammarAccess.getParameterRuleAccess().getConstraintsAssignment_0()); 
             }
 
             }
@@ -25649,17 +25667,22 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__ParameterRule__Group__1"
-    // InternalDataDescriptionLanguage.g:7661:1: rule__ParameterRule__Group__1 : rule__ParameterRule__Group__1__Impl ;
+    // InternalDataDescriptionLanguage.g:7661:1: rule__ParameterRule__Group__1 : rule__ParameterRule__Group__1__Impl rule__ParameterRule__Group__2 ;
     public final void rule__ParameterRule__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:7665:1: ( rule__ParameterRule__Group__1__Impl )
-            // InternalDataDescriptionLanguage.g:7666:2: rule__ParameterRule__Group__1__Impl
+            // InternalDataDescriptionLanguage.g:7665:1: ( rule__ParameterRule__Group__1__Impl rule__ParameterRule__Group__2 )
+            // InternalDataDescriptionLanguage.g:7666:2: rule__ParameterRule__Group__1__Impl rule__ParameterRule__Group__2
             {
-            pushFollow(FOLLOW_2);
+            pushFollow(FOLLOW_5);
             rule__ParameterRule__Group__1__Impl();
+
+            state._fsp--;
+            if (state.failed) return ;
+            pushFollow(FOLLOW_2);
+            rule__ParameterRule__Group__2();
 
             state._fsp--;
             if (state.failed) return ;
@@ -25682,26 +25705,26 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__ParameterRule__Group__1__Impl"
-    // InternalDataDescriptionLanguage.g:7672:1: rule__ParameterRule__Group__1__Impl : ( ( rule__ParameterRule__NameAssignment_1 ) ) ;
+    // InternalDataDescriptionLanguage.g:7673:1: rule__ParameterRule__Group__1__Impl : ( ( rule__ParameterRule__TypeAssignment_1 ) ) ;
     public final void rule__ParameterRule__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:7676:1: ( ( ( rule__ParameterRule__NameAssignment_1 ) ) )
-            // InternalDataDescriptionLanguage.g:7677:1: ( ( rule__ParameterRule__NameAssignment_1 ) )
+            // InternalDataDescriptionLanguage.g:7677:1: ( ( ( rule__ParameterRule__TypeAssignment_1 ) ) )
+            // InternalDataDescriptionLanguage.g:7678:1: ( ( rule__ParameterRule__TypeAssignment_1 ) )
             {
-            // InternalDataDescriptionLanguage.g:7677:1: ( ( rule__ParameterRule__NameAssignment_1 ) )
-            // InternalDataDescriptionLanguage.g:7678:2: ( rule__ParameterRule__NameAssignment_1 )
+            // InternalDataDescriptionLanguage.g:7678:1: ( ( rule__ParameterRule__TypeAssignment_1 ) )
+            // InternalDataDescriptionLanguage.g:7679:2: ( rule__ParameterRule__TypeAssignment_1 )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getParameterRuleAccess().getNameAssignment_1()); 
+               before(grammarAccess.getParameterRuleAccess().getTypeAssignment_1()); 
             }
-            // InternalDataDescriptionLanguage.g:7679:2: ( rule__ParameterRule__NameAssignment_1 )
-            // InternalDataDescriptionLanguage.g:7679:3: rule__ParameterRule__NameAssignment_1
+            // InternalDataDescriptionLanguage.g:7680:2: ( rule__ParameterRule__TypeAssignment_1 )
+            // InternalDataDescriptionLanguage.g:7680:3: rule__ParameterRule__TypeAssignment_1
             {
             pushFollow(FOLLOW_2);
-            rule__ParameterRule__NameAssignment_1();
+            rule__ParameterRule__TypeAssignment_1();
 
             state._fsp--;
             if (state.failed) return ;
@@ -25709,7 +25732,7 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getParameterRuleAccess().getNameAssignment_1()); 
+               after(grammarAccess.getParameterRuleAccess().getTypeAssignment_1()); 
             }
 
             }
@@ -25732,15 +25755,99 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
     // $ANTLR end "rule__ParameterRule__Group__1__Impl"
 
 
+    // $ANTLR start "rule__ParameterRule__Group__2"
+    // InternalDataDescriptionLanguage.g:7688:1: rule__ParameterRule__Group__2 : rule__ParameterRule__Group__2__Impl ;
+    public final void rule__ParameterRule__Group__2() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalDataDescriptionLanguage.g:7692:1: ( rule__ParameterRule__Group__2__Impl )
+            // InternalDataDescriptionLanguage.g:7693:2: rule__ParameterRule__Group__2__Impl
+            {
+            pushFollow(FOLLOW_2);
+            rule__ParameterRule__Group__2__Impl();
+
+            state._fsp--;
+            if (state.failed) return ;
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__ParameterRule__Group__2"
+
+
+    // $ANTLR start "rule__ParameterRule__Group__2__Impl"
+    // InternalDataDescriptionLanguage.g:7699:1: rule__ParameterRule__Group__2__Impl : ( ( rule__ParameterRule__NameAssignment_2 ) ) ;
+    public final void rule__ParameterRule__Group__2__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalDataDescriptionLanguage.g:7703:1: ( ( ( rule__ParameterRule__NameAssignment_2 ) ) )
+            // InternalDataDescriptionLanguage.g:7704:1: ( ( rule__ParameterRule__NameAssignment_2 ) )
+            {
+            // InternalDataDescriptionLanguage.g:7704:1: ( ( rule__ParameterRule__NameAssignment_2 ) )
+            // InternalDataDescriptionLanguage.g:7705:2: ( rule__ParameterRule__NameAssignment_2 )
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getParameterRuleAccess().getNameAssignment_2()); 
+            }
+            // InternalDataDescriptionLanguage.g:7706:2: ( rule__ParameterRule__NameAssignment_2 )
+            // InternalDataDescriptionLanguage.g:7706:3: rule__ParameterRule__NameAssignment_2
+            {
+            pushFollow(FOLLOW_2);
+            rule__ParameterRule__NameAssignment_2();
+
+            state._fsp--;
+            if (state.failed) return ;
+
+            }
+
+            if ( state.backtracking==0 ) {
+               after(grammarAccess.getParameterRuleAccess().getNameAssignment_2()); 
+            }
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__ParameterRule__Group__2__Impl"
+
+
     // $ANTLR start "rule__ImportRule__Group__0"
-    // InternalDataDescriptionLanguage.g:7688:1: rule__ImportRule__Group__0 : rule__ImportRule__Group__0__Impl rule__ImportRule__Group__1 ;
+    // InternalDataDescriptionLanguage.g:7715:1: rule__ImportRule__Group__0 : rule__ImportRule__Group__0__Impl rule__ImportRule__Group__1 ;
     public final void rule__ImportRule__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:7692:1: ( rule__ImportRule__Group__0__Impl rule__ImportRule__Group__1 )
-            // InternalDataDescriptionLanguage.g:7693:2: rule__ImportRule__Group__0__Impl rule__ImportRule__Group__1
+            // InternalDataDescriptionLanguage.g:7719:1: ( rule__ImportRule__Group__0__Impl rule__ImportRule__Group__1 )
+            // InternalDataDescriptionLanguage.g:7720:2: rule__ImportRule__Group__0__Impl rule__ImportRule__Group__1
             {
             pushFollow(FOLLOW_47);
             rule__ImportRule__Group__0__Impl();
@@ -25771,17 +25878,17 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__ImportRule__Group__0__Impl"
-    // InternalDataDescriptionLanguage.g:7700:1: rule__ImportRule__Group__0__Impl : ( 'import' ) ;
+    // InternalDataDescriptionLanguage.g:7727:1: rule__ImportRule__Group__0__Impl : ( 'import' ) ;
     public final void rule__ImportRule__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:7704:1: ( ( 'import' ) )
-            // InternalDataDescriptionLanguage.g:7705:1: ( 'import' )
+            // InternalDataDescriptionLanguage.g:7731:1: ( ( 'import' ) )
+            // InternalDataDescriptionLanguage.g:7732:1: ( 'import' )
             {
-            // InternalDataDescriptionLanguage.g:7705:1: ( 'import' )
-            // InternalDataDescriptionLanguage.g:7706:2: 'import'
+            // InternalDataDescriptionLanguage.g:7732:1: ( 'import' )
+            // InternalDataDescriptionLanguage.g:7733:2: 'import'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getImportRuleAccess().getImportKeyword_0()); 
@@ -25812,14 +25919,14 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__ImportRule__Group__1"
-    // InternalDataDescriptionLanguage.g:7715:1: rule__ImportRule__Group__1 : rule__ImportRule__Group__1__Impl rule__ImportRule__Group__2 ;
+    // InternalDataDescriptionLanguage.g:7742:1: rule__ImportRule__Group__1 : rule__ImportRule__Group__1__Impl rule__ImportRule__Group__2 ;
     public final void rule__ImportRule__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:7719:1: ( rule__ImportRule__Group__1__Impl rule__ImportRule__Group__2 )
-            // InternalDataDescriptionLanguage.g:7720:2: rule__ImportRule__Group__1__Impl rule__ImportRule__Group__2
+            // InternalDataDescriptionLanguage.g:7746:1: ( rule__ImportRule__Group__1__Impl rule__ImportRule__Group__2 )
+            // InternalDataDescriptionLanguage.g:7747:2: rule__ImportRule__Group__1__Impl rule__ImportRule__Group__2
             {
             pushFollow(FOLLOW_67);
             rule__ImportRule__Group__1__Impl();
@@ -25850,23 +25957,23 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__ImportRule__Group__1__Impl"
-    // InternalDataDescriptionLanguage.g:7727:1: rule__ImportRule__Group__1__Impl : ( ( rule__ImportRule__LanguageAssignment_1 ) ) ;
+    // InternalDataDescriptionLanguage.g:7754:1: rule__ImportRule__Group__1__Impl : ( ( rule__ImportRule__LanguageAssignment_1 ) ) ;
     public final void rule__ImportRule__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:7731:1: ( ( ( rule__ImportRule__LanguageAssignment_1 ) ) )
-            // InternalDataDescriptionLanguage.g:7732:1: ( ( rule__ImportRule__LanguageAssignment_1 ) )
+            // InternalDataDescriptionLanguage.g:7758:1: ( ( ( rule__ImportRule__LanguageAssignment_1 ) ) )
+            // InternalDataDescriptionLanguage.g:7759:1: ( ( rule__ImportRule__LanguageAssignment_1 ) )
             {
-            // InternalDataDescriptionLanguage.g:7732:1: ( ( rule__ImportRule__LanguageAssignment_1 ) )
-            // InternalDataDescriptionLanguage.g:7733:2: ( rule__ImportRule__LanguageAssignment_1 )
+            // InternalDataDescriptionLanguage.g:7759:1: ( ( rule__ImportRule__LanguageAssignment_1 ) )
+            // InternalDataDescriptionLanguage.g:7760:2: ( rule__ImportRule__LanguageAssignment_1 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getImportRuleAccess().getLanguageAssignment_1()); 
             }
-            // InternalDataDescriptionLanguage.g:7734:2: ( rule__ImportRule__LanguageAssignment_1 )
-            // InternalDataDescriptionLanguage.g:7734:3: rule__ImportRule__LanguageAssignment_1
+            // InternalDataDescriptionLanguage.g:7761:2: ( rule__ImportRule__LanguageAssignment_1 )
+            // InternalDataDescriptionLanguage.g:7761:3: rule__ImportRule__LanguageAssignment_1
             {
             pushFollow(FOLLOW_2);
             rule__ImportRule__LanguageAssignment_1();
@@ -25901,14 +26008,14 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__ImportRule__Group__2"
-    // InternalDataDescriptionLanguage.g:7742:1: rule__ImportRule__Group__2 : rule__ImportRule__Group__2__Impl rule__ImportRule__Group__3 ;
+    // InternalDataDescriptionLanguage.g:7769:1: rule__ImportRule__Group__2 : rule__ImportRule__Group__2__Impl rule__ImportRule__Group__3 ;
     public final void rule__ImportRule__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:7746:1: ( rule__ImportRule__Group__2__Impl rule__ImportRule__Group__3 )
-            // InternalDataDescriptionLanguage.g:7747:2: rule__ImportRule__Group__2__Impl rule__ImportRule__Group__3
+            // InternalDataDescriptionLanguage.g:7773:1: ( rule__ImportRule__Group__2__Impl rule__ImportRule__Group__3 )
+            // InternalDataDescriptionLanguage.g:7774:2: rule__ImportRule__Group__2__Impl rule__ImportRule__Group__3
             {
             pushFollow(FOLLOW_5);
             rule__ImportRule__Group__2__Impl();
@@ -25939,17 +26046,17 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__ImportRule__Group__2__Impl"
-    // InternalDataDescriptionLanguage.g:7754:1: rule__ImportRule__Group__2__Impl : ( 'from' ) ;
+    // InternalDataDescriptionLanguage.g:7781:1: rule__ImportRule__Group__2__Impl : ( 'from' ) ;
     public final void rule__ImportRule__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:7758:1: ( ( 'from' ) )
-            // InternalDataDescriptionLanguage.g:7759:1: ( 'from' )
+            // InternalDataDescriptionLanguage.g:7785:1: ( ( 'from' ) )
+            // InternalDataDescriptionLanguage.g:7786:1: ( 'from' )
             {
-            // InternalDataDescriptionLanguage.g:7759:1: ( 'from' )
-            // InternalDataDescriptionLanguage.g:7760:2: 'from'
+            // InternalDataDescriptionLanguage.g:7786:1: ( 'from' )
+            // InternalDataDescriptionLanguage.g:7787:2: 'from'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getImportRuleAccess().getFromKeyword_2()); 
@@ -25980,14 +26087,14 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__ImportRule__Group__3"
-    // InternalDataDescriptionLanguage.g:7769:1: rule__ImportRule__Group__3 : rule__ImportRule__Group__3__Impl rule__ImportRule__Group__4 ;
+    // InternalDataDescriptionLanguage.g:7796:1: rule__ImportRule__Group__3 : rule__ImportRule__Group__3__Impl rule__ImportRule__Group__4 ;
     public final void rule__ImportRule__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:7773:1: ( rule__ImportRule__Group__3__Impl rule__ImportRule__Group__4 )
-            // InternalDataDescriptionLanguage.g:7774:2: rule__ImportRule__Group__3__Impl rule__ImportRule__Group__4
+            // InternalDataDescriptionLanguage.g:7800:1: ( rule__ImportRule__Group__3__Impl rule__ImportRule__Group__4 )
+            // InternalDataDescriptionLanguage.g:7801:2: rule__ImportRule__Group__3__Impl rule__ImportRule__Group__4
             {
             pushFollow(FOLLOW_29);
             rule__ImportRule__Group__3__Impl();
@@ -26018,23 +26125,23 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__ImportRule__Group__3__Impl"
-    // InternalDataDescriptionLanguage.g:7781:1: rule__ImportRule__Group__3__Impl : ( ( rule__ImportRule__ImportedNamespaceAssignment_3 ) ) ;
+    // InternalDataDescriptionLanguage.g:7808:1: rule__ImportRule__Group__3__Impl : ( ( rule__ImportRule__ImportedNamespaceAssignment_3 ) ) ;
     public final void rule__ImportRule__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:7785:1: ( ( ( rule__ImportRule__ImportedNamespaceAssignment_3 ) ) )
-            // InternalDataDescriptionLanguage.g:7786:1: ( ( rule__ImportRule__ImportedNamespaceAssignment_3 ) )
+            // InternalDataDescriptionLanguage.g:7812:1: ( ( ( rule__ImportRule__ImportedNamespaceAssignment_3 ) ) )
+            // InternalDataDescriptionLanguage.g:7813:1: ( ( rule__ImportRule__ImportedNamespaceAssignment_3 ) )
             {
-            // InternalDataDescriptionLanguage.g:7786:1: ( ( rule__ImportRule__ImportedNamespaceAssignment_3 ) )
-            // InternalDataDescriptionLanguage.g:7787:2: ( rule__ImportRule__ImportedNamespaceAssignment_3 )
+            // InternalDataDescriptionLanguage.g:7813:1: ( ( rule__ImportRule__ImportedNamespaceAssignment_3 ) )
+            // InternalDataDescriptionLanguage.g:7814:2: ( rule__ImportRule__ImportedNamespaceAssignment_3 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getImportRuleAccess().getImportedNamespaceAssignment_3()); 
             }
-            // InternalDataDescriptionLanguage.g:7788:2: ( rule__ImportRule__ImportedNamespaceAssignment_3 )
-            // InternalDataDescriptionLanguage.g:7788:3: rule__ImportRule__ImportedNamespaceAssignment_3
+            // InternalDataDescriptionLanguage.g:7815:2: ( rule__ImportRule__ImportedNamespaceAssignment_3 )
+            // InternalDataDescriptionLanguage.g:7815:3: rule__ImportRule__ImportedNamespaceAssignment_3
             {
             pushFollow(FOLLOW_2);
             rule__ImportRule__ImportedNamespaceAssignment_3();
@@ -26069,14 +26176,14 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__ImportRule__Group__4"
-    // InternalDataDescriptionLanguage.g:7796:1: rule__ImportRule__Group__4 : rule__ImportRule__Group__4__Impl ;
+    // InternalDataDescriptionLanguage.g:7823:1: rule__ImportRule__Group__4 : rule__ImportRule__Group__4__Impl ;
     public final void rule__ImportRule__Group__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:7800:1: ( rule__ImportRule__Group__4__Impl )
-            // InternalDataDescriptionLanguage.g:7801:2: rule__ImportRule__Group__4__Impl
+            // InternalDataDescriptionLanguage.g:7827:1: ( rule__ImportRule__Group__4__Impl )
+            // InternalDataDescriptionLanguage.g:7828:2: rule__ImportRule__Group__4__Impl
             {
             pushFollow(FOLLOW_2);
             rule__ImportRule__Group__4__Impl();
@@ -26102,17 +26209,17 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__ImportRule__Group__4__Impl"
-    // InternalDataDescriptionLanguage.g:7807:1: rule__ImportRule__Group__4__Impl : ( ';' ) ;
+    // InternalDataDescriptionLanguage.g:7834:1: rule__ImportRule__Group__4__Impl : ( ';' ) ;
     public final void rule__ImportRule__Group__4__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:7811:1: ( ( ';' ) )
-            // InternalDataDescriptionLanguage.g:7812:1: ( ';' )
+            // InternalDataDescriptionLanguage.g:7838:1: ( ( ';' ) )
+            // InternalDataDescriptionLanguage.g:7839:1: ( ';' )
             {
-            // InternalDataDescriptionLanguage.g:7812:1: ( ';' )
-            // InternalDataDescriptionLanguage.g:7813:2: ';'
+            // InternalDataDescriptionLanguage.g:7839:1: ( ';' )
+            // InternalDataDescriptionLanguage.g:7840:2: ';'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getImportRuleAccess().getSemicolonKeyword_4()); 
@@ -26143,14 +26250,14 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__QualifiedName__Group__0"
-    // InternalDataDescriptionLanguage.g:7823:1: rule__QualifiedName__Group__0 : rule__QualifiedName__Group__0__Impl rule__QualifiedName__Group__1 ;
+    // InternalDataDescriptionLanguage.g:7850:1: rule__QualifiedName__Group__0 : rule__QualifiedName__Group__0__Impl rule__QualifiedName__Group__1 ;
     public final void rule__QualifiedName__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:7827:1: ( rule__QualifiedName__Group__0__Impl rule__QualifiedName__Group__1 )
-            // InternalDataDescriptionLanguage.g:7828:2: rule__QualifiedName__Group__0__Impl rule__QualifiedName__Group__1
+            // InternalDataDescriptionLanguage.g:7854:1: ( rule__QualifiedName__Group__0__Impl rule__QualifiedName__Group__1 )
+            // InternalDataDescriptionLanguage.g:7855:2: rule__QualifiedName__Group__0__Impl rule__QualifiedName__Group__1
             {
             pushFollow(FOLLOW_50);
             rule__QualifiedName__Group__0__Impl();
@@ -26181,17 +26288,17 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__QualifiedName__Group__0__Impl"
-    // InternalDataDescriptionLanguage.g:7835:1: rule__QualifiedName__Group__0__Impl : ( ruleStringOrId ) ;
+    // InternalDataDescriptionLanguage.g:7862:1: rule__QualifiedName__Group__0__Impl : ( ruleStringOrId ) ;
     public final void rule__QualifiedName__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:7839:1: ( ( ruleStringOrId ) )
-            // InternalDataDescriptionLanguage.g:7840:1: ( ruleStringOrId )
+            // InternalDataDescriptionLanguage.g:7866:1: ( ( ruleStringOrId ) )
+            // InternalDataDescriptionLanguage.g:7867:1: ( ruleStringOrId )
             {
-            // InternalDataDescriptionLanguage.g:7840:1: ( ruleStringOrId )
-            // InternalDataDescriptionLanguage.g:7841:2: ruleStringOrId
+            // InternalDataDescriptionLanguage.g:7867:1: ( ruleStringOrId )
+            // InternalDataDescriptionLanguage.g:7868:2: ruleStringOrId
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getQualifiedNameAccess().getStringOrIdParserRuleCall_0()); 
@@ -26226,14 +26333,14 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__QualifiedName__Group__1"
-    // InternalDataDescriptionLanguage.g:7850:1: rule__QualifiedName__Group__1 : rule__QualifiedName__Group__1__Impl ;
+    // InternalDataDescriptionLanguage.g:7877:1: rule__QualifiedName__Group__1 : rule__QualifiedName__Group__1__Impl ;
     public final void rule__QualifiedName__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:7854:1: ( rule__QualifiedName__Group__1__Impl )
-            // InternalDataDescriptionLanguage.g:7855:2: rule__QualifiedName__Group__1__Impl
+            // InternalDataDescriptionLanguage.g:7881:1: ( rule__QualifiedName__Group__1__Impl )
+            // InternalDataDescriptionLanguage.g:7882:2: rule__QualifiedName__Group__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__QualifiedName__Group__1__Impl();
@@ -26259,44 +26366,44 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__QualifiedName__Group__1__Impl"
-    // InternalDataDescriptionLanguage.g:7861:1: rule__QualifiedName__Group__1__Impl : ( ( rule__QualifiedName__Group_1__0 )* ) ;
+    // InternalDataDescriptionLanguage.g:7888:1: rule__QualifiedName__Group__1__Impl : ( ( rule__QualifiedName__Group_1__0 )* ) ;
     public final void rule__QualifiedName__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:7865:1: ( ( ( rule__QualifiedName__Group_1__0 )* ) )
-            // InternalDataDescriptionLanguage.g:7866:1: ( ( rule__QualifiedName__Group_1__0 )* )
+            // InternalDataDescriptionLanguage.g:7892:1: ( ( ( rule__QualifiedName__Group_1__0 )* ) )
+            // InternalDataDescriptionLanguage.g:7893:1: ( ( rule__QualifiedName__Group_1__0 )* )
             {
-            // InternalDataDescriptionLanguage.g:7866:1: ( ( rule__QualifiedName__Group_1__0 )* )
-            // InternalDataDescriptionLanguage.g:7867:2: ( rule__QualifiedName__Group_1__0 )*
+            // InternalDataDescriptionLanguage.g:7893:1: ( ( rule__QualifiedName__Group_1__0 )* )
+            // InternalDataDescriptionLanguage.g:7894:2: ( rule__QualifiedName__Group_1__0 )*
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getQualifiedNameAccess().getGroup_1()); 
             }
-            // InternalDataDescriptionLanguage.g:7868:2: ( rule__QualifiedName__Group_1__0 )*
-            loop62:
+            // InternalDataDescriptionLanguage.g:7895:2: ( rule__QualifiedName__Group_1__0 )*
+            loop63:
             do {
-                int alt62=2;
-                int LA62_0 = input.LA(1);
+                int alt63=2;
+                int LA63_0 = input.LA(1);
 
-                if ( (LA62_0==80) ) {
-                    int LA62_2 = input.LA(2);
+                if ( (LA63_0==80) ) {
+                    int LA63_2 = input.LA(2);
 
-                    if ( (LA62_2==RULE_QUOTED_ID) ) {
-                        int LA62_3 = input.LA(3);
+                    if ( (LA63_2==RULE_QUOTED_ID) ) {
+                        int LA63_3 = input.LA(3);
 
-                        if ( (synpred107_InternalDataDescriptionLanguage()) ) {
-                            alt62=1;
+                        if ( (synpred108_InternalDataDescriptionLanguage()) ) {
+                            alt63=1;
                         }
 
 
                     }
-                    else if ( (LA62_2==RULE_ID) ) {
-                        int LA62_4 = input.LA(3);
+                    else if ( (LA63_2==RULE_ID) ) {
+                        int LA63_4 = input.LA(3);
 
-                        if ( (synpred107_InternalDataDescriptionLanguage()) ) {
-                            alt62=1;
+                        if ( (synpred108_InternalDataDescriptionLanguage()) ) {
+                            alt63=1;
                         }
 
 
@@ -26306,9 +26413,9 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
                 }
 
 
-                switch (alt62) {
+                switch (alt63) {
             	case 1 :
-            	    // InternalDataDescriptionLanguage.g:7868:3: rule__QualifiedName__Group_1__0
+            	    // InternalDataDescriptionLanguage.g:7895:3: rule__QualifiedName__Group_1__0
             	    {
             	    pushFollow(FOLLOW_51);
             	    rule__QualifiedName__Group_1__0();
@@ -26320,7 +26427,7 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
             	    break;
 
             	default :
-            	    break loop62;
+            	    break loop63;
                 }
             } while (true);
 
@@ -26349,14 +26456,14 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__QualifiedName__Group_1__0"
-    // InternalDataDescriptionLanguage.g:7877:1: rule__QualifiedName__Group_1__0 : rule__QualifiedName__Group_1__0__Impl rule__QualifiedName__Group_1__1 ;
+    // InternalDataDescriptionLanguage.g:7904:1: rule__QualifiedName__Group_1__0 : rule__QualifiedName__Group_1__0__Impl rule__QualifiedName__Group_1__1 ;
     public final void rule__QualifiedName__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:7881:1: ( rule__QualifiedName__Group_1__0__Impl rule__QualifiedName__Group_1__1 )
-            // InternalDataDescriptionLanguage.g:7882:2: rule__QualifiedName__Group_1__0__Impl rule__QualifiedName__Group_1__1
+            // InternalDataDescriptionLanguage.g:7908:1: ( rule__QualifiedName__Group_1__0__Impl rule__QualifiedName__Group_1__1 )
+            // InternalDataDescriptionLanguage.g:7909:2: rule__QualifiedName__Group_1__0__Impl rule__QualifiedName__Group_1__1
             {
             pushFollow(FOLLOW_5);
             rule__QualifiedName__Group_1__0__Impl();
@@ -26387,17 +26494,17 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__QualifiedName__Group_1__0__Impl"
-    // InternalDataDescriptionLanguage.g:7889:1: rule__QualifiedName__Group_1__0__Impl : ( '.' ) ;
+    // InternalDataDescriptionLanguage.g:7916:1: rule__QualifiedName__Group_1__0__Impl : ( '.' ) ;
     public final void rule__QualifiedName__Group_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:7893:1: ( ( '.' ) )
-            // InternalDataDescriptionLanguage.g:7894:1: ( '.' )
+            // InternalDataDescriptionLanguage.g:7920:1: ( ( '.' ) )
+            // InternalDataDescriptionLanguage.g:7921:1: ( '.' )
             {
-            // InternalDataDescriptionLanguage.g:7894:1: ( '.' )
-            // InternalDataDescriptionLanguage.g:7895:2: '.'
+            // InternalDataDescriptionLanguage.g:7921:1: ( '.' )
+            // InternalDataDescriptionLanguage.g:7922:2: '.'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getQualifiedNameAccess().getFullStopKeyword_1_0()); 
@@ -26428,14 +26535,14 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__QualifiedName__Group_1__1"
-    // InternalDataDescriptionLanguage.g:7904:1: rule__QualifiedName__Group_1__1 : rule__QualifiedName__Group_1__1__Impl ;
+    // InternalDataDescriptionLanguage.g:7931:1: rule__QualifiedName__Group_1__1 : rule__QualifiedName__Group_1__1__Impl ;
     public final void rule__QualifiedName__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:7908:1: ( rule__QualifiedName__Group_1__1__Impl )
-            // InternalDataDescriptionLanguage.g:7909:2: rule__QualifiedName__Group_1__1__Impl
+            // InternalDataDescriptionLanguage.g:7935:1: ( rule__QualifiedName__Group_1__1__Impl )
+            // InternalDataDescriptionLanguage.g:7936:2: rule__QualifiedName__Group_1__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__QualifiedName__Group_1__1__Impl();
@@ -26461,17 +26568,17 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__QualifiedName__Group_1__1__Impl"
-    // InternalDataDescriptionLanguage.g:7915:1: rule__QualifiedName__Group_1__1__Impl : ( ruleStringOrId ) ;
+    // InternalDataDescriptionLanguage.g:7942:1: rule__QualifiedName__Group_1__1__Impl : ( ruleStringOrId ) ;
     public final void rule__QualifiedName__Group_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:7919:1: ( ( ruleStringOrId ) )
-            // InternalDataDescriptionLanguage.g:7920:1: ( ruleStringOrId )
+            // InternalDataDescriptionLanguage.g:7946:1: ( ( ruleStringOrId ) )
+            // InternalDataDescriptionLanguage.g:7947:1: ( ruleStringOrId )
             {
-            // InternalDataDescriptionLanguage.g:7920:1: ( ruleStringOrId )
-            // InternalDataDescriptionLanguage.g:7921:2: ruleStringOrId
+            // InternalDataDescriptionLanguage.g:7947:1: ( ruleStringOrId )
+            // InternalDataDescriptionLanguage.g:7948:2: ruleStringOrId
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getQualifiedNameAccess().getStringOrIdParserRuleCall_1_1()); 
@@ -26506,17 +26613,17 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__DataDescriptionModelRule__ImportsAssignment_0"
-    // InternalDataDescriptionLanguage.g:7931:1: rule__DataDescriptionModelRule__ImportsAssignment_0 : ( ruleImportRule ) ;
+    // InternalDataDescriptionLanguage.g:7958:1: rule__DataDescriptionModelRule__ImportsAssignment_0 : ( ruleImportRule ) ;
     public final void rule__DataDescriptionModelRule__ImportsAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:7935:1: ( ( ruleImportRule ) )
-            // InternalDataDescriptionLanguage.g:7936:2: ( ruleImportRule )
+            // InternalDataDescriptionLanguage.g:7962:1: ( ( ruleImportRule ) )
+            // InternalDataDescriptionLanguage.g:7963:2: ( ruleImportRule )
             {
-            // InternalDataDescriptionLanguage.g:7936:2: ( ruleImportRule )
-            // InternalDataDescriptionLanguage.g:7937:3: ruleImportRule
+            // InternalDataDescriptionLanguage.g:7963:2: ( ruleImportRule )
+            // InternalDataDescriptionLanguage.g:7964:3: ruleImportRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getDataDescriptionModelRuleAccess().getImportsImportRuleParserRuleCall_0_0()); 
@@ -26551,17 +26658,17 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__DataDescriptionModelRule__NameAssignment_2"
-    // InternalDataDescriptionLanguage.g:7946:1: rule__DataDescriptionModelRule__NameAssignment_2 : ( ruleQualifiedName ) ;
+    // InternalDataDescriptionLanguage.g:7973:1: rule__DataDescriptionModelRule__NameAssignment_2 : ( ruleQualifiedName ) ;
     public final void rule__DataDescriptionModelRule__NameAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:7950:1: ( ( ruleQualifiedName ) )
-            // InternalDataDescriptionLanguage.g:7951:2: ( ruleQualifiedName )
+            // InternalDataDescriptionLanguage.g:7977:1: ( ( ruleQualifiedName ) )
+            // InternalDataDescriptionLanguage.g:7978:2: ( ruleQualifiedName )
             {
-            // InternalDataDescriptionLanguage.g:7951:2: ( ruleQualifiedName )
-            // InternalDataDescriptionLanguage.g:7952:3: ruleQualifiedName
+            // InternalDataDescriptionLanguage.g:7978:2: ( ruleQualifiedName )
+            // InternalDataDescriptionLanguage.g:7979:3: ruleQualifiedName
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getDataDescriptionModelRuleAccess().getNameQualifiedNameParserRuleCall_2_0()); 
@@ -26596,17 +26703,17 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__DataDescriptionModelRule__TypesAssignment_4_2"
-    // InternalDataDescriptionLanguage.g:7961:1: rule__DataDescriptionModelRule__TypesAssignment_4_2 : ( ruleDataTypeDefinitionRule ) ;
+    // InternalDataDescriptionLanguage.g:7988:1: rule__DataDescriptionModelRule__TypesAssignment_4_2 : ( ruleDataTypeDefinitionRule ) ;
     public final void rule__DataDescriptionModelRule__TypesAssignment_4_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:7965:1: ( ( ruleDataTypeDefinitionRule ) )
-            // InternalDataDescriptionLanguage.g:7966:2: ( ruleDataTypeDefinitionRule )
+            // InternalDataDescriptionLanguage.g:7992:1: ( ( ruleDataTypeDefinitionRule ) )
+            // InternalDataDescriptionLanguage.g:7993:2: ( ruleDataTypeDefinitionRule )
             {
-            // InternalDataDescriptionLanguage.g:7966:2: ( ruleDataTypeDefinitionRule )
-            // InternalDataDescriptionLanguage.g:7967:3: ruleDataTypeDefinitionRule
+            // InternalDataDescriptionLanguage.g:7993:2: ( ruleDataTypeDefinitionRule )
+            // InternalDataDescriptionLanguage.g:7994:3: ruleDataTypeDefinitionRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getDataDescriptionModelRuleAccess().getTypesDataTypeDefinitionRuleParserRuleCall_4_2_0()); 
@@ -26641,17 +26748,17 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__DataDescriptionModelRule__DescriptionsAssignment_5_2"
-    // InternalDataDescriptionLanguage.g:7976:1: rule__DataDescriptionModelRule__DescriptionsAssignment_5_2 : ( ruleDataDescriptionRule ) ;
+    // InternalDataDescriptionLanguage.g:8003:1: rule__DataDescriptionModelRule__DescriptionsAssignment_5_2 : ( ruleDataDescriptionRule ) ;
     public final void rule__DataDescriptionModelRule__DescriptionsAssignment_5_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:7980:1: ( ( ruleDataDescriptionRule ) )
-            // InternalDataDescriptionLanguage.g:7981:2: ( ruleDataDescriptionRule )
+            // InternalDataDescriptionLanguage.g:8007:1: ( ( ruleDataDescriptionRule ) )
+            // InternalDataDescriptionLanguage.g:8008:2: ( ruleDataDescriptionRule )
             {
-            // InternalDataDescriptionLanguage.g:7981:2: ( ruleDataDescriptionRule )
-            // InternalDataDescriptionLanguage.g:7982:3: ruleDataDescriptionRule
+            // InternalDataDescriptionLanguage.g:8008:2: ( ruleDataDescriptionRule )
+            // InternalDataDescriptionLanguage.g:8009:3: ruleDataDescriptionRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getDataDescriptionModelRuleAccess().getDescriptionsDataDescriptionRuleParserRuleCall_5_2_0()); 
@@ -26686,17 +26793,17 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__DataDescriptionModelRule__ConstraintsAssignment_6_2"
-    // InternalDataDescriptionLanguage.g:7991:1: rule__DataDescriptionModelRule__ConstraintsAssignment_6_2 : ( ruleStatementRule ) ;
+    // InternalDataDescriptionLanguage.g:8018:1: rule__DataDescriptionModelRule__ConstraintsAssignment_6_2 : ( ruleStatementRule ) ;
     public final void rule__DataDescriptionModelRule__ConstraintsAssignment_6_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:7995:1: ( ( ruleStatementRule ) )
-            // InternalDataDescriptionLanguage.g:7996:2: ( ruleStatementRule )
+            // InternalDataDescriptionLanguage.g:8022:1: ( ( ruleStatementRule ) )
+            // InternalDataDescriptionLanguage.g:8023:2: ( ruleStatementRule )
             {
-            // InternalDataDescriptionLanguage.g:7996:2: ( ruleStatementRule )
-            // InternalDataDescriptionLanguage.g:7997:3: ruleStatementRule
+            // InternalDataDescriptionLanguage.g:8023:2: ( ruleStatementRule )
+            // InternalDataDescriptionLanguage.g:8024:3: ruleStatementRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getDataDescriptionModelRuleAccess().getConstraintsStatementRuleParserRuleCall_6_2_0()); 
@@ -26731,17 +26838,17 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__BaseDataTypeTypeDefinitionRule__ConstraintsAssignment_0"
-    // InternalDataDescriptionLanguage.g:8006:1: rule__BaseDataTypeTypeDefinitionRule__ConstraintsAssignment_0 : ( ruleConstraintRule ) ;
+    // InternalDataDescriptionLanguage.g:8033:1: rule__BaseDataTypeTypeDefinitionRule__ConstraintsAssignment_0 : ( ruleConstraintRule ) ;
     public final void rule__BaseDataTypeTypeDefinitionRule__ConstraintsAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:8010:1: ( ( ruleConstraintRule ) )
-            // InternalDataDescriptionLanguage.g:8011:2: ( ruleConstraintRule )
+            // InternalDataDescriptionLanguage.g:8037:1: ( ( ruleConstraintRule ) )
+            // InternalDataDescriptionLanguage.g:8038:2: ( ruleConstraintRule )
             {
-            // InternalDataDescriptionLanguage.g:8011:2: ( ruleConstraintRule )
-            // InternalDataDescriptionLanguage.g:8012:3: ruleConstraintRule
+            // InternalDataDescriptionLanguage.g:8038:2: ( ruleConstraintRule )
+            // InternalDataDescriptionLanguage.g:8039:3: ruleConstraintRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getBaseDataTypeTypeDefinitionRuleAccess().getConstraintsConstraintRuleParserRuleCall_0_0()); 
@@ -26776,17 +26883,17 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__BaseDataTypeTypeDefinitionRule__ScaleAssignment_1"
-    // InternalDataDescriptionLanguage.g:8021:1: rule__BaseDataTypeTypeDefinitionRule__ScaleAssignment_1 : ( ruleScaleType ) ;
+    // InternalDataDescriptionLanguage.g:8048:1: rule__BaseDataTypeTypeDefinitionRule__ScaleAssignment_1 : ( ruleScaleType ) ;
     public final void rule__BaseDataTypeTypeDefinitionRule__ScaleAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:8025:1: ( ( ruleScaleType ) )
-            // InternalDataDescriptionLanguage.g:8026:2: ( ruleScaleType )
+            // InternalDataDescriptionLanguage.g:8052:1: ( ( ruleScaleType ) )
+            // InternalDataDescriptionLanguage.g:8053:2: ( ruleScaleType )
             {
-            // InternalDataDescriptionLanguage.g:8026:2: ( ruleScaleType )
-            // InternalDataDescriptionLanguage.g:8027:3: ruleScaleType
+            // InternalDataDescriptionLanguage.g:8053:2: ( ruleScaleType )
+            // InternalDataDescriptionLanguage.g:8054:3: ruleScaleType
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getBaseDataTypeTypeDefinitionRuleAccess().getScaleScaleTypeEnumRuleCall_1_0()); 
@@ -26821,17 +26928,17 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__BaseDataTypeTypeDefinitionRule__NameAssignment_3"
-    // InternalDataDescriptionLanguage.g:8036:1: rule__BaseDataTypeTypeDefinitionRule__NameAssignment_3 : ( ruleStringOrId ) ;
+    // InternalDataDescriptionLanguage.g:8063:1: rule__BaseDataTypeTypeDefinitionRule__NameAssignment_3 : ( ruleStringOrId ) ;
     public final void rule__BaseDataTypeTypeDefinitionRule__NameAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:8040:1: ( ( ruleStringOrId ) )
-            // InternalDataDescriptionLanguage.g:8041:2: ( ruleStringOrId )
+            // InternalDataDescriptionLanguage.g:8067:1: ( ( ruleStringOrId ) )
+            // InternalDataDescriptionLanguage.g:8068:2: ( ruleStringOrId )
             {
-            // InternalDataDescriptionLanguage.g:8041:2: ( ruleStringOrId )
-            // InternalDataDescriptionLanguage.g:8042:3: ruleStringOrId
+            // InternalDataDescriptionLanguage.g:8068:2: ( ruleStringOrId )
+            // InternalDataDescriptionLanguage.g:8069:3: ruleStringOrId
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getBaseDataTypeTypeDefinitionRuleAccess().getNameStringOrIdParserRuleCall_3_0()); 
@@ -26866,17 +26973,17 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__BaseDataTypeTypeDefinitionRule__ConstraintsAssignment_4_3"
-    // InternalDataDescriptionLanguage.g:8051:1: rule__BaseDataTypeTypeDefinitionRule__ConstraintsAssignment_4_3 : ( ruleStatementRule ) ;
+    // InternalDataDescriptionLanguage.g:8078:1: rule__BaseDataTypeTypeDefinitionRule__ConstraintsAssignment_4_3 : ( ruleStatementRule ) ;
     public final void rule__BaseDataTypeTypeDefinitionRule__ConstraintsAssignment_4_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:8055:1: ( ( ruleStatementRule ) )
-            // InternalDataDescriptionLanguage.g:8056:2: ( ruleStatementRule )
+            // InternalDataDescriptionLanguage.g:8082:1: ( ( ruleStatementRule ) )
+            // InternalDataDescriptionLanguage.g:8083:2: ( ruleStatementRule )
             {
-            // InternalDataDescriptionLanguage.g:8056:2: ( ruleStatementRule )
-            // InternalDataDescriptionLanguage.g:8057:3: ruleStatementRule
+            // InternalDataDescriptionLanguage.g:8083:2: ( ruleStatementRule )
+            // InternalDataDescriptionLanguage.g:8084:3: ruleStatementRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getBaseDataTypeTypeDefinitionRuleAccess().getConstraintsStatementRuleParserRuleCall_4_3_0()); 
@@ -26911,17 +27018,17 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__EnumLiteralRule__NameAssignment"
-    // InternalDataDescriptionLanguage.g:8066:1: rule__EnumLiteralRule__NameAssignment : ( ruleStringOrId ) ;
+    // InternalDataDescriptionLanguage.g:8093:1: rule__EnumLiteralRule__NameAssignment : ( ruleStringOrId ) ;
     public final void rule__EnumLiteralRule__NameAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:8070:1: ( ( ruleStringOrId ) )
-            // InternalDataDescriptionLanguage.g:8071:2: ( ruleStringOrId )
+            // InternalDataDescriptionLanguage.g:8097:1: ( ( ruleStringOrId ) )
+            // InternalDataDescriptionLanguage.g:8098:2: ( ruleStringOrId )
             {
-            // InternalDataDescriptionLanguage.g:8071:2: ( ruleStringOrId )
-            // InternalDataDescriptionLanguage.g:8072:3: ruleStringOrId
+            // InternalDataDescriptionLanguage.g:8098:2: ( ruleStringOrId )
+            // InternalDataDescriptionLanguage.g:8099:3: ruleStringOrId
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getEnumLiteralRuleAccess().getNameStringOrIdParserRuleCall_0()); 
@@ -26956,17 +27063,17 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__EnumTypeDefinitionRule__ConstraintsAssignment_0"
-    // InternalDataDescriptionLanguage.g:8081:1: rule__EnumTypeDefinitionRule__ConstraintsAssignment_0 : ( ruleConstraintRule ) ;
+    // InternalDataDescriptionLanguage.g:8108:1: rule__EnumTypeDefinitionRule__ConstraintsAssignment_0 : ( ruleConstraintRule ) ;
     public final void rule__EnumTypeDefinitionRule__ConstraintsAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:8085:1: ( ( ruleConstraintRule ) )
-            // InternalDataDescriptionLanguage.g:8086:2: ( ruleConstraintRule )
+            // InternalDataDescriptionLanguage.g:8112:1: ( ( ruleConstraintRule ) )
+            // InternalDataDescriptionLanguage.g:8113:2: ( ruleConstraintRule )
             {
-            // InternalDataDescriptionLanguage.g:8086:2: ( ruleConstraintRule )
-            // InternalDataDescriptionLanguage.g:8087:3: ruleConstraintRule
+            // InternalDataDescriptionLanguage.g:8113:2: ( ruleConstraintRule )
+            // InternalDataDescriptionLanguage.g:8114:3: ruleConstraintRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getEnumTypeDefinitionRuleAccess().getConstraintsConstraintRuleParserRuleCall_0_0()); 
@@ -27001,17 +27108,17 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__EnumTypeDefinitionRule__ScaleAssignment_1"
-    // InternalDataDescriptionLanguage.g:8096:1: rule__EnumTypeDefinitionRule__ScaleAssignment_1 : ( ruleScaleType ) ;
+    // InternalDataDescriptionLanguage.g:8123:1: rule__EnumTypeDefinitionRule__ScaleAssignment_1 : ( ruleScaleType ) ;
     public final void rule__EnumTypeDefinitionRule__ScaleAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:8100:1: ( ( ruleScaleType ) )
-            // InternalDataDescriptionLanguage.g:8101:2: ( ruleScaleType )
+            // InternalDataDescriptionLanguage.g:8127:1: ( ( ruleScaleType ) )
+            // InternalDataDescriptionLanguage.g:8128:2: ( ruleScaleType )
             {
-            // InternalDataDescriptionLanguage.g:8101:2: ( ruleScaleType )
-            // InternalDataDescriptionLanguage.g:8102:3: ruleScaleType
+            // InternalDataDescriptionLanguage.g:8128:2: ( ruleScaleType )
+            // InternalDataDescriptionLanguage.g:8129:3: ruleScaleType
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getEnumTypeDefinitionRuleAccess().getScaleScaleTypeEnumRuleCall_1_0()); 
@@ -27046,17 +27153,17 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__EnumTypeDefinitionRule__NameAssignment_3"
-    // InternalDataDescriptionLanguage.g:8111:1: rule__EnumTypeDefinitionRule__NameAssignment_3 : ( ruleStringOrId ) ;
+    // InternalDataDescriptionLanguage.g:8138:1: rule__EnumTypeDefinitionRule__NameAssignment_3 : ( ruleStringOrId ) ;
     public final void rule__EnumTypeDefinitionRule__NameAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:8115:1: ( ( ruleStringOrId ) )
-            // InternalDataDescriptionLanguage.g:8116:2: ( ruleStringOrId )
+            // InternalDataDescriptionLanguage.g:8142:1: ( ( ruleStringOrId ) )
+            // InternalDataDescriptionLanguage.g:8143:2: ( ruleStringOrId )
             {
-            // InternalDataDescriptionLanguage.g:8116:2: ( ruleStringOrId )
-            // InternalDataDescriptionLanguage.g:8117:3: ruleStringOrId
+            // InternalDataDescriptionLanguage.g:8143:2: ( ruleStringOrId )
+            // InternalDataDescriptionLanguage.g:8144:3: ruleStringOrId
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getEnumTypeDefinitionRuleAccess().getNameStringOrIdParserRuleCall_3_0()); 
@@ -27091,17 +27198,17 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__EnumTypeDefinitionRule__LiteralsAssignment_5"
-    // InternalDataDescriptionLanguage.g:8126:1: rule__EnumTypeDefinitionRule__LiteralsAssignment_5 : ( ruleEnumLiteralRule ) ;
+    // InternalDataDescriptionLanguage.g:8153:1: rule__EnumTypeDefinitionRule__LiteralsAssignment_5 : ( ruleEnumLiteralRule ) ;
     public final void rule__EnumTypeDefinitionRule__LiteralsAssignment_5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:8130:1: ( ( ruleEnumLiteralRule ) )
-            // InternalDataDescriptionLanguage.g:8131:2: ( ruleEnumLiteralRule )
+            // InternalDataDescriptionLanguage.g:8157:1: ( ( ruleEnumLiteralRule ) )
+            // InternalDataDescriptionLanguage.g:8158:2: ( ruleEnumLiteralRule )
             {
-            // InternalDataDescriptionLanguage.g:8131:2: ( ruleEnumLiteralRule )
-            // InternalDataDescriptionLanguage.g:8132:3: ruleEnumLiteralRule
+            // InternalDataDescriptionLanguage.g:8158:2: ( ruleEnumLiteralRule )
+            // InternalDataDescriptionLanguage.g:8159:3: ruleEnumLiteralRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getEnumTypeDefinitionRuleAccess().getLiteralsEnumLiteralRuleParserRuleCall_5_0()); 
@@ -27136,17 +27243,17 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__EnumTypeDefinitionRule__LiteralsAssignment_6_1"
-    // InternalDataDescriptionLanguage.g:8141:1: rule__EnumTypeDefinitionRule__LiteralsAssignment_6_1 : ( ruleEnumLiteralRule ) ;
+    // InternalDataDescriptionLanguage.g:8168:1: rule__EnumTypeDefinitionRule__LiteralsAssignment_6_1 : ( ruleEnumLiteralRule ) ;
     public final void rule__EnumTypeDefinitionRule__LiteralsAssignment_6_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:8145:1: ( ( ruleEnumLiteralRule ) )
-            // InternalDataDescriptionLanguage.g:8146:2: ( ruleEnumLiteralRule )
+            // InternalDataDescriptionLanguage.g:8172:1: ( ( ruleEnumLiteralRule ) )
+            // InternalDataDescriptionLanguage.g:8173:2: ( ruleEnumLiteralRule )
             {
-            // InternalDataDescriptionLanguage.g:8146:2: ( ruleEnumLiteralRule )
-            // InternalDataDescriptionLanguage.g:8147:3: ruleEnumLiteralRule
+            // InternalDataDescriptionLanguage.g:8173:2: ( ruleEnumLiteralRule )
+            // InternalDataDescriptionLanguage.g:8174:3: ruleEnumLiteralRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getEnumTypeDefinitionRuleAccess().getLiteralsEnumLiteralRuleParserRuleCall_6_1_0()); 
@@ -27181,17 +27288,17 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__EnumTypeDefinitionRule__ConstraintsAssignment_8_3"
-    // InternalDataDescriptionLanguage.g:8156:1: rule__EnumTypeDefinitionRule__ConstraintsAssignment_8_3 : ( ruleStatementRule ) ;
+    // InternalDataDescriptionLanguage.g:8183:1: rule__EnumTypeDefinitionRule__ConstraintsAssignment_8_3 : ( ruleStatementRule ) ;
     public final void rule__EnumTypeDefinitionRule__ConstraintsAssignment_8_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:8160:1: ( ( ruleStatementRule ) )
-            // InternalDataDescriptionLanguage.g:8161:2: ( ruleStatementRule )
+            // InternalDataDescriptionLanguage.g:8187:1: ( ( ruleStatementRule ) )
+            // InternalDataDescriptionLanguage.g:8188:2: ( ruleStatementRule )
             {
-            // InternalDataDescriptionLanguage.g:8161:2: ( ruleStatementRule )
-            // InternalDataDescriptionLanguage.g:8162:3: ruleStatementRule
+            // InternalDataDescriptionLanguage.g:8188:2: ( ruleStatementRule )
+            // InternalDataDescriptionLanguage.g:8189:3: ruleStatementRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getEnumTypeDefinitionRuleAccess().getConstraintsStatementRuleParserRuleCall_8_3_0()); 
@@ -27226,17 +27333,17 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__TypedBaseDataDescriptionRule__ConstraintsAssignment_0"
-    // InternalDataDescriptionLanguage.g:8171:1: rule__TypedBaseDataDescriptionRule__ConstraintsAssignment_0 : ( ruleConstraintRule ) ;
+    // InternalDataDescriptionLanguage.g:8198:1: rule__TypedBaseDataDescriptionRule__ConstraintsAssignment_0 : ( ruleConstraintRule ) ;
     public final void rule__TypedBaseDataDescriptionRule__ConstraintsAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:8175:1: ( ( ruleConstraintRule ) )
-            // InternalDataDescriptionLanguage.g:8176:2: ( ruleConstraintRule )
+            // InternalDataDescriptionLanguage.g:8202:1: ( ( ruleConstraintRule ) )
+            // InternalDataDescriptionLanguage.g:8203:2: ( ruleConstraintRule )
             {
-            // InternalDataDescriptionLanguage.g:8176:2: ( ruleConstraintRule )
-            // InternalDataDescriptionLanguage.g:8177:3: ruleConstraintRule
+            // InternalDataDescriptionLanguage.g:8203:2: ( ruleConstraintRule )
+            // InternalDataDescriptionLanguage.g:8204:3: ruleConstraintRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTypedBaseDataDescriptionRuleAccess().getConstraintsConstraintRuleParserRuleCall_0_0()); 
@@ -27271,17 +27378,17 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__TypedBaseDataDescriptionRule__RepresentationAssignment_1"
-    // InternalDataDescriptionLanguage.g:8186:1: rule__TypedBaseDataDescriptionRule__RepresentationAssignment_1 : ( ruleRepresentationType ) ;
+    // InternalDataDescriptionLanguage.g:8213:1: rule__TypedBaseDataDescriptionRule__RepresentationAssignment_1 : ( ruleRepresentationType ) ;
     public final void rule__TypedBaseDataDescriptionRule__RepresentationAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:8190:1: ( ( ruleRepresentationType ) )
-            // InternalDataDescriptionLanguage.g:8191:2: ( ruleRepresentationType )
+            // InternalDataDescriptionLanguage.g:8217:1: ( ( ruleRepresentationType ) )
+            // InternalDataDescriptionLanguage.g:8218:2: ( ruleRepresentationType )
             {
-            // InternalDataDescriptionLanguage.g:8191:2: ( ruleRepresentationType )
-            // InternalDataDescriptionLanguage.g:8192:3: ruleRepresentationType
+            // InternalDataDescriptionLanguage.g:8218:2: ( ruleRepresentationType )
+            // InternalDataDescriptionLanguage.g:8219:3: ruleRepresentationType
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTypedBaseDataDescriptionRuleAccess().getRepresentationRepresentationTypeEnumRuleCall_1_0()); 
@@ -27316,17 +27423,17 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__TypedBaseDataDescriptionRule__NameAssignment_3"
-    // InternalDataDescriptionLanguage.g:8201:1: rule__TypedBaseDataDescriptionRule__NameAssignment_3 : ( ruleStringOrId ) ;
+    // InternalDataDescriptionLanguage.g:8228:1: rule__TypedBaseDataDescriptionRule__NameAssignment_3 : ( ruleStringOrId ) ;
     public final void rule__TypedBaseDataDescriptionRule__NameAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:8205:1: ( ( ruleStringOrId ) )
-            // InternalDataDescriptionLanguage.g:8206:2: ( ruleStringOrId )
+            // InternalDataDescriptionLanguage.g:8232:1: ( ( ruleStringOrId ) )
+            // InternalDataDescriptionLanguage.g:8233:2: ( ruleStringOrId )
             {
-            // InternalDataDescriptionLanguage.g:8206:2: ( ruleStringOrId )
-            // InternalDataDescriptionLanguage.g:8207:3: ruleStringOrId
+            // InternalDataDescriptionLanguage.g:8233:2: ( ruleStringOrId )
+            // InternalDataDescriptionLanguage.g:8234:3: ruleStringOrId
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTypedBaseDataDescriptionRuleAccess().getNameStringOrIdParserRuleCall_3_0()); 
@@ -27361,23 +27468,23 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__TypedBaseDataDescriptionRule__TypeAssignment_5_0_1"
-    // InternalDataDescriptionLanguage.g:8216:1: rule__TypedBaseDataDescriptionRule__TypeAssignment_5_0_1 : ( ( ruleQualifiedName ) ) ;
+    // InternalDataDescriptionLanguage.g:8243:1: rule__TypedBaseDataDescriptionRule__TypeAssignment_5_0_1 : ( ( ruleQualifiedName ) ) ;
     public final void rule__TypedBaseDataDescriptionRule__TypeAssignment_5_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:8220:1: ( ( ( ruleQualifiedName ) ) )
-            // InternalDataDescriptionLanguage.g:8221:2: ( ( ruleQualifiedName ) )
+            // InternalDataDescriptionLanguage.g:8247:1: ( ( ( ruleQualifiedName ) ) )
+            // InternalDataDescriptionLanguage.g:8248:2: ( ( ruleQualifiedName ) )
             {
-            // InternalDataDescriptionLanguage.g:8221:2: ( ( ruleQualifiedName ) )
-            // InternalDataDescriptionLanguage.g:8222:3: ( ruleQualifiedName )
+            // InternalDataDescriptionLanguage.g:8248:2: ( ( ruleQualifiedName ) )
+            // InternalDataDescriptionLanguage.g:8249:3: ( ruleQualifiedName )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTypedBaseDataDescriptionRuleAccess().getTypeDataTypeTypeDefinitionCrossReference_5_0_1_0()); 
             }
-            // InternalDataDescriptionLanguage.g:8223:3: ( ruleQualifiedName )
-            // InternalDataDescriptionLanguage.g:8224:4: ruleQualifiedName
+            // InternalDataDescriptionLanguage.g:8250:3: ( ruleQualifiedName )
+            // InternalDataDescriptionLanguage.g:8251:4: ruleQualifiedName
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTypedBaseDataDescriptionRuleAccess().getTypeDataTypeTypeDefinitionQualifiedNameParserRuleCall_5_0_1_0_1()); 
@@ -27418,23 +27525,23 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__TypedBaseDataDescriptionRule__TypeAssignment_5_1_1"
-    // InternalDataDescriptionLanguage.g:8235:1: rule__TypedBaseDataDescriptionRule__TypeAssignment_5_1_1 : ( ( ruleQualifiedName ) ) ;
+    // InternalDataDescriptionLanguage.g:8262:1: rule__TypedBaseDataDescriptionRule__TypeAssignment_5_1_1 : ( ( ruleQualifiedName ) ) ;
     public final void rule__TypedBaseDataDescriptionRule__TypeAssignment_5_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:8239:1: ( ( ( ruleQualifiedName ) ) )
-            // InternalDataDescriptionLanguage.g:8240:2: ( ( ruleQualifiedName ) )
+            // InternalDataDescriptionLanguage.g:8266:1: ( ( ( ruleQualifiedName ) ) )
+            // InternalDataDescriptionLanguage.g:8267:2: ( ( ruleQualifiedName ) )
             {
-            // InternalDataDescriptionLanguage.g:8240:2: ( ( ruleQualifiedName ) )
-            // InternalDataDescriptionLanguage.g:8241:3: ( ruleQualifiedName )
+            // InternalDataDescriptionLanguage.g:8267:2: ( ( ruleQualifiedName ) )
+            // InternalDataDescriptionLanguage.g:8268:3: ( ruleQualifiedName )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTypedBaseDataDescriptionRuleAccess().getTypeEnumDefinitionCrossReference_5_1_1_0()); 
             }
-            // InternalDataDescriptionLanguage.g:8242:3: ( ruleQualifiedName )
-            // InternalDataDescriptionLanguage.g:8243:4: ruleQualifiedName
+            // InternalDataDescriptionLanguage.g:8269:3: ( ruleQualifiedName )
+            // InternalDataDescriptionLanguage.g:8270:4: ruleQualifiedName
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTypedBaseDataDescriptionRuleAccess().getTypeEnumDefinitionQualifiedNameParserRuleCall_5_1_1_0_1()); 
@@ -27475,17 +27582,17 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__TypedBaseDataDescriptionRule__ConstraintsAssignment_6_3"
-    // InternalDataDescriptionLanguage.g:8254:1: rule__TypedBaseDataDescriptionRule__ConstraintsAssignment_6_3 : ( ruleStatementRule ) ;
+    // InternalDataDescriptionLanguage.g:8281:1: rule__TypedBaseDataDescriptionRule__ConstraintsAssignment_6_3 : ( ruleStatementRule ) ;
     public final void rule__TypedBaseDataDescriptionRule__ConstraintsAssignment_6_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:8258:1: ( ( ruleStatementRule ) )
-            // InternalDataDescriptionLanguage.g:8259:2: ( ruleStatementRule )
+            // InternalDataDescriptionLanguage.g:8285:1: ( ( ruleStatementRule ) )
+            // InternalDataDescriptionLanguage.g:8286:2: ( ruleStatementRule )
             {
-            // InternalDataDescriptionLanguage.g:8259:2: ( ruleStatementRule )
-            // InternalDataDescriptionLanguage.g:8260:3: ruleStatementRule
+            // InternalDataDescriptionLanguage.g:8286:2: ( ruleStatementRule )
+            // InternalDataDescriptionLanguage.g:8287:3: ruleStatementRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTypedBaseDataDescriptionRuleAccess().getConstraintsStatementRuleParserRuleCall_6_3_0()); 
@@ -27520,17 +27627,17 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__UntypedBaseDataDescriptionRule__ConstraintsAssignment_0"
-    // InternalDataDescriptionLanguage.g:8269:1: rule__UntypedBaseDataDescriptionRule__ConstraintsAssignment_0 : ( ruleConstraintRule ) ;
+    // InternalDataDescriptionLanguage.g:8296:1: rule__UntypedBaseDataDescriptionRule__ConstraintsAssignment_0 : ( ruleConstraintRule ) ;
     public final void rule__UntypedBaseDataDescriptionRule__ConstraintsAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:8273:1: ( ( ruleConstraintRule ) )
-            // InternalDataDescriptionLanguage.g:8274:2: ( ruleConstraintRule )
+            // InternalDataDescriptionLanguage.g:8300:1: ( ( ruleConstraintRule ) )
+            // InternalDataDescriptionLanguage.g:8301:2: ( ruleConstraintRule )
             {
-            // InternalDataDescriptionLanguage.g:8274:2: ( ruleConstraintRule )
-            // InternalDataDescriptionLanguage.g:8275:3: ruleConstraintRule
+            // InternalDataDescriptionLanguage.g:8301:2: ( ruleConstraintRule )
+            // InternalDataDescriptionLanguage.g:8302:3: ruleConstraintRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getUntypedBaseDataDescriptionRuleAccess().getConstraintsConstraintRuleParserRuleCall_0_0()); 
@@ -27565,17 +27672,17 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__UntypedBaseDataDescriptionRule__ScaleAssignment_1"
-    // InternalDataDescriptionLanguage.g:8284:1: rule__UntypedBaseDataDescriptionRule__ScaleAssignment_1 : ( ruleScaleType ) ;
+    // InternalDataDescriptionLanguage.g:8311:1: rule__UntypedBaseDataDescriptionRule__ScaleAssignment_1 : ( ruleScaleType ) ;
     public final void rule__UntypedBaseDataDescriptionRule__ScaleAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:8288:1: ( ( ruleScaleType ) )
-            // InternalDataDescriptionLanguage.g:8289:2: ( ruleScaleType )
+            // InternalDataDescriptionLanguage.g:8315:1: ( ( ruleScaleType ) )
+            // InternalDataDescriptionLanguage.g:8316:2: ( ruleScaleType )
             {
-            // InternalDataDescriptionLanguage.g:8289:2: ( ruleScaleType )
-            // InternalDataDescriptionLanguage.g:8290:3: ruleScaleType
+            // InternalDataDescriptionLanguage.g:8316:2: ( ruleScaleType )
+            // InternalDataDescriptionLanguage.g:8317:3: ruleScaleType
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getUntypedBaseDataDescriptionRuleAccess().getScaleScaleTypeEnumRuleCall_1_0()); 
@@ -27610,17 +27717,17 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__UntypedBaseDataDescriptionRule__RepresentationAssignment_2"
-    // InternalDataDescriptionLanguage.g:8299:1: rule__UntypedBaseDataDescriptionRule__RepresentationAssignment_2 : ( ruleRepresentationType ) ;
+    // InternalDataDescriptionLanguage.g:8326:1: rule__UntypedBaseDataDescriptionRule__RepresentationAssignment_2 : ( ruleRepresentationType ) ;
     public final void rule__UntypedBaseDataDescriptionRule__RepresentationAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:8303:1: ( ( ruleRepresentationType ) )
-            // InternalDataDescriptionLanguage.g:8304:2: ( ruleRepresentationType )
+            // InternalDataDescriptionLanguage.g:8330:1: ( ( ruleRepresentationType ) )
+            // InternalDataDescriptionLanguage.g:8331:2: ( ruleRepresentationType )
             {
-            // InternalDataDescriptionLanguage.g:8304:2: ( ruleRepresentationType )
-            // InternalDataDescriptionLanguage.g:8305:3: ruleRepresentationType
+            // InternalDataDescriptionLanguage.g:8331:2: ( ruleRepresentationType )
+            // InternalDataDescriptionLanguage.g:8332:3: ruleRepresentationType
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getUntypedBaseDataDescriptionRuleAccess().getRepresentationRepresentationTypeEnumRuleCall_2_0()); 
@@ -27655,17 +27762,17 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__UntypedBaseDataDescriptionRule__NameAssignment_4"
-    // InternalDataDescriptionLanguage.g:8314:1: rule__UntypedBaseDataDescriptionRule__NameAssignment_4 : ( ruleStringOrId ) ;
+    // InternalDataDescriptionLanguage.g:8341:1: rule__UntypedBaseDataDescriptionRule__NameAssignment_4 : ( ruleStringOrId ) ;
     public final void rule__UntypedBaseDataDescriptionRule__NameAssignment_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:8318:1: ( ( ruleStringOrId ) )
-            // InternalDataDescriptionLanguage.g:8319:2: ( ruleStringOrId )
+            // InternalDataDescriptionLanguage.g:8345:1: ( ( ruleStringOrId ) )
+            // InternalDataDescriptionLanguage.g:8346:2: ( ruleStringOrId )
             {
-            // InternalDataDescriptionLanguage.g:8319:2: ( ruleStringOrId )
-            // InternalDataDescriptionLanguage.g:8320:3: ruleStringOrId
+            // InternalDataDescriptionLanguage.g:8346:2: ( ruleStringOrId )
+            // InternalDataDescriptionLanguage.g:8347:3: ruleStringOrId
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getUntypedBaseDataDescriptionRuleAccess().getNameStringOrIdParserRuleCall_4_0()); 
@@ -27700,17 +27807,17 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__UntypedBaseDataDescriptionRule__ConstraintsAssignment_5_3"
-    // InternalDataDescriptionLanguage.g:8329:1: rule__UntypedBaseDataDescriptionRule__ConstraintsAssignment_5_3 : ( ruleStatementRule ) ;
+    // InternalDataDescriptionLanguage.g:8356:1: rule__UntypedBaseDataDescriptionRule__ConstraintsAssignment_5_3 : ( ruleStatementRule ) ;
     public final void rule__UntypedBaseDataDescriptionRule__ConstraintsAssignment_5_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:8333:1: ( ( ruleStatementRule ) )
-            // InternalDataDescriptionLanguage.g:8334:2: ( ruleStatementRule )
+            // InternalDataDescriptionLanguage.g:8360:1: ( ( ruleStatementRule ) )
+            // InternalDataDescriptionLanguage.g:8361:2: ( ruleStatementRule )
             {
-            // InternalDataDescriptionLanguage.g:8334:2: ( ruleStatementRule )
-            // InternalDataDescriptionLanguage.g:8335:3: ruleStatementRule
+            // InternalDataDescriptionLanguage.g:8361:2: ( ruleStatementRule )
+            // InternalDataDescriptionLanguage.g:8362:3: ruleStatementRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getUntypedBaseDataDescriptionRuleAccess().getConstraintsStatementRuleParserRuleCall_5_3_0()); 
@@ -27745,17 +27852,17 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__StructuredDataDescriptionRule__ConstraintsAssignment_0"
-    // InternalDataDescriptionLanguage.g:8344:1: rule__StructuredDataDescriptionRule__ConstraintsAssignment_0 : ( ruleConstraintRule ) ;
+    // InternalDataDescriptionLanguage.g:8371:1: rule__StructuredDataDescriptionRule__ConstraintsAssignment_0 : ( ruleConstraintRule ) ;
     public final void rule__StructuredDataDescriptionRule__ConstraintsAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:8348:1: ( ( ruleConstraintRule ) )
-            // InternalDataDescriptionLanguage.g:8349:2: ( ruleConstraintRule )
+            // InternalDataDescriptionLanguage.g:8375:1: ( ( ruleConstraintRule ) )
+            // InternalDataDescriptionLanguage.g:8376:2: ( ruleConstraintRule )
             {
-            // InternalDataDescriptionLanguage.g:8349:2: ( ruleConstraintRule )
-            // InternalDataDescriptionLanguage.g:8350:3: ruleConstraintRule
+            // InternalDataDescriptionLanguage.g:8376:2: ( ruleConstraintRule )
+            // InternalDataDescriptionLanguage.g:8377:3: ruleConstraintRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getStructuredDataDescriptionRuleAccess().getConstraintsConstraintRuleParserRuleCall_0_0()); 
@@ -27790,17 +27897,17 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__StructuredDataDescriptionRule__NameAssignment_2"
-    // InternalDataDescriptionLanguage.g:8359:1: rule__StructuredDataDescriptionRule__NameAssignment_2 : ( ruleStringOrId ) ;
+    // InternalDataDescriptionLanguage.g:8386:1: rule__StructuredDataDescriptionRule__NameAssignment_2 : ( ruleStringOrId ) ;
     public final void rule__StructuredDataDescriptionRule__NameAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:8363:1: ( ( ruleStringOrId ) )
-            // InternalDataDescriptionLanguage.g:8364:2: ( ruleStringOrId )
+            // InternalDataDescriptionLanguage.g:8390:1: ( ( ruleStringOrId ) )
+            // InternalDataDescriptionLanguage.g:8391:2: ( ruleStringOrId )
             {
-            // InternalDataDescriptionLanguage.g:8364:2: ( ruleStringOrId )
-            // InternalDataDescriptionLanguage.g:8365:3: ruleStringOrId
+            // InternalDataDescriptionLanguage.g:8391:2: ( ruleStringOrId )
+            // InternalDataDescriptionLanguage.g:8392:3: ruleStringOrId
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getStructuredDataDescriptionRuleAccess().getNameStringOrIdParserRuleCall_2_0()); 
@@ -27835,23 +27942,23 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__StructuredDataDescriptionRule__TypeAssignment_5"
-    // InternalDataDescriptionLanguage.g:8374:1: rule__StructuredDataDescriptionRule__TypeAssignment_5 : ( ( ruleQualifiedName ) ) ;
+    // InternalDataDescriptionLanguage.g:8401:1: rule__StructuredDataDescriptionRule__TypeAssignment_5 : ( ( ruleQualifiedName ) ) ;
     public final void rule__StructuredDataDescriptionRule__TypeAssignment_5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:8378:1: ( ( ( ruleQualifiedName ) ) )
-            // InternalDataDescriptionLanguage.g:8379:2: ( ( ruleQualifiedName ) )
+            // InternalDataDescriptionLanguage.g:8405:1: ( ( ( ruleQualifiedName ) ) )
+            // InternalDataDescriptionLanguage.g:8406:2: ( ( ruleQualifiedName ) )
             {
-            // InternalDataDescriptionLanguage.g:8379:2: ( ( ruleQualifiedName ) )
-            // InternalDataDescriptionLanguage.g:8380:3: ( ruleQualifiedName )
+            // InternalDataDescriptionLanguage.g:8406:2: ( ( ruleQualifiedName ) )
+            // InternalDataDescriptionLanguage.g:8407:3: ( ruleQualifiedName )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getStructuredDataDescriptionRuleAccess().getTypeClassDefinitionCrossReference_5_0()); 
             }
-            // InternalDataDescriptionLanguage.g:8381:3: ( ruleQualifiedName )
-            // InternalDataDescriptionLanguage.g:8382:4: ruleQualifiedName
+            // InternalDataDescriptionLanguage.g:8408:3: ( ruleQualifiedName )
+            // InternalDataDescriptionLanguage.g:8409:4: ruleQualifiedName
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getStructuredDataDescriptionRuleAccess().getTypeClassDefinitionQualifiedNameParserRuleCall_5_0_1()); 
@@ -27892,17 +27999,17 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__OrExpressionRule__SubExpressionsAssignment_0"
-    // InternalDataDescriptionLanguage.g:8393:1: rule__OrExpressionRule__SubExpressionsAssignment_0 : ( ruleXorExpressionRule ) ;
+    // InternalDataDescriptionLanguage.g:8420:1: rule__OrExpressionRule__SubExpressionsAssignment_0 : ( ruleXorExpressionRule ) ;
     public final void rule__OrExpressionRule__SubExpressionsAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:8397:1: ( ( ruleXorExpressionRule ) )
-            // InternalDataDescriptionLanguage.g:8398:2: ( ruleXorExpressionRule )
+            // InternalDataDescriptionLanguage.g:8424:1: ( ( ruleXorExpressionRule ) )
+            // InternalDataDescriptionLanguage.g:8425:2: ( ruleXorExpressionRule )
             {
-            // InternalDataDescriptionLanguage.g:8398:2: ( ruleXorExpressionRule )
-            // InternalDataDescriptionLanguage.g:8399:3: ruleXorExpressionRule
+            // InternalDataDescriptionLanguage.g:8425:2: ( ruleXorExpressionRule )
+            // InternalDataDescriptionLanguage.g:8426:3: ruleXorExpressionRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getOrExpressionRuleAccess().getSubExpressionsXorExpressionRuleParserRuleCall_0_0()); 
@@ -27937,17 +28044,17 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__OrExpressionRule__SubExpressionsAssignment_1_1"
-    // InternalDataDescriptionLanguage.g:8408:1: rule__OrExpressionRule__SubExpressionsAssignment_1_1 : ( ruleXorExpressionRule ) ;
+    // InternalDataDescriptionLanguage.g:8435:1: rule__OrExpressionRule__SubExpressionsAssignment_1_1 : ( ruleXorExpressionRule ) ;
     public final void rule__OrExpressionRule__SubExpressionsAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:8412:1: ( ( ruleXorExpressionRule ) )
-            // InternalDataDescriptionLanguage.g:8413:2: ( ruleXorExpressionRule )
+            // InternalDataDescriptionLanguage.g:8439:1: ( ( ruleXorExpressionRule ) )
+            // InternalDataDescriptionLanguage.g:8440:2: ( ruleXorExpressionRule )
             {
-            // InternalDataDescriptionLanguage.g:8413:2: ( ruleXorExpressionRule )
-            // InternalDataDescriptionLanguage.g:8414:3: ruleXorExpressionRule
+            // InternalDataDescriptionLanguage.g:8440:2: ( ruleXorExpressionRule )
+            // InternalDataDescriptionLanguage.g:8441:3: ruleXorExpressionRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getOrExpressionRuleAccess().getSubExpressionsXorExpressionRuleParserRuleCall_1_1_0()); 
@@ -27982,17 +28089,17 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__XorExpressionRule__SubExpressionsAssignment_0"
-    // InternalDataDescriptionLanguage.g:8423:1: rule__XorExpressionRule__SubExpressionsAssignment_0 : ( ruleAndExpressionRule ) ;
+    // InternalDataDescriptionLanguage.g:8450:1: rule__XorExpressionRule__SubExpressionsAssignment_0 : ( ruleAndExpressionRule ) ;
     public final void rule__XorExpressionRule__SubExpressionsAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:8427:1: ( ( ruleAndExpressionRule ) )
-            // InternalDataDescriptionLanguage.g:8428:2: ( ruleAndExpressionRule )
+            // InternalDataDescriptionLanguage.g:8454:1: ( ( ruleAndExpressionRule ) )
+            // InternalDataDescriptionLanguage.g:8455:2: ( ruleAndExpressionRule )
             {
-            // InternalDataDescriptionLanguage.g:8428:2: ( ruleAndExpressionRule )
-            // InternalDataDescriptionLanguage.g:8429:3: ruleAndExpressionRule
+            // InternalDataDescriptionLanguage.g:8455:2: ( ruleAndExpressionRule )
+            // InternalDataDescriptionLanguage.g:8456:3: ruleAndExpressionRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXorExpressionRuleAccess().getSubExpressionsAndExpressionRuleParserRuleCall_0_0()); 
@@ -28027,17 +28134,17 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__XorExpressionRule__SubExpressionsAssignment_1_1"
-    // InternalDataDescriptionLanguage.g:8438:1: rule__XorExpressionRule__SubExpressionsAssignment_1_1 : ( ruleAndExpressionRule ) ;
+    // InternalDataDescriptionLanguage.g:8465:1: rule__XorExpressionRule__SubExpressionsAssignment_1_1 : ( ruleAndExpressionRule ) ;
     public final void rule__XorExpressionRule__SubExpressionsAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:8442:1: ( ( ruleAndExpressionRule ) )
-            // InternalDataDescriptionLanguage.g:8443:2: ( ruleAndExpressionRule )
+            // InternalDataDescriptionLanguage.g:8469:1: ( ( ruleAndExpressionRule ) )
+            // InternalDataDescriptionLanguage.g:8470:2: ( ruleAndExpressionRule )
             {
-            // InternalDataDescriptionLanguage.g:8443:2: ( ruleAndExpressionRule )
-            // InternalDataDescriptionLanguage.g:8444:3: ruleAndExpressionRule
+            // InternalDataDescriptionLanguage.g:8470:2: ( ruleAndExpressionRule )
+            // InternalDataDescriptionLanguage.g:8471:3: ruleAndExpressionRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXorExpressionRuleAccess().getSubExpressionsAndExpressionRuleParserRuleCall_1_1_0()); 
@@ -28072,17 +28179,17 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__AndExpressionRule__SubExpressionsAssignment_0"
-    // InternalDataDescriptionLanguage.g:8453:1: rule__AndExpressionRule__SubExpressionsAssignment_0 : ( ruleNotExpressionRule ) ;
+    // InternalDataDescriptionLanguage.g:8480:1: rule__AndExpressionRule__SubExpressionsAssignment_0 : ( ruleNotExpressionRule ) ;
     public final void rule__AndExpressionRule__SubExpressionsAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:8457:1: ( ( ruleNotExpressionRule ) )
-            // InternalDataDescriptionLanguage.g:8458:2: ( ruleNotExpressionRule )
+            // InternalDataDescriptionLanguage.g:8484:1: ( ( ruleNotExpressionRule ) )
+            // InternalDataDescriptionLanguage.g:8485:2: ( ruleNotExpressionRule )
             {
-            // InternalDataDescriptionLanguage.g:8458:2: ( ruleNotExpressionRule )
-            // InternalDataDescriptionLanguage.g:8459:3: ruleNotExpressionRule
+            // InternalDataDescriptionLanguage.g:8485:2: ( ruleNotExpressionRule )
+            // InternalDataDescriptionLanguage.g:8486:3: ruleNotExpressionRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAndExpressionRuleAccess().getSubExpressionsNotExpressionRuleParserRuleCall_0_0()); 
@@ -28117,17 +28224,17 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__AndExpressionRule__SubExpressionsAssignment_1_1"
-    // InternalDataDescriptionLanguage.g:8468:1: rule__AndExpressionRule__SubExpressionsAssignment_1_1 : ( ruleNotExpressionRule ) ;
+    // InternalDataDescriptionLanguage.g:8495:1: rule__AndExpressionRule__SubExpressionsAssignment_1_1 : ( ruleNotExpressionRule ) ;
     public final void rule__AndExpressionRule__SubExpressionsAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:8472:1: ( ( ruleNotExpressionRule ) )
-            // InternalDataDescriptionLanguage.g:8473:2: ( ruleNotExpressionRule )
+            // InternalDataDescriptionLanguage.g:8499:1: ( ( ruleNotExpressionRule ) )
+            // InternalDataDescriptionLanguage.g:8500:2: ( ruleNotExpressionRule )
             {
-            // InternalDataDescriptionLanguage.g:8473:2: ( ruleNotExpressionRule )
-            // InternalDataDescriptionLanguage.g:8474:3: ruleNotExpressionRule
+            // InternalDataDescriptionLanguage.g:8500:2: ( ruleNotExpressionRule )
+            // InternalDataDescriptionLanguage.g:8501:3: ruleNotExpressionRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAndExpressionRuleAccess().getSubExpressionsNotExpressionRuleParserRuleCall_1_1_0()); 
@@ -28162,23 +28269,23 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__NotExpressionRule__NegatedAssignment_0"
-    // InternalDataDescriptionLanguage.g:8483:1: rule__NotExpressionRule__NegatedAssignment_0 : ( ( '!' ) ) ;
+    // InternalDataDescriptionLanguage.g:8510:1: rule__NotExpressionRule__NegatedAssignment_0 : ( ( '!' ) ) ;
     public final void rule__NotExpressionRule__NegatedAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:8487:1: ( ( ( '!' ) ) )
-            // InternalDataDescriptionLanguage.g:8488:2: ( ( '!' ) )
+            // InternalDataDescriptionLanguage.g:8514:1: ( ( ( '!' ) ) )
+            // InternalDataDescriptionLanguage.g:8515:2: ( ( '!' ) )
             {
-            // InternalDataDescriptionLanguage.g:8488:2: ( ( '!' ) )
-            // InternalDataDescriptionLanguage.g:8489:3: ( '!' )
+            // InternalDataDescriptionLanguage.g:8515:2: ( ( '!' ) )
+            // InternalDataDescriptionLanguage.g:8516:3: ( '!' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getNotExpressionRuleAccess().getNegatedExclamationMarkKeyword_0_0()); 
             }
-            // InternalDataDescriptionLanguage.g:8490:3: ( '!' )
-            // InternalDataDescriptionLanguage.g:8491:4: '!'
+            // InternalDataDescriptionLanguage.g:8517:3: ( '!' )
+            // InternalDataDescriptionLanguage.g:8518:4: '!'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getNotExpressionRuleAccess().getNegatedExclamationMarkKeyword_0_0()); 
@@ -28215,17 +28322,17 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__NotExpressionRule__OperandAssignment_1"
-    // InternalDataDescriptionLanguage.g:8502:1: rule__NotExpressionRule__OperandAssignment_1 : ( ruleComparisonExpressionRule ) ;
+    // InternalDataDescriptionLanguage.g:8529:1: rule__NotExpressionRule__OperandAssignment_1 : ( ruleComparisonExpressionRule ) ;
     public final void rule__NotExpressionRule__OperandAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:8506:1: ( ( ruleComparisonExpressionRule ) )
-            // InternalDataDescriptionLanguage.g:8507:2: ( ruleComparisonExpressionRule )
+            // InternalDataDescriptionLanguage.g:8533:1: ( ( ruleComparisonExpressionRule ) )
+            // InternalDataDescriptionLanguage.g:8534:2: ( ruleComparisonExpressionRule )
             {
-            // InternalDataDescriptionLanguage.g:8507:2: ( ruleComparisonExpressionRule )
-            // InternalDataDescriptionLanguage.g:8508:3: ruleComparisonExpressionRule
+            // InternalDataDescriptionLanguage.g:8534:2: ( ruleComparisonExpressionRule )
+            // InternalDataDescriptionLanguage.g:8535:3: ruleComparisonExpressionRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getNotExpressionRuleAccess().getOperandComparisonExpressionRuleParserRuleCall_1_0()); 
@@ -28260,17 +28367,17 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__ComparisonExpressionRule__LeftOperandAssignment_0"
-    // InternalDataDescriptionLanguage.g:8517:1: rule__ComparisonExpressionRule__LeftOperandAssignment_0 : ( ruleAddOrSubtractExpressionRule ) ;
+    // InternalDataDescriptionLanguage.g:8544:1: rule__ComparisonExpressionRule__LeftOperandAssignment_0 : ( ruleAddOrSubtractExpressionRule ) ;
     public final void rule__ComparisonExpressionRule__LeftOperandAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:8521:1: ( ( ruleAddOrSubtractExpressionRule ) )
-            // InternalDataDescriptionLanguage.g:8522:2: ( ruleAddOrSubtractExpressionRule )
+            // InternalDataDescriptionLanguage.g:8548:1: ( ( ruleAddOrSubtractExpressionRule ) )
+            // InternalDataDescriptionLanguage.g:8549:2: ( ruleAddOrSubtractExpressionRule )
             {
-            // InternalDataDescriptionLanguage.g:8522:2: ( ruleAddOrSubtractExpressionRule )
-            // InternalDataDescriptionLanguage.g:8523:3: ruleAddOrSubtractExpressionRule
+            // InternalDataDescriptionLanguage.g:8549:2: ( ruleAddOrSubtractExpressionRule )
+            // InternalDataDescriptionLanguage.g:8550:3: ruleAddOrSubtractExpressionRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getComparisonExpressionRuleAccess().getLeftOperandAddOrSubtractExpressionRuleParserRuleCall_0_0()); 
@@ -28305,17 +28412,17 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__ComparisonExpressionRule__ComparisonAssignment_1"
-    // InternalDataDescriptionLanguage.g:8532:1: rule__ComparisonExpressionRule__ComparisonAssignment_1 : ( rulePartialComparisonExpressionRule ) ;
+    // InternalDataDescriptionLanguage.g:8559:1: rule__ComparisonExpressionRule__ComparisonAssignment_1 : ( rulePartialComparisonExpressionRule ) ;
     public final void rule__ComparisonExpressionRule__ComparisonAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:8536:1: ( ( rulePartialComparisonExpressionRule ) )
-            // InternalDataDescriptionLanguage.g:8537:2: ( rulePartialComparisonExpressionRule )
+            // InternalDataDescriptionLanguage.g:8563:1: ( ( rulePartialComparisonExpressionRule ) )
+            // InternalDataDescriptionLanguage.g:8564:2: ( rulePartialComparisonExpressionRule )
             {
-            // InternalDataDescriptionLanguage.g:8537:2: ( rulePartialComparisonExpressionRule )
-            // InternalDataDescriptionLanguage.g:8538:3: rulePartialComparisonExpressionRule
+            // InternalDataDescriptionLanguage.g:8564:2: ( rulePartialComparisonExpressionRule )
+            // InternalDataDescriptionLanguage.g:8565:3: rulePartialComparisonExpressionRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getComparisonExpressionRuleAccess().getComparisonPartialComparisonExpressionRuleParserRuleCall_1_0()); 
@@ -28350,17 +28457,17 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__PartialComparisonExpressionRule__OperatorAssignment_0"
-    // InternalDataDescriptionLanguage.g:8547:1: rule__PartialComparisonExpressionRule__OperatorAssignment_0 : ( ruleComparisonOperatorRule ) ;
+    // InternalDataDescriptionLanguage.g:8574:1: rule__PartialComparisonExpressionRule__OperatorAssignment_0 : ( ruleComparisonOperatorRule ) ;
     public final void rule__PartialComparisonExpressionRule__OperatorAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:8551:1: ( ( ruleComparisonOperatorRule ) )
-            // InternalDataDescriptionLanguage.g:8552:2: ( ruleComparisonOperatorRule )
+            // InternalDataDescriptionLanguage.g:8578:1: ( ( ruleComparisonOperatorRule ) )
+            // InternalDataDescriptionLanguage.g:8579:2: ( ruleComparisonOperatorRule )
             {
-            // InternalDataDescriptionLanguage.g:8552:2: ( ruleComparisonOperatorRule )
-            // InternalDataDescriptionLanguage.g:8553:3: ruleComparisonOperatorRule
+            // InternalDataDescriptionLanguage.g:8579:2: ( ruleComparisonOperatorRule )
+            // InternalDataDescriptionLanguage.g:8580:3: ruleComparisonOperatorRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getPartialComparisonExpressionRuleAccess().getOperatorComparisonOperatorRuleEnumRuleCall_0_0()); 
@@ -28395,17 +28502,17 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__PartialComparisonExpressionRule__SubExpressionAssignment_1"
-    // InternalDataDescriptionLanguage.g:8562:1: rule__PartialComparisonExpressionRule__SubExpressionAssignment_1 : ( ruleAddOrSubtractExpressionRule ) ;
+    // InternalDataDescriptionLanguage.g:8589:1: rule__PartialComparisonExpressionRule__SubExpressionAssignment_1 : ( ruleAddOrSubtractExpressionRule ) ;
     public final void rule__PartialComparisonExpressionRule__SubExpressionAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:8566:1: ( ( ruleAddOrSubtractExpressionRule ) )
-            // InternalDataDescriptionLanguage.g:8567:2: ( ruleAddOrSubtractExpressionRule )
+            // InternalDataDescriptionLanguage.g:8593:1: ( ( ruleAddOrSubtractExpressionRule ) )
+            // InternalDataDescriptionLanguage.g:8594:2: ( ruleAddOrSubtractExpressionRule )
             {
-            // InternalDataDescriptionLanguage.g:8567:2: ( ruleAddOrSubtractExpressionRule )
-            // InternalDataDescriptionLanguage.g:8568:3: ruleAddOrSubtractExpressionRule
+            // InternalDataDescriptionLanguage.g:8594:2: ( ruleAddOrSubtractExpressionRule )
+            // InternalDataDescriptionLanguage.g:8595:3: ruleAddOrSubtractExpressionRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getPartialComparisonExpressionRuleAccess().getSubExpressionAddOrSubtractExpressionRuleParserRuleCall_1_0()); 
@@ -28440,17 +28547,17 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__AddOrSubtractExpressionRule__LeftOperandAssignment_0"
-    // InternalDataDescriptionLanguage.g:8577:1: rule__AddOrSubtractExpressionRule__LeftOperandAssignment_0 : ( ruleMultiplyDivideModuloExpressionRule ) ;
+    // InternalDataDescriptionLanguage.g:8604:1: rule__AddOrSubtractExpressionRule__LeftOperandAssignment_0 : ( ruleMultiplyDivideModuloExpressionRule ) ;
     public final void rule__AddOrSubtractExpressionRule__LeftOperandAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:8581:1: ( ( ruleMultiplyDivideModuloExpressionRule ) )
-            // InternalDataDescriptionLanguage.g:8582:2: ( ruleMultiplyDivideModuloExpressionRule )
+            // InternalDataDescriptionLanguage.g:8608:1: ( ( ruleMultiplyDivideModuloExpressionRule ) )
+            // InternalDataDescriptionLanguage.g:8609:2: ( ruleMultiplyDivideModuloExpressionRule )
             {
-            // InternalDataDescriptionLanguage.g:8582:2: ( ruleMultiplyDivideModuloExpressionRule )
-            // InternalDataDescriptionLanguage.g:8583:3: ruleMultiplyDivideModuloExpressionRule
+            // InternalDataDescriptionLanguage.g:8609:2: ( ruleMultiplyDivideModuloExpressionRule )
+            // InternalDataDescriptionLanguage.g:8610:3: ruleMultiplyDivideModuloExpressionRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAddOrSubtractExpressionRuleAccess().getLeftOperandMultiplyDivideModuloExpressionRuleParserRuleCall_0_0()); 
@@ -28485,17 +28592,17 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__AddOrSubtractExpressionRule__OperatorsAssignment_1_0"
-    // InternalDataDescriptionLanguage.g:8592:1: rule__AddOrSubtractExpressionRule__OperatorsAssignment_1_0 : ( ruleAddOrSubtractOperatorRule ) ;
+    // InternalDataDescriptionLanguage.g:8619:1: rule__AddOrSubtractExpressionRule__OperatorsAssignment_1_0 : ( ruleAddOrSubtractOperatorRule ) ;
     public final void rule__AddOrSubtractExpressionRule__OperatorsAssignment_1_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:8596:1: ( ( ruleAddOrSubtractOperatorRule ) )
-            // InternalDataDescriptionLanguage.g:8597:2: ( ruleAddOrSubtractOperatorRule )
+            // InternalDataDescriptionLanguage.g:8623:1: ( ( ruleAddOrSubtractOperatorRule ) )
+            // InternalDataDescriptionLanguage.g:8624:2: ( ruleAddOrSubtractOperatorRule )
             {
-            // InternalDataDescriptionLanguage.g:8597:2: ( ruleAddOrSubtractOperatorRule )
-            // InternalDataDescriptionLanguage.g:8598:3: ruleAddOrSubtractOperatorRule
+            // InternalDataDescriptionLanguage.g:8624:2: ( ruleAddOrSubtractOperatorRule )
+            // InternalDataDescriptionLanguage.g:8625:3: ruleAddOrSubtractOperatorRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAddOrSubtractExpressionRuleAccess().getOperatorsAddOrSubtractOperatorRuleEnumRuleCall_1_0_0()); 
@@ -28530,17 +28637,17 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__AddOrSubtractExpressionRule__OperandsAssignment_1_1"
-    // InternalDataDescriptionLanguage.g:8607:1: rule__AddOrSubtractExpressionRule__OperandsAssignment_1_1 : ( ruleMultiplyDivideModuloExpressionRule ) ;
+    // InternalDataDescriptionLanguage.g:8634:1: rule__AddOrSubtractExpressionRule__OperandsAssignment_1_1 : ( ruleMultiplyDivideModuloExpressionRule ) ;
     public final void rule__AddOrSubtractExpressionRule__OperandsAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:8611:1: ( ( ruleMultiplyDivideModuloExpressionRule ) )
-            // InternalDataDescriptionLanguage.g:8612:2: ( ruleMultiplyDivideModuloExpressionRule )
+            // InternalDataDescriptionLanguage.g:8638:1: ( ( ruleMultiplyDivideModuloExpressionRule ) )
+            // InternalDataDescriptionLanguage.g:8639:2: ( ruleMultiplyDivideModuloExpressionRule )
             {
-            // InternalDataDescriptionLanguage.g:8612:2: ( ruleMultiplyDivideModuloExpressionRule )
-            // InternalDataDescriptionLanguage.g:8613:3: ruleMultiplyDivideModuloExpressionRule
+            // InternalDataDescriptionLanguage.g:8639:2: ( ruleMultiplyDivideModuloExpressionRule )
+            // InternalDataDescriptionLanguage.g:8640:3: ruleMultiplyDivideModuloExpressionRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAddOrSubtractExpressionRuleAccess().getOperandsMultiplyDivideModuloExpressionRuleParserRuleCall_1_1_0()); 
@@ -28575,17 +28682,17 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__MultiplyDivideModuloExpressionRule__LeftOperandAssignment_0"
-    // InternalDataDescriptionLanguage.g:8622:1: rule__MultiplyDivideModuloExpressionRule__LeftOperandAssignment_0 : ( rulePowerOfExpressionRule ) ;
+    // InternalDataDescriptionLanguage.g:8649:1: rule__MultiplyDivideModuloExpressionRule__LeftOperandAssignment_0 : ( rulePowerOfExpressionRule ) ;
     public final void rule__MultiplyDivideModuloExpressionRule__LeftOperandAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:8626:1: ( ( rulePowerOfExpressionRule ) )
-            // InternalDataDescriptionLanguage.g:8627:2: ( rulePowerOfExpressionRule )
+            // InternalDataDescriptionLanguage.g:8653:1: ( ( rulePowerOfExpressionRule ) )
+            // InternalDataDescriptionLanguage.g:8654:2: ( rulePowerOfExpressionRule )
             {
-            // InternalDataDescriptionLanguage.g:8627:2: ( rulePowerOfExpressionRule )
-            // InternalDataDescriptionLanguage.g:8628:3: rulePowerOfExpressionRule
+            // InternalDataDescriptionLanguage.g:8654:2: ( rulePowerOfExpressionRule )
+            // InternalDataDescriptionLanguage.g:8655:3: rulePowerOfExpressionRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getMultiplyDivideModuloExpressionRuleAccess().getLeftOperandPowerOfExpressionRuleParserRuleCall_0_0()); 
@@ -28620,17 +28727,17 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__MultiplyDivideModuloExpressionRule__OperatorsAssignment_1_0"
-    // InternalDataDescriptionLanguage.g:8637:1: rule__MultiplyDivideModuloExpressionRule__OperatorsAssignment_1_0 : ( ruleMultiplyDivideModuloOperatorRule ) ;
+    // InternalDataDescriptionLanguage.g:8664:1: rule__MultiplyDivideModuloExpressionRule__OperatorsAssignment_1_0 : ( ruleMultiplyDivideModuloOperatorRule ) ;
     public final void rule__MultiplyDivideModuloExpressionRule__OperatorsAssignment_1_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:8641:1: ( ( ruleMultiplyDivideModuloOperatorRule ) )
-            // InternalDataDescriptionLanguage.g:8642:2: ( ruleMultiplyDivideModuloOperatorRule )
+            // InternalDataDescriptionLanguage.g:8668:1: ( ( ruleMultiplyDivideModuloOperatorRule ) )
+            // InternalDataDescriptionLanguage.g:8669:2: ( ruleMultiplyDivideModuloOperatorRule )
             {
-            // InternalDataDescriptionLanguage.g:8642:2: ( ruleMultiplyDivideModuloOperatorRule )
-            // InternalDataDescriptionLanguage.g:8643:3: ruleMultiplyDivideModuloOperatorRule
+            // InternalDataDescriptionLanguage.g:8669:2: ( ruleMultiplyDivideModuloOperatorRule )
+            // InternalDataDescriptionLanguage.g:8670:3: ruleMultiplyDivideModuloOperatorRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getMultiplyDivideModuloExpressionRuleAccess().getOperatorsMultiplyDivideModuloOperatorRuleEnumRuleCall_1_0_0()); 
@@ -28665,17 +28772,17 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__MultiplyDivideModuloExpressionRule__OperandsAssignment_1_1"
-    // InternalDataDescriptionLanguage.g:8652:1: rule__MultiplyDivideModuloExpressionRule__OperandsAssignment_1_1 : ( rulePowerOfExpressionRule ) ;
+    // InternalDataDescriptionLanguage.g:8679:1: rule__MultiplyDivideModuloExpressionRule__OperandsAssignment_1_1 : ( rulePowerOfExpressionRule ) ;
     public final void rule__MultiplyDivideModuloExpressionRule__OperandsAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:8656:1: ( ( rulePowerOfExpressionRule ) )
-            // InternalDataDescriptionLanguage.g:8657:2: ( rulePowerOfExpressionRule )
+            // InternalDataDescriptionLanguage.g:8683:1: ( ( rulePowerOfExpressionRule ) )
+            // InternalDataDescriptionLanguage.g:8684:2: ( rulePowerOfExpressionRule )
             {
-            // InternalDataDescriptionLanguage.g:8657:2: ( rulePowerOfExpressionRule )
-            // InternalDataDescriptionLanguage.g:8658:3: rulePowerOfExpressionRule
+            // InternalDataDescriptionLanguage.g:8684:2: ( rulePowerOfExpressionRule )
+            // InternalDataDescriptionLanguage.g:8685:3: rulePowerOfExpressionRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getMultiplyDivideModuloExpressionRuleAccess().getOperandsPowerOfExpressionRuleParserRuleCall_1_1_0()); 
@@ -28710,17 +28817,17 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__PowerOfExpressionRule__LeftOperandAssignment_0"
-    // InternalDataDescriptionLanguage.g:8667:1: rule__PowerOfExpressionRule__LeftOperandAssignment_0 : ( ruleUnaryAddOrSubtractExpressionRule ) ;
+    // InternalDataDescriptionLanguage.g:8694:1: rule__PowerOfExpressionRule__LeftOperandAssignment_0 : ( ruleUnaryAddOrSubtractExpressionRule ) ;
     public final void rule__PowerOfExpressionRule__LeftOperandAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:8671:1: ( ( ruleUnaryAddOrSubtractExpressionRule ) )
-            // InternalDataDescriptionLanguage.g:8672:2: ( ruleUnaryAddOrSubtractExpressionRule )
+            // InternalDataDescriptionLanguage.g:8698:1: ( ( ruleUnaryAddOrSubtractExpressionRule ) )
+            // InternalDataDescriptionLanguage.g:8699:2: ( ruleUnaryAddOrSubtractExpressionRule )
             {
-            // InternalDataDescriptionLanguage.g:8672:2: ( ruleUnaryAddOrSubtractExpressionRule )
-            // InternalDataDescriptionLanguage.g:8673:3: ruleUnaryAddOrSubtractExpressionRule
+            // InternalDataDescriptionLanguage.g:8699:2: ( ruleUnaryAddOrSubtractExpressionRule )
+            // InternalDataDescriptionLanguage.g:8700:3: ruleUnaryAddOrSubtractExpressionRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getPowerOfExpressionRuleAccess().getLeftOperandUnaryAddOrSubtractExpressionRuleParserRuleCall_0_0()); 
@@ -28755,17 +28862,17 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__PowerOfExpressionRule__RightOperandAssignment_1_1"
-    // InternalDataDescriptionLanguage.g:8682:1: rule__PowerOfExpressionRule__RightOperandAssignment_1_1 : ( rulePowerOfExpressionRule ) ;
+    // InternalDataDescriptionLanguage.g:8709:1: rule__PowerOfExpressionRule__RightOperandAssignment_1_1 : ( rulePowerOfExpressionRule ) ;
     public final void rule__PowerOfExpressionRule__RightOperandAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:8686:1: ( ( rulePowerOfExpressionRule ) )
-            // InternalDataDescriptionLanguage.g:8687:2: ( rulePowerOfExpressionRule )
+            // InternalDataDescriptionLanguage.g:8713:1: ( ( rulePowerOfExpressionRule ) )
+            // InternalDataDescriptionLanguage.g:8714:2: ( rulePowerOfExpressionRule )
             {
-            // InternalDataDescriptionLanguage.g:8687:2: ( rulePowerOfExpressionRule )
-            // InternalDataDescriptionLanguage.g:8688:3: rulePowerOfExpressionRule
+            // InternalDataDescriptionLanguage.g:8714:2: ( rulePowerOfExpressionRule )
+            // InternalDataDescriptionLanguage.g:8715:3: rulePowerOfExpressionRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getPowerOfExpressionRuleAccess().getRightOperandPowerOfExpressionRuleParserRuleCall_1_1_0()); 
@@ -28800,17 +28907,17 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__UnaryAddOrSubtractExpressionRule__OperatorsAssignment_0"
-    // InternalDataDescriptionLanguage.g:8697:1: rule__UnaryAddOrSubtractExpressionRule__OperatorsAssignment_0 : ( ruleAddOrSubtractOperatorRule ) ;
+    // InternalDataDescriptionLanguage.g:8724:1: rule__UnaryAddOrSubtractExpressionRule__OperatorsAssignment_0 : ( ruleAddOrSubtractOperatorRule ) ;
     public final void rule__UnaryAddOrSubtractExpressionRule__OperatorsAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:8701:1: ( ( ruleAddOrSubtractOperatorRule ) )
-            // InternalDataDescriptionLanguage.g:8702:2: ( ruleAddOrSubtractOperatorRule )
+            // InternalDataDescriptionLanguage.g:8728:1: ( ( ruleAddOrSubtractOperatorRule ) )
+            // InternalDataDescriptionLanguage.g:8729:2: ( ruleAddOrSubtractOperatorRule )
             {
-            // InternalDataDescriptionLanguage.g:8702:2: ( ruleAddOrSubtractOperatorRule )
-            // InternalDataDescriptionLanguage.g:8703:3: ruleAddOrSubtractOperatorRule
+            // InternalDataDescriptionLanguage.g:8729:2: ( ruleAddOrSubtractOperatorRule )
+            // InternalDataDescriptionLanguage.g:8730:3: ruleAddOrSubtractOperatorRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getUnaryAddOrSubtractExpressionRuleAccess().getOperatorsAddOrSubtractOperatorRuleEnumRuleCall_0_0()); 
@@ -28845,17 +28952,17 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__UnaryAddOrSubtractExpressionRule__SubExpressionAssignment_1"
-    // InternalDataDescriptionLanguage.g:8712:1: rule__UnaryAddOrSubtractExpressionRule__SubExpressionAssignment_1 : ( ruleReadExpressionRule ) ;
+    // InternalDataDescriptionLanguage.g:8739:1: rule__UnaryAddOrSubtractExpressionRule__SubExpressionAssignment_1 : ( ruleReadExpressionRule ) ;
     public final void rule__UnaryAddOrSubtractExpressionRule__SubExpressionAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:8716:1: ( ( ruleReadExpressionRule ) )
-            // InternalDataDescriptionLanguage.g:8717:2: ( ruleReadExpressionRule )
+            // InternalDataDescriptionLanguage.g:8743:1: ( ( ruleReadExpressionRule ) )
+            // InternalDataDescriptionLanguage.g:8744:2: ( ruleReadExpressionRule )
             {
-            // InternalDataDescriptionLanguage.g:8717:2: ( ruleReadExpressionRule )
-            // InternalDataDescriptionLanguage.g:8718:3: ruleReadExpressionRule
+            // InternalDataDescriptionLanguage.g:8744:2: ( ruleReadExpressionRule )
+            // InternalDataDescriptionLanguage.g:8745:3: ruleReadExpressionRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getUnaryAddOrSubtractExpressionRuleAccess().getSubExpressionReadExpressionRuleParserRuleCall_1_0()); 
@@ -28890,17 +28997,17 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__ArrayRule__ValuesAssignment_2_0"
-    // InternalDataDescriptionLanguage.g:8727:1: rule__ArrayRule__ValuesAssignment_2_0 : ( ruleOrExpressionRule ) ;
+    // InternalDataDescriptionLanguage.g:8754:1: rule__ArrayRule__ValuesAssignment_2_0 : ( ruleOrExpressionRule ) ;
     public final void rule__ArrayRule__ValuesAssignment_2_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:8731:1: ( ( ruleOrExpressionRule ) )
-            // InternalDataDescriptionLanguage.g:8732:2: ( ruleOrExpressionRule )
+            // InternalDataDescriptionLanguage.g:8758:1: ( ( ruleOrExpressionRule ) )
+            // InternalDataDescriptionLanguage.g:8759:2: ( ruleOrExpressionRule )
             {
-            // InternalDataDescriptionLanguage.g:8732:2: ( ruleOrExpressionRule )
-            // InternalDataDescriptionLanguage.g:8733:3: ruleOrExpressionRule
+            // InternalDataDescriptionLanguage.g:8759:2: ( ruleOrExpressionRule )
+            // InternalDataDescriptionLanguage.g:8760:3: ruleOrExpressionRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getArrayRuleAccess().getValuesOrExpressionRuleParserRuleCall_2_0_0()); 
@@ -28935,17 +29042,17 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__ArrayRule__ValuesAssignment_2_1_1"
-    // InternalDataDescriptionLanguage.g:8742:1: rule__ArrayRule__ValuesAssignment_2_1_1 : ( ruleOrExpressionRule ) ;
+    // InternalDataDescriptionLanguage.g:8769:1: rule__ArrayRule__ValuesAssignment_2_1_1 : ( ruleOrExpressionRule ) ;
     public final void rule__ArrayRule__ValuesAssignment_2_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:8746:1: ( ( ruleOrExpressionRule ) )
-            // InternalDataDescriptionLanguage.g:8747:2: ( ruleOrExpressionRule )
+            // InternalDataDescriptionLanguage.g:8773:1: ( ( ruleOrExpressionRule ) )
+            // InternalDataDescriptionLanguage.g:8774:2: ( ruleOrExpressionRule )
             {
-            // InternalDataDescriptionLanguage.g:8747:2: ( ruleOrExpressionRule )
-            // InternalDataDescriptionLanguage.g:8748:3: ruleOrExpressionRule
+            // InternalDataDescriptionLanguage.g:8774:2: ( ruleOrExpressionRule )
+            // InternalDataDescriptionLanguage.g:8775:3: ruleOrExpressionRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getArrayRuleAccess().getValuesOrExpressionRuleParserRuleCall_2_1_1_0()); 
@@ -28980,17 +29087,17 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__ParanthesesRule__SubExpressionAssignment_1"
-    // InternalDataDescriptionLanguage.g:8757:1: rule__ParanthesesRule__SubExpressionAssignment_1 : ( ruleExpressionRule ) ;
+    // InternalDataDescriptionLanguage.g:8784:1: rule__ParanthesesRule__SubExpressionAssignment_1 : ( ruleExpressionRule ) ;
     public final void rule__ParanthesesRule__SubExpressionAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:8761:1: ( ( ruleExpressionRule ) )
-            // InternalDataDescriptionLanguage.g:8762:2: ( ruleExpressionRule )
+            // InternalDataDescriptionLanguage.g:8788:1: ( ( ruleExpressionRule ) )
+            // InternalDataDescriptionLanguage.g:8789:2: ( ruleExpressionRule )
             {
-            // InternalDataDescriptionLanguage.g:8762:2: ( ruleExpressionRule )
-            // InternalDataDescriptionLanguage.g:8763:3: ruleExpressionRule
+            // InternalDataDescriptionLanguage.g:8789:2: ( ruleExpressionRule )
+            // InternalDataDescriptionLanguage.g:8790:3: ruleExpressionRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getParanthesesRuleAccess().getSubExpressionExpressionRuleParserRuleCall_1_0()); 
@@ -29025,17 +29132,17 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__PathExpressionRule__PathAssignment_1"
-    // InternalDataDescriptionLanguage.g:8772:1: rule__PathExpressionRule__PathAssignment_1 : ( RULE_STRING ) ;
+    // InternalDataDescriptionLanguage.g:8799:1: rule__PathExpressionRule__PathAssignment_1 : ( RULE_STRING ) ;
     public final void rule__PathExpressionRule__PathAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:8776:1: ( ( RULE_STRING ) )
-            // InternalDataDescriptionLanguage.g:8777:2: ( RULE_STRING )
+            // InternalDataDescriptionLanguage.g:8803:1: ( ( RULE_STRING ) )
+            // InternalDataDescriptionLanguage.g:8804:2: ( RULE_STRING )
             {
-            // InternalDataDescriptionLanguage.g:8777:2: ( RULE_STRING )
-            // InternalDataDescriptionLanguage.g:8778:3: RULE_STRING
+            // InternalDataDescriptionLanguage.g:8804:2: ( RULE_STRING )
+            // InternalDataDescriptionLanguage.g:8805:3: RULE_STRING
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getPathExpressionRuleAccess().getPathSTRINGTerminalRuleCall_1_0()); 
@@ -29066,23 +29173,23 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__CallRule__FunctionAssignment_0"
-    // InternalDataDescriptionLanguage.g:8787:1: rule__CallRule__FunctionAssignment_0 : ( ( ruleQualifiedName ) ) ;
+    // InternalDataDescriptionLanguage.g:8814:1: rule__CallRule__FunctionAssignment_0 : ( ( ruleQualifiedName ) ) ;
     public final void rule__CallRule__FunctionAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:8791:1: ( ( ( ruleQualifiedName ) ) )
-            // InternalDataDescriptionLanguage.g:8792:2: ( ( ruleQualifiedName ) )
+            // InternalDataDescriptionLanguage.g:8818:1: ( ( ( ruleQualifiedName ) ) )
+            // InternalDataDescriptionLanguage.g:8819:2: ( ( ruleQualifiedName ) )
             {
-            // InternalDataDescriptionLanguage.g:8792:2: ( ( ruleQualifiedName ) )
-            // InternalDataDescriptionLanguage.g:8793:3: ( ruleQualifiedName )
+            // InternalDataDescriptionLanguage.g:8819:2: ( ( ruleQualifiedName ) )
+            // InternalDataDescriptionLanguage.g:8820:3: ( ruleQualifiedName )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getCallRuleAccess().getFunctionFunctionDefinitionCrossReference_0_0()); 
             }
-            // InternalDataDescriptionLanguage.g:8794:3: ( ruleQualifiedName )
-            // InternalDataDescriptionLanguage.g:8795:4: ruleQualifiedName
+            // InternalDataDescriptionLanguage.g:8821:3: ( ruleQualifiedName )
+            // InternalDataDescriptionLanguage.g:8822:4: ruleQualifiedName
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getCallRuleAccess().getFunctionFunctionDefinitionQualifiedNameParserRuleCall_0_0_1()); 
@@ -29123,17 +29230,17 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__CallRule__ParametersAssignment_2_0"
-    // InternalDataDescriptionLanguage.g:8806:1: rule__CallRule__ParametersAssignment_2_0 : ( ruleExpressionRule ) ;
+    // InternalDataDescriptionLanguage.g:8833:1: rule__CallRule__ParametersAssignment_2_0 : ( ruleExpressionRule ) ;
     public final void rule__CallRule__ParametersAssignment_2_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:8810:1: ( ( ruleExpressionRule ) )
-            // InternalDataDescriptionLanguage.g:8811:2: ( ruleExpressionRule )
+            // InternalDataDescriptionLanguage.g:8837:1: ( ( ruleExpressionRule ) )
+            // InternalDataDescriptionLanguage.g:8838:2: ( ruleExpressionRule )
             {
-            // InternalDataDescriptionLanguage.g:8811:2: ( ruleExpressionRule )
-            // InternalDataDescriptionLanguage.g:8812:3: ruleExpressionRule
+            // InternalDataDescriptionLanguage.g:8838:2: ( ruleExpressionRule )
+            // InternalDataDescriptionLanguage.g:8839:3: ruleExpressionRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getCallRuleAccess().getParametersExpressionRuleParserRuleCall_2_0_0()); 
@@ -29168,17 +29275,17 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__CallRule__ParametersAssignment_2_1_1"
-    // InternalDataDescriptionLanguage.g:8821:1: rule__CallRule__ParametersAssignment_2_1_1 : ( ruleExpressionRule ) ;
+    // InternalDataDescriptionLanguage.g:8848:1: rule__CallRule__ParametersAssignment_2_1_1 : ( ruleExpressionRule ) ;
     public final void rule__CallRule__ParametersAssignment_2_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:8825:1: ( ( ruleExpressionRule ) )
-            // InternalDataDescriptionLanguage.g:8826:2: ( ruleExpressionRule )
+            // InternalDataDescriptionLanguage.g:8852:1: ( ( ruleExpressionRule ) )
+            // InternalDataDescriptionLanguage.g:8853:2: ( ruleExpressionRule )
             {
-            // InternalDataDescriptionLanguage.g:8826:2: ( ruleExpressionRule )
-            // InternalDataDescriptionLanguage.g:8827:3: ruleExpressionRule
+            // InternalDataDescriptionLanguage.g:8853:2: ( ruleExpressionRule )
+            // InternalDataDescriptionLanguage.g:8854:3: ruleExpressionRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getCallRuleAccess().getParametersExpressionRuleParserRuleCall_2_1_1_0()); 
@@ -29213,17 +29320,17 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__AttributeReferenceRule__SelfAssignment_0"
-    // InternalDataDescriptionLanguage.g:8836:1: rule__AttributeReferenceRule__SelfAssignment_0 : ( ruleSelfReferenceRule ) ;
+    // InternalDataDescriptionLanguage.g:8863:1: rule__AttributeReferenceRule__SelfAssignment_0 : ( ruleSelfReferenceRule ) ;
     public final void rule__AttributeReferenceRule__SelfAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:8840:1: ( ( ruleSelfReferenceRule ) )
-            // InternalDataDescriptionLanguage.g:8841:2: ( ruleSelfReferenceRule )
+            // InternalDataDescriptionLanguage.g:8867:1: ( ( ruleSelfReferenceRule ) )
+            // InternalDataDescriptionLanguage.g:8868:2: ( ruleSelfReferenceRule )
             {
-            // InternalDataDescriptionLanguage.g:8841:2: ( ruleSelfReferenceRule )
-            // InternalDataDescriptionLanguage.g:8842:3: ruleSelfReferenceRule
+            // InternalDataDescriptionLanguage.g:8868:2: ( ruleSelfReferenceRule )
+            // InternalDataDescriptionLanguage.g:8869:3: ruleSelfReferenceRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeReferenceRuleAccess().getSelfSelfReferenceRuleParserRuleCall_0_0()); 
@@ -29258,17 +29365,17 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__AttributeReferenceRule__ChainAssignment_1_1"
-    // InternalDataDescriptionLanguage.g:8851:1: rule__AttributeReferenceRule__ChainAssignment_1_1 : ( ruleValuelDefinitionReferenceRule ) ;
+    // InternalDataDescriptionLanguage.g:8878:1: rule__AttributeReferenceRule__ChainAssignment_1_1 : ( ruleValuelDefinitionReferenceRule ) ;
     public final void rule__AttributeReferenceRule__ChainAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:8855:1: ( ( ruleValuelDefinitionReferenceRule ) )
-            // InternalDataDescriptionLanguage.g:8856:2: ( ruleValuelDefinitionReferenceRule )
+            // InternalDataDescriptionLanguage.g:8882:1: ( ( ruleValuelDefinitionReferenceRule ) )
+            // InternalDataDescriptionLanguage.g:8883:2: ( ruleValuelDefinitionReferenceRule )
             {
-            // InternalDataDescriptionLanguage.g:8856:2: ( ruleValuelDefinitionReferenceRule )
-            // InternalDataDescriptionLanguage.g:8857:3: ruleValuelDefinitionReferenceRule
+            // InternalDataDescriptionLanguage.g:8883:2: ( ruleValuelDefinitionReferenceRule )
+            // InternalDataDescriptionLanguage.g:8884:3: ruleValuelDefinitionReferenceRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeReferenceRuleAccess().getChainValuelDefinitionReferenceRuleParserRuleCall_1_1_0()); 
@@ -29303,17 +29410,17 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__ConfigurationReferenceRule__ReferenceAssignment_1"
-    // InternalDataDescriptionLanguage.g:8866:1: rule__ConfigurationReferenceRule__ReferenceAssignment_1 : ( ruleStringOrId ) ;
+    // InternalDataDescriptionLanguage.g:8893:1: rule__ConfigurationReferenceRule__ReferenceAssignment_1 : ( ruleStringOrId ) ;
     public final void rule__ConfigurationReferenceRule__ReferenceAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:8870:1: ( ( ruleStringOrId ) )
-            // InternalDataDescriptionLanguage.g:8871:2: ( ruleStringOrId )
+            // InternalDataDescriptionLanguage.g:8897:1: ( ( ruleStringOrId ) )
+            // InternalDataDescriptionLanguage.g:8898:2: ( ruleStringOrId )
             {
-            // InternalDataDescriptionLanguage.g:8871:2: ( ruleStringOrId )
-            // InternalDataDescriptionLanguage.g:8872:3: ruleStringOrId
+            // InternalDataDescriptionLanguage.g:8898:2: ( ruleStringOrId )
+            // InternalDataDescriptionLanguage.g:8899:3: ruleStringOrId
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getConfigurationReferenceRuleAccess().getReferenceStringOrIdParserRuleCall_1_0()); 
@@ -29348,23 +29455,23 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__ValuelDefinitionReferenceRule__DefinitionAssignment"
-    // InternalDataDescriptionLanguage.g:8881:1: rule__ValuelDefinitionReferenceRule__DefinitionAssignment : ( ( ruleQualifiedName ) ) ;
+    // InternalDataDescriptionLanguage.g:8908:1: rule__ValuelDefinitionReferenceRule__DefinitionAssignment : ( ( ruleQualifiedName ) ) ;
     public final void rule__ValuelDefinitionReferenceRule__DefinitionAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:8885:1: ( ( ( ruleQualifiedName ) ) )
-            // InternalDataDescriptionLanguage.g:8886:2: ( ( ruleQualifiedName ) )
+            // InternalDataDescriptionLanguage.g:8912:1: ( ( ( ruleQualifiedName ) ) )
+            // InternalDataDescriptionLanguage.g:8913:2: ( ( ruleQualifiedName ) )
             {
-            // InternalDataDescriptionLanguage.g:8886:2: ( ( ruleQualifiedName ) )
-            // InternalDataDescriptionLanguage.g:8887:3: ( ruleQualifiedName )
+            // InternalDataDescriptionLanguage.g:8913:2: ( ( ruleQualifiedName ) )
+            // InternalDataDescriptionLanguage.g:8914:3: ( ruleQualifiedName )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getValuelDefinitionReferenceRuleAccess().getDefinitionValueDefinitionCrossReference_0()); 
             }
-            // InternalDataDescriptionLanguage.g:8888:3: ( ruleQualifiedName )
-            // InternalDataDescriptionLanguage.g:8889:4: ruleQualifiedName
+            // InternalDataDescriptionLanguage.g:8915:3: ( ruleQualifiedName )
+            // InternalDataDescriptionLanguage.g:8916:4: ruleQualifiedName
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getValuelDefinitionReferenceRuleAccess().getDefinitionValueDefinitionQualifiedNameParserRuleCall_0_1()); 
@@ -29405,23 +29512,23 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__BaseDataReferenceRule__DefinitionAssignment_1"
-    // InternalDataDescriptionLanguage.g:8900:1: rule__BaseDataReferenceRule__DefinitionAssignment_1 : ( ( ruleQualifiedName ) ) ;
+    // InternalDataDescriptionLanguage.g:8927:1: rule__BaseDataReferenceRule__DefinitionAssignment_1 : ( ( ruleQualifiedName ) ) ;
     public final void rule__BaseDataReferenceRule__DefinitionAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:8904:1: ( ( ( ruleQualifiedName ) ) )
-            // InternalDataDescriptionLanguage.g:8905:2: ( ( ruleQualifiedName ) )
+            // InternalDataDescriptionLanguage.g:8931:1: ( ( ( ruleQualifiedName ) ) )
+            // InternalDataDescriptionLanguage.g:8932:2: ( ( ruleQualifiedName ) )
             {
-            // InternalDataDescriptionLanguage.g:8905:2: ( ( ruleQualifiedName ) )
-            // InternalDataDescriptionLanguage.g:8906:3: ( ruleQualifiedName )
+            // InternalDataDescriptionLanguage.g:8932:2: ( ( ruleQualifiedName ) )
+            // InternalDataDescriptionLanguage.g:8933:3: ( ruleQualifiedName )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getBaseDataReferenceRuleAccess().getDefinitionBaseDataDescriptionCrossReference_1_0()); 
             }
-            // InternalDataDescriptionLanguage.g:8907:3: ( ruleQualifiedName )
-            // InternalDataDescriptionLanguage.g:8908:4: ruleQualifiedName
+            // InternalDataDescriptionLanguage.g:8934:3: ( ruleQualifiedName )
+            // InternalDataDescriptionLanguage.g:8935:4: ruleQualifiedName
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getBaseDataReferenceRuleAccess().getDefinitionBaseDataDescriptionQualifiedNameParserRuleCall_1_0_1()); 
@@ -29462,23 +29569,23 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__StructuredDataDescriptionReferenceRule__DefinitionAssignment_1"
-    // InternalDataDescriptionLanguage.g:8919:1: rule__StructuredDataDescriptionReferenceRule__DefinitionAssignment_1 : ( ( ruleQualifiedName ) ) ;
+    // InternalDataDescriptionLanguage.g:8946:1: rule__StructuredDataDescriptionReferenceRule__DefinitionAssignment_1 : ( ( ruleQualifiedName ) ) ;
     public final void rule__StructuredDataDescriptionReferenceRule__DefinitionAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:8923:1: ( ( ( ruleQualifiedName ) ) )
-            // InternalDataDescriptionLanguage.g:8924:2: ( ( ruleQualifiedName ) )
+            // InternalDataDescriptionLanguage.g:8950:1: ( ( ( ruleQualifiedName ) ) )
+            // InternalDataDescriptionLanguage.g:8951:2: ( ( ruleQualifiedName ) )
             {
-            // InternalDataDescriptionLanguage.g:8924:2: ( ( ruleQualifiedName ) )
-            // InternalDataDescriptionLanguage.g:8925:3: ( ruleQualifiedName )
+            // InternalDataDescriptionLanguage.g:8951:2: ( ( ruleQualifiedName ) )
+            // InternalDataDescriptionLanguage.g:8952:3: ( ruleQualifiedName )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getStructuredDataDescriptionReferenceRuleAccess().getDefinitionStructuredDataDescriptionCrossReference_1_0()); 
             }
-            // InternalDataDescriptionLanguage.g:8926:3: ( ruleQualifiedName )
-            // InternalDataDescriptionLanguage.g:8927:4: ruleQualifiedName
+            // InternalDataDescriptionLanguage.g:8953:3: ( ruleQualifiedName )
+            // InternalDataDescriptionLanguage.g:8954:4: ruleQualifiedName
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getStructuredDataDescriptionReferenceRuleAccess().getDefinitionStructuredDataDescriptionQualifiedNameParserRuleCall_1_0_1()); 
@@ -29519,23 +29626,23 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__InstanceLiteralRule__DefinitionAssignment_0"
-    // InternalDataDescriptionLanguage.g:8938:1: rule__InstanceLiteralRule__DefinitionAssignment_0 : ( ( ruleQualifiedName ) ) ;
+    // InternalDataDescriptionLanguage.g:8965:1: rule__InstanceLiteralRule__DefinitionAssignment_0 : ( ( ruleQualifiedName ) ) ;
     public final void rule__InstanceLiteralRule__DefinitionAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:8942:1: ( ( ( ruleQualifiedName ) ) )
-            // InternalDataDescriptionLanguage.g:8943:2: ( ( ruleQualifiedName ) )
+            // InternalDataDescriptionLanguage.g:8969:1: ( ( ( ruleQualifiedName ) ) )
+            // InternalDataDescriptionLanguage.g:8970:2: ( ( ruleQualifiedName ) )
             {
-            // InternalDataDescriptionLanguage.g:8943:2: ( ( ruleQualifiedName ) )
-            // InternalDataDescriptionLanguage.g:8944:3: ( ruleQualifiedName )
+            // InternalDataDescriptionLanguage.g:8970:2: ( ( ruleQualifiedName ) )
+            // InternalDataDescriptionLanguage.g:8971:3: ( ruleQualifiedName )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getInstanceLiteralRuleAccess().getDefinitionClassDefinitionCrossReference_0_0()); 
             }
-            // InternalDataDescriptionLanguage.g:8945:3: ( ruleQualifiedName )
-            // InternalDataDescriptionLanguage.g:8946:4: ruleQualifiedName
+            // InternalDataDescriptionLanguage.g:8972:3: ( ruleQualifiedName )
+            // InternalDataDescriptionLanguage.g:8973:4: ruleQualifiedName
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getInstanceLiteralRuleAccess().getDefinitionClassDefinitionQualifiedNameParserRuleCall_0_0_1()); 
@@ -29576,17 +29683,17 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__InstanceLiteralRule__AttributesAssignment_2"
-    // InternalDataDescriptionLanguage.g:8957:1: rule__InstanceLiteralRule__AttributesAssignment_2 : ( ruleAttributeRule ) ;
+    // InternalDataDescriptionLanguage.g:8984:1: rule__InstanceLiteralRule__AttributesAssignment_2 : ( ruleAttributeRule ) ;
     public final void rule__InstanceLiteralRule__AttributesAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:8961:1: ( ( ruleAttributeRule ) )
-            // InternalDataDescriptionLanguage.g:8962:2: ( ruleAttributeRule )
+            // InternalDataDescriptionLanguage.g:8988:1: ( ( ruleAttributeRule ) )
+            // InternalDataDescriptionLanguage.g:8989:2: ( ruleAttributeRule )
             {
-            // InternalDataDescriptionLanguage.g:8962:2: ( ruleAttributeRule )
-            // InternalDataDescriptionLanguage.g:8963:3: ruleAttributeRule
+            // InternalDataDescriptionLanguage.g:8989:2: ( ruleAttributeRule )
+            // InternalDataDescriptionLanguage.g:8990:3: ruleAttributeRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getInstanceLiteralRuleAccess().getAttributesAttributeRuleParserRuleCall_2_0()); 
@@ -29621,23 +29728,23 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__AttributeRule__DefinitionAssignment_0"
-    // InternalDataDescriptionLanguage.g:8972:1: rule__AttributeRule__DefinitionAssignment_0 : ( ( ruleStringOrId ) ) ;
+    // InternalDataDescriptionLanguage.g:8999:1: rule__AttributeRule__DefinitionAssignment_0 : ( ( ruleStringOrId ) ) ;
     public final void rule__AttributeRule__DefinitionAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:8976:1: ( ( ( ruleStringOrId ) ) )
-            // InternalDataDescriptionLanguage.g:8977:2: ( ( ruleStringOrId ) )
+            // InternalDataDescriptionLanguage.g:9003:1: ( ( ( ruleStringOrId ) ) )
+            // InternalDataDescriptionLanguage.g:9004:2: ( ( ruleStringOrId ) )
             {
-            // InternalDataDescriptionLanguage.g:8977:2: ( ( ruleStringOrId ) )
-            // InternalDataDescriptionLanguage.g:8978:3: ( ruleStringOrId )
+            // InternalDataDescriptionLanguage.g:9004:2: ( ( ruleStringOrId ) )
+            // InternalDataDescriptionLanguage.g:9005:3: ( ruleStringOrId )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeRuleAccess().getDefinitionAttributeDefinitionCrossReference_0_0()); 
             }
-            // InternalDataDescriptionLanguage.g:8979:3: ( ruleStringOrId )
-            // InternalDataDescriptionLanguage.g:8980:4: ruleStringOrId
+            // InternalDataDescriptionLanguage.g:9006:3: ( ruleStringOrId )
+            // InternalDataDescriptionLanguage.g:9007:4: ruleStringOrId
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeRuleAccess().getDefinitionAttributeDefinitionStringOrIdParserRuleCall_0_0_1()); 
@@ -29678,17 +29785,17 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__AttributeRule__ValueAssignment_2"
-    // InternalDataDescriptionLanguage.g:8991:1: rule__AttributeRule__ValueAssignment_2 : ( ruleExpressionRule ) ;
+    // InternalDataDescriptionLanguage.g:9018:1: rule__AttributeRule__ValueAssignment_2 : ( ruleExpressionRule ) ;
     public final void rule__AttributeRule__ValueAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:8995:1: ( ( ruleExpressionRule ) )
-            // InternalDataDescriptionLanguage.g:8996:2: ( ruleExpressionRule )
+            // InternalDataDescriptionLanguage.g:9022:1: ( ( ruleExpressionRule ) )
+            // InternalDataDescriptionLanguage.g:9023:2: ( ruleExpressionRule )
             {
-            // InternalDataDescriptionLanguage.g:8996:2: ( ruleExpressionRule )
-            // InternalDataDescriptionLanguage.g:8997:3: ruleExpressionRule
+            // InternalDataDescriptionLanguage.g:9023:2: ( ruleExpressionRule )
+            // InternalDataDescriptionLanguage.g:9024:3: ruleExpressionRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeRuleAccess().getValueExpressionRuleParserRuleCall_2_0()); 
@@ -29723,17 +29830,17 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__RealLiteralRule__LiteralAssignment_0"
-    // InternalDataDescriptionLanguage.g:9006:1: rule__RealLiteralRule__LiteralAssignment_0 : ( RULE_DOUBLE ) ;
+    // InternalDataDescriptionLanguage.g:9033:1: rule__RealLiteralRule__LiteralAssignment_0 : ( RULE_DOUBLE ) ;
     public final void rule__RealLiteralRule__LiteralAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:9010:1: ( ( RULE_DOUBLE ) )
-            // InternalDataDescriptionLanguage.g:9011:2: ( RULE_DOUBLE )
+            // InternalDataDescriptionLanguage.g:9037:1: ( ( RULE_DOUBLE ) )
+            // InternalDataDescriptionLanguage.g:9038:2: ( RULE_DOUBLE )
             {
-            // InternalDataDescriptionLanguage.g:9011:2: ( RULE_DOUBLE )
-            // InternalDataDescriptionLanguage.g:9012:3: RULE_DOUBLE
+            // InternalDataDescriptionLanguage.g:9038:2: ( RULE_DOUBLE )
+            // InternalDataDescriptionLanguage.g:9039:3: RULE_DOUBLE
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getRealLiteralRuleAccess().getLiteralDOUBLETerminalRuleCall_0_0()); 
@@ -29764,17 +29871,17 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__RealLiteralRule__FactorAssignment_1"
-    // InternalDataDescriptionLanguage.g:9021:1: rule__RealLiteralRule__FactorAssignment_1 : ( ruleFactorRule ) ;
+    // InternalDataDescriptionLanguage.g:9048:1: rule__RealLiteralRule__FactorAssignment_1 : ( ruleFactorRule ) ;
     public final void rule__RealLiteralRule__FactorAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:9025:1: ( ( ruleFactorRule ) )
-            // InternalDataDescriptionLanguage.g:9026:2: ( ruleFactorRule )
+            // InternalDataDescriptionLanguage.g:9052:1: ( ( ruleFactorRule ) )
+            // InternalDataDescriptionLanguage.g:9053:2: ( ruleFactorRule )
             {
-            // InternalDataDescriptionLanguage.g:9026:2: ( ruleFactorRule )
-            // InternalDataDescriptionLanguage.g:9027:3: ruleFactorRule
+            // InternalDataDescriptionLanguage.g:9053:2: ( ruleFactorRule )
+            // InternalDataDescriptionLanguage.g:9054:3: ruleFactorRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getRealLiteralRuleAccess().getFactorFactorRuleEnumRuleCall_1_0()); 
@@ -29809,17 +29916,17 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__IntegerLiteralRule__LiteralAssignment_0"
-    // InternalDataDescriptionLanguage.g:9036:1: rule__IntegerLiteralRule__LiteralAssignment_0 : ( RULE_INT ) ;
+    // InternalDataDescriptionLanguage.g:9063:1: rule__IntegerLiteralRule__LiteralAssignment_0 : ( RULE_INT ) ;
     public final void rule__IntegerLiteralRule__LiteralAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:9040:1: ( ( RULE_INT ) )
-            // InternalDataDescriptionLanguage.g:9041:2: ( RULE_INT )
+            // InternalDataDescriptionLanguage.g:9067:1: ( ( RULE_INT ) )
+            // InternalDataDescriptionLanguage.g:9068:2: ( RULE_INT )
             {
-            // InternalDataDescriptionLanguage.g:9041:2: ( RULE_INT )
-            // InternalDataDescriptionLanguage.g:9042:3: RULE_INT
+            // InternalDataDescriptionLanguage.g:9068:2: ( RULE_INT )
+            // InternalDataDescriptionLanguage.g:9069:3: RULE_INT
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getIntegerLiteralRuleAccess().getLiteralINTTerminalRuleCall_0_0()); 
@@ -29850,17 +29957,17 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__IntegerLiteralRule__FactorAssignment_1"
-    // InternalDataDescriptionLanguage.g:9051:1: rule__IntegerLiteralRule__FactorAssignment_1 : ( ruleFactorRule ) ;
+    // InternalDataDescriptionLanguage.g:9078:1: rule__IntegerLiteralRule__FactorAssignment_1 : ( ruleFactorRule ) ;
     public final void rule__IntegerLiteralRule__FactorAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:9055:1: ( ( ruleFactorRule ) )
-            // InternalDataDescriptionLanguage.g:9056:2: ( ruleFactorRule )
+            // InternalDataDescriptionLanguage.g:9082:1: ( ( ruleFactorRule ) )
+            // InternalDataDescriptionLanguage.g:9083:2: ( ruleFactorRule )
             {
-            // InternalDataDescriptionLanguage.g:9056:2: ( ruleFactorRule )
-            // InternalDataDescriptionLanguage.g:9057:3: ruleFactorRule
+            // InternalDataDescriptionLanguage.g:9083:2: ( ruleFactorRule )
+            // InternalDataDescriptionLanguage.g:9084:3: ruleFactorRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getIntegerLiteralRuleAccess().getFactorFactorRuleEnumRuleCall_1_0()); 
@@ -29895,17 +30002,17 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__StringLiteralRule__LiteralAssignment"
-    // InternalDataDescriptionLanguage.g:9066:1: rule__StringLiteralRule__LiteralAssignment : ( RULE_STRING ) ;
+    // InternalDataDescriptionLanguage.g:9093:1: rule__StringLiteralRule__LiteralAssignment : ( RULE_STRING ) ;
     public final void rule__StringLiteralRule__LiteralAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:9070:1: ( ( RULE_STRING ) )
-            // InternalDataDescriptionLanguage.g:9071:2: ( RULE_STRING )
+            // InternalDataDescriptionLanguage.g:9097:1: ( ( RULE_STRING ) )
+            // InternalDataDescriptionLanguage.g:9098:2: ( RULE_STRING )
             {
-            // InternalDataDescriptionLanguage.g:9071:2: ( RULE_STRING )
-            // InternalDataDescriptionLanguage.g:9072:3: RULE_STRING
+            // InternalDataDescriptionLanguage.g:9098:2: ( RULE_STRING )
+            // InternalDataDescriptionLanguage.g:9099:3: RULE_STRING
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getStringLiteralRuleAccess().getLiteralSTRINGTerminalRuleCall_0()); 
@@ -29936,23 +30043,23 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__BooleanLiteralRule__LiteralAssignment_1_0"
-    // InternalDataDescriptionLanguage.g:9081:1: rule__BooleanLiteralRule__LiteralAssignment_1_0 : ( ( 'true' ) ) ;
+    // InternalDataDescriptionLanguage.g:9108:1: rule__BooleanLiteralRule__LiteralAssignment_1_0 : ( ( 'true' ) ) ;
     public final void rule__BooleanLiteralRule__LiteralAssignment_1_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:9085:1: ( ( ( 'true' ) ) )
-            // InternalDataDescriptionLanguage.g:9086:2: ( ( 'true' ) )
+            // InternalDataDescriptionLanguage.g:9112:1: ( ( ( 'true' ) ) )
+            // InternalDataDescriptionLanguage.g:9113:2: ( ( 'true' ) )
             {
-            // InternalDataDescriptionLanguage.g:9086:2: ( ( 'true' ) )
-            // InternalDataDescriptionLanguage.g:9087:3: ( 'true' )
+            // InternalDataDescriptionLanguage.g:9113:2: ( ( 'true' ) )
+            // InternalDataDescriptionLanguage.g:9114:3: ( 'true' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getBooleanLiteralRuleAccess().getLiteralTrueKeyword_1_0_0()); 
             }
-            // InternalDataDescriptionLanguage.g:9088:3: ( 'true' )
-            // InternalDataDescriptionLanguage.g:9089:4: 'true'
+            // InternalDataDescriptionLanguage.g:9115:3: ( 'true' )
+            // InternalDataDescriptionLanguage.g:9116:4: 'true'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getBooleanLiteralRuleAccess().getLiteralTrueKeyword_1_0_0()); 
@@ -29989,17 +30096,17 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__AttributeDefinitionRule__ConstraintsAssignment_0"
-    // InternalDataDescriptionLanguage.g:9100:1: rule__AttributeDefinitionRule__ConstraintsAssignment_0 : ( ruleConstraintRule ) ;
+    // InternalDataDescriptionLanguage.g:9127:1: rule__AttributeDefinitionRule__ConstraintsAssignment_0 : ( ruleConstraintRule ) ;
     public final void rule__AttributeDefinitionRule__ConstraintsAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:9104:1: ( ( ruleConstraintRule ) )
-            // InternalDataDescriptionLanguage.g:9105:2: ( ruleConstraintRule )
+            // InternalDataDescriptionLanguage.g:9131:1: ( ( ruleConstraintRule ) )
+            // InternalDataDescriptionLanguage.g:9132:2: ( ruleConstraintRule )
             {
-            // InternalDataDescriptionLanguage.g:9105:2: ( ruleConstraintRule )
-            // InternalDataDescriptionLanguage.g:9106:3: ruleConstraintRule
+            // InternalDataDescriptionLanguage.g:9132:2: ( ruleConstraintRule )
+            // InternalDataDescriptionLanguage.g:9133:3: ruleConstraintRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeDefinitionRuleAccess().getConstraintsConstraintRuleParserRuleCall_0_0()); 
@@ -30034,17 +30141,17 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__AttributeDefinitionRule__NameAssignment_1"
-    // InternalDataDescriptionLanguage.g:9115:1: rule__AttributeDefinitionRule__NameAssignment_1 : ( ruleStringOrId ) ;
+    // InternalDataDescriptionLanguage.g:9142:1: rule__AttributeDefinitionRule__NameAssignment_1 : ( ruleStringOrId ) ;
     public final void rule__AttributeDefinitionRule__NameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:9119:1: ( ( ruleStringOrId ) )
-            // InternalDataDescriptionLanguage.g:9120:2: ( ruleStringOrId )
+            // InternalDataDescriptionLanguage.g:9146:1: ( ( ruleStringOrId ) )
+            // InternalDataDescriptionLanguage.g:9147:2: ( ruleStringOrId )
             {
-            // InternalDataDescriptionLanguage.g:9120:2: ( ruleStringOrId )
-            // InternalDataDescriptionLanguage.g:9121:3: ruleStringOrId
+            // InternalDataDescriptionLanguage.g:9147:2: ( ruleStringOrId )
+            // InternalDataDescriptionLanguage.g:9148:3: ruleStringOrId
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeDefinitionRuleAccess().getNameStringOrIdParserRuleCall_1_0()); 
@@ -30079,23 +30186,23 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__AttributeDefinitionRule__OptionalAssignment_3"
-    // InternalDataDescriptionLanguage.g:9130:1: rule__AttributeDefinitionRule__OptionalAssignment_3 : ( ( 'optional' ) ) ;
+    // InternalDataDescriptionLanguage.g:9157:1: rule__AttributeDefinitionRule__OptionalAssignment_3 : ( ( 'optional' ) ) ;
     public final void rule__AttributeDefinitionRule__OptionalAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:9134:1: ( ( ( 'optional' ) ) )
-            // InternalDataDescriptionLanguage.g:9135:2: ( ( 'optional' ) )
+            // InternalDataDescriptionLanguage.g:9161:1: ( ( ( 'optional' ) ) )
+            // InternalDataDescriptionLanguage.g:9162:2: ( ( 'optional' ) )
             {
-            // InternalDataDescriptionLanguage.g:9135:2: ( ( 'optional' ) )
-            // InternalDataDescriptionLanguage.g:9136:3: ( 'optional' )
+            // InternalDataDescriptionLanguage.g:9162:2: ( ( 'optional' ) )
+            // InternalDataDescriptionLanguage.g:9163:3: ( 'optional' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeDefinitionRuleAccess().getOptionalOptionalKeyword_3_0()); 
             }
-            // InternalDataDescriptionLanguage.g:9137:3: ( 'optional' )
-            // InternalDataDescriptionLanguage.g:9138:4: 'optional'
+            // InternalDataDescriptionLanguage.g:9164:3: ( 'optional' )
+            // InternalDataDescriptionLanguage.g:9165:4: 'optional'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeDefinitionRuleAccess().getOptionalOptionalKeyword_3_0()); 
@@ -30132,17 +30239,17 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__AttributeDefinitionRule__TypeAssignment_4"
-    // InternalDataDescriptionLanguage.g:9149:1: rule__AttributeDefinitionRule__TypeAssignment_4 : ( ruleTypeRule ) ;
+    // InternalDataDescriptionLanguage.g:9176:1: rule__AttributeDefinitionRule__TypeAssignment_4 : ( ruleTypeRule ) ;
     public final void rule__AttributeDefinitionRule__TypeAssignment_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:9153:1: ( ( ruleTypeRule ) )
-            // InternalDataDescriptionLanguage.g:9154:2: ( ruleTypeRule )
+            // InternalDataDescriptionLanguage.g:9180:1: ( ( ruleTypeRule ) )
+            // InternalDataDescriptionLanguage.g:9181:2: ( ruleTypeRule )
             {
-            // InternalDataDescriptionLanguage.g:9154:2: ( ruleTypeRule )
-            // InternalDataDescriptionLanguage.g:9155:3: ruleTypeRule
+            // InternalDataDescriptionLanguage.g:9181:2: ( ruleTypeRule )
+            // InternalDataDescriptionLanguage.g:9182:3: ruleTypeRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeDefinitionRuleAccess().getTypeTypeRuleParserRuleCall_4_0()); 
@@ -30177,17 +30284,17 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__AttributeDefinitionRule__InitialisationAssignment_5_1"
-    // InternalDataDescriptionLanguage.g:9164:1: rule__AttributeDefinitionRule__InitialisationAssignment_5_1 : ( ruleExpressionRule ) ;
+    // InternalDataDescriptionLanguage.g:9191:1: rule__AttributeDefinitionRule__InitialisationAssignment_5_1 : ( ruleExpressionRule ) ;
     public final void rule__AttributeDefinitionRule__InitialisationAssignment_5_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:9168:1: ( ( ruleExpressionRule ) )
-            // InternalDataDescriptionLanguage.g:9169:2: ( ruleExpressionRule )
+            // InternalDataDescriptionLanguage.g:9195:1: ( ( ruleExpressionRule ) )
+            // InternalDataDescriptionLanguage.g:9196:2: ( ruleExpressionRule )
             {
-            // InternalDataDescriptionLanguage.g:9169:2: ( ruleExpressionRule )
-            // InternalDataDescriptionLanguage.g:9170:3: ruleExpressionRule
+            // InternalDataDescriptionLanguage.g:9196:2: ( ruleExpressionRule )
+            // InternalDataDescriptionLanguage.g:9197:3: ruleExpressionRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeDefinitionRuleAccess().getInitialisationExpressionRuleParserRuleCall_5_1_0()); 
@@ -30222,23 +30329,23 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__EnumReferenceRule__DefinitionAssignment_1"
-    // InternalDataDescriptionLanguage.g:9179:1: rule__EnumReferenceRule__DefinitionAssignment_1 : ( ( ruleQualifiedName ) ) ;
+    // InternalDataDescriptionLanguage.g:9206:1: rule__EnumReferenceRule__DefinitionAssignment_1 : ( ( ruleQualifiedName ) ) ;
     public final void rule__EnumReferenceRule__DefinitionAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:9183:1: ( ( ( ruleQualifiedName ) ) )
-            // InternalDataDescriptionLanguage.g:9184:2: ( ( ruleQualifiedName ) )
+            // InternalDataDescriptionLanguage.g:9210:1: ( ( ( ruleQualifiedName ) ) )
+            // InternalDataDescriptionLanguage.g:9211:2: ( ( ruleQualifiedName ) )
             {
-            // InternalDataDescriptionLanguage.g:9184:2: ( ( ruleQualifiedName ) )
-            // InternalDataDescriptionLanguage.g:9185:3: ( ruleQualifiedName )
+            // InternalDataDescriptionLanguage.g:9211:2: ( ( ruleQualifiedName ) )
+            // InternalDataDescriptionLanguage.g:9212:3: ( ruleQualifiedName )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getEnumReferenceRuleAccess().getDefinitionEnumDefinitionCrossReference_1_0()); 
             }
-            // InternalDataDescriptionLanguage.g:9186:3: ( ruleQualifiedName )
-            // InternalDataDescriptionLanguage.g:9187:4: ruleQualifiedName
+            // InternalDataDescriptionLanguage.g:9213:3: ( ruleQualifiedName )
+            // InternalDataDescriptionLanguage.g:9214:4: ruleQualifiedName
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getEnumReferenceRuleAccess().getDefinitionEnumDefinitionQualifiedNameParserRuleCall_1_0_1()); 
@@ -30279,23 +30386,23 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__TypeReferenceRule__DefinitionAssignment_1"
-    // InternalDataDescriptionLanguage.g:9198:1: rule__TypeReferenceRule__DefinitionAssignment_1 : ( ( ruleQualifiedName ) ) ;
+    // InternalDataDescriptionLanguage.g:9225:1: rule__TypeReferenceRule__DefinitionAssignment_1 : ( ( ruleQualifiedName ) ) ;
     public final void rule__TypeReferenceRule__DefinitionAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:9202:1: ( ( ( ruleQualifiedName ) ) )
-            // InternalDataDescriptionLanguage.g:9203:2: ( ( ruleQualifiedName ) )
+            // InternalDataDescriptionLanguage.g:9229:1: ( ( ( ruleQualifiedName ) ) )
+            // InternalDataDescriptionLanguage.g:9230:2: ( ( ruleQualifiedName ) )
             {
-            // InternalDataDescriptionLanguage.g:9203:2: ( ( ruleQualifiedName ) )
-            // InternalDataDescriptionLanguage.g:9204:3: ( ruleQualifiedName )
+            // InternalDataDescriptionLanguage.g:9230:2: ( ( ruleQualifiedName ) )
+            // InternalDataDescriptionLanguage.g:9231:3: ( ruleQualifiedName )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTypeReferenceRuleAccess().getDefinitionClassDefinitionCrossReference_1_0()); 
             }
-            // InternalDataDescriptionLanguage.g:9205:3: ( ruleQualifiedName )
-            // InternalDataDescriptionLanguage.g:9206:4: ruleQualifiedName
+            // InternalDataDescriptionLanguage.g:9232:3: ( ruleQualifiedName )
+            // InternalDataDescriptionLanguage.g:9233:4: ruleQualifiedName
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTypeReferenceRuleAccess().getDefinitionClassDefinitionQualifiedNameParserRuleCall_1_0_1()); 
@@ -30336,17 +30443,17 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__ArrayTypeRule__ElementsAssignment_1"
-    // InternalDataDescriptionLanguage.g:9217:1: rule__ArrayTypeRule__ElementsAssignment_1 : ( ruleTypeRule ) ;
+    // InternalDataDescriptionLanguage.g:9244:1: rule__ArrayTypeRule__ElementsAssignment_1 : ( ruleTypeRule ) ;
     public final void rule__ArrayTypeRule__ElementsAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:9221:1: ( ( ruleTypeRule ) )
-            // InternalDataDescriptionLanguage.g:9222:2: ( ruleTypeRule )
+            // InternalDataDescriptionLanguage.g:9248:1: ( ( ruleTypeRule ) )
+            // InternalDataDescriptionLanguage.g:9249:2: ( ruleTypeRule )
             {
-            // InternalDataDescriptionLanguage.g:9222:2: ( ruleTypeRule )
-            // InternalDataDescriptionLanguage.g:9223:3: ruleTypeRule
+            // InternalDataDescriptionLanguage.g:9249:2: ( ruleTypeRule )
+            // InternalDataDescriptionLanguage.g:9250:3: ruleTypeRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getArrayTypeRuleAccess().getElementsTypeRuleParserRuleCall_1_0()); 
@@ -30380,21 +30487,66 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
     // $ANTLR end "rule__ArrayTypeRule__ElementsAssignment_1"
 
 
-    // $ANTLR start "rule__ParameterRule__TypeAssignment_0"
-    // InternalDataDescriptionLanguage.g:9232:1: rule__ParameterRule__TypeAssignment_0 : ( ruleTypeRule ) ;
-    public final void rule__ParameterRule__TypeAssignment_0() throws RecognitionException {
+    // $ANTLR start "rule__ParameterRule__ConstraintsAssignment_0"
+    // InternalDataDescriptionLanguage.g:9259:1: rule__ParameterRule__ConstraintsAssignment_0 : ( ruleConstraintRule ) ;
+    public final void rule__ParameterRule__ConstraintsAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:9236:1: ( ( ruleTypeRule ) )
-            // InternalDataDescriptionLanguage.g:9237:2: ( ruleTypeRule )
+            // InternalDataDescriptionLanguage.g:9263:1: ( ( ruleConstraintRule ) )
+            // InternalDataDescriptionLanguage.g:9264:2: ( ruleConstraintRule )
             {
-            // InternalDataDescriptionLanguage.g:9237:2: ( ruleTypeRule )
-            // InternalDataDescriptionLanguage.g:9238:3: ruleTypeRule
+            // InternalDataDescriptionLanguage.g:9264:2: ( ruleConstraintRule )
+            // InternalDataDescriptionLanguage.g:9265:3: ruleConstraintRule
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getParameterRuleAccess().getTypeTypeRuleParserRuleCall_0_0()); 
+               before(grammarAccess.getParameterRuleAccess().getConstraintsConstraintRuleParserRuleCall_0_0()); 
+            }
+            pushFollow(FOLLOW_2);
+            ruleConstraintRule();
+
+            state._fsp--;
+            if (state.failed) return ;
+            if ( state.backtracking==0 ) {
+               after(grammarAccess.getParameterRuleAccess().getConstraintsConstraintRuleParserRuleCall_0_0()); 
+            }
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__ParameterRule__ConstraintsAssignment_0"
+
+
+    // $ANTLR start "rule__ParameterRule__TypeAssignment_1"
+    // InternalDataDescriptionLanguage.g:9274:1: rule__ParameterRule__TypeAssignment_1 : ( ruleTypeRule ) ;
+    public final void rule__ParameterRule__TypeAssignment_1() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalDataDescriptionLanguage.g:9278:1: ( ( ruleTypeRule ) )
+            // InternalDataDescriptionLanguage.g:9279:2: ( ruleTypeRule )
+            {
+            // InternalDataDescriptionLanguage.g:9279:2: ( ruleTypeRule )
+            // InternalDataDescriptionLanguage.g:9280:3: ruleTypeRule
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getParameterRuleAccess().getTypeTypeRuleParserRuleCall_1_0()); 
             }
             pushFollow(FOLLOW_2);
             ruleTypeRule();
@@ -30402,7 +30554,7 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getParameterRuleAccess().getTypeTypeRuleParserRuleCall_0_0()); 
+               after(grammarAccess.getParameterRuleAccess().getTypeTypeRuleParserRuleCall_1_0()); 
             }
 
             }
@@ -30422,24 +30574,24 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
         }
         return ;
     }
-    // $ANTLR end "rule__ParameterRule__TypeAssignment_0"
+    // $ANTLR end "rule__ParameterRule__TypeAssignment_1"
 
 
-    // $ANTLR start "rule__ParameterRule__NameAssignment_1"
-    // InternalDataDescriptionLanguage.g:9247:1: rule__ParameterRule__NameAssignment_1 : ( ruleStringOrId ) ;
-    public final void rule__ParameterRule__NameAssignment_1() throws RecognitionException {
+    // $ANTLR start "rule__ParameterRule__NameAssignment_2"
+    // InternalDataDescriptionLanguage.g:9289:1: rule__ParameterRule__NameAssignment_2 : ( ruleStringOrId ) ;
+    public final void rule__ParameterRule__NameAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:9251:1: ( ( ruleStringOrId ) )
-            // InternalDataDescriptionLanguage.g:9252:2: ( ruleStringOrId )
+            // InternalDataDescriptionLanguage.g:9293:1: ( ( ruleStringOrId ) )
+            // InternalDataDescriptionLanguage.g:9294:2: ( ruleStringOrId )
             {
-            // InternalDataDescriptionLanguage.g:9252:2: ( ruleStringOrId )
-            // InternalDataDescriptionLanguage.g:9253:3: ruleStringOrId
+            // InternalDataDescriptionLanguage.g:9294:2: ( ruleStringOrId )
+            // InternalDataDescriptionLanguage.g:9295:3: ruleStringOrId
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getParameterRuleAccess().getNameStringOrIdParserRuleCall_1_0()); 
+               before(grammarAccess.getParameterRuleAccess().getNameStringOrIdParserRuleCall_2_0()); 
             }
             pushFollow(FOLLOW_2);
             ruleStringOrId();
@@ -30447,7 +30599,7 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getParameterRuleAccess().getNameStringOrIdParserRuleCall_1_0()); 
+               after(grammarAccess.getParameterRuleAccess().getNameStringOrIdParserRuleCall_2_0()); 
             }
 
             }
@@ -30467,21 +30619,21 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
         }
         return ;
     }
-    // $ANTLR end "rule__ParameterRule__NameAssignment_1"
+    // $ANTLR end "rule__ParameterRule__NameAssignment_2"
 
 
     // $ANTLR start "rule__ImportRule__LanguageAssignment_1"
-    // InternalDataDescriptionLanguage.g:9262:1: rule__ImportRule__LanguageAssignment_1 : ( RULE_STRING ) ;
+    // InternalDataDescriptionLanguage.g:9304:1: rule__ImportRule__LanguageAssignment_1 : ( RULE_STRING ) ;
     public final void rule__ImportRule__LanguageAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:9266:1: ( ( RULE_STRING ) )
-            // InternalDataDescriptionLanguage.g:9267:2: ( RULE_STRING )
+            // InternalDataDescriptionLanguage.g:9308:1: ( ( RULE_STRING ) )
+            // InternalDataDescriptionLanguage.g:9309:2: ( RULE_STRING )
             {
-            // InternalDataDescriptionLanguage.g:9267:2: ( RULE_STRING )
-            // InternalDataDescriptionLanguage.g:9268:3: RULE_STRING
+            // InternalDataDescriptionLanguage.g:9309:2: ( RULE_STRING )
+            // InternalDataDescriptionLanguage.g:9310:3: RULE_STRING
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getImportRuleAccess().getLanguageSTRINGTerminalRuleCall_1_0()); 
@@ -30512,17 +30664,17 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__ImportRule__ImportedNamespaceAssignment_3"
-    // InternalDataDescriptionLanguage.g:9277:1: rule__ImportRule__ImportedNamespaceAssignment_3 : ( ruleQualifiedName ) ;
+    // InternalDataDescriptionLanguage.g:9319:1: rule__ImportRule__ImportedNamespaceAssignment_3 : ( ruleQualifiedName ) ;
     public final void rule__ImportRule__ImportedNamespaceAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:9281:1: ( ( ruleQualifiedName ) )
-            // InternalDataDescriptionLanguage.g:9282:2: ( ruleQualifiedName )
+            // InternalDataDescriptionLanguage.g:9323:1: ( ( ruleQualifiedName ) )
+            // InternalDataDescriptionLanguage.g:9324:2: ( ruleQualifiedName )
             {
-            // InternalDataDescriptionLanguage.g:9282:2: ( ruleQualifiedName )
-            // InternalDataDescriptionLanguage.g:9283:3: ruleQualifiedName
+            // InternalDataDescriptionLanguage.g:9324:2: ( ruleQualifiedName )
+            // InternalDataDescriptionLanguage.g:9325:3: ruleQualifiedName
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getImportRuleAccess().getImportedNamespaceQualifiedNameParserRuleCall_3_0()); 
@@ -30627,10 +30779,10 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
     }
     // $ANTLR end synpred3_InternalDataDescriptionLanguage
 
-    // $ANTLR start synpred107_InternalDataDescriptionLanguage
-    public final void synpred107_InternalDataDescriptionLanguage_fragment() throws RecognitionException {   
-        // InternalDataDescriptionLanguage.g:7868:3: ( rule__QualifiedName__Group_1__0 )
-        // InternalDataDescriptionLanguage.g:7868:3: rule__QualifiedName__Group_1__0
+    // $ANTLR start synpred108_InternalDataDescriptionLanguage
+    public final void synpred108_InternalDataDescriptionLanguage_fragment() throws RecognitionException {   
+        // InternalDataDescriptionLanguage.g:7895:3: ( rule__QualifiedName__Group_1__0 )
+        // InternalDataDescriptionLanguage.g:7895:3: rule__QualifiedName__Group_1__0
         {
         pushFollow(FOLLOW_2);
         rule__QualifiedName__Group_1__0();
@@ -30640,10 +30792,24 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
         }
     }
-    // $ANTLR end synpred107_InternalDataDescriptionLanguage
+    // $ANTLR end synpred108_InternalDataDescriptionLanguage
 
     // Delegated rules
 
+    public final boolean synpred108_InternalDataDescriptionLanguage() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred108_InternalDataDescriptionLanguage_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
     public final boolean synpred1_InternalDataDescriptionLanguage() {
         state.backtracking++;
         int start = input.mark();
@@ -30677,20 +30843,6 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
         int start = input.mark();
         try {
             synpred2_InternalDataDescriptionLanguage_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred107_InternalDataDescriptionLanguage() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred107_InternalDataDescriptionLanguage_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }

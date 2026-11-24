@@ -243,7 +243,8 @@ public class ConstraintCompiler {
     /**
      * @return The standard deviations of the features of the problem; declarations for other
      *   data are ignored.
-     * @throws IllegalArgumentException if a declaration is malformed or a deviation negative.
+     * @throws IllegalArgumentException if a declaration is malformed. A negative deviation is
+     *   rejected when the DDL file is loaded (the annotation of the parameter).
      */
     private static Map<EStructuralFeature, Double> readDeviations(
             final List<Call> calls,
@@ -262,12 +263,6 @@ public class ConstraintCompiler {
             final Expression deviationParameter = call.getParameters().get(1);
             final DataDescription description = new DataReferenceSwitch().doSwitch(dataParameter);
             final double deviation = new NumberSwitch().doSwitch(deviationParameter).doubleValue();
-
-            // also rejects NaN
-            if(!(deviation >= 0.0)) {
-                throw new IllegalArgumentException("The standard deviation of '" + description.getName()
-                                                   + "' must not be negative, but is " + deviation + ".");
-            }
 
             final EStructuralFeature searchFeature = searchByData.get(description);
             final EStructuralFeature objective = objectivesByData.get(description);

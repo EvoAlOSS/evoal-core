@@ -305,6 +305,7 @@ ConstantDefinitionRule returns ConstantDefinition:
 ;
 
 ParameterRule returns Parameter:
+	(constraints += ConstraintRule)*
 	type = TypeRule name = StringOrId
 ;
 

@@ -9881,38 +9881,93 @@ public class InternalOptimisationLanguageParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleParameterRule"
-    // InternalOptimisationLanguage.g:3382:1: ruleParameterRule returns [EObject current=null] : ( ( (lv_type_0_0= ruleTypeRule ) ) ( (lv_name_1_0= ruleStringOrId ) ) ) ;
+    // InternalOptimisationLanguage.g:3382:1: ruleParameterRule returns [EObject current=null] : ( ( (lv_constraints_0_0= ruleConstraintRule ) )* ( (lv_type_1_0= ruleTypeRule ) ) ( (lv_name_2_0= ruleStringOrId ) ) ) ;
     public final EObject ruleParameterRule() throws RecognitionException {
         EObject current = null;
 
-        EObject lv_type_0_0 = null;
+        EObject lv_constraints_0_0 = null;
 
-        AntlrDatatypeRuleToken lv_name_1_0 = null;
+        EObject lv_type_1_0 = null;
+
+        AntlrDatatypeRuleToken lv_name_2_0 = null;
 
 
 
         	enterRule();
 
         try {
-            // InternalOptimisationLanguage.g:3388:2: ( ( ( (lv_type_0_0= ruleTypeRule ) ) ( (lv_name_1_0= ruleStringOrId ) ) ) )
-            // InternalOptimisationLanguage.g:3389:2: ( ( (lv_type_0_0= ruleTypeRule ) ) ( (lv_name_1_0= ruleStringOrId ) ) )
+            // InternalOptimisationLanguage.g:3388:2: ( ( ( (lv_constraints_0_0= ruleConstraintRule ) )* ( (lv_type_1_0= ruleTypeRule ) ) ( (lv_name_2_0= ruleStringOrId ) ) ) )
+            // InternalOptimisationLanguage.g:3389:2: ( ( (lv_constraints_0_0= ruleConstraintRule ) )* ( (lv_type_1_0= ruleTypeRule ) ) ( (lv_name_2_0= ruleStringOrId ) ) )
             {
-            // InternalOptimisationLanguage.g:3389:2: ( ( (lv_type_0_0= ruleTypeRule ) ) ( (lv_name_1_0= ruleStringOrId ) ) )
-            // InternalOptimisationLanguage.g:3390:3: ( (lv_type_0_0= ruleTypeRule ) ) ( (lv_name_1_0= ruleStringOrId ) )
+            // InternalOptimisationLanguage.g:3389:2: ( ( (lv_constraints_0_0= ruleConstraintRule ) )* ( (lv_type_1_0= ruleTypeRule ) ) ( (lv_name_2_0= ruleStringOrId ) ) )
+            // InternalOptimisationLanguage.g:3390:3: ( (lv_constraints_0_0= ruleConstraintRule ) )* ( (lv_type_1_0= ruleTypeRule ) ) ( (lv_name_2_0= ruleStringOrId ) )
             {
-            // InternalOptimisationLanguage.g:3390:3: ( (lv_type_0_0= ruleTypeRule ) )
-            // InternalOptimisationLanguage.g:3391:4: (lv_type_0_0= ruleTypeRule )
+            // InternalOptimisationLanguage.g:3390:3: ( (lv_constraints_0_0= ruleConstraintRule ) )*
+            loop40:
+            do {
+                int alt40=2;
+                int LA40_0 = input.LA(1);
+
+                if ( (LA40_0==52) ) {
+                    alt40=1;
+                }
+
+
+                switch (alt40) {
+            	case 1 :
+            	    // InternalOptimisationLanguage.g:3391:4: (lv_constraints_0_0= ruleConstraintRule )
+            	    {
+            	    // InternalOptimisationLanguage.g:3391:4: (lv_constraints_0_0= ruleConstraintRule )
+            	    // InternalOptimisationLanguage.g:3392:5: lv_constraints_0_0= ruleConstraintRule
+            	    {
+            	    if ( state.backtracking==0 ) {
+
+            	      					newCompositeNode(grammarAccess.getParameterRuleAccess().getConstraintsConstraintRuleParserRuleCall_0_0());
+            	      				
+            	    }
+            	    pushFollow(FOLLOW_46);
+            	    lv_constraints_0_0=ruleConstraintRule();
+
+            	    state._fsp--;
+            	    if (state.failed) return current;
+            	    if ( state.backtracking==0 ) {
+
+            	      					if (current==null) {
+            	      						current = createModelElementForParent(grammarAccess.getParameterRuleRule());
+            	      					}
+            	      					add(
+            	      						current,
+            	      						"constraints",
+            	      						lv_constraints_0_0,
+            	      						"de.evoal.languages.model.base.dsl.BaseLanguage.ConstraintRule");
+            	      					afterParserOrEnumRuleCall();
+            	      				
+            	    }
+
+            	    }
+
+
+            	    }
+            	    break;
+
+            	default :
+            	    break loop40;
+                }
+            } while (true);
+
+            // InternalOptimisationLanguage.g:3409:3: ( (lv_type_1_0= ruleTypeRule ) )
+            // InternalOptimisationLanguage.g:3410:4: (lv_type_1_0= ruleTypeRule )
             {
-            // InternalOptimisationLanguage.g:3391:4: (lv_type_0_0= ruleTypeRule )
-            // InternalOptimisationLanguage.g:3392:5: lv_type_0_0= ruleTypeRule
+            // InternalOptimisationLanguage.g:3410:4: (lv_type_1_0= ruleTypeRule )
+            // InternalOptimisationLanguage.g:3411:5: lv_type_1_0= ruleTypeRule
             {
             if ( state.backtracking==0 ) {
 
-              					newCompositeNode(grammarAccess.getParameterRuleAccess().getTypeTypeRuleParserRuleCall_0_0());
+              					newCompositeNode(grammarAccess.getParameterRuleAccess().getTypeTypeRuleParserRuleCall_1_0());
               				
             }
             pushFollow(FOLLOW_4);
-            lv_type_0_0=ruleTypeRule();
+            lv_type_1_0=ruleTypeRule();
 
             state._fsp--;
             if (state.failed) return current;
@@ -9924,7 +9979,7 @@ public class InternalOptimisationLanguageParser extends AbstractInternalAntlrPar
               					set(
               						current,
               						"type",
-              						lv_type_0_0,
+              						lv_type_1_0,
               						"de.evoal.languages.model.base.dsl.BaseLanguage.TypeRule");
               					afterParserOrEnumRuleCall();
               				
@@ -9935,19 +9990,19 @@ public class InternalOptimisationLanguageParser extends AbstractInternalAntlrPar
 
             }
 
-            // InternalOptimisationLanguage.g:3409:3: ( (lv_name_1_0= ruleStringOrId ) )
-            // InternalOptimisationLanguage.g:3410:4: (lv_name_1_0= ruleStringOrId )
+            // InternalOptimisationLanguage.g:3428:3: ( (lv_name_2_0= ruleStringOrId ) )
+            // InternalOptimisationLanguage.g:3429:4: (lv_name_2_0= ruleStringOrId )
             {
-            // InternalOptimisationLanguage.g:3410:4: (lv_name_1_0= ruleStringOrId )
-            // InternalOptimisationLanguage.g:3411:5: lv_name_1_0= ruleStringOrId
+            // InternalOptimisationLanguage.g:3429:4: (lv_name_2_0= ruleStringOrId )
+            // InternalOptimisationLanguage.g:3430:5: lv_name_2_0= ruleStringOrId
             {
             if ( state.backtracking==0 ) {
 
-              					newCompositeNode(grammarAccess.getParameterRuleAccess().getNameStringOrIdParserRuleCall_1_0());
+              					newCompositeNode(grammarAccess.getParameterRuleAccess().getNameStringOrIdParserRuleCall_2_0());
               				
             }
             pushFollow(FOLLOW_2);
-            lv_name_1_0=ruleStringOrId();
+            lv_name_2_0=ruleStringOrId();
 
             state._fsp--;
             if (state.failed) return current;
@@ -9959,7 +10014,7 @@ public class InternalOptimisationLanguageParser extends AbstractInternalAntlrPar
               					set(
               						current,
               						"name",
-              						lv_name_1_0,
+              						lv_name_2_0,
               						"de.evoal.languages.model.base.dsl.BaseLanguage.StringOrId");
               					afterParserOrEnumRuleCall();
               				
@@ -9995,7 +10050,7 @@ public class InternalOptimisationLanguageParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleImportRule"
-    // InternalOptimisationLanguage.g:3432:1: entryRuleImportRule returns [EObject current=null] : iv_ruleImportRule= ruleImportRule EOF ;
+    // InternalOptimisationLanguage.g:3451:1: entryRuleImportRule returns [EObject current=null] : iv_ruleImportRule= ruleImportRule EOF ;
     public final EObject entryRuleImportRule() throws RecognitionException {
         EObject current = null;
 
@@ -10003,8 +10058,8 @@ public class InternalOptimisationLanguageParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalOptimisationLanguage.g:3432:51: (iv_ruleImportRule= ruleImportRule EOF )
-            // InternalOptimisationLanguage.g:3433:2: iv_ruleImportRule= ruleImportRule EOF
+            // InternalOptimisationLanguage.g:3451:51: (iv_ruleImportRule= ruleImportRule EOF )
+            // InternalOptimisationLanguage.g:3452:2: iv_ruleImportRule= ruleImportRule EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getImportRuleRule()); 
@@ -10035,7 +10090,7 @@ public class InternalOptimisationLanguageParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleImportRule"
-    // InternalOptimisationLanguage.g:3439:1: ruleImportRule returns [EObject current=null] : (otherlv_0= 'import' ( (lv_language_1_0= RULE_STRING ) ) otherlv_2= 'from' ( (lv_importedNamespace_3_0= ruleQualifiedName ) ) otherlv_4= ';' ) ;
+    // InternalOptimisationLanguage.g:3458:1: ruleImportRule returns [EObject current=null] : (otherlv_0= 'import' ( (lv_language_1_0= RULE_STRING ) ) otherlv_2= 'from' ( (lv_importedNamespace_3_0= ruleQualifiedName ) ) otherlv_4= ';' ) ;
     public final EObject ruleImportRule() throws RecognitionException {
         EObject current = null;
 
@@ -10050,11 +10105,11 @@ public class InternalOptimisationLanguageParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalOptimisationLanguage.g:3445:2: ( (otherlv_0= 'import' ( (lv_language_1_0= RULE_STRING ) ) otherlv_2= 'from' ( (lv_importedNamespace_3_0= ruleQualifiedName ) ) otherlv_4= ';' ) )
-            // InternalOptimisationLanguage.g:3446:2: (otherlv_0= 'import' ( (lv_language_1_0= RULE_STRING ) ) otherlv_2= 'from' ( (lv_importedNamespace_3_0= ruleQualifiedName ) ) otherlv_4= ';' )
+            // InternalOptimisationLanguage.g:3464:2: ( (otherlv_0= 'import' ( (lv_language_1_0= RULE_STRING ) ) otherlv_2= 'from' ( (lv_importedNamespace_3_0= ruleQualifiedName ) ) otherlv_4= ';' ) )
+            // InternalOptimisationLanguage.g:3465:2: (otherlv_0= 'import' ( (lv_language_1_0= RULE_STRING ) ) otherlv_2= 'from' ( (lv_importedNamespace_3_0= ruleQualifiedName ) ) otherlv_4= ';' )
             {
-            // InternalOptimisationLanguage.g:3446:2: (otherlv_0= 'import' ( (lv_language_1_0= RULE_STRING ) ) otherlv_2= 'from' ( (lv_importedNamespace_3_0= ruleQualifiedName ) ) otherlv_4= ';' )
-            // InternalOptimisationLanguage.g:3447:3: otherlv_0= 'import' ( (lv_language_1_0= RULE_STRING ) ) otherlv_2= 'from' ( (lv_importedNamespace_3_0= ruleQualifiedName ) ) otherlv_4= ';'
+            // InternalOptimisationLanguage.g:3465:2: (otherlv_0= 'import' ( (lv_language_1_0= RULE_STRING ) ) otherlv_2= 'from' ( (lv_importedNamespace_3_0= ruleQualifiedName ) ) otherlv_4= ';' )
+            // InternalOptimisationLanguage.g:3466:3: otherlv_0= 'import' ( (lv_language_1_0= RULE_STRING ) ) otherlv_2= 'from' ( (lv_importedNamespace_3_0= ruleQualifiedName ) ) otherlv_4= ';'
             {
             otherlv_0=(Token)match(input,64,FOLLOW_35); if (state.failed) return current;
             if ( state.backtracking==0 ) {
@@ -10062,13 +10117,13 @@ public class InternalOptimisationLanguageParser extends AbstractInternalAntlrPar
               			newLeafNode(otherlv_0, grammarAccess.getImportRuleAccess().getImportKeyword_0());
               		
             }
-            // InternalOptimisationLanguage.g:3451:3: ( (lv_language_1_0= RULE_STRING ) )
-            // InternalOptimisationLanguage.g:3452:4: (lv_language_1_0= RULE_STRING )
+            // InternalOptimisationLanguage.g:3470:3: ( (lv_language_1_0= RULE_STRING ) )
+            // InternalOptimisationLanguage.g:3471:4: (lv_language_1_0= RULE_STRING )
             {
-            // InternalOptimisationLanguage.g:3452:4: (lv_language_1_0= RULE_STRING )
-            // InternalOptimisationLanguage.g:3453:5: lv_language_1_0= RULE_STRING
+            // InternalOptimisationLanguage.g:3471:4: (lv_language_1_0= RULE_STRING )
+            // InternalOptimisationLanguage.g:3472:5: lv_language_1_0= RULE_STRING
             {
-            lv_language_1_0=(Token)match(input,RULE_STRING,FOLLOW_46); if (state.failed) return current;
+            lv_language_1_0=(Token)match(input,RULE_STRING,FOLLOW_47); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               					newLeafNode(lv_language_1_0, grammarAccess.getImportRuleAccess().getLanguageSTRINGTerminalRuleCall_1_0());
@@ -10098,11 +10153,11 @@ public class InternalOptimisationLanguageParser extends AbstractInternalAntlrPar
               			newLeafNode(otherlv_2, grammarAccess.getImportRuleAccess().getFromKeyword_2());
               		
             }
-            // InternalOptimisationLanguage.g:3473:3: ( (lv_importedNamespace_3_0= ruleQualifiedName ) )
-            // InternalOptimisationLanguage.g:3474:4: (lv_importedNamespace_3_0= ruleQualifiedName )
+            // InternalOptimisationLanguage.g:3492:3: ( (lv_importedNamespace_3_0= ruleQualifiedName ) )
+            // InternalOptimisationLanguage.g:3493:4: (lv_importedNamespace_3_0= ruleQualifiedName )
             {
-            // InternalOptimisationLanguage.g:3474:4: (lv_importedNamespace_3_0= ruleQualifiedName )
-            // InternalOptimisationLanguage.g:3475:5: lv_importedNamespace_3_0= ruleQualifiedName
+            // InternalOptimisationLanguage.g:3493:4: (lv_importedNamespace_3_0= ruleQualifiedName )
+            // InternalOptimisationLanguage.g:3494:5: lv_importedNamespace_3_0= ruleQualifiedName
             {
             if ( state.backtracking==0 ) {
 
@@ -10164,7 +10219,7 @@ public class InternalOptimisationLanguageParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleQualifiedName"
-    // InternalOptimisationLanguage.g:3500:1: entryRuleQualifiedName returns [String current=null] : iv_ruleQualifiedName= ruleQualifiedName EOF ;
+    // InternalOptimisationLanguage.g:3519:1: entryRuleQualifiedName returns [String current=null] : iv_ruleQualifiedName= ruleQualifiedName EOF ;
     public final String entryRuleQualifiedName() throws RecognitionException {
         String current = null;
 
@@ -10172,8 +10227,8 @@ public class InternalOptimisationLanguageParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalOptimisationLanguage.g:3500:53: (iv_ruleQualifiedName= ruleQualifiedName EOF )
-            // InternalOptimisationLanguage.g:3501:2: iv_ruleQualifiedName= ruleQualifiedName EOF
+            // InternalOptimisationLanguage.g:3519:53: (iv_ruleQualifiedName= ruleQualifiedName EOF )
+            // InternalOptimisationLanguage.g:3520:2: iv_ruleQualifiedName= ruleQualifiedName EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getQualifiedNameRule()); 
@@ -10204,7 +10259,7 @@ public class InternalOptimisationLanguageParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleQualifiedName"
-    // InternalOptimisationLanguage.g:3507:1: ruleQualifiedName returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_StringOrId_0= ruleStringOrId (kw= '.' this_StringOrId_2= ruleStringOrId )* ) ;
+    // InternalOptimisationLanguage.g:3526:1: ruleQualifiedName returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_StringOrId_0= ruleStringOrId (kw= '.' this_StringOrId_2= ruleStringOrId )* ) ;
     public final AntlrDatatypeRuleToken ruleQualifiedName() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -10218,11 +10273,11 @@ public class InternalOptimisationLanguageParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalOptimisationLanguage.g:3513:2: ( (this_StringOrId_0= ruleStringOrId (kw= '.' this_StringOrId_2= ruleStringOrId )* ) )
-            // InternalOptimisationLanguage.g:3514:2: (this_StringOrId_0= ruleStringOrId (kw= '.' this_StringOrId_2= ruleStringOrId )* )
+            // InternalOptimisationLanguage.g:3532:2: ( (this_StringOrId_0= ruleStringOrId (kw= '.' this_StringOrId_2= ruleStringOrId )* ) )
+            // InternalOptimisationLanguage.g:3533:2: (this_StringOrId_0= ruleStringOrId (kw= '.' this_StringOrId_2= ruleStringOrId )* )
             {
-            // InternalOptimisationLanguage.g:3514:2: (this_StringOrId_0= ruleStringOrId (kw= '.' this_StringOrId_2= ruleStringOrId )* )
-            // InternalOptimisationLanguage.g:3515:3: this_StringOrId_0= ruleStringOrId (kw= '.' this_StringOrId_2= ruleStringOrId )*
+            // InternalOptimisationLanguage.g:3533:2: (this_StringOrId_0= ruleStringOrId (kw= '.' this_StringOrId_2= ruleStringOrId )* )
+            // InternalOptimisationLanguage.g:3534:3: this_StringOrId_0= ruleStringOrId (kw= '.' this_StringOrId_2= ruleStringOrId )*
             {
             if ( state.backtracking==0 ) {
 
@@ -10244,29 +10299,29 @@ public class InternalOptimisationLanguageParser extends AbstractInternalAntlrPar
               			afterParserOrEnumRuleCall();
               		
             }
-            // InternalOptimisationLanguage.g:3525:3: (kw= '.' this_StringOrId_2= ruleStringOrId )*
-            loop40:
+            // InternalOptimisationLanguage.g:3544:3: (kw= '.' this_StringOrId_2= ruleStringOrId )*
+            loop41:
             do {
-                int alt40=2;
-                int LA40_0 = input.LA(1);
+                int alt41=2;
+                int LA41_0 = input.LA(1);
 
-                if ( (LA40_0==26) ) {
-                    int LA40_2 = input.LA(2);
+                if ( (LA41_0==26) ) {
+                    int LA41_2 = input.LA(2);
 
-                    if ( (LA40_2==RULE_QUOTED_ID) ) {
-                        int LA40_3 = input.LA(3);
+                    if ( (LA41_2==RULE_QUOTED_ID) ) {
+                        int LA41_3 = input.LA(3);
 
-                        if ( (synpred58_InternalOptimisationLanguage()) ) {
-                            alt40=1;
+                        if ( (synpred59_InternalOptimisationLanguage()) ) {
+                            alt41=1;
                         }
 
 
                     }
-                    else if ( (LA40_2==RULE_ID) ) {
-                        int LA40_4 = input.LA(3);
+                    else if ( (LA41_2==RULE_ID) ) {
+                        int LA41_4 = input.LA(3);
 
-                        if ( (synpred58_InternalOptimisationLanguage()) ) {
-                            alt40=1;
+                        if ( (synpred59_InternalOptimisationLanguage()) ) {
+                            alt41=1;
                         }
 
 
@@ -10276,9 +10331,9 @@ public class InternalOptimisationLanguageParser extends AbstractInternalAntlrPar
                 }
 
 
-                switch (alt40) {
+                switch (alt41) {
             	case 1 :
-            	    // InternalOptimisationLanguage.g:3526:4: kw= '.' this_StringOrId_2= ruleStringOrId
+            	    // InternalOptimisationLanguage.g:3545:4: kw= '.' this_StringOrId_2= ruleStringOrId
             	    {
             	    kw=(Token)match(input,26,FOLLOW_4); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
@@ -10312,7 +10367,7 @@ public class InternalOptimisationLanguageParser extends AbstractInternalAntlrPar
             	    break;
 
             	default :
-            	    break loop40;
+            	    break loop41;
                 }
             } while (true);
 
@@ -10341,7 +10396,7 @@ public class InternalOptimisationLanguageParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleStringOrId"
-    // InternalOptimisationLanguage.g:3546:1: entryRuleStringOrId returns [String current=null] : iv_ruleStringOrId= ruleStringOrId EOF ;
+    // InternalOptimisationLanguage.g:3565:1: entryRuleStringOrId returns [String current=null] : iv_ruleStringOrId= ruleStringOrId EOF ;
     public final String entryRuleStringOrId() throws RecognitionException {
         String current = null;
 
@@ -10349,8 +10404,8 @@ public class InternalOptimisationLanguageParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalOptimisationLanguage.g:3546:50: (iv_ruleStringOrId= ruleStringOrId EOF )
-            // InternalOptimisationLanguage.g:3547:2: iv_ruleStringOrId= ruleStringOrId EOF
+            // InternalOptimisationLanguage.g:3565:50: (iv_ruleStringOrId= ruleStringOrId EOF )
+            // InternalOptimisationLanguage.g:3566:2: iv_ruleStringOrId= ruleStringOrId EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getStringOrIdRule()); 
@@ -10381,7 +10436,7 @@ public class InternalOptimisationLanguageParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleStringOrId"
-    // InternalOptimisationLanguage.g:3553:1: ruleStringOrId returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_QUOTED_ID_0= RULE_QUOTED_ID | this_ID_1= RULE_ID ) ;
+    // InternalOptimisationLanguage.g:3572:1: ruleStringOrId returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_QUOTED_ID_0= RULE_QUOTED_ID | this_ID_1= RULE_ID ) ;
     public final AntlrDatatypeRuleToken ruleStringOrId() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -10392,29 +10447,29 @@ public class InternalOptimisationLanguageParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalOptimisationLanguage.g:3559:2: ( (this_QUOTED_ID_0= RULE_QUOTED_ID | this_ID_1= RULE_ID ) )
-            // InternalOptimisationLanguage.g:3560:2: (this_QUOTED_ID_0= RULE_QUOTED_ID | this_ID_1= RULE_ID )
+            // InternalOptimisationLanguage.g:3578:2: ( (this_QUOTED_ID_0= RULE_QUOTED_ID | this_ID_1= RULE_ID ) )
+            // InternalOptimisationLanguage.g:3579:2: (this_QUOTED_ID_0= RULE_QUOTED_ID | this_ID_1= RULE_ID )
             {
-            // InternalOptimisationLanguage.g:3560:2: (this_QUOTED_ID_0= RULE_QUOTED_ID | this_ID_1= RULE_ID )
-            int alt41=2;
-            int LA41_0 = input.LA(1);
+            // InternalOptimisationLanguage.g:3579:2: (this_QUOTED_ID_0= RULE_QUOTED_ID | this_ID_1= RULE_ID )
+            int alt42=2;
+            int LA42_0 = input.LA(1);
 
-            if ( (LA41_0==RULE_QUOTED_ID) ) {
-                alt41=1;
+            if ( (LA42_0==RULE_QUOTED_ID) ) {
+                alt42=1;
             }
-            else if ( (LA41_0==RULE_ID) ) {
-                alt41=2;
+            else if ( (LA42_0==RULE_ID) ) {
+                alt42=2;
             }
             else {
                 if (state.backtracking>0) {state.failed=true; return current;}
                 NoViableAltException nvae =
-                    new NoViableAltException("", 41, 0, input);
+                    new NoViableAltException("", 42, 0, input);
 
                 throw nvae;
             }
-            switch (alt41) {
+            switch (alt42) {
                 case 1 :
-                    // InternalOptimisationLanguage.g:3561:3: this_QUOTED_ID_0= RULE_QUOTED_ID
+                    // InternalOptimisationLanguage.g:3580:3: this_QUOTED_ID_0= RULE_QUOTED_ID
                     {
                     this_QUOTED_ID_0=(Token)match(input,RULE_QUOTED_ID,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -10431,7 +10486,7 @@ public class InternalOptimisationLanguageParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 2 :
-                    // InternalOptimisationLanguage.g:3569:3: this_ID_1= RULE_ID
+                    // InternalOptimisationLanguage.g:3588:3: this_ID_1= RULE_ID
                     {
                     this_ID_1=(Token)match(input,RULE_ID,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -10472,7 +10527,7 @@ public class InternalOptimisationLanguageParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleComparisonOperatorRule"
-    // InternalOptimisationLanguage.g:3580:1: ruleComparisonOperatorRule returns [Enumerator current=null] : ( (enumLiteral_0= '>' ) | (enumLiteral_1= '>=' ) | (enumLiteral_2= '=' ) | (enumLiteral_3= '!=' ) | (enumLiteral_4= '<=' ) | (enumLiteral_5= '<' ) ) ;
+    // InternalOptimisationLanguage.g:3599:1: ruleComparisonOperatorRule returns [Enumerator current=null] : ( (enumLiteral_0= '>' ) | (enumLiteral_1= '>=' ) | (enumLiteral_2= '=' ) | (enumLiteral_3= '!=' ) | (enumLiteral_4= '<=' ) | (enumLiteral_5= '<' ) ) ;
     public final Enumerator ruleComparisonOperatorRule() throws RecognitionException {
         Enumerator current = null;
 
@@ -10487,56 +10542,56 @@ public class InternalOptimisationLanguageParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalOptimisationLanguage.g:3586:2: ( ( (enumLiteral_0= '>' ) | (enumLiteral_1= '>=' ) | (enumLiteral_2= '=' ) | (enumLiteral_3= '!=' ) | (enumLiteral_4= '<=' ) | (enumLiteral_5= '<' ) ) )
-            // InternalOptimisationLanguage.g:3587:2: ( (enumLiteral_0= '>' ) | (enumLiteral_1= '>=' ) | (enumLiteral_2= '=' ) | (enumLiteral_3= '!=' ) | (enumLiteral_4= '<=' ) | (enumLiteral_5= '<' ) )
+            // InternalOptimisationLanguage.g:3605:2: ( ( (enumLiteral_0= '>' ) | (enumLiteral_1= '>=' ) | (enumLiteral_2= '=' ) | (enumLiteral_3= '!=' ) | (enumLiteral_4= '<=' ) | (enumLiteral_5= '<' ) ) )
+            // InternalOptimisationLanguage.g:3606:2: ( (enumLiteral_0= '>' ) | (enumLiteral_1= '>=' ) | (enumLiteral_2= '=' ) | (enumLiteral_3= '!=' ) | (enumLiteral_4= '<=' ) | (enumLiteral_5= '<' ) )
             {
-            // InternalOptimisationLanguage.g:3587:2: ( (enumLiteral_0= '>' ) | (enumLiteral_1= '>=' ) | (enumLiteral_2= '=' ) | (enumLiteral_3= '!=' ) | (enumLiteral_4= '<=' ) | (enumLiteral_5= '<' ) )
-            int alt42=6;
+            // InternalOptimisationLanguage.g:3606:2: ( (enumLiteral_0= '>' ) | (enumLiteral_1= '>=' ) | (enumLiteral_2= '=' ) | (enumLiteral_3= '!=' ) | (enumLiteral_4= '<=' ) | (enumLiteral_5= '<' ) )
+            int alt43=6;
             switch ( input.LA(1) ) {
             case 66:
                 {
-                alt42=1;
+                alt43=1;
                 }
                 break;
             case 67:
                 {
-                alt42=2;
+                alt43=2;
                 }
                 break;
             case 68:
                 {
-                alt42=3;
+                alt43=3;
                 }
                 break;
             case 69:
                 {
-                alt42=4;
+                alt43=4;
                 }
                 break;
             case 70:
                 {
-                alt42=5;
+                alt43=5;
                 }
                 break;
             case 71:
                 {
-                alt42=6;
+                alt43=6;
                 }
                 break;
             default:
                 if (state.backtracking>0) {state.failed=true; return current;}
                 NoViableAltException nvae =
-                    new NoViableAltException("", 42, 0, input);
+                    new NoViableAltException("", 43, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt42) {
+            switch (alt43) {
                 case 1 :
-                    // InternalOptimisationLanguage.g:3588:3: (enumLiteral_0= '>' )
+                    // InternalOptimisationLanguage.g:3607:3: (enumLiteral_0= '>' )
                     {
-                    // InternalOptimisationLanguage.g:3588:3: (enumLiteral_0= '>' )
-                    // InternalOptimisationLanguage.g:3589:4: enumLiteral_0= '>'
+                    // InternalOptimisationLanguage.g:3607:3: (enumLiteral_0= '>' )
+                    // InternalOptimisationLanguage.g:3608:4: enumLiteral_0= '>'
                     {
                     enumLiteral_0=(Token)match(input,66,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -10552,10 +10607,10 @@ public class InternalOptimisationLanguageParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 2 :
-                    // InternalOptimisationLanguage.g:3596:3: (enumLiteral_1= '>=' )
+                    // InternalOptimisationLanguage.g:3615:3: (enumLiteral_1= '>=' )
                     {
-                    // InternalOptimisationLanguage.g:3596:3: (enumLiteral_1= '>=' )
-                    // InternalOptimisationLanguage.g:3597:4: enumLiteral_1= '>='
+                    // InternalOptimisationLanguage.g:3615:3: (enumLiteral_1= '>=' )
+                    // InternalOptimisationLanguage.g:3616:4: enumLiteral_1= '>='
                     {
                     enumLiteral_1=(Token)match(input,67,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -10571,10 +10626,10 @@ public class InternalOptimisationLanguageParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 3 :
-                    // InternalOptimisationLanguage.g:3604:3: (enumLiteral_2= '=' )
+                    // InternalOptimisationLanguage.g:3623:3: (enumLiteral_2= '=' )
                     {
-                    // InternalOptimisationLanguage.g:3604:3: (enumLiteral_2= '=' )
-                    // InternalOptimisationLanguage.g:3605:4: enumLiteral_2= '='
+                    // InternalOptimisationLanguage.g:3623:3: (enumLiteral_2= '=' )
+                    // InternalOptimisationLanguage.g:3624:4: enumLiteral_2= '='
                     {
                     enumLiteral_2=(Token)match(input,68,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -10590,10 +10645,10 @@ public class InternalOptimisationLanguageParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 4 :
-                    // InternalOptimisationLanguage.g:3612:3: (enumLiteral_3= '!=' )
+                    // InternalOptimisationLanguage.g:3631:3: (enumLiteral_3= '!=' )
                     {
-                    // InternalOptimisationLanguage.g:3612:3: (enumLiteral_3= '!=' )
-                    // InternalOptimisationLanguage.g:3613:4: enumLiteral_3= '!='
+                    // InternalOptimisationLanguage.g:3631:3: (enumLiteral_3= '!=' )
+                    // InternalOptimisationLanguage.g:3632:4: enumLiteral_3= '!='
                     {
                     enumLiteral_3=(Token)match(input,69,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -10609,10 +10664,10 @@ public class InternalOptimisationLanguageParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 5 :
-                    // InternalOptimisationLanguage.g:3620:3: (enumLiteral_4= '<=' )
+                    // InternalOptimisationLanguage.g:3639:3: (enumLiteral_4= '<=' )
                     {
-                    // InternalOptimisationLanguage.g:3620:3: (enumLiteral_4= '<=' )
-                    // InternalOptimisationLanguage.g:3621:4: enumLiteral_4= '<='
+                    // InternalOptimisationLanguage.g:3639:3: (enumLiteral_4= '<=' )
+                    // InternalOptimisationLanguage.g:3640:4: enumLiteral_4= '<='
                     {
                     enumLiteral_4=(Token)match(input,70,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -10628,10 +10683,10 @@ public class InternalOptimisationLanguageParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 6 :
-                    // InternalOptimisationLanguage.g:3628:3: (enumLiteral_5= '<' )
+                    // InternalOptimisationLanguage.g:3647:3: (enumLiteral_5= '<' )
                     {
-                    // InternalOptimisationLanguage.g:3628:3: (enumLiteral_5= '<' )
-                    // InternalOptimisationLanguage.g:3629:4: enumLiteral_5= '<'
+                    // InternalOptimisationLanguage.g:3647:3: (enumLiteral_5= '<' )
+                    // InternalOptimisationLanguage.g:3648:4: enumLiteral_5= '<'
                     {
                     enumLiteral_5=(Token)match(input,71,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -10671,7 +10726,7 @@ public class InternalOptimisationLanguageParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleAddOrSubtractOperatorRule"
-    // InternalOptimisationLanguage.g:3639:1: ruleAddOrSubtractOperatorRule returns [Enumerator current=null] : ( (enumLiteral_0= '+' ) | (enumLiteral_1= '-' ) ) ;
+    // InternalOptimisationLanguage.g:3658:1: ruleAddOrSubtractOperatorRule returns [Enumerator current=null] : ( (enumLiteral_0= '+' ) | (enumLiteral_1= '-' ) ) ;
     public final Enumerator ruleAddOrSubtractOperatorRule() throws RecognitionException {
         Enumerator current = null;
 
@@ -10682,32 +10737,32 @@ public class InternalOptimisationLanguageParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalOptimisationLanguage.g:3645:2: ( ( (enumLiteral_0= '+' ) | (enumLiteral_1= '-' ) ) )
-            // InternalOptimisationLanguage.g:3646:2: ( (enumLiteral_0= '+' ) | (enumLiteral_1= '-' ) )
+            // InternalOptimisationLanguage.g:3664:2: ( ( (enumLiteral_0= '+' ) | (enumLiteral_1= '-' ) ) )
+            // InternalOptimisationLanguage.g:3665:2: ( (enumLiteral_0= '+' ) | (enumLiteral_1= '-' ) )
             {
-            // InternalOptimisationLanguage.g:3646:2: ( (enumLiteral_0= '+' ) | (enumLiteral_1= '-' ) )
-            int alt43=2;
-            int LA43_0 = input.LA(1);
+            // InternalOptimisationLanguage.g:3665:2: ( (enumLiteral_0= '+' ) | (enumLiteral_1= '-' ) )
+            int alt44=2;
+            int LA44_0 = input.LA(1);
 
-            if ( (LA43_0==72) ) {
-                alt43=1;
+            if ( (LA44_0==72) ) {
+                alt44=1;
             }
-            else if ( (LA43_0==73) ) {
-                alt43=2;
+            else if ( (LA44_0==73) ) {
+                alt44=2;
             }
             else {
                 if (state.backtracking>0) {state.failed=true; return current;}
                 NoViableAltException nvae =
-                    new NoViableAltException("", 43, 0, input);
+                    new NoViableAltException("", 44, 0, input);
 
                 throw nvae;
             }
-            switch (alt43) {
+            switch (alt44) {
                 case 1 :
-                    // InternalOptimisationLanguage.g:3647:3: (enumLiteral_0= '+' )
+                    // InternalOptimisationLanguage.g:3666:3: (enumLiteral_0= '+' )
                     {
-                    // InternalOptimisationLanguage.g:3647:3: (enumLiteral_0= '+' )
-                    // InternalOptimisationLanguage.g:3648:4: enumLiteral_0= '+'
+                    // InternalOptimisationLanguage.g:3666:3: (enumLiteral_0= '+' )
+                    // InternalOptimisationLanguage.g:3667:4: enumLiteral_0= '+'
                     {
                     enumLiteral_0=(Token)match(input,72,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -10723,10 +10778,10 @@ public class InternalOptimisationLanguageParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 2 :
-                    // InternalOptimisationLanguage.g:3655:3: (enumLiteral_1= '-' )
+                    // InternalOptimisationLanguage.g:3674:3: (enumLiteral_1= '-' )
                     {
-                    // InternalOptimisationLanguage.g:3655:3: (enumLiteral_1= '-' )
-                    // InternalOptimisationLanguage.g:3656:4: enumLiteral_1= '-'
+                    // InternalOptimisationLanguage.g:3674:3: (enumLiteral_1= '-' )
+                    // InternalOptimisationLanguage.g:3675:4: enumLiteral_1= '-'
                     {
                     enumLiteral_1=(Token)match(input,73,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -10766,7 +10821,7 @@ public class InternalOptimisationLanguageParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleMultiplyDivideModuloOperatorRule"
-    // InternalOptimisationLanguage.g:3666:1: ruleMultiplyDivideModuloOperatorRule returns [Enumerator current=null] : ( (enumLiteral_0= '*' ) | (enumLiteral_1= '/' ) | (enumLiteral_2= '%' ) ) ;
+    // InternalOptimisationLanguage.g:3685:1: ruleMultiplyDivideModuloOperatorRule returns [Enumerator current=null] : ( (enumLiteral_0= '*' ) | (enumLiteral_1= '/' ) | (enumLiteral_2= '%' ) ) ;
     public final Enumerator ruleMultiplyDivideModuloOperatorRule() throws RecognitionException {
         Enumerator current = null;
 
@@ -10778,41 +10833,41 @@ public class InternalOptimisationLanguageParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalOptimisationLanguage.g:3672:2: ( ( (enumLiteral_0= '*' ) | (enumLiteral_1= '/' ) | (enumLiteral_2= '%' ) ) )
-            // InternalOptimisationLanguage.g:3673:2: ( (enumLiteral_0= '*' ) | (enumLiteral_1= '/' ) | (enumLiteral_2= '%' ) )
+            // InternalOptimisationLanguage.g:3691:2: ( ( (enumLiteral_0= '*' ) | (enumLiteral_1= '/' ) | (enumLiteral_2= '%' ) ) )
+            // InternalOptimisationLanguage.g:3692:2: ( (enumLiteral_0= '*' ) | (enumLiteral_1= '/' ) | (enumLiteral_2= '%' ) )
             {
-            // InternalOptimisationLanguage.g:3673:2: ( (enumLiteral_0= '*' ) | (enumLiteral_1= '/' ) | (enumLiteral_2= '%' ) )
-            int alt44=3;
+            // InternalOptimisationLanguage.g:3692:2: ( (enumLiteral_0= '*' ) | (enumLiteral_1= '/' ) | (enumLiteral_2= '%' ) )
+            int alt45=3;
             switch ( input.LA(1) ) {
             case 74:
                 {
-                alt44=1;
+                alt45=1;
                 }
                 break;
             case 75:
                 {
-                alt44=2;
+                alt45=2;
                 }
                 break;
             case 76:
                 {
-                alt44=3;
+                alt45=3;
                 }
                 break;
             default:
                 if (state.backtracking>0) {state.failed=true; return current;}
                 NoViableAltException nvae =
-                    new NoViableAltException("", 44, 0, input);
+                    new NoViableAltException("", 45, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt44) {
+            switch (alt45) {
                 case 1 :
-                    // InternalOptimisationLanguage.g:3674:3: (enumLiteral_0= '*' )
+                    // InternalOptimisationLanguage.g:3693:3: (enumLiteral_0= '*' )
                     {
-                    // InternalOptimisationLanguage.g:3674:3: (enumLiteral_0= '*' )
-                    // InternalOptimisationLanguage.g:3675:4: enumLiteral_0= '*'
+                    // InternalOptimisationLanguage.g:3693:3: (enumLiteral_0= '*' )
+                    // InternalOptimisationLanguage.g:3694:4: enumLiteral_0= '*'
                     {
                     enumLiteral_0=(Token)match(input,74,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -10828,10 +10883,10 @@ public class InternalOptimisationLanguageParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 2 :
-                    // InternalOptimisationLanguage.g:3682:3: (enumLiteral_1= '/' )
+                    // InternalOptimisationLanguage.g:3701:3: (enumLiteral_1= '/' )
                     {
-                    // InternalOptimisationLanguage.g:3682:3: (enumLiteral_1= '/' )
-                    // InternalOptimisationLanguage.g:3683:4: enumLiteral_1= '/'
+                    // InternalOptimisationLanguage.g:3701:3: (enumLiteral_1= '/' )
+                    // InternalOptimisationLanguage.g:3702:4: enumLiteral_1= '/'
                     {
                     enumLiteral_1=(Token)match(input,75,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -10847,10 +10902,10 @@ public class InternalOptimisationLanguageParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 3 :
-                    // InternalOptimisationLanguage.g:3690:3: (enumLiteral_2= '%' )
+                    // InternalOptimisationLanguage.g:3709:3: (enumLiteral_2= '%' )
                     {
-                    // InternalOptimisationLanguage.g:3690:3: (enumLiteral_2= '%' )
-                    // InternalOptimisationLanguage.g:3691:4: enumLiteral_2= '%'
+                    // InternalOptimisationLanguage.g:3709:3: (enumLiteral_2= '%' )
+                    // InternalOptimisationLanguage.g:3710:4: enumLiteral_2= '%'
                     {
                     enumLiteral_2=(Token)match(input,76,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -10890,7 +10945,7 @@ public class InternalOptimisationLanguageParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleFactorRule"
-    // InternalOptimisationLanguage.g:3701:1: ruleFactorRule returns [Enumerator current=null] : ( (enumLiteral_0= 'Y' ) | (enumLiteral_1= 'Z' ) | (enumLiteral_2= 'E' ) | (enumLiteral_3= 'P' ) | (enumLiteral_4= 'T' ) | (enumLiteral_5= 'G' ) | (enumLiteral_6= 'M' ) | (enumLiteral_7= 'k' ) | (enumLiteral_8= 'h' ) | (enumLiteral_9= 'da' ) | (enumLiteral_10= 'd' ) | (enumLiteral_11= 'c' ) | (enumLiteral_12= 'm' ) | (enumLiteral_13= '\\u00B5' ) | (enumLiteral_14= 'n' ) | (enumLiteral_15= 'p' ) | (enumLiteral_16= 'f' ) | (enumLiteral_17= 'a' ) | (enumLiteral_18= 'z' ) | (enumLiteral_19= 'y' ) ) ;
+    // InternalOptimisationLanguage.g:3720:1: ruleFactorRule returns [Enumerator current=null] : ( (enumLiteral_0= 'Y' ) | (enumLiteral_1= 'Z' ) | (enumLiteral_2= 'E' ) | (enumLiteral_3= 'P' ) | (enumLiteral_4= 'T' ) | (enumLiteral_5= 'G' ) | (enumLiteral_6= 'M' ) | (enumLiteral_7= 'k' ) | (enumLiteral_8= 'h' ) | (enumLiteral_9= 'da' ) | (enumLiteral_10= 'd' ) | (enumLiteral_11= 'c' ) | (enumLiteral_12= 'm' ) | (enumLiteral_13= '\\u00B5' ) | (enumLiteral_14= 'n' ) | (enumLiteral_15= 'p' ) | (enumLiteral_16= 'f' ) | (enumLiteral_17= 'a' ) | (enumLiteral_18= 'z' ) | (enumLiteral_19= 'y' ) ) ;
     public final Enumerator ruleFactorRule() throws RecognitionException {
         Enumerator current = null;
 
@@ -10919,126 +10974,126 @@ public class InternalOptimisationLanguageParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalOptimisationLanguage.g:3707:2: ( ( (enumLiteral_0= 'Y' ) | (enumLiteral_1= 'Z' ) | (enumLiteral_2= 'E' ) | (enumLiteral_3= 'P' ) | (enumLiteral_4= 'T' ) | (enumLiteral_5= 'G' ) | (enumLiteral_6= 'M' ) | (enumLiteral_7= 'k' ) | (enumLiteral_8= 'h' ) | (enumLiteral_9= 'da' ) | (enumLiteral_10= 'd' ) | (enumLiteral_11= 'c' ) | (enumLiteral_12= 'm' ) | (enumLiteral_13= '\\u00B5' ) | (enumLiteral_14= 'n' ) | (enumLiteral_15= 'p' ) | (enumLiteral_16= 'f' ) | (enumLiteral_17= 'a' ) | (enumLiteral_18= 'z' ) | (enumLiteral_19= 'y' ) ) )
-            // InternalOptimisationLanguage.g:3708:2: ( (enumLiteral_0= 'Y' ) | (enumLiteral_1= 'Z' ) | (enumLiteral_2= 'E' ) | (enumLiteral_3= 'P' ) | (enumLiteral_4= 'T' ) | (enumLiteral_5= 'G' ) | (enumLiteral_6= 'M' ) | (enumLiteral_7= 'k' ) | (enumLiteral_8= 'h' ) | (enumLiteral_9= 'da' ) | (enumLiteral_10= 'd' ) | (enumLiteral_11= 'c' ) | (enumLiteral_12= 'm' ) | (enumLiteral_13= '\\u00B5' ) | (enumLiteral_14= 'n' ) | (enumLiteral_15= 'p' ) | (enumLiteral_16= 'f' ) | (enumLiteral_17= 'a' ) | (enumLiteral_18= 'z' ) | (enumLiteral_19= 'y' ) )
+            // InternalOptimisationLanguage.g:3726:2: ( ( (enumLiteral_0= 'Y' ) | (enumLiteral_1= 'Z' ) | (enumLiteral_2= 'E' ) | (enumLiteral_3= 'P' ) | (enumLiteral_4= 'T' ) | (enumLiteral_5= 'G' ) | (enumLiteral_6= 'M' ) | (enumLiteral_7= 'k' ) | (enumLiteral_8= 'h' ) | (enumLiteral_9= 'da' ) | (enumLiteral_10= 'd' ) | (enumLiteral_11= 'c' ) | (enumLiteral_12= 'm' ) | (enumLiteral_13= '\\u00B5' ) | (enumLiteral_14= 'n' ) | (enumLiteral_15= 'p' ) | (enumLiteral_16= 'f' ) | (enumLiteral_17= 'a' ) | (enumLiteral_18= 'z' ) | (enumLiteral_19= 'y' ) ) )
+            // InternalOptimisationLanguage.g:3727:2: ( (enumLiteral_0= 'Y' ) | (enumLiteral_1= 'Z' ) | (enumLiteral_2= 'E' ) | (enumLiteral_3= 'P' ) | (enumLiteral_4= 'T' ) | (enumLiteral_5= 'G' ) | (enumLiteral_6= 'M' ) | (enumLiteral_7= 'k' ) | (enumLiteral_8= 'h' ) | (enumLiteral_9= 'da' ) | (enumLiteral_10= 'd' ) | (enumLiteral_11= 'c' ) | (enumLiteral_12= 'm' ) | (enumLiteral_13= '\\u00B5' ) | (enumLiteral_14= 'n' ) | (enumLiteral_15= 'p' ) | (enumLiteral_16= 'f' ) | (enumLiteral_17= 'a' ) | (enumLiteral_18= 'z' ) | (enumLiteral_19= 'y' ) )
             {
-            // InternalOptimisationLanguage.g:3708:2: ( (enumLiteral_0= 'Y' ) | (enumLiteral_1= 'Z' ) | (enumLiteral_2= 'E' ) | (enumLiteral_3= 'P' ) | (enumLiteral_4= 'T' ) | (enumLiteral_5= 'G' ) | (enumLiteral_6= 'M' ) | (enumLiteral_7= 'k' ) | (enumLiteral_8= 'h' ) | (enumLiteral_9= 'da' ) | (enumLiteral_10= 'd' ) | (enumLiteral_11= 'c' ) | (enumLiteral_12= 'm' ) | (enumLiteral_13= '\\u00B5' ) | (enumLiteral_14= 'n' ) | (enumLiteral_15= 'p' ) | (enumLiteral_16= 'f' ) | (enumLiteral_17= 'a' ) | (enumLiteral_18= 'z' ) | (enumLiteral_19= 'y' ) )
-            int alt45=20;
+            // InternalOptimisationLanguage.g:3727:2: ( (enumLiteral_0= 'Y' ) | (enumLiteral_1= 'Z' ) | (enumLiteral_2= 'E' ) | (enumLiteral_3= 'P' ) | (enumLiteral_4= 'T' ) | (enumLiteral_5= 'G' ) | (enumLiteral_6= 'M' ) | (enumLiteral_7= 'k' ) | (enumLiteral_8= 'h' ) | (enumLiteral_9= 'da' ) | (enumLiteral_10= 'd' ) | (enumLiteral_11= 'c' ) | (enumLiteral_12= 'm' ) | (enumLiteral_13= '\\u00B5' ) | (enumLiteral_14= 'n' ) | (enumLiteral_15= 'p' ) | (enumLiteral_16= 'f' ) | (enumLiteral_17= 'a' ) | (enumLiteral_18= 'z' ) | (enumLiteral_19= 'y' ) )
+            int alt46=20;
             switch ( input.LA(1) ) {
             case 77:
                 {
-                alt45=1;
+                alt46=1;
                 }
                 break;
             case 78:
                 {
-                alt45=2;
+                alt46=2;
                 }
                 break;
             case 79:
                 {
-                alt45=3;
+                alt46=3;
                 }
                 break;
             case 80:
                 {
-                alt45=4;
+                alt46=4;
                 }
                 break;
             case 81:
                 {
-                alt45=5;
+                alt46=5;
                 }
                 break;
             case 82:
                 {
-                alt45=6;
+                alt46=6;
                 }
                 break;
             case 83:
                 {
-                alt45=7;
+                alt46=7;
                 }
                 break;
             case 84:
                 {
-                alt45=8;
+                alt46=8;
                 }
                 break;
             case 85:
                 {
-                alt45=9;
+                alt46=9;
                 }
                 break;
             case 86:
                 {
-                alt45=10;
+                alt46=10;
                 }
                 break;
             case 87:
                 {
-                alt45=11;
+                alt46=11;
                 }
                 break;
             case 88:
                 {
-                alt45=12;
+                alt46=12;
                 }
                 break;
             case 89:
                 {
-                alt45=13;
+                alt46=13;
                 }
                 break;
             case 90:
                 {
-                alt45=14;
+                alt46=14;
                 }
                 break;
             case 91:
                 {
-                alt45=15;
+                alt46=15;
                 }
                 break;
             case 92:
                 {
-                alt45=16;
+                alt46=16;
                 }
                 break;
             case 93:
                 {
-                alt45=17;
+                alt46=17;
                 }
                 break;
             case 94:
                 {
-                alt45=18;
+                alt46=18;
                 }
                 break;
             case 95:
                 {
-                alt45=19;
+                alt46=19;
                 }
                 break;
             case 96:
                 {
-                alt45=20;
+                alt46=20;
                 }
                 break;
             default:
                 if (state.backtracking>0) {state.failed=true; return current;}
                 NoViableAltException nvae =
-                    new NoViableAltException("", 45, 0, input);
+                    new NoViableAltException("", 46, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt45) {
+            switch (alt46) {
                 case 1 :
-                    // InternalOptimisationLanguage.g:3709:3: (enumLiteral_0= 'Y' )
+                    // InternalOptimisationLanguage.g:3728:3: (enumLiteral_0= 'Y' )
                     {
-                    // InternalOptimisationLanguage.g:3709:3: (enumLiteral_0= 'Y' )
-                    // InternalOptimisationLanguage.g:3710:4: enumLiteral_0= 'Y'
+                    // InternalOptimisationLanguage.g:3728:3: (enumLiteral_0= 'Y' )
+                    // InternalOptimisationLanguage.g:3729:4: enumLiteral_0= 'Y'
                     {
                     enumLiteral_0=(Token)match(input,77,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -11054,10 +11109,10 @@ public class InternalOptimisationLanguageParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 2 :
-                    // InternalOptimisationLanguage.g:3717:3: (enumLiteral_1= 'Z' )
+                    // InternalOptimisationLanguage.g:3736:3: (enumLiteral_1= 'Z' )
                     {
-                    // InternalOptimisationLanguage.g:3717:3: (enumLiteral_1= 'Z' )
-                    // InternalOptimisationLanguage.g:3718:4: enumLiteral_1= 'Z'
+                    // InternalOptimisationLanguage.g:3736:3: (enumLiteral_1= 'Z' )
+                    // InternalOptimisationLanguage.g:3737:4: enumLiteral_1= 'Z'
                     {
                     enumLiteral_1=(Token)match(input,78,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -11073,10 +11128,10 @@ public class InternalOptimisationLanguageParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 3 :
-                    // InternalOptimisationLanguage.g:3725:3: (enumLiteral_2= 'E' )
+                    // InternalOptimisationLanguage.g:3744:3: (enumLiteral_2= 'E' )
                     {
-                    // InternalOptimisationLanguage.g:3725:3: (enumLiteral_2= 'E' )
-                    // InternalOptimisationLanguage.g:3726:4: enumLiteral_2= 'E'
+                    // InternalOptimisationLanguage.g:3744:3: (enumLiteral_2= 'E' )
+                    // InternalOptimisationLanguage.g:3745:4: enumLiteral_2= 'E'
                     {
                     enumLiteral_2=(Token)match(input,79,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -11092,10 +11147,10 @@ public class InternalOptimisationLanguageParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 4 :
-                    // InternalOptimisationLanguage.g:3733:3: (enumLiteral_3= 'P' )
+                    // InternalOptimisationLanguage.g:3752:3: (enumLiteral_3= 'P' )
                     {
-                    // InternalOptimisationLanguage.g:3733:3: (enumLiteral_3= 'P' )
-                    // InternalOptimisationLanguage.g:3734:4: enumLiteral_3= 'P'
+                    // InternalOptimisationLanguage.g:3752:3: (enumLiteral_3= 'P' )
+                    // InternalOptimisationLanguage.g:3753:4: enumLiteral_3= 'P'
                     {
                     enumLiteral_3=(Token)match(input,80,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -11111,10 +11166,10 @@ public class InternalOptimisationLanguageParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 5 :
-                    // InternalOptimisationLanguage.g:3741:3: (enumLiteral_4= 'T' )
+                    // InternalOptimisationLanguage.g:3760:3: (enumLiteral_4= 'T' )
                     {
-                    // InternalOptimisationLanguage.g:3741:3: (enumLiteral_4= 'T' )
-                    // InternalOptimisationLanguage.g:3742:4: enumLiteral_4= 'T'
+                    // InternalOptimisationLanguage.g:3760:3: (enumLiteral_4= 'T' )
+                    // InternalOptimisationLanguage.g:3761:4: enumLiteral_4= 'T'
                     {
                     enumLiteral_4=(Token)match(input,81,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -11130,10 +11185,10 @@ public class InternalOptimisationLanguageParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 6 :
-                    // InternalOptimisationLanguage.g:3749:3: (enumLiteral_5= 'G' )
+                    // InternalOptimisationLanguage.g:3768:3: (enumLiteral_5= 'G' )
                     {
-                    // InternalOptimisationLanguage.g:3749:3: (enumLiteral_5= 'G' )
-                    // InternalOptimisationLanguage.g:3750:4: enumLiteral_5= 'G'
+                    // InternalOptimisationLanguage.g:3768:3: (enumLiteral_5= 'G' )
+                    // InternalOptimisationLanguage.g:3769:4: enumLiteral_5= 'G'
                     {
                     enumLiteral_5=(Token)match(input,82,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -11149,10 +11204,10 @@ public class InternalOptimisationLanguageParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 7 :
-                    // InternalOptimisationLanguage.g:3757:3: (enumLiteral_6= 'M' )
+                    // InternalOptimisationLanguage.g:3776:3: (enumLiteral_6= 'M' )
                     {
-                    // InternalOptimisationLanguage.g:3757:3: (enumLiteral_6= 'M' )
-                    // InternalOptimisationLanguage.g:3758:4: enumLiteral_6= 'M'
+                    // InternalOptimisationLanguage.g:3776:3: (enumLiteral_6= 'M' )
+                    // InternalOptimisationLanguage.g:3777:4: enumLiteral_6= 'M'
                     {
                     enumLiteral_6=(Token)match(input,83,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -11168,10 +11223,10 @@ public class InternalOptimisationLanguageParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 8 :
-                    // InternalOptimisationLanguage.g:3765:3: (enumLiteral_7= 'k' )
+                    // InternalOptimisationLanguage.g:3784:3: (enumLiteral_7= 'k' )
                     {
-                    // InternalOptimisationLanguage.g:3765:3: (enumLiteral_7= 'k' )
-                    // InternalOptimisationLanguage.g:3766:4: enumLiteral_7= 'k'
+                    // InternalOptimisationLanguage.g:3784:3: (enumLiteral_7= 'k' )
+                    // InternalOptimisationLanguage.g:3785:4: enumLiteral_7= 'k'
                     {
                     enumLiteral_7=(Token)match(input,84,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -11187,10 +11242,10 @@ public class InternalOptimisationLanguageParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 9 :
-                    // InternalOptimisationLanguage.g:3773:3: (enumLiteral_8= 'h' )
+                    // InternalOptimisationLanguage.g:3792:3: (enumLiteral_8= 'h' )
                     {
-                    // InternalOptimisationLanguage.g:3773:3: (enumLiteral_8= 'h' )
-                    // InternalOptimisationLanguage.g:3774:4: enumLiteral_8= 'h'
+                    // InternalOptimisationLanguage.g:3792:3: (enumLiteral_8= 'h' )
+                    // InternalOptimisationLanguage.g:3793:4: enumLiteral_8= 'h'
                     {
                     enumLiteral_8=(Token)match(input,85,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -11206,10 +11261,10 @@ public class InternalOptimisationLanguageParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 10 :
-                    // InternalOptimisationLanguage.g:3781:3: (enumLiteral_9= 'da' )
+                    // InternalOptimisationLanguage.g:3800:3: (enumLiteral_9= 'da' )
                     {
-                    // InternalOptimisationLanguage.g:3781:3: (enumLiteral_9= 'da' )
-                    // InternalOptimisationLanguage.g:3782:4: enumLiteral_9= 'da'
+                    // InternalOptimisationLanguage.g:3800:3: (enumLiteral_9= 'da' )
+                    // InternalOptimisationLanguage.g:3801:4: enumLiteral_9= 'da'
                     {
                     enumLiteral_9=(Token)match(input,86,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -11225,10 +11280,10 @@ public class InternalOptimisationLanguageParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 11 :
-                    // InternalOptimisationLanguage.g:3789:3: (enumLiteral_10= 'd' )
+                    // InternalOptimisationLanguage.g:3808:3: (enumLiteral_10= 'd' )
                     {
-                    // InternalOptimisationLanguage.g:3789:3: (enumLiteral_10= 'd' )
-                    // InternalOptimisationLanguage.g:3790:4: enumLiteral_10= 'd'
+                    // InternalOptimisationLanguage.g:3808:3: (enumLiteral_10= 'd' )
+                    // InternalOptimisationLanguage.g:3809:4: enumLiteral_10= 'd'
                     {
                     enumLiteral_10=(Token)match(input,87,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -11244,10 +11299,10 @@ public class InternalOptimisationLanguageParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 12 :
-                    // InternalOptimisationLanguage.g:3797:3: (enumLiteral_11= 'c' )
+                    // InternalOptimisationLanguage.g:3816:3: (enumLiteral_11= 'c' )
                     {
-                    // InternalOptimisationLanguage.g:3797:3: (enumLiteral_11= 'c' )
-                    // InternalOptimisationLanguage.g:3798:4: enumLiteral_11= 'c'
+                    // InternalOptimisationLanguage.g:3816:3: (enumLiteral_11= 'c' )
+                    // InternalOptimisationLanguage.g:3817:4: enumLiteral_11= 'c'
                     {
                     enumLiteral_11=(Token)match(input,88,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -11263,10 +11318,10 @@ public class InternalOptimisationLanguageParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 13 :
-                    // InternalOptimisationLanguage.g:3805:3: (enumLiteral_12= 'm' )
+                    // InternalOptimisationLanguage.g:3824:3: (enumLiteral_12= 'm' )
                     {
-                    // InternalOptimisationLanguage.g:3805:3: (enumLiteral_12= 'm' )
-                    // InternalOptimisationLanguage.g:3806:4: enumLiteral_12= 'm'
+                    // InternalOptimisationLanguage.g:3824:3: (enumLiteral_12= 'm' )
+                    // InternalOptimisationLanguage.g:3825:4: enumLiteral_12= 'm'
                     {
                     enumLiteral_12=(Token)match(input,89,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -11282,10 +11337,10 @@ public class InternalOptimisationLanguageParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 14 :
-                    // InternalOptimisationLanguage.g:3813:3: (enumLiteral_13= '\\u00B5' )
+                    // InternalOptimisationLanguage.g:3832:3: (enumLiteral_13= '\\u00B5' )
                     {
-                    // InternalOptimisationLanguage.g:3813:3: (enumLiteral_13= '\\u00B5' )
-                    // InternalOptimisationLanguage.g:3814:4: enumLiteral_13= '\\u00B5'
+                    // InternalOptimisationLanguage.g:3832:3: (enumLiteral_13= '\\u00B5' )
+                    // InternalOptimisationLanguage.g:3833:4: enumLiteral_13= '\\u00B5'
                     {
                     enumLiteral_13=(Token)match(input,90,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -11301,10 +11356,10 @@ public class InternalOptimisationLanguageParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 15 :
-                    // InternalOptimisationLanguage.g:3821:3: (enumLiteral_14= 'n' )
+                    // InternalOptimisationLanguage.g:3840:3: (enumLiteral_14= 'n' )
                     {
-                    // InternalOptimisationLanguage.g:3821:3: (enumLiteral_14= 'n' )
-                    // InternalOptimisationLanguage.g:3822:4: enumLiteral_14= 'n'
+                    // InternalOptimisationLanguage.g:3840:3: (enumLiteral_14= 'n' )
+                    // InternalOptimisationLanguage.g:3841:4: enumLiteral_14= 'n'
                     {
                     enumLiteral_14=(Token)match(input,91,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -11320,10 +11375,10 @@ public class InternalOptimisationLanguageParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 16 :
-                    // InternalOptimisationLanguage.g:3829:3: (enumLiteral_15= 'p' )
+                    // InternalOptimisationLanguage.g:3848:3: (enumLiteral_15= 'p' )
                     {
-                    // InternalOptimisationLanguage.g:3829:3: (enumLiteral_15= 'p' )
-                    // InternalOptimisationLanguage.g:3830:4: enumLiteral_15= 'p'
+                    // InternalOptimisationLanguage.g:3848:3: (enumLiteral_15= 'p' )
+                    // InternalOptimisationLanguage.g:3849:4: enumLiteral_15= 'p'
                     {
                     enumLiteral_15=(Token)match(input,92,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -11339,10 +11394,10 @@ public class InternalOptimisationLanguageParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 17 :
-                    // InternalOptimisationLanguage.g:3837:3: (enumLiteral_16= 'f' )
+                    // InternalOptimisationLanguage.g:3856:3: (enumLiteral_16= 'f' )
                     {
-                    // InternalOptimisationLanguage.g:3837:3: (enumLiteral_16= 'f' )
-                    // InternalOptimisationLanguage.g:3838:4: enumLiteral_16= 'f'
+                    // InternalOptimisationLanguage.g:3856:3: (enumLiteral_16= 'f' )
+                    // InternalOptimisationLanguage.g:3857:4: enumLiteral_16= 'f'
                     {
                     enumLiteral_16=(Token)match(input,93,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -11358,10 +11413,10 @@ public class InternalOptimisationLanguageParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 18 :
-                    // InternalOptimisationLanguage.g:3845:3: (enumLiteral_17= 'a' )
+                    // InternalOptimisationLanguage.g:3864:3: (enumLiteral_17= 'a' )
                     {
-                    // InternalOptimisationLanguage.g:3845:3: (enumLiteral_17= 'a' )
-                    // InternalOptimisationLanguage.g:3846:4: enumLiteral_17= 'a'
+                    // InternalOptimisationLanguage.g:3864:3: (enumLiteral_17= 'a' )
+                    // InternalOptimisationLanguage.g:3865:4: enumLiteral_17= 'a'
                     {
                     enumLiteral_17=(Token)match(input,94,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -11377,10 +11432,10 @@ public class InternalOptimisationLanguageParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 19 :
-                    // InternalOptimisationLanguage.g:3853:3: (enumLiteral_18= 'z' )
+                    // InternalOptimisationLanguage.g:3872:3: (enumLiteral_18= 'z' )
                     {
-                    // InternalOptimisationLanguage.g:3853:3: (enumLiteral_18= 'z' )
-                    // InternalOptimisationLanguage.g:3854:4: enumLiteral_18= 'z'
+                    // InternalOptimisationLanguage.g:3872:3: (enumLiteral_18= 'z' )
+                    // InternalOptimisationLanguage.g:3873:4: enumLiteral_18= 'z'
                     {
                     enumLiteral_18=(Token)match(input,95,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -11396,10 +11451,10 @@ public class InternalOptimisationLanguageParser extends AbstractInternalAntlrPar
                     }
                     break;
                 case 20 :
-                    // InternalOptimisationLanguage.g:3861:3: (enumLiteral_19= 'y' )
+                    // InternalOptimisationLanguage.g:3880:3: (enumLiteral_19= 'y' )
                     {
-                    // InternalOptimisationLanguage.g:3861:3: (enumLiteral_19= 'y' )
-                    // InternalOptimisationLanguage.g:3862:4: enumLiteral_19= 'y'
+                    // InternalOptimisationLanguage.g:3880:3: (enumLiteral_19= 'y' )
+                    // InternalOptimisationLanguage.g:3881:4: enumLiteral_19= 'y'
                     {
                     enumLiteral_19=(Token)match(input,96,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -11437,14 +11492,14 @@ public class InternalOptimisationLanguageParser extends AbstractInternalAntlrPar
     }
     // $ANTLR end "ruleFactorRule"
 
-    // $ANTLR start synpred58_InternalOptimisationLanguage
-    public final void synpred58_InternalOptimisationLanguage_fragment() throws RecognitionException {   
+    // $ANTLR start synpred59_InternalOptimisationLanguage
+    public final void synpred59_InternalOptimisationLanguage_fragment() throws RecognitionException {   
         Token kw=null;
         AntlrDatatypeRuleToken this_StringOrId_2 = null;
 
 
-        // InternalOptimisationLanguage.g:3526:4: (kw= '.' this_StringOrId_2= ruleStringOrId )
-        // InternalOptimisationLanguage.g:3526:4: kw= '.' this_StringOrId_2= ruleStringOrId
+        // InternalOptimisationLanguage.g:3545:4: (kw= '.' this_StringOrId_2= ruleStringOrId )
+        // InternalOptimisationLanguage.g:3545:4: kw= '.' this_StringOrId_2= ruleStringOrId
         {
         kw=(Token)match(input,26,FOLLOW_4); if (state.failed) return ;
         pushFollow(FOLLOW_2);
@@ -11455,15 +11510,15 @@ public class InternalOptimisationLanguageParser extends AbstractInternalAntlrPar
 
         }
     }
-    // $ANTLR end synpred58_InternalOptimisationLanguage
+    // $ANTLR end synpred59_InternalOptimisationLanguage
 
     // Delegated rules
 
-    public final boolean synpred58_InternalOptimisationLanguage() {
+    public final boolean synpred59_InternalOptimisationLanguage() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred58_InternalOptimisationLanguage_fragment(); // can never throw exception
+            synpred59_InternalOptimisationLanguage_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -11569,6 +11624,7 @@ public class InternalOptimisationLanguageParser extends AbstractInternalAntlrPar
     public static final BitSet FOLLOW_43 = new BitSet(new long[]{0x0020000000000000L});
     public static final BitSet FOLLOW_44 = new BitSet(new long[]{0xFFC3100000000000L});
     public static final BitSet FOLLOW_45 = new BitSet(new long[]{0x0000000600000000L});
-    public static final BitSet FOLLOW_46 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000002L});
+    public static final BitSet FOLLOW_46 = new BitSet(new long[]{0xFFD3100000000180L});
+    public static final BitSet FOLLOW_47 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000002L});
 
 }

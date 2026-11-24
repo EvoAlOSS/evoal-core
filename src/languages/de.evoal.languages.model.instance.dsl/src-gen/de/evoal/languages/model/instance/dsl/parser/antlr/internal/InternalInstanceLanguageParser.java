@@ -8349,38 +8349,93 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "ruleParameterRule"
-    // InternalInstanceLanguage.g:2804:1: ruleParameterRule returns [EObject current=null] : ( ( (lv_type_0_0= ruleTypeRule ) ) ( (lv_name_1_0= ruleStringOrId ) ) ) ;
+    // InternalInstanceLanguage.g:2804:1: ruleParameterRule returns [EObject current=null] : ( ( (lv_constraints_0_0= ruleConstraintRule ) )* ( (lv_type_1_0= ruleTypeRule ) ) ( (lv_name_2_0= ruleStringOrId ) ) ) ;
     public final EObject ruleParameterRule() throws RecognitionException {
         EObject current = null;
 
-        EObject lv_type_0_0 = null;
+        EObject lv_constraints_0_0 = null;
 
-        AntlrDatatypeRuleToken lv_name_1_0 = null;
+        EObject lv_type_1_0 = null;
+
+        AntlrDatatypeRuleToken lv_name_2_0 = null;
 
 
 
         	enterRule();
 
         try {
-            // InternalInstanceLanguage.g:2810:2: ( ( ( (lv_type_0_0= ruleTypeRule ) ) ( (lv_name_1_0= ruleStringOrId ) ) ) )
-            // InternalInstanceLanguage.g:2811:2: ( ( (lv_type_0_0= ruleTypeRule ) ) ( (lv_name_1_0= ruleStringOrId ) ) )
+            // InternalInstanceLanguage.g:2810:2: ( ( ( (lv_constraints_0_0= ruleConstraintRule ) )* ( (lv_type_1_0= ruleTypeRule ) ) ( (lv_name_2_0= ruleStringOrId ) ) ) )
+            // InternalInstanceLanguage.g:2811:2: ( ( (lv_constraints_0_0= ruleConstraintRule ) )* ( (lv_type_1_0= ruleTypeRule ) ) ( (lv_name_2_0= ruleStringOrId ) ) )
             {
-            // InternalInstanceLanguage.g:2811:2: ( ( (lv_type_0_0= ruleTypeRule ) ) ( (lv_name_1_0= ruleStringOrId ) ) )
-            // InternalInstanceLanguage.g:2812:3: ( (lv_type_0_0= ruleTypeRule ) ) ( (lv_name_1_0= ruleStringOrId ) )
+            // InternalInstanceLanguage.g:2811:2: ( ( (lv_constraints_0_0= ruleConstraintRule ) )* ( (lv_type_1_0= ruleTypeRule ) ) ( (lv_name_2_0= ruleStringOrId ) ) )
+            // InternalInstanceLanguage.g:2812:3: ( (lv_constraints_0_0= ruleConstraintRule ) )* ( (lv_type_1_0= ruleTypeRule ) ) ( (lv_name_2_0= ruleStringOrId ) )
             {
-            // InternalInstanceLanguage.g:2812:3: ( (lv_type_0_0= ruleTypeRule ) )
-            // InternalInstanceLanguage.g:2813:4: (lv_type_0_0= ruleTypeRule )
+            // InternalInstanceLanguage.g:2812:3: ( (lv_constraints_0_0= ruleConstraintRule ) )*
+            loop33:
+            do {
+                int alt33=2;
+                int LA33_0 = input.LA(1);
+
+                if ( (LA33_0==40) ) {
+                    alt33=1;
+                }
+
+
+                switch (alt33) {
+            	case 1 :
+            	    // InternalInstanceLanguage.g:2813:4: (lv_constraints_0_0= ruleConstraintRule )
+            	    {
+            	    // InternalInstanceLanguage.g:2813:4: (lv_constraints_0_0= ruleConstraintRule )
+            	    // InternalInstanceLanguage.g:2814:5: lv_constraints_0_0= ruleConstraintRule
+            	    {
+            	    if ( state.backtracking==0 ) {
+
+            	      					newCompositeNode(grammarAccess.getParameterRuleAccess().getConstraintsConstraintRuleParserRuleCall_0_0());
+            	      				
+            	    }
+            	    pushFollow(FOLLOW_34);
+            	    lv_constraints_0_0=ruleConstraintRule();
+
+            	    state._fsp--;
+            	    if (state.failed) return current;
+            	    if ( state.backtracking==0 ) {
+
+            	      					if (current==null) {
+            	      						current = createModelElementForParent(grammarAccess.getParameterRuleRule());
+            	      					}
+            	      					add(
+            	      						current,
+            	      						"constraints",
+            	      						lv_constraints_0_0,
+            	      						"de.evoal.languages.model.base.dsl.BaseLanguage.ConstraintRule");
+            	      					afterParserOrEnumRuleCall();
+            	      				
+            	    }
+
+            	    }
+
+
+            	    }
+            	    break;
+
+            	default :
+            	    break loop33;
+                }
+            } while (true);
+
+            // InternalInstanceLanguage.g:2831:3: ( (lv_type_1_0= ruleTypeRule ) )
+            // InternalInstanceLanguage.g:2832:4: (lv_type_1_0= ruleTypeRule )
             {
-            // InternalInstanceLanguage.g:2813:4: (lv_type_0_0= ruleTypeRule )
-            // InternalInstanceLanguage.g:2814:5: lv_type_0_0= ruleTypeRule
+            // InternalInstanceLanguage.g:2832:4: (lv_type_1_0= ruleTypeRule )
+            // InternalInstanceLanguage.g:2833:5: lv_type_1_0= ruleTypeRule
             {
             if ( state.backtracking==0 ) {
 
-              					newCompositeNode(grammarAccess.getParameterRuleAccess().getTypeTypeRuleParserRuleCall_0_0());
+              					newCompositeNode(grammarAccess.getParameterRuleAccess().getTypeTypeRuleParserRuleCall_1_0());
               				
             }
             pushFollow(FOLLOW_7);
-            lv_type_0_0=ruleTypeRule();
+            lv_type_1_0=ruleTypeRule();
 
             state._fsp--;
             if (state.failed) return current;
@@ -8392,7 +8447,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
               					set(
               						current,
               						"type",
-              						lv_type_0_0,
+              						lv_type_1_0,
               						"de.evoal.languages.model.base.dsl.BaseLanguage.TypeRule");
               					afterParserOrEnumRuleCall();
               				
@@ -8403,19 +8458,19 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
             }
 
-            // InternalInstanceLanguage.g:2831:3: ( (lv_name_1_0= ruleStringOrId ) )
-            // InternalInstanceLanguage.g:2832:4: (lv_name_1_0= ruleStringOrId )
+            // InternalInstanceLanguage.g:2850:3: ( (lv_name_2_0= ruleStringOrId ) )
+            // InternalInstanceLanguage.g:2851:4: (lv_name_2_0= ruleStringOrId )
             {
-            // InternalInstanceLanguage.g:2832:4: (lv_name_1_0= ruleStringOrId )
-            // InternalInstanceLanguage.g:2833:5: lv_name_1_0= ruleStringOrId
+            // InternalInstanceLanguage.g:2851:4: (lv_name_2_0= ruleStringOrId )
+            // InternalInstanceLanguage.g:2852:5: lv_name_2_0= ruleStringOrId
             {
             if ( state.backtracking==0 ) {
 
-              					newCompositeNode(grammarAccess.getParameterRuleAccess().getNameStringOrIdParserRuleCall_1_0());
+              					newCompositeNode(grammarAccess.getParameterRuleAccess().getNameStringOrIdParserRuleCall_2_0());
               				
             }
             pushFollow(FOLLOW_2);
-            lv_name_1_0=ruleStringOrId();
+            lv_name_2_0=ruleStringOrId();
 
             state._fsp--;
             if (state.failed) return current;
@@ -8427,7 +8482,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
               					set(
               						current,
               						"name",
-              						lv_name_1_0,
+              						lv_name_2_0,
               						"de.evoal.languages.model.base.dsl.BaseLanguage.StringOrId");
               					afterParserOrEnumRuleCall();
               				
@@ -8463,7 +8518,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "entryRuleImportRule"
-    // InternalInstanceLanguage.g:2854:1: entryRuleImportRule returns [EObject current=null] : iv_ruleImportRule= ruleImportRule EOF ;
+    // InternalInstanceLanguage.g:2873:1: entryRuleImportRule returns [EObject current=null] : iv_ruleImportRule= ruleImportRule EOF ;
     public final EObject entryRuleImportRule() throws RecognitionException {
         EObject current = null;
 
@@ -8471,8 +8526,8 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
         try {
-            // InternalInstanceLanguage.g:2854:51: (iv_ruleImportRule= ruleImportRule EOF )
-            // InternalInstanceLanguage.g:2855:2: iv_ruleImportRule= ruleImportRule EOF
+            // InternalInstanceLanguage.g:2873:51: (iv_ruleImportRule= ruleImportRule EOF )
+            // InternalInstanceLanguage.g:2874:2: iv_ruleImportRule= ruleImportRule EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getImportRuleRule()); 
@@ -8503,7 +8558,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "ruleImportRule"
-    // InternalInstanceLanguage.g:2861:1: ruleImportRule returns [EObject current=null] : (otherlv_0= 'import' ( (lv_language_1_0= RULE_STRING ) ) otherlv_2= 'from' ( (lv_importedNamespace_3_0= ruleQualifiedName ) ) otherlv_4= ';' ) ;
+    // InternalInstanceLanguage.g:2880:1: ruleImportRule returns [EObject current=null] : (otherlv_0= 'import' ( (lv_language_1_0= RULE_STRING ) ) otherlv_2= 'from' ( (lv_importedNamespace_3_0= ruleQualifiedName ) ) otherlv_4= ';' ) ;
     public final EObject ruleImportRule() throws RecognitionException {
         EObject current = null;
 
@@ -8518,11 +8573,11 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
         	enterRule();
 
         try {
-            // InternalInstanceLanguage.g:2867:2: ( (otherlv_0= 'import' ( (lv_language_1_0= RULE_STRING ) ) otherlv_2= 'from' ( (lv_importedNamespace_3_0= ruleQualifiedName ) ) otherlv_4= ';' ) )
-            // InternalInstanceLanguage.g:2868:2: (otherlv_0= 'import' ( (lv_language_1_0= RULE_STRING ) ) otherlv_2= 'from' ( (lv_importedNamespace_3_0= ruleQualifiedName ) ) otherlv_4= ';' )
+            // InternalInstanceLanguage.g:2886:2: ( (otherlv_0= 'import' ( (lv_language_1_0= RULE_STRING ) ) otherlv_2= 'from' ( (lv_importedNamespace_3_0= ruleQualifiedName ) ) otherlv_4= ';' ) )
+            // InternalInstanceLanguage.g:2887:2: (otherlv_0= 'import' ( (lv_language_1_0= RULE_STRING ) ) otherlv_2= 'from' ( (lv_importedNamespace_3_0= ruleQualifiedName ) ) otherlv_4= ';' )
             {
-            // InternalInstanceLanguage.g:2868:2: (otherlv_0= 'import' ( (lv_language_1_0= RULE_STRING ) ) otherlv_2= 'from' ( (lv_importedNamespace_3_0= ruleQualifiedName ) ) otherlv_4= ';' )
-            // InternalInstanceLanguage.g:2869:3: otherlv_0= 'import' ( (lv_language_1_0= RULE_STRING ) ) otherlv_2= 'from' ( (lv_importedNamespace_3_0= ruleQualifiedName ) ) otherlv_4= ';'
+            // InternalInstanceLanguage.g:2887:2: (otherlv_0= 'import' ( (lv_language_1_0= RULE_STRING ) ) otherlv_2= 'from' ( (lv_importedNamespace_3_0= ruleQualifiedName ) ) otherlv_4= ';' )
+            // InternalInstanceLanguage.g:2888:3: otherlv_0= 'import' ( (lv_language_1_0= RULE_STRING ) ) otherlv_2= 'from' ( (lv_importedNamespace_3_0= ruleQualifiedName ) ) otherlv_4= ';'
             {
             otherlv_0=(Token)match(input,52,FOLLOW_21); if (state.failed) return current;
             if ( state.backtracking==0 ) {
@@ -8530,13 +8585,13 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
               			newLeafNode(otherlv_0, grammarAccess.getImportRuleAccess().getImportKeyword_0());
               		
             }
-            // InternalInstanceLanguage.g:2873:3: ( (lv_language_1_0= RULE_STRING ) )
-            // InternalInstanceLanguage.g:2874:4: (lv_language_1_0= RULE_STRING )
+            // InternalInstanceLanguage.g:2892:3: ( (lv_language_1_0= RULE_STRING ) )
+            // InternalInstanceLanguage.g:2893:4: (lv_language_1_0= RULE_STRING )
             {
-            // InternalInstanceLanguage.g:2874:4: (lv_language_1_0= RULE_STRING )
-            // InternalInstanceLanguage.g:2875:5: lv_language_1_0= RULE_STRING
+            // InternalInstanceLanguage.g:2893:4: (lv_language_1_0= RULE_STRING )
+            // InternalInstanceLanguage.g:2894:5: lv_language_1_0= RULE_STRING
             {
-            lv_language_1_0=(Token)match(input,RULE_STRING,FOLLOW_34); if (state.failed) return current;
+            lv_language_1_0=(Token)match(input,RULE_STRING,FOLLOW_35); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               					newLeafNode(lv_language_1_0, grammarAccess.getImportRuleAccess().getLanguageSTRINGTerminalRuleCall_1_0());
@@ -8566,11 +8621,11 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
               			newLeafNode(otherlv_2, grammarAccess.getImportRuleAccess().getFromKeyword_2());
               		
             }
-            // InternalInstanceLanguage.g:2895:3: ( (lv_importedNamespace_3_0= ruleQualifiedName ) )
-            // InternalInstanceLanguage.g:2896:4: (lv_importedNamespace_3_0= ruleQualifiedName )
+            // InternalInstanceLanguage.g:2914:3: ( (lv_importedNamespace_3_0= ruleQualifiedName ) )
+            // InternalInstanceLanguage.g:2915:4: (lv_importedNamespace_3_0= ruleQualifiedName )
             {
-            // InternalInstanceLanguage.g:2896:4: (lv_importedNamespace_3_0= ruleQualifiedName )
-            // InternalInstanceLanguage.g:2897:5: lv_importedNamespace_3_0= ruleQualifiedName
+            // InternalInstanceLanguage.g:2915:4: (lv_importedNamespace_3_0= ruleQualifiedName )
+            // InternalInstanceLanguage.g:2916:5: lv_importedNamespace_3_0= ruleQualifiedName
             {
             if ( state.backtracking==0 ) {
 
@@ -8632,7 +8687,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "entryRuleQualifiedName"
-    // InternalInstanceLanguage.g:2922:1: entryRuleQualifiedName returns [String current=null] : iv_ruleQualifiedName= ruleQualifiedName EOF ;
+    // InternalInstanceLanguage.g:2941:1: entryRuleQualifiedName returns [String current=null] : iv_ruleQualifiedName= ruleQualifiedName EOF ;
     public final String entryRuleQualifiedName() throws RecognitionException {
         String current = null;
 
@@ -8640,8 +8695,8 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
         try {
-            // InternalInstanceLanguage.g:2922:53: (iv_ruleQualifiedName= ruleQualifiedName EOF )
-            // InternalInstanceLanguage.g:2923:2: iv_ruleQualifiedName= ruleQualifiedName EOF
+            // InternalInstanceLanguage.g:2941:53: (iv_ruleQualifiedName= ruleQualifiedName EOF )
+            // InternalInstanceLanguage.g:2942:2: iv_ruleQualifiedName= ruleQualifiedName EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getQualifiedNameRule()); 
@@ -8672,7 +8727,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "ruleQualifiedName"
-    // InternalInstanceLanguage.g:2929:1: ruleQualifiedName returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_StringOrId_0= ruleStringOrId (kw= '.' this_StringOrId_2= ruleStringOrId )* ) ;
+    // InternalInstanceLanguage.g:2948:1: ruleQualifiedName returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_StringOrId_0= ruleStringOrId (kw= '.' this_StringOrId_2= ruleStringOrId )* ) ;
     public final AntlrDatatypeRuleToken ruleQualifiedName() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -8686,11 +8741,11 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
         	enterRule();
 
         try {
-            // InternalInstanceLanguage.g:2935:2: ( (this_StringOrId_0= ruleStringOrId (kw= '.' this_StringOrId_2= ruleStringOrId )* ) )
-            // InternalInstanceLanguage.g:2936:2: (this_StringOrId_0= ruleStringOrId (kw= '.' this_StringOrId_2= ruleStringOrId )* )
+            // InternalInstanceLanguage.g:2954:2: ( (this_StringOrId_0= ruleStringOrId (kw= '.' this_StringOrId_2= ruleStringOrId )* ) )
+            // InternalInstanceLanguage.g:2955:2: (this_StringOrId_0= ruleStringOrId (kw= '.' this_StringOrId_2= ruleStringOrId )* )
             {
-            // InternalInstanceLanguage.g:2936:2: (this_StringOrId_0= ruleStringOrId (kw= '.' this_StringOrId_2= ruleStringOrId )* )
-            // InternalInstanceLanguage.g:2937:3: this_StringOrId_0= ruleStringOrId (kw= '.' this_StringOrId_2= ruleStringOrId )*
+            // InternalInstanceLanguage.g:2955:2: (this_StringOrId_0= ruleStringOrId (kw= '.' this_StringOrId_2= ruleStringOrId )* )
+            // InternalInstanceLanguage.g:2956:3: this_StringOrId_0= ruleStringOrId (kw= '.' this_StringOrId_2= ruleStringOrId )*
             {
             if ( state.backtracking==0 ) {
 
@@ -8712,29 +8767,29 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
               			afterParserOrEnumRuleCall();
               		
             }
-            // InternalInstanceLanguage.g:2947:3: (kw= '.' this_StringOrId_2= ruleStringOrId )*
-            loop33:
+            // InternalInstanceLanguage.g:2966:3: (kw= '.' this_StringOrId_2= ruleStringOrId )*
+            loop34:
             do {
-                int alt33=2;
-                int LA33_0 = input.LA(1);
+                int alt34=2;
+                int LA34_0 = input.LA(1);
 
-                if ( (LA33_0==32) ) {
-                    int LA33_2 = input.LA(2);
+                if ( (LA34_0==32) ) {
+                    int LA34_2 = input.LA(2);
 
-                    if ( (LA33_2==RULE_QUOTED_ID) ) {
-                        int LA33_3 = input.LA(3);
+                    if ( (LA34_2==RULE_QUOTED_ID) ) {
+                        int LA34_3 = input.LA(3);
 
-                        if ( (synpred50_InternalInstanceLanguage()) ) {
-                            alt33=1;
+                        if ( (synpred51_InternalInstanceLanguage()) ) {
+                            alt34=1;
                         }
 
 
                     }
-                    else if ( (LA33_2==RULE_ID) ) {
-                        int LA33_4 = input.LA(3);
+                    else if ( (LA34_2==RULE_ID) ) {
+                        int LA34_4 = input.LA(3);
 
-                        if ( (synpred50_InternalInstanceLanguage()) ) {
-                            alt33=1;
+                        if ( (synpred51_InternalInstanceLanguage()) ) {
+                            alt34=1;
                         }
 
 
@@ -8744,9 +8799,9 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
                 }
 
 
-                switch (alt33) {
+                switch (alt34) {
             	case 1 :
-            	    // InternalInstanceLanguage.g:2948:4: kw= '.' this_StringOrId_2= ruleStringOrId
+            	    // InternalInstanceLanguage.g:2967:4: kw= '.' this_StringOrId_2= ruleStringOrId
             	    {
             	    kw=(Token)match(input,32,FOLLOW_7); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
@@ -8780,7 +8835,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
             	    break;
 
             	default :
-            	    break loop33;
+            	    break loop34;
                 }
             } while (true);
 
@@ -8809,7 +8864,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "entryRuleStringOrId"
-    // InternalInstanceLanguage.g:2968:1: entryRuleStringOrId returns [String current=null] : iv_ruleStringOrId= ruleStringOrId EOF ;
+    // InternalInstanceLanguage.g:2987:1: entryRuleStringOrId returns [String current=null] : iv_ruleStringOrId= ruleStringOrId EOF ;
     public final String entryRuleStringOrId() throws RecognitionException {
         String current = null;
 
@@ -8817,8 +8872,8 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
         try {
-            // InternalInstanceLanguage.g:2968:50: (iv_ruleStringOrId= ruleStringOrId EOF )
-            // InternalInstanceLanguage.g:2969:2: iv_ruleStringOrId= ruleStringOrId EOF
+            // InternalInstanceLanguage.g:2987:50: (iv_ruleStringOrId= ruleStringOrId EOF )
+            // InternalInstanceLanguage.g:2988:2: iv_ruleStringOrId= ruleStringOrId EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getStringOrIdRule()); 
@@ -8849,7 +8904,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "ruleStringOrId"
-    // InternalInstanceLanguage.g:2975:1: ruleStringOrId returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_QUOTED_ID_0= RULE_QUOTED_ID | this_ID_1= RULE_ID ) ;
+    // InternalInstanceLanguage.g:2994:1: ruleStringOrId returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_QUOTED_ID_0= RULE_QUOTED_ID | this_ID_1= RULE_ID ) ;
     public final AntlrDatatypeRuleToken ruleStringOrId() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -8860,29 +8915,29 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
         	enterRule();
 
         try {
-            // InternalInstanceLanguage.g:2981:2: ( (this_QUOTED_ID_0= RULE_QUOTED_ID | this_ID_1= RULE_ID ) )
-            // InternalInstanceLanguage.g:2982:2: (this_QUOTED_ID_0= RULE_QUOTED_ID | this_ID_1= RULE_ID )
+            // InternalInstanceLanguage.g:3000:2: ( (this_QUOTED_ID_0= RULE_QUOTED_ID | this_ID_1= RULE_ID ) )
+            // InternalInstanceLanguage.g:3001:2: (this_QUOTED_ID_0= RULE_QUOTED_ID | this_ID_1= RULE_ID )
             {
-            // InternalInstanceLanguage.g:2982:2: (this_QUOTED_ID_0= RULE_QUOTED_ID | this_ID_1= RULE_ID )
-            int alt34=2;
-            int LA34_0 = input.LA(1);
+            // InternalInstanceLanguage.g:3001:2: (this_QUOTED_ID_0= RULE_QUOTED_ID | this_ID_1= RULE_ID )
+            int alt35=2;
+            int LA35_0 = input.LA(1);
 
-            if ( (LA34_0==RULE_QUOTED_ID) ) {
-                alt34=1;
+            if ( (LA35_0==RULE_QUOTED_ID) ) {
+                alt35=1;
             }
-            else if ( (LA34_0==RULE_ID) ) {
-                alt34=2;
+            else if ( (LA35_0==RULE_ID) ) {
+                alt35=2;
             }
             else {
                 if (state.backtracking>0) {state.failed=true; return current;}
                 NoViableAltException nvae =
-                    new NoViableAltException("", 34, 0, input);
+                    new NoViableAltException("", 35, 0, input);
 
                 throw nvae;
             }
-            switch (alt34) {
+            switch (alt35) {
                 case 1 :
-                    // InternalInstanceLanguage.g:2983:3: this_QUOTED_ID_0= RULE_QUOTED_ID
+                    // InternalInstanceLanguage.g:3002:3: this_QUOTED_ID_0= RULE_QUOTED_ID
                     {
                     this_QUOTED_ID_0=(Token)match(input,RULE_QUOTED_ID,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -8899,7 +8954,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 2 :
-                    // InternalInstanceLanguage.g:2991:3: this_ID_1= RULE_ID
+                    // InternalInstanceLanguage.g:3010:3: this_ID_1= RULE_ID
                     {
                     this_ID_1=(Token)match(input,RULE_ID,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -8940,7 +8995,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "ruleComparisonOperatorRule"
-    // InternalInstanceLanguage.g:3002:1: ruleComparisonOperatorRule returns [Enumerator current=null] : ( (enumLiteral_0= '>' ) | (enumLiteral_1= '>=' ) | (enumLiteral_2= '=' ) | (enumLiteral_3= '!=' ) | (enumLiteral_4= '<=' ) | (enumLiteral_5= '<' ) ) ;
+    // InternalInstanceLanguage.g:3021:1: ruleComparisonOperatorRule returns [Enumerator current=null] : ( (enumLiteral_0= '>' ) | (enumLiteral_1= '>=' ) | (enumLiteral_2= '=' ) | (enumLiteral_3= '!=' ) | (enumLiteral_4= '<=' ) | (enumLiteral_5= '<' ) ) ;
     public final Enumerator ruleComparisonOperatorRule() throws RecognitionException {
         Enumerator current = null;
 
@@ -8955,56 +9010,56 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
         	enterRule();
 
         try {
-            // InternalInstanceLanguage.g:3008:2: ( ( (enumLiteral_0= '>' ) | (enumLiteral_1= '>=' ) | (enumLiteral_2= '=' ) | (enumLiteral_3= '!=' ) | (enumLiteral_4= '<=' ) | (enumLiteral_5= '<' ) ) )
-            // InternalInstanceLanguage.g:3009:2: ( (enumLiteral_0= '>' ) | (enumLiteral_1= '>=' ) | (enumLiteral_2= '=' ) | (enumLiteral_3= '!=' ) | (enumLiteral_4= '<=' ) | (enumLiteral_5= '<' ) )
+            // InternalInstanceLanguage.g:3027:2: ( ( (enumLiteral_0= '>' ) | (enumLiteral_1= '>=' ) | (enumLiteral_2= '=' ) | (enumLiteral_3= '!=' ) | (enumLiteral_4= '<=' ) | (enumLiteral_5= '<' ) ) )
+            // InternalInstanceLanguage.g:3028:2: ( (enumLiteral_0= '>' ) | (enumLiteral_1= '>=' ) | (enumLiteral_2= '=' ) | (enumLiteral_3= '!=' ) | (enumLiteral_4= '<=' ) | (enumLiteral_5= '<' ) )
             {
-            // InternalInstanceLanguage.g:3009:2: ( (enumLiteral_0= '>' ) | (enumLiteral_1= '>=' ) | (enumLiteral_2= '=' ) | (enumLiteral_3= '!=' ) | (enumLiteral_4= '<=' ) | (enumLiteral_5= '<' ) )
-            int alt35=6;
+            // InternalInstanceLanguage.g:3028:2: ( (enumLiteral_0= '>' ) | (enumLiteral_1= '>=' ) | (enumLiteral_2= '=' ) | (enumLiteral_3= '!=' ) | (enumLiteral_4= '<=' ) | (enumLiteral_5= '<' ) )
+            int alt36=6;
             switch ( input.LA(1) ) {
             case 54:
                 {
-                alt35=1;
+                alt36=1;
                 }
                 break;
             case 55:
                 {
-                alt35=2;
+                alt36=2;
                 }
                 break;
             case 16:
                 {
-                alt35=3;
+                alt36=3;
                 }
                 break;
             case 56:
                 {
-                alt35=4;
+                alt36=4;
                 }
                 break;
             case 57:
                 {
-                alt35=5;
+                alt36=5;
                 }
                 break;
             case 58:
                 {
-                alt35=6;
+                alt36=6;
                 }
                 break;
             default:
                 if (state.backtracking>0) {state.failed=true; return current;}
                 NoViableAltException nvae =
-                    new NoViableAltException("", 35, 0, input);
+                    new NoViableAltException("", 36, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt35) {
+            switch (alt36) {
                 case 1 :
-                    // InternalInstanceLanguage.g:3010:3: (enumLiteral_0= '>' )
+                    // InternalInstanceLanguage.g:3029:3: (enumLiteral_0= '>' )
                     {
-                    // InternalInstanceLanguage.g:3010:3: (enumLiteral_0= '>' )
-                    // InternalInstanceLanguage.g:3011:4: enumLiteral_0= '>'
+                    // InternalInstanceLanguage.g:3029:3: (enumLiteral_0= '>' )
+                    // InternalInstanceLanguage.g:3030:4: enumLiteral_0= '>'
                     {
                     enumLiteral_0=(Token)match(input,54,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -9020,10 +9075,10 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 2 :
-                    // InternalInstanceLanguage.g:3018:3: (enumLiteral_1= '>=' )
+                    // InternalInstanceLanguage.g:3037:3: (enumLiteral_1= '>=' )
                     {
-                    // InternalInstanceLanguage.g:3018:3: (enumLiteral_1= '>=' )
-                    // InternalInstanceLanguage.g:3019:4: enumLiteral_1= '>='
+                    // InternalInstanceLanguage.g:3037:3: (enumLiteral_1= '>=' )
+                    // InternalInstanceLanguage.g:3038:4: enumLiteral_1= '>='
                     {
                     enumLiteral_1=(Token)match(input,55,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -9039,10 +9094,10 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 3 :
-                    // InternalInstanceLanguage.g:3026:3: (enumLiteral_2= '=' )
+                    // InternalInstanceLanguage.g:3045:3: (enumLiteral_2= '=' )
                     {
-                    // InternalInstanceLanguage.g:3026:3: (enumLiteral_2= '=' )
-                    // InternalInstanceLanguage.g:3027:4: enumLiteral_2= '='
+                    // InternalInstanceLanguage.g:3045:3: (enumLiteral_2= '=' )
+                    // InternalInstanceLanguage.g:3046:4: enumLiteral_2= '='
                     {
                     enumLiteral_2=(Token)match(input,16,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -9058,10 +9113,10 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 4 :
-                    // InternalInstanceLanguage.g:3034:3: (enumLiteral_3= '!=' )
+                    // InternalInstanceLanguage.g:3053:3: (enumLiteral_3= '!=' )
                     {
-                    // InternalInstanceLanguage.g:3034:3: (enumLiteral_3= '!=' )
-                    // InternalInstanceLanguage.g:3035:4: enumLiteral_3= '!='
+                    // InternalInstanceLanguage.g:3053:3: (enumLiteral_3= '!=' )
+                    // InternalInstanceLanguage.g:3054:4: enumLiteral_3= '!='
                     {
                     enumLiteral_3=(Token)match(input,56,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -9077,10 +9132,10 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 5 :
-                    // InternalInstanceLanguage.g:3042:3: (enumLiteral_4= '<=' )
+                    // InternalInstanceLanguage.g:3061:3: (enumLiteral_4= '<=' )
                     {
-                    // InternalInstanceLanguage.g:3042:3: (enumLiteral_4= '<=' )
-                    // InternalInstanceLanguage.g:3043:4: enumLiteral_4= '<='
+                    // InternalInstanceLanguage.g:3061:3: (enumLiteral_4= '<=' )
+                    // InternalInstanceLanguage.g:3062:4: enumLiteral_4= '<='
                     {
                     enumLiteral_4=(Token)match(input,57,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -9096,10 +9151,10 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 6 :
-                    // InternalInstanceLanguage.g:3050:3: (enumLiteral_5= '<' )
+                    // InternalInstanceLanguage.g:3069:3: (enumLiteral_5= '<' )
                     {
-                    // InternalInstanceLanguage.g:3050:3: (enumLiteral_5= '<' )
-                    // InternalInstanceLanguage.g:3051:4: enumLiteral_5= '<'
+                    // InternalInstanceLanguage.g:3069:3: (enumLiteral_5= '<' )
+                    // InternalInstanceLanguage.g:3070:4: enumLiteral_5= '<'
                     {
                     enumLiteral_5=(Token)match(input,58,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -9139,7 +9194,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "ruleAddOrSubtractOperatorRule"
-    // InternalInstanceLanguage.g:3061:1: ruleAddOrSubtractOperatorRule returns [Enumerator current=null] : ( (enumLiteral_0= '+' ) | (enumLiteral_1= '-' ) ) ;
+    // InternalInstanceLanguage.g:3080:1: ruleAddOrSubtractOperatorRule returns [Enumerator current=null] : ( (enumLiteral_0= '+' ) | (enumLiteral_1= '-' ) ) ;
     public final Enumerator ruleAddOrSubtractOperatorRule() throws RecognitionException {
         Enumerator current = null;
 
@@ -9150,32 +9205,32 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
         	enterRule();
 
         try {
-            // InternalInstanceLanguage.g:3067:2: ( ( (enumLiteral_0= '+' ) | (enumLiteral_1= '-' ) ) )
-            // InternalInstanceLanguage.g:3068:2: ( (enumLiteral_0= '+' ) | (enumLiteral_1= '-' ) )
+            // InternalInstanceLanguage.g:3086:2: ( ( (enumLiteral_0= '+' ) | (enumLiteral_1= '-' ) ) )
+            // InternalInstanceLanguage.g:3087:2: ( (enumLiteral_0= '+' ) | (enumLiteral_1= '-' ) )
             {
-            // InternalInstanceLanguage.g:3068:2: ( (enumLiteral_0= '+' ) | (enumLiteral_1= '-' ) )
-            int alt36=2;
-            int LA36_0 = input.LA(1);
+            // InternalInstanceLanguage.g:3087:2: ( (enumLiteral_0= '+' ) | (enumLiteral_1= '-' ) )
+            int alt37=2;
+            int LA37_0 = input.LA(1);
 
-            if ( (LA36_0==59) ) {
-                alt36=1;
+            if ( (LA37_0==59) ) {
+                alt37=1;
             }
-            else if ( (LA36_0==60) ) {
-                alt36=2;
+            else if ( (LA37_0==60) ) {
+                alt37=2;
             }
             else {
                 if (state.backtracking>0) {state.failed=true; return current;}
                 NoViableAltException nvae =
-                    new NoViableAltException("", 36, 0, input);
+                    new NoViableAltException("", 37, 0, input);
 
                 throw nvae;
             }
-            switch (alt36) {
+            switch (alt37) {
                 case 1 :
-                    // InternalInstanceLanguage.g:3069:3: (enumLiteral_0= '+' )
+                    // InternalInstanceLanguage.g:3088:3: (enumLiteral_0= '+' )
                     {
-                    // InternalInstanceLanguage.g:3069:3: (enumLiteral_0= '+' )
-                    // InternalInstanceLanguage.g:3070:4: enumLiteral_0= '+'
+                    // InternalInstanceLanguage.g:3088:3: (enumLiteral_0= '+' )
+                    // InternalInstanceLanguage.g:3089:4: enumLiteral_0= '+'
                     {
                     enumLiteral_0=(Token)match(input,59,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -9191,10 +9246,10 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 2 :
-                    // InternalInstanceLanguage.g:3077:3: (enumLiteral_1= '-' )
+                    // InternalInstanceLanguage.g:3096:3: (enumLiteral_1= '-' )
                     {
-                    // InternalInstanceLanguage.g:3077:3: (enumLiteral_1= '-' )
-                    // InternalInstanceLanguage.g:3078:4: enumLiteral_1= '-'
+                    // InternalInstanceLanguage.g:3096:3: (enumLiteral_1= '-' )
+                    // InternalInstanceLanguage.g:3097:4: enumLiteral_1= '-'
                     {
                     enumLiteral_1=(Token)match(input,60,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -9234,7 +9289,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "ruleMultiplyDivideModuloOperatorRule"
-    // InternalInstanceLanguage.g:3088:1: ruleMultiplyDivideModuloOperatorRule returns [Enumerator current=null] : ( (enumLiteral_0= '*' ) | (enumLiteral_1= '/' ) | (enumLiteral_2= '%' ) ) ;
+    // InternalInstanceLanguage.g:3107:1: ruleMultiplyDivideModuloOperatorRule returns [Enumerator current=null] : ( (enumLiteral_0= '*' ) | (enumLiteral_1= '/' ) | (enumLiteral_2= '%' ) ) ;
     public final Enumerator ruleMultiplyDivideModuloOperatorRule() throws RecognitionException {
         Enumerator current = null;
 
@@ -9246,41 +9301,41 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
         	enterRule();
 
         try {
-            // InternalInstanceLanguage.g:3094:2: ( ( (enumLiteral_0= '*' ) | (enumLiteral_1= '/' ) | (enumLiteral_2= '%' ) ) )
-            // InternalInstanceLanguage.g:3095:2: ( (enumLiteral_0= '*' ) | (enumLiteral_1= '/' ) | (enumLiteral_2= '%' ) )
+            // InternalInstanceLanguage.g:3113:2: ( ( (enumLiteral_0= '*' ) | (enumLiteral_1= '/' ) | (enumLiteral_2= '%' ) ) )
+            // InternalInstanceLanguage.g:3114:2: ( (enumLiteral_0= '*' ) | (enumLiteral_1= '/' ) | (enumLiteral_2= '%' ) )
             {
-            // InternalInstanceLanguage.g:3095:2: ( (enumLiteral_0= '*' ) | (enumLiteral_1= '/' ) | (enumLiteral_2= '%' ) )
-            int alt37=3;
+            // InternalInstanceLanguage.g:3114:2: ( (enumLiteral_0= '*' ) | (enumLiteral_1= '/' ) | (enumLiteral_2= '%' ) )
+            int alt38=3;
             switch ( input.LA(1) ) {
             case 61:
                 {
-                alt37=1;
+                alt38=1;
                 }
                 break;
             case 62:
                 {
-                alt37=2;
+                alt38=2;
                 }
                 break;
             case 63:
                 {
-                alt37=3;
+                alt38=3;
                 }
                 break;
             default:
                 if (state.backtracking>0) {state.failed=true; return current;}
                 NoViableAltException nvae =
-                    new NoViableAltException("", 37, 0, input);
+                    new NoViableAltException("", 38, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt37) {
+            switch (alt38) {
                 case 1 :
-                    // InternalInstanceLanguage.g:3096:3: (enumLiteral_0= '*' )
+                    // InternalInstanceLanguage.g:3115:3: (enumLiteral_0= '*' )
                     {
-                    // InternalInstanceLanguage.g:3096:3: (enumLiteral_0= '*' )
-                    // InternalInstanceLanguage.g:3097:4: enumLiteral_0= '*'
+                    // InternalInstanceLanguage.g:3115:3: (enumLiteral_0= '*' )
+                    // InternalInstanceLanguage.g:3116:4: enumLiteral_0= '*'
                     {
                     enumLiteral_0=(Token)match(input,61,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -9296,10 +9351,10 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 2 :
-                    // InternalInstanceLanguage.g:3104:3: (enumLiteral_1= '/' )
+                    // InternalInstanceLanguage.g:3123:3: (enumLiteral_1= '/' )
                     {
-                    // InternalInstanceLanguage.g:3104:3: (enumLiteral_1= '/' )
-                    // InternalInstanceLanguage.g:3105:4: enumLiteral_1= '/'
+                    // InternalInstanceLanguage.g:3123:3: (enumLiteral_1= '/' )
+                    // InternalInstanceLanguage.g:3124:4: enumLiteral_1= '/'
                     {
                     enumLiteral_1=(Token)match(input,62,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -9315,10 +9370,10 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 3 :
-                    // InternalInstanceLanguage.g:3112:3: (enumLiteral_2= '%' )
+                    // InternalInstanceLanguage.g:3131:3: (enumLiteral_2= '%' )
                     {
-                    // InternalInstanceLanguage.g:3112:3: (enumLiteral_2= '%' )
-                    // InternalInstanceLanguage.g:3113:4: enumLiteral_2= '%'
+                    // InternalInstanceLanguage.g:3131:3: (enumLiteral_2= '%' )
+                    // InternalInstanceLanguage.g:3132:4: enumLiteral_2= '%'
                     {
                     enumLiteral_2=(Token)match(input,63,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -9358,7 +9413,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "ruleFactorRule"
-    // InternalInstanceLanguage.g:3123:1: ruleFactorRule returns [Enumerator current=null] : ( (enumLiteral_0= 'Y' ) | (enumLiteral_1= 'Z' ) | (enumLiteral_2= 'E' ) | (enumLiteral_3= 'P' ) | (enumLiteral_4= 'T' ) | (enumLiteral_5= 'G' ) | (enumLiteral_6= 'M' ) | (enumLiteral_7= 'k' ) | (enumLiteral_8= 'h' ) | (enumLiteral_9= 'da' ) | (enumLiteral_10= 'd' ) | (enumLiteral_11= 'c' ) | (enumLiteral_12= 'm' ) | (enumLiteral_13= '\\u00B5' ) | (enumLiteral_14= 'n' ) | (enumLiteral_15= 'p' ) | (enumLiteral_16= 'f' ) | (enumLiteral_17= 'a' ) | (enumLiteral_18= 'z' ) | (enumLiteral_19= 'y' ) ) ;
+    // InternalInstanceLanguage.g:3142:1: ruleFactorRule returns [Enumerator current=null] : ( (enumLiteral_0= 'Y' ) | (enumLiteral_1= 'Z' ) | (enumLiteral_2= 'E' ) | (enumLiteral_3= 'P' ) | (enumLiteral_4= 'T' ) | (enumLiteral_5= 'G' ) | (enumLiteral_6= 'M' ) | (enumLiteral_7= 'k' ) | (enumLiteral_8= 'h' ) | (enumLiteral_9= 'da' ) | (enumLiteral_10= 'd' ) | (enumLiteral_11= 'c' ) | (enumLiteral_12= 'm' ) | (enumLiteral_13= '\\u00B5' ) | (enumLiteral_14= 'n' ) | (enumLiteral_15= 'p' ) | (enumLiteral_16= 'f' ) | (enumLiteral_17= 'a' ) | (enumLiteral_18= 'z' ) | (enumLiteral_19= 'y' ) ) ;
     public final Enumerator ruleFactorRule() throws RecognitionException {
         Enumerator current = null;
 
@@ -9387,126 +9442,126 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
         	enterRule();
 
         try {
-            // InternalInstanceLanguage.g:3129:2: ( ( (enumLiteral_0= 'Y' ) | (enumLiteral_1= 'Z' ) | (enumLiteral_2= 'E' ) | (enumLiteral_3= 'P' ) | (enumLiteral_4= 'T' ) | (enumLiteral_5= 'G' ) | (enumLiteral_6= 'M' ) | (enumLiteral_7= 'k' ) | (enumLiteral_8= 'h' ) | (enumLiteral_9= 'da' ) | (enumLiteral_10= 'd' ) | (enumLiteral_11= 'c' ) | (enumLiteral_12= 'm' ) | (enumLiteral_13= '\\u00B5' ) | (enumLiteral_14= 'n' ) | (enumLiteral_15= 'p' ) | (enumLiteral_16= 'f' ) | (enumLiteral_17= 'a' ) | (enumLiteral_18= 'z' ) | (enumLiteral_19= 'y' ) ) )
-            // InternalInstanceLanguage.g:3130:2: ( (enumLiteral_0= 'Y' ) | (enumLiteral_1= 'Z' ) | (enumLiteral_2= 'E' ) | (enumLiteral_3= 'P' ) | (enumLiteral_4= 'T' ) | (enumLiteral_5= 'G' ) | (enumLiteral_6= 'M' ) | (enumLiteral_7= 'k' ) | (enumLiteral_8= 'h' ) | (enumLiteral_9= 'da' ) | (enumLiteral_10= 'd' ) | (enumLiteral_11= 'c' ) | (enumLiteral_12= 'm' ) | (enumLiteral_13= '\\u00B5' ) | (enumLiteral_14= 'n' ) | (enumLiteral_15= 'p' ) | (enumLiteral_16= 'f' ) | (enumLiteral_17= 'a' ) | (enumLiteral_18= 'z' ) | (enumLiteral_19= 'y' ) )
+            // InternalInstanceLanguage.g:3148:2: ( ( (enumLiteral_0= 'Y' ) | (enumLiteral_1= 'Z' ) | (enumLiteral_2= 'E' ) | (enumLiteral_3= 'P' ) | (enumLiteral_4= 'T' ) | (enumLiteral_5= 'G' ) | (enumLiteral_6= 'M' ) | (enumLiteral_7= 'k' ) | (enumLiteral_8= 'h' ) | (enumLiteral_9= 'da' ) | (enumLiteral_10= 'd' ) | (enumLiteral_11= 'c' ) | (enumLiteral_12= 'm' ) | (enumLiteral_13= '\\u00B5' ) | (enumLiteral_14= 'n' ) | (enumLiteral_15= 'p' ) | (enumLiteral_16= 'f' ) | (enumLiteral_17= 'a' ) | (enumLiteral_18= 'z' ) | (enumLiteral_19= 'y' ) ) )
+            // InternalInstanceLanguage.g:3149:2: ( (enumLiteral_0= 'Y' ) | (enumLiteral_1= 'Z' ) | (enumLiteral_2= 'E' ) | (enumLiteral_3= 'P' ) | (enumLiteral_4= 'T' ) | (enumLiteral_5= 'G' ) | (enumLiteral_6= 'M' ) | (enumLiteral_7= 'k' ) | (enumLiteral_8= 'h' ) | (enumLiteral_9= 'da' ) | (enumLiteral_10= 'd' ) | (enumLiteral_11= 'c' ) | (enumLiteral_12= 'm' ) | (enumLiteral_13= '\\u00B5' ) | (enumLiteral_14= 'n' ) | (enumLiteral_15= 'p' ) | (enumLiteral_16= 'f' ) | (enumLiteral_17= 'a' ) | (enumLiteral_18= 'z' ) | (enumLiteral_19= 'y' ) )
             {
-            // InternalInstanceLanguage.g:3130:2: ( (enumLiteral_0= 'Y' ) | (enumLiteral_1= 'Z' ) | (enumLiteral_2= 'E' ) | (enumLiteral_3= 'P' ) | (enumLiteral_4= 'T' ) | (enumLiteral_5= 'G' ) | (enumLiteral_6= 'M' ) | (enumLiteral_7= 'k' ) | (enumLiteral_8= 'h' ) | (enumLiteral_9= 'da' ) | (enumLiteral_10= 'd' ) | (enumLiteral_11= 'c' ) | (enumLiteral_12= 'm' ) | (enumLiteral_13= '\\u00B5' ) | (enumLiteral_14= 'n' ) | (enumLiteral_15= 'p' ) | (enumLiteral_16= 'f' ) | (enumLiteral_17= 'a' ) | (enumLiteral_18= 'z' ) | (enumLiteral_19= 'y' ) )
-            int alt38=20;
+            // InternalInstanceLanguage.g:3149:2: ( (enumLiteral_0= 'Y' ) | (enumLiteral_1= 'Z' ) | (enumLiteral_2= 'E' ) | (enumLiteral_3= 'P' ) | (enumLiteral_4= 'T' ) | (enumLiteral_5= 'G' ) | (enumLiteral_6= 'M' ) | (enumLiteral_7= 'k' ) | (enumLiteral_8= 'h' ) | (enumLiteral_9= 'da' ) | (enumLiteral_10= 'd' ) | (enumLiteral_11= 'c' ) | (enumLiteral_12= 'm' ) | (enumLiteral_13= '\\u00B5' ) | (enumLiteral_14= 'n' ) | (enumLiteral_15= 'p' ) | (enumLiteral_16= 'f' ) | (enumLiteral_17= 'a' ) | (enumLiteral_18= 'z' ) | (enumLiteral_19= 'y' ) )
+            int alt39=20;
             switch ( input.LA(1) ) {
             case 64:
                 {
-                alt38=1;
+                alt39=1;
                 }
                 break;
             case 65:
                 {
-                alt38=2;
+                alt39=2;
                 }
                 break;
             case 66:
                 {
-                alt38=3;
+                alt39=3;
                 }
                 break;
             case 67:
                 {
-                alt38=4;
+                alt39=4;
                 }
                 break;
             case 68:
                 {
-                alt38=5;
+                alt39=5;
                 }
                 break;
             case 69:
                 {
-                alt38=6;
+                alt39=6;
                 }
                 break;
             case 70:
                 {
-                alt38=7;
+                alt39=7;
                 }
                 break;
             case 71:
                 {
-                alt38=8;
+                alt39=8;
                 }
                 break;
             case 72:
                 {
-                alt38=9;
+                alt39=9;
                 }
                 break;
             case 73:
                 {
-                alt38=10;
+                alt39=10;
                 }
                 break;
             case 74:
                 {
-                alt38=11;
+                alt39=11;
                 }
                 break;
             case 75:
                 {
-                alt38=12;
+                alt39=12;
                 }
                 break;
             case 76:
                 {
-                alt38=13;
+                alt39=13;
                 }
                 break;
             case 77:
                 {
-                alt38=14;
+                alt39=14;
                 }
                 break;
             case 78:
                 {
-                alt38=15;
+                alt39=15;
                 }
                 break;
             case 79:
                 {
-                alt38=16;
+                alt39=16;
                 }
                 break;
             case 80:
                 {
-                alt38=17;
+                alt39=17;
                 }
                 break;
             case 81:
                 {
-                alt38=18;
+                alt39=18;
                 }
                 break;
             case 82:
                 {
-                alt38=19;
+                alt39=19;
                 }
                 break;
             case 83:
                 {
-                alt38=20;
+                alt39=20;
                 }
                 break;
             default:
                 if (state.backtracking>0) {state.failed=true; return current;}
                 NoViableAltException nvae =
-                    new NoViableAltException("", 38, 0, input);
+                    new NoViableAltException("", 39, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt38) {
+            switch (alt39) {
                 case 1 :
-                    // InternalInstanceLanguage.g:3131:3: (enumLiteral_0= 'Y' )
+                    // InternalInstanceLanguage.g:3150:3: (enumLiteral_0= 'Y' )
                     {
-                    // InternalInstanceLanguage.g:3131:3: (enumLiteral_0= 'Y' )
-                    // InternalInstanceLanguage.g:3132:4: enumLiteral_0= 'Y'
+                    // InternalInstanceLanguage.g:3150:3: (enumLiteral_0= 'Y' )
+                    // InternalInstanceLanguage.g:3151:4: enumLiteral_0= 'Y'
                     {
                     enumLiteral_0=(Token)match(input,64,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -9522,10 +9577,10 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 2 :
-                    // InternalInstanceLanguage.g:3139:3: (enumLiteral_1= 'Z' )
+                    // InternalInstanceLanguage.g:3158:3: (enumLiteral_1= 'Z' )
                     {
-                    // InternalInstanceLanguage.g:3139:3: (enumLiteral_1= 'Z' )
-                    // InternalInstanceLanguage.g:3140:4: enumLiteral_1= 'Z'
+                    // InternalInstanceLanguage.g:3158:3: (enumLiteral_1= 'Z' )
+                    // InternalInstanceLanguage.g:3159:4: enumLiteral_1= 'Z'
                     {
                     enumLiteral_1=(Token)match(input,65,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -9541,10 +9596,10 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 3 :
-                    // InternalInstanceLanguage.g:3147:3: (enumLiteral_2= 'E' )
+                    // InternalInstanceLanguage.g:3166:3: (enumLiteral_2= 'E' )
                     {
-                    // InternalInstanceLanguage.g:3147:3: (enumLiteral_2= 'E' )
-                    // InternalInstanceLanguage.g:3148:4: enumLiteral_2= 'E'
+                    // InternalInstanceLanguage.g:3166:3: (enumLiteral_2= 'E' )
+                    // InternalInstanceLanguage.g:3167:4: enumLiteral_2= 'E'
                     {
                     enumLiteral_2=(Token)match(input,66,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -9560,10 +9615,10 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 4 :
-                    // InternalInstanceLanguage.g:3155:3: (enumLiteral_3= 'P' )
+                    // InternalInstanceLanguage.g:3174:3: (enumLiteral_3= 'P' )
                     {
-                    // InternalInstanceLanguage.g:3155:3: (enumLiteral_3= 'P' )
-                    // InternalInstanceLanguage.g:3156:4: enumLiteral_3= 'P'
+                    // InternalInstanceLanguage.g:3174:3: (enumLiteral_3= 'P' )
+                    // InternalInstanceLanguage.g:3175:4: enumLiteral_3= 'P'
                     {
                     enumLiteral_3=(Token)match(input,67,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -9579,10 +9634,10 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 5 :
-                    // InternalInstanceLanguage.g:3163:3: (enumLiteral_4= 'T' )
+                    // InternalInstanceLanguage.g:3182:3: (enumLiteral_4= 'T' )
                     {
-                    // InternalInstanceLanguage.g:3163:3: (enumLiteral_4= 'T' )
-                    // InternalInstanceLanguage.g:3164:4: enumLiteral_4= 'T'
+                    // InternalInstanceLanguage.g:3182:3: (enumLiteral_4= 'T' )
+                    // InternalInstanceLanguage.g:3183:4: enumLiteral_4= 'T'
                     {
                     enumLiteral_4=(Token)match(input,68,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -9598,10 +9653,10 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 6 :
-                    // InternalInstanceLanguage.g:3171:3: (enumLiteral_5= 'G' )
+                    // InternalInstanceLanguage.g:3190:3: (enumLiteral_5= 'G' )
                     {
-                    // InternalInstanceLanguage.g:3171:3: (enumLiteral_5= 'G' )
-                    // InternalInstanceLanguage.g:3172:4: enumLiteral_5= 'G'
+                    // InternalInstanceLanguage.g:3190:3: (enumLiteral_5= 'G' )
+                    // InternalInstanceLanguage.g:3191:4: enumLiteral_5= 'G'
                     {
                     enumLiteral_5=(Token)match(input,69,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -9617,10 +9672,10 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 7 :
-                    // InternalInstanceLanguage.g:3179:3: (enumLiteral_6= 'M' )
+                    // InternalInstanceLanguage.g:3198:3: (enumLiteral_6= 'M' )
                     {
-                    // InternalInstanceLanguage.g:3179:3: (enumLiteral_6= 'M' )
-                    // InternalInstanceLanguage.g:3180:4: enumLiteral_6= 'M'
+                    // InternalInstanceLanguage.g:3198:3: (enumLiteral_6= 'M' )
+                    // InternalInstanceLanguage.g:3199:4: enumLiteral_6= 'M'
                     {
                     enumLiteral_6=(Token)match(input,70,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -9636,10 +9691,10 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 8 :
-                    // InternalInstanceLanguage.g:3187:3: (enumLiteral_7= 'k' )
+                    // InternalInstanceLanguage.g:3206:3: (enumLiteral_7= 'k' )
                     {
-                    // InternalInstanceLanguage.g:3187:3: (enumLiteral_7= 'k' )
-                    // InternalInstanceLanguage.g:3188:4: enumLiteral_7= 'k'
+                    // InternalInstanceLanguage.g:3206:3: (enumLiteral_7= 'k' )
+                    // InternalInstanceLanguage.g:3207:4: enumLiteral_7= 'k'
                     {
                     enumLiteral_7=(Token)match(input,71,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -9655,10 +9710,10 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 9 :
-                    // InternalInstanceLanguage.g:3195:3: (enumLiteral_8= 'h' )
+                    // InternalInstanceLanguage.g:3214:3: (enumLiteral_8= 'h' )
                     {
-                    // InternalInstanceLanguage.g:3195:3: (enumLiteral_8= 'h' )
-                    // InternalInstanceLanguage.g:3196:4: enumLiteral_8= 'h'
+                    // InternalInstanceLanguage.g:3214:3: (enumLiteral_8= 'h' )
+                    // InternalInstanceLanguage.g:3215:4: enumLiteral_8= 'h'
                     {
                     enumLiteral_8=(Token)match(input,72,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -9674,10 +9729,10 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 10 :
-                    // InternalInstanceLanguage.g:3203:3: (enumLiteral_9= 'da' )
+                    // InternalInstanceLanguage.g:3222:3: (enumLiteral_9= 'da' )
                     {
-                    // InternalInstanceLanguage.g:3203:3: (enumLiteral_9= 'da' )
-                    // InternalInstanceLanguage.g:3204:4: enumLiteral_9= 'da'
+                    // InternalInstanceLanguage.g:3222:3: (enumLiteral_9= 'da' )
+                    // InternalInstanceLanguage.g:3223:4: enumLiteral_9= 'da'
                     {
                     enumLiteral_9=(Token)match(input,73,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -9693,10 +9748,10 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 11 :
-                    // InternalInstanceLanguage.g:3211:3: (enumLiteral_10= 'd' )
+                    // InternalInstanceLanguage.g:3230:3: (enumLiteral_10= 'd' )
                     {
-                    // InternalInstanceLanguage.g:3211:3: (enumLiteral_10= 'd' )
-                    // InternalInstanceLanguage.g:3212:4: enumLiteral_10= 'd'
+                    // InternalInstanceLanguage.g:3230:3: (enumLiteral_10= 'd' )
+                    // InternalInstanceLanguage.g:3231:4: enumLiteral_10= 'd'
                     {
                     enumLiteral_10=(Token)match(input,74,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -9712,10 +9767,10 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 12 :
-                    // InternalInstanceLanguage.g:3219:3: (enumLiteral_11= 'c' )
+                    // InternalInstanceLanguage.g:3238:3: (enumLiteral_11= 'c' )
                     {
-                    // InternalInstanceLanguage.g:3219:3: (enumLiteral_11= 'c' )
-                    // InternalInstanceLanguage.g:3220:4: enumLiteral_11= 'c'
+                    // InternalInstanceLanguage.g:3238:3: (enumLiteral_11= 'c' )
+                    // InternalInstanceLanguage.g:3239:4: enumLiteral_11= 'c'
                     {
                     enumLiteral_11=(Token)match(input,75,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -9731,10 +9786,10 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 13 :
-                    // InternalInstanceLanguage.g:3227:3: (enumLiteral_12= 'm' )
+                    // InternalInstanceLanguage.g:3246:3: (enumLiteral_12= 'm' )
                     {
-                    // InternalInstanceLanguage.g:3227:3: (enumLiteral_12= 'm' )
-                    // InternalInstanceLanguage.g:3228:4: enumLiteral_12= 'm'
+                    // InternalInstanceLanguage.g:3246:3: (enumLiteral_12= 'm' )
+                    // InternalInstanceLanguage.g:3247:4: enumLiteral_12= 'm'
                     {
                     enumLiteral_12=(Token)match(input,76,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -9750,10 +9805,10 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 14 :
-                    // InternalInstanceLanguage.g:3235:3: (enumLiteral_13= '\\u00B5' )
+                    // InternalInstanceLanguage.g:3254:3: (enumLiteral_13= '\\u00B5' )
                     {
-                    // InternalInstanceLanguage.g:3235:3: (enumLiteral_13= '\\u00B5' )
-                    // InternalInstanceLanguage.g:3236:4: enumLiteral_13= '\\u00B5'
+                    // InternalInstanceLanguage.g:3254:3: (enumLiteral_13= '\\u00B5' )
+                    // InternalInstanceLanguage.g:3255:4: enumLiteral_13= '\\u00B5'
                     {
                     enumLiteral_13=(Token)match(input,77,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -9769,10 +9824,10 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 15 :
-                    // InternalInstanceLanguage.g:3243:3: (enumLiteral_14= 'n' )
+                    // InternalInstanceLanguage.g:3262:3: (enumLiteral_14= 'n' )
                     {
-                    // InternalInstanceLanguage.g:3243:3: (enumLiteral_14= 'n' )
-                    // InternalInstanceLanguage.g:3244:4: enumLiteral_14= 'n'
+                    // InternalInstanceLanguage.g:3262:3: (enumLiteral_14= 'n' )
+                    // InternalInstanceLanguage.g:3263:4: enumLiteral_14= 'n'
                     {
                     enumLiteral_14=(Token)match(input,78,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -9788,10 +9843,10 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 16 :
-                    // InternalInstanceLanguage.g:3251:3: (enumLiteral_15= 'p' )
+                    // InternalInstanceLanguage.g:3270:3: (enumLiteral_15= 'p' )
                     {
-                    // InternalInstanceLanguage.g:3251:3: (enumLiteral_15= 'p' )
-                    // InternalInstanceLanguage.g:3252:4: enumLiteral_15= 'p'
+                    // InternalInstanceLanguage.g:3270:3: (enumLiteral_15= 'p' )
+                    // InternalInstanceLanguage.g:3271:4: enumLiteral_15= 'p'
                     {
                     enumLiteral_15=(Token)match(input,79,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -9807,10 +9862,10 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 17 :
-                    // InternalInstanceLanguage.g:3259:3: (enumLiteral_16= 'f' )
+                    // InternalInstanceLanguage.g:3278:3: (enumLiteral_16= 'f' )
                     {
-                    // InternalInstanceLanguage.g:3259:3: (enumLiteral_16= 'f' )
-                    // InternalInstanceLanguage.g:3260:4: enumLiteral_16= 'f'
+                    // InternalInstanceLanguage.g:3278:3: (enumLiteral_16= 'f' )
+                    // InternalInstanceLanguage.g:3279:4: enumLiteral_16= 'f'
                     {
                     enumLiteral_16=(Token)match(input,80,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -9826,10 +9881,10 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 18 :
-                    // InternalInstanceLanguage.g:3267:3: (enumLiteral_17= 'a' )
+                    // InternalInstanceLanguage.g:3286:3: (enumLiteral_17= 'a' )
                     {
-                    // InternalInstanceLanguage.g:3267:3: (enumLiteral_17= 'a' )
-                    // InternalInstanceLanguage.g:3268:4: enumLiteral_17= 'a'
+                    // InternalInstanceLanguage.g:3286:3: (enumLiteral_17= 'a' )
+                    // InternalInstanceLanguage.g:3287:4: enumLiteral_17= 'a'
                     {
                     enumLiteral_17=(Token)match(input,81,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -9845,10 +9900,10 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 19 :
-                    // InternalInstanceLanguage.g:3275:3: (enumLiteral_18= 'z' )
+                    // InternalInstanceLanguage.g:3294:3: (enumLiteral_18= 'z' )
                     {
-                    // InternalInstanceLanguage.g:3275:3: (enumLiteral_18= 'z' )
-                    // InternalInstanceLanguage.g:3276:4: enumLiteral_18= 'z'
+                    // InternalInstanceLanguage.g:3294:3: (enumLiteral_18= 'z' )
+                    // InternalInstanceLanguage.g:3295:4: enumLiteral_18= 'z'
                     {
                     enumLiteral_18=(Token)match(input,82,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -9864,10 +9919,10 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 20 :
-                    // InternalInstanceLanguage.g:3283:3: (enumLiteral_19= 'y' )
+                    // InternalInstanceLanguage.g:3302:3: (enumLiteral_19= 'y' )
                     {
-                    // InternalInstanceLanguage.g:3283:3: (enumLiteral_19= 'y' )
-                    // InternalInstanceLanguage.g:3284:4: enumLiteral_19= 'y'
+                    // InternalInstanceLanguage.g:3302:3: (enumLiteral_19= 'y' )
+                    // InternalInstanceLanguage.g:3303:4: enumLiteral_19= 'y'
                     {
                     enumLiteral_19=(Token)match(input,83,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -9905,14 +9960,14 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
     }
     // $ANTLR end "ruleFactorRule"
 
-    // $ANTLR start synpred50_InternalInstanceLanguage
-    public final void synpred50_InternalInstanceLanguage_fragment() throws RecognitionException {   
+    // $ANTLR start synpred51_InternalInstanceLanguage
+    public final void synpred51_InternalInstanceLanguage_fragment() throws RecognitionException {   
         Token kw=null;
         AntlrDatatypeRuleToken this_StringOrId_2 = null;
 
 
-        // InternalInstanceLanguage.g:2948:4: (kw= '.' this_StringOrId_2= ruleStringOrId )
-        // InternalInstanceLanguage.g:2948:4: kw= '.' this_StringOrId_2= ruleStringOrId
+        // InternalInstanceLanguage.g:2967:4: (kw= '.' this_StringOrId_2= ruleStringOrId )
+        // InternalInstanceLanguage.g:2967:4: kw= '.' this_StringOrId_2= ruleStringOrId
         {
         kw=(Token)match(input,32,FOLLOW_7); if (state.failed) return ;
         pushFollow(FOLLOW_2);
@@ -9923,15 +9978,15 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
         }
     }
-    // $ANTLR end synpred50_InternalInstanceLanguage
+    // $ANTLR end synpred51_InternalInstanceLanguage
 
     // Delegated rules
 
-    public final boolean synpred50_InternalInstanceLanguage() {
+    public final boolean synpred51_InternalInstanceLanguage() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred50_InternalInstanceLanguage_fragment(); // can never throw exception
+            synpred51_InternalInstanceLanguage_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -10025,6 +10080,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
     public static final BitSet FOLLOW_31 = new BitSet(new long[]{0x0000020000000000L});
     public static final BitSet FOLLOW_32 = new BitSet(new long[]{0x000FFC0420040000L});
     public static final BitSet FOLLOW_33 = new BitSet(new long[]{0x0000002000200000L});
-    public static final BitSet FOLLOW_34 = new BitSet(new long[]{0x0020000000000000L});
+    public static final BitSet FOLLOW_34 = new BitSet(new long[]{0x000FFD0420040180L});
+    public static final BitSet FOLLOW_35 = new BitSet(new long[]{0x0020000000000000L});
 
 }

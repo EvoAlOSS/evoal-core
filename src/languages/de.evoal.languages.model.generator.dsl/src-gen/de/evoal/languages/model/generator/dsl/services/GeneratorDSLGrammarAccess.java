@@ -1709,6 +1709,7 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 	}
 	
 	//ParameterRule returns Parameter:
+	//    (constraints += ConstraintRule)*
 	//    type = TypeRule name = StringOrId
 	//;
 	public BaseLanguageGrammarAccess.ParameterRuleElements getParameterRuleAccess() {

@@ -21,6 +21,8 @@ import de.evoal.core.api.validation.model.Diagnostics;
 import de.evoal.core.api.validation.model.InstanceValidator;
 import de.evoal.languages.model.base.definitions.AttributeDefinition;
 import de.evoal.languages.model.base.definitions.ClassDefinition;
+import de.evoal.languages.model.base.definitions.FunctionDefinition;
+import de.evoal.languages.model.base.definitions.Parameter;
 import de.evoal.languages.model.base.expressions.Attribute;
 import de.evoal.languages.model.base.expressions.Expression;
 import de.evoal.languages.model.base.expressions.Instance;
@@ -117,6 +119,39 @@ public class ConstraintValidator implements InstanceValidator {
         }
 
         for(final Expression constraint : attribute.getConstraints()) {
+            apply(context, subject, constraint, computed);
+        }
+    }
+
+    /**
+     * Checks an argument of a call against the annotations of its parameter, e.g.
+     *   {@code 1.5} of {@code correlation(data 'x', data 'y', 1.5)} against the bounds of
+     *   {@code coefficient}.
+     *
+     * @param context The context of the diagnostics, the call.
+     * @param function The called function.
+     * @param parameter The parameter of the function.
+     * @param argument The expression that the call passes for the parameter.
+     */
+    public void checkArgument(final @NonNull DiagnosticsContext context,
+                              final @NonNull FunctionDefinition function,
+                              final @NonNull Parameter parameter,
+                              final @NonNull Expression argument) {
+        if(parameter.getConstraints().isEmpty()) {
+            return;
+        }
+
+        final String subject = "The parameter '" + parameter.getName() + "' of '" + function.getName() + "'";
+        final Object computed;
+        try {
+            computed = evaluator.doSwitch(argument);
+        } catch(final RuntimeException e) {
+            log.debug("Cannot compute the argument of {}.", subject, e);
+            events.fire(Diagnostics.of(Diagnostics.Level.Info, context, subject + " is not checked against its annotations: its argument cannot be computed before the run."));
+            return;
+        }
+
+        for(final Expression constraint : parameter.getConstraints()) {
             apply(context, subject, constraint, computed);
         }
     }

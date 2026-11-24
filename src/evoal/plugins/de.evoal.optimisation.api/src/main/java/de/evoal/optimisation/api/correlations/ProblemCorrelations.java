@@ -3,8 +3,6 @@ package de.evoal.optimisation.api.correlations;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
-import lombok.extern.slf4j.Slf4j;
-
 import org.eclipse.emf.ecore.EObject;
 
 import de.evoal.core.api.board.Blackboard;
@@ -22,11 +20,10 @@ import de.evoal.optimisation.main.constraints.CorrelationCompiler;
  *   declared in the DDL ({@code correlation}, {@code 'ranged-correlation'},
  *   {@code 'building-block'}). They are read at the start of every
  *   run, before the algorithm is created; the bean uses the run start of the
- *   {@link MetricContributor}s for this and contributes no metrics. Correlations with a
- *   nominal feature are reported, since no component can use them.
+ *   {@link MetricContributor}s for this and contributes no metrics. A correlation with a
+ *   nominal feature is rejected when the DDL file is loaded, since no component can use it.
  */
 @ApplicationScoped
-@Slf4j
 public class ProblemCorrelations implements MetricContributor {
     @Inject
     private Blackboard board;
@@ -72,12 +69,7 @@ public class ProblemCorrelations implements MetricContributor {
         }
 
         final Problem problem = helper.lookup(configuration, "problem");
+        // a correlation with a nominal feature is rejected when the DDL file is loaded
         setUp(compiler.compile(problem));
-
-        correlations.all()
-                    .stream()
-                    .filter(correlation -> correlation.kind() == CorrelationKind.NOMINAL)
-                    .forEach(correlation -> log.warn("The {} has a nominal feature; its values have no order, so it is "
-                                                     + "skipped.", correlation));
     }
 }

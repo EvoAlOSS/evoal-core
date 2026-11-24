@@ -193,8 +193,9 @@ public class DefinitionLanguageParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getConstantDefinitionRuleAccess().getTypeAssignment_1(), "rule__ConstantDefinitionRule__TypeAssignment_1");
 			builder.put(grammarAccess.getConstantDefinitionRuleAccess().getNameAssignment_2(), "rule__ConstantDefinitionRule__NameAssignment_2");
 			builder.put(grammarAccess.getConstantDefinitionRuleAccess().getValueAssignment_4(), "rule__ConstantDefinitionRule__ValueAssignment_4");
-			builder.put(grammarAccess.getParameterRuleAccess().getTypeAssignment_0(), "rule__ParameterRule__TypeAssignment_0");
-			builder.put(grammarAccess.getParameterRuleAccess().getNameAssignment_1(), "rule__ParameterRule__NameAssignment_1");
+			builder.put(grammarAccess.getParameterRuleAccess().getConstraintsAssignment_0(), "rule__ParameterRule__ConstraintsAssignment_0");
+			builder.put(grammarAccess.getParameterRuleAccess().getTypeAssignment_1(), "rule__ParameterRule__TypeAssignment_1");
+			builder.put(grammarAccess.getParameterRuleAccess().getNameAssignment_2(), "rule__ParameterRule__NameAssignment_2");
 			builder.put(grammarAccess.getImportRuleAccess().getLanguageAssignment_1(), "rule__ImportRule__LanguageAssignment_1");
 			builder.put(grammarAccess.getImportRuleAccess().getImportedNamespaceAssignment_3(), "rule__ImportRule__ImportedNamespaceAssignment_3");
 		}

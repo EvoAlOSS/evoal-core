@@ -1747,30 +1747,40 @@ public class BaseLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 	public class ParameterRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.base.dsl.BaseLanguage.ParameterRule");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cTypeAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall cTypeTypeRuleParserRuleCall_0_0 = (RuleCall)cTypeAssignment_0.eContents().get(0);
-		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cNameStringOrIdParserRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		private final Assignment cConstraintsAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cConstraintsConstraintRuleParserRuleCall_0_0 = (RuleCall)cConstraintsAssignment_0.eContents().get(0);
+		private final Assignment cTypeAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cTypeTypeRuleParserRuleCall_1_0 = (RuleCall)cTypeAssignment_1.eContents().get(0);
+		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cNameStringOrIdParserRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
 		
 		//ParameterRule returns Parameter:
+		//    (constraints += ConstraintRule)*
 		//    type = TypeRule name = StringOrId
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
+		//(constraints += ConstraintRule)*
 		//type = TypeRule name = StringOrId
 		public Group getGroup() { return cGroup; }
 		
+		//(constraints += ConstraintRule)*
+		public Assignment getConstraintsAssignment_0() { return cConstraintsAssignment_0; }
+		
+		//ConstraintRule
+		public RuleCall getConstraintsConstraintRuleParserRuleCall_0_0() { return cConstraintsConstraintRuleParserRuleCall_0_0; }
+		
 		//type = TypeRule
-		public Assignment getTypeAssignment_0() { return cTypeAssignment_0; }
+		public Assignment getTypeAssignment_1() { return cTypeAssignment_1; }
 		
 		//TypeRule
-		public RuleCall getTypeTypeRuleParserRuleCall_0_0() { return cTypeTypeRuleParserRuleCall_0_0; }
+		public RuleCall getTypeTypeRuleParserRuleCall_1_0() { return cTypeTypeRuleParserRuleCall_1_0; }
 		
 		//name = StringOrId
-		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
 		
 		//StringOrId
-		public RuleCall getNameStringOrIdParserRuleCall_1_0() { return cNameStringOrIdParserRuleCall_1_0; }
+		public RuleCall getNameStringOrIdParserRuleCall_2_0() { return cNameStringOrIdParserRuleCall_2_0; }
 	}
 	public class ImportRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.base.dsl.BaseLanguage.ImportRule");
@@ -3053,6 +3063,7 @@ public class BaseLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 	}
 	
 	//ParameterRule returns Parameter:
+	//    (constraints += ConstraintRule)*
 	//    type = TypeRule name = StringOrId
 	//;
 	public ParameterRuleElements getParameterRuleAccess() {

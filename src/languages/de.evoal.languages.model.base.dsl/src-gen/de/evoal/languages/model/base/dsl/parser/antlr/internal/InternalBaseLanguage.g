@@ -2690,9 +2690,28 @@ ruleParameterRule returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getParameterRuleAccess().getTypeTypeRuleParserRuleCall_0_0());
+					newCompositeNode(grammarAccess.getParameterRuleAccess().getConstraintsConstraintRuleParserRuleCall_0_0());
 				}
-				lv_type_0_0=ruleTypeRule
+				lv_constraints_0_0=ruleConstraintRule
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getParameterRuleRule());
+					}
+					add(
+						$current,
+						"constraints",
+						lv_constraints_0_0,
+						"de.evoal.languages.model.base.dsl.BaseLanguage.ConstraintRule");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)*
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getParameterRuleAccess().getTypeTypeRuleParserRuleCall_1_0());
+				}
+				lv_type_1_0=ruleTypeRule
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getParameterRuleRule());
@@ -2700,7 +2719,7 @@ ruleParameterRule returns [EObject current=null]
 					set(
 						$current,
 						"type",
-						lv_type_0_0,
+						lv_type_1_0,
 						"de.evoal.languages.model.base.dsl.BaseLanguage.TypeRule");
 					afterParserOrEnumRuleCall();
 				}
@@ -2709,9 +2728,9 @@ ruleParameterRule returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getParameterRuleAccess().getNameStringOrIdParserRuleCall_1_0());
+					newCompositeNode(grammarAccess.getParameterRuleAccess().getNameStringOrIdParserRuleCall_2_0());
 				}
-				lv_name_1_0=ruleStringOrId
+				lv_name_2_0=ruleStringOrId
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getParameterRuleRule());
@@ -2719,7 +2738,7 @@ ruleParameterRule returns [EObject current=null]
 					set(
 						$current,
 						"name",
-						lv_name_1_0,
+						lv_name_2_0,
 						"de.evoal.languages.model.base.dsl.BaseLanguage.StringOrId");
 					afterParserOrEnumRuleCall();
 				}

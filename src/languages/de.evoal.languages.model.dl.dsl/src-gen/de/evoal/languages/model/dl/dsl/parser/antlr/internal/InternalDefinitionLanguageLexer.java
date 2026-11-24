@@ -1761,8 +1761,8 @@ public class InternalDefinitionLanguageLexer extends Lexer {
     // $ANTLR start "RULE_DIGIT"
     public final void mRULE_DIGIT() throws RecognitionException {
         try {
-            // InternalDefinitionLanguage.g:3956:21: ( '0' .. '9' )
-            // InternalDefinitionLanguage.g:3956:23: '0' .. '9'
+            // InternalDefinitionLanguage.g:3975:21: ( '0' .. '9' )
+            // InternalDefinitionLanguage.g:3975:23: '0' .. '9'
             {
             matchRange('0','9'); 
 
@@ -1777,11 +1777,11 @@ public class InternalDefinitionLanguageLexer extends Lexer {
     // $ANTLR start "RULE_EXPONENT"
     public final void mRULE_EXPONENT() throws RecognitionException {
         try {
-            // InternalDefinitionLanguage.g:3958:24: ( 'e' ( '+' | '-' )? ( RULE_DIGIT )+ )
-            // InternalDefinitionLanguage.g:3958:26: 'e' ( '+' | '-' )? ( RULE_DIGIT )+
+            // InternalDefinitionLanguage.g:3977:24: ( 'e' ( '+' | '-' )? ( RULE_DIGIT )+ )
+            // InternalDefinitionLanguage.g:3977:26: 'e' ( '+' | '-' )? ( RULE_DIGIT )+
             {
             match('e'); 
-            // InternalDefinitionLanguage.g:3958:30: ( '+' | '-' )?
+            // InternalDefinitionLanguage.g:3977:30: ( '+' | '-' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -1807,7 +1807,7 @@ public class InternalDefinitionLanguageLexer extends Lexer {
 
             }
 
-            // InternalDefinitionLanguage.g:3958:41: ( RULE_DIGIT )+
+            // InternalDefinitionLanguage.g:3977:41: ( RULE_DIGIT )+
             int cnt2=0;
             loop2:
             do {
@@ -1821,7 +1821,7 @@ public class InternalDefinitionLanguageLexer extends Lexer {
 
                 switch (alt2) {
             	case 1 :
-            	    // InternalDefinitionLanguage.g:3958:41: RULE_DIGIT
+            	    // InternalDefinitionLanguage.g:3977:41: RULE_DIGIT
             	    {
             	    mRULE_DIGIT(); 
 
@@ -1851,10 +1851,10 @@ public class InternalDefinitionLanguageLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalDefinitionLanguage.g:3960:10: ( ( RULE_DIGIT )+ )
-            // InternalDefinitionLanguage.g:3960:12: ( RULE_DIGIT )+
+            // InternalDefinitionLanguage.g:3979:10: ( ( RULE_DIGIT )+ )
+            // InternalDefinitionLanguage.g:3979:12: ( RULE_DIGIT )+
             {
-            // InternalDefinitionLanguage.g:3960:12: ( RULE_DIGIT )+
+            // InternalDefinitionLanguage.g:3979:12: ( RULE_DIGIT )+
             int cnt3=0;
             loop3:
             do {
@@ -1868,7 +1868,7 @@ public class InternalDefinitionLanguageLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // InternalDefinitionLanguage.g:3960:12: RULE_DIGIT
+            	    // InternalDefinitionLanguage.g:3979:12: RULE_DIGIT
             	    {
             	    mRULE_DIGIT(); 
 
@@ -1900,17 +1900,17 @@ public class InternalDefinitionLanguageLexer extends Lexer {
         try {
             int _type = RULE_DOUBLE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalDefinitionLanguage.g:3962:13: ( ( ( RULE_DIGIT )+ RULE_EXPONENT | ( RULE_DIGIT )+ '.' ( RULE_DIGIT )* ( RULE_EXPONENT )? ) )
-            // InternalDefinitionLanguage.g:3962:15: ( ( RULE_DIGIT )+ RULE_EXPONENT | ( RULE_DIGIT )+ '.' ( RULE_DIGIT )* ( RULE_EXPONENT )? )
+            // InternalDefinitionLanguage.g:3981:13: ( ( ( RULE_DIGIT )+ RULE_EXPONENT | ( RULE_DIGIT )+ '.' ( RULE_DIGIT )* ( RULE_EXPONENT )? ) )
+            // InternalDefinitionLanguage.g:3981:15: ( ( RULE_DIGIT )+ RULE_EXPONENT | ( RULE_DIGIT )+ '.' ( RULE_DIGIT )* ( RULE_EXPONENT )? )
             {
-            // InternalDefinitionLanguage.g:3962:15: ( ( RULE_DIGIT )+ RULE_EXPONENT | ( RULE_DIGIT )+ '.' ( RULE_DIGIT )* ( RULE_EXPONENT )? )
+            // InternalDefinitionLanguage.g:3981:15: ( ( RULE_DIGIT )+ RULE_EXPONENT | ( RULE_DIGIT )+ '.' ( RULE_DIGIT )* ( RULE_EXPONENT )? )
             int alt8=2;
             alt8 = dfa8.predict(input);
             switch (alt8) {
                 case 1 :
-                    // InternalDefinitionLanguage.g:3962:16: ( RULE_DIGIT )+ RULE_EXPONENT
+                    // InternalDefinitionLanguage.g:3981:16: ( RULE_DIGIT )+ RULE_EXPONENT
                     {
-                    // InternalDefinitionLanguage.g:3962:16: ( RULE_DIGIT )+
+                    // InternalDefinitionLanguage.g:3981:16: ( RULE_DIGIT )+
                     int cnt4=0;
                     loop4:
                     do {
@@ -1924,7 +1924,7 @@ public class InternalDefinitionLanguageLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // InternalDefinitionLanguage.g:3962:16: RULE_DIGIT
+                    	    // InternalDefinitionLanguage.g:3981:16: RULE_DIGIT
                     	    {
                     	    mRULE_DIGIT(); 
 
@@ -1945,9 +1945,9 @@ public class InternalDefinitionLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalDefinitionLanguage.g:3962:42: ( RULE_DIGIT )+ '.' ( RULE_DIGIT )* ( RULE_EXPONENT )?
+                    // InternalDefinitionLanguage.g:3981:42: ( RULE_DIGIT )+ '.' ( RULE_DIGIT )* ( RULE_EXPONENT )?
                     {
-                    // InternalDefinitionLanguage.g:3962:42: ( RULE_DIGIT )+
+                    // InternalDefinitionLanguage.g:3981:42: ( RULE_DIGIT )+
                     int cnt5=0;
                     loop5:
                     do {
@@ -1961,7 +1961,7 @@ public class InternalDefinitionLanguageLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // InternalDefinitionLanguage.g:3962:42: RULE_DIGIT
+                    	    // InternalDefinitionLanguage.g:3981:42: RULE_DIGIT
                     	    {
                     	    mRULE_DIGIT(); 
 
@@ -1978,7 +1978,7 @@ public class InternalDefinitionLanguageLexer extends Lexer {
                     } while (true);
 
                     match('.'); 
-                    // InternalDefinitionLanguage.g:3962:58: ( RULE_DIGIT )*
+                    // InternalDefinitionLanguage.g:3981:58: ( RULE_DIGIT )*
                     loop6:
                     do {
                         int alt6=2;
@@ -1991,7 +1991,7 @@ public class InternalDefinitionLanguageLexer extends Lexer {
 
                         switch (alt6) {
                     	case 1 :
-                    	    // InternalDefinitionLanguage.g:3962:58: RULE_DIGIT
+                    	    // InternalDefinitionLanguage.g:3981:58: RULE_DIGIT
                     	    {
                     	    mRULE_DIGIT(); 
 
@@ -2003,7 +2003,7 @@ public class InternalDefinitionLanguageLexer extends Lexer {
                         }
                     } while (true);
 
-                    // InternalDefinitionLanguage.g:3962:70: ( RULE_EXPONENT )?
+                    // InternalDefinitionLanguage.g:3981:70: ( RULE_EXPONENT )?
                     int alt7=2;
                     int LA7_0 = input.LA(1);
 
@@ -2012,7 +2012,7 @@ public class InternalDefinitionLanguageLexer extends Lexer {
                     }
                     switch (alt7) {
                         case 1 :
-                            // InternalDefinitionLanguage.g:3962:70: RULE_EXPONENT
+                            // InternalDefinitionLanguage.g:3981:70: RULE_EXPONENT
                             {
                             mRULE_EXPONENT(); 
 
@@ -2043,11 +2043,11 @@ public class InternalDefinitionLanguageLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalDefinitionLanguage.g:3964:13: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' )
-            // InternalDefinitionLanguage.g:3964:15: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+            // InternalDefinitionLanguage.g:3983:13: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' )
+            // InternalDefinitionLanguage.g:3983:15: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
             {
             match('\"'); 
-            // InternalDefinitionLanguage.g:3964:19: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+            // InternalDefinitionLanguage.g:3983:19: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
             loop9:
             do {
                 int alt9=3;
@@ -2063,7 +2063,7 @@ public class InternalDefinitionLanguageLexer extends Lexer {
 
                 switch (alt9) {
             	case 1 :
-            	    // InternalDefinitionLanguage.g:3964:20: '\\\\' .
+            	    // InternalDefinitionLanguage.g:3983:20: '\\\\' .
             	    {
             	    match('\\'); 
             	    matchAny(); 
@@ -2071,7 +2071,7 @@ public class InternalDefinitionLanguageLexer extends Lexer {
             	    }
             	    break;
             	case 2 :
-            	    // InternalDefinitionLanguage.g:3964:27: ~ ( ( '\\\\' | '\"' ) )
+            	    // InternalDefinitionLanguage.g:3983:27: ~ ( ( '\\\\' | '\"' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -2108,11 +2108,11 @@ public class InternalDefinitionLanguageLexer extends Lexer {
         try {
             int _type = RULE_QUOTED_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalDefinitionLanguage.g:3966:16: ( '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
-            // InternalDefinitionLanguage.g:3966:18: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+            // InternalDefinitionLanguage.g:3985:16: ( '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalDefinitionLanguage.g:3985:18: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
             {
             match('\''); 
-            // InternalDefinitionLanguage.g:3966:23: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+            // InternalDefinitionLanguage.g:3985:23: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
             loop10:
             do {
                 int alt10=3;
@@ -2128,7 +2128,7 @@ public class InternalDefinitionLanguageLexer extends Lexer {
 
                 switch (alt10) {
             	case 1 :
-            	    // InternalDefinitionLanguage.g:3966:24: '\\\\' .
+            	    // InternalDefinitionLanguage.g:3985:24: '\\\\' .
             	    {
             	    match('\\'); 
             	    matchAny(); 
@@ -2136,7 +2136,7 @@ public class InternalDefinitionLanguageLexer extends Lexer {
             	    }
             	    break;
             	case 2 :
-            	    // InternalDefinitionLanguage.g:3966:31: ~ ( ( '\\\\' | '\\'' ) )
+            	    // InternalDefinitionLanguage.g:3985:31: ~ ( ( '\\\\' | '\\'' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -2173,10 +2173,10 @@ public class InternalDefinitionLanguageLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalDefinitionLanguage.g:3968:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // InternalDefinitionLanguage.g:3968:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalDefinitionLanguage.g:3987:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // InternalDefinitionLanguage.g:3987:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // InternalDefinitionLanguage.g:3968:11: ( '^' )?
+            // InternalDefinitionLanguage.g:3987:11: ( '^' )?
             int alt11=2;
             int LA11_0 = input.LA(1);
 
@@ -2185,7 +2185,7 @@ public class InternalDefinitionLanguageLexer extends Lexer {
             }
             switch (alt11) {
                 case 1 :
-                    // InternalDefinitionLanguage.g:3968:11: '^'
+                    // InternalDefinitionLanguage.g:3987:11: '^'
                     {
                     match('^'); 
 
@@ -2203,7 +2203,7 @@ public class InternalDefinitionLanguageLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // InternalDefinitionLanguage.g:3968:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalDefinitionLanguage.g:3987:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop12:
             do {
                 int alt12=2;
@@ -2252,12 +2252,12 @@ public class InternalDefinitionLanguageLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalDefinitionLanguage.g:3970:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // InternalDefinitionLanguage.g:3970:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // InternalDefinitionLanguage.g:3989:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // InternalDefinitionLanguage.g:3989:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // InternalDefinitionLanguage.g:3970:24: ( options {greedy=false; } : . )*
+            // InternalDefinitionLanguage.g:3989:24: ( options {greedy=false; } : . )*
             loop13:
             do {
                 int alt13=2;
@@ -2282,7 +2282,7 @@ public class InternalDefinitionLanguageLexer extends Lexer {
 
                 switch (alt13) {
             	case 1 :
-            	    // InternalDefinitionLanguage.g:3970:52: .
+            	    // InternalDefinitionLanguage.g:3989:52: .
             	    {
             	    matchAny(); 
 
@@ -2312,12 +2312,12 @@ public class InternalDefinitionLanguageLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalDefinitionLanguage.g:3972:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // InternalDefinitionLanguage.g:3972:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // InternalDefinitionLanguage.g:3991:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // InternalDefinitionLanguage.g:3991:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // InternalDefinitionLanguage.g:3972:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // InternalDefinitionLanguage.g:3991:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop14:
             do {
                 int alt14=2;
@@ -2330,7 +2330,7 @@ public class InternalDefinitionLanguageLexer extends Lexer {
 
                 switch (alt14) {
             	case 1 :
-            	    // InternalDefinitionLanguage.g:3972:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // InternalDefinitionLanguage.g:3991:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -2350,7 +2350,7 @@ public class InternalDefinitionLanguageLexer extends Lexer {
                 }
             } while (true);
 
-            // InternalDefinitionLanguage.g:3972:40: ( ( '\\r' )? '\\n' )?
+            // InternalDefinitionLanguage.g:3991:40: ( ( '\\r' )? '\\n' )?
             int alt16=2;
             int LA16_0 = input.LA(1);
 
@@ -2359,9 +2359,9 @@ public class InternalDefinitionLanguageLexer extends Lexer {
             }
             switch (alt16) {
                 case 1 :
-                    // InternalDefinitionLanguage.g:3972:41: ( '\\r' )? '\\n'
+                    // InternalDefinitionLanguage.g:3991:41: ( '\\r' )? '\\n'
                     {
-                    // InternalDefinitionLanguage.g:3972:41: ( '\\r' )?
+                    // InternalDefinitionLanguage.g:3991:41: ( '\\r' )?
                     int alt15=2;
                     int LA15_0 = input.LA(1);
 
@@ -2370,7 +2370,7 @@ public class InternalDefinitionLanguageLexer extends Lexer {
                     }
                     switch (alt15) {
                         case 1 :
-                            // InternalDefinitionLanguage.g:3972:41: '\\r'
+                            // InternalDefinitionLanguage.g:3991:41: '\\r'
                             {
                             match('\r'); 
 
@@ -2402,10 +2402,10 @@ public class InternalDefinitionLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalDefinitionLanguage.g:3974:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // InternalDefinitionLanguage.g:3974:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalDefinitionLanguage.g:3993:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // InternalDefinitionLanguage.g:3993:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // InternalDefinitionLanguage.g:3974:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalDefinitionLanguage.g:3993:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt17=0;
             loop17:
             do {
@@ -2459,8 +2459,8 @@ public class InternalDefinitionLanguageLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalDefinitionLanguage.g:3976:16: ( . )
-            // InternalDefinitionLanguage.g:3976:18: .
+            // InternalDefinitionLanguage.g:3995:16: ( . )
+            // InternalDefinitionLanguage.g:3995:18: .
             {
             matchAny(); 
 
@@ -3159,7 +3159,7 @@ public class InternalDefinitionLanguageLexer extends Lexer {
             this.transition = DFA8_transition;
         }
         public String getDescription() {
-            return "3962:15: ( ( RULE_DIGIT )+ RULE_EXPONENT | ( RULE_DIGIT )+ '.' ( RULE_DIGIT )* ( RULE_EXPONENT )? )";
+            return "3981:15: ( ( RULE_DIGIT )+ RULE_EXPONENT | ( RULE_DIGIT )+ '.' ( RULE_DIGIT )* ( RULE_EXPONENT )? )";
         }
     }
     static final String DFA18_eotS =

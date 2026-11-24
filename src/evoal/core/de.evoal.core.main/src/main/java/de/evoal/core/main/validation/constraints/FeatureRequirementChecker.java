@@ -1,5 +1,6 @@
 package de.evoal.core.main.validation.constraints;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,7 +20,9 @@ import de.evoal.models.core.exceptions.InitializationException;
 /**
  * Base class of the checkers of the {@code FeatureRequirement}s ({@code @RequiresScale},
  *   {@code @RequiresRepresentation}, {@code @RequiresBoundaries}): the path of {@code features}
- *   is evaluated from the annotated instance, and every selected data is checked.
+ *   is evaluated from the annotated instance, and every selected data is checked. On a
+ *   parameter of a {@code def}, the path starts at the data of the argument, e.g.
+ *   {@code features := path "."} for the data itself.
  */
 abstract class FeatureRequirementChecker implements ConstraintCheckerComponent {
     /**
@@ -44,13 +47,16 @@ abstract class FeatureRequirementChecker implements ConstraintCheckerComponent {
 
     @Override
     public ConstraintCheck check(final Object value) {
-        if(!(value instanceof Instance instance)) {
+        final List<EObject> starts = startsOf(value);
+        if(starts.isEmpty()) {
             return ConstraintCheck.notCheckable("it is only known during the run");
         }
 
-        final List<Object> selection;
+        final List<Object> selection = new ArrayList<>();
         try {
-            selection = PathEvaluator.evaluate(features, instance);
+            for(final EObject start : starts) {
+                selection.addAll(PathEvaluator.evaluate(features, start));
+            }
         } catch(final PathException e) {
             return ConstraintCheck.violated("has an invalid 'features' path: " + e.getMessage());
         }
@@ -67,6 +73,21 @@ abstract class FeatureRequirementChecker implements ConstraintCheckerComponent {
         }
 
         return ConstraintCheck.satisfied();
+    }
+
+    /**
+     * @return Where the path starts: the annotated instance, or for an annotation on a
+     *   parameter of a {@code def} the data of the argument (each element for an array of data);
+     *   empty if the value is only known during the run.
+     */
+    private static List<EObject> startsOf(final Object value) {
+        return switch(value) {
+            case Instance instance -> List.of(instance);
+            case DataDescription data -> List.of(data);
+            case List<?> elements when !elements.isEmpty() && elements.stream().allMatch(DataDescription.class::isInstance) ->
+                    elements.stream().map(EObject.class::cast).toList();
+            case null, default -> List.of();
+        };
     }
 
     /**

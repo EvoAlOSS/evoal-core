@@ -390,14 +390,8 @@ public class ConstraintCompilerTest {
             Assertions.assertEquals(Map.of(feature(searchClass, "x0"), 0.25), constraint.deviations());
         }
 
-        @Test
-        public void aNegativeDeviationIsRejected() {
-            // given
-            module.getConstraints().add(call("standard-deviation", data(x0), number(-0.25)));
-
-            // then
-            Assertions.assertThrows(IllegalArgumentException.class, ConstraintCompilerTest.this::compile);
-        }
+        // a negative deviation is rejected when the DDL file is loaded, by the annotation of
+        // the parameter 'deviation' (constraint.dl)
     }
 
     @Nested

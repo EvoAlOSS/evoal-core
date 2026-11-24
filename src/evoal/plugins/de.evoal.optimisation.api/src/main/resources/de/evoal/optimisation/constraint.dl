@@ -12,25 +12,29 @@ module de.evoal.optimisation.constraint {
      *   <li>Its standard deviation, not negative.</li>
      * </ol>
      */
-    def void 'standard-deviation'(data reference, real deviation);
+    def void 'standard-deviation'(data reference,
+                                  @LowerBoundary { boundary := 0.0; inclusive := true; } real deviation);
 
     /**
      * Declares the correlation of two search features. Correlation-aware operators of the
      *   evolutionary algorithm ('correlation-aware-mutation', 'linkage-crossover') use it,
      *   and 'correlation-statistics' compares it with the population. The coefficient is
      *   the Pearson correlation (Pearson 1896) for cardinal and quotient features and the
-     *   Spearman rank correlation (Spearman 1904) if a feature is ordinal; a correlation
-     *   with a nominal feature is skipped.
+     *   Spearman rank correlation (Spearman 1904) if a feature is ordinal. Nominal features
+     *   have no order, so a correlation with a nominal feature is an error.
      *
      * <b>Parameters:</b>
      * <ol>
-     *   <li>The first feature.</li>
-     *   <li>The second feature, not the first one.</li>
+     *   <li>The first feature, at least ordinal.</li>
+     *   <li>The second feature, at least ordinal and not the first one.</li>
      *   <li>The correlation coefficient, in [-1, 1].</li>
      * </ol>
      */
     @Literature { keys := ["pearson1896mathematical", "spearman1904proof"]; }
-    def void correlation(data feature1, data feature2, real coefficient);
+    def void correlation(@RequiresScale { minimum := 'measurement-scale.ordinal'; features := path "."; } data feature1,
+                         @RequiresScale { minimum := 'measurement-scale.ordinal'; features := path "."; } data feature2,
+                         @LowerBoundary { boundary := -1.0; inclusive := true; }
+                         @UpperBoundary { boundary := 1.0; inclusive := true; } real coefficient);
 
     /**
      * Declares the correlation of two search features that applies only while both lie in
@@ -38,15 +42,20 @@ module de.evoal.optimisation.constraint {
      *
      * <b>Parameters:</b>
      * <ol>
-     *   <li>The first feature.</li>
+     *   <li>The first feature, at least ordinal.</li>
      *   <li>Its range, {@code range(lower, upper)}, both bounds included.</li>
-     *   <li>The second feature, not the first one.</li>
+     *   <li>The second feature, at least ordinal and not the first one.</li>
      *   <li>Its range, {@code range(lower, upper)}.</li>
      *   <li>The correlation coefficient, in [-1, 1].</li>
      * </ol>
      */
     @Literature { keys := ["pearson1896mathematical", "spearman1904proof"]; }
-    def void 'ranged-correlation'(data feature1, expression range1, data feature2, expression range2, real coefficient);
+    def void 'ranged-correlation'(@RequiresScale { minimum := 'measurement-scale.ordinal'; features := path "."; } data feature1,
+                                  expression range1,
+                                  @RequiresScale { minimum := 'measurement-scale.ordinal'; features := path "."; } data feature2,
+                                  expression range2,
+                                  @LowerBoundary { boundary := -1.0; inclusive := true; }
+                                  @UpperBoundary { boundary := 1.0; inclusive := true; } real coefficient);
 
     /**
      * Declares a building block, a group of search features that interact, i.e. the
@@ -64,7 +73,7 @@ module de.evoal.optimisation.constraint {
      * </ol>
      */
     @Literature { keys := ["harik1997learning"]; }
-    def void 'building-block'(array data features);
+    def void 'building-block'(@MinimumNumberOfElements { bound := 2; } array data features);
 
     /**
      * Declares a constraint of the optimisation problem, a comparison of two arithmetic

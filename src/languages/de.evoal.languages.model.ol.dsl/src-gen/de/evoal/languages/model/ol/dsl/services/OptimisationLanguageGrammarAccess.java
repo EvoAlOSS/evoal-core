@@ -1299,6 +1299,7 @@ public class OptimisationLanguageGrammarAccess extends AbstractElementFinder.Abs
 	}
 	
 	//ParameterRule returns Parameter:
+	//    (constraints += ConstraintRule)*
 	//    type = TypeRule name = StringOrId
 	//;
 	public BaseLanguageGrammarAccess.ParameterRuleElements getParameterRuleAccess() {

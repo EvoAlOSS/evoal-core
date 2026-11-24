@@ -1,15 +1,17 @@
+import "definitions" from 'de.evoal.core.constraints';
+
 module de.evoal.surrogate.adaption.density.ml {
 	/**
 	 * Measures density information using kernel density.
-	 * 
-	 * @param bandwith Width for density calculation.
+	 *
+	 * @param bandwith Width for density calculation, greater than 0.
 	 */
-	def void 'kernel-density-estimation'(real bandwidth);
-	
+	def void 'kernel-density-estimation'(@LowerBoundary { boundary := 0.0; inclusive := false; } real bandwidth);
+
 	/**
 	 * Measures density information using a gaussian kernel.
-	 * 
-	 * @param bandwith Width for density calculation.
+	 *
+	 * @param bandwith Width for density calculation, greater than 0.
 	 */
-	def void 'gaussian-density-estimation'(real bandwidth);
+	def void 'gaussian-density-estimation'(@LowerBoundary { boundary := 0.0; inclusive := false; } real bandwidth);
 }

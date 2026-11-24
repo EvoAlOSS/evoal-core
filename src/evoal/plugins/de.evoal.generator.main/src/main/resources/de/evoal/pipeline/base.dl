@@ -50,10 +50,10 @@ module 'de.evoal.pipeline.base' {
      * Function for calling the pipeline-based generator.
      *
      * @param filename The filename to write.
-     * @param count The number of data points to write.
+     * @param count The number of data points to write, not negative.
      * @param pipelines The pipelines to execute for data generation.
      */
-    def void generate(string filename, int count, array literal pipelines);
+    def void generate(string filename, @LowerBoundary { boundary := 0; inclusive := true; } int count, array literal pipelines);
 
     /**
      * Executes a pipeline once: its first step is the source (e.g. 'reader'), and the

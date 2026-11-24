@@ -22293,7 +22293,7 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
             // InternalOptimisationLanguage.g:6715:1: ( rule__ParameterRule__Group__0__Impl rule__ParameterRule__Group__1 )
             // InternalOptimisationLanguage.g:6716:2: rule__ParameterRule__Group__0__Impl rule__ParameterRule__Group__1
             {
-            pushFollow(FOLLOW_5);
+            pushFollow(FOLLOW_52);
             rule__ParameterRule__Group__0__Impl();
 
             state._fsp--;
@@ -22322,34 +22322,52 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__ParameterRule__Group__0__Impl"
-    // InternalOptimisationLanguage.g:6723:1: rule__ParameterRule__Group__0__Impl : ( ( rule__ParameterRule__TypeAssignment_0 ) ) ;
+    // InternalOptimisationLanguage.g:6723:1: rule__ParameterRule__Group__0__Impl : ( ( rule__ParameterRule__ConstraintsAssignment_0 )* ) ;
     public final void rule__ParameterRule__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:6727:1: ( ( ( rule__ParameterRule__TypeAssignment_0 ) ) )
-            // InternalOptimisationLanguage.g:6728:1: ( ( rule__ParameterRule__TypeAssignment_0 ) )
+            // InternalOptimisationLanguage.g:6727:1: ( ( ( rule__ParameterRule__ConstraintsAssignment_0 )* ) )
+            // InternalOptimisationLanguage.g:6728:1: ( ( rule__ParameterRule__ConstraintsAssignment_0 )* )
             {
-            // InternalOptimisationLanguage.g:6728:1: ( ( rule__ParameterRule__TypeAssignment_0 ) )
-            // InternalOptimisationLanguage.g:6729:2: ( rule__ParameterRule__TypeAssignment_0 )
+            // InternalOptimisationLanguage.g:6728:1: ( ( rule__ParameterRule__ConstraintsAssignment_0 )* )
+            // InternalOptimisationLanguage.g:6729:2: ( rule__ParameterRule__ConstraintsAssignment_0 )*
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getParameterRuleAccess().getTypeAssignment_0()); 
+               before(grammarAccess.getParameterRuleAccess().getConstraintsAssignment_0()); 
             }
-            // InternalOptimisationLanguage.g:6730:2: ( rule__ParameterRule__TypeAssignment_0 )
-            // InternalOptimisationLanguage.g:6730:3: rule__ParameterRule__TypeAssignment_0
-            {
-            pushFollow(FOLLOW_2);
-            rule__ParameterRule__TypeAssignment_0();
+            // InternalOptimisationLanguage.g:6730:2: ( rule__ParameterRule__ConstraintsAssignment_0 )*
+            loop45:
+            do {
+                int alt45=2;
+                int LA45_0 = input.LA(1);
 
-            state._fsp--;
-            if (state.failed) return ;
+                if ( (LA45_0==80) ) {
+                    alt45=1;
+                }
 
-            }
+
+                switch (alt45) {
+            	case 1 :
+            	    // InternalOptimisationLanguage.g:6730:3: rule__ParameterRule__ConstraintsAssignment_0
+            	    {
+            	    pushFollow(FOLLOW_50);
+            	    rule__ParameterRule__ConstraintsAssignment_0();
+
+            	    state._fsp--;
+            	    if (state.failed) return ;
+
+            	    }
+            	    break;
+
+            	default :
+            	    break loop45;
+                }
+            } while (true);
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getParameterRuleAccess().getTypeAssignment_0()); 
+               after(grammarAccess.getParameterRuleAccess().getConstraintsAssignment_0()); 
             }
 
             }
@@ -22373,17 +22391,22 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__ParameterRule__Group__1"
-    // InternalOptimisationLanguage.g:6738:1: rule__ParameterRule__Group__1 : rule__ParameterRule__Group__1__Impl ;
+    // InternalOptimisationLanguage.g:6738:1: rule__ParameterRule__Group__1 : rule__ParameterRule__Group__1__Impl rule__ParameterRule__Group__2 ;
     public final void rule__ParameterRule__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:6742:1: ( rule__ParameterRule__Group__1__Impl )
-            // InternalOptimisationLanguage.g:6743:2: rule__ParameterRule__Group__1__Impl
+            // InternalOptimisationLanguage.g:6742:1: ( rule__ParameterRule__Group__1__Impl rule__ParameterRule__Group__2 )
+            // InternalOptimisationLanguage.g:6743:2: rule__ParameterRule__Group__1__Impl rule__ParameterRule__Group__2
             {
-            pushFollow(FOLLOW_2);
+            pushFollow(FOLLOW_5);
             rule__ParameterRule__Group__1__Impl();
+
+            state._fsp--;
+            if (state.failed) return ;
+            pushFollow(FOLLOW_2);
+            rule__ParameterRule__Group__2();
 
             state._fsp--;
             if (state.failed) return ;
@@ -22406,26 +22429,26 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__ParameterRule__Group__1__Impl"
-    // InternalOptimisationLanguage.g:6749:1: rule__ParameterRule__Group__1__Impl : ( ( rule__ParameterRule__NameAssignment_1 ) ) ;
+    // InternalOptimisationLanguage.g:6750:1: rule__ParameterRule__Group__1__Impl : ( ( rule__ParameterRule__TypeAssignment_1 ) ) ;
     public final void rule__ParameterRule__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:6753:1: ( ( ( rule__ParameterRule__NameAssignment_1 ) ) )
-            // InternalOptimisationLanguage.g:6754:1: ( ( rule__ParameterRule__NameAssignment_1 ) )
+            // InternalOptimisationLanguage.g:6754:1: ( ( ( rule__ParameterRule__TypeAssignment_1 ) ) )
+            // InternalOptimisationLanguage.g:6755:1: ( ( rule__ParameterRule__TypeAssignment_1 ) )
             {
-            // InternalOptimisationLanguage.g:6754:1: ( ( rule__ParameterRule__NameAssignment_1 ) )
-            // InternalOptimisationLanguage.g:6755:2: ( rule__ParameterRule__NameAssignment_1 )
+            // InternalOptimisationLanguage.g:6755:1: ( ( rule__ParameterRule__TypeAssignment_1 ) )
+            // InternalOptimisationLanguage.g:6756:2: ( rule__ParameterRule__TypeAssignment_1 )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getParameterRuleAccess().getNameAssignment_1()); 
+               before(grammarAccess.getParameterRuleAccess().getTypeAssignment_1()); 
             }
-            // InternalOptimisationLanguage.g:6756:2: ( rule__ParameterRule__NameAssignment_1 )
-            // InternalOptimisationLanguage.g:6756:3: rule__ParameterRule__NameAssignment_1
+            // InternalOptimisationLanguage.g:6757:2: ( rule__ParameterRule__TypeAssignment_1 )
+            // InternalOptimisationLanguage.g:6757:3: rule__ParameterRule__TypeAssignment_1
             {
             pushFollow(FOLLOW_2);
-            rule__ParameterRule__NameAssignment_1();
+            rule__ParameterRule__TypeAssignment_1();
 
             state._fsp--;
             if (state.failed) return ;
@@ -22433,7 +22456,7 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getParameterRuleAccess().getNameAssignment_1()); 
+               after(grammarAccess.getParameterRuleAccess().getTypeAssignment_1()); 
             }
 
             }
@@ -22456,15 +22479,99 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
     // $ANTLR end "rule__ParameterRule__Group__1__Impl"
 
 
+    // $ANTLR start "rule__ParameterRule__Group__2"
+    // InternalOptimisationLanguage.g:6765:1: rule__ParameterRule__Group__2 : rule__ParameterRule__Group__2__Impl ;
+    public final void rule__ParameterRule__Group__2() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalOptimisationLanguage.g:6769:1: ( rule__ParameterRule__Group__2__Impl )
+            // InternalOptimisationLanguage.g:6770:2: rule__ParameterRule__Group__2__Impl
+            {
+            pushFollow(FOLLOW_2);
+            rule__ParameterRule__Group__2__Impl();
+
+            state._fsp--;
+            if (state.failed) return ;
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__ParameterRule__Group__2"
+
+
+    // $ANTLR start "rule__ParameterRule__Group__2__Impl"
+    // InternalOptimisationLanguage.g:6776:1: rule__ParameterRule__Group__2__Impl : ( ( rule__ParameterRule__NameAssignment_2 ) ) ;
+    public final void rule__ParameterRule__Group__2__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalOptimisationLanguage.g:6780:1: ( ( ( rule__ParameterRule__NameAssignment_2 ) ) )
+            // InternalOptimisationLanguage.g:6781:1: ( ( rule__ParameterRule__NameAssignment_2 ) )
+            {
+            // InternalOptimisationLanguage.g:6781:1: ( ( rule__ParameterRule__NameAssignment_2 ) )
+            // InternalOptimisationLanguage.g:6782:2: ( rule__ParameterRule__NameAssignment_2 )
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getParameterRuleAccess().getNameAssignment_2()); 
+            }
+            // InternalOptimisationLanguage.g:6783:2: ( rule__ParameterRule__NameAssignment_2 )
+            // InternalOptimisationLanguage.g:6783:3: rule__ParameterRule__NameAssignment_2
+            {
+            pushFollow(FOLLOW_2);
+            rule__ParameterRule__NameAssignment_2();
+
+            state._fsp--;
+            if (state.failed) return ;
+
+            }
+
+            if ( state.backtracking==0 ) {
+               after(grammarAccess.getParameterRuleAccess().getNameAssignment_2()); 
+            }
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__ParameterRule__Group__2__Impl"
+
+
     // $ANTLR start "rule__ImportRule__Group__0"
-    // InternalOptimisationLanguage.g:6765:1: rule__ImportRule__Group__0 : rule__ImportRule__Group__0__Impl rule__ImportRule__Group__1 ;
+    // InternalOptimisationLanguage.g:6792:1: rule__ImportRule__Group__0 : rule__ImportRule__Group__0__Impl rule__ImportRule__Group__1 ;
     public final void rule__ImportRule__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:6769:1: ( rule__ImportRule__Group__0__Impl rule__ImportRule__Group__1 )
-            // InternalOptimisationLanguage.g:6770:2: rule__ImportRule__Group__0__Impl rule__ImportRule__Group__1
+            // InternalOptimisationLanguage.g:6796:1: ( rule__ImportRule__Group__0__Impl rule__ImportRule__Group__1 )
+            // InternalOptimisationLanguage.g:6797:2: rule__ImportRule__Group__0__Impl rule__ImportRule__Group__1
             {
             pushFollow(FOLLOW_42);
             rule__ImportRule__Group__0__Impl();
@@ -22495,17 +22602,17 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__ImportRule__Group__0__Impl"
-    // InternalOptimisationLanguage.g:6777:1: rule__ImportRule__Group__0__Impl : ( 'import' ) ;
+    // InternalOptimisationLanguage.g:6804:1: rule__ImportRule__Group__0__Impl : ( 'import' ) ;
     public final void rule__ImportRule__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:6781:1: ( ( 'import' ) )
-            // InternalOptimisationLanguage.g:6782:1: ( 'import' )
+            // InternalOptimisationLanguage.g:6808:1: ( ( 'import' ) )
+            // InternalOptimisationLanguage.g:6809:1: ( 'import' )
             {
-            // InternalOptimisationLanguage.g:6782:1: ( 'import' )
-            // InternalOptimisationLanguage.g:6783:2: 'import'
+            // InternalOptimisationLanguage.g:6809:1: ( 'import' )
+            // InternalOptimisationLanguage.g:6810:2: 'import'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getImportRuleAccess().getImportKeyword_0()); 
@@ -22536,14 +22643,14 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__ImportRule__Group__1"
-    // InternalOptimisationLanguage.g:6792:1: rule__ImportRule__Group__1 : rule__ImportRule__Group__1__Impl rule__ImportRule__Group__2 ;
+    // InternalOptimisationLanguage.g:6819:1: rule__ImportRule__Group__1 : rule__ImportRule__Group__1__Impl rule__ImportRule__Group__2 ;
     public final void rule__ImportRule__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:6796:1: ( rule__ImportRule__Group__1__Impl rule__ImportRule__Group__2 )
-            // InternalOptimisationLanguage.g:6797:2: rule__ImportRule__Group__1__Impl rule__ImportRule__Group__2
+            // InternalOptimisationLanguage.g:6823:1: ( rule__ImportRule__Group__1__Impl rule__ImportRule__Group__2 )
+            // InternalOptimisationLanguage.g:6824:2: rule__ImportRule__Group__1__Impl rule__ImportRule__Group__2
             {
             pushFollow(FOLLOW_62);
             rule__ImportRule__Group__1__Impl();
@@ -22574,23 +22681,23 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__ImportRule__Group__1__Impl"
-    // InternalOptimisationLanguage.g:6804:1: rule__ImportRule__Group__1__Impl : ( ( rule__ImportRule__LanguageAssignment_1 ) ) ;
+    // InternalOptimisationLanguage.g:6831:1: rule__ImportRule__Group__1__Impl : ( ( rule__ImportRule__LanguageAssignment_1 ) ) ;
     public final void rule__ImportRule__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:6808:1: ( ( ( rule__ImportRule__LanguageAssignment_1 ) ) )
-            // InternalOptimisationLanguage.g:6809:1: ( ( rule__ImportRule__LanguageAssignment_1 ) )
+            // InternalOptimisationLanguage.g:6835:1: ( ( ( rule__ImportRule__LanguageAssignment_1 ) ) )
+            // InternalOptimisationLanguage.g:6836:1: ( ( rule__ImportRule__LanguageAssignment_1 ) )
             {
-            // InternalOptimisationLanguage.g:6809:1: ( ( rule__ImportRule__LanguageAssignment_1 ) )
-            // InternalOptimisationLanguage.g:6810:2: ( rule__ImportRule__LanguageAssignment_1 )
+            // InternalOptimisationLanguage.g:6836:1: ( ( rule__ImportRule__LanguageAssignment_1 ) )
+            // InternalOptimisationLanguage.g:6837:2: ( rule__ImportRule__LanguageAssignment_1 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getImportRuleAccess().getLanguageAssignment_1()); 
             }
-            // InternalOptimisationLanguage.g:6811:2: ( rule__ImportRule__LanguageAssignment_1 )
-            // InternalOptimisationLanguage.g:6811:3: rule__ImportRule__LanguageAssignment_1
+            // InternalOptimisationLanguage.g:6838:2: ( rule__ImportRule__LanguageAssignment_1 )
+            // InternalOptimisationLanguage.g:6838:3: rule__ImportRule__LanguageAssignment_1
             {
             pushFollow(FOLLOW_2);
             rule__ImportRule__LanguageAssignment_1();
@@ -22625,14 +22732,14 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__ImportRule__Group__2"
-    // InternalOptimisationLanguage.g:6819:1: rule__ImportRule__Group__2 : rule__ImportRule__Group__2__Impl rule__ImportRule__Group__3 ;
+    // InternalOptimisationLanguage.g:6846:1: rule__ImportRule__Group__2 : rule__ImportRule__Group__2__Impl rule__ImportRule__Group__3 ;
     public final void rule__ImportRule__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:6823:1: ( rule__ImportRule__Group__2__Impl rule__ImportRule__Group__3 )
-            // InternalOptimisationLanguage.g:6824:2: rule__ImportRule__Group__2__Impl rule__ImportRule__Group__3
+            // InternalOptimisationLanguage.g:6850:1: ( rule__ImportRule__Group__2__Impl rule__ImportRule__Group__3 )
+            // InternalOptimisationLanguage.g:6851:2: rule__ImportRule__Group__2__Impl rule__ImportRule__Group__3
             {
             pushFollow(FOLLOW_5);
             rule__ImportRule__Group__2__Impl();
@@ -22663,17 +22770,17 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__ImportRule__Group__2__Impl"
-    // InternalOptimisationLanguage.g:6831:1: rule__ImportRule__Group__2__Impl : ( 'from' ) ;
+    // InternalOptimisationLanguage.g:6858:1: rule__ImportRule__Group__2__Impl : ( 'from' ) ;
     public final void rule__ImportRule__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:6835:1: ( ( 'from' ) )
-            // InternalOptimisationLanguage.g:6836:1: ( 'from' )
+            // InternalOptimisationLanguage.g:6862:1: ( ( 'from' ) )
+            // InternalOptimisationLanguage.g:6863:1: ( 'from' )
             {
-            // InternalOptimisationLanguage.g:6836:1: ( 'from' )
-            // InternalOptimisationLanguage.g:6837:2: 'from'
+            // InternalOptimisationLanguage.g:6863:1: ( 'from' )
+            // InternalOptimisationLanguage.g:6864:2: 'from'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getImportRuleAccess().getFromKeyword_2()); 
@@ -22704,14 +22811,14 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__ImportRule__Group__3"
-    // InternalOptimisationLanguage.g:6846:1: rule__ImportRule__Group__3 : rule__ImportRule__Group__3__Impl rule__ImportRule__Group__4 ;
+    // InternalOptimisationLanguage.g:6873:1: rule__ImportRule__Group__3 : rule__ImportRule__Group__3__Impl rule__ImportRule__Group__4 ;
     public final void rule__ImportRule__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:6850:1: ( rule__ImportRule__Group__3__Impl rule__ImportRule__Group__4 )
-            // InternalOptimisationLanguage.g:6851:2: rule__ImportRule__Group__3__Impl rule__ImportRule__Group__4
+            // InternalOptimisationLanguage.g:6877:1: ( rule__ImportRule__Group__3__Impl rule__ImportRule__Group__4 )
+            // InternalOptimisationLanguage.g:6878:2: rule__ImportRule__Group__3__Impl rule__ImportRule__Group__4
             {
             pushFollow(FOLLOW_24);
             rule__ImportRule__Group__3__Impl();
@@ -22742,23 +22849,23 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__ImportRule__Group__3__Impl"
-    // InternalOptimisationLanguage.g:6858:1: rule__ImportRule__Group__3__Impl : ( ( rule__ImportRule__ImportedNamespaceAssignment_3 ) ) ;
+    // InternalOptimisationLanguage.g:6885:1: rule__ImportRule__Group__3__Impl : ( ( rule__ImportRule__ImportedNamespaceAssignment_3 ) ) ;
     public final void rule__ImportRule__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:6862:1: ( ( ( rule__ImportRule__ImportedNamespaceAssignment_3 ) ) )
-            // InternalOptimisationLanguage.g:6863:1: ( ( rule__ImportRule__ImportedNamespaceAssignment_3 ) )
+            // InternalOptimisationLanguage.g:6889:1: ( ( ( rule__ImportRule__ImportedNamespaceAssignment_3 ) ) )
+            // InternalOptimisationLanguage.g:6890:1: ( ( rule__ImportRule__ImportedNamespaceAssignment_3 ) )
             {
-            // InternalOptimisationLanguage.g:6863:1: ( ( rule__ImportRule__ImportedNamespaceAssignment_3 ) )
-            // InternalOptimisationLanguage.g:6864:2: ( rule__ImportRule__ImportedNamespaceAssignment_3 )
+            // InternalOptimisationLanguage.g:6890:1: ( ( rule__ImportRule__ImportedNamespaceAssignment_3 ) )
+            // InternalOptimisationLanguage.g:6891:2: ( rule__ImportRule__ImportedNamespaceAssignment_3 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getImportRuleAccess().getImportedNamespaceAssignment_3()); 
             }
-            // InternalOptimisationLanguage.g:6865:2: ( rule__ImportRule__ImportedNamespaceAssignment_3 )
-            // InternalOptimisationLanguage.g:6865:3: rule__ImportRule__ImportedNamespaceAssignment_3
+            // InternalOptimisationLanguage.g:6892:2: ( rule__ImportRule__ImportedNamespaceAssignment_3 )
+            // InternalOptimisationLanguage.g:6892:3: rule__ImportRule__ImportedNamespaceAssignment_3
             {
             pushFollow(FOLLOW_2);
             rule__ImportRule__ImportedNamespaceAssignment_3();
@@ -22793,14 +22900,14 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__ImportRule__Group__4"
-    // InternalOptimisationLanguage.g:6873:1: rule__ImportRule__Group__4 : rule__ImportRule__Group__4__Impl ;
+    // InternalOptimisationLanguage.g:6900:1: rule__ImportRule__Group__4 : rule__ImportRule__Group__4__Impl ;
     public final void rule__ImportRule__Group__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:6877:1: ( rule__ImportRule__Group__4__Impl )
-            // InternalOptimisationLanguage.g:6878:2: rule__ImportRule__Group__4__Impl
+            // InternalOptimisationLanguage.g:6904:1: ( rule__ImportRule__Group__4__Impl )
+            // InternalOptimisationLanguage.g:6905:2: rule__ImportRule__Group__4__Impl
             {
             pushFollow(FOLLOW_2);
             rule__ImportRule__Group__4__Impl();
@@ -22826,17 +22933,17 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__ImportRule__Group__4__Impl"
-    // InternalOptimisationLanguage.g:6884:1: rule__ImportRule__Group__4__Impl : ( ';' ) ;
+    // InternalOptimisationLanguage.g:6911:1: rule__ImportRule__Group__4__Impl : ( ';' ) ;
     public final void rule__ImportRule__Group__4__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:6888:1: ( ( ';' ) )
-            // InternalOptimisationLanguage.g:6889:1: ( ';' )
+            // InternalOptimisationLanguage.g:6915:1: ( ( ';' ) )
+            // InternalOptimisationLanguage.g:6916:1: ( ';' )
             {
-            // InternalOptimisationLanguage.g:6889:1: ( ';' )
-            // InternalOptimisationLanguage.g:6890:2: ';'
+            // InternalOptimisationLanguage.g:6916:1: ( ';' )
+            // InternalOptimisationLanguage.g:6917:2: ';'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getImportRuleAccess().getSemicolonKeyword_4()); 
@@ -22867,14 +22974,14 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__QualifiedName__Group__0"
-    // InternalOptimisationLanguage.g:6900:1: rule__QualifiedName__Group__0 : rule__QualifiedName__Group__0__Impl rule__QualifiedName__Group__1 ;
+    // InternalOptimisationLanguage.g:6927:1: rule__QualifiedName__Group__0 : rule__QualifiedName__Group__0__Impl rule__QualifiedName__Group__1 ;
     public final void rule__QualifiedName__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:6904:1: ( rule__QualifiedName__Group__0__Impl rule__QualifiedName__Group__1 )
-            // InternalOptimisationLanguage.g:6905:2: rule__QualifiedName__Group__0__Impl rule__QualifiedName__Group__1
+            // InternalOptimisationLanguage.g:6931:1: ( rule__QualifiedName__Group__0__Impl rule__QualifiedName__Group__1 )
+            // InternalOptimisationLanguage.g:6932:2: rule__QualifiedName__Group__0__Impl rule__QualifiedName__Group__1
             {
             pushFollow(FOLLOW_18);
             rule__QualifiedName__Group__0__Impl();
@@ -22905,17 +23012,17 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__QualifiedName__Group__0__Impl"
-    // InternalOptimisationLanguage.g:6912:1: rule__QualifiedName__Group__0__Impl : ( ruleStringOrId ) ;
+    // InternalOptimisationLanguage.g:6939:1: rule__QualifiedName__Group__0__Impl : ( ruleStringOrId ) ;
     public final void rule__QualifiedName__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:6916:1: ( ( ruleStringOrId ) )
-            // InternalOptimisationLanguage.g:6917:1: ( ruleStringOrId )
+            // InternalOptimisationLanguage.g:6943:1: ( ( ruleStringOrId ) )
+            // InternalOptimisationLanguage.g:6944:1: ( ruleStringOrId )
             {
-            // InternalOptimisationLanguage.g:6917:1: ( ruleStringOrId )
-            // InternalOptimisationLanguage.g:6918:2: ruleStringOrId
+            // InternalOptimisationLanguage.g:6944:1: ( ruleStringOrId )
+            // InternalOptimisationLanguage.g:6945:2: ruleStringOrId
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getQualifiedNameAccess().getStringOrIdParserRuleCall_0()); 
@@ -22950,14 +23057,14 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__QualifiedName__Group__1"
-    // InternalOptimisationLanguage.g:6927:1: rule__QualifiedName__Group__1 : rule__QualifiedName__Group__1__Impl ;
+    // InternalOptimisationLanguage.g:6954:1: rule__QualifiedName__Group__1 : rule__QualifiedName__Group__1__Impl ;
     public final void rule__QualifiedName__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:6931:1: ( rule__QualifiedName__Group__1__Impl )
-            // InternalOptimisationLanguage.g:6932:2: rule__QualifiedName__Group__1__Impl
+            // InternalOptimisationLanguage.g:6958:1: ( rule__QualifiedName__Group__1__Impl )
+            // InternalOptimisationLanguage.g:6959:2: rule__QualifiedName__Group__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__QualifiedName__Group__1__Impl();
@@ -22983,44 +23090,44 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__QualifiedName__Group__1__Impl"
-    // InternalOptimisationLanguage.g:6938:1: rule__QualifiedName__Group__1__Impl : ( ( rule__QualifiedName__Group_1__0 )* ) ;
+    // InternalOptimisationLanguage.g:6965:1: rule__QualifiedName__Group__1__Impl : ( ( rule__QualifiedName__Group_1__0 )* ) ;
     public final void rule__QualifiedName__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:6942:1: ( ( ( rule__QualifiedName__Group_1__0 )* ) )
-            // InternalOptimisationLanguage.g:6943:1: ( ( rule__QualifiedName__Group_1__0 )* )
+            // InternalOptimisationLanguage.g:6969:1: ( ( ( rule__QualifiedName__Group_1__0 )* ) )
+            // InternalOptimisationLanguage.g:6970:1: ( ( rule__QualifiedName__Group_1__0 )* )
             {
-            // InternalOptimisationLanguage.g:6943:1: ( ( rule__QualifiedName__Group_1__0 )* )
-            // InternalOptimisationLanguage.g:6944:2: ( rule__QualifiedName__Group_1__0 )*
+            // InternalOptimisationLanguage.g:6970:1: ( ( rule__QualifiedName__Group_1__0 )* )
+            // InternalOptimisationLanguage.g:6971:2: ( rule__QualifiedName__Group_1__0 )*
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getQualifiedNameAccess().getGroup_1()); 
             }
-            // InternalOptimisationLanguage.g:6945:2: ( rule__QualifiedName__Group_1__0 )*
-            loop45:
+            // InternalOptimisationLanguage.g:6972:2: ( rule__QualifiedName__Group_1__0 )*
+            loop46:
             do {
-                int alt45=2;
-                int LA45_0 = input.LA(1);
+                int alt46=2;
+                int LA46_0 = input.LA(1);
 
-                if ( (LA45_0==58) ) {
-                    int LA45_2 = input.LA(2);
+                if ( (LA46_0==58) ) {
+                    int LA46_2 = input.LA(2);
 
-                    if ( (LA45_2==RULE_QUOTED_ID) ) {
-                        int LA45_3 = input.LA(3);
+                    if ( (LA46_2==RULE_QUOTED_ID) ) {
+                        int LA46_3 = input.LA(3);
 
-                        if ( (synpred86_InternalOptimisationLanguage()) ) {
-                            alt45=1;
+                        if ( (synpred87_InternalOptimisationLanguage()) ) {
+                            alt46=1;
                         }
 
 
                     }
-                    else if ( (LA45_2==RULE_ID) ) {
-                        int LA45_4 = input.LA(3);
+                    else if ( (LA46_2==RULE_ID) ) {
+                        int LA46_4 = input.LA(3);
 
-                        if ( (synpred86_InternalOptimisationLanguage()) ) {
-                            alt45=1;
+                        if ( (synpred87_InternalOptimisationLanguage()) ) {
+                            alt46=1;
                         }
 
 
@@ -23030,9 +23137,9 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
                 }
 
 
-                switch (alt45) {
+                switch (alt46) {
             	case 1 :
-            	    // InternalOptimisationLanguage.g:6945:3: rule__QualifiedName__Group_1__0
+            	    // InternalOptimisationLanguage.g:6972:3: rule__QualifiedName__Group_1__0
             	    {
             	    pushFollow(FOLLOW_46);
             	    rule__QualifiedName__Group_1__0();
@@ -23044,7 +23151,7 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
             	    break;
 
             	default :
-            	    break loop45;
+            	    break loop46;
                 }
             } while (true);
 
@@ -23073,14 +23180,14 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__QualifiedName__Group_1__0"
-    // InternalOptimisationLanguage.g:6954:1: rule__QualifiedName__Group_1__0 : rule__QualifiedName__Group_1__0__Impl rule__QualifiedName__Group_1__1 ;
+    // InternalOptimisationLanguage.g:6981:1: rule__QualifiedName__Group_1__0 : rule__QualifiedName__Group_1__0__Impl rule__QualifiedName__Group_1__1 ;
     public final void rule__QualifiedName__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:6958:1: ( rule__QualifiedName__Group_1__0__Impl rule__QualifiedName__Group_1__1 )
-            // InternalOptimisationLanguage.g:6959:2: rule__QualifiedName__Group_1__0__Impl rule__QualifiedName__Group_1__1
+            // InternalOptimisationLanguage.g:6985:1: ( rule__QualifiedName__Group_1__0__Impl rule__QualifiedName__Group_1__1 )
+            // InternalOptimisationLanguage.g:6986:2: rule__QualifiedName__Group_1__0__Impl rule__QualifiedName__Group_1__1
             {
             pushFollow(FOLLOW_5);
             rule__QualifiedName__Group_1__0__Impl();
@@ -23111,17 +23218,17 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__QualifiedName__Group_1__0__Impl"
-    // InternalOptimisationLanguage.g:6966:1: rule__QualifiedName__Group_1__0__Impl : ( '.' ) ;
+    // InternalOptimisationLanguage.g:6993:1: rule__QualifiedName__Group_1__0__Impl : ( '.' ) ;
     public final void rule__QualifiedName__Group_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:6970:1: ( ( '.' ) )
-            // InternalOptimisationLanguage.g:6971:1: ( '.' )
+            // InternalOptimisationLanguage.g:6997:1: ( ( '.' ) )
+            // InternalOptimisationLanguage.g:6998:1: ( '.' )
             {
-            // InternalOptimisationLanguage.g:6971:1: ( '.' )
-            // InternalOptimisationLanguage.g:6972:2: '.'
+            // InternalOptimisationLanguage.g:6998:1: ( '.' )
+            // InternalOptimisationLanguage.g:6999:2: '.'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getQualifiedNameAccess().getFullStopKeyword_1_0()); 
@@ -23152,14 +23259,14 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__QualifiedName__Group_1__1"
-    // InternalOptimisationLanguage.g:6981:1: rule__QualifiedName__Group_1__1 : rule__QualifiedName__Group_1__1__Impl ;
+    // InternalOptimisationLanguage.g:7008:1: rule__QualifiedName__Group_1__1 : rule__QualifiedName__Group_1__1__Impl ;
     public final void rule__QualifiedName__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:6985:1: ( rule__QualifiedName__Group_1__1__Impl )
-            // InternalOptimisationLanguage.g:6986:2: rule__QualifiedName__Group_1__1__Impl
+            // InternalOptimisationLanguage.g:7012:1: ( rule__QualifiedName__Group_1__1__Impl )
+            // InternalOptimisationLanguage.g:7013:2: rule__QualifiedName__Group_1__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__QualifiedName__Group_1__1__Impl();
@@ -23185,17 +23292,17 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__QualifiedName__Group_1__1__Impl"
-    // InternalOptimisationLanguage.g:6992:1: rule__QualifiedName__Group_1__1__Impl : ( ruleStringOrId ) ;
+    // InternalOptimisationLanguage.g:7019:1: rule__QualifiedName__Group_1__1__Impl : ( ruleStringOrId ) ;
     public final void rule__QualifiedName__Group_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:6996:1: ( ( ruleStringOrId ) )
-            // InternalOptimisationLanguage.g:6997:1: ( ruleStringOrId )
+            // InternalOptimisationLanguage.g:7023:1: ( ( ruleStringOrId ) )
+            // InternalOptimisationLanguage.g:7024:1: ( ruleStringOrId )
             {
-            // InternalOptimisationLanguage.g:6997:1: ( ruleStringOrId )
-            // InternalOptimisationLanguage.g:6998:2: ruleStringOrId
+            // InternalOptimisationLanguage.g:7024:1: ( ruleStringOrId )
+            // InternalOptimisationLanguage.g:7025:2: ruleStringOrId
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getQualifiedNameAccess().getStringOrIdParserRuleCall_1_1()); 
@@ -23230,17 +23337,17 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__OptimisationModelRule__ImportsAssignment_0"
-    // InternalOptimisationLanguage.g:7008:1: rule__OptimisationModelRule__ImportsAssignment_0 : ( ruleImportRule ) ;
+    // InternalOptimisationLanguage.g:7035:1: rule__OptimisationModelRule__ImportsAssignment_0 : ( ruleImportRule ) ;
     public final void rule__OptimisationModelRule__ImportsAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:7012:1: ( ( ruleImportRule ) )
-            // InternalOptimisationLanguage.g:7013:2: ( ruleImportRule )
+            // InternalOptimisationLanguage.g:7039:1: ( ( ruleImportRule ) )
+            // InternalOptimisationLanguage.g:7040:2: ( ruleImportRule )
             {
-            // InternalOptimisationLanguage.g:7013:2: ( ruleImportRule )
-            // InternalOptimisationLanguage.g:7014:3: ruleImportRule
+            // InternalOptimisationLanguage.g:7040:2: ( ruleImportRule )
+            // InternalOptimisationLanguage.g:7041:3: ruleImportRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getOptimisationModelRuleAccess().getImportsImportRuleParserRuleCall_0_0()); 
@@ -23275,17 +23382,17 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__OptimisationModelRule__NameAssignment_2"
-    // InternalOptimisationLanguage.g:7023:1: rule__OptimisationModelRule__NameAssignment_2 : ( ruleQualifiedName ) ;
+    // InternalOptimisationLanguage.g:7050:1: rule__OptimisationModelRule__NameAssignment_2 : ( ruleQualifiedName ) ;
     public final void rule__OptimisationModelRule__NameAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:7027:1: ( ( ruleQualifiedName ) )
-            // InternalOptimisationLanguage.g:7028:2: ( ruleQualifiedName )
+            // InternalOptimisationLanguage.g:7054:1: ( ( ruleQualifiedName ) )
+            // InternalOptimisationLanguage.g:7055:2: ( ruleQualifiedName )
             {
-            // InternalOptimisationLanguage.g:7028:2: ( ruleQualifiedName )
-            // InternalOptimisationLanguage.g:7029:3: ruleQualifiedName
+            // InternalOptimisationLanguage.g:7055:2: ( ruleQualifiedName )
+            // InternalOptimisationLanguage.g:7056:3: ruleQualifiedName
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getOptimisationModelRuleAccess().getNameQualifiedNameParserRuleCall_2_0()); 
@@ -23320,17 +23427,17 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__OptimisationModelRule__ProblemAssignment_4"
-    // InternalOptimisationLanguage.g:7038:1: rule__OptimisationModelRule__ProblemAssignment_4 : ( ruleProblemRule ) ;
+    // InternalOptimisationLanguage.g:7065:1: rule__OptimisationModelRule__ProblemAssignment_4 : ( ruleProblemRule ) ;
     public final void rule__OptimisationModelRule__ProblemAssignment_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:7042:1: ( ( ruleProblemRule ) )
-            // InternalOptimisationLanguage.g:7043:2: ( ruleProblemRule )
+            // InternalOptimisationLanguage.g:7069:1: ( ( ruleProblemRule ) )
+            // InternalOptimisationLanguage.g:7070:2: ( ruleProblemRule )
             {
-            // InternalOptimisationLanguage.g:7043:2: ( ruleProblemRule )
-            // InternalOptimisationLanguage.g:7044:3: ruleProblemRule
+            // InternalOptimisationLanguage.g:7070:2: ( ruleProblemRule )
+            // InternalOptimisationLanguage.g:7071:3: ruleProblemRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getOptimisationModelRuleAccess().getProblemProblemRuleParserRuleCall_4_0()); 
@@ -23365,17 +23472,17 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__OptimisationModelRule__AlgorithmAssignment_5"
-    // InternalOptimisationLanguage.g:7053:1: rule__OptimisationModelRule__AlgorithmAssignment_5 : ( ruleAlgorithmInstanceRule ) ;
+    // InternalOptimisationLanguage.g:7080:1: rule__OptimisationModelRule__AlgorithmAssignment_5 : ( ruleAlgorithmInstanceRule ) ;
     public final void rule__OptimisationModelRule__AlgorithmAssignment_5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:7057:1: ( ( ruleAlgorithmInstanceRule ) )
-            // InternalOptimisationLanguage.g:7058:2: ( ruleAlgorithmInstanceRule )
+            // InternalOptimisationLanguage.g:7084:1: ( ( ruleAlgorithmInstanceRule ) )
+            // InternalOptimisationLanguage.g:7085:2: ( ruleAlgorithmInstanceRule )
             {
-            // InternalOptimisationLanguage.g:7058:2: ( ruleAlgorithmInstanceRule )
-            // InternalOptimisationLanguage.g:7059:3: ruleAlgorithmInstanceRule
+            // InternalOptimisationLanguage.g:7085:2: ( ruleAlgorithmInstanceRule )
+            // InternalOptimisationLanguage.g:7086:3: ruleAlgorithmInstanceRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getOptimisationModelRuleAccess().getAlgorithmAlgorithmInstanceRuleParserRuleCall_5_0()); 
@@ -23410,23 +23517,23 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__ProblemRule__DefinitionAssignment_1"
-    // InternalOptimisationLanguage.g:7068:1: rule__ProblemRule__DefinitionAssignment_1 : ( ( ruleQualifiedName ) ) ;
+    // InternalOptimisationLanguage.g:7095:1: rule__ProblemRule__DefinitionAssignment_1 : ( ( ruleQualifiedName ) ) ;
     public final void rule__ProblemRule__DefinitionAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:7072:1: ( ( ( ruleQualifiedName ) ) )
-            // InternalOptimisationLanguage.g:7073:2: ( ( ruleQualifiedName ) )
+            // InternalOptimisationLanguage.g:7099:1: ( ( ( ruleQualifiedName ) ) )
+            // InternalOptimisationLanguage.g:7100:2: ( ( ruleQualifiedName ) )
             {
-            // InternalOptimisationLanguage.g:7073:2: ( ( ruleQualifiedName ) )
-            // InternalOptimisationLanguage.g:7074:3: ( ruleQualifiedName )
+            // InternalOptimisationLanguage.g:7100:2: ( ( ruleQualifiedName ) )
+            // InternalOptimisationLanguage.g:7101:3: ( ruleQualifiedName )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getProblemRuleAccess().getDefinitionClassDefinitionCrossReference_1_0()); 
             }
-            // InternalOptimisationLanguage.g:7075:3: ( ruleQualifiedName )
-            // InternalOptimisationLanguage.g:7076:4: ruleQualifiedName
+            // InternalOptimisationLanguage.g:7102:3: ( ruleQualifiedName )
+            // InternalOptimisationLanguage.g:7103:4: ruleQualifiedName
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getProblemRuleAccess().getDefinitionClassDefinitionQualifiedNameParserRuleCall_1_0_1()); 
@@ -23467,17 +23574,17 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__ProblemRule__NameAssignment_2"
-    // InternalOptimisationLanguage.g:7087:1: rule__ProblemRule__NameAssignment_2 : ( ruleStringOrId ) ;
+    // InternalOptimisationLanguage.g:7114:1: rule__ProblemRule__NameAssignment_2 : ( ruleStringOrId ) ;
     public final void rule__ProblemRule__NameAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:7091:1: ( ( ruleStringOrId ) )
-            // InternalOptimisationLanguage.g:7092:2: ( ruleStringOrId )
+            // InternalOptimisationLanguage.g:7118:1: ( ( ruleStringOrId ) )
+            // InternalOptimisationLanguage.g:7119:2: ( ruleStringOrId )
             {
-            // InternalOptimisationLanguage.g:7092:2: ( ruleStringOrId )
-            // InternalOptimisationLanguage.g:7093:3: ruleStringOrId
+            // InternalOptimisationLanguage.g:7119:2: ( ruleStringOrId )
+            // InternalOptimisationLanguage.g:7120:3: ruleStringOrId
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getProblemRuleAccess().getNameStringOrIdParserRuleCall_2_0()); 
@@ -23512,17 +23619,17 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__ProblemRule__SearchSpaceAssignment_6"
-    // InternalOptimisationLanguage.g:7102:1: rule__ProblemRule__SearchSpaceAssignment_6 : ( ruleTypeDefinitionReferenceRule ) ;
+    // InternalOptimisationLanguage.g:7129:1: rule__ProblemRule__SearchSpaceAssignment_6 : ( ruleTypeDefinitionReferenceRule ) ;
     public final void rule__ProblemRule__SearchSpaceAssignment_6() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:7106:1: ( ( ruleTypeDefinitionReferenceRule ) )
-            // InternalOptimisationLanguage.g:7107:2: ( ruleTypeDefinitionReferenceRule )
+            // InternalOptimisationLanguage.g:7133:1: ( ( ruleTypeDefinitionReferenceRule ) )
+            // InternalOptimisationLanguage.g:7134:2: ( ruleTypeDefinitionReferenceRule )
             {
-            // InternalOptimisationLanguage.g:7107:2: ( ruleTypeDefinitionReferenceRule )
-            // InternalOptimisationLanguage.g:7108:3: ruleTypeDefinitionReferenceRule
+            // InternalOptimisationLanguage.g:7134:2: ( ruleTypeDefinitionReferenceRule )
+            // InternalOptimisationLanguage.g:7135:3: ruleTypeDefinitionReferenceRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getProblemRuleAccess().getSearchSpaceTypeDefinitionReferenceRuleParserRuleCall_6_0()); 
@@ -23557,17 +23664,17 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__ProblemRule__SearchSpaceAssignment_7_1"
-    // InternalOptimisationLanguage.g:7117:1: rule__ProblemRule__SearchSpaceAssignment_7_1 : ( ruleTypeDefinitionReferenceRule ) ;
+    // InternalOptimisationLanguage.g:7144:1: rule__ProblemRule__SearchSpaceAssignment_7_1 : ( ruleTypeDefinitionReferenceRule ) ;
     public final void rule__ProblemRule__SearchSpaceAssignment_7_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:7121:1: ( ( ruleTypeDefinitionReferenceRule ) )
-            // InternalOptimisationLanguage.g:7122:2: ( ruleTypeDefinitionReferenceRule )
+            // InternalOptimisationLanguage.g:7148:1: ( ( ruleTypeDefinitionReferenceRule ) )
+            // InternalOptimisationLanguage.g:7149:2: ( ruleTypeDefinitionReferenceRule )
             {
-            // InternalOptimisationLanguage.g:7122:2: ( ruleTypeDefinitionReferenceRule )
-            // InternalOptimisationLanguage.g:7123:3: ruleTypeDefinitionReferenceRule
+            // InternalOptimisationLanguage.g:7149:2: ( ruleTypeDefinitionReferenceRule )
+            // InternalOptimisationLanguage.g:7150:3: ruleTypeDefinitionReferenceRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getProblemRuleAccess().getSearchSpaceTypeDefinitionReferenceRuleParserRuleCall_7_1_0()); 
@@ -23602,17 +23709,17 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__ProblemRule__OptimisationFunctionAssignment_10"
-    // InternalOptimisationLanguage.g:7132:1: rule__ProblemRule__OptimisationFunctionAssignment_10 : ( ruleInstanceLiteralRule ) ;
+    // InternalOptimisationLanguage.g:7159:1: rule__ProblemRule__OptimisationFunctionAssignment_10 : ( ruleInstanceLiteralRule ) ;
     public final void rule__ProblemRule__OptimisationFunctionAssignment_10() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:7136:1: ( ( ruleInstanceLiteralRule ) )
-            // InternalOptimisationLanguage.g:7137:2: ( ruleInstanceLiteralRule )
+            // InternalOptimisationLanguage.g:7163:1: ( ( ruleInstanceLiteralRule ) )
+            // InternalOptimisationLanguage.g:7164:2: ( ruleInstanceLiteralRule )
             {
-            // InternalOptimisationLanguage.g:7137:2: ( ruleInstanceLiteralRule )
-            // InternalOptimisationLanguage.g:7138:3: ruleInstanceLiteralRule
+            // InternalOptimisationLanguage.g:7164:2: ( ruleInstanceLiteralRule )
+            // InternalOptimisationLanguage.g:7165:3: ruleInstanceLiteralRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getProblemRuleAccess().getOptimisationFunctionInstanceLiteralRuleParserRuleCall_10_0()); 
@@ -23647,17 +23754,17 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__ProblemRule__OptimisationSpaceAssignment_12"
-    // InternalOptimisationLanguage.g:7147:1: rule__ProblemRule__OptimisationSpaceAssignment_12 : ( ruleOptimisationGoalRule ) ;
+    // InternalOptimisationLanguage.g:7174:1: rule__ProblemRule__OptimisationSpaceAssignment_12 : ( ruleOptimisationGoalRule ) ;
     public final void rule__ProblemRule__OptimisationSpaceAssignment_12() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:7151:1: ( ( ruleOptimisationGoalRule ) )
-            // InternalOptimisationLanguage.g:7152:2: ( ruleOptimisationGoalRule )
+            // InternalOptimisationLanguage.g:7178:1: ( ( ruleOptimisationGoalRule ) )
+            // InternalOptimisationLanguage.g:7179:2: ( ruleOptimisationGoalRule )
             {
-            // InternalOptimisationLanguage.g:7152:2: ( ruleOptimisationGoalRule )
-            // InternalOptimisationLanguage.g:7153:3: ruleOptimisationGoalRule
+            // InternalOptimisationLanguage.g:7179:2: ( ruleOptimisationGoalRule )
+            // InternalOptimisationLanguage.g:7180:3: ruleOptimisationGoalRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getProblemRuleAccess().getOptimisationSpaceOptimisationGoalRuleParserRuleCall_12_0()); 
@@ -23692,17 +23799,17 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__ProblemRule__OptimisationSpaceAssignment_13_1"
-    // InternalOptimisationLanguage.g:7162:1: rule__ProblemRule__OptimisationSpaceAssignment_13_1 : ( ruleOptimisationGoalRule ) ;
+    // InternalOptimisationLanguage.g:7189:1: rule__ProblemRule__OptimisationSpaceAssignment_13_1 : ( ruleOptimisationGoalRule ) ;
     public final void rule__ProblemRule__OptimisationSpaceAssignment_13_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:7166:1: ( ( ruleOptimisationGoalRule ) )
-            // InternalOptimisationLanguage.g:7167:2: ( ruleOptimisationGoalRule )
+            // InternalOptimisationLanguage.g:7193:1: ( ( ruleOptimisationGoalRule ) )
+            // InternalOptimisationLanguage.g:7194:2: ( ruleOptimisationGoalRule )
             {
-            // InternalOptimisationLanguage.g:7167:2: ( ruleOptimisationGoalRule )
-            // InternalOptimisationLanguage.g:7168:3: ruleOptimisationGoalRule
+            // InternalOptimisationLanguage.g:7194:2: ( ruleOptimisationGoalRule )
+            // InternalOptimisationLanguage.g:7195:3: ruleOptimisationGoalRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getProblemRuleAccess().getOptimisationSpaceOptimisationGoalRuleParserRuleCall_13_1_0()); 
@@ -23737,17 +23844,17 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__ProblemRule__DocumentationAssignment_14_1"
-    // InternalOptimisationLanguage.g:7177:1: rule__ProblemRule__DocumentationAssignment_14_1 : ( ruleArrayRule ) ;
+    // InternalOptimisationLanguage.g:7204:1: rule__ProblemRule__DocumentationAssignment_14_1 : ( ruleArrayRule ) ;
     public final void rule__ProblemRule__DocumentationAssignment_14_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:7181:1: ( ( ruleArrayRule ) )
-            // InternalOptimisationLanguage.g:7182:2: ( ruleArrayRule )
+            // InternalOptimisationLanguage.g:7208:1: ( ( ruleArrayRule ) )
+            // InternalOptimisationLanguage.g:7209:2: ( ruleArrayRule )
             {
-            // InternalOptimisationLanguage.g:7182:2: ( ruleArrayRule )
-            // InternalOptimisationLanguage.g:7183:3: ruleArrayRule
+            // InternalOptimisationLanguage.g:7209:2: ( ruleArrayRule )
+            // InternalOptimisationLanguage.g:7210:3: ruleArrayRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getProblemRuleAccess().getDocumentationArrayRuleParserRuleCall_14_1_0()); 
@@ -23782,17 +23889,17 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__MaximiseGoalRule__DataAssignment_1"
-    // InternalOptimisationLanguage.g:7192:1: rule__MaximiseGoalRule__DataAssignment_1 : ( ruleTypeDefinitionReferenceRule ) ;
+    // InternalOptimisationLanguage.g:7219:1: rule__MaximiseGoalRule__DataAssignment_1 : ( ruleTypeDefinitionReferenceRule ) ;
     public final void rule__MaximiseGoalRule__DataAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:7196:1: ( ( ruleTypeDefinitionReferenceRule ) )
-            // InternalOptimisationLanguage.g:7197:2: ( ruleTypeDefinitionReferenceRule )
+            // InternalOptimisationLanguage.g:7223:1: ( ( ruleTypeDefinitionReferenceRule ) )
+            // InternalOptimisationLanguage.g:7224:2: ( ruleTypeDefinitionReferenceRule )
             {
-            // InternalOptimisationLanguage.g:7197:2: ( ruleTypeDefinitionReferenceRule )
-            // InternalOptimisationLanguage.g:7198:3: ruleTypeDefinitionReferenceRule
+            // InternalOptimisationLanguage.g:7224:2: ( ruleTypeDefinitionReferenceRule )
+            // InternalOptimisationLanguage.g:7225:3: ruleTypeDefinitionReferenceRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getMaximiseGoalRuleAccess().getDataTypeDefinitionReferenceRuleParserRuleCall_1_0()); 
@@ -23827,17 +23934,17 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__MinimiseGoalRule__DataAssignment_1"
-    // InternalOptimisationLanguage.g:7207:1: rule__MinimiseGoalRule__DataAssignment_1 : ( ruleTypeDefinitionReferenceRule ) ;
+    // InternalOptimisationLanguage.g:7234:1: rule__MinimiseGoalRule__DataAssignment_1 : ( ruleTypeDefinitionReferenceRule ) ;
     public final void rule__MinimiseGoalRule__DataAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:7211:1: ( ( ruleTypeDefinitionReferenceRule ) )
-            // InternalOptimisationLanguage.g:7212:2: ( ruleTypeDefinitionReferenceRule )
+            // InternalOptimisationLanguage.g:7238:1: ( ( ruleTypeDefinitionReferenceRule ) )
+            // InternalOptimisationLanguage.g:7239:2: ( ruleTypeDefinitionReferenceRule )
             {
-            // InternalOptimisationLanguage.g:7212:2: ( ruleTypeDefinitionReferenceRule )
-            // InternalOptimisationLanguage.g:7213:3: ruleTypeDefinitionReferenceRule
+            // InternalOptimisationLanguage.g:7239:2: ( ruleTypeDefinitionReferenceRule )
+            // InternalOptimisationLanguage.g:7240:3: ruleTypeDefinitionReferenceRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getMinimiseGoalRuleAccess().getDataTypeDefinitionReferenceRuleParserRuleCall_1_0()); 
@@ -23872,17 +23979,17 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__TargetGoalRule__DataAssignment_1"
-    // InternalOptimisationLanguage.g:7222:1: rule__TargetGoalRule__DataAssignment_1 : ( ruleTypeDefinitionReferenceRule ) ;
+    // InternalOptimisationLanguage.g:7249:1: rule__TargetGoalRule__DataAssignment_1 : ( ruleTypeDefinitionReferenceRule ) ;
     public final void rule__TargetGoalRule__DataAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:7226:1: ( ( ruleTypeDefinitionReferenceRule ) )
-            // InternalOptimisationLanguage.g:7227:2: ( ruleTypeDefinitionReferenceRule )
+            // InternalOptimisationLanguage.g:7253:1: ( ( ruleTypeDefinitionReferenceRule ) )
+            // InternalOptimisationLanguage.g:7254:2: ( ruleTypeDefinitionReferenceRule )
             {
-            // InternalOptimisationLanguage.g:7227:2: ( ruleTypeDefinitionReferenceRule )
-            // InternalOptimisationLanguage.g:7228:3: ruleTypeDefinitionReferenceRule
+            // InternalOptimisationLanguage.g:7254:2: ( ruleTypeDefinitionReferenceRule )
+            // InternalOptimisationLanguage.g:7255:3: ruleTypeDefinitionReferenceRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTargetGoalRuleAccess().getDataTypeDefinitionReferenceRuleParserRuleCall_1_0()); 
@@ -23917,23 +24024,23 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__TargetGoalRule__FromEvaluationAssignment_3_0"
-    // InternalOptimisationLanguage.g:7237:1: rule__TargetGoalRule__FromEvaluationAssignment_3_0 : ( ( 'target' ) ) ;
+    // InternalOptimisationLanguage.g:7264:1: rule__TargetGoalRule__FromEvaluationAssignment_3_0 : ( ( 'target' ) ) ;
     public final void rule__TargetGoalRule__FromEvaluationAssignment_3_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:7241:1: ( ( ( 'target' ) ) )
-            // InternalOptimisationLanguage.g:7242:2: ( ( 'target' ) )
+            // InternalOptimisationLanguage.g:7268:1: ( ( ( 'target' ) ) )
+            // InternalOptimisationLanguage.g:7269:2: ( ( 'target' ) )
             {
-            // InternalOptimisationLanguage.g:7242:2: ( ( 'target' ) )
-            // InternalOptimisationLanguage.g:7243:3: ( 'target' )
+            // InternalOptimisationLanguage.g:7269:2: ( ( 'target' ) )
+            // InternalOptimisationLanguage.g:7270:3: ( 'target' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTargetGoalRuleAccess().getFromEvaluationTargetKeyword_3_0_0()); 
             }
-            // InternalOptimisationLanguage.g:7244:3: ( 'target' )
-            // InternalOptimisationLanguage.g:7245:4: 'target'
+            // InternalOptimisationLanguage.g:7271:3: ( 'target' )
+            // InternalOptimisationLanguage.g:7272:4: 'target'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTargetGoalRuleAccess().getFromEvaluationTargetKeyword_3_0_0()); 
@@ -23970,17 +24077,17 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__TargetGoalRule__ValueAssignment_3_1"
-    // InternalOptimisationLanguage.g:7256:1: rule__TargetGoalRule__ValueAssignment_3_1 : ( ruleLiteralRule ) ;
+    // InternalOptimisationLanguage.g:7283:1: rule__TargetGoalRule__ValueAssignment_3_1 : ( ruleLiteralRule ) ;
     public final void rule__TargetGoalRule__ValueAssignment_3_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:7260:1: ( ( ruleLiteralRule ) )
-            // InternalOptimisationLanguage.g:7261:2: ( ruleLiteralRule )
+            // InternalOptimisationLanguage.g:7287:1: ( ( ruleLiteralRule ) )
+            // InternalOptimisationLanguage.g:7288:2: ( ruleLiteralRule )
             {
-            // InternalOptimisationLanguage.g:7261:2: ( ruleLiteralRule )
-            // InternalOptimisationLanguage.g:7262:3: ruleLiteralRule
+            // InternalOptimisationLanguage.g:7288:2: ( ruleLiteralRule )
+            // InternalOptimisationLanguage.g:7289:3: ruleLiteralRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTargetGoalRuleAccess().getValueLiteralRuleParserRuleCall_3_1_0()); 
@@ -24015,17 +24122,17 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__TargetGoalRule__DistanceAssignment_5"
-    // InternalOptimisationLanguage.g:7271:1: rule__TargetGoalRule__DistanceAssignment_5 : ( ruleInstanceLiteralRule ) ;
+    // InternalOptimisationLanguage.g:7298:1: rule__TargetGoalRule__DistanceAssignment_5 : ( ruleInstanceLiteralRule ) ;
     public final void rule__TargetGoalRule__DistanceAssignment_5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:7275:1: ( ( ruleInstanceLiteralRule ) )
-            // InternalOptimisationLanguage.g:7276:2: ( ruleInstanceLiteralRule )
+            // InternalOptimisationLanguage.g:7302:1: ( ( ruleInstanceLiteralRule ) )
+            // InternalOptimisationLanguage.g:7303:2: ( ruleInstanceLiteralRule )
             {
-            // InternalOptimisationLanguage.g:7276:2: ( ruleInstanceLiteralRule )
-            // InternalOptimisationLanguage.g:7277:3: ruleInstanceLiteralRule
+            // InternalOptimisationLanguage.g:7303:2: ( ruleInstanceLiteralRule )
+            // InternalOptimisationLanguage.g:7304:3: ruleInstanceLiteralRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTargetGoalRuleAccess().getDistanceInstanceLiteralRuleParserRuleCall_5_0()); 
@@ -24060,23 +24167,23 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__AlgorithmInstanceRule__DefinitionAssignment_1"
-    // InternalOptimisationLanguage.g:7286:1: rule__AlgorithmInstanceRule__DefinitionAssignment_1 : ( ( ruleQualifiedName ) ) ;
+    // InternalOptimisationLanguage.g:7313:1: rule__AlgorithmInstanceRule__DefinitionAssignment_1 : ( ( ruleQualifiedName ) ) ;
     public final void rule__AlgorithmInstanceRule__DefinitionAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:7290:1: ( ( ( ruleQualifiedName ) ) )
-            // InternalOptimisationLanguage.g:7291:2: ( ( ruleQualifiedName ) )
+            // InternalOptimisationLanguage.g:7317:1: ( ( ( ruleQualifiedName ) ) )
+            // InternalOptimisationLanguage.g:7318:2: ( ( ruleQualifiedName ) )
             {
-            // InternalOptimisationLanguage.g:7291:2: ( ( ruleQualifiedName ) )
-            // InternalOptimisationLanguage.g:7292:3: ( ruleQualifiedName )
+            // InternalOptimisationLanguage.g:7318:2: ( ( ruleQualifiedName ) )
+            // InternalOptimisationLanguage.g:7319:3: ( ruleQualifiedName )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAlgorithmInstanceRuleAccess().getDefinitionClassDefinitionCrossReference_1_0()); 
             }
-            // InternalOptimisationLanguage.g:7293:3: ( ruleQualifiedName )
-            // InternalOptimisationLanguage.g:7294:4: ruleQualifiedName
+            // InternalOptimisationLanguage.g:7320:3: ( ruleQualifiedName )
+            // InternalOptimisationLanguage.g:7321:4: ruleQualifiedName
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAlgorithmInstanceRuleAccess().getDefinitionClassDefinitionQualifiedNameParserRuleCall_1_0_1()); 
@@ -24117,23 +24224,23 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__AlgorithmInstanceRule__ProblemAssignment_3"
-    // InternalOptimisationLanguage.g:7305:1: rule__AlgorithmInstanceRule__ProblemAssignment_3 : ( ( ruleQualifiedName ) ) ;
+    // InternalOptimisationLanguage.g:7332:1: rule__AlgorithmInstanceRule__ProblemAssignment_3 : ( ( ruleQualifiedName ) ) ;
     public final void rule__AlgorithmInstanceRule__ProblemAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:7309:1: ( ( ( ruleQualifiedName ) ) )
-            // InternalOptimisationLanguage.g:7310:2: ( ( ruleQualifiedName ) )
+            // InternalOptimisationLanguage.g:7336:1: ( ( ( ruleQualifiedName ) ) )
+            // InternalOptimisationLanguage.g:7337:2: ( ( ruleQualifiedName ) )
             {
-            // InternalOptimisationLanguage.g:7310:2: ( ( ruleQualifiedName ) )
-            // InternalOptimisationLanguage.g:7311:3: ( ruleQualifiedName )
+            // InternalOptimisationLanguage.g:7337:2: ( ( ruleQualifiedName ) )
+            // InternalOptimisationLanguage.g:7338:3: ( ruleQualifiedName )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAlgorithmInstanceRuleAccess().getProblemProblemInstanceCrossReference_3_0()); 
             }
-            // InternalOptimisationLanguage.g:7312:3: ( ruleQualifiedName )
-            // InternalOptimisationLanguage.g:7313:4: ruleQualifiedName
+            // InternalOptimisationLanguage.g:7339:3: ( ruleQualifiedName )
+            // InternalOptimisationLanguage.g:7340:4: ruleQualifiedName
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAlgorithmInstanceRuleAccess().getProblemProblemInstanceQualifiedNameParserRuleCall_3_0_1()); 
@@ -24174,17 +24281,17 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__AlgorithmInstanceRule__AttributesAssignment_5"
-    // InternalOptimisationLanguage.g:7324:1: rule__AlgorithmInstanceRule__AttributesAssignment_5 : ( ruleAttributeRule ) ;
+    // InternalOptimisationLanguage.g:7351:1: rule__AlgorithmInstanceRule__AttributesAssignment_5 : ( ruleAttributeRule ) ;
     public final void rule__AlgorithmInstanceRule__AttributesAssignment_5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:7328:1: ( ( ruleAttributeRule ) )
-            // InternalOptimisationLanguage.g:7329:2: ( ruleAttributeRule )
+            // InternalOptimisationLanguage.g:7355:1: ( ( ruleAttributeRule ) )
+            // InternalOptimisationLanguage.g:7356:2: ( ruleAttributeRule )
             {
-            // InternalOptimisationLanguage.g:7329:2: ( ruleAttributeRule )
-            // InternalOptimisationLanguage.g:7330:3: ruleAttributeRule
+            // InternalOptimisationLanguage.g:7356:2: ( ruleAttributeRule )
+            // InternalOptimisationLanguage.g:7357:3: ruleAttributeRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAlgorithmInstanceRuleAccess().getAttributesAttributeRuleParserRuleCall_5_0()); 
@@ -24219,17 +24326,17 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__AlgorithmInstanceRule__DocumentationAssignment_6_2"
-    // InternalOptimisationLanguage.g:7339:1: rule__AlgorithmInstanceRule__DocumentationAssignment_6_2 : ( ruleArrayRule ) ;
+    // InternalOptimisationLanguage.g:7366:1: rule__AlgorithmInstanceRule__DocumentationAssignment_6_2 : ( ruleArrayRule ) ;
     public final void rule__AlgorithmInstanceRule__DocumentationAssignment_6_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:7343:1: ( ( ruleArrayRule ) )
-            // InternalOptimisationLanguage.g:7344:2: ( ruleArrayRule )
+            // InternalOptimisationLanguage.g:7370:1: ( ( ruleArrayRule ) )
+            // InternalOptimisationLanguage.g:7371:2: ( ruleArrayRule )
             {
-            // InternalOptimisationLanguage.g:7344:2: ( ruleArrayRule )
-            // InternalOptimisationLanguage.g:7345:3: ruleArrayRule
+            // InternalOptimisationLanguage.g:7371:2: ( ruleArrayRule )
+            // InternalOptimisationLanguage.g:7372:3: ruleArrayRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAlgorithmInstanceRuleAccess().getDocumentationArrayRuleParserRuleCall_6_2_0()); 
@@ -24264,17 +24371,17 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__OrExpressionRule__SubExpressionsAssignment_0"
-    // InternalOptimisationLanguage.g:7354:1: rule__OrExpressionRule__SubExpressionsAssignment_0 : ( ruleXorExpressionRule ) ;
+    // InternalOptimisationLanguage.g:7381:1: rule__OrExpressionRule__SubExpressionsAssignment_0 : ( ruleXorExpressionRule ) ;
     public final void rule__OrExpressionRule__SubExpressionsAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:7358:1: ( ( ruleXorExpressionRule ) )
-            // InternalOptimisationLanguage.g:7359:2: ( ruleXorExpressionRule )
+            // InternalOptimisationLanguage.g:7385:1: ( ( ruleXorExpressionRule ) )
+            // InternalOptimisationLanguage.g:7386:2: ( ruleXorExpressionRule )
             {
-            // InternalOptimisationLanguage.g:7359:2: ( ruleXorExpressionRule )
-            // InternalOptimisationLanguage.g:7360:3: ruleXorExpressionRule
+            // InternalOptimisationLanguage.g:7386:2: ( ruleXorExpressionRule )
+            // InternalOptimisationLanguage.g:7387:3: ruleXorExpressionRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getOrExpressionRuleAccess().getSubExpressionsXorExpressionRuleParserRuleCall_0_0()); 
@@ -24309,17 +24416,17 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__OrExpressionRule__SubExpressionsAssignment_1_1"
-    // InternalOptimisationLanguage.g:7369:1: rule__OrExpressionRule__SubExpressionsAssignment_1_1 : ( ruleXorExpressionRule ) ;
+    // InternalOptimisationLanguage.g:7396:1: rule__OrExpressionRule__SubExpressionsAssignment_1_1 : ( ruleXorExpressionRule ) ;
     public final void rule__OrExpressionRule__SubExpressionsAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:7373:1: ( ( ruleXorExpressionRule ) )
-            // InternalOptimisationLanguage.g:7374:2: ( ruleXorExpressionRule )
+            // InternalOptimisationLanguage.g:7400:1: ( ( ruleXorExpressionRule ) )
+            // InternalOptimisationLanguage.g:7401:2: ( ruleXorExpressionRule )
             {
-            // InternalOptimisationLanguage.g:7374:2: ( ruleXorExpressionRule )
-            // InternalOptimisationLanguage.g:7375:3: ruleXorExpressionRule
+            // InternalOptimisationLanguage.g:7401:2: ( ruleXorExpressionRule )
+            // InternalOptimisationLanguage.g:7402:3: ruleXorExpressionRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getOrExpressionRuleAccess().getSubExpressionsXorExpressionRuleParserRuleCall_1_1_0()); 
@@ -24354,17 +24461,17 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__XorExpressionRule__SubExpressionsAssignment_0"
-    // InternalOptimisationLanguage.g:7384:1: rule__XorExpressionRule__SubExpressionsAssignment_0 : ( ruleAndExpressionRule ) ;
+    // InternalOptimisationLanguage.g:7411:1: rule__XorExpressionRule__SubExpressionsAssignment_0 : ( ruleAndExpressionRule ) ;
     public final void rule__XorExpressionRule__SubExpressionsAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:7388:1: ( ( ruleAndExpressionRule ) )
-            // InternalOptimisationLanguage.g:7389:2: ( ruleAndExpressionRule )
+            // InternalOptimisationLanguage.g:7415:1: ( ( ruleAndExpressionRule ) )
+            // InternalOptimisationLanguage.g:7416:2: ( ruleAndExpressionRule )
             {
-            // InternalOptimisationLanguage.g:7389:2: ( ruleAndExpressionRule )
-            // InternalOptimisationLanguage.g:7390:3: ruleAndExpressionRule
+            // InternalOptimisationLanguage.g:7416:2: ( ruleAndExpressionRule )
+            // InternalOptimisationLanguage.g:7417:3: ruleAndExpressionRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXorExpressionRuleAccess().getSubExpressionsAndExpressionRuleParserRuleCall_0_0()); 
@@ -24399,17 +24506,17 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__XorExpressionRule__SubExpressionsAssignment_1_1"
-    // InternalOptimisationLanguage.g:7399:1: rule__XorExpressionRule__SubExpressionsAssignment_1_1 : ( ruleAndExpressionRule ) ;
+    // InternalOptimisationLanguage.g:7426:1: rule__XorExpressionRule__SubExpressionsAssignment_1_1 : ( ruleAndExpressionRule ) ;
     public final void rule__XorExpressionRule__SubExpressionsAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:7403:1: ( ( ruleAndExpressionRule ) )
-            // InternalOptimisationLanguage.g:7404:2: ( ruleAndExpressionRule )
+            // InternalOptimisationLanguage.g:7430:1: ( ( ruleAndExpressionRule ) )
+            // InternalOptimisationLanguage.g:7431:2: ( ruleAndExpressionRule )
             {
-            // InternalOptimisationLanguage.g:7404:2: ( ruleAndExpressionRule )
-            // InternalOptimisationLanguage.g:7405:3: ruleAndExpressionRule
+            // InternalOptimisationLanguage.g:7431:2: ( ruleAndExpressionRule )
+            // InternalOptimisationLanguage.g:7432:3: ruleAndExpressionRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXorExpressionRuleAccess().getSubExpressionsAndExpressionRuleParserRuleCall_1_1_0()); 
@@ -24444,17 +24551,17 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__AndExpressionRule__SubExpressionsAssignment_0"
-    // InternalOptimisationLanguage.g:7414:1: rule__AndExpressionRule__SubExpressionsAssignment_0 : ( ruleNotExpressionRule ) ;
+    // InternalOptimisationLanguage.g:7441:1: rule__AndExpressionRule__SubExpressionsAssignment_0 : ( ruleNotExpressionRule ) ;
     public final void rule__AndExpressionRule__SubExpressionsAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:7418:1: ( ( ruleNotExpressionRule ) )
-            // InternalOptimisationLanguage.g:7419:2: ( ruleNotExpressionRule )
+            // InternalOptimisationLanguage.g:7445:1: ( ( ruleNotExpressionRule ) )
+            // InternalOptimisationLanguage.g:7446:2: ( ruleNotExpressionRule )
             {
-            // InternalOptimisationLanguage.g:7419:2: ( ruleNotExpressionRule )
-            // InternalOptimisationLanguage.g:7420:3: ruleNotExpressionRule
+            // InternalOptimisationLanguage.g:7446:2: ( ruleNotExpressionRule )
+            // InternalOptimisationLanguage.g:7447:3: ruleNotExpressionRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAndExpressionRuleAccess().getSubExpressionsNotExpressionRuleParserRuleCall_0_0()); 
@@ -24489,17 +24596,17 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__AndExpressionRule__SubExpressionsAssignment_1_1"
-    // InternalOptimisationLanguage.g:7429:1: rule__AndExpressionRule__SubExpressionsAssignment_1_1 : ( ruleNotExpressionRule ) ;
+    // InternalOptimisationLanguage.g:7456:1: rule__AndExpressionRule__SubExpressionsAssignment_1_1 : ( ruleNotExpressionRule ) ;
     public final void rule__AndExpressionRule__SubExpressionsAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:7433:1: ( ( ruleNotExpressionRule ) )
-            // InternalOptimisationLanguage.g:7434:2: ( ruleNotExpressionRule )
+            // InternalOptimisationLanguage.g:7460:1: ( ( ruleNotExpressionRule ) )
+            // InternalOptimisationLanguage.g:7461:2: ( ruleNotExpressionRule )
             {
-            // InternalOptimisationLanguage.g:7434:2: ( ruleNotExpressionRule )
-            // InternalOptimisationLanguage.g:7435:3: ruleNotExpressionRule
+            // InternalOptimisationLanguage.g:7461:2: ( ruleNotExpressionRule )
+            // InternalOptimisationLanguage.g:7462:3: ruleNotExpressionRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAndExpressionRuleAccess().getSubExpressionsNotExpressionRuleParserRuleCall_1_1_0()); 
@@ -24534,23 +24641,23 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__NotExpressionRule__NegatedAssignment_0"
-    // InternalOptimisationLanguage.g:7444:1: rule__NotExpressionRule__NegatedAssignment_0 : ( ( '!' ) ) ;
+    // InternalOptimisationLanguage.g:7471:1: rule__NotExpressionRule__NegatedAssignment_0 : ( ( '!' ) ) ;
     public final void rule__NotExpressionRule__NegatedAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:7448:1: ( ( ( '!' ) ) )
-            // InternalOptimisationLanguage.g:7449:2: ( ( '!' ) )
+            // InternalOptimisationLanguage.g:7475:1: ( ( ( '!' ) ) )
+            // InternalOptimisationLanguage.g:7476:2: ( ( '!' ) )
             {
-            // InternalOptimisationLanguage.g:7449:2: ( ( '!' ) )
-            // InternalOptimisationLanguage.g:7450:3: ( '!' )
+            // InternalOptimisationLanguage.g:7476:2: ( ( '!' ) )
+            // InternalOptimisationLanguage.g:7477:3: ( '!' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getNotExpressionRuleAccess().getNegatedExclamationMarkKeyword_0_0()); 
             }
-            // InternalOptimisationLanguage.g:7451:3: ( '!' )
-            // InternalOptimisationLanguage.g:7452:4: '!'
+            // InternalOptimisationLanguage.g:7478:3: ( '!' )
+            // InternalOptimisationLanguage.g:7479:4: '!'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getNotExpressionRuleAccess().getNegatedExclamationMarkKeyword_0_0()); 
@@ -24587,17 +24694,17 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__NotExpressionRule__OperandAssignment_1"
-    // InternalOptimisationLanguage.g:7463:1: rule__NotExpressionRule__OperandAssignment_1 : ( ruleComparisonExpressionRule ) ;
+    // InternalOptimisationLanguage.g:7490:1: rule__NotExpressionRule__OperandAssignment_1 : ( ruleComparisonExpressionRule ) ;
     public final void rule__NotExpressionRule__OperandAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:7467:1: ( ( ruleComparisonExpressionRule ) )
-            // InternalOptimisationLanguage.g:7468:2: ( ruleComparisonExpressionRule )
+            // InternalOptimisationLanguage.g:7494:1: ( ( ruleComparisonExpressionRule ) )
+            // InternalOptimisationLanguage.g:7495:2: ( ruleComparisonExpressionRule )
             {
-            // InternalOptimisationLanguage.g:7468:2: ( ruleComparisonExpressionRule )
-            // InternalOptimisationLanguage.g:7469:3: ruleComparisonExpressionRule
+            // InternalOptimisationLanguage.g:7495:2: ( ruleComparisonExpressionRule )
+            // InternalOptimisationLanguage.g:7496:3: ruleComparisonExpressionRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getNotExpressionRuleAccess().getOperandComparisonExpressionRuleParserRuleCall_1_0()); 
@@ -24632,17 +24739,17 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__ComparisonExpressionRule__LeftOperandAssignment_0"
-    // InternalOptimisationLanguage.g:7478:1: rule__ComparisonExpressionRule__LeftOperandAssignment_0 : ( ruleAddOrSubtractExpressionRule ) ;
+    // InternalOptimisationLanguage.g:7505:1: rule__ComparisonExpressionRule__LeftOperandAssignment_0 : ( ruleAddOrSubtractExpressionRule ) ;
     public final void rule__ComparisonExpressionRule__LeftOperandAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:7482:1: ( ( ruleAddOrSubtractExpressionRule ) )
-            // InternalOptimisationLanguage.g:7483:2: ( ruleAddOrSubtractExpressionRule )
+            // InternalOptimisationLanguage.g:7509:1: ( ( ruleAddOrSubtractExpressionRule ) )
+            // InternalOptimisationLanguage.g:7510:2: ( ruleAddOrSubtractExpressionRule )
             {
-            // InternalOptimisationLanguage.g:7483:2: ( ruleAddOrSubtractExpressionRule )
-            // InternalOptimisationLanguage.g:7484:3: ruleAddOrSubtractExpressionRule
+            // InternalOptimisationLanguage.g:7510:2: ( ruleAddOrSubtractExpressionRule )
+            // InternalOptimisationLanguage.g:7511:3: ruleAddOrSubtractExpressionRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getComparisonExpressionRuleAccess().getLeftOperandAddOrSubtractExpressionRuleParserRuleCall_0_0()); 
@@ -24677,17 +24784,17 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__ComparisonExpressionRule__ComparisonAssignment_1"
-    // InternalOptimisationLanguage.g:7493:1: rule__ComparisonExpressionRule__ComparisonAssignment_1 : ( rulePartialComparisonExpressionRule ) ;
+    // InternalOptimisationLanguage.g:7520:1: rule__ComparisonExpressionRule__ComparisonAssignment_1 : ( rulePartialComparisonExpressionRule ) ;
     public final void rule__ComparisonExpressionRule__ComparisonAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:7497:1: ( ( rulePartialComparisonExpressionRule ) )
-            // InternalOptimisationLanguage.g:7498:2: ( rulePartialComparisonExpressionRule )
+            // InternalOptimisationLanguage.g:7524:1: ( ( rulePartialComparisonExpressionRule ) )
+            // InternalOptimisationLanguage.g:7525:2: ( rulePartialComparisonExpressionRule )
             {
-            // InternalOptimisationLanguage.g:7498:2: ( rulePartialComparisonExpressionRule )
-            // InternalOptimisationLanguage.g:7499:3: rulePartialComparisonExpressionRule
+            // InternalOptimisationLanguage.g:7525:2: ( rulePartialComparisonExpressionRule )
+            // InternalOptimisationLanguage.g:7526:3: rulePartialComparisonExpressionRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getComparisonExpressionRuleAccess().getComparisonPartialComparisonExpressionRuleParserRuleCall_1_0()); 
@@ -24722,17 +24829,17 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__PartialComparisonExpressionRule__OperatorAssignment_0"
-    // InternalOptimisationLanguage.g:7508:1: rule__PartialComparisonExpressionRule__OperatorAssignment_0 : ( ruleComparisonOperatorRule ) ;
+    // InternalOptimisationLanguage.g:7535:1: rule__PartialComparisonExpressionRule__OperatorAssignment_0 : ( ruleComparisonOperatorRule ) ;
     public final void rule__PartialComparisonExpressionRule__OperatorAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:7512:1: ( ( ruleComparisonOperatorRule ) )
-            // InternalOptimisationLanguage.g:7513:2: ( ruleComparisonOperatorRule )
+            // InternalOptimisationLanguage.g:7539:1: ( ( ruleComparisonOperatorRule ) )
+            // InternalOptimisationLanguage.g:7540:2: ( ruleComparisonOperatorRule )
             {
-            // InternalOptimisationLanguage.g:7513:2: ( ruleComparisonOperatorRule )
-            // InternalOptimisationLanguage.g:7514:3: ruleComparisonOperatorRule
+            // InternalOptimisationLanguage.g:7540:2: ( ruleComparisonOperatorRule )
+            // InternalOptimisationLanguage.g:7541:3: ruleComparisonOperatorRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getPartialComparisonExpressionRuleAccess().getOperatorComparisonOperatorRuleEnumRuleCall_0_0()); 
@@ -24767,17 +24874,17 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__PartialComparisonExpressionRule__SubExpressionAssignment_1"
-    // InternalOptimisationLanguage.g:7523:1: rule__PartialComparisonExpressionRule__SubExpressionAssignment_1 : ( ruleAddOrSubtractExpressionRule ) ;
+    // InternalOptimisationLanguage.g:7550:1: rule__PartialComparisonExpressionRule__SubExpressionAssignment_1 : ( ruleAddOrSubtractExpressionRule ) ;
     public final void rule__PartialComparisonExpressionRule__SubExpressionAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:7527:1: ( ( ruleAddOrSubtractExpressionRule ) )
-            // InternalOptimisationLanguage.g:7528:2: ( ruleAddOrSubtractExpressionRule )
+            // InternalOptimisationLanguage.g:7554:1: ( ( ruleAddOrSubtractExpressionRule ) )
+            // InternalOptimisationLanguage.g:7555:2: ( ruleAddOrSubtractExpressionRule )
             {
-            // InternalOptimisationLanguage.g:7528:2: ( ruleAddOrSubtractExpressionRule )
-            // InternalOptimisationLanguage.g:7529:3: ruleAddOrSubtractExpressionRule
+            // InternalOptimisationLanguage.g:7555:2: ( ruleAddOrSubtractExpressionRule )
+            // InternalOptimisationLanguage.g:7556:3: ruleAddOrSubtractExpressionRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getPartialComparisonExpressionRuleAccess().getSubExpressionAddOrSubtractExpressionRuleParserRuleCall_1_0()); 
@@ -24812,17 +24919,17 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__AddOrSubtractExpressionRule__LeftOperandAssignment_0"
-    // InternalOptimisationLanguage.g:7538:1: rule__AddOrSubtractExpressionRule__LeftOperandAssignment_0 : ( ruleMultiplyDivideModuloExpressionRule ) ;
+    // InternalOptimisationLanguage.g:7565:1: rule__AddOrSubtractExpressionRule__LeftOperandAssignment_0 : ( ruleMultiplyDivideModuloExpressionRule ) ;
     public final void rule__AddOrSubtractExpressionRule__LeftOperandAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:7542:1: ( ( ruleMultiplyDivideModuloExpressionRule ) )
-            // InternalOptimisationLanguage.g:7543:2: ( ruleMultiplyDivideModuloExpressionRule )
+            // InternalOptimisationLanguage.g:7569:1: ( ( ruleMultiplyDivideModuloExpressionRule ) )
+            // InternalOptimisationLanguage.g:7570:2: ( ruleMultiplyDivideModuloExpressionRule )
             {
-            // InternalOptimisationLanguage.g:7543:2: ( ruleMultiplyDivideModuloExpressionRule )
-            // InternalOptimisationLanguage.g:7544:3: ruleMultiplyDivideModuloExpressionRule
+            // InternalOptimisationLanguage.g:7570:2: ( ruleMultiplyDivideModuloExpressionRule )
+            // InternalOptimisationLanguage.g:7571:3: ruleMultiplyDivideModuloExpressionRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAddOrSubtractExpressionRuleAccess().getLeftOperandMultiplyDivideModuloExpressionRuleParserRuleCall_0_0()); 
@@ -24857,17 +24964,17 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__AddOrSubtractExpressionRule__OperatorsAssignment_1_0"
-    // InternalOptimisationLanguage.g:7553:1: rule__AddOrSubtractExpressionRule__OperatorsAssignment_1_0 : ( ruleAddOrSubtractOperatorRule ) ;
+    // InternalOptimisationLanguage.g:7580:1: rule__AddOrSubtractExpressionRule__OperatorsAssignment_1_0 : ( ruleAddOrSubtractOperatorRule ) ;
     public final void rule__AddOrSubtractExpressionRule__OperatorsAssignment_1_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:7557:1: ( ( ruleAddOrSubtractOperatorRule ) )
-            // InternalOptimisationLanguage.g:7558:2: ( ruleAddOrSubtractOperatorRule )
+            // InternalOptimisationLanguage.g:7584:1: ( ( ruleAddOrSubtractOperatorRule ) )
+            // InternalOptimisationLanguage.g:7585:2: ( ruleAddOrSubtractOperatorRule )
             {
-            // InternalOptimisationLanguage.g:7558:2: ( ruleAddOrSubtractOperatorRule )
-            // InternalOptimisationLanguage.g:7559:3: ruleAddOrSubtractOperatorRule
+            // InternalOptimisationLanguage.g:7585:2: ( ruleAddOrSubtractOperatorRule )
+            // InternalOptimisationLanguage.g:7586:3: ruleAddOrSubtractOperatorRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAddOrSubtractExpressionRuleAccess().getOperatorsAddOrSubtractOperatorRuleEnumRuleCall_1_0_0()); 
@@ -24902,17 +25009,17 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__AddOrSubtractExpressionRule__OperandsAssignment_1_1"
-    // InternalOptimisationLanguage.g:7568:1: rule__AddOrSubtractExpressionRule__OperandsAssignment_1_1 : ( ruleMultiplyDivideModuloExpressionRule ) ;
+    // InternalOptimisationLanguage.g:7595:1: rule__AddOrSubtractExpressionRule__OperandsAssignment_1_1 : ( ruleMultiplyDivideModuloExpressionRule ) ;
     public final void rule__AddOrSubtractExpressionRule__OperandsAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:7572:1: ( ( ruleMultiplyDivideModuloExpressionRule ) )
-            // InternalOptimisationLanguage.g:7573:2: ( ruleMultiplyDivideModuloExpressionRule )
+            // InternalOptimisationLanguage.g:7599:1: ( ( ruleMultiplyDivideModuloExpressionRule ) )
+            // InternalOptimisationLanguage.g:7600:2: ( ruleMultiplyDivideModuloExpressionRule )
             {
-            // InternalOptimisationLanguage.g:7573:2: ( ruleMultiplyDivideModuloExpressionRule )
-            // InternalOptimisationLanguage.g:7574:3: ruleMultiplyDivideModuloExpressionRule
+            // InternalOptimisationLanguage.g:7600:2: ( ruleMultiplyDivideModuloExpressionRule )
+            // InternalOptimisationLanguage.g:7601:3: ruleMultiplyDivideModuloExpressionRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAddOrSubtractExpressionRuleAccess().getOperandsMultiplyDivideModuloExpressionRuleParserRuleCall_1_1_0()); 
@@ -24947,17 +25054,17 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__MultiplyDivideModuloExpressionRule__LeftOperandAssignment_0"
-    // InternalOptimisationLanguage.g:7583:1: rule__MultiplyDivideModuloExpressionRule__LeftOperandAssignment_0 : ( rulePowerOfExpressionRule ) ;
+    // InternalOptimisationLanguage.g:7610:1: rule__MultiplyDivideModuloExpressionRule__LeftOperandAssignment_0 : ( rulePowerOfExpressionRule ) ;
     public final void rule__MultiplyDivideModuloExpressionRule__LeftOperandAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:7587:1: ( ( rulePowerOfExpressionRule ) )
-            // InternalOptimisationLanguage.g:7588:2: ( rulePowerOfExpressionRule )
+            // InternalOptimisationLanguage.g:7614:1: ( ( rulePowerOfExpressionRule ) )
+            // InternalOptimisationLanguage.g:7615:2: ( rulePowerOfExpressionRule )
             {
-            // InternalOptimisationLanguage.g:7588:2: ( rulePowerOfExpressionRule )
-            // InternalOptimisationLanguage.g:7589:3: rulePowerOfExpressionRule
+            // InternalOptimisationLanguage.g:7615:2: ( rulePowerOfExpressionRule )
+            // InternalOptimisationLanguage.g:7616:3: rulePowerOfExpressionRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getMultiplyDivideModuloExpressionRuleAccess().getLeftOperandPowerOfExpressionRuleParserRuleCall_0_0()); 
@@ -24992,17 +25099,17 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__MultiplyDivideModuloExpressionRule__OperatorsAssignment_1_0"
-    // InternalOptimisationLanguage.g:7598:1: rule__MultiplyDivideModuloExpressionRule__OperatorsAssignment_1_0 : ( ruleMultiplyDivideModuloOperatorRule ) ;
+    // InternalOptimisationLanguage.g:7625:1: rule__MultiplyDivideModuloExpressionRule__OperatorsAssignment_1_0 : ( ruleMultiplyDivideModuloOperatorRule ) ;
     public final void rule__MultiplyDivideModuloExpressionRule__OperatorsAssignment_1_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:7602:1: ( ( ruleMultiplyDivideModuloOperatorRule ) )
-            // InternalOptimisationLanguage.g:7603:2: ( ruleMultiplyDivideModuloOperatorRule )
+            // InternalOptimisationLanguage.g:7629:1: ( ( ruleMultiplyDivideModuloOperatorRule ) )
+            // InternalOptimisationLanguage.g:7630:2: ( ruleMultiplyDivideModuloOperatorRule )
             {
-            // InternalOptimisationLanguage.g:7603:2: ( ruleMultiplyDivideModuloOperatorRule )
-            // InternalOptimisationLanguage.g:7604:3: ruleMultiplyDivideModuloOperatorRule
+            // InternalOptimisationLanguage.g:7630:2: ( ruleMultiplyDivideModuloOperatorRule )
+            // InternalOptimisationLanguage.g:7631:3: ruleMultiplyDivideModuloOperatorRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getMultiplyDivideModuloExpressionRuleAccess().getOperatorsMultiplyDivideModuloOperatorRuleEnumRuleCall_1_0_0()); 
@@ -25037,17 +25144,17 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__MultiplyDivideModuloExpressionRule__OperandsAssignment_1_1"
-    // InternalOptimisationLanguage.g:7613:1: rule__MultiplyDivideModuloExpressionRule__OperandsAssignment_1_1 : ( rulePowerOfExpressionRule ) ;
+    // InternalOptimisationLanguage.g:7640:1: rule__MultiplyDivideModuloExpressionRule__OperandsAssignment_1_1 : ( rulePowerOfExpressionRule ) ;
     public final void rule__MultiplyDivideModuloExpressionRule__OperandsAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:7617:1: ( ( rulePowerOfExpressionRule ) )
-            // InternalOptimisationLanguage.g:7618:2: ( rulePowerOfExpressionRule )
+            // InternalOptimisationLanguage.g:7644:1: ( ( rulePowerOfExpressionRule ) )
+            // InternalOptimisationLanguage.g:7645:2: ( rulePowerOfExpressionRule )
             {
-            // InternalOptimisationLanguage.g:7618:2: ( rulePowerOfExpressionRule )
-            // InternalOptimisationLanguage.g:7619:3: rulePowerOfExpressionRule
+            // InternalOptimisationLanguage.g:7645:2: ( rulePowerOfExpressionRule )
+            // InternalOptimisationLanguage.g:7646:3: rulePowerOfExpressionRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getMultiplyDivideModuloExpressionRuleAccess().getOperandsPowerOfExpressionRuleParserRuleCall_1_1_0()); 
@@ -25082,17 +25189,17 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__PowerOfExpressionRule__LeftOperandAssignment_0"
-    // InternalOptimisationLanguage.g:7628:1: rule__PowerOfExpressionRule__LeftOperandAssignment_0 : ( ruleUnaryAddOrSubtractExpressionRule ) ;
+    // InternalOptimisationLanguage.g:7655:1: rule__PowerOfExpressionRule__LeftOperandAssignment_0 : ( ruleUnaryAddOrSubtractExpressionRule ) ;
     public final void rule__PowerOfExpressionRule__LeftOperandAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:7632:1: ( ( ruleUnaryAddOrSubtractExpressionRule ) )
-            // InternalOptimisationLanguage.g:7633:2: ( ruleUnaryAddOrSubtractExpressionRule )
+            // InternalOptimisationLanguage.g:7659:1: ( ( ruleUnaryAddOrSubtractExpressionRule ) )
+            // InternalOptimisationLanguage.g:7660:2: ( ruleUnaryAddOrSubtractExpressionRule )
             {
-            // InternalOptimisationLanguage.g:7633:2: ( ruleUnaryAddOrSubtractExpressionRule )
-            // InternalOptimisationLanguage.g:7634:3: ruleUnaryAddOrSubtractExpressionRule
+            // InternalOptimisationLanguage.g:7660:2: ( ruleUnaryAddOrSubtractExpressionRule )
+            // InternalOptimisationLanguage.g:7661:3: ruleUnaryAddOrSubtractExpressionRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getPowerOfExpressionRuleAccess().getLeftOperandUnaryAddOrSubtractExpressionRuleParserRuleCall_0_0()); 
@@ -25127,17 +25234,17 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__PowerOfExpressionRule__RightOperandAssignment_1_1"
-    // InternalOptimisationLanguage.g:7643:1: rule__PowerOfExpressionRule__RightOperandAssignment_1_1 : ( rulePowerOfExpressionRule ) ;
+    // InternalOptimisationLanguage.g:7670:1: rule__PowerOfExpressionRule__RightOperandAssignment_1_1 : ( rulePowerOfExpressionRule ) ;
     public final void rule__PowerOfExpressionRule__RightOperandAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:7647:1: ( ( rulePowerOfExpressionRule ) )
-            // InternalOptimisationLanguage.g:7648:2: ( rulePowerOfExpressionRule )
+            // InternalOptimisationLanguage.g:7674:1: ( ( rulePowerOfExpressionRule ) )
+            // InternalOptimisationLanguage.g:7675:2: ( rulePowerOfExpressionRule )
             {
-            // InternalOptimisationLanguage.g:7648:2: ( rulePowerOfExpressionRule )
-            // InternalOptimisationLanguage.g:7649:3: rulePowerOfExpressionRule
+            // InternalOptimisationLanguage.g:7675:2: ( rulePowerOfExpressionRule )
+            // InternalOptimisationLanguage.g:7676:3: rulePowerOfExpressionRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getPowerOfExpressionRuleAccess().getRightOperandPowerOfExpressionRuleParserRuleCall_1_1_0()); 
@@ -25172,17 +25279,17 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__UnaryAddOrSubtractExpressionRule__OperatorsAssignment_0"
-    // InternalOptimisationLanguage.g:7658:1: rule__UnaryAddOrSubtractExpressionRule__OperatorsAssignment_0 : ( ruleAddOrSubtractOperatorRule ) ;
+    // InternalOptimisationLanguage.g:7685:1: rule__UnaryAddOrSubtractExpressionRule__OperatorsAssignment_0 : ( ruleAddOrSubtractOperatorRule ) ;
     public final void rule__UnaryAddOrSubtractExpressionRule__OperatorsAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:7662:1: ( ( ruleAddOrSubtractOperatorRule ) )
-            // InternalOptimisationLanguage.g:7663:2: ( ruleAddOrSubtractOperatorRule )
+            // InternalOptimisationLanguage.g:7689:1: ( ( ruleAddOrSubtractOperatorRule ) )
+            // InternalOptimisationLanguage.g:7690:2: ( ruleAddOrSubtractOperatorRule )
             {
-            // InternalOptimisationLanguage.g:7663:2: ( ruleAddOrSubtractOperatorRule )
-            // InternalOptimisationLanguage.g:7664:3: ruleAddOrSubtractOperatorRule
+            // InternalOptimisationLanguage.g:7690:2: ( ruleAddOrSubtractOperatorRule )
+            // InternalOptimisationLanguage.g:7691:3: ruleAddOrSubtractOperatorRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getUnaryAddOrSubtractExpressionRuleAccess().getOperatorsAddOrSubtractOperatorRuleEnumRuleCall_0_0()); 
@@ -25217,17 +25324,17 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__UnaryAddOrSubtractExpressionRule__SubExpressionAssignment_1"
-    // InternalOptimisationLanguage.g:7673:1: rule__UnaryAddOrSubtractExpressionRule__SubExpressionAssignment_1 : ( ruleReadExpressionRule ) ;
+    // InternalOptimisationLanguage.g:7700:1: rule__UnaryAddOrSubtractExpressionRule__SubExpressionAssignment_1 : ( ruleReadExpressionRule ) ;
     public final void rule__UnaryAddOrSubtractExpressionRule__SubExpressionAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:7677:1: ( ( ruleReadExpressionRule ) )
-            // InternalOptimisationLanguage.g:7678:2: ( ruleReadExpressionRule )
+            // InternalOptimisationLanguage.g:7704:1: ( ( ruleReadExpressionRule ) )
+            // InternalOptimisationLanguage.g:7705:2: ( ruleReadExpressionRule )
             {
-            // InternalOptimisationLanguage.g:7678:2: ( ruleReadExpressionRule )
-            // InternalOptimisationLanguage.g:7679:3: ruleReadExpressionRule
+            // InternalOptimisationLanguage.g:7705:2: ( ruleReadExpressionRule )
+            // InternalOptimisationLanguage.g:7706:3: ruleReadExpressionRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getUnaryAddOrSubtractExpressionRuleAccess().getSubExpressionReadExpressionRuleParserRuleCall_1_0()); 
@@ -25262,17 +25369,17 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__ArrayRule__ValuesAssignment_2_0"
-    // InternalOptimisationLanguage.g:7688:1: rule__ArrayRule__ValuesAssignment_2_0 : ( ruleOrExpressionRule ) ;
+    // InternalOptimisationLanguage.g:7715:1: rule__ArrayRule__ValuesAssignment_2_0 : ( ruleOrExpressionRule ) ;
     public final void rule__ArrayRule__ValuesAssignment_2_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:7692:1: ( ( ruleOrExpressionRule ) )
-            // InternalOptimisationLanguage.g:7693:2: ( ruleOrExpressionRule )
+            // InternalOptimisationLanguage.g:7719:1: ( ( ruleOrExpressionRule ) )
+            // InternalOptimisationLanguage.g:7720:2: ( ruleOrExpressionRule )
             {
-            // InternalOptimisationLanguage.g:7693:2: ( ruleOrExpressionRule )
-            // InternalOptimisationLanguage.g:7694:3: ruleOrExpressionRule
+            // InternalOptimisationLanguage.g:7720:2: ( ruleOrExpressionRule )
+            // InternalOptimisationLanguage.g:7721:3: ruleOrExpressionRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getArrayRuleAccess().getValuesOrExpressionRuleParserRuleCall_2_0_0()); 
@@ -25307,17 +25414,17 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__ArrayRule__ValuesAssignment_2_1_1"
-    // InternalOptimisationLanguage.g:7703:1: rule__ArrayRule__ValuesAssignment_2_1_1 : ( ruleOrExpressionRule ) ;
+    // InternalOptimisationLanguage.g:7730:1: rule__ArrayRule__ValuesAssignment_2_1_1 : ( ruleOrExpressionRule ) ;
     public final void rule__ArrayRule__ValuesAssignment_2_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:7707:1: ( ( ruleOrExpressionRule ) )
-            // InternalOptimisationLanguage.g:7708:2: ( ruleOrExpressionRule )
+            // InternalOptimisationLanguage.g:7734:1: ( ( ruleOrExpressionRule ) )
+            // InternalOptimisationLanguage.g:7735:2: ( ruleOrExpressionRule )
             {
-            // InternalOptimisationLanguage.g:7708:2: ( ruleOrExpressionRule )
-            // InternalOptimisationLanguage.g:7709:3: ruleOrExpressionRule
+            // InternalOptimisationLanguage.g:7735:2: ( ruleOrExpressionRule )
+            // InternalOptimisationLanguage.g:7736:3: ruleOrExpressionRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getArrayRuleAccess().getValuesOrExpressionRuleParserRuleCall_2_1_1_0()); 
@@ -25352,17 +25459,17 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__ParanthesesRule__SubExpressionAssignment_1"
-    // InternalOptimisationLanguage.g:7718:1: rule__ParanthesesRule__SubExpressionAssignment_1 : ( ruleExpressionRule ) ;
+    // InternalOptimisationLanguage.g:7745:1: rule__ParanthesesRule__SubExpressionAssignment_1 : ( ruleExpressionRule ) ;
     public final void rule__ParanthesesRule__SubExpressionAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:7722:1: ( ( ruleExpressionRule ) )
-            // InternalOptimisationLanguage.g:7723:2: ( ruleExpressionRule )
+            // InternalOptimisationLanguage.g:7749:1: ( ( ruleExpressionRule ) )
+            // InternalOptimisationLanguage.g:7750:2: ( ruleExpressionRule )
             {
-            // InternalOptimisationLanguage.g:7723:2: ( ruleExpressionRule )
-            // InternalOptimisationLanguage.g:7724:3: ruleExpressionRule
+            // InternalOptimisationLanguage.g:7750:2: ( ruleExpressionRule )
+            // InternalOptimisationLanguage.g:7751:3: ruleExpressionRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getParanthesesRuleAccess().getSubExpressionExpressionRuleParserRuleCall_1_0()); 
@@ -25397,17 +25504,17 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__PathExpressionRule__PathAssignment_1"
-    // InternalOptimisationLanguage.g:7733:1: rule__PathExpressionRule__PathAssignment_1 : ( RULE_STRING ) ;
+    // InternalOptimisationLanguage.g:7760:1: rule__PathExpressionRule__PathAssignment_1 : ( RULE_STRING ) ;
     public final void rule__PathExpressionRule__PathAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:7737:1: ( ( RULE_STRING ) )
-            // InternalOptimisationLanguage.g:7738:2: ( RULE_STRING )
+            // InternalOptimisationLanguage.g:7764:1: ( ( RULE_STRING ) )
+            // InternalOptimisationLanguage.g:7765:2: ( RULE_STRING )
             {
-            // InternalOptimisationLanguage.g:7738:2: ( RULE_STRING )
-            // InternalOptimisationLanguage.g:7739:3: RULE_STRING
+            // InternalOptimisationLanguage.g:7765:2: ( RULE_STRING )
+            // InternalOptimisationLanguage.g:7766:3: RULE_STRING
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getPathExpressionRuleAccess().getPathSTRINGTerminalRuleCall_1_0()); 
@@ -25438,23 +25545,23 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__CallRule__FunctionAssignment_0"
-    // InternalOptimisationLanguage.g:7748:1: rule__CallRule__FunctionAssignment_0 : ( ( ruleQualifiedName ) ) ;
+    // InternalOptimisationLanguage.g:7775:1: rule__CallRule__FunctionAssignment_0 : ( ( ruleQualifiedName ) ) ;
     public final void rule__CallRule__FunctionAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:7752:1: ( ( ( ruleQualifiedName ) ) )
-            // InternalOptimisationLanguage.g:7753:2: ( ( ruleQualifiedName ) )
+            // InternalOptimisationLanguage.g:7779:1: ( ( ( ruleQualifiedName ) ) )
+            // InternalOptimisationLanguage.g:7780:2: ( ( ruleQualifiedName ) )
             {
-            // InternalOptimisationLanguage.g:7753:2: ( ( ruleQualifiedName ) )
-            // InternalOptimisationLanguage.g:7754:3: ( ruleQualifiedName )
+            // InternalOptimisationLanguage.g:7780:2: ( ( ruleQualifiedName ) )
+            // InternalOptimisationLanguage.g:7781:3: ( ruleQualifiedName )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getCallRuleAccess().getFunctionFunctionDefinitionCrossReference_0_0()); 
             }
-            // InternalOptimisationLanguage.g:7755:3: ( ruleQualifiedName )
-            // InternalOptimisationLanguage.g:7756:4: ruleQualifiedName
+            // InternalOptimisationLanguage.g:7782:3: ( ruleQualifiedName )
+            // InternalOptimisationLanguage.g:7783:4: ruleQualifiedName
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getCallRuleAccess().getFunctionFunctionDefinitionQualifiedNameParserRuleCall_0_0_1()); 
@@ -25495,17 +25602,17 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__CallRule__ParametersAssignment_2_0"
-    // InternalOptimisationLanguage.g:7767:1: rule__CallRule__ParametersAssignment_2_0 : ( ruleExpressionRule ) ;
+    // InternalOptimisationLanguage.g:7794:1: rule__CallRule__ParametersAssignment_2_0 : ( ruleExpressionRule ) ;
     public final void rule__CallRule__ParametersAssignment_2_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:7771:1: ( ( ruleExpressionRule ) )
-            // InternalOptimisationLanguage.g:7772:2: ( ruleExpressionRule )
+            // InternalOptimisationLanguage.g:7798:1: ( ( ruleExpressionRule ) )
+            // InternalOptimisationLanguage.g:7799:2: ( ruleExpressionRule )
             {
-            // InternalOptimisationLanguage.g:7772:2: ( ruleExpressionRule )
-            // InternalOptimisationLanguage.g:7773:3: ruleExpressionRule
+            // InternalOptimisationLanguage.g:7799:2: ( ruleExpressionRule )
+            // InternalOptimisationLanguage.g:7800:3: ruleExpressionRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getCallRuleAccess().getParametersExpressionRuleParserRuleCall_2_0_0()); 
@@ -25540,17 +25647,17 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__CallRule__ParametersAssignment_2_1_1"
-    // InternalOptimisationLanguage.g:7782:1: rule__CallRule__ParametersAssignment_2_1_1 : ( ruleExpressionRule ) ;
+    // InternalOptimisationLanguage.g:7809:1: rule__CallRule__ParametersAssignment_2_1_1 : ( ruleExpressionRule ) ;
     public final void rule__CallRule__ParametersAssignment_2_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:7786:1: ( ( ruleExpressionRule ) )
-            // InternalOptimisationLanguage.g:7787:2: ( ruleExpressionRule )
+            // InternalOptimisationLanguage.g:7813:1: ( ( ruleExpressionRule ) )
+            // InternalOptimisationLanguage.g:7814:2: ( ruleExpressionRule )
             {
-            // InternalOptimisationLanguage.g:7787:2: ( ruleExpressionRule )
-            // InternalOptimisationLanguage.g:7788:3: ruleExpressionRule
+            // InternalOptimisationLanguage.g:7814:2: ( ruleExpressionRule )
+            // InternalOptimisationLanguage.g:7815:3: ruleExpressionRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getCallRuleAccess().getParametersExpressionRuleParserRuleCall_2_1_1_0()); 
@@ -25585,17 +25692,17 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__AttributeReferenceRule__SelfAssignment_0"
-    // InternalOptimisationLanguage.g:7797:1: rule__AttributeReferenceRule__SelfAssignment_0 : ( ruleSelfReferenceRule ) ;
+    // InternalOptimisationLanguage.g:7824:1: rule__AttributeReferenceRule__SelfAssignment_0 : ( ruleSelfReferenceRule ) ;
     public final void rule__AttributeReferenceRule__SelfAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:7801:1: ( ( ruleSelfReferenceRule ) )
-            // InternalOptimisationLanguage.g:7802:2: ( ruleSelfReferenceRule )
+            // InternalOptimisationLanguage.g:7828:1: ( ( ruleSelfReferenceRule ) )
+            // InternalOptimisationLanguage.g:7829:2: ( ruleSelfReferenceRule )
             {
-            // InternalOptimisationLanguage.g:7802:2: ( ruleSelfReferenceRule )
-            // InternalOptimisationLanguage.g:7803:3: ruleSelfReferenceRule
+            // InternalOptimisationLanguage.g:7829:2: ( ruleSelfReferenceRule )
+            // InternalOptimisationLanguage.g:7830:3: ruleSelfReferenceRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeReferenceRuleAccess().getSelfSelfReferenceRuleParserRuleCall_0_0()); 
@@ -25630,17 +25737,17 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__AttributeReferenceRule__ChainAssignment_1_1"
-    // InternalOptimisationLanguage.g:7812:1: rule__AttributeReferenceRule__ChainAssignment_1_1 : ( ruleValuelDefinitionReferenceRule ) ;
+    // InternalOptimisationLanguage.g:7839:1: rule__AttributeReferenceRule__ChainAssignment_1_1 : ( ruleValuelDefinitionReferenceRule ) ;
     public final void rule__AttributeReferenceRule__ChainAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:7816:1: ( ( ruleValuelDefinitionReferenceRule ) )
-            // InternalOptimisationLanguage.g:7817:2: ( ruleValuelDefinitionReferenceRule )
+            // InternalOptimisationLanguage.g:7843:1: ( ( ruleValuelDefinitionReferenceRule ) )
+            // InternalOptimisationLanguage.g:7844:2: ( ruleValuelDefinitionReferenceRule )
             {
-            // InternalOptimisationLanguage.g:7817:2: ( ruleValuelDefinitionReferenceRule )
-            // InternalOptimisationLanguage.g:7818:3: ruleValuelDefinitionReferenceRule
+            // InternalOptimisationLanguage.g:7844:2: ( ruleValuelDefinitionReferenceRule )
+            // InternalOptimisationLanguage.g:7845:3: ruleValuelDefinitionReferenceRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeReferenceRuleAccess().getChainValuelDefinitionReferenceRuleParserRuleCall_1_1_0()); 
@@ -25675,17 +25782,17 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__ConfigurationReferenceRule__ReferenceAssignment_1"
-    // InternalOptimisationLanguage.g:7827:1: rule__ConfigurationReferenceRule__ReferenceAssignment_1 : ( ruleStringOrId ) ;
+    // InternalOptimisationLanguage.g:7854:1: rule__ConfigurationReferenceRule__ReferenceAssignment_1 : ( ruleStringOrId ) ;
     public final void rule__ConfigurationReferenceRule__ReferenceAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:7831:1: ( ( ruleStringOrId ) )
-            // InternalOptimisationLanguage.g:7832:2: ( ruleStringOrId )
+            // InternalOptimisationLanguage.g:7858:1: ( ( ruleStringOrId ) )
+            // InternalOptimisationLanguage.g:7859:2: ( ruleStringOrId )
             {
-            // InternalOptimisationLanguage.g:7832:2: ( ruleStringOrId )
-            // InternalOptimisationLanguage.g:7833:3: ruleStringOrId
+            // InternalOptimisationLanguage.g:7859:2: ( ruleStringOrId )
+            // InternalOptimisationLanguage.g:7860:3: ruleStringOrId
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getConfigurationReferenceRuleAccess().getReferenceStringOrIdParserRuleCall_1_0()); 
@@ -25720,23 +25827,23 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__ValuelDefinitionReferenceRule__DefinitionAssignment"
-    // InternalOptimisationLanguage.g:7842:1: rule__ValuelDefinitionReferenceRule__DefinitionAssignment : ( ( ruleQualifiedName ) ) ;
+    // InternalOptimisationLanguage.g:7869:1: rule__ValuelDefinitionReferenceRule__DefinitionAssignment : ( ( ruleQualifiedName ) ) ;
     public final void rule__ValuelDefinitionReferenceRule__DefinitionAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:7846:1: ( ( ( ruleQualifiedName ) ) )
-            // InternalOptimisationLanguage.g:7847:2: ( ( ruleQualifiedName ) )
+            // InternalOptimisationLanguage.g:7873:1: ( ( ( ruleQualifiedName ) ) )
+            // InternalOptimisationLanguage.g:7874:2: ( ( ruleQualifiedName ) )
             {
-            // InternalOptimisationLanguage.g:7847:2: ( ( ruleQualifiedName ) )
-            // InternalOptimisationLanguage.g:7848:3: ( ruleQualifiedName )
+            // InternalOptimisationLanguage.g:7874:2: ( ( ruleQualifiedName ) )
+            // InternalOptimisationLanguage.g:7875:3: ( ruleQualifiedName )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getValuelDefinitionReferenceRuleAccess().getDefinitionValueDefinitionCrossReference_0()); 
             }
-            // InternalOptimisationLanguage.g:7849:3: ( ruleQualifiedName )
-            // InternalOptimisationLanguage.g:7850:4: ruleQualifiedName
+            // InternalOptimisationLanguage.g:7876:3: ( ruleQualifiedName )
+            // InternalOptimisationLanguage.g:7877:4: ruleQualifiedName
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getValuelDefinitionReferenceRuleAccess().getDefinitionValueDefinitionQualifiedNameParserRuleCall_0_1()); 
@@ -25777,23 +25884,23 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__BaseDataReferenceRule__DefinitionAssignment_1"
-    // InternalOptimisationLanguage.g:7861:1: rule__BaseDataReferenceRule__DefinitionAssignment_1 : ( ( ruleQualifiedName ) ) ;
+    // InternalOptimisationLanguage.g:7888:1: rule__BaseDataReferenceRule__DefinitionAssignment_1 : ( ( ruleQualifiedName ) ) ;
     public final void rule__BaseDataReferenceRule__DefinitionAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:7865:1: ( ( ( ruleQualifiedName ) ) )
-            // InternalOptimisationLanguage.g:7866:2: ( ( ruleQualifiedName ) )
+            // InternalOptimisationLanguage.g:7892:1: ( ( ( ruleQualifiedName ) ) )
+            // InternalOptimisationLanguage.g:7893:2: ( ( ruleQualifiedName ) )
             {
-            // InternalOptimisationLanguage.g:7866:2: ( ( ruleQualifiedName ) )
-            // InternalOptimisationLanguage.g:7867:3: ( ruleQualifiedName )
+            // InternalOptimisationLanguage.g:7893:2: ( ( ruleQualifiedName ) )
+            // InternalOptimisationLanguage.g:7894:3: ( ruleQualifiedName )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getBaseDataReferenceRuleAccess().getDefinitionBaseDataDescriptionCrossReference_1_0()); 
             }
-            // InternalOptimisationLanguage.g:7868:3: ( ruleQualifiedName )
-            // InternalOptimisationLanguage.g:7869:4: ruleQualifiedName
+            // InternalOptimisationLanguage.g:7895:3: ( ruleQualifiedName )
+            // InternalOptimisationLanguage.g:7896:4: ruleQualifiedName
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getBaseDataReferenceRuleAccess().getDefinitionBaseDataDescriptionQualifiedNameParserRuleCall_1_0_1()); 
@@ -25834,23 +25941,23 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__StructuredDataDescriptionReferenceRule__DefinitionAssignment_1"
-    // InternalOptimisationLanguage.g:7880:1: rule__StructuredDataDescriptionReferenceRule__DefinitionAssignment_1 : ( ( ruleQualifiedName ) ) ;
+    // InternalOptimisationLanguage.g:7907:1: rule__StructuredDataDescriptionReferenceRule__DefinitionAssignment_1 : ( ( ruleQualifiedName ) ) ;
     public final void rule__StructuredDataDescriptionReferenceRule__DefinitionAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:7884:1: ( ( ( ruleQualifiedName ) ) )
-            // InternalOptimisationLanguage.g:7885:2: ( ( ruleQualifiedName ) )
+            // InternalOptimisationLanguage.g:7911:1: ( ( ( ruleQualifiedName ) ) )
+            // InternalOptimisationLanguage.g:7912:2: ( ( ruleQualifiedName ) )
             {
-            // InternalOptimisationLanguage.g:7885:2: ( ( ruleQualifiedName ) )
-            // InternalOptimisationLanguage.g:7886:3: ( ruleQualifiedName )
+            // InternalOptimisationLanguage.g:7912:2: ( ( ruleQualifiedName ) )
+            // InternalOptimisationLanguage.g:7913:3: ( ruleQualifiedName )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getStructuredDataDescriptionReferenceRuleAccess().getDefinitionStructuredDataDescriptionCrossReference_1_0()); 
             }
-            // InternalOptimisationLanguage.g:7887:3: ( ruleQualifiedName )
-            // InternalOptimisationLanguage.g:7888:4: ruleQualifiedName
+            // InternalOptimisationLanguage.g:7914:3: ( ruleQualifiedName )
+            // InternalOptimisationLanguage.g:7915:4: ruleQualifiedName
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getStructuredDataDescriptionReferenceRuleAccess().getDefinitionStructuredDataDescriptionQualifiedNameParserRuleCall_1_0_1()); 
@@ -25891,23 +25998,23 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__InstanceLiteralRule__DefinitionAssignment_0"
-    // InternalOptimisationLanguage.g:7899:1: rule__InstanceLiteralRule__DefinitionAssignment_0 : ( ( ruleQualifiedName ) ) ;
+    // InternalOptimisationLanguage.g:7926:1: rule__InstanceLiteralRule__DefinitionAssignment_0 : ( ( ruleQualifiedName ) ) ;
     public final void rule__InstanceLiteralRule__DefinitionAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:7903:1: ( ( ( ruleQualifiedName ) ) )
-            // InternalOptimisationLanguage.g:7904:2: ( ( ruleQualifiedName ) )
+            // InternalOptimisationLanguage.g:7930:1: ( ( ( ruleQualifiedName ) ) )
+            // InternalOptimisationLanguage.g:7931:2: ( ( ruleQualifiedName ) )
             {
-            // InternalOptimisationLanguage.g:7904:2: ( ( ruleQualifiedName ) )
-            // InternalOptimisationLanguage.g:7905:3: ( ruleQualifiedName )
+            // InternalOptimisationLanguage.g:7931:2: ( ( ruleQualifiedName ) )
+            // InternalOptimisationLanguage.g:7932:3: ( ruleQualifiedName )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getInstanceLiteralRuleAccess().getDefinitionClassDefinitionCrossReference_0_0()); 
             }
-            // InternalOptimisationLanguage.g:7906:3: ( ruleQualifiedName )
-            // InternalOptimisationLanguage.g:7907:4: ruleQualifiedName
+            // InternalOptimisationLanguage.g:7933:3: ( ruleQualifiedName )
+            // InternalOptimisationLanguage.g:7934:4: ruleQualifiedName
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getInstanceLiteralRuleAccess().getDefinitionClassDefinitionQualifiedNameParserRuleCall_0_0_1()); 
@@ -25948,17 +26055,17 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__InstanceLiteralRule__AttributesAssignment_2"
-    // InternalOptimisationLanguage.g:7918:1: rule__InstanceLiteralRule__AttributesAssignment_2 : ( ruleAttributeRule ) ;
+    // InternalOptimisationLanguage.g:7945:1: rule__InstanceLiteralRule__AttributesAssignment_2 : ( ruleAttributeRule ) ;
     public final void rule__InstanceLiteralRule__AttributesAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:7922:1: ( ( ruleAttributeRule ) )
-            // InternalOptimisationLanguage.g:7923:2: ( ruleAttributeRule )
+            // InternalOptimisationLanguage.g:7949:1: ( ( ruleAttributeRule ) )
+            // InternalOptimisationLanguage.g:7950:2: ( ruleAttributeRule )
             {
-            // InternalOptimisationLanguage.g:7923:2: ( ruleAttributeRule )
-            // InternalOptimisationLanguage.g:7924:3: ruleAttributeRule
+            // InternalOptimisationLanguage.g:7950:2: ( ruleAttributeRule )
+            // InternalOptimisationLanguage.g:7951:3: ruleAttributeRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getInstanceLiteralRuleAccess().getAttributesAttributeRuleParserRuleCall_2_0()); 
@@ -25993,23 +26100,23 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__AttributeRule__DefinitionAssignment_0"
-    // InternalOptimisationLanguage.g:7933:1: rule__AttributeRule__DefinitionAssignment_0 : ( ( ruleStringOrId ) ) ;
+    // InternalOptimisationLanguage.g:7960:1: rule__AttributeRule__DefinitionAssignment_0 : ( ( ruleStringOrId ) ) ;
     public final void rule__AttributeRule__DefinitionAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:7937:1: ( ( ( ruleStringOrId ) ) )
-            // InternalOptimisationLanguage.g:7938:2: ( ( ruleStringOrId ) )
+            // InternalOptimisationLanguage.g:7964:1: ( ( ( ruleStringOrId ) ) )
+            // InternalOptimisationLanguage.g:7965:2: ( ( ruleStringOrId ) )
             {
-            // InternalOptimisationLanguage.g:7938:2: ( ( ruleStringOrId ) )
-            // InternalOptimisationLanguage.g:7939:3: ( ruleStringOrId )
+            // InternalOptimisationLanguage.g:7965:2: ( ( ruleStringOrId ) )
+            // InternalOptimisationLanguage.g:7966:3: ( ruleStringOrId )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeRuleAccess().getDefinitionAttributeDefinitionCrossReference_0_0()); 
             }
-            // InternalOptimisationLanguage.g:7940:3: ( ruleStringOrId )
-            // InternalOptimisationLanguage.g:7941:4: ruleStringOrId
+            // InternalOptimisationLanguage.g:7967:3: ( ruleStringOrId )
+            // InternalOptimisationLanguage.g:7968:4: ruleStringOrId
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeRuleAccess().getDefinitionAttributeDefinitionStringOrIdParserRuleCall_0_0_1()); 
@@ -26050,17 +26157,17 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__AttributeRule__ValueAssignment_2"
-    // InternalOptimisationLanguage.g:7952:1: rule__AttributeRule__ValueAssignment_2 : ( ruleExpressionRule ) ;
+    // InternalOptimisationLanguage.g:7979:1: rule__AttributeRule__ValueAssignment_2 : ( ruleExpressionRule ) ;
     public final void rule__AttributeRule__ValueAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:7956:1: ( ( ruleExpressionRule ) )
-            // InternalOptimisationLanguage.g:7957:2: ( ruleExpressionRule )
+            // InternalOptimisationLanguage.g:7983:1: ( ( ruleExpressionRule ) )
+            // InternalOptimisationLanguage.g:7984:2: ( ruleExpressionRule )
             {
-            // InternalOptimisationLanguage.g:7957:2: ( ruleExpressionRule )
-            // InternalOptimisationLanguage.g:7958:3: ruleExpressionRule
+            // InternalOptimisationLanguage.g:7984:2: ( ruleExpressionRule )
+            // InternalOptimisationLanguage.g:7985:3: ruleExpressionRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeRuleAccess().getValueExpressionRuleParserRuleCall_2_0()); 
@@ -26095,17 +26202,17 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__RealLiteralRule__LiteralAssignment_0"
-    // InternalOptimisationLanguage.g:7967:1: rule__RealLiteralRule__LiteralAssignment_0 : ( RULE_DOUBLE ) ;
+    // InternalOptimisationLanguage.g:7994:1: rule__RealLiteralRule__LiteralAssignment_0 : ( RULE_DOUBLE ) ;
     public final void rule__RealLiteralRule__LiteralAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:7971:1: ( ( RULE_DOUBLE ) )
-            // InternalOptimisationLanguage.g:7972:2: ( RULE_DOUBLE )
+            // InternalOptimisationLanguage.g:7998:1: ( ( RULE_DOUBLE ) )
+            // InternalOptimisationLanguage.g:7999:2: ( RULE_DOUBLE )
             {
-            // InternalOptimisationLanguage.g:7972:2: ( RULE_DOUBLE )
-            // InternalOptimisationLanguage.g:7973:3: RULE_DOUBLE
+            // InternalOptimisationLanguage.g:7999:2: ( RULE_DOUBLE )
+            // InternalOptimisationLanguage.g:8000:3: RULE_DOUBLE
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getRealLiteralRuleAccess().getLiteralDOUBLETerminalRuleCall_0_0()); 
@@ -26136,17 +26243,17 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__RealLiteralRule__FactorAssignment_1"
-    // InternalOptimisationLanguage.g:7982:1: rule__RealLiteralRule__FactorAssignment_1 : ( ruleFactorRule ) ;
+    // InternalOptimisationLanguage.g:8009:1: rule__RealLiteralRule__FactorAssignment_1 : ( ruleFactorRule ) ;
     public final void rule__RealLiteralRule__FactorAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:7986:1: ( ( ruleFactorRule ) )
-            // InternalOptimisationLanguage.g:7987:2: ( ruleFactorRule )
+            // InternalOptimisationLanguage.g:8013:1: ( ( ruleFactorRule ) )
+            // InternalOptimisationLanguage.g:8014:2: ( ruleFactorRule )
             {
-            // InternalOptimisationLanguage.g:7987:2: ( ruleFactorRule )
-            // InternalOptimisationLanguage.g:7988:3: ruleFactorRule
+            // InternalOptimisationLanguage.g:8014:2: ( ruleFactorRule )
+            // InternalOptimisationLanguage.g:8015:3: ruleFactorRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getRealLiteralRuleAccess().getFactorFactorRuleEnumRuleCall_1_0()); 
@@ -26181,17 +26288,17 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__IntegerLiteralRule__LiteralAssignment_0"
-    // InternalOptimisationLanguage.g:7997:1: rule__IntegerLiteralRule__LiteralAssignment_0 : ( RULE_INT ) ;
+    // InternalOptimisationLanguage.g:8024:1: rule__IntegerLiteralRule__LiteralAssignment_0 : ( RULE_INT ) ;
     public final void rule__IntegerLiteralRule__LiteralAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:8001:1: ( ( RULE_INT ) )
-            // InternalOptimisationLanguage.g:8002:2: ( RULE_INT )
+            // InternalOptimisationLanguage.g:8028:1: ( ( RULE_INT ) )
+            // InternalOptimisationLanguage.g:8029:2: ( RULE_INT )
             {
-            // InternalOptimisationLanguage.g:8002:2: ( RULE_INT )
-            // InternalOptimisationLanguage.g:8003:3: RULE_INT
+            // InternalOptimisationLanguage.g:8029:2: ( RULE_INT )
+            // InternalOptimisationLanguage.g:8030:3: RULE_INT
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getIntegerLiteralRuleAccess().getLiteralINTTerminalRuleCall_0_0()); 
@@ -26222,17 +26329,17 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__IntegerLiteralRule__FactorAssignment_1"
-    // InternalOptimisationLanguage.g:8012:1: rule__IntegerLiteralRule__FactorAssignment_1 : ( ruleFactorRule ) ;
+    // InternalOptimisationLanguage.g:8039:1: rule__IntegerLiteralRule__FactorAssignment_1 : ( ruleFactorRule ) ;
     public final void rule__IntegerLiteralRule__FactorAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:8016:1: ( ( ruleFactorRule ) )
-            // InternalOptimisationLanguage.g:8017:2: ( ruleFactorRule )
+            // InternalOptimisationLanguage.g:8043:1: ( ( ruleFactorRule ) )
+            // InternalOptimisationLanguage.g:8044:2: ( ruleFactorRule )
             {
-            // InternalOptimisationLanguage.g:8017:2: ( ruleFactorRule )
-            // InternalOptimisationLanguage.g:8018:3: ruleFactorRule
+            // InternalOptimisationLanguage.g:8044:2: ( ruleFactorRule )
+            // InternalOptimisationLanguage.g:8045:3: ruleFactorRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getIntegerLiteralRuleAccess().getFactorFactorRuleEnumRuleCall_1_0()); 
@@ -26267,17 +26374,17 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__StringLiteralRule__LiteralAssignment"
-    // InternalOptimisationLanguage.g:8027:1: rule__StringLiteralRule__LiteralAssignment : ( RULE_STRING ) ;
+    // InternalOptimisationLanguage.g:8054:1: rule__StringLiteralRule__LiteralAssignment : ( RULE_STRING ) ;
     public final void rule__StringLiteralRule__LiteralAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:8031:1: ( ( RULE_STRING ) )
-            // InternalOptimisationLanguage.g:8032:2: ( RULE_STRING )
+            // InternalOptimisationLanguage.g:8058:1: ( ( RULE_STRING ) )
+            // InternalOptimisationLanguage.g:8059:2: ( RULE_STRING )
             {
-            // InternalOptimisationLanguage.g:8032:2: ( RULE_STRING )
-            // InternalOptimisationLanguage.g:8033:3: RULE_STRING
+            // InternalOptimisationLanguage.g:8059:2: ( RULE_STRING )
+            // InternalOptimisationLanguage.g:8060:3: RULE_STRING
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getStringLiteralRuleAccess().getLiteralSTRINGTerminalRuleCall_0()); 
@@ -26308,23 +26415,23 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__BooleanLiteralRule__LiteralAssignment_1_0"
-    // InternalOptimisationLanguage.g:8042:1: rule__BooleanLiteralRule__LiteralAssignment_1_0 : ( ( 'true' ) ) ;
+    // InternalOptimisationLanguage.g:8069:1: rule__BooleanLiteralRule__LiteralAssignment_1_0 : ( ( 'true' ) ) ;
     public final void rule__BooleanLiteralRule__LiteralAssignment_1_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:8046:1: ( ( ( 'true' ) ) )
-            // InternalOptimisationLanguage.g:8047:2: ( ( 'true' ) )
+            // InternalOptimisationLanguage.g:8073:1: ( ( ( 'true' ) ) )
+            // InternalOptimisationLanguage.g:8074:2: ( ( 'true' ) )
             {
-            // InternalOptimisationLanguage.g:8047:2: ( ( 'true' ) )
-            // InternalOptimisationLanguage.g:8048:3: ( 'true' )
+            // InternalOptimisationLanguage.g:8074:2: ( ( 'true' ) )
+            // InternalOptimisationLanguage.g:8075:3: ( 'true' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getBooleanLiteralRuleAccess().getLiteralTrueKeyword_1_0_0()); 
             }
-            // InternalOptimisationLanguage.g:8049:3: ( 'true' )
-            // InternalOptimisationLanguage.g:8050:4: 'true'
+            // InternalOptimisationLanguage.g:8076:3: ( 'true' )
+            // InternalOptimisationLanguage.g:8077:4: 'true'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getBooleanLiteralRuleAccess().getLiteralTrueKeyword_1_0_0()); 
@@ -26361,17 +26468,17 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__AttributeDefinitionRule__ConstraintsAssignment_0"
-    // InternalOptimisationLanguage.g:8061:1: rule__AttributeDefinitionRule__ConstraintsAssignment_0 : ( ruleConstraintRule ) ;
+    // InternalOptimisationLanguage.g:8088:1: rule__AttributeDefinitionRule__ConstraintsAssignment_0 : ( ruleConstraintRule ) ;
     public final void rule__AttributeDefinitionRule__ConstraintsAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:8065:1: ( ( ruleConstraintRule ) )
-            // InternalOptimisationLanguage.g:8066:2: ( ruleConstraintRule )
+            // InternalOptimisationLanguage.g:8092:1: ( ( ruleConstraintRule ) )
+            // InternalOptimisationLanguage.g:8093:2: ( ruleConstraintRule )
             {
-            // InternalOptimisationLanguage.g:8066:2: ( ruleConstraintRule )
-            // InternalOptimisationLanguage.g:8067:3: ruleConstraintRule
+            // InternalOptimisationLanguage.g:8093:2: ( ruleConstraintRule )
+            // InternalOptimisationLanguage.g:8094:3: ruleConstraintRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeDefinitionRuleAccess().getConstraintsConstraintRuleParserRuleCall_0_0()); 
@@ -26406,17 +26513,17 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__AttributeDefinitionRule__NameAssignment_1"
-    // InternalOptimisationLanguage.g:8076:1: rule__AttributeDefinitionRule__NameAssignment_1 : ( ruleStringOrId ) ;
+    // InternalOptimisationLanguage.g:8103:1: rule__AttributeDefinitionRule__NameAssignment_1 : ( ruleStringOrId ) ;
     public final void rule__AttributeDefinitionRule__NameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:8080:1: ( ( ruleStringOrId ) )
-            // InternalOptimisationLanguage.g:8081:2: ( ruleStringOrId )
+            // InternalOptimisationLanguage.g:8107:1: ( ( ruleStringOrId ) )
+            // InternalOptimisationLanguage.g:8108:2: ( ruleStringOrId )
             {
-            // InternalOptimisationLanguage.g:8081:2: ( ruleStringOrId )
-            // InternalOptimisationLanguage.g:8082:3: ruleStringOrId
+            // InternalOptimisationLanguage.g:8108:2: ( ruleStringOrId )
+            // InternalOptimisationLanguage.g:8109:3: ruleStringOrId
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeDefinitionRuleAccess().getNameStringOrIdParserRuleCall_1_0()); 
@@ -26451,23 +26558,23 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__AttributeDefinitionRule__OptionalAssignment_3"
-    // InternalOptimisationLanguage.g:8091:1: rule__AttributeDefinitionRule__OptionalAssignment_3 : ( ( 'optional' ) ) ;
+    // InternalOptimisationLanguage.g:8118:1: rule__AttributeDefinitionRule__OptionalAssignment_3 : ( ( 'optional' ) ) ;
     public final void rule__AttributeDefinitionRule__OptionalAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:8095:1: ( ( ( 'optional' ) ) )
-            // InternalOptimisationLanguage.g:8096:2: ( ( 'optional' ) )
+            // InternalOptimisationLanguage.g:8122:1: ( ( ( 'optional' ) ) )
+            // InternalOptimisationLanguage.g:8123:2: ( ( 'optional' ) )
             {
-            // InternalOptimisationLanguage.g:8096:2: ( ( 'optional' ) )
-            // InternalOptimisationLanguage.g:8097:3: ( 'optional' )
+            // InternalOptimisationLanguage.g:8123:2: ( ( 'optional' ) )
+            // InternalOptimisationLanguage.g:8124:3: ( 'optional' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeDefinitionRuleAccess().getOptionalOptionalKeyword_3_0()); 
             }
-            // InternalOptimisationLanguage.g:8098:3: ( 'optional' )
-            // InternalOptimisationLanguage.g:8099:4: 'optional'
+            // InternalOptimisationLanguage.g:8125:3: ( 'optional' )
+            // InternalOptimisationLanguage.g:8126:4: 'optional'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeDefinitionRuleAccess().getOptionalOptionalKeyword_3_0()); 
@@ -26504,17 +26611,17 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__AttributeDefinitionRule__TypeAssignment_4"
-    // InternalOptimisationLanguage.g:8110:1: rule__AttributeDefinitionRule__TypeAssignment_4 : ( ruleTypeRule ) ;
+    // InternalOptimisationLanguage.g:8137:1: rule__AttributeDefinitionRule__TypeAssignment_4 : ( ruleTypeRule ) ;
     public final void rule__AttributeDefinitionRule__TypeAssignment_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:8114:1: ( ( ruleTypeRule ) )
-            // InternalOptimisationLanguage.g:8115:2: ( ruleTypeRule )
+            // InternalOptimisationLanguage.g:8141:1: ( ( ruleTypeRule ) )
+            // InternalOptimisationLanguage.g:8142:2: ( ruleTypeRule )
             {
-            // InternalOptimisationLanguage.g:8115:2: ( ruleTypeRule )
-            // InternalOptimisationLanguage.g:8116:3: ruleTypeRule
+            // InternalOptimisationLanguage.g:8142:2: ( ruleTypeRule )
+            // InternalOptimisationLanguage.g:8143:3: ruleTypeRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeDefinitionRuleAccess().getTypeTypeRuleParserRuleCall_4_0()); 
@@ -26549,17 +26656,17 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__AttributeDefinitionRule__InitialisationAssignment_5_1"
-    // InternalOptimisationLanguage.g:8125:1: rule__AttributeDefinitionRule__InitialisationAssignment_5_1 : ( ruleExpressionRule ) ;
+    // InternalOptimisationLanguage.g:8152:1: rule__AttributeDefinitionRule__InitialisationAssignment_5_1 : ( ruleExpressionRule ) ;
     public final void rule__AttributeDefinitionRule__InitialisationAssignment_5_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:8129:1: ( ( ruleExpressionRule ) )
-            // InternalOptimisationLanguage.g:8130:2: ( ruleExpressionRule )
+            // InternalOptimisationLanguage.g:8156:1: ( ( ruleExpressionRule ) )
+            // InternalOptimisationLanguage.g:8157:2: ( ruleExpressionRule )
             {
-            // InternalOptimisationLanguage.g:8130:2: ( ruleExpressionRule )
-            // InternalOptimisationLanguage.g:8131:3: ruleExpressionRule
+            // InternalOptimisationLanguage.g:8157:2: ( ruleExpressionRule )
+            // InternalOptimisationLanguage.g:8158:3: ruleExpressionRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeDefinitionRuleAccess().getInitialisationExpressionRuleParserRuleCall_5_1_0()); 
@@ -26594,23 +26701,23 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__EnumReferenceRule__DefinitionAssignment_1"
-    // InternalOptimisationLanguage.g:8140:1: rule__EnumReferenceRule__DefinitionAssignment_1 : ( ( ruleQualifiedName ) ) ;
+    // InternalOptimisationLanguage.g:8167:1: rule__EnumReferenceRule__DefinitionAssignment_1 : ( ( ruleQualifiedName ) ) ;
     public final void rule__EnumReferenceRule__DefinitionAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:8144:1: ( ( ( ruleQualifiedName ) ) )
-            // InternalOptimisationLanguage.g:8145:2: ( ( ruleQualifiedName ) )
+            // InternalOptimisationLanguage.g:8171:1: ( ( ( ruleQualifiedName ) ) )
+            // InternalOptimisationLanguage.g:8172:2: ( ( ruleQualifiedName ) )
             {
-            // InternalOptimisationLanguage.g:8145:2: ( ( ruleQualifiedName ) )
-            // InternalOptimisationLanguage.g:8146:3: ( ruleQualifiedName )
+            // InternalOptimisationLanguage.g:8172:2: ( ( ruleQualifiedName ) )
+            // InternalOptimisationLanguage.g:8173:3: ( ruleQualifiedName )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getEnumReferenceRuleAccess().getDefinitionEnumDefinitionCrossReference_1_0()); 
             }
-            // InternalOptimisationLanguage.g:8147:3: ( ruleQualifiedName )
-            // InternalOptimisationLanguage.g:8148:4: ruleQualifiedName
+            // InternalOptimisationLanguage.g:8174:3: ( ruleQualifiedName )
+            // InternalOptimisationLanguage.g:8175:4: ruleQualifiedName
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getEnumReferenceRuleAccess().getDefinitionEnumDefinitionQualifiedNameParserRuleCall_1_0_1()); 
@@ -26651,23 +26758,23 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__TypeReferenceRule__DefinitionAssignment_1"
-    // InternalOptimisationLanguage.g:8159:1: rule__TypeReferenceRule__DefinitionAssignment_1 : ( ( ruleQualifiedName ) ) ;
+    // InternalOptimisationLanguage.g:8186:1: rule__TypeReferenceRule__DefinitionAssignment_1 : ( ( ruleQualifiedName ) ) ;
     public final void rule__TypeReferenceRule__DefinitionAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:8163:1: ( ( ( ruleQualifiedName ) ) )
-            // InternalOptimisationLanguage.g:8164:2: ( ( ruleQualifiedName ) )
+            // InternalOptimisationLanguage.g:8190:1: ( ( ( ruleQualifiedName ) ) )
+            // InternalOptimisationLanguage.g:8191:2: ( ( ruleQualifiedName ) )
             {
-            // InternalOptimisationLanguage.g:8164:2: ( ( ruleQualifiedName ) )
-            // InternalOptimisationLanguage.g:8165:3: ( ruleQualifiedName )
+            // InternalOptimisationLanguage.g:8191:2: ( ( ruleQualifiedName ) )
+            // InternalOptimisationLanguage.g:8192:3: ( ruleQualifiedName )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTypeReferenceRuleAccess().getDefinitionClassDefinitionCrossReference_1_0()); 
             }
-            // InternalOptimisationLanguage.g:8166:3: ( ruleQualifiedName )
-            // InternalOptimisationLanguage.g:8167:4: ruleQualifiedName
+            // InternalOptimisationLanguage.g:8193:3: ( ruleQualifiedName )
+            // InternalOptimisationLanguage.g:8194:4: ruleQualifiedName
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTypeReferenceRuleAccess().getDefinitionClassDefinitionQualifiedNameParserRuleCall_1_0_1()); 
@@ -26708,17 +26815,17 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__ArrayTypeRule__ElementsAssignment_1"
-    // InternalOptimisationLanguage.g:8178:1: rule__ArrayTypeRule__ElementsAssignment_1 : ( ruleTypeRule ) ;
+    // InternalOptimisationLanguage.g:8205:1: rule__ArrayTypeRule__ElementsAssignment_1 : ( ruleTypeRule ) ;
     public final void rule__ArrayTypeRule__ElementsAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:8182:1: ( ( ruleTypeRule ) )
-            // InternalOptimisationLanguage.g:8183:2: ( ruleTypeRule )
+            // InternalOptimisationLanguage.g:8209:1: ( ( ruleTypeRule ) )
+            // InternalOptimisationLanguage.g:8210:2: ( ruleTypeRule )
             {
-            // InternalOptimisationLanguage.g:8183:2: ( ruleTypeRule )
-            // InternalOptimisationLanguage.g:8184:3: ruleTypeRule
+            // InternalOptimisationLanguage.g:8210:2: ( ruleTypeRule )
+            // InternalOptimisationLanguage.g:8211:3: ruleTypeRule
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getArrayTypeRuleAccess().getElementsTypeRuleParserRuleCall_1_0()); 
@@ -26752,21 +26859,66 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
     // $ANTLR end "rule__ArrayTypeRule__ElementsAssignment_1"
 
 
-    // $ANTLR start "rule__ParameterRule__TypeAssignment_0"
-    // InternalOptimisationLanguage.g:8193:1: rule__ParameterRule__TypeAssignment_0 : ( ruleTypeRule ) ;
-    public final void rule__ParameterRule__TypeAssignment_0() throws RecognitionException {
+    // $ANTLR start "rule__ParameterRule__ConstraintsAssignment_0"
+    // InternalOptimisationLanguage.g:8220:1: rule__ParameterRule__ConstraintsAssignment_0 : ( ruleConstraintRule ) ;
+    public final void rule__ParameterRule__ConstraintsAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:8197:1: ( ( ruleTypeRule ) )
-            // InternalOptimisationLanguage.g:8198:2: ( ruleTypeRule )
+            // InternalOptimisationLanguage.g:8224:1: ( ( ruleConstraintRule ) )
+            // InternalOptimisationLanguage.g:8225:2: ( ruleConstraintRule )
             {
-            // InternalOptimisationLanguage.g:8198:2: ( ruleTypeRule )
-            // InternalOptimisationLanguage.g:8199:3: ruleTypeRule
+            // InternalOptimisationLanguage.g:8225:2: ( ruleConstraintRule )
+            // InternalOptimisationLanguage.g:8226:3: ruleConstraintRule
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getParameterRuleAccess().getTypeTypeRuleParserRuleCall_0_0()); 
+               before(grammarAccess.getParameterRuleAccess().getConstraintsConstraintRuleParserRuleCall_0_0()); 
+            }
+            pushFollow(FOLLOW_2);
+            ruleConstraintRule();
+
+            state._fsp--;
+            if (state.failed) return ;
+            if ( state.backtracking==0 ) {
+               after(grammarAccess.getParameterRuleAccess().getConstraintsConstraintRuleParserRuleCall_0_0()); 
+            }
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__ParameterRule__ConstraintsAssignment_0"
+
+
+    // $ANTLR start "rule__ParameterRule__TypeAssignment_1"
+    // InternalOptimisationLanguage.g:8235:1: rule__ParameterRule__TypeAssignment_1 : ( ruleTypeRule ) ;
+    public final void rule__ParameterRule__TypeAssignment_1() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalOptimisationLanguage.g:8239:1: ( ( ruleTypeRule ) )
+            // InternalOptimisationLanguage.g:8240:2: ( ruleTypeRule )
+            {
+            // InternalOptimisationLanguage.g:8240:2: ( ruleTypeRule )
+            // InternalOptimisationLanguage.g:8241:3: ruleTypeRule
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getParameterRuleAccess().getTypeTypeRuleParserRuleCall_1_0()); 
             }
             pushFollow(FOLLOW_2);
             ruleTypeRule();
@@ -26774,7 +26926,7 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getParameterRuleAccess().getTypeTypeRuleParserRuleCall_0_0()); 
+               after(grammarAccess.getParameterRuleAccess().getTypeTypeRuleParserRuleCall_1_0()); 
             }
 
             }
@@ -26794,24 +26946,24 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
         }
         return ;
     }
-    // $ANTLR end "rule__ParameterRule__TypeAssignment_0"
+    // $ANTLR end "rule__ParameterRule__TypeAssignment_1"
 
 
-    // $ANTLR start "rule__ParameterRule__NameAssignment_1"
-    // InternalOptimisationLanguage.g:8208:1: rule__ParameterRule__NameAssignment_1 : ( ruleStringOrId ) ;
-    public final void rule__ParameterRule__NameAssignment_1() throws RecognitionException {
+    // $ANTLR start "rule__ParameterRule__NameAssignment_2"
+    // InternalOptimisationLanguage.g:8250:1: rule__ParameterRule__NameAssignment_2 : ( ruleStringOrId ) ;
+    public final void rule__ParameterRule__NameAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:8212:1: ( ( ruleStringOrId ) )
-            // InternalOptimisationLanguage.g:8213:2: ( ruleStringOrId )
+            // InternalOptimisationLanguage.g:8254:1: ( ( ruleStringOrId ) )
+            // InternalOptimisationLanguage.g:8255:2: ( ruleStringOrId )
             {
-            // InternalOptimisationLanguage.g:8213:2: ( ruleStringOrId )
-            // InternalOptimisationLanguage.g:8214:3: ruleStringOrId
+            // InternalOptimisationLanguage.g:8255:2: ( ruleStringOrId )
+            // InternalOptimisationLanguage.g:8256:3: ruleStringOrId
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getParameterRuleAccess().getNameStringOrIdParserRuleCall_1_0()); 
+               before(grammarAccess.getParameterRuleAccess().getNameStringOrIdParserRuleCall_2_0()); 
             }
             pushFollow(FOLLOW_2);
             ruleStringOrId();
@@ -26819,7 +26971,7 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getParameterRuleAccess().getNameStringOrIdParserRuleCall_1_0()); 
+               after(grammarAccess.getParameterRuleAccess().getNameStringOrIdParserRuleCall_2_0()); 
             }
 
             }
@@ -26839,21 +26991,21 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
         }
         return ;
     }
-    // $ANTLR end "rule__ParameterRule__NameAssignment_1"
+    // $ANTLR end "rule__ParameterRule__NameAssignment_2"
 
 
     // $ANTLR start "rule__ImportRule__LanguageAssignment_1"
-    // InternalOptimisationLanguage.g:8223:1: rule__ImportRule__LanguageAssignment_1 : ( RULE_STRING ) ;
+    // InternalOptimisationLanguage.g:8265:1: rule__ImportRule__LanguageAssignment_1 : ( RULE_STRING ) ;
     public final void rule__ImportRule__LanguageAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:8227:1: ( ( RULE_STRING ) )
-            // InternalOptimisationLanguage.g:8228:2: ( RULE_STRING )
+            // InternalOptimisationLanguage.g:8269:1: ( ( RULE_STRING ) )
+            // InternalOptimisationLanguage.g:8270:2: ( RULE_STRING )
             {
-            // InternalOptimisationLanguage.g:8228:2: ( RULE_STRING )
-            // InternalOptimisationLanguage.g:8229:3: RULE_STRING
+            // InternalOptimisationLanguage.g:8270:2: ( RULE_STRING )
+            // InternalOptimisationLanguage.g:8271:3: RULE_STRING
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getImportRuleAccess().getLanguageSTRINGTerminalRuleCall_1_0()); 
@@ -26884,17 +27036,17 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__ImportRule__ImportedNamespaceAssignment_3"
-    // InternalOptimisationLanguage.g:8238:1: rule__ImportRule__ImportedNamespaceAssignment_3 : ( ruleQualifiedName ) ;
+    // InternalOptimisationLanguage.g:8280:1: rule__ImportRule__ImportedNamespaceAssignment_3 : ( ruleQualifiedName ) ;
     public final void rule__ImportRule__ImportedNamespaceAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:8242:1: ( ( ruleQualifiedName ) )
-            // InternalOptimisationLanguage.g:8243:2: ( ruleQualifiedName )
+            // InternalOptimisationLanguage.g:8284:1: ( ( ruleQualifiedName ) )
+            // InternalOptimisationLanguage.g:8285:2: ( ruleQualifiedName )
             {
-            // InternalOptimisationLanguage.g:8243:2: ( ruleQualifiedName )
-            // InternalOptimisationLanguage.g:8244:3: ruleQualifiedName
+            // InternalOptimisationLanguage.g:8285:2: ( ruleQualifiedName )
+            // InternalOptimisationLanguage.g:8286:3: ruleQualifiedName
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getImportRuleAccess().getImportedNamespaceQualifiedNameParserRuleCall_3_0()); 
@@ -26927,10 +27079,10 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
     }
     // $ANTLR end "rule__ImportRule__ImportedNamespaceAssignment_3"
 
-    // $ANTLR start synpred86_InternalOptimisationLanguage
-    public final void synpred86_InternalOptimisationLanguage_fragment() throws RecognitionException {   
-        // InternalOptimisationLanguage.g:6945:3: ( rule__QualifiedName__Group_1__0 )
-        // InternalOptimisationLanguage.g:6945:3: rule__QualifiedName__Group_1__0
+    // $ANTLR start synpred87_InternalOptimisationLanguage
+    public final void synpred87_InternalOptimisationLanguage_fragment() throws RecognitionException {   
+        // InternalOptimisationLanguage.g:6972:3: ( rule__QualifiedName__Group_1__0 )
+        // InternalOptimisationLanguage.g:6972:3: rule__QualifiedName__Group_1__0
         {
         pushFollow(FOLLOW_2);
         rule__QualifiedName__Group_1__0();
@@ -26940,15 +27092,15 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
         }
     }
-    // $ANTLR end synpred86_InternalOptimisationLanguage
+    // $ANTLR end synpred87_InternalOptimisationLanguage
 
     // Delegated rules
 
-    public final boolean synpred86_InternalOptimisationLanguage() {
+    public final boolean synpred87_InternalOptimisationLanguage() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred86_InternalOptimisationLanguage_fragment(); // can never throw exception
+            synpred87_InternalOptimisationLanguage_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }

@@ -1,0 +1,18 @@
+import "definitions" from 'de.evoal.core.constraints';
+
+/**
+ * Functions for the tests of parameter annotations.
+ */
+module 'de.evoal.core.test.parameters.functions' {
+    /**
+     * A function whose parameters state rules: an ordinal feature and a weight in [0, 1].
+     */
+    def void weigh(@RequiresScale { minimum := 'measurement-scale.ordinal'; features := path "."; } data feature,
+                   @LowerBoundary { boundary := 0.0; inclusive := true; }
+                   @UpperBoundary { boundary := 1.0; inclusive := true; } real weight);
+
+    /**
+     * A function whose parameter needs at least two elements.
+     */
+    def void group(@MinimumNumberOfElements { bound := 2; } array data features);
+}

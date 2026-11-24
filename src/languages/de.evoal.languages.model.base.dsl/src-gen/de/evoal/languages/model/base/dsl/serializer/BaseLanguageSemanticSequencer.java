@@ -717,20 +717,11 @@ public class BaseLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 	 *     ParameterRule returns Parameter
 	 *
 	 * Constraint:
-	 *     (type=TypeRule name=StringOrId)
+	 *     (constraints+=ConstraintRule* type=TypeRule name=StringOrId)
 	 * </pre>
 	 */
 	protected void sequence_ParameterRule(ISerializationContext context, de.evoal.languages.model.base.definitions.Parameter semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, DefinitionsPackage.Literals.PARAMETER__TYPE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DefinitionsPackage.Literals.PARAMETER__TYPE));
-			if (transientValues.isValueTransient(semanticObject, DefinitionsPackage.Literals.DEFINITION__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DefinitionsPackage.Literals.DEFINITION__NAME));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getParameterRuleAccess().getTypeTypeRuleParserRuleCall_0_0(), semanticObject.getType());
-		feeder.accept(grammarAccess.getParameterRuleAccess().getNameStringOrIdParserRuleCall_1_0(), semanticObject.getName());
-		feeder.finish();
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
