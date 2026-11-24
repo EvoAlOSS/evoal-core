@@ -85,13 +85,63 @@ set once per execution (`write` or `execute`); a later execution replaces it.
 
 | DL module | Components |
 |---|---|
-| `de.evoal.pipeline.distributions` | `'distribution-based-data'` (processor), `'noise-data'`; distributions `'normal-distribution'`, `'uniform-distribution'`, `'log-normal-distribution'`, `'multivariate-normal-distribution'`, `'copula-distribution'`; point sets `'random-points'`, `'sobol-sequence'`; randomisations `'no-randomisation'`, `'random-shift'`; copulas `'independence-copula'`, `'gaussian-copula'` |
+| `de.evoal.pipeline.distributions` | `'distribution-based-data'` (processor), `'noise-data'`; distributions `'normal-distribution'`, `'uniform-distribution'`, `'log-normal-distribution'`, `'truncated-normal-distribution'`, `'triangular-distribution'`, `'beta-distribution'`, `'exponential-distribution'`, `'gamma-distribution'`, `'weibull-distribution'`, `'bernoulli-distribution'`, `'binomial-distribution'`, `'poisson-distribution'`, `'categorical-distribution'`, `'gaussian-mixture-distribution'`, `'multivariate-normal-distribution'`, `'copula-distribution'`; point sets `'random-points'`, `'sobol-sequence'`; randomisations `'no-randomisation'`, `'random-shift'`; copulas `'independence-copula'`, `'gaussian-copula'` |
 | `de.evoal.pipeline.benchmarks` | `ackley`, `forrester`, `rastrigin`, `rosenbrock`, `'weighted-sphere'`, `zdt1` |
 | `de.evoal.pipeline.sequences` | `'sequence-generator'` (processor) with `'expression-based-sequence'` |
 | `de.evoal.pipeline.io` | `reader` (source), `writer`, `empty`, sinks `template` and `'csv-writer'` |
 | `de.evoal.pipeline.statistics` | sink `'correlation-estimation'` |
 | `de.evoal.pipeline.misc` | `constants`, `limit`, filters `'condition-filter'`, `'constraint-validation'` and `'rejection-sampling'` |
 | `de.evoal.pipeline.optimisation` | `'benchmark-function'`: the benchmarks as optimisation function of a search |
+
+### Univariate distributions
+
+A `'univariate-distribution'` (`UnivariateDistribution`) gives one value per sample and has a
+quantile function F⁻¹ (`quantile`), which copulas use for their marginals.
+
+- `'normal-distribution'`, `'uniform-distribution'` and `'log-normal-distribution'` sample
+  directly from their random stream (`nextGaussian`, `nextDouble`).
+- The others extend `InversionDistribution`: a sample is F⁻¹(u) of the next uniform number u of
+  their stream (Devroye 1986), so a copula or a Sobol' sequence that maps its points through the
+  quantile gives the same distribution. `init` reads the parameters (`configure`) and takes the
+  stream of the CDI name (`name`).
+  - `'truncated-normal-distribution'` (`TruncatedNormalDistribution`): μ + σ·Φ⁻¹(Φ(α) +
+    p·(Φ(β) − Φ(α))) with the standardised bounds α and β; if both lie above μ, it computes on the
+    mirrored side, where Φ is small and keeps its precision. An interval whose probability is 0 in
+    double precision (bounds beyond about 37σ on one side) is rejected at start-up.
+  - `'triangular-distribution'` (Kotz and van Dorp 2004), `'exponential-distribution'` and
+    `'weibull-distribution'` have closed-form quantiles (`EvoalMath.log1p` for −ln(1 − p)).
+  - `'gamma-distribution'` and `'beta-distribution'` use the numerical quantiles of Commons Math
+    (absolute accuracy 1e-9); the beta distribution is scaled from [0, 1] to [`lower`, `upper`].
+- `'gaussian-mixture-distribution'` (`GaussianMixtureDistribution`, McLachlan and Peel 2000):
+  F(x) = Σ wᵢ·Φ((x − μᵢ)/σᵢ). Brent's method (Commons Math, absolute accuracy 1e-12 of the
+  largest σᵢ) solves F(x) = p below the median and S(x) = 1 − p with S(x) = Σ wᵢ·Φ((μᵢ − x)/σᵢ)
+  above it, in [min(μᵢ − 40σᵢ), max(μᵢ + 40σᵢ)]; both tails keep their precision. It checks at
+  start-up what the DL cannot: equal lengths, non-negative weights with the sum 1 (± 1e-9), and
+  positive σᵢ.
+- `DiscreteDistribution` (`'discrete-distribution'`, Johnson, Kemp and Kotz 2005) marks its
+  value as discrete (`isDiscrete`); its quantile is the smallest k with F(k) ≥ p.
+  - `'bernoulli-distribution'` compares p with 1 − `p`; `'binomial-distribution'` and
+    `'poisson-distribution'` use the quantiles of Commons Math (Poisson: +∞ at p = 1).
+  - `'categorical-distribution'` (`isCategorical`) searches the cumulative probabilities in the order of the
+    list. It checks at start-up what the DL cannot: one probability per value, none negative,
+    and the sum 1 (± 1e-9; it divides by the sum).
+- The DL checks the parameters (`@LowerBoundary`, `@UpperBoundary`, `@MultiVariateConstraint`),
+  so the classes do not repeat these checks.
+
+### `'distribution-based-data'`
+
+Every `Distribution` states the number of values per sample (`dimension`), which of them are
+whole numbers (`isDiscrete`) and which name categories (`isCategorical`); a copula takes these
+from its marginals. `DistributionBasedData` checks at start-up (`init`, after `setFeatures`)
+that the distributions give one value per written data, that a discrete value goes to integer
+data and every other value to real data (`EClassifierHelper`), and that a categorical value goes
+to nominal or ordinal data (the scale of the data description, `EAnnotationHelper`; data without
+a scale is nominal, the default of the DDL; typed data takes the scale of its type, read from the
+type because the derived `getScale()` of typed data returns `null`). It writes a discrete value as an `int`, any other as a `double`.
+`'noise-data'` adds its values to real data and has no such check.
+- `StandardNormal` gives Φ (Commons Math, from erfc) and Φ⁻¹ (Wichura's AS 241,
+  doi:10.2307/2347330, relative error about 1e-16). Commons Math's own Φ⁻¹ computes
+  erf⁻¹(2p − 1), which loses the digits of a small p.
 
 ### Uniform point sets and low-discrepancy sequences
 
@@ -125,10 +175,7 @@ A `'copula-distribution'` (`CopulaDistribution`) couples univariate marginals by
 `copula` and maps the j-th value uⱼ to the quantile Fⱼ⁻¹(uⱼ) of the j-th marginal. None of the
 three attributes has a default.
 
-- Marginals are `'univariate-distribution'`s (`UnivariateDistribution`, with `quantile`):
-  `'normal-distribution'`, `'uniform-distribution'` and `'log-normal-distribution'` (μ and σ of
-  ln X). Φ and Φ⁻¹ come from Commons Math (`StandardNormal`); in the far tails (p < 1e-10), Φ⁻¹
-  loses relative precision, but its absolute error stays around 1e-7.
+- Marginals are `'univariate-distribution'`s (see above).
 - `points` is a uniform point set on the unit cube (every lower bound 0, every upper bound 1)
   with as many dimensions as the copula needs (`Copula.pointDimension`); otherwise the
   configuration is rejected. With `'random-points'` the data is random, with a low-discrepancy
@@ -139,8 +186,9 @@ three attributes has a default.
   maps u to Φ(A·Φ⁻¹(u)) with the symmetric square root A of R (`CorrelatedGaussianSampler`,
   which also accepts a singular R). R has to be symmetric, with ones on the diagonal and positive
   semi-definite; it is rejected otherwise, not repaired. With normal marginals, the data has the
-  Pearson correlation R; for any marginals, Spearman ρ_S = (6/π)·arcsin(ρ/2) and Kendall
-  τ = (2/π)·arcsin ρ (Kruskal 1958).
+  Pearson correlation R; for any continuous marginals, Spearman ρ_S = (6/π)·arcsin(ρ/2) and
+  Kendall τ = (2/π)·arcsin ρ (Kruskal 1958). A discrete marginal maps a range of normal scores
+  to one value; these ties lower the measured correlations, which the copula does not correct.
 - A non-finite value stops the run with an error: a coordinate 0 maps to −∞ for a marginal
   without lower bound, e.g. for the first point of a Sobol' sequence with `'no-randomisation'`.
 - Every marginal takes a stream of its type, so a later distribution of the same type in the
@@ -197,5 +245,6 @@ nested values are rejected; an empty list writes an empty file.
 | `generator-rejection-sampling` | data with the density 2x by rejection sampling (`'rejection-sampling'`) |
 | `generator-sobol-sequence` | evenly covering data from a randomly shifted Sobol' sequence, compared with uniform data |
 | `generator-gaussian-copula` | a normal and a log-normal variable coupled by a Gaussian copula on Sobol' points; Pearson vs. Spearman |
+| `generator-distributions` | parts with properties from truncated normal, triangular, beta, Weibull, Poisson, categorical and Gaussian mixture distributions; integer and nominal data; a copula with a discrete marginal |
 | `correlation-estimation` | estimating correlations from data, rendering them into a DDL module and using them in a search |
 | `search-with-benchmark`, `search-with-benchmark-and-target`, `search-with-benchmark-and-training` | the benchmarks as optimisation function |

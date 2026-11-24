@@ -1,0 +1,78 @@
+import "definitions" from 'de.evoal.core.math';
+import "definitions" from 'de.evoal.pipeline.base';
+import "definitions" from 'de.evoal.pipeline.distributions';
+import "definitions" from 'de.evoal.pipeline.io';
+
+import "data" from parts;
+
+module 'parts' {
+	/**
+	 * One row per part. The first six values are independent; the load and the tool failures
+	 *   are coupled by a Gaussian copula with the correlation 0.7 of the normal scores.
+	 */
+	pipeline 'parts-pipeline' [
+		step {
+			component 'distribution-based-data' {
+				distributions := [
+					'truncated-normal-distribution' {
+						'μ' := 2.0;
+						'σ' := 0.1;
+						'lower' := 1.85;
+						'upper' := 2.15;
+					},
+					'triangular-distribution' {
+						'a' := 40.0;
+						'c' := 45.0;
+						'b' := 60.0;
+					},
+					'beta-distribution' {
+						'α' := 8.0;
+						'β' := 2.0;
+					},
+					'weibull-distribution' {
+						'k' := 1.5;
+						'λ' := 1000.0;
+					},
+					'poisson-distribution' {
+						'λ' := 2.0;
+					},
+					'categorical-distribution' {
+						'values' := [1, 2, 3];
+						'probabilities' := [0.5, 0.3, 0.2];
+					},
+					'copula-distribution' {
+						copula := 'gaussian-copula' {
+							correlation := [
+								[1.0, 0.7],
+								[0.7, 1.0]
+							];
+						};
+						marginals := [
+							'gaussian-mixture-distribution' {
+								'weights' := [0.6, 0.4];
+								'μ' := [50.0, 80.0];
+								'σ' := [5.0, 8.0];
+							},
+							'poisson-distribution' {
+								'λ' := 3.0;
+							}
+						];
+						points := 'sobol-sequence' {
+							'lower' := [0.0, 0.0];
+							'upper' := [1.0, 1.0];
+							'randomisation' := 'random-shift' {};
+						};
+					}
+				];
+			}
+
+			writes [data 'thickness', data 'cycle-time', data 'yield', data 'lifetime',
+			        data 'defects', data 'variant', data 'load', data 'failures'];
+		}
+	]
+
+	begin
+		// 2^10 rows: the Sobol' points of the copula are evenly balanced for powers of two
+		write "output/parts.csv" with 1024 samples from executing ['parts-pipeline'];
+	end
+}

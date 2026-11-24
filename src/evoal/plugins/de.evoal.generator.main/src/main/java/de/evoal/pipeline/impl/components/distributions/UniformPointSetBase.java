@@ -74,7 +74,8 @@ public abstract class UniformPointSetBase implements UniformPointSet {
     /**
      * @return The dimension d of the points, known after {@link #configureBox(double[], double[])}.
      */
-    protected int dimension() {
+    @Override
+    public int dimension() {
         return lower.length;
     }
 

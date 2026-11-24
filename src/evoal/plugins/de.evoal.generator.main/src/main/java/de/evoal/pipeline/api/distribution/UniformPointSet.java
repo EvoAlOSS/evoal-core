@@ -14,4 +14,12 @@ public interface UniformPointSet extends Distribution {
      * @return The upper bounds (exclusive) of the box, one per dimension (a copy).
      */
     double [] upper();
+
+    /**
+     * @return The dimension of the box.
+     */
+    @Override
+    default int dimension() {
+        return lower().length;
+    }
 }

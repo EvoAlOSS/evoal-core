@@ -41,6 +41,11 @@ public class MultivariateNormalDistribution implements Distribution {
     private CorrelatedGaussianSampler sampler;
 
     /**
+     * The number of means.
+     */
+    private int dimension;
+
+    /**
      * @throws IllegalArgumentException if the covariance matrix does not fit the means, or is not
      *   symmetric and positive semi-definite.
      */
@@ -50,9 +55,15 @@ public class MultivariateNormalDistribution implements Distribution {
         final double [][] covariance = evaluator.attributeToDoubleArrayArray(configuration, "covariance");
 
         sampler = new CorrelatedGaussianSampler(means, covariance);
+        dimension = means.length;
         randomness = randomStreams.forNewInstance(NAME);
 
         return this;
+    }
+
+    @Override
+    public int dimension() {
+        return dimension;
     }
 
     @Override

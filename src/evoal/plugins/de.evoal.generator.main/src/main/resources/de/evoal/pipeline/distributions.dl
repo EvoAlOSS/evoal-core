@@ -82,6 +82,254 @@ module 'de.evoal.pipeline.distributions' {
 	}
 
 	/**
+	 * Normal distribution N(μ, σ²) truncated to [lower, upper], e.g. for a measured quantity
+	 *   with physical limits. μ and σ are the parameters before the truncation, not the
+	 *   mean and standard deviation of the truncated distribution.
+	 *
+	 * A sample is F⁻¹(u) of a uniform u with
+	 *   F⁻¹(p) = μ + σ·Φ⁻¹(Φ(α) + p·(Φ(β) − Φ(α))), α = (lower − μ)/σ and β = (upper − μ)/σ.
+	 *   For a bound on one side only, place the other one far in the tail, e.g. μ + 10σ.
+	 */
+	@MultiVariateConstraint { 'expression' := self.'lower' < self.'upper'; }
+	@Literature { keys := ["devroye1986nonuniform"]; }
+	type 'truncated-normal-distribution' extends 'univariate-distribution' {
+		/**
+		 * The mean of the normal distribution before the truncation.
+		 */
+		'μ' : real;
+
+		/**
+		 * The standard deviation of the normal distribution before the truncation.
+		 */
+		@LowerBoundary { boundary := 0.0; inclusive := false; }
+		'σ' : real;
+
+		/**
+		 * The lower bound of the values.
+		 */
+		'lower' : real;
+
+		/**
+		 * The upper bound of the values, greater than the lower bound.
+		 */
+		'upper' : real;
+	}
+
+	/**
+	 * Triangular distribution with minimum a, mode c and maximum b: the density rises
+	 *   linearly from a to c and falls linearly from c to b. It suits an expert estimate given
+	 *   as "at least a, most likely c, at most b".
+	 */
+	@MultiVariateConstraint { 'expression' := self.'a' <= self.'c' AND self.'c' <= self.'b' AND self.'a' < self.'b'; }
+	@Literature { keys := ["kotz2004beyond"]; }
+	type 'triangular-distribution' extends 'univariate-distribution' {
+		/**
+		 * The minimum.
+		 */
+		'a' : real;
+
+		/**
+		 * The mode, between the minimum and the maximum.
+		 */
+		'c' : real;
+
+		/**
+		 * The maximum, greater than the minimum.
+		 */
+		'b' : real;
+	}
+
+	/**
+	 * Beta distribution with shapes α and β on [lower, upper]: X = lower + (upper − lower)·Y,
+	 *   where Y on [0, 1] has the density y^(α−1)·(1 − y)^(β−1) / B(α, β). α = β = 1 gives the
+	 *   uniform distribution; α, β > 1 give a single mode at
+	 *   lower + (upper − lower)·(α − 1)/(α + β − 2).
+	 */
+	@MultiVariateConstraint { 'expression' := self.'lower' < self.'upper'; }
+	@Literature { keys := ["devroye1986nonuniform"]; }
+	type 'beta-distribution' extends 'univariate-distribution' {
+		/**
+		 * The first shape parameter, positive.
+		 */
+		@LowerBoundary { boundary := 0.0; inclusive := false; }
+		'α' : real;
+
+		/**
+		 * The second shape parameter, positive.
+		 */
+		@LowerBoundary { boundary := 0.0; inclusive := false; }
+		'β' : real;
+
+		/**
+		 * The lower bound of the values.
+		 */
+		'lower' : real := 0.0;
+
+		/**
+		 * The upper bound of the values, greater than the lower bound.
+		 */
+		'upper' : real := 1.0;
+	}
+
+	/**
+	 * Exponential distribution with rate λ: F(x) = 1 − exp(−λx) for x ≥ 0, mean 1/λ. It
+	 *   describes waiting times between independent events.
+	 */
+	@Literature { keys := ["devroye1986nonuniform"]; }
+	type 'exponential-distribution' extends 'univariate-distribution' {
+		/**
+		 * The rate, positive.
+		 */
+		@LowerBoundary { boundary := 0.0; inclusive := false; }
+		'λ' : real;
+	}
+
+	/**
+	 * Gamma distribution with shape k and scale θ: density x^(k−1)·exp(−x/θ) / (Γ(k)·θ^k) for
+	 *   x > 0, mean kθ and variance kθ². It describes skewed positive values; k = 1 gives
+	 *   the exponential distribution with rate 1/θ.
+	 */
+	@Literature { keys := ["devroye1986nonuniform"]; }
+	type 'gamma-distribution' extends 'univariate-distribution' {
+		/**
+		 * The shape, positive.
+		 */
+		@LowerBoundary { boundary := 0.0; inclusive := false; }
+		'k' : real;
+
+		/**
+		 * The scale, positive.
+		 */
+		@LowerBoundary { boundary := 0.0; inclusive := false; }
+		'θ' : real;
+	}
+
+	/**
+	 * Weibull distribution with shape k and scale λ: F(x) = 1 − exp(−(x/λ)^k) for x ≥ 0. It
+	 *   describes lifetimes and strengths; k = 1 gives the exponential distribution with
+	 *   rate 1/λ.
+	 */
+	@Literature { keys := ["devroye1986nonuniform"]; }
+	type 'weibull-distribution' extends 'univariate-distribution' {
+		/**
+		 * The shape, positive.
+		 */
+		@LowerBoundary { boundary := 0.0; inclusive := false; }
+		'k' : real;
+
+		/**
+		 * The scale, positive.
+		 */
+		@LowerBoundary { boundary := 0.0; inclusive := false; }
+		'λ' : real;
+	}
+
+	/**
+	 * Univariate Gaussian mixture: with probability wᵢ, the value comes from N(μᵢ, σᵢ²), e.g. for
+	 *   a quantity with two operating points. The distribution function is
+	 *   F(x) = Σ wᵢ·Φ((x − μᵢ)/σᵢ); its quantile has no closed form and is found numerically
+	 *   (Brent's method).
+	 *
+	 * The three arrays have one entry per component. EvoAl checks at start-up that they have
+	 *   the same length, that the weights are not negative and sum to 1, and that every σᵢ is
+	 *   positive.
+	 */
+	@Literature { keys := ["mclachlan2000finite"]; }
+	type 'gaussian-mixture-distribution' extends 'univariate-distribution' {
+		/**
+		 * The weights wᵢ of the components.
+		 */
+		@MinimumNumberOfElements { bound := 1; }
+		'weights' : array real;
+
+		/**
+		 * The means μᵢ of the components.
+		 */
+		@MinimumNumberOfElements { bound := 1; }
+		'μ' : array real;
+
+		/**
+		 * The standard deviations σᵢ of the components.
+		 */
+		@MinimumNumberOfElements { bound := 1; }
+		'σ' : array real;
+	}
+
+	/**
+	 * Base type for distributions of whole numbers. 'distribution-based-data' writes their
+	 *   values to integer data only. The quantile is the smallest value k with F(k) ≥ p.
+	 */
+	@Literature { keys := ["johnson2005univariate"]; }
+	abstract type 'discrete-distribution' extends 'univariate-distribution' {}
+
+	/**
+	 * Bernoulli distribution: 1 with probability p, 0 otherwise, e.g. for a switch that is on or
+	 *   off.
+	 */
+	type 'bernoulli-distribution' extends 'discrete-distribution' {
+		/**
+		 * The probability of a 1, in [0, 1].
+		 */
+		@LowerBoundary { boundary := 0.0; }
+		@UpperBoundary { boundary := 1.0; }
+		'p' : real;
+	}
+
+	/**
+	 * Binomial distribution: the number of successes in n independent trials, each with the
+	 *   success probability p. Its values are 0 to n, with mean np.
+	 */
+	type 'binomial-distribution' extends 'discrete-distribution' {
+		/**
+		 * The number of trials, not negative.
+		 */
+		@LowerBoundary { boundary := 0; }
+		'n' : int;
+
+		/**
+		 * The success probability of a trial, in [0, 1].
+		 */
+		@LowerBoundary { boundary := 0.0; }
+		@UpperBoundary { boundary := 1.0; }
+		'p' : real;
+	}
+
+	/**
+	 * Poisson distribution with mean λ: the number of events in an interval in which they occur
+	 *   independently at the rate λ, e.g. defects per part or arrivals per hour.
+	 */
+	type 'poisson-distribution' extends 'discrete-distribution' {
+		/**
+		 * The mean number of events, positive.
+		 */
+		@LowerBoundary { boundary := 0.0; inclusive := false; }
+		'λ' : real;
+	}
+
+	/**
+	 * Categorical distribution: the i-th of the values with the i-th of the probabilities, e.g.
+	 *   for variants of a design numbered 1, 2 and 3. The values name categories, so
+	 *   'distribution-based-data' writes them to nominal or ordinal integer data only.
+	 *
+	 * The quantile follows the order of the list, not the order of the values: a copula point
+	 *   close to 0 gives the first value of the list. In a 'gaussian-copula', list the values
+	 *   in the order in which they should correlate with the other marginals.
+	 */
+	type 'categorical-distribution' extends 'discrete-distribution' {
+		/**
+		 * The values, whole numbers.
+		 */
+		@MinimumNumberOfElements { bound := 1; }
+		'values' : array int;
+
+		/**
+		 * The probability of each value: one per value, not negative, with the sum 1.
+		 */
+		@MinimumNumberOfElements { bound := 1; }
+		'probabilities' : array real;
+	}
+
+	/**
 	 * Base type for sets of points in the box [lower, upper) whose coordinates are uniformly
 	 *   distributed. Each sample is the next point.
 	 */
@@ -171,8 +419,12 @@ module 'de.evoal.pipeline.distributions' {
 	 *
 	 * R is the correlation of the normal scores Φ⁻¹(U), not of the data: with normal
 	 *   marginals, the data has the Pearson correlation R; with other marginals, Pearson's
-	 *   coefficient differs. The rank correlations follow from R for any marginals:
+	 *   coefficient differs. The rank correlations follow from R for any continuous marginals:
 	 *   Spearman ρ_S = (6/π)·arcsin(ρ/2) and Kendall τ = (2/π)·arcsin(ρ).
+	 *
+	 * A discrete marginal maps a range of normal scores to the same value. These ties lower
+	 *   every measured correlation with it below the values above; the copula does not correct
+	 *   for this.
 	 */
 	@Literature { keys := ["kruskal1958ordinal"]; }
 	type 'gaussian-copula' extends copula {
@@ -215,12 +467,14 @@ module 'de.evoal.pipeline.distributions' {
 	}
 
 	/**
-	 * Fills the written data of a row with samples of the distributions.
+	 * Fills the written data of a row with samples of the distributions, in the order of the
+	 *   distributions and their values. The values of a discrete distribution go to integer
+	 *   data, all other values to real data.
 	 */
 	type 'distribution-based-data' extends Processor {
 		/**
-		 * The different distributions to use. Make sure it matches the size of
-		 *   the data the function writes.
+		 * The distributions. Together, they give one value per written data; otherwise the
+		 *   run stops at start-up, as it does for a value whose data has the wrong type.
 		 */
 		distributions : array instance distribution;
 	}

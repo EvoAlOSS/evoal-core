@@ -14,7 +14,7 @@ import net.jafama.StrictFastMath;
  * The implementations are pure Java, so their results do not depend on the
  *   platform:
  * <ul>
- *   <li>{@link #cos}, {@link #exp}, {@link #log}, {@link #tanh}, and {@link #atanh} use Jafama's
+ *   <li>{@link #cos}, {@link #exp}, {@link #log}, {@link #log1p}, {@link #tanh}, and {@link #atanh} use Jafama's
  *     {@link StrictFastMath}, which is two to six times faster than
  *     {@link StrictMath}. The result differs from the exact one by at most
  *     4 ulp ({@code exp}), 1 ulp ({@code log}), or 6e-16 ({@code cos}).</li>
@@ -58,6 +58,14 @@ public final class EvoalMath {
      */
     public static double log(final double x) {
         return StrictFastMath.log(x);
+    }
+
+    /**
+     * @return ln(1 + {@code x}), accurate also for {@code x} close to 0, where
+     *   {@code log(1 + x)} loses the digits of {@code x}.
+     */
+    public static double log1p(final double x) {
+        return StrictFastMath.log1p(x);
     }
 
     /**

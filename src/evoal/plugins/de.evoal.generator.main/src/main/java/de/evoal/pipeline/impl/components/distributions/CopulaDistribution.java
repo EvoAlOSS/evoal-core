@@ -115,6 +115,30 @@ public class CopulaDistribution implements Distribution {
     }
 
     /**
+     * @return The number of marginals.
+     */
+    @Override
+    public int dimension() {
+        return marginals.size();
+    }
+
+    /**
+     * @return If the marginal of the value is discrete.
+     */
+    @Override
+    public boolean isDiscrete(final int index) {
+        return marginals.get(index).isDiscrete(0);
+    }
+
+    /**
+     * @return If the marginal of the value is categorical.
+     */
+    @Override
+    public boolean isCategorical(final int index) {
+        return marginals.get(index).isCategorical(0);
+    }
+
+    /**
      * @throws IllegalStateException if a value is not finite, e.g., because a coordinate 0 of the
      *   point maps to −∞ for a marginal without lower bound.
      */
