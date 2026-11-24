@@ -2,16 +2,16 @@
 // kernel density of input and prediction (kind 'both', former formula, see #288).
 // model.pson is the nearly constant SVR of the former adaption example; #288 chooses a new
 // model together with the new formulas.
-import "definitions" from de.evoal.core.math;
+import "definitions" from 'de.evoal.core.math';
 
-import "definitions" from de.evoal.optimisation.core;
-import "definitions" from de.evoal.optimisation.local_search.optimisation;
-import "definitions" from de.evoal.surrogate.optimisation;
+import "definitions" from 'de.evoal.optimisation.core';
+import "definitions" from 'de.evoal.optimisation.local_search.optimisation';
+import "definitions" from 'de.evoal.surrogate.optimisation';
 
-import "definitions" from de.evoal.surrogate.adaption.density.optimisation;
-import "definitions" from de.evoal.surrogate.adaption.interval.optimisation;
+import "definitions" from 'de.evoal.surrogate.adaption.density.optimisation';
+import "definitions" from 'de.evoal.surrogate.adaption.interval.optimisation';
 
-import "data" from surrogate;
+import "data" from 'surrogate';
 
 module 'search' {
     specify problem 'regression' {
@@ -46,7 +46,7 @@ module 'search' {
 
         'fitness-pipeline' := [
             'kernel-density' {
-                kind := "both";
+                kind := 'density-kind.both';
                 exponent := 2.0;
                 'root-exponent' := 1.0;
             }

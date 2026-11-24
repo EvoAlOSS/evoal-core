@@ -191,16 +191,24 @@ module de.evoal.optimisation.ea.optimisation {
     }
 
     /**
+     * Abstract base type of the recombinations that only exchange genes between the two
+     *   children, so every gene of a child comes from one of the parents. Blending
+     *   recombinations, which create new values (e.g. 'sbx-crossover'), are no gene exchange.
+     *   'linkage-crossover' wraps a gene exchange.
+     */
+    abstract type 'gene-exchange' extends recombination {}
+
+    /**
      * One-point crossover: a cut point is chosen uniformly between two
      *   genes, and the children exchange the genes after it.
      */
-    type 'single-point-crossover' extends recombination {}
+    type 'single-point-crossover' extends 'gene-exchange' {}
 
     /**
      * Multi-point crossover: 'points' different cut points are chosen
      *   uniformly between two genes, and the children exchange every second segment.
      */
-    type 'multi-point-crossover' extends recombination {
+    type 'multi-point-crossover' extends 'gene-exchange' {
         /**
          * The number of cut points; at most the number of genes minus 1.
          */
@@ -213,7 +221,7 @@ module de.evoal.optimisation.ea.optimisation {
      *   'swap-probability'.
      */
     @Literature { keys := ["syswerda1989uniform"]; }
-    type 'uniform-crossover' extends recombination {
+    type 'uniform-crossover' extends 'gene-exchange' {
         /**
          * The probability that a gene is exchanged.
          */
@@ -427,16 +435,14 @@ module de.evoal.optimisation.ea.optimisation {
      *   conserves it (Harik and Goldberg 1997, section 2); the operator conserves every group
      *   whose anchor comes from one parent. The relationships of the children record the
      *   property 'linked-features'.
-     *
-     * Only crossovers that exchange genes can be wrapped ('single-point-crossover',
-     *   'multi-point-crossover', 'uniform-crossover'); blending crossovers are rejected.
      */
     @Literature { keys := ["berger2024evoal", "harik1997learning"]; }
     type 'linkage-crossover' extends recombination {
         /**
-         * The crossover that exchanges the genes.
+         * The crossover that exchanges the genes: 'single-point-crossover',
+         *   'multi-point-crossover' or 'uniform-crossover'.
          */
-        crossover : instance recombination;
+        crossover : instance 'gene-exchange';
 
         /**
          * The smallest absolute correlation coefficient whose features are kept together;

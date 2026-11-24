@@ -1,6 +1,18 @@
-import "definitions" from de.evoal.optimisation.core;
+import "definitions" from 'de.evoal.optimisation.core';
 
 module de.evoal.surrogate.adaption.density.optimisation {
+    /**
+     * How a density adaption calculates the probability {@code p} of a candidate.
+     *   'source-based': the geometric mean of the densities of the candidate's input
+     *     values.
+     *   'target-based': the density of the predicted value.
+     *   'both': the product of the source-based and the target-based probability.
+     *
+     * Each density is offset by the inverse of its feature's range, and the probability
+     *   is at most 1.
+     */
+    nominal enum 'density-kind' ( 'source-based', 'target-based', both );
+
     /**
      * Base type of the density adaptions: fitness steps that adapt the objectives predicted
      *   by the surrogate by the probability density {@code p} of the candidate with respect
@@ -10,9 +22,9 @@ module de.evoal.surrogate.adaption.density.optimisation {
      */
     abstract type density extends 'fitness-step' {
         /**
-         * Which probability calculation should be used (source-based, target-based, both).
+         * How the probability is calculated.
          */
-        kind : string;
+        kind : enum 'density-kind';
 
         /**
          * Exponent of the probability in the penalty term.

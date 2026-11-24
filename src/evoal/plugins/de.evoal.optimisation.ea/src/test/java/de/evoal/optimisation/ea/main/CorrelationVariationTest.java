@@ -33,8 +33,6 @@ import de.evoal.optimisation.ea.main.correlation.Linkage;
 import de.evoal.optimisation.ea.main.operators.CorrelationAwareMutation;
 import de.evoal.optimisation.ea.main.operators.GaussianMutation;
 import de.evoal.optimisation.ea.main.operators.LinkageCrossover;
-import de.evoal.optimisation.ea.main.operators.SbxCrossover;
-import de.evoal.optimisation.ea.main.operators.SinglePointCrossover;
 import de.evoal.optimisation.ea.main.operators.UniformCrossover;
 import de.evoal.optimisation.ea.main.statistics.LinkageStatistics;
 
@@ -131,12 +129,6 @@ public class CorrelationVariationTest {
         Assertions.assertEquals(-0.5, (Double) a.input().eGet(y), 2.0 / 65535);
         Assertions.assertEquals(0.5, (Double) b.input().eGet(y), 2.0 / 65535);
         Assertions.assertEquals(List.of("y with x"), a.lineage().properties().get(Variation.LINKED_FEATURES));
-    }
-
-    @Test
-    public void onlyCrossoversThatExchangeGenesCanBeLinked() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> new LinkageCrossover(new SbxCrossover(1.0, 15.0), linkage));
-        Assertions.assertDoesNotThrow(() -> new LinkageCrossover(new SinglePointCrossover(1.0), linkage));
     }
 
     @Test

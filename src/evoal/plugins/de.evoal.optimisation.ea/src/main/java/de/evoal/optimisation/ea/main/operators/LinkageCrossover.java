@@ -36,7 +36,8 @@ import de.evoal.optimisation.ea.main.correlation.Linkage;
  *   whose anchor comes from one parent. Correlations are used if their absolute coefficient
  *   is at least {@code 'minimum-correlation'} (see {@link CorrelationTransfer} for the other
  *   conditions); building blocks are always used. Only recombinations that exchange genes
- *   ({@link GeneExchange}) can be wrapped.
+ *   ({@link GeneExchange}) can be wrapped; the DL states it with the attribute type
+ *   {@code instance 'gene-exchange'}, which is checked when the configuration is loaded.
  */
 @Dependent
 @Named("de.evoal.optimisation.ea.optimisation.linkage-crossover")
@@ -75,13 +76,9 @@ public class LinkageCrossover implements RecombinationOperator {
      *
      * @param crossover The recombination that exchanges the genes.
      * @param linkage Keeps the features of building blocks and correlated pairs together.
-     * @throws IllegalArgumentException if the recombination does not exchange genes.
+     * @param <C> The type of the recombination.
      */
-    public LinkageCrossover(final RecombinationOperator crossover, final Linkage linkage) {
-        if(!(crossover instanceof GeneExchange)) {
-            throw new IllegalArgumentException(rejection(crossover));
-        }
-
+    public <C extends RecombinationOperator & GeneExchange> LinkageCrossover(final C crossover, final Linkage linkage) {
         this.crossover = crossover;
         this.linkage = linkage;
     }
@@ -89,9 +86,6 @@ public class LinkageCrossover implements RecombinationOperator {
     @Override
     public RecombinationOperator init(final EObject configuration) throws InitializationException {
         crossover = BeanFactory.createComponent(RecombinationOperator.class, helper.lookup(configuration, "crossover"));
-        if(!(crossover instanceof GeneExchange)) {
-            throw new InitializationException(rejection(crossover));
-        }
 
         final double minimum = evaluator.attributeToDouble(configuration, "minimum-correlation");
         final CorrelationTransfer transfer = new CorrelationTransfer(correlations.correlations().all(), minimum, boundaries,
@@ -140,10 +134,5 @@ public class LinkageCrossover implements RecombinationOperator {
     @Override
     public void recombine(final Genes first, final Genes second, final RandomGenerator random) {
         crossover.recombine(first, second, random);
-    }
-
-    private static String rejection(final RecombinationOperator crossover) {
-        return "The 'linkage-crossover' can only wrap recombinations that exchange genes (e.g. 'single-point-crossover', "
-               + "'multi-point-crossover', 'uniform-crossover'), but '" + crossover.name() + "' creates new values.";
     }
 }

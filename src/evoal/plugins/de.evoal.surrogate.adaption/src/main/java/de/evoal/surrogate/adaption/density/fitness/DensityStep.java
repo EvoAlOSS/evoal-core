@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 import jakarta.enterprise.inject.Vetoed;
 import jakarta.inject.Inject;
 
+import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
@@ -110,19 +111,27 @@ public abstract class DensityStep extends AdaptionStep {
 
     @Override
     public DensityStep init(final EObject configuration) {
-        kind = attributes.lookup(configuration, "kind");
+        kind = attributes.<EEnumLiteral>lookup(configuration, "kind").getName();
         exponent = attributes.lookup(configuration, "exponent");
         rootExponent = attributes.lookup(configuration, "root-exponent");
 
-        probabilityCalculator = switch(kind) {
+        probabilityCalculator = calculatorOf(kind);
+
+        return this;
+    }
+
+    /**
+     * @param kind A literal of the DL enumeration {@code 'density-kind'}.
+     * @return The calculation of the probability.
+     */
+    private ProbabilityCalculator calculatorOf(final String kind) {
+        return switch(kind) {
             case "both" -> this::bothProbability;
             case "source-based" -> this::sourceBasedProbability;
             case "target-based" -> this::targetBasedProbability;
-            default -> throw new IllegalArgumentException("Unknown kind '" + kind + "' of density-based adaption. Use"
-                                                          + " 'both', 'source-based', or 'target-based'.");
+            default -> throw new IllegalStateException("The DL enumeration 'density-kind' has the literal '" + kind
+                                                       + "', which the density adaption does not know.");
         };
-
-        return this;
     }
 
     /**
