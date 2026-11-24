@@ -339,7 +339,7 @@ public class DynamicEClassProvider {
 
         if(type instanceof ClassDefinition) {
             result = eFactory.createEReference();
-        } else if(type instanceof ExpressionType) {
+        } else if(type instanceof ExpressionType || type instanceof PathType) {
             result = createExpressionReference();
         } else {
             result = eFactory.createEAttribute();
@@ -403,9 +403,9 @@ public class DynamicEClassProvider {
     }
 
     /**
-     * Creates the feature for a DL attribute of type {@code expression}. The value is the
-     *   parsed {@link Expression} itself, which the component evaluates later (e.g., per
-     *   sample). It is not contained, so it stays in the parsed model and its references
+     * Creates the feature for a DL attribute of type {@code expression} or {@code path}. The
+     *   value is the parsed {@link Expression} (or path expression) itself, which the component
+     *   evaluates later (e.g., per sample). It is not contained, so it stays in the parsed model and its references
      *   (data, constants, ...) remain valid. See {@link ValueConverter#convert(EObject)}.
      */
     private EReference createExpressionReference() {
@@ -432,7 +432,7 @@ public class DynamicEClassProvider {
             reference.setContainment(true);
             reference.setEType(toArrayClass(inner));
             result = reference;
-        } else if(type.getElements() instanceof ExpressionType) {
+        } else if(type.getElements() instanceof ExpressionType || type.getElements() instanceof PathType) {
             result = createExpressionReference();
             result.setEType(toEClassifier(type.getElements()));
         } else {
@@ -507,6 +507,8 @@ public class DynamicEClassProvider {
             return "literal";
         } else if (type instanceof ExpressionType) {
             return "expression";
+        } else if (type instanceof PathType) {
+            return "path";
         } else if (type instanceof EnumDefinitionReference er) {
             final EnumDefinition definition = er.getDefinition();
             return "enum " + ((Module)definition.eContainer()).getName() + "." + definition.getName();
@@ -585,6 +587,8 @@ public class DynamicEClassProvider {
             return ePackage.getEJavaObject();
         } else if (type instanceof ExpressionType) {
             return ExpressionsPackage.Literals.EXPRESSION;
+        } else if (type instanceof PathType) {
+            return ExpressionsPackage.Literals.PATH_EXPRESSION;
         } else if (type instanceof EnumDefinitionReference er) {
             return toEEnum(er.getDefinition());
         }

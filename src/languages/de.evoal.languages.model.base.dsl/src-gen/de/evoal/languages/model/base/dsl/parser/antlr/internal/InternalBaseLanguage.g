@@ -795,11 +795,23 @@ ruleReadExpressionRule returns [EObject current=null]
 			/* */
 		}
 		{
-			newCompositeNode(grammarAccess.getReadExpressionRuleAccess().getReferenceRuleParserRuleCall_4());
+			newCompositeNode(grammarAccess.getReadExpressionRuleAccess().getPathExpressionRuleParserRuleCall_4());
 		}
-		this_ReferenceRule_4=ruleReferenceRule
+		this_PathExpressionRule_4=rulePathExpressionRule
 		{
-			$current = $this_ReferenceRule_4.current;
+			$current = $this_PathExpressionRule_4.current;
+			afterParserOrEnumRuleCall();
+		}
+		    |
+		{
+			/* */
+		}
+		{
+			newCompositeNode(grammarAccess.getReadExpressionRuleAccess().getReferenceRuleParserRuleCall_5());
+		}
+		this_ReferenceRule_5=ruleReferenceRule
+		{
+			$current = $this_ReferenceRule_5.current;
 			afterParserOrEnumRuleCall();
 		}
 	)
@@ -931,6 +943,47 @@ ruleParanthesesRule returns [EObject current=null]
 		{
 			newLeafNode(otherlv_2, grammarAccess.getParanthesesRuleAccess().getRightParenthesisKeyword_2());
 		}
+	)
+;
+
+// Entry rule entryRulePathExpressionRule
+entryRulePathExpressionRule returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getPathExpressionRuleRule()); }
+	iv_rulePathExpressionRule=rulePathExpressionRule
+	{ $current=$iv_rulePathExpressionRule.current; }
+	EOF;
+
+// Rule PathExpressionRule
+rulePathExpressionRule returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		otherlv_0='path'
+		{
+			newLeafNode(otherlv_0, grammarAccess.getPathExpressionRuleAccess().getPathKeyword_0());
+		}
+		(
+			(
+				lv_path_1_0=RULE_STRING
+				{
+					newLeafNode(lv_path_1_0, grammarAccess.getPathExpressionRuleAccess().getPathSTRINGTerminalRuleCall_1_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getPathExpressionRuleRule());
+					}
+					setWithLastConsumed(
+						$current,
+						"path",
+						lv_path_1_0,
+						"de.evoal.languages.model.base.dsl.BaseLanguage.STRING");
+				}
+			)
+		)
 	)
 ;
 
@@ -2102,6 +2155,18 @@ ruleTypeRule returns [EObject current=null]
 			$current = $this_DataTypeRule_6.current;
 			afterParserOrEnumRuleCall();
 		}
+		    |
+		{
+			/* */
+		}
+		{
+			newCompositeNode(grammarAccess.getTypeRuleAccess().getPathTypeRuleParserRuleCall_7());
+		}
+		this_PathTypeRule_7=rulePathTypeRule
+		{
+			$current = $this_PathTypeRule_7.current;
+			afterParserOrEnumRuleCall();
+		}
 	)
 ;
 
@@ -2329,6 +2394,39 @@ ruleDataTypeRule returns [EObject current=null]
 		otherlv_1='data'
 		{
 			newLeafNode(otherlv_1, grammarAccess.getDataTypeRuleAccess().getDataKeyword_1());
+		}
+	)
+;
+
+// Entry rule entryRulePathTypeRule
+entryRulePathTypeRule returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getPathTypeRuleRule()); }
+	iv_rulePathTypeRule=rulePathTypeRule
+	{ $current=$iv_rulePathTypeRule.current; }
+	EOF;
+
+// Rule PathTypeRule
+rulePathTypeRule returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			{
+				/* */
+			}
+			{
+				$current = forceCreateModelElement(
+					grammarAccess.getPathTypeRuleAccess().getPathTypeAction_0(),
+					$current);
+			}
+		)
+		otherlv_1='path'
+		{
+			newLeafNode(otherlv_1, grammarAccess.getPathTypeRuleAccess().getPathKeyword_1());
 		}
 	)
 ;

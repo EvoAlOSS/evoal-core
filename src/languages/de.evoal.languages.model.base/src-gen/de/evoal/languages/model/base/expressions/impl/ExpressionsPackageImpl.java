@@ -34,6 +34,7 @@ import de.evoal.languages.model.base.expressions.NumberLiteral;
 import de.evoal.languages.model.base.expressions.OrExpression;
 import de.evoal.languages.model.base.expressions.Parantheses;
 import de.evoal.languages.model.base.expressions.PartialComparisonExpression;
+import de.evoal.languages.model.base.expressions.PathExpression;
 import de.evoal.languages.model.base.expressions.PowerOfExpression;
 import de.evoal.languages.model.base.expressions.ReadExpression;
 import de.evoal.languages.model.base.expressions.RealLiteral;
@@ -283,6 +284,13 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * @generated
 	 */
 	private EClass callEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass pathExpressionEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1169,6 +1177,26 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * @generated
 	 */
 	@Override
+	public EClass getPathExpression() {
+		return pathExpressionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getPathExpression_Path() {
+		return (EAttribute)pathExpressionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getParantheses() {
 		return paranthesesEClass;
 	}
@@ -1389,6 +1417,9 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		createEReference(callEClass, CALL__FUNCTION);
 		createEReference(callEClass, CALL__PARAMETERS);
 
+		pathExpressionEClass = createEClass(PATH_EXPRESSION);
+		createEAttribute(pathExpressionEClass, PATH_EXPRESSION__PATH);
+
 		paranthesesEClass = createEClass(PARANTHESES);
 		createEReference(paranthesesEClass, PARANTHESES__SUB_EXPRESSION);
 
@@ -1465,6 +1496,7 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		typeDefinitionReferenceEClass.getESuperTypes().add(this.getValueReference());
 		booleanLiteralEClass.getESuperTypes().add(this.getLiteral());
 		callEClass.getESuperTypes().add(this.getReadExpression());
+		pathExpressionEClass.getESuperTypes().add(this.getReadExpression());
 		paranthesesEClass.getESuperTypes().add(this.getReadExpression());
 		arrayEClass.getESuperTypes().add(this.getReadExpression());
 
@@ -1587,6 +1619,9 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		initEClass(callEClass, Call.class, "Call", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCall_Function(), theDefinitionsPackage.getFunctionDefinition(), null, "function", null, 0, 1, Call.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCall_Parameters(), this.getExpression(), null, "parameters", null, 0, -1, Call.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(pathExpressionEClass, PathExpression.class, "PathExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getPathExpression_Path(), ecorePackage.getEString(), "path", null, 1, 1, PathExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(paranthesesEClass, Parantheses.class, "Parantheses", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getParantheses_SubExpression(), this.getExpression(), null, "subExpression", null, 1, 1, Parantheses.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

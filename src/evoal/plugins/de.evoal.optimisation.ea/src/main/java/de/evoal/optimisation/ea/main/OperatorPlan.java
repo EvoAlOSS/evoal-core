@@ -2,32 +2,27 @@ package de.evoal.optimisation.ea.main;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Function;
 import java.util.stream.IntStream;
 
 import lombok.extern.slf4j.Slf4j;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EStructuralFeature;
 
 import de.evoal.core.api.cdi.BeanFactory;
 import de.evoal.core.api.utils.AttributeHelper;
 import de.evoal.models.core.cdi.EvoalComponent;
 import de.evoal.models.core.exceptions.InitializationException;
 
-import de.evoal.optimisation.ea.api.genotype.Chromosome;
-import de.evoal.optimisation.ea.api.genotype.MeasurementScale;
 import de.evoal.optimisation.ea.api.operators.MutationOperator;
 import de.evoal.optimisation.ea.api.operators.RecombinationOperator;
-import de.evoal.optimisation.ea.main.genotype.GenotypeFactory;
 import de.evoal.optimisation.ea.main.genotype.GenotypeFactory.ConfiguredChromosome;
-import de.evoal.optimisation.ea.main.operators.ApplicabilityReader;
 
 /**
  * Decides which recombinations and mutations change which chromosomes: every chromosome uses
- *   the recombinations and mutations it lists, in their order, and every one of them must
- *   apply to it. The applicability of an operator is read from its DL type. The uses follow
- *   the order of the chromosomes. A chromosome without recombinations and mutations never
+ *   the recombinations and mutations it lists, in their order. That they apply to it is
+ *   checked when the configuration is loaded (the requirements of their DL types, e.g.
+ *   {@code @Requires} and {@code @RequiresScale}). The uses follow the order of the
+ *   chromosomes. A chromosome without recombinations and mutations never
  *   changes, which is logged as a warning.
  *
  * @param recombinations The recombination uses, in the order they are applied.
@@ -50,18 +45,16 @@ public record OperatorPlan(List<OperatorUse<RecombinationOperator>> recombinatio
      * Creates the plan of the configured chromosomes.
      *
      * @param chromosomes The chromosomes with their configurations.
-     * @param factory Gives the scales of the features.
      * @param helper Reads the configurations.
-     * @param reader Reads the applicability of the operator types.
      * @return The plan.
-     * @throws InitializationException if an operator of a chromosome does not apply to it.
+     * @throws InitializationException if an operator cannot be created.
      */
-    public static OperatorPlan create(final List<ConfiguredChromosome> chromosomes, final GenotypeFactory factory,
-                                      final AttributeHelper helper, final ApplicabilityReader reader)
+    public static OperatorPlan create(final List<ConfiguredChromosome> chromosomes, final AttributeHelper helper)
             throws InitializationException {
-        final OperatorPlan plan = new OperatorPlan(
-                plan(chromosomes, factory, helper, reader, "recombination", RecombinationOperator.class, RecombinationOperator::name),
-                plan(chromosomes, factory, helper, reader, "mutation", MutationOperator.class, MutationOperator::name));
+        final List<OperatorUse<RecombinationOperator>> recombinations = plan(chromosomes, helper, "recombination",
+                                                                             RecombinationOperator.class);
+        final List<OperatorUse<MutationOperator>> mutations = plan(chromosomes, helper, "mutation", MutationOperator.class);
+        final OperatorPlan plan = new OperatorPlan(recombinations, mutations);
 
         for(final int c : plan.unchangedChromosomes(chromosomes.size())) {
             log.warn("The chromosome {} has neither recombinations nor mutations and never changes.",
@@ -85,39 +78,22 @@ public record OperatorPlan(List<OperatorUse<RecombinationOperator>> recombinatio
     }
 
     private static <T extends EvoalComponent<T>> List<OperatorUse<T>> plan(
-            final List<ConfiguredChromosome> chromosomes, final GenotypeFactory factory, final AttributeHelper helper,
-            final ApplicabilityReader reader, final String slot, final Class<T> type, final Function<T, String> names)
+            final List<ConfiguredChromosome> chromosomes, final AttributeHelper helper, final String slot, final Class<T> type)
             throws InitializationException {
         final List<OperatorUse<T>> uses = new ArrayList<>();
 
         for(int c = 0; c < chromosomes.size(); ++c) {
             final ConfiguredChromosome configured = chromosomes.get(c);
-            final Chromosome chromosome = configured.chromosome();
-            final List<MeasurementScale> scales = scales(chromosome, factory);
             final String prefix = "genotype.chromosomes[" + c + "]." + slot;
 
             final List<EObject> configurations = helper.lookup(configured.configuration(), slot);
             for(int i = 0; i < configurations.size(); ++i) {
                 final EObject configuration = configurations.get(i);
                 final T operator = BeanFactory.createComponent(type, configuration);
-                final String reason = reader.of(configuration).reasonAgainst(chromosome, scales);
-                if(reason != null) {
-                    throw new InitializationException("The " + slot + " '" + names.apply(operator) + "' of the chromosome " + chromosome
-                                                      + " does not apply to it: " + reason + ".");
-                }
                 uses.add(new OperatorUse<>(operator, c, STREAM + "/" + prefix + "[" + i + "]"));
             }
         }
 
         return uses;
-    }
-
-    private static List<MeasurementScale> scales(final Chromosome chromosome, final GenotypeFactory factory) {
-        final List<MeasurementScale> scales = new ArrayList<>();
-        for(final EStructuralFeature feature : chromosome.features()) {
-            scales.add(factory.scaleOf(feature).orElse(null));
-        }
-
-        return scales;
     }
 }

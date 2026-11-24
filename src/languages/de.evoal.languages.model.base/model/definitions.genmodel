@@ -67,7 +67,7 @@
     <genClasses ecoreClass="definitions.ecore#//TypedBaseDataDescription">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference definitions.ecore#//TypedBaseDataDescription/type"/>
       <genOperations ecoreOperation="definitions.ecore#//TypedBaseDataDescription/getScale"
-          body="return getType() == null || !(getType() instanceof TypedBaseDataDescription) ? null : ((TypedBaseDataDescription)getType()).getScale();&#xA;"/>
+          body="return getType() instanceof &lt;%de.evoal.languages.model.base.definitions.ScaledDefinition%&gt; ? ((&lt;%de.evoal.languages.model.base.definitions.ScaledDefinition%&gt;)getType()).getScale() : null;&#xA;"/>
     </genClasses>
     <genClasses ecoreClass="definitions.ecore#//UntypedBaseDataDescription"/>
     <genClasses ecoreClass="definitions.ecore#//StructuredDataDescription">

@@ -4,22 +4,6 @@ import "definitions" from de.evoal.optimisation.core;
 
 module de.evoal.optimisation.ea.optimisation {
     /**
-     * The representations of the genes of a chromosome.
-     *   'double':  one real gene per real feature.
-     *   'integer': one integer gene per integer feature.
-     *   'bit':     bits; a boolean feature is one bit, a real or integer feature
-     *              'precision' bits in standard binary code.
-     *   'gray':    like 'bit', but real and integer features in Gray code.
-     */
-    nominal enum representation ( 'double', 'integer', 'bit', 'gray' );
-
-    /**
-     * The scales of measurement of the DDL, from the weakest to the strongest:
-     *   'nominal' < 'ordinal' < 'cardinal' < 'quotient'.
-     */
-    nominal enum 'measurement-scale' ( 'nominal', 'ordinal', 'cardinal', 'quotient' );
-
-    /**
      * What happens to a gene value outside the boundaries of its feature after a
      *   recombination or mutation.
      *   wrap:   the value enters the range from the other side (periodic boundaries).
@@ -27,26 +11,6 @@ module de.evoal.optimisation.ea.optimisation {
      *   stick:  the value is set to the nearest boundary.
      */
     nominal enum 'boundary-handling' ( wrap, bounce, stick );
-
-    /**
-     * States to which chromosomes a recombination or mutation applies: the
-     *   representations it supports and the weakest scale of measurement the features
-     *   of the chromosome may have. A feature without a declared scale is accepted. An
-     *   operator of a chromosome that it does not apply to is rejected when the algorithm
-     *   starts.
-     */
-    type Applicability extends Constraint {
-        /**
-         * The supported representations.
-         */
-        @MinimumNumberOfElements { bound := 1; }
-        representations : array enum representation;
-
-        /**
-         * The weakest scale of measurement of the features.
-         */
-        'minimum-scale' : enum 'measurement-scale' := 'measurement-scale.nominal';
-    }
 
     /**
      * An evolutionary algorithm (EA) on tabular search spaces. Every generation:
@@ -113,7 +77,12 @@ module de.evoal.optimisation.ea.optimisation {
 
     /**
      * Abstract base type of the chromosomes. A chromosome lists its recombinations and
-     *   mutations; an operator that does not apply to it is rejected. A chromosome with
+     *   mutations. Its type is the representation of its genes ('double-chromosome',
+     *   'integer-chromosome', 'bit-chromosome', 'gray-chromosome'). An operator states the
+     *   chromosomes it applies to with @Requires on the type of its chromosome, e.g.
+     *   path "(..)+[double-chromosome]", and the weakest scale of the features with
+     *   @RequiresScale on path "(..)+[chromosome]/features"; an operator of a chromosome that
+     *   it does not apply to is rejected when the configuration is loaded. A chromosome with
      *   neither recombinations nor mutations never changes, which is reported as a warning
      *   when the algorithm starts.
      */
@@ -218,20 +187,12 @@ module de.evoal.optimisation.ea.optimisation {
      * One-point crossover: a cut point is chosen uniformly between two
      *   genes, and the children exchange the genes after it.
      */
-    @Applicability {
-        representations := ['representation.double', 'representation.integer', 'representation.bit',
-                            'representation.gray'];
-    }
     type 'single-point-crossover' extends recombination {}
 
     /**
      * Multi-point crossover: 'points' different cut points are chosen
      *   uniformly between two genes, and the children exchange every second segment.
      */
-    @Applicability {
-        representations := ['representation.double', 'representation.integer', 'representation.bit',
-                            'representation.gray'];
-    }
     type 'multi-point-crossover' extends recombination {
         /**
          * The number of cut points; at most the number of genes minus 1.
@@ -244,10 +205,6 @@ module de.evoal.optimisation.ea.optimisation {
      * Uniform crossover (Syswerda 1989): the children exchange every gene with
      *   'swap-probability'.
      */
-    @Applicability {
-        representations := ['representation.double', 'representation.integer', 'representation.bit',
-                            'representation.gray'];
-    }
     @Literature { keys := ["syswerda1989uniform"]; }
     type 'uniform-crossover' extends recombination {
         /**
@@ -265,7 +222,8 @@ module de.evoal.optimisation.ea.optimisation {
      *   the polynomial distribution with 'distribution-index'; a larger index keeps the
      *   children closer to the parents. Every gene is recombined with probability 0.5.
      */
-    @Applicability { representations := ['representation.double']; 'minimum-scale' := 'measurement-scale.cardinal'; }
+    @Requires { selection := path "(..)+[double-chromosome]"; }
+    @RequiresScale { minimum := 'measurement-scale.cardinal'; features := path "(..)+[chromosome]/features"; }
     @Literature { keys := ["deb1995simulated", "deb2002fast"]; }
     type 'sbx-crossover' extends recombination {
         /**
@@ -282,7 +240,8 @@ module de.evoal.optimisation.ea.optimisation {
      *   y the other parent, and a is drawn uniformly from [-d, 1 + d] (d = 'extension'),
      *   once per child and chromosome.
      */
-    @Applicability { representations := ['representation.double']; 'minimum-scale' := 'measurement-scale.cardinal'; }
+    @Requires { selection := path "(..)+[double-chromosome]"; }
+    @RequiresScale { minimum := 'measurement-scale.cardinal'; features := path "(..)+[chromosome]/features"; }
     @Literature { keys := ["muehlenbein1993predictive"]; }
     type 'line-crossover' extends recombination {
         /**
@@ -298,7 +257,8 @@ module de.evoal.optimisation.ea.optimisation {
      *   whose place the first child takes. With alpha = 0.5 both children are the mean of
      *   the parents.
      */
-    @Applicability { representations := ['representation.double']; 'minimum-scale' := 'measurement-scale.cardinal'; }
+    @Requires { selection := path "(..)+[double-chromosome]"; }
+    @RequiresScale { minimum := 'measurement-scale.cardinal'; features := path "(..)+[chromosome]/features"; }
     type 'arithmetic-crossover' extends recombination {
         /**
          * The weight of the parent whose place a child takes.
@@ -313,7 +273,8 @@ module de.evoal.optimisation.ea.optimisation {
      *   drawn uniformly from [min - alpha I, max + alpha I], where min and max are the
      *   parent values and I = max - min.
      */
-    @Applicability { representations := ['representation.double']; 'minimum-scale' := 'measurement-scale.cardinal'; }
+    @Requires { selection := path "(..)+[double-chromosome]"; }
+    @RequiresScale { minimum := 'measurement-scale.cardinal'; features := path "(..)+[chromosome]/features"; }
     @Literature { keys := ["eshelman1993real"]; }
     type 'blx-alpha-crossover' extends recombination {
         /**
@@ -327,14 +288,15 @@ module de.evoal.optimisation.ea.optimisation {
      * Random reset mutation: a mutated gene gets a value drawn uniformly from the
      *   boundaries of its feature.
      */
-    @Applicability { representations := ['representation.double', 'representation.integer']; }
+    @Requires { selection := path "(..)+[double-chromosome] | (..)+[integer-chromosome]"; }
     type 'random-reset-mutation' extends mutation {}
 
     /**
      * Gaussian mutation: a normally distributed value with mean 0 and the standard
      *   deviation 'sigma' times the range of the feature is added to a mutated gene.
      */
-    @Applicability { representations := ['representation.double']; 'minimum-scale' := 'measurement-scale.cardinal'; }
+    @Requires { selection := path "(..)+[double-chromosome]"; }
+    @RequiresScale { minimum := 'measurement-scale.cardinal'; features := path "(..)+[chromosome]/features"; }
     type 'gaussian-mutation' extends mutation {
         /**
          * The standard deviation relative to the range of the feature.
@@ -346,7 +308,7 @@ module de.evoal.optimisation.ea.optimisation {
     /**
      * Bit-flip mutation: a mutated bit is inverted.
      */
-    @Applicability { representations := ['representation.bit', 'representation.gray']; }
+    @Requires { selection := path "(..)+[bit-chromosome] | (..)+[gray-chromosome]"; }
     type 'bit-flip-mutation' extends mutation {}
 
     /**
@@ -355,7 +317,8 @@ module de.evoal.optimisation.ea.optimisation {
      *   by a perturbation of the polynomial distribution with 'distribution-index'; a
      *   larger index gives smaller changes.
      */
-    @Applicability { representations := ['representation.double']; 'minimum-scale' := 'measurement-scale.cardinal'; }
+    @Requires { selection := path "(..)+[double-chromosome]"; }
+    @RequiresScale { minimum := 'measurement-scale.cardinal'; features := path "(..)+[chromosome]/features"; }
     @Literature { keys := ["deb2002fast"]; }
     type 'polynomial-mutation' extends mutation {
         /**
@@ -369,7 +332,8 @@ module de.evoal.optimisation.ea.optimisation {
      * Creep mutation: a mutated gene changes by a value drawn uniformly from -step, ...,
      *   -1, 1, ..., step.
      */
-    @Applicability { representations := ['representation.integer']; 'minimum-scale' := 'measurement-scale.ordinal'; }
+    @Requires { selection := path "(..)+[integer-chromosome]"; }
+    @RequiresScale { minimum := 'measurement-scale.ordinal'; features := path "(..)+[chromosome]/features"; }
     type 'creep-mutation' extends mutation {
         /**
          * The largest change of a gene.
@@ -385,10 +349,6 @@ module de.evoal.optimisation.ea.optimisation {
      *   not used. Its own 'gene-probability' is not used either. It applies to a
      *   chromosome that all its children apply to.
      */
-    @Applicability {
-        representations := ['representation.double', 'representation.integer', 'representation.bit',
-                            'representation.gray'];
-    }
     @Literature { keys := ["berger2024evoal"]; }
     type 'single-choice-mutation' extends mutation {
         /**
@@ -423,10 +383,6 @@ module de.evoal.optimisation.ea.optimisation {
      *   changed are not changed again. The relationship of the child records the properties
      *   'primary-features' and 'propagated-features'.
      */
-    @Applicability {
-        representations := ['representation.double', 'representation.integer', 'representation.bit',
-                            'representation.gray'];
-    }
     @Literature { keys := ["berger2024evoal"]; }
     type 'correlation-aware-mutation' extends mutation {
         /**
@@ -468,10 +424,6 @@ module de.evoal.optimisation.ea.optimisation {
      * Only crossovers that exchange genes can be wrapped ('single-point-crossover',
      *   'multi-point-crossover', 'uniform-crossover'); blending crossovers are rejected.
      */
-    @Applicability {
-        representations := ['representation.double', 'representation.integer', 'representation.bit',
-                            'representation.gray'];
-    }
     @Literature { keys := ["berger2024evoal", "harik1997learning"]; }
     type 'linkage-crossover' extends recombination {
         /**

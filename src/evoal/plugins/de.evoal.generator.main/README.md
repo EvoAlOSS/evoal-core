@@ -136,8 +136,8 @@ from its marginals. `DistributionBasedData` checks at start-up (`init`, after `s
 that the distributions give one value per written data, that a discrete value goes to integer
 data and every other value to real data (`EClassifierHelper`), and that a categorical value goes
 to nominal or ordinal data (the scale of the data description, `EAnnotationHelper`; data without
-a scale is nominal, the default of the DDL; typed data takes the scale of its type, read from the
-type because the derived `getScale()` of typed data returns `null`). It writes a discrete value as an `int`, any other as a `double`.
+a scale is nominal, the default of the DDL; typed data has the scale of its type). It writes a
+discrete value as an `int`, any other as a `double`.
 `'noise-data'` adds its values to real data and has no such check.
 - `StandardNormal` gives Φ (Commons Math, from erfc) and Φ⁻¹ (Wichura's AS 241,
   doi:10.2307/2347330, relative error about 1e-16). Commons Math's own Φ⁻¹ computes

@@ -181,8 +181,8 @@
     </eAnnotations>
     <eOperations name="getScale" lowerBound="1" eType="#//ScaleType">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="body" value="return getType() == null || !(getType() instanceof TypedBaseDataDescription) ? null : ((TypedBaseDataDescription)getType()).getScale();&#xA;"/>
-        <details key="documentation" value="Returns the scale of the associated data type."/>
+        <details key="body" value="return getType() instanceof &lt;%de.evoal.languages.model.base.definitions.ScaledDefinition%&gt; ? ((&lt;%de.evoal.languages.model.base.definitions.ScaledDefinition%&gt;)getType()).getScale() : null;&#xA;"/>
+        <details key="documentation" value="Returns the scale of the associated data type, or null if the type has no scale."/>
       </eAnnotations>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="#//Definition">

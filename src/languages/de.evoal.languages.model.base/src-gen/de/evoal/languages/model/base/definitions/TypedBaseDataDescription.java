@@ -53,7 +53,7 @@ public interface TypedBaseDataDescription extends BaseDataDescription {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * Returns the scale of the associated data type.
+	 * Returns the scale of the associated data type, or null if the type has no scale.
 	 * <!-- end-model-doc -->
 	 * @model kind="operation" required="true"
 	 * @generated

@@ -382,13 +382,15 @@ public class BaseLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 		private final RuleCall cCallRuleParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final RuleCall cLiteralRuleParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		private final RuleCall cParanthesesRuleParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
-		private final RuleCall cReferenceRuleParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
+		private final RuleCall cPathExpressionRuleParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
+		private final RuleCall cReferenceRuleParserRuleCall_5 = (RuleCall)cAlternatives.eContents().get(5);
 		
 		//ReadExpressionRule returns ReadExpression:
 		//    ArrayRule
 		//    | CallRule
 		//    | LiteralRule
 		//    | ParanthesesRule
+		//    | PathExpressionRule
 		//    | ReferenceRule;
 		@Override public ParserRule getRule() { return rule; }
 		
@@ -396,6 +398,7 @@ public class BaseLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 		//| CallRule
 		//| LiteralRule
 		//| ParanthesesRule
+		//| PathExpressionRule
 		//| ReferenceRule
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
@@ -411,8 +414,11 @@ public class BaseLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 		//ParanthesesRule
 		public RuleCall getParanthesesRuleParserRuleCall_3() { return cParanthesesRuleParserRuleCall_3; }
 		
+		//PathExpressionRule
+		public RuleCall getPathExpressionRuleParserRuleCall_4() { return cPathExpressionRuleParserRuleCall_4; }
+		
 		//ReferenceRule
-		public RuleCall getReferenceRuleParserRuleCall_4() { return cReferenceRuleParserRuleCall_4; }
+		public RuleCall getReferenceRuleParserRuleCall_5() { return cReferenceRuleParserRuleCall_5; }
 	}
 	public class ArrayRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.base.dsl.BaseLanguage.ArrayRule");
@@ -499,6 +505,34 @@ public class BaseLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 		
 		//')'
 		public Keyword getRightParenthesisKeyword_2() { return cRightParenthesisKeyword_2; }
+	}
+	public class PathExpressionRuleElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.base.dsl.BaseLanguage.PathExpressionRule");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cPathKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cPathAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cPathSTRINGTerminalRuleCall_1_0 = (RuleCall)cPathAssignment_1.eContents().get(0);
+		
+		///**
+		// * A path expression, e.g. path "../mover[arpso-mover]". The path is a string because '//'
+		// * starts a comment and '/' is the division; the interpreter parses it.
+		// */
+		//PathExpressionRule returns PathExpression:
+		//    'path' path = STRING
+		//;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'path' path = STRING
+		public Group getGroup() { return cGroup; }
+		
+		//'path'
+		public Keyword getPathKeyword_0() { return cPathKeyword_0; }
+		
+		//path = STRING
+		public Assignment getPathAssignment_1() { return cPathAssignment_1; }
+		
+		//STRING
+		public RuleCall getPathSTRINGTerminalRuleCall_1_0() { return cPathSTRINGTerminalRuleCall_1_0; }
 	}
 	public class CallRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.base.dsl.BaseLanguage.CallRule");
@@ -1216,6 +1250,7 @@ public class BaseLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 		private final RuleCall cExpressionTypeRuleParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
 		private final RuleCall cLiteralTypeRuleParserRuleCall_5 = (RuleCall)cAlternatives.eContents().get(5);
 		private final RuleCall cDataTypeRuleParserRuleCall_6 = (RuleCall)cAlternatives.eContents().get(6);
+		private final RuleCall cPathTypeRuleParserRuleCall_7 = (RuleCall)cAlternatives.eContents().get(7);
 		
 		//TypeRule returns types::Type:
 		//    ArrayTypeRule
@@ -1225,6 +1260,7 @@ public class BaseLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 		//    | ExpressionTypeRule
 		//    | LiteralTypeRule
 		//    | DataTypeRule
+		//    | PathTypeRule
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
@@ -1235,6 +1271,7 @@ public class BaseLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 		//| ExpressionTypeRule
 		//| LiteralTypeRule
 		//| DataTypeRule
+		//| PathTypeRule
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//ArrayTypeRule
@@ -1257,6 +1294,9 @@ public class BaseLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 		
 		//DataTypeRule
 		public RuleCall getDataTypeRuleParserRuleCall_6() { return cDataTypeRuleParserRuleCall_6; }
+		
+		//PathTypeRule
+		public RuleCall getPathTypeRuleParserRuleCall_7() { return cPathTypeRuleParserRuleCall_7; }
 	}
 	public class BaseTypeRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.base.dsl.BaseLanguage.BaseTypeRule");
@@ -1395,6 +1435,28 @@ public class BaseLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 		
 		//'data'
 		public Keyword getDataKeyword_1() { return cDataKeyword_1; }
+	}
+	public class PathTypeRuleElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.base.dsl.BaseLanguage.PathTypeRule");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cPathTypeAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cPathKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		
+		//PathTypeRule returns types::PathType:
+		//    {types::PathType}
+		//    'path'
+		//;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//{types::PathType}
+		//'path'
+		public Group getGroup() { return cGroup; }
+		
+		//{types::PathType}
+		public Action getPathTypeAction_0() { return cPathTypeAction_0; }
+		
+		//'path'
+		public Keyword getPathKeyword_1() { return cPathKeyword_1; }
 	}
 	public class StringTypeRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.base.dsl.BaseLanguage.StringTypeRule");
@@ -2160,6 +2222,7 @@ public class BaseLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 	private final ReadExpressionRuleElements pReadExpressionRule;
 	private final ArrayRuleElements pArrayRule;
 	private final ParanthesesRuleElements pParanthesesRule;
+	private final PathExpressionRuleElements pPathExpressionRule;
 	private final CallRuleElements pCallRule;
 	private final ReferenceRuleElements pReferenceRule;
 	private final SelfReferenceRuleElements pSelfReferenceRule;
@@ -2187,6 +2250,7 @@ public class BaseLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 	private final TypeReferenceRuleElements pTypeReferenceRule;
 	private final LiteralTypeRuleElements pLiteralTypeRule;
 	private final DataTypeRuleElements pDataTypeRule;
+	private final PathTypeRuleElements pPathTypeRule;
 	private final StringTypeRuleElements pStringTypeRule;
 	private final ExpressionTypeRuleElements pExpressionTypeRule;
 	private final IntTypeRuleElements pIntTypeRule;
@@ -2233,6 +2297,7 @@ public class BaseLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 		this.pReadExpressionRule = new ReadExpressionRuleElements();
 		this.pArrayRule = new ArrayRuleElements();
 		this.pParanthesesRule = new ParanthesesRuleElements();
+		this.pPathExpressionRule = new PathExpressionRuleElements();
 		this.pCallRule = new CallRuleElements();
 		this.pReferenceRule = new ReferenceRuleElements();
 		this.pSelfReferenceRule = new SelfReferenceRuleElements();
@@ -2260,6 +2325,7 @@ public class BaseLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 		this.pTypeReferenceRule = new TypeReferenceRuleElements();
 		this.pLiteralTypeRule = new LiteralTypeRuleElements();
 		this.pDataTypeRule = new DataTypeRuleElements();
+		this.pPathTypeRule = new PathTypeRuleElements();
 		this.pStringTypeRule = new StringTypeRuleElements();
 		this.pExpressionTypeRule = new ExpressionTypeRuleElements();
 		this.pIntTypeRule = new IntTypeRuleElements();
@@ -2472,6 +2538,7 @@ public class BaseLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 	//    | CallRule
 	//    | LiteralRule
 	//    | ParanthesesRule
+	//    | PathExpressionRule
 	//    | ReferenceRule;
 	public ReadExpressionRuleElements getReadExpressionRuleAccess() {
 		return pReadExpressionRule;
@@ -2506,6 +2573,21 @@ public class BaseLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 	
 	public ParserRule getParanthesesRuleRule() {
 		return getParanthesesRuleAccess().getRule();
+	}
+	
+	///**
+	// * A path expression, e.g. path "../mover[arpso-mover]". The path is a string because '//'
+	// * starts a comment and '/' is the division; the interpreter parses it.
+	// */
+	//PathExpressionRule returns PathExpression:
+	//    'path' path = STRING
+	//;
+	public PathExpressionRuleElements getPathExpressionRuleAccess() {
+		return pPathExpressionRule;
+	}
+	
+	public ParserRule getPathExpressionRuleRule() {
+		return getPathExpressionRuleAccess().getRule();
 	}
 	
 	//CallRule returns Call:
@@ -2782,6 +2864,7 @@ public class BaseLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 	//    | ExpressionTypeRule
 	//    | LiteralTypeRule
 	//    | DataTypeRule
+	//    | PathTypeRule
 	//;
 	public TypeRuleElements getTypeRuleAccess() {
 		return pTypeRule;
@@ -2849,6 +2932,18 @@ public class BaseLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 	
 	public ParserRule getDataTypeRuleRule() {
 		return getDataTypeRuleAccess().getRule();
+	}
+	
+	//PathTypeRule returns types::PathType:
+	//    {types::PathType}
+	//    'path'
+	//;
+	public PathTypeRuleElements getPathTypeRuleAccess() {
+		return pPathTypeRule;
+	}
+	
+	public ParserRule getPathTypeRuleRule() {
+		return getPathTypeRuleAccess().getRule();
 	}
 	
 	//StringTypeRule returns types::StringType:

@@ -52,6 +52,7 @@ module de.evoal.core.main {
     exports de.evoal.core.api.interpreter;
     exports de.evoal.core.api.languages;
     exports de.evoal.core.api.languages.base;
+    exports de.evoal.core.api.languages.paths;
     exports de.evoal.core.api.literature;
     exports de.evoal.core.api.provenance;
     exports de.evoal.core.api.math;

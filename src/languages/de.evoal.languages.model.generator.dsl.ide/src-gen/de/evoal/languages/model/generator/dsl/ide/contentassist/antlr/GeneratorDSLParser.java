@@ -89,6 +89,7 @@ public class GeneratorDSLParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getArrayRuleAccess().getGroup_2(), "rule__ArrayRule__Group_2__0");
 			builder.put(grammarAccess.getArrayRuleAccess().getGroup_2_1(), "rule__ArrayRule__Group_2_1__0");
 			builder.put(grammarAccess.getParanthesesRuleAccess().getGroup(), "rule__ParanthesesRule__Group__0");
+			builder.put(grammarAccess.getPathExpressionRuleAccess().getGroup(), "rule__PathExpressionRule__Group__0");
 			builder.put(grammarAccess.getCallRuleAccess().getGroup(), "rule__CallRule__Group__0");
 			builder.put(grammarAccess.getCallRuleAccess().getGroup_2(), "rule__CallRule__Group_2__0");
 			builder.put(grammarAccess.getCallRuleAccess().getGroup_2_1(), "rule__CallRule__Group_2_1__0");
@@ -113,6 +114,7 @@ public class GeneratorDSLParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getTypeReferenceRuleAccess().getGroup(), "rule__TypeReferenceRule__Group__0");
 			builder.put(grammarAccess.getLiteralTypeRuleAccess().getGroup(), "rule__LiteralTypeRule__Group__0");
 			builder.put(grammarAccess.getDataTypeRuleAccess().getGroup(), "rule__DataTypeRule__Group__0");
+			builder.put(grammarAccess.getPathTypeRuleAccess().getGroup(), "rule__PathTypeRule__Group__0");
 			builder.put(grammarAccess.getStringTypeRuleAccess().getGroup(), "rule__StringTypeRule__Group__0");
 			builder.put(grammarAccess.getExpressionTypeRuleAccess().getGroup(), "rule__ExpressionTypeRule__Group__0");
 			builder.put(grammarAccess.getIntTypeRuleAccess().getGroup(), "rule__IntTypeRule__Group__0");
@@ -183,6 +185,7 @@ public class GeneratorDSLParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getArrayRuleAccess().getValuesAssignment_2_0(), "rule__ArrayRule__ValuesAssignment_2_0");
 			builder.put(grammarAccess.getArrayRuleAccess().getValuesAssignment_2_1_1(), "rule__ArrayRule__ValuesAssignment_2_1_1");
 			builder.put(grammarAccess.getParanthesesRuleAccess().getSubExpressionAssignment_1(), "rule__ParanthesesRule__SubExpressionAssignment_1");
+			builder.put(grammarAccess.getPathExpressionRuleAccess().getPathAssignment_1(), "rule__PathExpressionRule__PathAssignment_1");
 			builder.put(grammarAccess.getCallRuleAccess().getFunctionAssignment_0(), "rule__CallRule__FunctionAssignment_0");
 			builder.put(grammarAccess.getCallRuleAccess().getParametersAssignment_2_0(), "rule__CallRule__ParametersAssignment_2_0");
 			builder.put(grammarAccess.getCallRuleAccess().getParametersAssignment_2_1_1(), "rule__CallRule__ParametersAssignment_2_1_1");

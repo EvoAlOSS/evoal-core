@@ -46,7 +46,6 @@ import de.evoal.optimisation.ea.api.selection.SelectionMethod;
 import de.evoal.optimisation.ea.main.comparator.CrowdedComparator;
 import de.evoal.optimisation.ea.main.genotype.GenotypeFactory;
 import de.evoal.optimisation.ea.main.genotype.GenotypeFactory.ConfiguredChromosome;
-import de.evoal.optimisation.ea.main.operators.ApplicabilityReader;
 import de.evoal.optimisation.ea.main.selection.Nsga2Selection;
 import de.evoal.optimisation.ea.main.selection.StochasticRankingSelection;
 import de.evoal.optimisation.ea.main.statistics.LinkageStatistics;
@@ -132,9 +131,6 @@ public class EvolutionaryAlgorithm extends TemplateAlgorithm {
     private RandomService randomService;
 
     @Inject
-    private ApplicabilityReader reader;
-
-    @Inject
     private ExecutionRecorder recorder;
 
     private ReplacementStrategy replacement;
@@ -186,7 +182,7 @@ public class EvolutionaryAlgorithm extends TemplateAlgorithm {
         genotype = new Genotype(chromosomes.stream().map(ConfiguredChromosome::chromosome).toList(), genotypes.searchSpace());
         log.info("Genotype: {}.", genotype);
 
-        plan = OperatorPlan.create(chromosomes, genotypes, helper, reader);
+        plan = OperatorPlan.create(chromosomes, helper);
 
         parentSelection = BeanFactory.createComponent(SelectionMethod.class, helper.<EObject>lookup(configuration, "parent-selection"));
         replacement = BeanFactory.createComponent(ReplacementStrategy.class, helper.<EObject>lookup(configuration, "replacement"));

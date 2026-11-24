@@ -5,6 +5,7 @@ package de.evoal.languages.model.base.definitions.impl;
 import de.evoal.languages.model.base.definitions.Definition;
 import de.evoal.languages.model.base.definitions.DefinitionsPackage;
 import de.evoal.languages.model.base.definitions.ScaleType;
+import de.evoal.languages.model.base.definitions.ScaledDefinition;
 import de.evoal.languages.model.base.definitions.TypedBaseDataDescription;
 
 import java.lang.reflect.InvocationTargetException;
@@ -108,7 +109,7 @@ public class TypedBaseDataDescriptionImpl extends BaseDataDescriptionImpl implem
 	 */
 	@Override
 	public ScaleType getScale() {
-		return getType() == null || !(getType() instanceof TypedBaseDataDescription) ? null : ((TypedBaseDataDescription)getType()).getScale();
+		return getType() instanceof ScaledDefinition ? ((ScaledDefinition)getType()).getScale() : null;
 		
 	}
 

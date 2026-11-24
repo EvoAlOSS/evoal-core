@@ -54,34 +54,20 @@ public class ARPSOSwarm extends DefaultSwarm {
     @ConfigurationValue(entry = OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.swarm.diversity-high")
     private double diversity_high;
 
-    @Inject
-    @Named("search-space")
-    private Space searchSpace;
-
     /**
      * The mover whose direction the swarm switches.
      */
     private ARPSOMover arpsoMover;
 
     /**
-     * Checks the preconditions of ARPSO: the diversity is relative to the diagonal of the
-     *   search space, so every variable needs a lower and an upper boundary, and only the
-     *   {@code 'arpso-mover'} can switch between attraction and repulsion.
-     *
-     * @throws InitializationException if a precondition does not hold.
+     * Takes the mover, which is the {@code 'arpso-mover'}, the only one that can switch between
+     *   attraction and repulsion. Every search variable has a lower and an upper boundary. The
+     *   DL type requires both ({@code @Requires}, {@code @RequiresBoundaries}), which is checked
+     *   when the configuration is loaded.
      */
     @Override
     public Swarm init(final EObject configuration) throws InitializationException {
-        if(!(mover instanceof ARPSOMover arMover)) {
-            throw new InitializationException("The 'arpso-swarm' requires the 'arpso-mover', but the mover is " + mover.getClass().getSimpleName() + ".");
-        }
-        arpsoMover = arMover;
-
-        for(final EStructuralFeature feature : searchSpace) {
-            if(!FeatureBoundaries.isBounded(feature)) {
-                throw new InitializationException("The 'arpso-swarm' requires a lower and an upper boundary for every search variable, but '" + feature.getName() + "' has none.");
-            }
-        }
+        arpsoMover = (ARPSOMover) mover;
 
         return this;
     }

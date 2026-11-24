@@ -7,12 +7,9 @@ import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EStructuralFeature;
 
 import de.evoal.core.api.cdi.BeanFactory;
-import de.evoal.core.api.ecore.misc.EClassifierHelper;
 import de.evoal.core.api.utils.AttributeHelper;
-import de.evoal.models.core.ecore.Space;
 import de.evoal.models.core.exceptions.InitializationException;
 
 import de.evoal.optimisation.api.run.Candidate;
@@ -48,24 +45,13 @@ public class ParticleSwarmAlgorithm extends TemplateAlgorithm {
      */
     private Swarm swarm;
 
-    @Inject
-    @Named("search-space")
-    private Space searchSpace;
-
     /**
-     * Checks that every search variable is real-valued: the movers add velocities to the
-     *   positions and set the results as {@code double} values.
-     *
-     * @throws InitializationException if a search variable is not real-valued.
+     * Creates the swarm. The search variables are real and at least cardinal: the DL type
+     *   requires it ({@code @RequiresRepresentation}, {@code @RequiresScale}), which is checked
+     *   when the configuration is loaded.
      */
     @Override
     protected void configure(final EObject configuration) throws InitializationException {
-        for(final EStructuralFeature feature : searchSpace) {
-            if(!EClassifierHelper.isReal(feature.getEType())) {
-                throw new InitializationException("Particle swarm optimisation supports only real search variables, but '" + feature.getName() + "' is of type " + feature.getEType().getName() + ".");
-            }
-        }
-
         swarm = BeanFactory.createComponent(Swarm.class, helper.lookup(configuration, "swarm"));
     }
 

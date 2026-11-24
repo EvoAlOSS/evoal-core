@@ -375,6 +375,34 @@ public interface TypesPackage extends EPackage {
 	int DATA_TYPE_OPERATION_COUNT = TYPE_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link de.evoal.languages.model.base.types.impl.PathTypeImpl <em>Path Type</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.evoal.languages.model.base.types.impl.PathTypeImpl
+	 * @see de.evoal.languages.model.base.types.impl.TypesPackageImpl#getPathType()
+	 * @generated
+	 */
+	int PATH_TYPE = 11;
+
+	/**
+	 * The number of structural features of the '<em>Path Type</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PATH_TYPE_FEATURE_COUNT = TYPE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>Path Type</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PATH_TYPE_OPERATION_COUNT = TYPE_OPERATION_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.base.types.impl.DefinitionReferenceImpl <em>Definition Reference</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -382,7 +410,7 @@ public interface TypesPackage extends EPackage {
 	 * @see de.evoal.languages.model.base.types.impl.TypesPackageImpl#getDefinitionReference()
 	 * @generated
 	 */
-	int DEFINITION_REFERENCE = 11;
+	int DEFINITION_REFERENCE = 12;
 
 	/**
 	 * The number of structural features of the '<em>Definition Reference</em>' class.
@@ -420,7 +448,7 @@ public interface TypesPackage extends EPackage {
 	 * @see de.evoal.languages.model.base.types.impl.TypesPackageImpl#getClassDefinitionReference()
 	 * @generated
 	 */
-	int CLASS_DEFINITION_REFERENCE = 12;
+	int CLASS_DEFINITION_REFERENCE = 13;
 
 	/**
 	 * The feature id for the '<em><b>Definition</b></em>' reference.
@@ -466,7 +494,7 @@ public interface TypesPackage extends EPackage {
 	 * @see de.evoal.languages.model.base.types.impl.TypesPackageImpl#getEnumDefinitionReference()
 	 * @generated
 	 */
-	int ENUM_DEFINITION_REFERENCE = 13;
+	int ENUM_DEFINITION_REFERENCE = 14;
 
 	/**
 	 * The feature id for the '<em><b>Definition</b></em>' reference.
@@ -625,6 +653,16 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getDataType();
+
+	/**
+	 * Returns the meta object for class '{@link de.evoal.languages.model.base.types.PathType <em>Path Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Path Type</em>'.
+	 * @see de.evoal.languages.model.base.types.PathType
+	 * @generated
+	 */
+	EClass getPathType();
 
 	/**
 	 * Returns the meta object for class '{@link de.evoal.languages.model.base.types.DefinitionReference <em>Definition Reference</em>}'.
@@ -828,6 +866,16 @@ public interface TypesPackage extends EPackage {
 		 * @generated
 		 */
 		EClass DATA_TYPE = eINSTANCE.getDataType();
+
+		/**
+		 * The meta object literal for the '{@link de.evoal.languages.model.base.types.impl.PathTypeImpl <em>Path Type</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.evoal.languages.model.base.types.impl.PathTypeImpl
+		 * @see de.evoal.languages.model.base.types.impl.TypesPackageImpl#getPathType()
+		 * @generated
+		 */
+		EClass PATH_TYPE = eINSTANCE.getPathType();
 
 		/**
 		 * The meta object literal for the '{@link de.evoal.languages.model.base.types.impl.DefinitionReferenceImpl <em>Definition Reference</em>}' class.

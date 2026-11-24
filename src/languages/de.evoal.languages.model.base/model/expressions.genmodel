@@ -160,6 +160,9 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference expressions.ecore#//Call/function"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference expressions.ecore#//Call/parameters"/>
     </genClasses>
+    <genClasses ecoreClass="expressions.ecore#//PathExpression">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute expressions.ecore#//PathExpression/path"/>
+    </genClasses>
     <genClasses ecoreClass="expressions.ecore#//Parantheses">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference expressions.ecore#//Parantheses/subExpression"/>
     </genClasses>

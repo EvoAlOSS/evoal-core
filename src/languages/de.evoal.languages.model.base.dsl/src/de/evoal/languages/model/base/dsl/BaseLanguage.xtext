@@ -73,6 +73,7 @@ ReadExpressionRule returns ReadExpression:
 	| CallRule
 	| LiteralRule
 	| ParanthesesRule
+	| PathExpressionRule
 	| ReferenceRule;
 
 /**
@@ -86,6 +87,14 @@ ArrayRule returns Array:
 
 ParanthesesRule returns Parantheses:
 	'(' subExpression = ExpressionRule ')'
+;
+
+/**
+ * A path expression, e.g. path "../mover[arpso-mover]". The path is a string because '//'
+ * starts a comment and '/' is the division; the interpreter parses it.
+ */
+PathExpressionRule returns PathExpression:
+	'path' path = STRING
 ;
 
 CallRule returns Call:
@@ -218,6 +227,7 @@ TypeRule returns types::Type:
 	| ExpressionTypeRule
 	| LiteralTypeRule
 	| DataTypeRule
+	| PathTypeRule
 ;
 
 BaseTypeRule returns types::BaseType:
@@ -243,6 +253,11 @@ LiteralTypeRule returns types::LiteralType:
 DataTypeRule returns types::DataType:
 	{types::DataType}
 	'data'
+;
+
+PathTypeRule returns types::PathType:
+	{types::PathType}
+	'path'
 ;
 
 StringTypeRule returns types::StringType:

@@ -11,6 +11,17 @@ module 'de.evoal.core.constraints' {
     nominal enum Severity ( error, warning );
 
     /**
+     * The scales of measurement of the DDL, from the weakest to the strongest:
+     *   'nominal' < 'ordinal' < 'cardinal' < 'quotient'.
+     */
+    nominal enum 'measurement-scale' ( 'nominal', 'ordinal', 'cardinal', 'quotient' );
+
+    /**
+     * The representations of DDL data: 'real', 'integer', 'boolean' and 'string' data.
+     */
+    nominal enum representation ( 'real', 'integer', 'boolean', 'string' );
+
+    /**
      * Base type for EvoAl constraints.
      */
     abstract type Constraint {
@@ -51,9 +62,37 @@ module 'de.evoal.core.constraints' {
         inclusive : boolean := true;
     }
 
+    /**
+     * A condition on the attributes of an instance, e.g.
+     *   {@code @MultiVariateConstraint { 'expression' := self.'lower' < self.'upper'; }}. Besides
+     *   {@code self.'a'.'b'}, the condition can select objects of the configuration tree with path
+     *   expressions ({@code path "…"}, evaluated from the instance) and the functions
+     *   {@code count}, {@code exists}, {@code min} and {@code max} on their selections.
+     */
     type MultiVariateConstraint extends Constraint {
         'expression' : expression;
     }
+
+    /**
+     * The number of objects and values the path expression selects, e.g.
+     *   {@code count(path "../features")}.
+     */
+    def int count(path selection);
+
+    /**
+     * Whether the path expression selects anything.
+     */
+    def boolean exists(path selection);
+
+    /**
+     * The largest number the path expression selects; an error if it selects nothing.
+     */
+    def real max(path selection);
+
+    /**
+     * The smallest number the path expression selects; an error if it selects nothing.
+     */
+    def real min(path selection);
 
     /**
      * Constraint that specifies a minimum number of elements for arrays.
@@ -73,6 +112,87 @@ module 'de.evoal.core.constraints' {
          * The maximum number of elements
          */
         bound : int;
+    }
+
+    /**
+     * A requirement of a component on the data it works on, e.g. a particle swarm on the search
+     *   variables of its problem. The requirement is checked for every instance of the annotated
+     *   type when a configuration is loaded, for every data its 'features' select.
+     */
+    abstract type FeatureRequirement extends Constraint {
+        /**
+         * Selects the data the requirement applies to, starting at the annotated instance, e.g.
+         *   {@code path "/algorithm/problem/searchSpace"} for the search variables of the problem
+         *   or {@code path "../features"} for the features of the containing instance.
+         */
+        features : path;
+    }
+
+    /**
+     * The selected data needs at least the given scale of measurement, e.g.
+     *   {@code @RequiresScale { minimum := 'measurement-scale.cardinal'; features := path "…"; }}
+     *   for a component that computes differences. Data without a scale is nominal, typed data
+     *   has the scale of its type.
+     */
+    type RequiresScale extends FeatureRequirement {
+        /**
+         * The weakest scale the data may have.
+         */
+        minimum : enum 'measurement-scale';
+    }
+
+    /**
+     * The selected data needs one of the given representations, e.g.
+     *   {@code @RequiresRepresentation { representations := ['representation.real']; features := path "…"; }}.
+     */
+    type RequiresRepresentation extends FeatureRequirement {
+        /**
+         * The representations the data may have.
+         */
+        @MinimumNumberOfElements { bound := 1; }
+        representations : array enum representation;
+    }
+
+    /**
+     * The selected data needs a lower and/or an upper boundary ({@code @LowerBoundary},
+     *   {@code @UpperBoundary} of the data or of its type); the range of the representation does
+     *   not count.
+     */
+    type RequiresBoundaries extends FeatureRequirement {
+        /**
+         * Whether the data needs a lower boundary.
+         */
+        lower : boolean := false;
+
+        /**
+         * Whether the data needs an upper boundary.
+         */
+        upper : boolean := false;
+    }
+
+    /**
+     * The path must select at least one object, e.g.
+     *   {@code @Requires { selection := path "../mover[arpso-mover]"; }} on a component that only
+     *   works with a particular sibling. Alternatives are a union in the path
+     *   ({@code path "../mover[a] | ../mover[b]"}); several {@code @Requires} on a type must all
+     *   hold. Checked for every instance of the annotated type when a configuration is loaded.
+     */
+    type Requires extends Constraint {
+        /**
+         * The path, evaluated from the annotated instance.
+         */
+        selection : path;
+    }
+
+    /**
+     * The path must select nothing, e.g. {@code @Excludes { selection := path "../mover[basic-mover]"; }}.
+     *   Checked for every instance of the annotated type when a configuration is loaded.
+     */
+    type Excludes extends Constraint {
+        /**
+         * The path, evaluated from the annotated instance.
+         */
+        selection : path;
     }
 
     /**

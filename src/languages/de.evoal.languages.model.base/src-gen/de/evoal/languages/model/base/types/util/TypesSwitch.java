@@ -148,6 +148,13 @@ public class TypesSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case TypesPackage.PATH_TYPE: {
+				PathType pathType = (PathType)theEObject;
+				T result = casePathType(pathType);
+				if (result == null) result = caseType(pathType);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case TypesPackage.DEFINITION_REFERENCE: {
 				DefinitionReference definitionReference = (DefinitionReference)theEObject;
 				T result = caseDefinitionReference(definitionReference);
@@ -337,6 +344,21 @@ public class TypesSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseDataType(DataType object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Path Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Path Type</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePathType(PathType object) {
 		return null;
 	}
 

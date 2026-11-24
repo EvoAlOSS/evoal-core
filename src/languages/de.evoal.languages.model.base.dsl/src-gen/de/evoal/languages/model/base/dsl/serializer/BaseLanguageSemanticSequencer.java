@@ -30,6 +30,7 @@ import de.evoal.languages.model.base.expressions.NotExpression;
 import de.evoal.languages.model.base.expressions.OrExpression;
 import de.evoal.languages.model.base.expressions.Parantheses;
 import de.evoal.languages.model.base.expressions.PartialComparisonExpression;
+import de.evoal.languages.model.base.expressions.PathExpression;
 import de.evoal.languages.model.base.expressions.PowerOfExpression;
 import de.evoal.languages.model.base.expressions.RealLiteral;
 import de.evoal.languages.model.base.expressions.SelfReference;
@@ -46,6 +47,7 @@ import de.evoal.languages.model.base.types.EnumDefinitionReference;
 import de.evoal.languages.model.base.types.ExpressionType;
 import de.evoal.languages.model.base.types.IntType;
 import de.evoal.languages.model.base.types.LiteralType;
+import de.evoal.languages.model.base.types.PathType;
 import de.evoal.languages.model.base.types.RealType;
 import de.evoal.languages.model.base.types.StringType;
 import de.evoal.languages.model.base.types.TypesPackage;
@@ -147,6 +149,9 @@ public class BaseLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 			case ExpressionsPackage.PARTIAL_COMPARISON_EXPRESSION:
 				sequence_PartialComparisonExpressionRule(context, (PartialComparisonExpression) semanticObject); 
 				return; 
+			case ExpressionsPackage.PATH_EXPRESSION:
+				sequence_PathExpressionRule(context, (PathExpression) semanticObject); 
+				return; 
 			case ExpressionsPackage.POWER_OF_EXPRESSION:
 				sequence_PowerOfExpressionRule(context, (PowerOfExpression) semanticObject); 
 				return; 
@@ -210,6 +215,9 @@ public class BaseLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 				return; 
 			case TypesPackage.LITERAL_TYPE:
 				sequence_LiteralTypeRule(context, (LiteralType) semanticObject); 
+				return; 
+			case TypesPackage.PATH_TYPE:
+				sequence_PathTypeRule(context, (PathType) semanticObject); 
 				return; 
 			case TypesPackage.REAL_TYPE:
 				sequence_RealTypeRule(context, (RealType) semanticObject); 
@@ -767,6 +775,42 @@ public class BaseLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 		feeder.accept(grammarAccess.getPartialComparisonExpressionRuleAccess().getOperatorComparisonOperatorRuleEnumRuleCall_0_0(), semanticObject.getOperator());
 		feeder.accept(grammarAccess.getPartialComparisonExpressionRuleAccess().getSubExpressionAddOrSubtractExpressionRuleParserRuleCall_1_0(), semanticObject.getSubExpression());
 		feeder.finish();
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     ReadExpressionRule returns PathExpression
+	 *     PathExpressionRule returns PathExpression
+	 *
+	 * Constraint:
+	 *     path=STRING
+	 * </pre>
+	 */
+	protected void sequence_PathExpressionRule(ISerializationContext context, PathExpression semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, ExpressionsPackage.Literals.PATH_EXPRESSION__PATH) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ExpressionsPackage.Literals.PATH_EXPRESSION__PATH));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getPathExpressionRuleAccess().getPathSTRINGTerminalRuleCall_1_0(), semanticObject.getPath());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     TypeRule returns PathType
+	 *     PathTypeRule returns PathType
+	 *
+	 * Constraint:
+	 *     {PathType}
+	 * </pre>
+	 */
+	protected void sequence_PathTypeRule(ISerializationContext context, PathType semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	

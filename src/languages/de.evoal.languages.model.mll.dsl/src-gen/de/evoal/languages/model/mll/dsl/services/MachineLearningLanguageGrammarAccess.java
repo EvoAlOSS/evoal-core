@@ -1458,6 +1458,7 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 	//    | CallRule
 	//    | LiteralRule
 	//    | ParanthesesRule
+	//    | PathExpressionRule
 	//    | ReferenceRule;
 	public BaseLanguageGrammarAccess.ReadExpressionRuleElements getReadExpressionRuleAccess() {
 		return gaBaseLanguage.getReadExpressionRuleAccess();
@@ -1492,6 +1493,21 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 	
 	public ParserRule getParanthesesRuleRule() {
 		return getParanthesesRuleAccess().getRule();
+	}
+	
+	///**
+	// * A path expression, e.g. path "../mover[arpso-mover]". The path is a string because '//'
+	// * starts a comment and '/' is the division; the interpreter parses it.
+	// */
+	//PathExpressionRule returns PathExpression:
+	//    'path' path = STRING
+	//;
+	public BaseLanguageGrammarAccess.PathExpressionRuleElements getPathExpressionRuleAccess() {
+		return gaBaseLanguage.getPathExpressionRuleAccess();
+	}
+	
+	public ParserRule getPathExpressionRuleRule() {
+		return getPathExpressionRuleAccess().getRule();
 	}
 	
 	//CallRule returns Call:
@@ -1740,6 +1756,7 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 	//    | ExpressionTypeRule
 	//    | LiteralTypeRule
 	//    | DataTypeRule
+	//    | PathTypeRule
 	//;
 	public BaseLanguageGrammarAccess.TypeRuleElements getTypeRuleAccess() {
 		return gaBaseLanguage.getTypeRuleAccess();
@@ -1807,6 +1824,18 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 	
 	public ParserRule getDataTypeRuleRule() {
 		return getDataTypeRuleAccess().getRule();
+	}
+	
+	//PathTypeRule returns types::PathType:
+	//    {types::PathType}
+	//    'path'
+	//;
+	public BaseLanguageGrammarAccess.PathTypeRuleElements getPathTypeRuleAccess() {
+		return gaBaseLanguage.getPathTypeRuleAccess();
+	}
+	
+	public ParserRule getPathTypeRuleRule() {
+		return getPathTypeRuleAccess().getRule();
 	}
 	
 	//StringTypeRule returns types::StringType:

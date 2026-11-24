@@ -20,6 +20,7 @@ import de.evoal.languages.model.base.types.EnumDefinitionReference;
 import de.evoal.languages.model.base.types.ExpressionType;
 import de.evoal.languages.model.base.types.IntType;
 import de.evoal.languages.model.base.types.LiteralType;
+import de.evoal.languages.model.base.types.PathType;
 import de.evoal.languages.model.base.types.RealType;
 import de.evoal.languages.model.base.types.StringType;
 import de.evoal.languages.model.base.types.Type;
@@ -117,6 +118,13 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * @generated
 	 */
 	private EClass dataTypeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass pathTypeEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -335,6 +343,16 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * @generated
 	 */
 	@Override
+	public EClass getPathType() {
+		return pathTypeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getDefinitionReference() {
 		return definitionReferenceEClass;
 	}
@@ -441,6 +459,8 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 
 		dataTypeEClass = createEClass(DATA_TYPE);
 
+		pathTypeEClass = createEClass(PATH_TYPE);
+
 		definitionReferenceEClass = createEClass(DEFINITION_REFERENCE);
 		createEOperation(definitionReferenceEClass, DEFINITION_REFERENCE___GET_DEFINITION);
 
@@ -492,6 +512,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		expressionTypeEClass.getESuperTypes().add(this.getType());
 		literalTypeEClass.getESuperTypes().add(this.getType());
 		dataTypeEClass.getESuperTypes().add(this.getType());
+		pathTypeEClass.getESuperTypes().add(this.getType());
 		definitionReferenceEClass.getESuperTypes().add(this.getType());
 		classDefinitionReferenceEClass.getESuperTypes().add(this.getDefinitionReference());
 		enumDefinitionReferenceEClass.getESuperTypes().add(this.getDefinitionReference());
@@ -519,6 +540,8 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		initEClass(literalTypeEClass, LiteralType.class, "LiteralType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(dataTypeEClass, DataType.class, "DataType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(pathTypeEClass, PathType.class, "PathType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(definitionReferenceEClass, DefinitionReference.class, "DefinitionReference", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

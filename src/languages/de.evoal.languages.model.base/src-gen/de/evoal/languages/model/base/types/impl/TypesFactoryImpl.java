@@ -66,6 +66,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 			case TypesPackage.EXPRESSION_TYPE: return createExpressionType();
 			case TypesPackage.LITERAL_TYPE: return createLiteralType();
 			case TypesPackage.DATA_TYPE: return createDataType();
+			case TypesPackage.PATH_TYPE: return createPathType();
 			case TypesPackage.CLASS_DEFINITION_REFERENCE: return createClassDefinitionReference();
 			case TypesPackage.ENUM_DEFINITION_REFERENCE: return createEnumDefinitionReference();
 			default:
@@ -181,6 +182,17 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	public DataType createDataType() {
 		DataTypeImpl dataType = new DataTypeImpl();
 		return dataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public PathType createPathType() {
+		PathTypeImpl pathType = new PathTypeImpl();
+		return pathType;
 	}
 
 	/**

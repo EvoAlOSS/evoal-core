@@ -112,6 +112,15 @@ public interface TypesFactory extends EFactory {
 	DataType createDataType();
 
 	/**
+	 * Returns a new object of class '<em>Path Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Path Type</em>'.
+	 * @generated
+	 */
+	PathType createPathType();
+
+	/**
 	 * Returns a new object of class '<em>Class Definition Reference</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

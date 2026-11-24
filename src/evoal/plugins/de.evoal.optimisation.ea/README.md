@@ -46,11 +46,20 @@ values outside the boundaries back.
 Every chromosome lists its `recombination` and `mutation` operators; both lists are required,
 and an empty list means that the chromosome is not recombined or not mutated. The algorithm
 has no operators of its own, and there are no default operators (#311). Which chromosomes an
-operator may change is stated once, in the DL: the annotation
-`@Applicability { representations; 'minimum-scale'; }` on the operator type. The
-`ApplicabilityReader` reads it from the operator's DL type, and the `OperatorPlan` rejects an
-operator that does not apply to its chromosome. A chromosome with neither recombinations nor
-mutations never changes, which is logged as a warning.
+operator may change is stated once, in the DL, with the requirement annotations of core (#270,
+#267) on the operator type:
+
+- the type of its chromosome, which is the representation of the genes:
+  `@Requires { selection := path "(..)+[double-chromosome]"; }`, alternatives as a union
+  (`"(..)+[bit-chromosome] | (..)+[gray-chromosome]"`); `(..)+` reaches the chromosome also
+  from an operator inside another one;
+- the weakest scale of the chromosome's features:
+  `@RequiresScale { minimum := 'measurement-scale.cardinal'; features := path "(..)+[chromosome]/features"; }`.
+
+An operator without them applies to every chromosome. A configuration with an operator that
+does not apply to its chromosome is rejected when it is loaded, with file, line and path. A
+chromosome with neither recombinations nor mutations never changes, which is logged as a
+warning.
 
 Every probability has one unit (`Variation`):
 
@@ -63,11 +72,11 @@ Every probability has one unit (`Variation`):
 - `'single-choice-mutation'`: if it fires, exactly one of its `children` is chosen by
   `weights`, one per child (`MutationOperator.choose`), and applied with its own gene
   probability; the property `operators` names the chosen one. It applies to a chromosome
-  that all its children apply to (`ApplicabilityReader` combines them).
+  that all its children apply to: every child is checked against the chromosome.
 
 - `'correlation-aware-mutation' { mutation; 'minimum-correlation'; 'propagation-depth'; }`
   and `'linkage-crossover' { crossover; 'minimum-correlation'; }` wrap an operator and use
-  its probabilities and applicability; see [Correlation-aware operators](#correlation-aware-operators).
+  its probabilities; the wrapped operator is checked against the chromosome; see [Correlation-aware operators](#correlation-aware-operators).
 
 Every configured operator and selection draws from its own named stream of the
 `RandomService` (operators: `de.evoal.optimisation.ea/genotype.chromosomes[<c>].<slot>[<index>]`),

@@ -2,7 +2,6 @@ package de.evoal.optimisation.ea.main.genotype;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
@@ -13,13 +12,10 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
 import de.evoal.core.api.dynamic.DynamicEClassProvider;
-import de.evoal.core.api.dynamic.EAnnotationHelper;
 import de.evoal.core.api.ecore.info.FeatureBoundaries;
 import de.evoal.core.api.ecore.misc.EClassifierHelper;
 import de.evoal.core.api.languages.AttributeEvaluator;
 import de.evoal.core.api.utils.AttributeHelper;
-import de.evoal.languages.model.base.definitions.BaseDataDescription;
-import de.evoal.languages.model.base.definitions.ScaleType;
 import de.evoal.models.core.ecore.Space;
 import de.evoal.models.core.exceptions.InitializationException;
 
@@ -28,16 +24,12 @@ import de.evoal.optimisation.ea.api.genotype.Chromosome;
 import de.evoal.optimisation.ea.api.genotype.DoubleChromosome;
 import de.evoal.optimisation.ea.api.genotype.Genotype;
 import de.evoal.optimisation.ea.api.genotype.IntegerChromosome;
-import de.evoal.optimisation.ea.api.genotype.MeasurementScale;
 
 /**
  * Creates the {@link Genotype} of the algorithm from the configured {@code genotype}.
  */
 @Dependent
 public class GenotypeFactory {
-    @Inject
-    private EAnnotationHelper annotations;
-
     @Inject
     private AttributeEvaluator attributes;
 
@@ -221,18 +213,6 @@ public class GenotypeFactory {
                                                   + "variable, but '" + feature.getName() + "' has none.");
             }
         }
-    }
-
-    /**
-     * @return The declared scale of the feature, empty if it declares none.
-     */
-    public Optional<MeasurementScale> scaleOf(final EStructuralFeature feature) {
-        return annotations.dataDescriptionOf(feature)
-                          .filter(BaseDataDescription.class::isInstance)
-                          .map(BaseDataDescription.class::cast)
-                          .map(BaseDataDescription::getScale)
-                          .filter(scale -> scale != ScaleType.UNKNOWN)
-                          .map(scale -> MeasurementScale.of(scale.getLiteral()));
     }
 
     /**

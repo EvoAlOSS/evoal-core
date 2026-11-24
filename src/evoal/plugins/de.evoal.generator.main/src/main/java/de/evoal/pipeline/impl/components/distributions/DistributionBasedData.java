@@ -4,8 +4,6 @@ import de.evoal.core.api.dynamic.EAnnotationHelper;
 import de.evoal.core.api.ecore.misc.EClassifierHelper;
 import de.evoal.languages.model.base.definitions.BaseDataDescription;
 import de.evoal.languages.model.base.definitions.ScaleType;
-import de.evoal.languages.model.base.definitions.ScaledDefinition;
-import de.evoal.languages.model.base.definitions.TypedBaseDataDescription;
 import de.evoal.core.api.utils.AttributeHelper;
 import de.evoal.core.api.utils.Requirements;
 import de.evoal.pipeline.api.distribution.Distribution;
@@ -142,17 +140,14 @@ public class DistributionBasedData extends PipelineComponentImpl {
 
     /**
      * Returns the DDL scale of the data. Data without a scale in the DDL is nominal (the default
-     *   of the DDL). Typed data takes the scale of its type, read here from the type, because
-     *   the derived {@code getScale()} of typed data returns {@code null}.
+     *   of the DDL); typed data has the scale of its type.
      *
      * @return The scale, unknown if the data has no data description.
      */
     private ScaleType scaleOf(final EStructuralFeature feature) {
         return annotations.dataDescriptionOf(feature)
-                          .map(description -> description instanceof TypedBaseDataDescription typed
-                                              && typed.getType() instanceof ScaledDefinition type
-                                              ? type.getScale()
-                                              : description instanceof BaseDataDescription base ? base.getScale() : null)
+                          .filter(BaseDataDescription.class::isInstance)
+                          .map(description -> ((BaseDataDescription) description).getScale())
                           .orElse(ScaleType.UNKNOWN);
     }
 

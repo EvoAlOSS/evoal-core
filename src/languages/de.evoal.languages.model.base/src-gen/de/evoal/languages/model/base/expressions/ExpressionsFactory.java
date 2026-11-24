@@ -247,6 +247,15 @@ public interface ExpressionsFactory extends EFactory {
 	Call createCall();
 
 	/**
+	 * Returns a new object of class '<em>Path Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Path Expression</em>'.
+	 * @generated
+	 */
+	PathExpression createPathExpression();
+
+	/**
 	 * Returns a new object of class '<em>Parantheses</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -82,6 +82,7 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 			case ExpressionsPackage.TYPE_DEFINITION_REFERENCE: return createTypeDefinitionReference();
 			case ExpressionsPackage.BOOLEAN_LITERAL: return createBooleanLiteral();
 			case ExpressionsPackage.CALL: return createCall();
+			case ExpressionsPackage.PATH_EXPRESSION: return createPathExpression();
 			case ExpressionsPackage.PARANTHESES: return createParantheses();
 			case ExpressionsPackage.ARRAY: return createArray();
 			default:
@@ -404,6 +405,17 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 	public Call createCall() {
 		CallImpl call = new CallImpl();
 		return call;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public PathExpression createPathExpression() {
+		PathExpressionImpl pathExpression = new PathExpressionImpl();
+		return pathExpression;
 	}
 
 	/**

@@ -19,9 +19,12 @@ module de.evoal.optimisation.pso.optimisation {
 	nominal enum 'topology' ( global, star, ring, square );
 	
 	/**
-	 * Particle swarm optimisation (Kennedy and Eberhart 1995). Supports only real search
-	 *   variables; the memory model's bestSoFar is the best personal best of the swarm.
+	 * Particle swarm optimisation (Kennedy and Eberhart 1995). Needs real search variables of
+	 *   at least cardinal scale, because the movers add velocities to the positions; the memory
+	 *   model's bestSoFar is the best personal best of the swarm.
 	 */
+	@RequiresRepresentation { representations := ['representation.real']; features := path "/algorithm/problem/searchSpace"; }
+	@RequiresScale { minimum := 'measurement-scale.cardinal'; features := path "/algorithm/problem/searchSpace"; }
 	@Literature { keys := ["kennedy1995particle"]; }
 	type 'particle-swarm-optimisation' extends 'algorithm' {
 	    'swarm' : instance swarm;
@@ -41,8 +44,11 @@ module de.evoal.optimisation.pso.optimisation {
 	/**
 	 * Swarm that switches between attraction and repulsion depending on its
 	 *   diversity (Riget and Vesterstroem 2002). Requires the 'arpso-mover' and a lower
-	 *   and an upper boundary for every search variable.
+	 *   and an upper boundary for every search variable: the diversity is relative to the
+	 *   diagonal of the search space.
 	 */
+	@RequiresBoundaries { lower := true; upper := true; features := path "/algorithm/problem/searchSpace"; }
+	@Requires { selection := path "../mover[arpso-mover]"; }
 	@Literature { keys := ["riget2002diversity"]; }
 	type 'arpso-swarm' extends 'swarm' {
         'diversity-low' : real; //example: 0.000005

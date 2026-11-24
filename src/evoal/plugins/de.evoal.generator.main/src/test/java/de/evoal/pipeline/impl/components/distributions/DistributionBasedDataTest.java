@@ -11,6 +11,8 @@ import de.evoal.core.api.dynamic.EAnnotationHelper;
 import de.evoal.core.api.dynamic.EClassProvider;
 import de.evoal.core.api.random.RandomService;
 import de.evoal.core.junit.dsl.LanguageHelper;
+import de.evoal.languages.model.base.definitions.BaseDataDescription;
+import de.evoal.languages.model.base.definitions.ScaleType;
 import de.evoal.languages.model.ddl.DataDescriptionModule;
 import de.evoal.models.core.ecore.Space;
 import de.evoal.models.core.ecore.TypedEObject;
@@ -19,7 +21,7 @@ import de.evoal.pipeline.api.distribution.Distribution;
 /**
  * 'distribution-based-data' ({@link DistributionBasedData}) on the data of {@code mixed.ddl}:
  *   real 'x', quotient integer 'n', real 'y', nominal integer 'variant', 'typed-variant' of a
- *   nominal type, and 'unscaled' without a scale.
+ *   nominal type, 'unscaled' without a scale, and 'temperature' of a cardinal type.
  */
 public class DistributionBasedDataTest {
     private final Space pipeline = new Space(new EClassProvider().eClassFor(
@@ -36,6 +38,26 @@ public class DistributionBasedDataTest {
         step.configure(distributions, distributions.stream().map(d -> d.getClass().getSimpleName()).toList());
 
         return step;
+    }
+
+    @Test
+    public void dataHasItsDeclaredScaleTheScaleOfItsTypeOrNominal() {
+        final DataDescriptionModule module = LanguageHelper.loadFromClasspath("de/evoal/pipeline/test/mixed.ddl");
+
+        Assertions.assertEquals(ScaleType.QUOTIENT, scaleOf(module, "x"));
+        Assertions.assertEquals(ScaleType.NOMINAL, scaleOf(module, "variant"));
+        Assertions.assertEquals(ScaleType.NOMINAL, scaleOf(module, "typed-variant"));
+        Assertions.assertEquals(ScaleType.NOMINAL, scaleOf(module, "unscaled"));
+        Assertions.assertEquals(ScaleType.CARDINAL, scaleOf(module, "temperature"));
+    }
+
+    private static ScaleType scaleOf(final DataDescriptionModule module, final String name) {
+        return module.getDescriptions()
+                     .stream()
+                     .filter(description -> name.equals(description.getName()))
+                     .map(description -> ((BaseDataDescription) description).getScale())
+                     .findFirst()
+                     .orElseThrow();
     }
 
     @Test

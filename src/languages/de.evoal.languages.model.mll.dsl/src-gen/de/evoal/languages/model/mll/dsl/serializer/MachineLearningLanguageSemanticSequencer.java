@@ -29,6 +29,7 @@ import de.evoal.languages.model.base.expressions.NotExpression;
 import de.evoal.languages.model.base.expressions.OrExpression;
 import de.evoal.languages.model.base.expressions.Parantheses;
 import de.evoal.languages.model.base.expressions.PartialComparisonExpression;
+import de.evoal.languages.model.base.expressions.PathExpression;
 import de.evoal.languages.model.base.expressions.PowerOfExpression;
 import de.evoal.languages.model.base.expressions.RealLiteral;
 import de.evoal.languages.model.base.expressions.SelfReference;
@@ -45,6 +46,7 @@ import de.evoal.languages.model.base.types.EnumDefinitionReference;
 import de.evoal.languages.model.base.types.ExpressionType;
 import de.evoal.languages.model.base.types.IntType;
 import de.evoal.languages.model.base.types.LiteralType;
+import de.evoal.languages.model.base.types.PathType;
 import de.evoal.languages.model.base.types.RealType;
 import de.evoal.languages.model.base.types.StringType;
 import de.evoal.languages.model.base.types.TypesPackage;
@@ -201,6 +203,9 @@ public class MachineLearningLanguageSemanticSequencer extends GeneratorDSLSemant
 			case ExpressionsPackage.PARTIAL_COMPARISON_EXPRESSION:
 				sequence_PartialComparisonExpressionRule(context, (PartialComparisonExpression) semanticObject); 
 				return; 
+			case ExpressionsPackage.PATH_EXPRESSION:
+				sequence_PathExpressionRule(context, (PathExpression) semanticObject); 
+				return; 
 			case ExpressionsPackage.POWER_OF_EXPRESSION:
 				sequence_PowerOfExpressionRule(context, (PowerOfExpression) semanticObject); 
 				return; 
@@ -306,6 +311,9 @@ public class MachineLearningLanguageSemanticSequencer extends GeneratorDSLSemant
 				return; 
 			case TypesPackage.LITERAL_TYPE:
 				sequence_LiteralTypeRule(context, (LiteralType) semanticObject); 
+				return; 
+			case TypesPackage.PATH_TYPE:
+				sequence_PathTypeRule(context, (PathType) semanticObject); 
 				return; 
 			case TypesPackage.REAL_TYPE:
 				sequence_RealTypeRule(context, (RealType) semanticObject); 

@@ -12,6 +12,7 @@ import de.evoal.languages.model.interpreter.numeric.ArithmeticNumberOperations;
 import de.evoal.languages.model.interpreter.numeric.BooleanNumberOperations;
 import de.evoal.languages.model.interpreter.numeric.NumericConversions;
 import de.evoal.languages.model.interpreter.ConstantEvaluator;
+import de.evoal.core.api.languages.base.ElementSwitch;
 import de.evoal.models.core.ecore.Space;
 import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
@@ -87,9 +88,37 @@ public class ValueConverter extends ExpressionsSwitch<Object> {
             return eObject;
         }
 
+        if(targetType != null && targetType.getEType() == ExpressionsPackage.Literals.PATH_EXPRESSION) {
+            // paths are stored unevaluated and evaluated later from the object they are checked for
+            if(targetType.isMany() && eObject instanceof Array array) {
+                return array.getValues()
+                            .stream()
+                            .map(this::toPathExpression)
+                            .collect(Collectors.toList());
+            }
+
+            return toPathExpression(eObject);
+        }
+
         final Object value = toTargetType(doSwitch(eObject));
         log.info("Converted {} ({}) to {}.", eObject, targetType, value);
         return value;
+    }
+
+    /**
+     * @return The path expression the expression consists of.
+     * @throws IllegalArgumentException if the expression is no path expression.
+     */
+    private PathExpression toPathExpression(final EObject expression) {
+        final Optional<ReadExpression> element = expression instanceof Expression value
+                                                 ? ElementSwitch.elementOf(value)
+                                                 : Optional.empty();
+        if(element.isPresent() && element.get() instanceof PathExpression path) {
+            return path;
+        }
+
+        throw new IllegalArgumentException("Invalid value for attribute '" + targetType.getName()
+                                           + "': expected a path expression, e.g. path \"../features\".");
     }
 
     /**
@@ -516,6 +545,12 @@ public class ValueConverter extends ExpressionsSwitch<Object> {
         }
 
         return doSwitch(base);
+    }
+
+    @Override
+    public Object casePathExpression(final PathExpression path) {
+        throw new IllegalArgumentException("The path expression path \"" + path.getPath() + "\" can only be the value of a "
+                                           + "'path' attribute or part of a constraint expression.");
     }
 
     @Override

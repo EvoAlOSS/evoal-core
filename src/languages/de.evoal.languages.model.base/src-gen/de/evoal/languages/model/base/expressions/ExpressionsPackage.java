@@ -1419,6 +1419,43 @@ public interface ExpressionsPackage extends EPackage {
 	int CALL_OPERATION_COUNT = READ_EXPRESSION_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link de.evoal.languages.model.base.expressions.impl.PathExpressionImpl <em>Path Expression</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.evoal.languages.model.base.expressions.impl.PathExpressionImpl
+	 * @see de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl#getPathExpression()
+	 * @generated
+	 */
+	int PATH_EXPRESSION = 31;
+
+	/**
+	 * The feature id for the '<em><b>Path</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PATH_EXPRESSION__PATH = READ_EXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Path Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PATH_EXPRESSION_FEATURE_COUNT = READ_EXPRESSION_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>Path Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PATH_EXPRESSION_OPERATION_COUNT = READ_EXPRESSION_OPERATION_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.base.expressions.impl.ParanthesesImpl <em>Parantheses</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1426,7 +1463,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl#getParantheses()
 	 * @generated
 	 */
-	int PARANTHESES = 31;
+	int PARANTHESES = 32;
 
 	/**
 	 * The feature id for the '<em><b>Sub Expression</b></em>' containment reference.
@@ -1463,7 +1500,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl#getArray()
 	 * @generated
 	 */
-	int ARRAY = 32;
+	int ARRAY = 33;
 
 	/**
 	 * The feature id for the '<em><b>Values</b></em>' containment reference list.
@@ -1500,7 +1537,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl#getComparisonOperator()
 	 * @generated
 	 */
-	int COMPARISON_OPERATOR = 33;
+	int COMPARISON_OPERATOR = 34;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.base.expressions.AddOrSubtractOperator <em>Add Or Subtract Operator</em>}' enum.
@@ -1510,7 +1547,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl#getAddOrSubtractOperator()
 	 * @generated
 	 */
-	int ADD_OR_SUBTRACT_OPERATOR = 34;
+	int ADD_OR_SUBTRACT_OPERATOR = 35;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.base.expressions.MultiplyDivideModuloOperator <em>Multiply Divide Modulo Operator</em>}' enum.
@@ -1520,7 +1557,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl#getMultiplyDivideModuloOperator()
 	 * @generated
 	 */
-	int MULTIPLY_DIVIDE_MODULO_OPERATOR = 35;
+	int MULTIPLY_DIVIDE_MODULO_OPERATOR = 36;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.base.expressions.Factor <em>Factor</em>}' enum.
@@ -1530,7 +1567,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl#getFactor()
 	 * @generated
 	 */
-	int FACTOR = 36;
+	int FACTOR = 37;
 
 	/**
 	 * The meta object id for the '<em>Number</em>' data type.
@@ -1540,7 +1577,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl#getNumber()
 	 * @generated
 	 */
-	int NUMBER = 37;
+	int NUMBER = 38;
 
 
 	/**
@@ -2339,6 +2376,27 @@ public interface ExpressionsPackage extends EPackage {
 	EReference getCall_Parameters();
 
 	/**
+	 * Returns the meta object for class '{@link de.evoal.languages.model.base.expressions.PathExpression <em>Path Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Path Expression</em>'.
+	 * @see de.evoal.languages.model.base.expressions.PathExpression
+	 * @generated
+	 */
+	EClass getPathExpression();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.base.expressions.PathExpression#getPath <em>Path</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Path</em>'.
+	 * @see de.evoal.languages.model.base.expressions.PathExpression#getPath()
+	 * @see #getPathExpression()
+	 * @generated
+	 */
+	EAttribute getPathExpression_Path();
+
+	/**
 	 * Returns the meta object for class '{@link de.evoal.languages.model.base.expressions.Parantheses <em>Parantheses</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3123,6 +3181,24 @@ public interface ExpressionsPackage extends EPackage {
 		 * @generated
 		 */
 		EReference CALL__PARAMETERS = eINSTANCE.getCall_Parameters();
+
+		/**
+		 * The meta object literal for the '{@link de.evoal.languages.model.base.expressions.impl.PathExpressionImpl <em>Path Expression</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.evoal.languages.model.base.expressions.impl.PathExpressionImpl
+		 * @see de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl#getPathExpression()
+		 * @generated
+		 */
+		EClass PATH_EXPRESSION = eINSTANCE.getPathExpression();
+
+		/**
+		 * The meta object literal for the '<em><b>Path</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PATH_EXPRESSION__PATH = eINSTANCE.getPathExpression_Path();
 
 		/**
 		 * The meta object literal for the '{@link de.evoal.languages.model.base.expressions.impl.ParanthesesImpl <em>Parantheses</em>}' class.

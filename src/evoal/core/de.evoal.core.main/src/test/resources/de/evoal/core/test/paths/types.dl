@@ -1,0 +1,87 @@
+import "definitions" from 'de.evoal.core.constraints';
+
+/**
+ * Types for the tests of path expressions.
+ */
+module 'de.evoal.core.test.paths.types' {
+    /**
+     * The type of the test problem.
+     */
+    type 'test-problem' {}
+
+    /**
+     * The type of the test function.
+     */
+    type 'test-function' {}
+
+    /**
+     * Base type of the criteria.
+     */
+    abstract type criterion {}
+
+    /**
+     * A criterion with a maximum.
+     */
+    type 'count-criterion' extends criterion {
+        'maximum' : int := 10;
+    }
+
+    /**
+     * Satisfied if one of its criteria is satisfied.
+     */
+    type 'any-of' extends criterion {
+        'criteria' : array instance criterion;
+    }
+
+    /**
+     * Satisfied if all of its criteria are satisfied.
+     */
+    type 'all-of' extends criterion {
+        'criteria' : array instance criterion;
+    }
+
+    /**
+     * Base type of the movers.
+     */
+    abstract type mover {}
+
+    /**
+     * A mover.
+     */
+    type 'basic-mover' extends mover {}
+
+    /**
+     * A subtype of the basic mover.
+     */
+    type 'special-mover' extends 'basic-mover' {}
+
+    /**
+     * A part with a default.
+     */
+    type 'swarm' {
+        'size' : int := 5;
+    }
+
+    /**
+     * Decreases a value within the bound of the count criteria of the algorithm.
+     */
+    @MultiVariateConstraint {
+        'expression' := count(path "/algorithm/criteria([any-of]/criteria)*[count-criterion]") = 0
+                        OR self.'iterations' <= min(path "/algorithm/criteria([any-of]/criteria)*[count-criterion]/maximum");
+    }
+    type 'decrease' {
+        'iterations' : int;
+    }
+
+    /**
+     * The algorithm of the tests.
+     */
+    type 'test-algorithm' {
+        'swarm' : instance 'swarm';
+        'mover' : instance mover;
+        'criteria' : array instance criterion;
+        'features' : array data;
+        'others' : array data;
+        'decreases' : array instance 'decrease';
+    }
+}

@@ -24,6 +24,7 @@
     <genClasses ecoreClass="types.ecore#//ExpressionType"/>
     <genClasses ecoreClass="types.ecore#//LiteralType"/>
     <genClasses ecoreClass="types.ecore#//DataType"/>
+    <genClasses ecoreClass="types.ecore#//PathType"/>
     <genClasses ecoreClass="types.ecore#//DefinitionReference">
       <genOperations ecoreOperation="types.ecore#//DefinitionReference/getDefinition"/>
     </genClasses>

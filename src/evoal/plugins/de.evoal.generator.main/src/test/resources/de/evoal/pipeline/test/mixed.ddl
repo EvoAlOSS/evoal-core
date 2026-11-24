@@ -8,6 +8,11 @@ module 'de.evoal.pipeline.test.mixed' {
          */
         nominal type 'variant-number';
 
+        /**
+         * Temperatures in degrees Celsius.
+         */
+        cardinal type 'celsius';
+
     data:
         /**
          * A real value.
@@ -38,4 +43,9 @@ module 'de.evoal.pipeline.test.mixed' {
          * A whole number without a scale, nominal by default.
          */
         integer data 'unscaled';
+
+        /**
+         * A temperature of a cardinal type.
+         */
+        real data 'temperature' of type 'celsius';
 }

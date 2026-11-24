@@ -112,6 +112,10 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 				return createDataTypeAdapter();
 			}
 			@Override
+			public Adapter casePathType(PathType object) {
+				return createPathTypeAdapter();
+			}
+			@Override
 			public Adapter caseDefinitionReference(DefinitionReference object) {
 				return createDefinitionReferenceAdapter();
 			}
@@ -294,6 +298,20 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createDataTypeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.base.types.PathType <em>Path Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.evoal.languages.model.base.types.PathType
+	 * @generated
+	 */
+	public Adapter createPathTypeAdapter() {
 		return null;
 	}
 

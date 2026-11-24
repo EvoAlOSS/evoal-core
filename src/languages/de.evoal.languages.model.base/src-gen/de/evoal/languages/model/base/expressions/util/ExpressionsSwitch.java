@@ -338,6 +338,14 @@ public class ExpressionsSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case ExpressionsPackage.PATH_EXPRESSION: {
+				PathExpression pathExpression = (PathExpression)theEObject;
+				T result = casePathExpression(pathExpression);
+				if (result == null) result = caseReadExpression(pathExpression);
+				if (result == null) result = caseExpression(pathExpression);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case ExpressionsPackage.PARANTHESES: {
 				Parantheses parantheses = (Parantheses)theEObject;
 				T result = caseParantheses(parantheses);
@@ -820,6 +828,21 @@ public class ExpressionsSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseCall(Call object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Path Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Path Expression</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePathExpression(PathExpression object) {
 		return null;
 	}
 

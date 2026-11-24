@@ -192,6 +192,10 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 				return createCallAdapter();
 			}
 			@Override
+			public Adapter casePathExpression(PathExpression object) {
+				return createPathExpressionAdapter();
+			}
+			@Override
 			public Adapter caseParantheses(Parantheses object) {
 				return createParanthesesAdapter();
 			}
@@ -650,6 +654,20 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createCallAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.base.expressions.PathExpression <em>Path Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.evoal.languages.model.base.expressions.PathExpression
+	 * @generated
+	 */
+	public Adapter createPathExpressionAdapter() {
 		return null;
 	}
 
