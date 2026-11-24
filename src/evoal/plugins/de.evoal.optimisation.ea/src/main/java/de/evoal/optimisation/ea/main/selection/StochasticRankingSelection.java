@@ -141,14 +141,6 @@ public class StochasticRankingSelection implements SelectionMethod {
         return "stochastic-ranking-selection";
     }
 
-    /**
-     * @return {@code true}: the ranking compares the fitness itself.
-     */
-    @Override
-    public boolean needsSingleFitness() {
-        return true;
-    }
-
     @Override
     public boolean ranksStochastically() {
         return true;

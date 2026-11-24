@@ -199,6 +199,7 @@ module de.evoal.optimisation.local_search.optimisation {
     * P(f(s), f(s'), T) = exp(max( (f(s')-f(s)/T(k)), 0) for maximisation
     * P(f(s), f(s'), T) = exp(max( -(f(s')-f(s)/T(k)), 0) for minimisation
     */
+    @RequiresFitnessComponents { minimum := 1; maximum := 1; }
     type 'exponential-probability' extends 'probability-acceptance-function' {}
 
 }

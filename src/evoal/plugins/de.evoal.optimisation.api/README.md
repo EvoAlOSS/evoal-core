@@ -443,6 +443,13 @@ The surrogate adaptions apply formulas on objective values; they convert a compo
 with `DirectionStep.toObjective` and the result with `DirectionStep.toCanonical`, so they
 only accept `minimise` and `maximise` goals.
 
+A component that needs a number of fitness components states it in the DL with
+`@RequiresFitnessComponents { minimum; maximum; }` (e.g. the roulette wheel selection and the
+comparators exactly one, `'nsga2-selection'` at least two). `SearchRunner.run` checks it before
+it creates the algorithm: `FitnessComponentRequirements` compares the annotations of every DL
+type of the algorithm's configuration (`RunLiterature.definitionsOf`, the walk of the
+literature) with the layout of the pipeline. The components themselves do not check it again.
+
 ### Writing a fitness step
 
 1. Declare a DL type that extends `'fitness-step'` (or `scalarisation`) in the module's

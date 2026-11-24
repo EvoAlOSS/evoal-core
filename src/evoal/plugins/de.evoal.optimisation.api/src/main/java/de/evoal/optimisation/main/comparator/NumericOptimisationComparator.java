@@ -7,7 +7,6 @@ import jakarta.inject.Named;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
 
-import de.evoal.core.api.utils.Requirements;
 import de.evoal.models.core.ecore.TypedEObject;
 
 import de.evoal.optimisation.api.fitness.Fitness;
@@ -28,12 +27,11 @@ public class NumericOptimisationComparator implements OptimisationValueComparato
     private static final int[] ORDER = {0};
 
     /**
-     * @throws IllegalArgumentException if the fitness has not exactly one component.
+     * Compares the only fitness component; that the fitness has one component is checked when
+     * the run builds its fitness pipeline ({@code @RequiresFitnessComponents}).
      */
     @Override
     public FitnessValue toValue(final TypedEObject objectives, final Fitness fitness) {
-        Requirements.requireEqual(fitness.size(), 1);
-
         final FitnessComponent component = fitness.layout().component(0);
         final List<EStructuralFeature> statisticsFeatures = component.goal()
                                                                      .map(Goal::objective)

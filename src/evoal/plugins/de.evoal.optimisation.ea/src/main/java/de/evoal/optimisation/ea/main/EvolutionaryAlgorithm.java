@@ -27,7 +27,6 @@ import de.evoal.optimisation.api.checks.CheckPoint;
 import de.evoal.optimisation.api.correlations.ProblemCorrelations;
 import de.evoal.optimisation.api.execution.ExecutionRecorder;
 import de.evoal.optimisation.api.fitness.Evaluator;
-import de.evoal.optimisation.api.fitness.FitnessPipeline;
 import de.evoal.optimisation.api.model.InitialCandidatesProvider;
 import de.evoal.optimisation.api.run.Candidate;
 import de.evoal.optimisation.api.steps.EvaluateCandidates;
@@ -110,9 +109,6 @@ public class EvolutionaryAlgorithm extends TemplateAlgorithm {
 
     private SelectionMethod parentSelection;
 
-    @Inject
-    private Provider<FitnessPipeline> pipelines;
-
     /**
      * The correlations of the DDL; their properties are defined if there are any.
      */
@@ -188,12 +184,9 @@ public class EvolutionaryAlgorithm extends TemplateAlgorithm {
         replacement = BeanFactory.createComponent(ReplacementStrategy.class, helper.<EObject>lookup(configuration, "replacement"));
         replacement.check(size, offspring);
 
-        requireSingleFitness("parent-selection", parentSelection);
-        requireSingleFitness("replacement", replacement.selection());
-
         final EObject comparator = helper.lookup(configuration, "comparator");
         crowded = CrowdedComparator.TYPE.equals(DynamicEClassProvider.dlTypeOf(comparator));
-        checkNsga2(parentSelection, replacement, crowded, pipelines.get().layout().components().size());
+        checkNsga2(parentSelection, replacement, crowded);
         checkParentCount(parentSelection, size, offspring);
         order = crowded ? new CrowdedOrder() : CandidateOrder.BY_VALUE;
 
@@ -256,17 +249,17 @@ public class EvolutionaryAlgorithm extends TemplateAlgorithm {
     /**
      * Checks the parts of NSGA-II: {@code 'crowded-comparator'} and {@code 'nsga2-selection'}
      *   only together, the selection only directly in {@code 'plus-replacement'} or
-     *   {@code 'comma-replacement'} (so that every member of the next population has a front),
-     *   and a fitness with at least two components.
+     *   {@code 'comma-replacement'} (so that every member of the next population has a front).
+     *   That the fitness has at least two components is checked when the run builds its
+     *   fitness pipeline ({@code @RequiresFitnessComponents} of {@code 'nsga2-selection'}).
      *
      * @param parentSelection The parent selection.
      * @param replacement The replacement.
      * @param crowded Whether the comparator is {@code 'crowded-comparator'}.
-     * @param components The number of fitness components.
      * @throws InitializationException if a check fails.
      */
     static void checkNsga2(final SelectionMethod parentSelection, final ReplacementStrategy replacement,
-                           final boolean crowded, final int components) throws InitializationException {
+                           final boolean crowded) throws InitializationException {
         if(parentSelection.sortsIntoFronts()) {
             throw new InitializationException("'nsga2-selection' is a survivor selection; use it as the selection of the "
                                               + "replacement, not as 'parent-selection'.");
@@ -291,25 +284,6 @@ public class EvolutionaryAlgorithm extends TemplateAlgorithm {
         }
         if(!crowded) {
             throw new InitializationException("'nsga2-selection' needs 'crowded-comparator' as 'comparator'.");
-        }
-
-        if(components < 2) {
-            throw new InitializationException("NSGA-II needs a fitness with at least two components, but the fitness has "
-                                              + components + "; remove the scalarisation step from 'fitness-pipeline'.");
-        }
-    }
-
-    /**
-     * @throws InitializationException if the selection uses the fitness itself, but the
-     *   fitness has not exactly one component.
-     */
-    private void requireSingleFitness(final String slot, final SelectionMethod selection) throws InitializationException {
-        final int components = pipelines.get().layout().components().size();
-
-        if(selection.needsSingleFitness() && components != 1) {
-            throw new InitializationException("The " + slot + " '" + selection.name() + "' needs a fitness with one component, "
-                                              + "but the fitness has " + components + "; add a scalarisation step such as "
-                                              + "'weighted-sum' to 'fitness-pipeline'.");
         }
     }
 

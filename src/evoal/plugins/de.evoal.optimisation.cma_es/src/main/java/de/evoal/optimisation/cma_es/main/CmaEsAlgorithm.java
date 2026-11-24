@@ -18,7 +18,6 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 
 import de.evoal.core.api.cdi.BeanFactory;
 import de.evoal.core.api.ecore.info.FeatureBoundaries;
-import de.evoal.core.api.ecore.misc.EClassifierHelper;
 import de.evoal.core.api.random.RandomService;
 import de.evoal.core.api.utils.AttributeHelper;
 import de.evoal.models.core.ecore.Space;
@@ -202,13 +201,9 @@ public class CmaEsAlgorithm extends TemplateAlgorithm {
 
     @Override
     protected void configure(final EObject configuration) throws InitializationException {
+        // real search variables of at least cardinal scale: checked when the configuration is
+        // loaded (@RequiresRepresentation, @RequiresScale of 'cma-es')
         final List<EStructuralFeature> features = new ArrayList<>(searchSpace);
-        for(final EStructuralFeature feature : features) {
-            if(!EClassifierHelper.isReal(feature.getEType())) {
-                throw new InitializationException("CMA-ES supports only real search variables, but '" + feature.getName()
-                                                  + "' is of type " + feature.getEType().getName() + ".");
-            }
-        }
 
         initialStepSize = helper.<Double>lookup(configuration, "initial-step-size");
         final Integer configuredPopulationSize = optional(configuration, "population-size");

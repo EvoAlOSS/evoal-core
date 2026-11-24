@@ -6,14 +6,19 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Provider;
 
+import lombok.extern.slf4j.Slf4j;
+
 import de.evoal.core.api.board.Blackboard;
 import de.evoal.core.api.cdi.BeanFactory;
 import de.evoal.core.api.provenance.RunRecord;
 import de.evoal.core.api.random.RandomService;
+import de.evoal.models.core.exceptions.InitializationException;
 import de.evoal.models.v202704.optimisation.model.OptimisationModule;
 import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
 import de.evoal.optimisation.api.execution.EvaluationPosition;
 import de.evoal.optimisation.api.execution.ExecutionRecorder;
+import de.evoal.optimisation.api.fitness.FitnessComponentRequirements;
+import de.evoal.optimisation.api.fitness.FitnessLayout;
 import de.evoal.optimisation.api.fitness.FitnessPipeline;
 import de.evoal.optimisation.api.model.IndividualIDGenerator;
 import de.evoal.optimisation.api.model.OptimisationAlgorithm;
@@ -32,6 +37,7 @@ import de.evoal.optimisation.main.search.OptimisationConfigurationSetup;
  *   and the columns of the statistics writers.
  */
 @ApplicationScoped
+@Slf4j
 public class SearchRunner {
     @Inject
     private OptimisationConfigurationSetup configurationSetup;
@@ -92,10 +98,18 @@ public class SearchRunner {
         idGenerator.startRun();
         executionRecorder.startRun(position);
 
+        final FitnessLayout layout = fitnessPipelines.get().layout();
+        try {
+            FitnessComponentRequirements.check(literature.definitionsOf(configuration.getAlgorithm()), layout);
+        } catch(final InitializationException e) {
+            log.error("The configuration does not fit the fitness of the problem: {}", e.getMessage());
+            throw new RuntimeException("The configuration does not fit the fitness of the problem.", e);
+        }
+
         final OptimisationAlgorithm algorithm =
                 BeanFactory.createComponent(OptimisationAlgorithm.class, configuration.getAlgorithm());
 
-        executionRecorder.defineFitness(fitnessPipelines.get().layout());
+        executionRecorder.defineFitness(layout);
         executionRecorder.beginExecution();
         algorithm.run();
         executionRecorder.finishRun();

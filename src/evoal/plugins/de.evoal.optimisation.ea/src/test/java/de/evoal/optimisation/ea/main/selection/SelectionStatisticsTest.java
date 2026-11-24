@@ -144,14 +144,4 @@ public class SelectionStatisticsTest {
             Statistics.assertBinomial(counts.getOrDefault(candidate, 0L), SELECTIONS, 0.25, "equal fitness");
         }
     }
-
-    @Test
-    public void onlyTheFitnessBasedSelectionsNeedASingleFitness() {
-        Assertions.assertTrue(new RouletteWheelSelection().needsSingleFitness());
-        Assertions.assertTrue(new StochasticUniversalSampling().needsSingleFitness());
-        Assertions.assertTrue(new BoltzmannSelection(1.0).needsSingleFitness());
-        Assertions.assertTrue(new EliteSelection(1, new BoltzmannSelection(1.0)).needsSingleFitness());
-        Assertions.assertFalse(new TournamentSelection(2).needsSingleFitness());
-        Assertions.assertFalse(new EliteSelection(1, new TournamentSelection(2)).needsSingleFitness());
-    }
 }

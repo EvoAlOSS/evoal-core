@@ -54,11 +54,12 @@ public class GenotypeFactory {
     /**
      * @param genotype The configured {@code genotype}.
      * @return The chromosomes.
-     * @throws InitializationException if a chromosome cannot represent its features.
+     * @throws InitializationException if a chromosome cannot represent its features. That the
+     *   search variables are bounded and that every chromosome has features of its
+     *   representations is checked when the configuration is loaded ({@code @RequiresBoundaries}
+     *   of {@code 'evolutionary-algorithm'}, {@code @RequiresRepresentation} of the chromosomes).
      */
     public List<ConfiguredChromosome> create(final EObject genotype) throws InitializationException {
-        requireBoundedFeatures();
-
         final List<ConfiguredChromosome> chromosomes = configured(genotype);
 
         try {
@@ -121,8 +122,9 @@ public class GenotypeFactory {
                 lower[i] = bounds[0];
                 upper[i] = bounds[1];
             } else {
-                throw new InitializationException("A bit chromosome cannot represent the feature '" + feature.getName()
-                                                  + "' of type " + type.getName() + ".");
+                // excluded when the configuration is loaded (@RequiresRepresentation)
+                throw new IllegalStateException("A bit chromosome cannot represent the feature '" + feature.getName()
+                                                + "' of type " + type.getName() + ".");
             }
         }
 
@@ -138,13 +140,7 @@ public class GenotypeFactory {
         final double[] upper = new double[features.size()];
 
         for(int i = 0; i < features.size(); ++i) {
-            final EStructuralFeature feature = features.get(i);
-            if(!EClassifierHelper.isDouble(feature.getEType())) {
-                throw new InitializationException("A double chromosome needs real features, but '" + feature.getName()
-                                                  + "' is of type " + feature.getEType().getName() + ".");
-            }
-
-            final double[] bounds = realBounds(feature);
+            final double[] bounds = realBounds(features.get(i));
             lower[i] = bounds[0];
             upper[i] = bounds[1];
         }
@@ -157,13 +153,7 @@ public class GenotypeFactory {
         final long[] upper = new long[features.size()];
 
         for(int i = 0; i < features.size(); ++i) {
-            final EStructuralFeature feature = features.get(i);
-            if(!EClassifierHelper.isInteger(feature.getEType())) {
-                throw new InitializationException("An integer chromosome needs integer features, but '" + feature.getName()
-                                                  + "' is of type " + feature.getEType().getName() + ".");
-            }
-
-            final long[] bounds = integerBounds(feature);
+            final long[] bounds = integerBounds(features.get(i));
             lower[i] = bounds[0];
             upper[i] = bounds[1];
         }
@@ -200,19 +190,6 @@ public class GenotypeFactory {
         }
 
         return new double[] {lower, upper};
-    }
-
-    /**
-     * @throws InitializationException if a search variable that is not boolean has no lower
-     *   or no upper boundary.
-     */
-    private void requireBoundedFeatures() throws InitializationException {
-        for(final EStructuralFeature feature : searchSpace) {
-            if(!EClassifierHelper.isBoolean(feature.getEType()) && !FeatureBoundaries.isBounded(feature)) {
-                throw new InitializationException("The evolutionary algorithm needs a lower and an upper boundary for every search "
-                                                  + "variable, but '" + feature.getName() + "' has none.");
-            }
-        }
     }
 
     /**

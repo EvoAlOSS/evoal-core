@@ -31,6 +31,7 @@ module de.evoal.optimisation.ea.optimisation {
      *
      * Every search variable that is not boolean needs a lower and an upper boundary.
      */
+    @RequiresBoundaries { lower := true; upper := true; features := path "/algorithm/problem/searchSpace"; }
     type 'evolutionary-algorithm' extends algorithm {
         /**
          * The number of candidates in the population (N).
@@ -109,11 +110,13 @@ module de.evoal.optimisation.ea.optimisation {
     /**
      * Real features, one gene each.
      */
+    @RequiresRepresentation { representations := ['representation.real']; features := path "features"; }
     type 'double-chromosome' extends chromosome {}
 
     /**
      * Integer features, one gene each.
      */
+    @RequiresRepresentation { representations := ['representation.integer']; features := path "features"; }
     type 'integer-chromosome' extends chromosome {}
 
     /**
@@ -122,6 +125,8 @@ module de.evoal.optimisation.ea.optimisation {
      *   and u stand for l + k * (u - l) / (2^precision - 1); integers are rounded, and
      *   every integer of the range must be reachable.
      */
+    @RequiresRepresentation { representations := ['representation.real', 'representation.integer', 'representation.boolean'];
+                              features := path "features"; }
     type 'bit-chromosome' extends chromosome {
         /**
          * The number of bits of a real or integer feature.
@@ -136,6 +141,8 @@ module de.evoal.optimisation.ea.optimisation {
      *   neighbouring values differ in one bit (reflected binary code, Gray 1953).
      */
     @Literature { keys := ["gray1953pulse"]; }
+    @RequiresRepresentation { representations := ['representation.real', 'representation.integer', 'representation.boolean'];
+                              features := path "features"; }
     type 'gray-chromosome' extends chromosome {
         /**
          * The number of bits of a real or integer feature.
@@ -569,6 +576,7 @@ module de.evoal.optimisation.ea.optimisation {
      *   fitness is -Infinity (best), only the candidates with -Infinity are selected; NaN is
      *   an error. Needs a fitness with one component.
      */
+    @RequiresFitnessComponents { minimum := 1; maximum := 1; }
     type 'roulette-wheel-selection' extends selection {}
 
     /**
@@ -580,6 +588,7 @@ module de.evoal.optimisation.ea.optimisation {
      *   roulette wheel selection. Needs a fitness with one component.
      */
     @Literature { keys := ["baker1987reducing"]; }
+    @RequiresFitnessComponents { minimum := 1; maximum := 1; }
     type 'stochastic-universal-sampling' extends selection {}
 
     /**
@@ -588,6 +597,7 @@ module de.evoal.optimisation.ea.optimisation {
      *   finite fitness of the candidates. Infinite fitness and NaN as in the roulette
      *   wheel selection. Needs a fitness with one component.
      */
+    @RequiresFitnessComponents { minimum := 1; maximum := 1; }
     type 'boltzmann-selection' extends selection {
         /**
          * The temperature; a larger temperature selects more uniformly.
@@ -613,6 +623,7 @@ module de.evoal.optimisation.ea.optimisation {
      *   then compares by constrained domination, too.
      */
     @Literature { keys := ["deb2002fast"]; }
+    @RequiresFitnessComponents { minimum := 2; }
     type 'nsga2-selection' extends selection {
         /**
          * The constraint group of the constrained domination, as named in the DDL.
@@ -650,6 +661,7 @@ module de.evoal.optimisation.ea.optimisation {
      *   of the iteration).
      */
     @Literature { keys := ["runarsson2000stochastic"]; }
+    @RequiresFitnessComponents { minimum := 1; maximum := 1; }
     type 'stochastic-ranking-selection' extends selection {
         /**
          * The constraint group, as named in the DDL.

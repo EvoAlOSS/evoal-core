@@ -30,11 +30,6 @@ public class StochasticUniversalSampling implements SelectionMethod {
     }
 
     @Override
-    public boolean needsSingleFitness() {
-        return true;
-    }
-
-    @Override
     public List<Candidate> select(final List<Candidate> candidates, final int count, final CandidateOrder order,
                                   final RandomGenerator random) {
         final List<Candidate> selected = new ArrayList<>(count);

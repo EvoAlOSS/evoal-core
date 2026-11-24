@@ -384,6 +384,7 @@ module de.evoal.surrogate.smile.ml {
 	 */
 	@Literature { keys := ["smola2004tutorial", "flake2002efficient", "burges1998tutorial", "platt1998sequential",
 	                       "fan2005working", "bordes2005fast", "glasmachers2008second", "chang2011libsvm"]; }
+	@RequiresScale { minimum := 'measurement-scale.cardinal'; features := path "/task/inputs"; }
 	type 'epsilon-svr' extends surrogate {
 		/**
 	     * The soft margin penalty parameter C: the weight of the training errors outside the
@@ -426,6 +427,7 @@ module de.evoal.surrogate.smile.ml {
      * Reference: Rasmussen and Williams 2006.
      */
     @Literature { keys := ["rasmussen2006gaussian"]; }
+    @RequiresScale { minimum := 'measurement-scale.cardinal'; features := path "/task/inputs"; }
     type 'gaussian-process' extends surrogate {
 
         /**

@@ -430,6 +430,7 @@ module de.evoal.optimisation.core {
     /**
      * Comparator for a single number-based fitness value (such as a double).
      */
+    @RequiresFitnessComponents { minimum := 1; maximum := 1; }
     type 'numeric-comparator' extends comparator {
     }
 
@@ -440,6 +441,7 @@ module de.evoal.optimisation.core {
      *   better). Feasible means that every constraint of the group is satisfied.
      */
     @Literature { keys := ["deb2000efficient"]; }
+    @RequiresFitnessComponents { minimum := 1; maximum := 1; }
     type 'feasibility-comparator' extends comparator {
         /**
          * The constraint group, as named in the DDL.
@@ -455,6 +457,7 @@ module de.evoal.optimisation.core {
      *   for the last case.
      */
     @Literature { keys := ["takahama2006constrained"]; }
+    @RequiresFitnessComponents { minimum := 1; maximum := 1; }
     type 'epsilon-comparator' extends comparator {
         /**
          * The constraint group, as named in the DDL.
@@ -920,6 +923,7 @@ module de.evoal.optimisation.core {
      *   scalarisation such as 'weighted-sum' to the 'fitness-pipeline'.
      */
     @Literature { keys := ["zielinski2006examination"]; }
+    @RequiresFitnessComponents { minimum := 1; maximum := 1; }
     type stagnation extends 'stopping-criterion' {
         /**
          * The number of iterations without improvement after which the run stops.

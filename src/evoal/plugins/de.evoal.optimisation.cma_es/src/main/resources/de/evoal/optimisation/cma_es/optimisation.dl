@@ -17,7 +17,9 @@ module de.evoal.optimisation.cma_es.optimisation {
      *   candidate of the 'initialisation', e.g. a uniformly random point of the search space
      *   with 'random-population'. C starts as the identity.
      *
-     * Only real search features are supported. The distribution lives in an unbounded
+     * Only real search features of at least cardinal scale are supported, and a configured
+     *   'parent-number' is at most half the configured 'population-size' (only then are the
+     *   weights of all parents positive). The distribution lives in an unbounded
      *   space; a sample is mapped into the bounds of the DDL by the boundary transformation
      *   of pycma ('BoundTransform': the identity except in a margin of max(1, |bound|) / 20
      *   at each bound, quadratic there, periodic outside), so no evaluation is wasted.
@@ -34,6 +36,10 @@ module de.evoal.optimisation.cma_es.optimisation {
      *   DDL. The sampled candidates have no predecessors.
      */
     @Literature { keys := ["hansen2016cma", "hansen2001completely", "hansen2003reducing"]; }
+    @RequiresRepresentation { representations := ['representation.real']; features := path "/algorithm/problem/searchSpace"; }
+    @RequiresScale { minimum := 'measurement-scale.cardinal'; features := path "/algorithm/problem/searchSpace"; }
+    @MultiVariateConstraint { 'expression' := !exists(path "parent-number") OR !exists(path "population-size")
+                                              OR 2 * self.'parent-number' <= self.'population-size'; }
     type 'cma-es' extends 'algorithm' {
         /**
          * The initial step size sigma_0. The tutorial suggests 0.3 (b - a) for a search
@@ -168,8 +174,11 @@ module de.evoal.optimisation.cma_es.optimisation {
     /**
      * Learning rates that replace the defaults of table 1 of the tutorial (for the diagonal
      *   model, c_1 and c_mu of sep-CMA-ES). An attribute that is not set keeps its default.
+     *   If both are set, c_1 + c_mu is at most 1.
      */
     @Literature { keys := ["hansen2016cma"]; }
+    @MultiVariateConstraint { 'expression' := !exists(path "c-1") OR !exists(path "c-mu")
+                                              OR self.'c-1' + self.'c-mu' <= 1.0; }
     type 'learning-rates' extends configuration {
         /**
          * The learning rate c_sigma of the evolution path of the step size; default

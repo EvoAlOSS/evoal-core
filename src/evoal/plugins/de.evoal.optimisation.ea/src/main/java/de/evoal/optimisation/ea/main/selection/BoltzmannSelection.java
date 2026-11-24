@@ -56,11 +56,6 @@ public class BoltzmannSelection implements SelectionMethod {
         return "boltzmann-selection";
     }
 
-    @Override
-    public boolean needsSingleFitness() {
-        return true;
-    }
-
     /**
      * @return The weights exp(-(f - f_min) / temperature) of the candidates, with f_min the
      *   smallest finite fitness; non-finite fitness as in {@link Rankings#proportionalWeights}.

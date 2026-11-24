@@ -1,3 +1,4 @@
+import "definitions" from 'de.evoal.core.constraints';
 import "definitions" from de.evoal.surrogate.ml;
 
 /**
@@ -14,12 +15,14 @@ module de.evoal.surrogate.simple.ml {
 	/**
 	 * A surrogate model that is based on a linear regression.
 	 */
+	@RequiresScale { minimum := 'measurement-scale.cardinal'; features := path "/task/inputs"; }
 	type 'linear-regression' extends surrogate {
 	}
 	
 	/**
 	 * A surrogate model that is based on a simple quadratic regression.
 	 */
+	@RequiresScale { minimum := 'measurement-scale.cardinal'; features := path "/task/inputs"; }
 	type 'simple-quadratic-regression' extends surrogate {
 	}
 }

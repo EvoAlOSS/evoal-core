@@ -37,11 +37,6 @@ public class RouletteWheelSelection implements SelectionMethod {
     }
 
     @Override
-    public boolean needsSingleFitness() {
-        return true;
-    }
-
-    @Override
     public List<Candidate> select(final List<Candidate> candidates, final int count, final CandidateOrder order,
                                   final RandomGenerator random) {
         return Rankings.drawAll(candidates, windowedWeights(candidates, name()), count, random);

@@ -56,8 +56,7 @@ class StochasticRankingSelectionTest {
     }
 
     @Test
-    void itNeedsAFitnessWithOneComponent() {
-        Assertions.assertTrue(selection(0.45, StochasticRankingSelection.Penalty.SUM).needsSingleFitness());
+    void itRanksStochastically() {
         Assertions.assertTrue(selection(0.45, StochasticRankingSelection.Penalty.SUM).ranksStochastically());
         Assertions.assertTrue(new EliteSelection(1, selection(0.45, StochasticRankingSelection.Penalty.SUM)).ranksStochastically());
     }

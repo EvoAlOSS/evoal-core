@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
 
-import de.evoal.core.api.utils.Requirements;
 import de.evoal.models.core.ecore.TypedEObject;
 
 import de.evoal.optimisation.api.constraints.ViolationRecord;
@@ -51,15 +50,14 @@ abstract class AbstractFeasibilityComparator implements OptimisationValueCompara
     }
 
     /**
-     * @throws IllegalArgumentException if the fitness has not exactly one component, or the
-     *   problem has no constraint in the group.
+     * @throws IllegalArgumentException if the problem has no constraint in the group. That the
+     *   fitness has one component is checked when the run builds its fitness pipeline
+     *   ({@code @RequiresFitnessComponents}).
      */
     @Override
     public FeasibilityValue toValue(final TypedEObject objectives,
                                     final Fitness fitness,
                                     final ViolationRecord violations) {
-        Requirements.requireEqual(fitness.size(), 1);
-
         final FitnessComponent component = fitness.layout().component(0);
         final List<EStructuralFeature> statisticsFeatures = component.goal()
                                                                      .map(Goal::objective)

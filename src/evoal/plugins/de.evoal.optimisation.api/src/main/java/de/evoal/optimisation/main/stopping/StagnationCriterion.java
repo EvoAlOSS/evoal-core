@@ -15,8 +15,6 @@ import de.evoal.models.v202704.optimisation.execution.TerminationCriterion;
 import de.evoal.models.v202704.optimisation.execution.impl.TerminationCriterionImpl;
 import de.evoal.models.v202704.optimisation.memory.Iteration;
 
-import de.evoal.optimisation.api.fitness.FitnessLayout;
-import de.evoal.optimisation.api.fitness.FitnessPipeline;
 import de.evoal.optimisation.api.model.StagnationMeasure;
 
 /**
@@ -48,24 +46,17 @@ public class StagnationCriterion extends TerminationCriterionImpl {
     private StagnationMeasure measure;
 
     /**
-     * Provides the fitness components of the configuration.
-     */
-    @Inject
-    private FitnessPipeline pipeline;
-
-    /**
      * The improvements and iterations without improvement of the current run.
      */
     private Stagnation stagnation;
 
     /**
-     * @throws InitializationException if the fitness has more than one component or a
-     *   tolerance is negative.
+     * @throws InitializationException if a tolerance is negative. That the fitness has one
+     *   component is checked when the run builds its fitness pipeline
+     *   ({@code @RequiresFitnessComponents} of {@code stagnation}).
      */
     @Override
     public TerminationCriterion init(final EObject configuration) throws InitializationException {
-        requireOneComponent(pipeline.layout());
-
         iterations = evaluator.attributeToInteger(configuration, "iterations");
         final double absoluteTolerance = evaluator.attributeToDouble(configuration, "absolute-tolerance");
         final double relativeTolerance = evaluator.attributeToDouble(configuration, "relative-tolerance");
@@ -79,17 +70,6 @@ public class StagnationCriterion extends TerminationCriterionImpl {
         measure = BeanFactory.createComponent(StagnationMeasure.class, measureConfiguration);
 
         return this;
-    }
-
-    /**
-     * @throws InitializationException if the layout has more than one component.
-     */
-    private static void requireOneComponent(final FitnessLayout layout) throws InitializationException {
-        if(layout.size() != 1) {
-            throw new InitializationException("The stopping criterion 'stagnation' needs a fitness with one component, "
-                                              + "but the fitness has the components " + layout
-                                              + ". Add a scalarisation, e.g. 'weighted-sum', to the 'fitness-pipeline'.");
-        }
     }
 
     @Override

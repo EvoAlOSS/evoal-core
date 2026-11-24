@@ -67,11 +67,6 @@ public class EliteSelection implements SelectionMethod {
     }
 
     @Override
-    public boolean needsSingleFitness() {
-        return rest.needsSingleFitness();
-    }
-
-    @Override
     public boolean sortsIntoFronts() {
         return rest.sortsIntoFronts();
     }

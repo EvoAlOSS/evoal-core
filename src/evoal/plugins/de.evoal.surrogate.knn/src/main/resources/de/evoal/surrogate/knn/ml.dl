@@ -9,6 +9,7 @@ module de.evoal.surrogate.knn.ml {
     /**
      * A surrogate model implementing the K-Nearest Neighbours algorithm.
      */
+	@RequiresScale { minimum := 'measurement-scale.cardinal'; features := path "/task/inputs"; }
 	type knn extends surrogate {
 	    /**
 	     * The number of neighbours to take into account.

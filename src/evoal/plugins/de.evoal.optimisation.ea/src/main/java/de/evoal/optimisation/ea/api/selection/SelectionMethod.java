@@ -18,14 +18,6 @@ public interface SelectionMethod extends EvoalComponent<SelectionMethod> {
     String name();
 
     /**
-     * @return Whether the selection uses the fitness itself, which then must have one
-     *   component, instead of comparing the candidates; includes nested selections.
-     */
-    default boolean needsSingleFitness() {
-        return false;
-    }
-
-    /**
      * @return Whether the selection sorts the candidates into non-dominated fronts
      *   ({@code 'nsga2-selection'}); includes nested selections.
      */

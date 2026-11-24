@@ -156,7 +156,7 @@ module 'de.evoal.core.constraints' {
     /**
      * The selected data needs a lower and/or an upper boundary ({@code @LowerBoundary},
      *   {@code @UpperBoundary} of the data or of its type); the range of the representation does
-     *   not count.
+     *   not count, except for boolean data, which is always bounded (false and true).
      */
     type RequiresBoundaries extends FeatureRequirement {
         /**
@@ -193,6 +193,28 @@ module 'de.evoal.core.constraints' {
          * The path, evaluated from the annotated instance.
          */
         selection : path;
+    }
+
+    /**
+     * The number of fitness components a component needs, e.g.
+     *   {@code @RequiresFitnessComponents { minimum := 1; maximum := 1; }} on a selection that
+     *   works on a single fitness value. The number follows from the goals of the problem and the
+     *   steps of the fitness pipeline (a scalarisation makes one), so it is checked when the
+     *   optimisation run builds its fitness pipeline, before the first evaluation, for every
+     *   configuration of the annotated type in the algorithm.
+     */
+    type RequiresFitnessComponents extends Constraint {
+        /**
+         * The smallest number of fitness components.
+         */
+        @LowerBoundary { boundary := 1; }
+        minimum : int := 1;
+
+        /**
+         * The largest number of fitness components; no limit if it is not set.
+         */
+        @LowerBoundary { boundary := 1; }
+        maximum : optional int;
     }
 
     /**

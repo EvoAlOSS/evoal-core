@@ -1,8 +1,6 @@
 package de.evoal.optimisation.main.stopping;
 
 import java.lang.reflect.Field;
-import java.util.Arrays;
-import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 
@@ -15,9 +13,6 @@ import de.evoal.models.core.exceptions.InitializationException;
 import de.evoal.models.v202704.optimisation.memory.Iteration;
 import de.evoal.models.v202704.optimisation.memory.MemoryFactory;
 
-import de.evoal.optimisation.api.fitness.FitnessComponent;
-import de.evoal.optimisation.api.fitness.FitnessLayout;
-import de.evoal.optimisation.api.fitness.FitnessPipeline;
 import de.evoal.optimisation.api.model.StagnationMeasure;
 
 public class StagnationCriterionTest {
@@ -36,19 +31,6 @@ public class StagnationCriterionTest {
         iteration.setNumber(number);
 
         return iteration;
-    }
-
-    /**
-     * @return A pipeline mock with fitness components of the given names.
-     */
-    private static FitnessPipeline pipeline(final String... names) {
-        final List<FitnessComponent> components = Arrays.stream(names)
-                                                        .map(FitnessComponent::named)
-                                                        .toList();
-        final FitnessPipeline pipeline = Mockito.mock(FitnessPipeline.class);
-        Mockito.when(pipeline.layout()).thenReturn(new FitnessLayout(components));
-
-        return pipeline;
     }
 
     /**
@@ -89,26 +71,10 @@ public class StagnationCriterionTest {
     }
 
     @Test
-    public void aFitnessWithSeveralComponentsIsRejected() throws Exception {
-        // given
-        final StagnationCriterion criterion = new StagnationCriterion();
-        inject(criterion, "evaluator", evaluator);
-        inject(criterion, "pipeline", pipeline("y:0", "y:1"));
-
-        // when
-        final InitializationException exception = Assertions.assertThrows(InitializationException.class,
-                                                                          () -> criterion.init(configuration));
-
-        // then
-        Assertions.assertTrue(exception.getMessage().contains("scalarisation"), exception.getMessage());
-    }
-
-    @Test
     public void aNegativeToleranceIsRejected() throws Exception {
         // given
         final StagnationCriterion criterion = new StagnationCriterion();
         inject(criterion, "evaluator", evaluator);
-        inject(criterion, "pipeline", pipeline("y:0"));
         Mockito.when(evaluator.attributeToInteger(configuration, "iterations")).thenReturn(5);
         Mockito.when(evaluator.attributeToDouble(configuration, "absolute-tolerance")).thenReturn(-1.0);
         Mockito.when(evaluator.attributeToDouble(configuration, "relative-tolerance")).thenReturn(0.0);

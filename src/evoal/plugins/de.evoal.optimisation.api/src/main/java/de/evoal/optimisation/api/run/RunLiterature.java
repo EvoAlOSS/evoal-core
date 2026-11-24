@@ -14,12 +14,15 @@ import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 
 
+import org.eclipse.emf.ecore.EObject;
+
 import de.evoal.core.api.languages.AttributeEvaluator;
 import de.evoal.core.api.literature.CitationList;
 import de.evoal.core.api.literature.ConfigurationLiterature;
 import de.evoal.core.api.literature.LiteratureContributor;
 import de.evoal.core.api.literature.LiteratureIndex;
 import de.evoal.languages.model.base.definitions.ClassDefinition;
+import de.evoal.languages.model.base.definitions.Definition;
 import de.evoal.languages.model.base.expressions.Call;
 import de.evoal.models.v202704.optimisation.model.ModelPackage;
 import de.evoal.models.v202704.optimisation.model.OptimisationModule;
@@ -86,6 +89,17 @@ public class RunLiterature {
      * The folder that {@link #citations} were written to.
      */
     private Path folder;
+
+    /**
+     * @param root A configuration, e.g. the algorithm of a run.
+     * @return The DL types (and the declarations of builtin calls) that the configuration uses,
+     *   walked as for its literature, but without the definitions that contributors add (e.g.
+     *   from a surrogate's model file).
+     */
+    public List<Definition> definitionsOf(final @NonNull EObject root) {
+        return new ConfigurationLiterature(evaluator, Set.of(ModelPackage.eINSTANCE), definition -> false, List.of())
+                .definitions(root);
+    }
 
     /**
      * Collects the literature of a configuration.

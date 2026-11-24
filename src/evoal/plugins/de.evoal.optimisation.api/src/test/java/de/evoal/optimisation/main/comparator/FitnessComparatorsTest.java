@@ -110,16 +110,8 @@ public class FitnessComparatorsTest {
             Assertions.assertSame(fitness, value.getFitness());
         }
 
-        @Test
-        public void aFitnessWithSeveralComponentsIsRejected() {
-            // given
-            final FitnessLayout twoGoals = FitnessLayout.of(new Goals(List.of(new Goal.Minimise(a), new Goal.Minimise(b))));
-            final Fitness fitness = new Fitness(twoGoals, new double[] {1.0, 2.0});
-            final TypedEObject objectives = objectives(1.0, 2.0);
-
-            // when, then
-            Assertions.assertThrows(IllegalArgumentException.class, () -> comparator.toValue(objectives, fitness));
-        }
+        // a fitness with several components is rejected when the run builds its fitness
+        // pipeline (@RequiresFitnessComponents of 'numeric-comparator')
 
         @Test
         public void aValueOfAnotherComparatorCannotBeCompared() {

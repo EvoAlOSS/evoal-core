@@ -1,8 +1,6 @@
 package de.evoal.optimisation.local_search.main.probability;
 
 import de.evoal.core.api.math.EvoalMath;
-import de.evoal.core.api.utils.Requirements;
-import de.evoal.models.core.ecore.Space;
 import de.evoal.models.v202704.optimisation.execution.OptimisationValue;
 import de.evoal.models.v202704.optimisation.execution.OptimisationValueWithDistance;
 import de.evoal.optimisation.local_search.api.probability.AcceptanceProbabilityFunction;
@@ -25,9 +23,6 @@ import org.eclipse.emf.ecore.EObject;
 @Dependent
 @Named("de.evoal.optimisation.local_search.optimisation.exponential-probability")
 public class ExponentialProbabilityFunction implements AcceptanceProbabilityFunction {
-    @Inject @Named("optimisation-space")
-    private Space optimisationSpace;
-
     @Inject
     private AttributeEvaluator evaluator;
 
@@ -67,10 +62,12 @@ public class ExponentialProbabilityFunction implements AcceptanceProbabilityFunc
         return withDistance.distanceFrom(currentValue);
     }
 
+    /**
+     * That the fitness has one component is checked when the run builds its fitness pipeline
+     * ({@code @RequiresFitnessComponents} of {@code 'exponential-probability'}).
+     */
     @Override
     public ExponentialProbabilityFunction init(final EObject config) {
-        Requirements.requireSize(optimisationSpace, 1);
-
         return this;
     }
 }
