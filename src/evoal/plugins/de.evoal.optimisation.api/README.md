@@ -589,3 +589,9 @@ The kernel registers the listeners of a run when it starts. Today that is the
 `IterationFinished`, `write()` on `RunFinished`. To add output to EvoAl, write a
 `StatisticsWriter`; a new kind of listener has to be registered in
 `OptimisationRun.execute`.
+
+The kernel builds the steps of an iteration (`Iteration.getSteps()`, the steps version of the
+memory model) only if a listener reads them: `RunListener.readsSteps()` and
+`StatisticsWriter.readsSteps()` return `false` by default, the `'memory-model'` writer returns
+its `'steps'`. Without such a listener, the iterations have no steps; the outputs of the steps
+still get their ids, so the members have the same ids either way.

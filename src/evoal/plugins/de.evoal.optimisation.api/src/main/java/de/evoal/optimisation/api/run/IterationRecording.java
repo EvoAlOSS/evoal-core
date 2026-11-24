@@ -24,7 +24,8 @@ import de.evoal.optimisation.api.model.IndividualIDGenerator;
 
 /**
  * Turns the candidates of one iteration into the individuals of the memory model, in two
- *   versions with the same ids:
+ *   versions with the same ids (the steps are only created if they are read, but their
+ *   outputs always get their ids, {@link #numberSteps}):
  * <ul>
  *   <li>the <em>steps</em>: every executed step holds its outputs as individuals, related to
  *     their direct predecessors ({@link Candidate#stepLineage()}), which may be outputs of an
@@ -298,8 +299,8 @@ final class IterationRecording {
     }
 
     /**
-     * Creates the ranks from the occurrences of the members; call it after {@link #toSteps}, so
-     *   that the ids of the step outputs come first.
+     * Creates the ranks from the occurrences of the members; call it after {@link #toSteps} or
+     *   {@link #numberSteps}, so that the ids of the step outputs come first.
      *
      * @param members The occurrences of the members, indexed as the members.
      * @param ranks The member indices of every rank, the best rank first.
@@ -350,6 +351,17 @@ final class IterationRecording {
         }
 
         return relationship;
+    }
+
+    /**
+     * Gives the outputs of the steps their ids without creating the steps, so that the members
+     *   get the same ids as with {@link #toSteps}; call it instead of {@link #toSteps} and before
+     *   {@link #toRanks}.
+     *
+     * @param steps The executed steps with their outputs, in execution order.
+     */
+    void numberSteps(final List<ExecutedStep> steps) {
+        steps.forEach(step -> occurrencesOf(step.outputs()));
     }
 
     /**

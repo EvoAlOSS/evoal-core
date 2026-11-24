@@ -28,4 +28,9 @@ public record StatisticsWriterListener(StatisticsWriter writer) implements RunLi
             case IndividualEvaluated evaluated -> { }
         }
     }
+
+    @Override
+    public boolean readsSteps() {
+        return writer.readsSteps();
+    }
 }

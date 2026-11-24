@@ -237,6 +237,14 @@ public class MemoryModelWriter implements StatisticsWriter {
     }
 
     /**
+     * @return Whether the steps version is written ({@code 'steps'}).
+     */
+    @Override
+    public boolean readsSteps() {
+        return steps;
+    }
+
+    /**
      * @throws IllegalStateException if the iteration does not have the next number.
      */
     private void requireNextNumber(final Iteration iteration) {

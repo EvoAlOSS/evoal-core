@@ -33,4 +33,12 @@ public interface StatisticsWriter extends EvoalComponent<StatisticsWriter> {
      * Write the statistics since the run is completed.
      */
     void write();
+
+    /**
+     * @return Whether the writer reads the steps of an iteration ({@link Iteration#getSteps()});
+     *   without such a writer, the iterations have no steps. {@code false} by default.
+     */
+    default boolean readsSteps() {
+        return false;
+    }
 }

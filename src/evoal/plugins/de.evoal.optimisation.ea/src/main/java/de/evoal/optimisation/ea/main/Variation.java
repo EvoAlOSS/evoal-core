@@ -1,7 +1,9 @@
 package de.evoal.optimisation.ea.main;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.random.RandomGenerator;
 
 import de.evoal.core.api.random.RandomService;
@@ -329,19 +331,20 @@ final class Variation {
         final Lineage origin = child.recombined
                 ? Lineage.recombination(child.parents, child.pair)
                 : Lineage.mutation(parent);
-        Lineage lineage = origin.withProperty(OPERATORS, List.copyOf(child.operators))
-                                .withProperty(CHANGED_FEATURES, genotype.changedFeatures(child.parentGenome, child.genome));
+        final Map<String, Object> properties = new LinkedHashMap<>();
+        properties.put(OPERATORS, List.copyOf(child.operators));
+        properties.put(CHANGED_FEATURES, genotype.changedFeatures(child.parentGenome, child.genome));
         if(!child.primaryFeatures.isEmpty()) {
-            lineage = lineage.withProperty(PRIMARY_FEATURES, List.copyOf(child.primaryFeatures));
+            properties.put(PRIMARY_FEATURES, List.copyOf(child.primaryFeatures));
         }
         if(!child.propagatedFeatures.isEmpty()) {
-            lineage = lineage.withProperty(PROPAGATED_FEATURES, List.copyOf(child.propagatedFeatures));
+            properties.put(PROPAGATED_FEATURES, List.copyOf(child.propagatedFeatures));
         }
         if(!child.linkedFeatures.isEmpty()) {
-            lineage = lineage.withProperty(LINKED_FEATURES, List.copyOf(child.linkedFeatures));
+            properties.put(LINKED_FEATURES, List.copyOf(child.linkedFeatures));
         }
 
-        return new Candidate(genotype.decode(child.genome), lineage);
+        return new Candidate(genotype.decode(child.genome), origin.withProperties(properties));
     }
 
     /**
@@ -370,16 +373,16 @@ final class Variation {
         }
 
         final List<String> mutationOperators = child.operators.subList(operatorsBefore, child.operators.size());
-        Lineage step = Lineage.mutation(recombined)
-                              .withProperty(OPERATORS, List.copyOf(mutationOperators))
-                              .withProperty(CHANGED_FEATURES, genotype.changedFeatures(beforeMutation, child.genome));
+        final Map<String, Object> properties = new LinkedHashMap<>();
+        properties.put(OPERATORS, List.copyOf(mutationOperators));
+        properties.put(CHANGED_FEATURES, genotype.changedFeatures(beforeMutation, child.genome));
         if(!child.primaryFeatures.isEmpty()) {
-            step = step.withProperty(PRIMARY_FEATURES, List.copyOf(child.primaryFeatures));
+            properties.put(PRIMARY_FEATURES, List.copyOf(child.primaryFeatures));
         }
         if(!child.propagatedFeatures.isEmpty()) {
-            step = step.withProperty(PROPAGATED_FEATURES, List.copyOf(child.propagatedFeatures));
+            properties.put(PROPAGATED_FEATURES, List.copyOf(child.propagatedFeatures));
         }
 
-        return new Candidate(candidate.input(), candidate.lineage(), step);
+        return new Candidate(candidate.input(), candidate.lineage(), Lineage.mutation(recombined).withProperties(properties));
     }
 }

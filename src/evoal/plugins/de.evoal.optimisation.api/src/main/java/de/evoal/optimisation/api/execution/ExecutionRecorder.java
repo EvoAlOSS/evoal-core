@@ -1,7 +1,10 @@
 package de.evoal.optimisation.api.execution;
 
 import java.util.Comparator;
+import java.util.EnumMap;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import jakarta.enterprise.context.ApplicationScoped;
@@ -79,6 +82,13 @@ public class ExecutionRecorder {
     private Execution execution = MemoryFactory.eINSTANCE.createExecution();
 
     /**
+     * The property definitions of the current run by scope and name, so that
+     *   {@link #requireProperty} finds a definition without searching the list of the
+     *   execution; every property of every recorded individual is checked.
+     */
+    private final Map<PropertyScope, Map<String, PropertyDefinition>> propertyDefinitions = new EnumMap<>(PropertyScope.class);
+
+    /**
      * The phase of the current run.
      */
     private Phase phase = Phase.NO_RUN;
@@ -153,6 +163,8 @@ public class ExecutionRecorder {
         }
 
         execution.getPropertyDefinitions().add(definition);
+        propertyDefinitions.computeIfAbsent(definition.getScope(), scope -> new HashMap<>())
+                           .put(name, definition);
     }
 
     /**
@@ -185,10 +197,7 @@ public class ExecutionRecorder {
      * @return The definition of the property in the current run, if there is one.
      */
     public Optional<PropertyDefinition> findPropertyDefinition(final String name, final PropertyScope scope) {
-        return execution.getPropertyDefinitions()
-                        .stream()
-                        .filter(definition -> definition.getName().equals(name) && definition.getScope() == scope)
-                        .findFirst();
+        return Optional.ofNullable(propertyDefinitions.getOrDefault(scope, Map.of()).get(name));
     }
 
     /**
@@ -360,6 +369,7 @@ public class ExecutionRecorder {
     public void startRun(final EvaluationPosition evaluationPosition) {
         this.evaluationPosition = evaluationPosition;
         execution = MemoryFactory.eINSTANCE.createExecution();
+        propertyDefinitions.clear();
         phase = Phase.DEFINITION;
 
         orderedContributors().forEach(contributor -> contributor.startRun(this));

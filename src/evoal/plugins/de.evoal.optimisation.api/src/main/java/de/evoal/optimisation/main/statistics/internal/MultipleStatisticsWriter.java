@@ -35,4 +35,9 @@ public class MultipleStatisticsWriter implements StatisticsWriter {
     public void write() {
         Arrays.stream(writers).forEach(StatisticsWriter::write);
     }
+
+    @Override
+    public boolean readsSteps() {
+        return Arrays.stream(writers).anyMatch(StatisticsWriter::readsSteps);
+    }
 }

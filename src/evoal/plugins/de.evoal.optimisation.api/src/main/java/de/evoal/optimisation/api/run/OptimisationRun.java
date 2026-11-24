@@ -23,6 +23,7 @@ import de.evoal.optimisation.api.events.IterationFinished;
 import de.evoal.optimisation.api.events.IterationStarted;
 import de.evoal.optimisation.api.events.RunEventDispatcher;
 import de.evoal.optimisation.api.events.RunFinished;
+import de.evoal.optimisation.api.events.RunListener;
 import de.evoal.optimisation.api.events.RunStarted;
 import de.evoal.optimisation.api.execution.ExecutionRecorder;
 import de.evoal.optimisation.api.model.IndividualIDGenerator;
@@ -97,6 +98,12 @@ public class OptimisationRun {
     private Map<Candidate, Individual> previousIndividuals = new IdentityHashMap<>();
 
     /**
+     * Whether a listener of the run reads the steps of the iterations
+     *   ({@link RunListener#readsSteps()}); otherwise the iterations have no steps.
+     */
+    private boolean withSteps;
+
+    /**
      * @param events Publishes the events of the run.
      * @param idGenerator Creates the ids of the individuals.
      * @param recorder Provides the execution of the run.
@@ -130,7 +137,10 @@ public class OptimisationRun {
             bestValue = null;
             previousIndividuals = new IdentityHashMap<>();
 
-            events.startRun(List.of(new StatisticsWriterListener(statistics)));
+            final List<RunListener> listeners = List.of(new StatisticsWriterListener(statistics));
+            withSteps = listeners.stream().anyMatch(RunListener::readsSteps);
+
+            events.startRun(listeners);
             events.publish(new RunStarted(recorder.getExecution()));
 
             int number = 0;
@@ -173,7 +183,8 @@ public class OptimisationRun {
 
     /**
      * Creates the memory state of an iteration and publishes it: the executed steps with their
-     *   outputs and the ranked members ({@link IterationRecording}).
+     *   outputs, if a listener reads them, and the ranked members ({@link IterationRecording}).
+     *   The individuals have the same ids with and without the steps.
      *
      * @return The memory state.
      */
@@ -182,7 +193,11 @@ public class OptimisationRun {
 
         final Iteration iteration = MemoryFactory.eINSTANCE.createIteration();
         iteration.setNumber(number);
-        iteration.getSteps().addAll(recording.toSteps(population.steps()));
+        if(withSteps) {
+            iteration.getSteps().addAll(recording.toSteps(population.steps()));
+        } else {
+            recording.numberSteps(population.steps());
+        }
 
         final List<IterationRecording.Occurrence> members = recording.occurrencesOf(population.members());
         iteration.getRanks().addAll(recording.toRanks(members, population.ranks()));

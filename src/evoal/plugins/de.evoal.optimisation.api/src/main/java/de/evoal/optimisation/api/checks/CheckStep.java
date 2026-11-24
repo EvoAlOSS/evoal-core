@@ -1,7 +1,9 @@
 package de.evoal.optimisation.api.checks;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import lombok.extern.slf4j.Slf4j;
@@ -203,8 +205,10 @@ abstract class CheckStep implements Check {
             return repaired;
         }
 
-        final Lineage recorded = lineage.withProperty(REPAIR, strategy)
-                                        .withProperty(ATTEMPTS, (long) attempts);
+        final Map<String, Object> properties = new LinkedHashMap<>();
+        properties.put(REPAIR, strategy);
+        properties.put(ATTEMPTS, (long) attempts);
+        final Lineage recorded = lineage.withProperties(properties);
 
         return new Candidate(input, recorded);
     }

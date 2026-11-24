@@ -13,4 +13,14 @@ public interface RunListener {
      * @param event The event.
      */
     void on(RunEvent event);
+
+    /**
+     * @return Whether the listener reads the steps of an iteration
+     *   ({@link de.evoal.models.v202704.optimisation.memory.Iteration#getSteps()}). The run builds the steps
+     *   only if one of its listeners reads them; otherwise its iterations have no steps.
+     *   {@code false} by default.
+     */
+    default boolean readsSteps() {
+        return false;
+    }
 }

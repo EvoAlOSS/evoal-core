@@ -128,8 +128,19 @@ public record Lineage(Kind kind, List<Candidate> predecessors, Map<String, Objec
      * @return The same lineage with the property set.
      */
     public Lineage withProperty(final String name, final Object value) {
+        return withProperties(Collections.singletonMap(name, value));
+    }
+
+    /**
+     * Sets several properties with one copy of the properties; a lineage that gets several
+     *   properties should use it instead of {@link #withProperty} per property.
+     *
+     * @param added The properties to set, in the order in which they are recorded.
+     * @return The same lineage with the properties set.
+     */
+    public Lineage withProperties(final Map<String, Object> added) {
         final Map<String, Object> extended = new LinkedHashMap<>(properties);
-        extended.put(name, value);
+        extended.putAll(added);
 
         return new Lineage(kind, predecessors, extended, pair);
     }

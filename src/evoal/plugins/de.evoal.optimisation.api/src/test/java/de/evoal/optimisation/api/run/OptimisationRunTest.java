@@ -69,6 +69,11 @@ public class OptimisationRunTest {
 
     private int lastIteration = 2;
 
+    /**
+     * Whether the statistics writer reads the steps of the iterations.
+     */
+    private boolean readsSteps = true;
+
     private OptimisationRun kernel() {
         final RunEventDispatcher events = new RunEventDispatcher(Mockito.mock(ExecutionRecorder.class));
         final RunScope scope = new RunScope() {
@@ -102,6 +107,11 @@ public class OptimisationRunTest {
             @Override
             public StatisticsWriter init(final EObject configuration) {
                 return this;
+            }
+
+            @Override
+            public boolean readsSteps() {
+                return readsSteps;
             }
         };
 
@@ -636,7 +646,7 @@ public class OptimisationRunTest {
          *   (4), mutates r into m (5) and creates u (6), which is not evaluated, evaluates m and
          *   keeps m and the survivor of a.
          */
-        private final FakeProcedure procedure = new FakeProcedure((number, previous) -> {
+        private final BiFunction<Integer, List<Candidate>, Population> populations = (number, previous) -> {
             if(number == 0) {
                 final Candidate a = member(1, Lineage.NONE);
                 final Candidate b = member(2, Lineage.NONE);
@@ -662,12 +672,28 @@ public class OptimisationRunTest {
                     new ExecutedStep("Acceptance", "replace", List.of(mutated, parentA)),
                     new ExecutedStep("ParameterAdjustment", "adjust", List.of()));
             return new Population(List.of(mutated, parentA), List.of(List.of(0), List.of(1)), steps);
-        });
+        };
 
         @BeforeEach
         public void run() {
             lastIteration = 1;
-            kernel.execute(criterion, procedure);
+            kernel.execute(criterion, new FakeProcedure(populations));
+        }
+
+        @Test
+        public void withoutAReaderOfTheStepsTheIterationsHaveNoStepsAndTheSameIds() {
+            final List<Iteration> withSteps = List.copyOf(iterations);
+            iterations.clear();
+            readsSteps = false;
+
+            kernel().execute(criterion, new FakeProcedure(populations));
+
+            Assertions.assertEquals(List.of(), iterations.get(0).getSteps());
+            Assertions.assertEquals(List.of(), iterations.get(1).getSteps());
+            Assertions.assertEquals(idsOf(withSteps.get(0)), idsOf(iterations.get(0)));
+            Assertions.assertEquals(idsOf(withSteps.get(1)), idsOf(iterations.get(1)));
+            Assertions.assertEquals(List.of(0, 1), targetIds(individual(iterations.get(1), 5).getRelationships().getFirst()));
+            Assertions.assertEquals(List.of(0), targetIds(individual(iterations.get(1), 2).getRelationships().getFirst()));
         }
 
         private List<IterationStep> steps() {
