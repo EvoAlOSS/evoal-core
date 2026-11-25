@@ -26,7 +26,7 @@ import de.evoal.surrogate.api.function.ModelFunction;
 import de.evoal.surrogate.api.function.ModelFunctionData;
 import de.evoal.surrogate.api.function.PredictionInterval;
 import de.evoal.surrogate.api.training.GoodnessOfFit;
-import de.evoal.surrogate.main.gof.PredictedValues;
+import de.evoal.surrogate.api.training.PredictedValues;
 
 /**
  * The goodness of fit of prediction intervals, picp and mpiw (#349).

@@ -54,6 +54,12 @@ public final class GoodnessOfFit {
     private EObjectPairStreamSupplier data = null;
 
     /**
+     * The actual and predicted values of {@link #data} per output feature, or {@code null} if
+     *   the measures predict them with the surrogate of the state.
+     */
+    private Map<EStructuralFeature, PredictedValues> predictions = null;
+
+    /**
      * Returns the values of the program that the given state belongs to.
      *
      * @param context The state of the interpreter.
@@ -83,6 +89,24 @@ public final class GoodnessOfFit {
     public void assess(final @NonNull String dataSet, final @NonNull EObjectPairStreamSupplier data) {
         this.dataSet = dataSet;
         this.data = data;
+        this.predictions = null;
+    }
+
+    /**
+     * Sets the data set that the next goodness-of-fit calculation assesses, with predictions
+     *   that are already known, e.g. those of the models of a resampling scheme's parts. The
+     *   measures use them instead of predicting with the surrogate of the state, and log an
+     *   undefined value only at debug level: the caller reports it.
+     *
+     * @param dataSet The name of the data set.
+     * @param data Pairs of input and expected output.
+     * @param predictions The actual and predicted values of the data per output feature.
+     */
+    public void assess(final @NonNull String dataSet, final @NonNull EObjectPairStreamSupplier data,
+                       final @NonNull Map<EStructuralFeature, PredictedValues> predictions) {
+        this.dataSet = dataSet;
+        this.data = data;
+        this.predictions = predictions;
     }
 
     /**
@@ -97,6 +121,14 @@ public final class GoodnessOfFit {
      */
     public Optional<EObjectPairStreamSupplier> data() {
         return Optional.ofNullable(data);
+    }
+
+    /**
+     * @return The predictions of the assessed data set, or empty if the measures predict with
+     *   the surrogate of the state.
+     */
+    public Optional<Map<EStructuralFeature, PredictedValues>> predictions() {
+        return Optional.ofNullable(predictions);
     }
 
     /**

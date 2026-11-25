@@ -221,8 +221,8 @@ module 'de.evoal.surrogate.pipeline' {
 	 * Stores the model with its prediction pipeline and its goodness-of-fit values: one entry
 	 * per output feature and measure, named by the qualified measure, with the value of each
 	 * data set, e.g. <code>de.evoal.surrogate.ml.rmse</code> → { training: 0.1, test: 0.3 }; the
-	 * value of a resampling scheme is an object with its mean, standard deviation and values
-	 * (see <code>'resampling-scheme'</code>).
+	 * value of a resampling scheme is an object with its mean, standard deviation, pooled value
+	 * and values (see <code>'resampling-scheme'</code>).
 	 * If the learning task names a goodness-of-fit file
 	 * (<code>serialise to "model.pson" and "gof.json"</code>), the values are written to it as
 	 * JSON as well. Storing again writes all values recorded so far.
@@ -237,12 +237,24 @@ module 'de.evoal.surrogate.pipeline' {
 	 * an MLL file (<code>assessing with [...]</code>); every scheme is stated at most once,
 	 * because its name is the name of its data set. Per output feature and measure, the data
 	 * set of the scheme holds the mean, the standard deviation (divided by m - 1 for m parts;
-	 * 0 for one part) and the values of the parts, e.g. "k-fold-cross-validation":
-	 * { "mean": 31.2, "standard-deviation": 6.8, "values": [...] }. A part on which a measure
-	 * is undefined (e.g. R² on a single held-out row) adds no value; the warning names it.
+	 * 0 for one part), the pooled value and the values of the parts, e.g.
+	 * "k-fold-cross-validation": { "mean": 31.2, "standard-deviation": 6.8, "pooled": 30.5,
+	 * "values": [...] }. A part on which a measure is undefined (e.g. R² on a single held-out
+	 * row) adds no value; the warning names it, and mean and standard deviation are left out
+	 * if no part has a value.
+	 * The pooled value is the measure on the held-out rows of all parts together, each with
+	 * the prediction of its part's model; it is left out if the measure is undefined on them.
+	 * For k-fold, leave-one-out and block cross-validation every row is held out once, so it is
+	 * the measure on the cross-validated predictions; for leave-one-out, rmse is the root of
+	 * the PRESS statistic (Allen 1974) divided by the number of rows. The mean over the parts
+	 * differs from it if the parts are small: R² and rrse of a part compare with the mean of
+	 * the part's rows, and an error measure averaged over parts is not the measure on all
+	 * predictions (Forman and Scholz 2010 show this for the F-measure and recommend computing
+	 * it from the counts of all folds). For the bootstrap, a row counts as often as it is out of bag.
 	 * The splits use the random stream <code>de.evoal.surrogate.pipeline.resample/&lt;scheme&gt;</code>
 	 * of the run (<code>core:seed</code>), so the same seed gives the same parts.
 	 */
+	@Literature { keys := ["allen1974relationship", "forman2010apples"]; }
 	abstract type 'resampling-scheme' {}
 
 	/**
@@ -262,9 +274,10 @@ module 'de.evoal.surrogate.pipeline' {
 	/**
 	 * Leave-one-out cross-validation (Stone 1974; Arlot and Celisse 2010): each row is held
 	 * out once, so there are as many parts as rows. Measures that are undefined on a single
-	 * row (R², rrse) give no values.
+	 * row (R², rrse) give no values of the parts, only a pooled value (R² of the pooled values
+	 * is also called Q²).
 	 */
-	@Literature { keys := ["stone1974crossvalidatory", "arlot2010survey"]; }
+	@Literature { keys := ["stone1974crossvalidatory", "arlot2010survey", "allen1974relationship"]; }
 	type 'leave-one-out-cross-validation' extends 'resampling-scheme' {}
 
 	/**

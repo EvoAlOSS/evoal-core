@@ -1,4 +1,4 @@
-package de.evoal.surrogate.main.gof;
+package de.evoal.surrogate.api.training;
 
 import de.evoal.core.api.ecore.stream.EObjectPairStreamSupplier;
 import de.evoal.models.core.ecore.Space;
@@ -9,10 +9,12 @@ import de.evoal.surrogate.api.function.PredictionPipeline;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.Function;
 
 /**
  * The actual and the predicted values of one output feature, for comparing a surrogate with
@@ -98,6 +100,37 @@ public record PredictedValues(double[] actual, double[] predicted, Optional<Boun
         }
 
         return result;
+    }
+
+    /**
+     * Concatenates the values of several data sets, e.g. the held-out rows of the parts of a
+     *   resampling scheme, each with the prediction of its own surrogate.
+     *
+     * @param parts The values per output feature of each data set, all with the same features.
+     * @return The values per output feature, the values of the data sets one after the other;
+     *   with bounds only if every data set has bounds.
+     */
+    public static Map<EStructuralFeature, PredictedValues> pool(final List<Map<EStructuralFeature, PredictedValues>> parts) {
+        final Map<EStructuralFeature, List<PredictedValues>> features = new LinkedHashMap<>();
+        parts.forEach(part -> part.forEach((feature, values) -> features.computeIfAbsent(feature, f -> new ArrayList<>()).add(values)));
+
+        final Map<EStructuralFeature, PredictedValues> result = new LinkedHashMap<>();
+        features.forEach((feature, values) -> {
+            final Optional<Bounds> bounds = values.stream().allMatch(v -> v.bounds().isPresent())
+                                            ? Optional.of(new Bounds(concat(values, v -> v.bounds().get().lower()),
+                                                                     concat(values, v -> v.bounds().get().upper())))
+                                            : Optional.empty();
+            result.put(feature, new PredictedValues(concat(values, PredictedValues::actual), concat(values, PredictedValues::predicted), bounds));
+        });
+
+        return result;
+    }
+
+    private static double[] concat(final List<PredictedValues> values, final Function<PredictedValues, double[]> array) {
+        return values.stream()
+                     .map(array)
+                     .flatMapToDouble(Arrays::stream)
+                     .toArray();
     }
 
     private static double[] toArray(final List<Double> values) {

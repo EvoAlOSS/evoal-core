@@ -28,6 +28,7 @@ import java.io.File;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.OptionalDouble;
 
 /**
  * How {@code 'store-model'} stores the goodness-of-fit values (#234).
@@ -107,18 +108,35 @@ public class StoreModelFunctionTest {
         // given
         final File file = new File(directory, "gof.json");
         task.setGofFile(file.getPath());
-        GoodnessOfFit.of(context).record(y, RMSE, "bootstrap", ResampledValues.of(List.of(1.0, 3.0)));
+        GoodnessOfFit.of(context).record(y, RMSE, "bootstrap", ResampledValues.of(List.of(1.0, 3.0), OptionalDouble.of(2.5)));
 
         // when
         new StoreModelFunction(literature).call(context, new Object[0]);
 
         // then
         final Map<?, ?> content = JsonMapper.builder().build().readValue(file, Map.class);
-        Assertions.assertEquals(Map.of("mean", 2.0, "standard-deviation", Math.sqrt(2.0), "values", List.of(1.0, 3.0)),
+        Assertions.assertEquals(Map.of("mean", 2.0, "standard-deviation", Math.sqrt(2.0), "pooled", 2.5, "values", List.of(1.0, 3.0)),
                                 ((Map<?, ?>) ((Map<?, ?>) content.get("y:0")).get(RMSE)).get("bootstrap"));
         Mockito.verify(writer).addOutputFeatureInformation(Mockito.eq(y), Mockito.argThat(parameter ->
                 RMSE.equals(parameter.getName())
                 && ((Map<?, ?>) parameter.getValue()).get("bootstrap") instanceof Map<?, ?> stored
-                && Double.valueOf(2.0).equals(stored.get("mean"))));
+                && Double.valueOf(2.0).equals(stored.get("mean"))
+                && Double.valueOf(2.5).equals(stored.get("pooled"))));
+    }
+
+    @Test
+    public void aSchemeWithOnlyAPooledValueStoresNoSummary(@TempDir final File directory) {
+        // given: R² of leave-one-out, undefined on every single-row part
+        final File file = new File(directory, "gof.json");
+        task.setGofFile(file.getPath());
+        GoodnessOfFit.of(context).record(y, R_SQUARE, "leave-one-out-cross-validation", ResampledValues.of(List.of(), OptionalDouble.of(0.93)));
+
+        // when
+        new StoreModelFunction(literature).call(context, new Object[0]);
+
+        // then
+        final Map<?, ?> content = JsonMapper.builder().build().readValue(file, Map.class);
+        Assertions.assertEquals(Map.of("pooled", 0.93, "values", List.of()),
+                                ((Map<?, ?>) ((Map<?, ?>) content.get("y:0")).get(R_SQUARE)).get("leave-one-out-cross-validation"));
     }
 }

@@ -1,7 +1,7 @@
 package de.evoal.surrogate.main.gof.rsquare;
 
 import de.evoal.surrogate.main.gof.GoodnessOfFitMeasure;
-import de.evoal.surrogate.main.gof.PredictedValues;
+import de.evoal.surrogate.api.training.PredictedValues;
 
 import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Named;

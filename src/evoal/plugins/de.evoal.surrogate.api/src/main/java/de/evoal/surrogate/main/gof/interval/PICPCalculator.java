@@ -6,7 +6,7 @@ import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Named;
 
 import de.evoal.surrogate.main.gof.GoodnessOfFitMeasure;
-import de.evoal.surrogate.main.gof.PredictedValues;
+import de.evoal.surrogate.api.training.PredictedValues;
 
 /**
  * Calculates the prediction interval coverage probability
