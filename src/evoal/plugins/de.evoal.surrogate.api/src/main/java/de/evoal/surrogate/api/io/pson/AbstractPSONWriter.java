@@ -1,83 +1,20 @@
 package de.evoal.surrogate.api.io.pson;
 
-import de.evoal.models.core.ecore.Space;
-import de.evoal.models.v202704.pipeline.PipelineDefinition;
 import de.evoal.surrogate.api.function.ModelFunction;
+import de.evoal.surrogate.api.io.AbstractModelWriter;
 import de.evoal.surrogate.api.io.ModelStorage;
-import de.evoal.surrogate.api.io.ModelWriter;
 import lombok.NonNull;
-import org.eclipse.emf.ecore.EStructuralFeature;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-public abstract class AbstractPSONWriter implements ModelWriter {
+/**
+ * Base of the writers of PSON model files: the file is the configuration of the model with its
+ *   state, which the subclass adds.
+ */
+public abstract class AbstractPSONWriter extends AbstractModelWriter {
     private PSONModelStorage storage;
-
-    private final Map<String, List<Parameter>> inputInformation = new HashMap<>();
-
-    private final Map<String, List<Parameter>> outputInformation = new HashMap<>();
-
-    private PipelineDefinition pipeline;
-
-    /**
-     * The DL types of the training configuration.
-     */
-    private final List<String> definitions = new ArrayList<>();
-
-    @Override
-    public void addInputFeatureInformation(final EStructuralFeature feature, final Parameter value) {
-        // a name identifies the information: a second value replaces the first
-        final List<Parameter> information = this.inputInformation.computeIfAbsent(feature.getName(), k -> new ArrayList<>());
-        information.removeIf(p -> p.getName().equals(value.getName()));
-        information.add(value);
-    }
-
-    @Override
-    public void addOutputFeatureInformation(final EStructuralFeature feature, final Parameter value) {
-        // a name identifies the information: a second value replaces the first
-        final List<Parameter> information = this.outputInformation.computeIfAbsent(feature.getName(), k -> new ArrayList<>());
-        information.removeIf(p -> p.getName().equals(value.getName()));
-        information.add(value);
-    }
-
-    @Override
-    public ModelWriter addPredictionPipeline(@NonNull PipelineDefinition pipeline) {
-        this.pipeline = pipeline;
-
-        return this;
-    }
-
-    /**
-     * The writer implements the raw {@link ModelWriter}, so the list is raw as well; its elements
-     *   are the fully qualified names of the DL types.
-     */
-    @Override
-    @SuppressWarnings({"rawtypes", "unchecked"})
-    public ModelWriter addTrainingDefinitions(final @NonNull List definitions) {
-        this.definitions.clear();
-        this.definitions.addAll(definitions);
-
-        return this;
-    }
 
     @Override
     public void store(final ModelFunction function) {
-        final SurrogateConfiguration configuration = new SurrogateConfiguration();
-        final Space inputSpace = function.getInput();
-        final Space outputSpace = function.getOutput();
-
-        configuration.setName(function.getModelName());
-        configuration.setDefinitions(new ArrayList<>(definitions));
-        configuration.setPredictionPipeline(pipeline);
-        configuration.setInputData(inputSpace);
-        configuration.setOutputData(outputSpace);
-        configuration.getInputParameters()
-                .putAll(inputInformation);
-        configuration.getOutputParameters()
-                .putAll(outputInformation);
+        final SurrogateConfiguration configuration = configurationOf(function);
 
         toConfiguration(function, configuration);
 

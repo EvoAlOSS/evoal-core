@@ -31,6 +31,7 @@ module de.evoal.surrogate.api {
     requires de.evoal.languages.models;
     requires commons.math3;
     requires com.microsoft.onnxruntime;
+    requires com.google.protobuf;
     requires org.checkerframework.checker.qual;
 //    requires org.bytedeco.javacpp;
 
@@ -73,4 +74,7 @@ module de.evoal.surrogate.api {
     opens de.evoal.surrogate.main.training to weld.core.impl;
     exports de.evoal.surrogate.api.io.onnx;
     opens de.evoal.surrogate.api.io.onnx to weld.core.impl;
+
+    // the classes of the ONNX schema, generated from src/main/proto, for the ONNX writers
+    exports de.evoal.surrogate.protobuf;
 }

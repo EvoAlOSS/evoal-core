@@ -1,5 +1,6 @@
 package de.evoal.surrogate.main.pipeline;
 
+import de.evoal.core.api.dynamic.DynamicEClassProvider;
 import de.evoal.core.api.dynamic.EAnnotationHelper;
 import de.evoal.models.core.ecore.Space;
 import de.evoal.models.core.ecore.TypedEObject;
@@ -16,6 +17,7 @@ import de.evoal.surrogate.api.function.ModelFunction;
 import de.evoal.surrogate.api.function.ModelFunctionData;
 import de.evoal.surrogate.api.function.ModelFunctionFactory;
 import de.evoal.surrogate.api.function.PredictionPipeline;
+import de.evoal.surrogate.api.io.ModelStorageFactory;
 import de.evoal.surrogate.api.training.ModelLearner;
 import de.evoal.surrogate.main.training.ModelLearnerFactory;
 import lombok.NonNull;
@@ -76,10 +78,18 @@ public class ModelLearnerComponent extends PipelineComponentImpl {
         log.info("Creating model learner.");
         try {
             modelURI = new URI(filename);
-            learner = factory.create(modelConfiguration, inputSpace, outputSpace);
         } catch (final URISyntaxException e) {
             throw new InitializationException("Failed to create model URI.", e);
         }
+
+        // before the training: the model type must have a writer for the format of the file
+        try {
+            functionFactory.requireWriter(DynamicEClassProvider.dlTypeOf(modelConfiguration), ModelStorageFactory.extensionOf(modelURI));
+        } catch (final IllegalStateException e) {
+            throw new InitializationException(e.getMessage(), e);
+        }
+
+        learner = factory.create(modelConfiguration, inputSpace, outputSpace);
 
         return this;
     }

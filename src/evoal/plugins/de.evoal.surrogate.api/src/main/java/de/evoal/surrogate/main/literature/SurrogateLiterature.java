@@ -1,6 +1,9 @@
 package de.evoal.surrogate.main.literature;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -26,6 +29,8 @@ import de.evoal.languages.model.base.definitions.Definition;
 import de.evoal.languages.model.dl.DefinitionModule;
 import de.evoal.models.core.utils.FQNProvider;
 import de.evoal.pipeline.api.cdi.DefinitionModuleLoader;
+import de.evoal.surrogate.api.io.onnx.ONNXModelStorage;
+import de.evoal.surrogate.protobuf.ModelProto;
 
 /**
  * The literature of surrogate models.
@@ -35,7 +40,8 @@ import de.evoal.pipeline.api.cdi.DefinitionModuleLoader;
  *   pipeline that loads the model file (DL types {@value #SURROGATE_FUNCTION} and
  *   {@value #TRAINED_MODEL}) cites them, together with the model's own type ({@code name}) and the
  *   types of its prediction pipeline ({@code class-definition}). A model file without
- *   {@code definitions}, written before they were recorded, gives only these two.
+ *   {@code definitions}, written before they were recorded, gives only these two. An ONNX model
+ *   file stores the same information in its metadata; a foreign ONNX model has none.
  */
 @ApplicationScoped
 @Slf4j
@@ -105,16 +111,40 @@ public class SurrogateLiterature implements LiteratureContributor {
         }
 
         try {
-            final JsonNode model = JsonMapper.builder().build().readTree(modelFile);
+            final Optional<JsonNode> model = modelInformation(modelFile);
+            if(model.isEmpty()) {
+                log.debug("The ONNX model file '{}' is a foreign model; it has no literature.", modelFile);
+                return List.of();
+            }
 
-            return namesIn(model).stream()
+            return namesIn(model.get()).stream()
                                  .map(this::findClassDefinition)
                                  .flatMap(Optional::stream)
                                  .map(Definition.class::cast)
                                  .toList();
-        } catch(final JacksonException e) {
+        } catch(final JacksonException | IOException e) {
             log.warn("Cannot read the literature of the model file '{}'.", modelFile, e);
             return List.of();
+        }
+    }
+
+    /**
+     * @return The model information of a model file: a PSON file is the model information, an
+     *   ONNX file stores it in its metadata; empty for an ONNX file without it (a foreign model).
+     */
+    static Optional<JsonNode> modelInformation(final File modelFile) throws IOException {
+        final JsonMapper mapper = JsonMapper.builder().build();
+        if(!modelFile.getName().endsWith(".onnx")) {
+            return Optional.of(mapper.readTree(modelFile));
+        }
+
+        try(final InputStream is = new FileInputStream(modelFile)) {
+            return ModelProto.parseFrom(is)
+                             .getMetadataPropsList()
+                             .stream()
+                             .filter(entry -> ONNXModelStorage.CONFIGURATION_KEY.equals(entry.getKey()))
+                             .findFirst()
+                             .map(entry -> mapper.readTree(entry.getValue()));
         }
     }
 

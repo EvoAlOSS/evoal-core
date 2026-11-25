@@ -12,6 +12,11 @@
 	<artifactId>surrogate.api</artifactId>
 	<name>EvoAl - Plugins - Surrogate - API</name>
 
+	<properties>
+		<!-- protoc and the Java runtime of the generated ONNX classes have the same version -->
+		<protobuf.version>4.36.2</protobuf.version>
+	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
@@ -60,6 +65,12 @@
             <version>1.23.2</version>
         </dependency>
 
+		<!-- Runtime of the ONNX classes generated from src/main/proto, which write .onnx files -->
+		<dependency>
+			<groupId>com.google.protobuf</groupId>
+			<artifactId>protobuf-java</artifactId>
+			<version>${protobuf.version}</version>
+		</dependency>
 
         <dependency>
 			<groupId>org.mockito</groupId>
@@ -75,4 +86,32 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<!--
+				  Generates the Java classes of the ONNX schema (src/main/proto/onnx-ml.proto, from
+				  ONNX 1.20.0) in the package de.evoal.surrogate.protobuf. protoc is a native
+				  program that the plugin downloads from Maven Central for the build platform.
+				-->
+				<groupId>io.github.ascopes</groupId>
+				<artifactId>protobuf-maven-plugin</artifactId>
+				<version>5.1.12</version>
+				<configuration>
+					<protoc>${protobuf.version}</protoc>
+					<sourceDirectories>
+						<sourceDirectory>${project.basedir}/src/main/proto</sourceDirectory>
+					</sourceDirectories>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 </project>

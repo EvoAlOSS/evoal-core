@@ -18,16 +18,21 @@ public class ModelStorageFactory {
      * @return A valid model storage.
      */
     public @NonNull ModelStorage create(final  @NonNull URI location, final @NonNull Space inputSpace, final @NonNull Space outputSpace) {
-        final String path = location.getPath();
-        final String [] parts = path.split("\\.");
-
-        final String filetype = parts[parts.length - 1];
+        final String filetype = extensionOf(location);
 
         log.info("Creating model storage for type '{}'.", filetype);
-        log.info("Creating model storage for type '{}'.", ModelStorage.class.toString());
 
         return BeanFactory.create(filetype, ModelStorage.class)
                           .setLocation(location)
                           .setSpaces(inputSpace, outputSpace);
+    }
+
+    /**
+     * @return The file extension of the location, which names its format (e.g. {@code pson}).
+     */
+    public static @NonNull String extensionOf(final @NonNull URI location) {
+        final String [] parts = location.getPath().split("\\.");
+
+        return parts[parts.length - 1];
     }
 }

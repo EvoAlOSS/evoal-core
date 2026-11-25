@@ -28,7 +28,7 @@ import de.evoal.surrogate.api.function.ModelFunction;
 /**
  * A model function that runs an ONNX model. Every input feature is an input tensor of the
  *   model and every output feature an output tensor, each with the name of the feature and a
- *   single value.
+ *   single value. Dynamic dimensions of an input (e.g. a batch dimension) are set to 1.
  */
 @Slf4j
 public class ONNXFunction extends ModelFunction {
@@ -44,9 +44,24 @@ public class ONNXFunction extends ModelFunction {
     private final Map<String, NodeInfo> inputInfo;
     private final Map<String, NodeInfo> outputInfo;
 
-    @SneakyThrows
+    /**
+     * Creates the function of a foreign ONNX model.
+     */
     public ONNXFunction(final Space input, final Space output, final OrtSession session) {
-        super("de.evoal.surrogate.api.ml.general-onnx-function", input, output);
+        this("de.evoal.surrogate.api.ml.general-onnx-function", input, output, session);
+    }
+
+    /**
+     * Creates the function of an ONNX model.
+     *
+     * @param modelName The name of the model, the DL type of a model that EvoAl trained.
+     * @param input The input features.
+     * @param output The output features.
+     * @param session The session that runs the model.
+     */
+    @SneakyThrows
+    public ONNXFunction(final String modelName, final Space input, final Space output, final OrtSession session) {
+        super(modelName, input, output);
         this.session = session;
         this.inputInfo = session.getInputInfo();
         this.outputInfo = session.getOutputInfo();
@@ -89,6 +104,12 @@ public class ONNXFunction extends ModelFunction {
     private OnnxTensor toTensor(final OrtEnvironment environment, final TypedEObject in, final EStructuralFeature feature) throws OrtException {
         final TensorInfo info = (TensorInfo) inputInfo.get(feature.getName()).getInfo();
         final long[] shape = info.getShape().clone();
+        for(int i = 0; i < shape.length; ++i) {
+            // a dynamic dimension (-1) holds the one value
+            if(shape[i] < 0) {
+                shape[i] = 1;
+            }
+        }
 
         return switch(info.type) {
             case FLOAT -> OnnxTensor.createTensor(environment, FloatBuffer.wrap(new float[] {in.eGetAsFloat(feature)}), shape);
@@ -100,16 +121,18 @@ public class ONNXFunction extends ModelFunction {
     }
 
     /**
-     * @return The single value of an output tensor of the model.
+     * @return The single value of an output tensor of the model, whatever its shape (e.g.
+     *   {@code [1]} or {@code [1, 1]}).
      */
-    private Object fromTensor(final EStructuralFeature feature, final OnnxValue value) throws OrtException {
+    private Object fromTensor(final EStructuralFeature feature, final OnnxValue value) {
         final TensorInfo info = (TensorInfo) outputInfo.get(feature.getName()).getInfo();
+        final OnnxTensor tensor = (OnnxTensor) value;
 
         return switch(info.type) {
-            case FLOAT -> Double.valueOf(((float[]) value.getValue())[0]);
-            case DOUBLE -> ((double[]) value.getValue())[0];
-            case INT32 -> ((int[]) value.getValue())[0];
-            case INT64 -> ((long[]) value.getValue())[0];
+            case FLOAT -> Double.valueOf(tensor.getFloatBuffer().get(0));
+            case DOUBLE -> tensor.getDoubleBuffer().get(0);
+            case INT32 -> tensor.getIntBuffer().get(0);
+            case INT64 -> tensor.getLongBuffer().get(0);
             default -> throw new IllegalArgumentException("Unsupported output type: " + info.type);
         };
     }

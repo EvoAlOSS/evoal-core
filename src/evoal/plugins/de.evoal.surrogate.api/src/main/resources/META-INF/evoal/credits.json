@@ -3,6 +3,10 @@
         {
             "library": "com.microsoft.onnxruntime:onnxruntime",
             "purpose": "ONNX Runtime (with its native libraries): evaluates surrogate models in the ONNX format."
+        },
+        {
+            "library": "com.google.protobuf:protobuf-java",
+            "purpose": "Protocol Buffers: writes and reads model files in the ONNX format, whose schema is a protobuf schema."
         }
     ]
 }
