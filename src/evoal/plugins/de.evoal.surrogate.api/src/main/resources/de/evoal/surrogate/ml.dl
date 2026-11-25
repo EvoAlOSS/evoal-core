@@ -149,4 +149,68 @@ module de.evoal.surrogate.ml {
 	 * feature are equal, the measure is undefined and is not written (a warning is logged).
 	 */
 	def void rrse();
+
+	/**
+	 * Calculates the <i>prediction interval coverage probability</i> of every output feature on
+	 * the assessed data set (the training data while learning, the test data while testing;
+	 * Khosravi, Nahavandi, Creighton and Atiya 2011, https://doi.org/10.1109/TNN.2011.2162110):
+	 *
+	 * <math display="block">
+	 *   <mrow>
+	 *     <mi>p</mi><mi>i</mi><mi>c</mi><mi>p</mi>
+	 *     <mo>=</mo>
+	 *     <mfrac>
+	 *       <mn>1</mn>
+	 *       <mi>n</mi>
+	 *     </mfrac>
+	 *     <msubsup>
+	 *       <mo stretchy="true">∑</mo>
+	 *       <mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow>
+	 *       <mi>n</mi>
+	 *     </msubsup>
+	 *     <msub><mi>c</mi><mi>i</mi></msub>
+	 *   </mrow>
+	 * </math>
+	 *
+	 * where <i>c<sub>i</sub></i> is 1 if the value <i>y<sub>i</sub></i> of the data set lies in
+	 * the prediction interval [<i>L<sub>i</sub></i>, <i>U<sub>i</sub></i>] of the surrogate
+	 * (bounds included) and 0 otherwise. The share is in [0, 1]; for a well-calibrated surrogate
+	 * it is close to the coverage of its interval, e.g. 'coverage' of 'gradient-boosting'. The
+	 * measure needs a surrogate that predicts an interval; for another surrogate, or an empty
+	 * data set, it is undefined and is not written (a warning is logged).
+	 */
+	def void picp();
+
+	/**
+	 * Calculates the <i>mean prediction interval width</i> of every output feature on the
+	 * assessed data set (the training data while learning, the test data while testing;
+	 * Khosravi, Nahavandi, Creighton and Atiya 2011, https://doi.org/10.1109/TNN.2011.2162110):
+	 *
+	 * <math display="block">
+	 *   <mrow>
+	 *     <mi>m</mi><mi>p</mi><mi>i</mi><mi>w</mi>
+	 *     <mo>=</mo>
+	 *     <mfrac>
+	 *       <mn>1</mn>
+	 *       <mi>n</mi>
+	 *     </mfrac>
+	 *     <msubsup>
+	 *       <mo stretchy="true">∑</mo>
+	 *       <mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow>
+	 *       <mi>n</mi>
+	 *     </msubsup>
+	 *     <mo form="prefix" stretchy="false">(</mo>
+	 *     <msub><mi>U</mi><mi>i</mi></msub>
+	 *     <mo>−</mo>
+	 *     <msub><mi>L</mi><mi>i</mi></msub>
+	 *     <mo form="postfix" stretchy="false">)</mo>
+	 *   </mrow>
+	 * </math>
+	 *
+	 * with the symbols of {@code picp}, in the unit of the output. Together with {@code picp} it
+	 * shows whether an interval holds the data because it is informative or only because it is
+	 * wide. The measure needs a surrogate that predicts an interval; for another surrogate, or an
+	 * empty data set, it is undefined and is not written (a warning is logged).
+	 */
+	def void mpiw();
 }

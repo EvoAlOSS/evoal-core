@@ -12,6 +12,11 @@
 	<artifactId>surrogate.smile</artifactId>
 	<name>EvoAl - Plugins - Surrogate - SMILE</name>
 
+	<properties>
+		<!-- set by jacoco's agent when the coverage is measured -->
+		<argLine></argLine>
+	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
@@ -21,6 +26,21 @@
 		<dependency>
 			<groupId>de.evoal</groupId>
 			<artifactId>core.junit</artifactId>
+			<version>${project.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>${mockito.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- the module loader of the ONNX model storage, which the tests mock -->
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>generator.main</artifactId>
 			<version>${project.version}</version>
 			<scope>test</scope>
 		</dependency>
@@ -38,5 +58,48 @@
 			<version>${smile.version}</version>
 			<scope>provided</scope>
 		</dependency>
+
+		<!-- the runtime of the ONNX classes of surrogate.api, which ships it -->
+		<dependency>
+			<groupId>com.google.protobuf</groupId>
+			<artifactId>protobuf-java</artifactId>
+			<version>${protobuf.version}</version>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
+
+	<build>
+		<plugins>
+			<!--
+			  The tests store and load ONNX model files: the storage needs the module loader of
+			  generator.main and the model transformer of surrogate.api, which the tests mock. The
+			  module does not read generator.main, and surrogate.api does not export the
+			  transformer, so the tests get access to them.
+			-->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>default-testCompile</id>
+						<configuration>
+							<compilerArgs>
+								<arg>--add-reads</arg>
+								<arg>de.evoal.surrogate.smile=de.evoal.generator.main</arg>
+								<arg>--add-exports</arg>
+								<arg>de.evoal.surrogate.api/de.evoal.surrogate.main.internal=de.evoal.surrogate.smile</arg>
+							</compilerArgs>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<argLine>@{argLine} --add-reads de.evoal.surrogate.smile=de.evoal.generator.main --add-opens de.evoal.surrogate.api/de.evoal.surrogate.main.internal=de.evoal.surrogate.smile</argLine>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>

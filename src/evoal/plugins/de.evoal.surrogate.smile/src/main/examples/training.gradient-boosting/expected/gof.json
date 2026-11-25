@@ -1,0 +1,20 @@
+{
+  "y:0" : {
+    "de.evoal.surrogate.ml.rmse" : {
+      "training" : 2.0249478884937884,
+      "test" : 3.3412000292439687
+    },
+    "de.evoal.surrogate.ml.R²" : {
+      "training" : 0.8603307098033897,
+      "test" : 0.846970152295916
+    },
+    "de.evoal.surrogate.ml.picp" : {
+      "training" : 0.9177777777777778,
+      "test" : 0.805
+    },
+    "de.evoal.surrogate.ml.mpiw" : {
+      "training" : 5.538977477244442,
+      "test" : 9.863543982619163
+    }
+  }
+}

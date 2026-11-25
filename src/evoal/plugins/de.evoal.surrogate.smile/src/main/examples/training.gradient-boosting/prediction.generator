@@ -1,0 +1,45 @@
+import "definitions" from de.evoal.core.math;
+import "definitions" from 'de.evoal.pipeline.base';
+import "definitions" from 'de.evoal.pipeline.sequences';
+import "definitions" from 'de.evoal.surrogate.pipeline';
+
+import "data" from surrogate;
+
+module prediction {
+	/**
+	 * Predicts y:0 with the stored model for x:0 = 0, 0.05, ..., 1. The model file undoes the
+	 * z-score normalisation of y:0, so the predictions are in the original unit.
+	 */
+	pipeline 'prediction' [
+		step {
+			component 'sequence-generator' {
+				sequences := [
+					'expression-based-sequence' {
+						variable     := data 'k';
+						initial      := 0.0;
+						'expression' := data 'k' + 1.0;
+					},
+					'expression-based-sequence' {
+						variable     := data 'x:0';
+						initial      := 0.0;
+						'expression' := data 'k' / 20.0;
+					}
+				];
+			}
+
+			writes [data 'k', data 'x:0'];
+		}
+		step {
+			component 'trained-model' {
+				'model-file' := "model/gradient-boosting.onnx";
+			}
+
+			reads [data 'x:0'];
+			writes [data 'y:0'];
+		}
+	]
+
+	begin
+		write "output/predictions.csv" with 21 samples from executing ['prediction'];
+	end
+}

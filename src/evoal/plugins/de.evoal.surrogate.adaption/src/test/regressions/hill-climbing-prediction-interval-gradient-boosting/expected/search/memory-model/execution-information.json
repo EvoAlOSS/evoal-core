@@ -1,0 +1,143 @@
+{
+  "formatVersion" : "2027.4.0",
+  "problem" : {
+    "name" : "regression",
+    "goals" : [ {
+      "feature" : "y:0",
+      "direction" : "minimise"
+    } ],
+    "function" : {
+      "type" : "de.evoal.optimisation.core.unknown-function",
+      "attributes" : { }
+    }
+  },
+  "algorithm" : {
+    "type" : "de.evoal.optimisation.local_search.optimisation.local-search",
+    "attributes" : {
+      "initialisation" : {
+        "type" : "de.evoal.optimisation.core.specify-candidates",
+        "attributes" : {
+          "candidate-list" : [ {
+            "type" : "de.evoal.optimisation.core.candidate",
+            "attributes" : {
+              "values" : [ {
+                "type" : "de.evoal.optimisation.core.variable",
+                "attributes" : {
+                  "var" : "x:0",
+                  "val" : 0.5
+                }
+              } ]
+            }
+          } ],
+          "random" : false
+        }
+      },
+      "optimisation-function" : {
+        "type" : "de.evoal.surrogate.optimisation.surrogate",
+        "attributes" : {
+          "model-file" : "model.onnx",
+          "input-space" : [ "x:0" ],
+          "output-space" : [ "y:0" ]
+        }
+      },
+      "comparator" : {
+        "type" : "de.evoal.optimisation.core.numeric-comparator",
+        "attributes" : { }
+      },
+      "stopping-criteria" : [ {
+        "type" : "de.evoal.optimisation.core.iteration-count",
+        "attributes" : {
+          "maximum-iterations" : 10
+        }
+      } ],
+      "fitness-pipeline" : [ {
+        "type" : "de.evoal.surrogate.adaption.interval.optimisation.prediction-interval",
+        "attributes" : { }
+      } ],
+      "candidate-checks" : [ ],
+      "constraint-measure" : {
+        "type" : "de.evoal.optimisation.core.exact-measure",
+        "attributes" : {
+          "equality-tolerance" : 1.0E-4
+        }
+      },
+      "neighbour-choosing-strategy" : {
+        "type" : "de.evoal.optimisation.local_search.optimisation.manual-strategy",
+        "attributes" : {
+          "step-size" : [ {
+            "type" : "de.evoal.optimisation.core.variable",
+            "attributes" : {
+              "var" : "x:0",
+              "val" : 0.05
+            }
+          } ],
+          "neighbour-order" : "fixed"
+        }
+      },
+      "accepting-strategy" : {
+        "type" : "de.evoal.optimisation.local_search.optimisation.hill-climber",
+        "attributes" : { }
+      }
+    }
+  },
+  "documentation" : [ {
+    "type" : "de.evoal.optimisation.core.candidates-per-iteration",
+    "attributes" : {
+      "prefix-data" : false,
+      "store-search-space" : true,
+      "store-optimisation-space" : true
+    }
+  }, {
+    "type" : "de.evoal.optimisation.core.memory-model",
+    "attributes" : {
+      "steps" : false
+    }
+  } ],
+  "citations" : [ "berger2024evoal", "friedman2001greedy", "friedman2002stochastic", "koenker1978regression", "chernozhukov2010quantile", "han2012datapreprocessing" ],
+  "searchSpace" : [ {
+    "name" : "x:0",
+    "type" : "real",
+    "scale" : "quotient",
+    "lowerBound" : {
+      "value" : 0.0,
+      "inclusive" : true
+    },
+    "upperBound" : {
+      "value" : 1.0,
+      "inclusive" : true
+    }
+  } ],
+  "optimisationSpace" : [ {
+    "name" : "y:0",
+    "type" : "real",
+    "scale" : "quotient"
+  } ],
+  "fitness" : {
+    "components" : [ {
+      "name" : "y:0",
+      "goal" : "y:0"
+    } ],
+    "steps" : [ {
+      "type" : "de.evoal.surrogate.adaption.interval.optimisation.prediction-interval",
+      "attributes" : { }
+    } ]
+  },
+  "metricDefinitions" : [ {
+    "name" : "evaluations.real",
+    "kind" : "counter",
+    "valueType" : "integer",
+    "scope" : "iteration",
+    "description" : "Number of evaluations of the real optimisation function."
+  }, {
+    "name" : "evaluations.surrogate",
+    "kind" : "counter",
+    "valueType" : "integer",
+    "scope" : "iteration",
+    "description" : "Number of predictions of a surrogate model."
+  } ],
+  "setup" : {
+    "evoalVersion" : "${evoal.version}",
+    "seed" : "42",
+    "run" : 0
+  }
+}

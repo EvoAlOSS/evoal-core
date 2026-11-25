@@ -36,7 +36,8 @@ import de.evoal.surrogate.protobuf.StringStringEntryProto;
 
 /**
  * A model file in the ONNX format. A file that EvoAl writes stores the model information (the
- *   content of a PSON file without the state of the model) as JSON in the metadata of the model,
+ *   content of a PSON file; the graph is the state of the model, the state of the model
+ *   information holds only small values outside the graph) as JSON in the metadata of the model,
  *   under the key {@value #CONFIGURATION_KEY}; other ONNX tools ignore it. A file without the key
  *   is a foreign model: model {@value #FOREIGN_MODEL}, without a prediction pipeline and without
  *   feature information.
@@ -98,7 +99,7 @@ public class ONNXModelStorage implements ModelStorage {
     /**
      * Creates the storage with the given loader and transformer, e.g., for tests.
      */
-    ONNXModelStorage(final DefinitionModuleLoader loader, final SurrogateModelTransformer transformer) {
+    public ONNXModelStorage(final DefinitionModuleLoader loader, final SurrogateModelTransformer transformer) {
         this.loader = loader;
         this.transformer = transformer;
     }

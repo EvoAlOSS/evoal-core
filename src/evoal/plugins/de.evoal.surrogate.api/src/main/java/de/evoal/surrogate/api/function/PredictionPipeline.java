@@ -332,6 +332,28 @@ public final class PredictionPipeline {
         return run(postparation, upper).eGetAsDouble(feature) - run(postparation, lower).eGetAsDouble(feature);
     }
 
+    /**
+     * Applies the steps after the prediction to a value of an output feature as the model
+     *   predicts it, e.g. to a bound of a prediction interval, which the model function gives in
+     *   its own unit.
+     *
+     * @param feature An output feature.
+     * @param value A value of the feature as the model predicts it.
+     * @return The value in the original unit of the feature; {@code value} without steps after
+     *   the prediction.
+     */
+    public double restore(final @NonNull EStructuralFeature feature, final double value) {
+        if(!hasPostparation()) {
+            return value;
+        }
+
+        // the other features keep their default 0; the steps only change the features they name
+        final TypedEObject row = space.newEObject();
+        row.eSet(feature, value);
+
+        return run(postparation, row).eGetAsDouble(feature);
+    }
+
     private TypedEObject rowOf(final TypedEObject input) {
         final TypedEObject row = space.newEObject();
         function.getInput().forEach(feature -> row.eSet(feature, input.eGet(feature)));

@@ -465,4 +465,102 @@ module de.evoal.surrogate.smile.ml {
         @LowerBoundary{ boundary := 0; }
         'iterations' : int;
     }
+
+    /**
+     * The point prediction of a 'gradient-boosting' model.
+     */
+    nominal enum 'point-prediction' ( mean, median );
+
+    /**
+     * Which rows the trees of the three models of a 'gradient-boosting' model are fitted on.
+     */
+    nominal enum 'row-sampling' ( shared, independent );
+
+    /**
+     * Gradient boosting with regression trees and a prediction interval: three models of
+     *   'number-trees' trees each are fitted to the training data. The first one predicts the
+     *   output ('point-prediction'), the other two predict the lower and the upper quantile of
+     *   the output, (1 − 'coverage') / 2 and (1 + 'coverage') / 2 (quantile regression). The
+     *   bounds form a prediction interval that holds a new observation with the probability
+     *   'coverage'; its width follows the noise of the data, e.g. wide where the output
+     *   scatters. The three values are sorted at every point, so the bounds do not cross. The
+     *   model has a single output; its model file is an ONNX file ('.onnx') with the outputs
+     *   y, y.lower and y.upper for the output y.<br/>
+     * <br/>
+     * Each model starts with a constant and adds one tree at a time; a tree is fitted to the
+     *   negative gradient of the loss of the model so far, on a random sample of the training
+     *   rows, and is added with the weight 'shrinkage'.<br/>
+     * <br/>
+     * References: Friedman 2001; Friedman 2002 (sampling of rows); Koenker and Bassett 1978
+     *   (quantile regression); Chernozhukov, Fernández-Val and Galichon 2010 (rearrangement).
+     */
+    @Literature { keys := ["friedman2001greedy", "friedman2002stochastic", "koenker1978regression",
+                           "chernozhukov2010quantile"]; }
+    @RequiresScale { minimum := 'measurement-scale.ordinal'; features := path "/task/inputs"; }
+    type 'gradient-boosting' extends surrogate {
+        /**
+         * The prediction of the model: mean, the trees minimise the squared error (good for
+         *   data without outliers); median, the trees fit the 0.5 quantile (robust against
+         *   outliers, and it lies between the bounds).
+         */
+        'point-prediction' : enum 'point-prediction';
+
+        /**
+         * The number of trees of each of the three models.
+         */
+        @LowerBoundary{ boundary := 1; }
+        'number-trees' : int;
+
+        /**
+         * The weight of each tree (learning rate). A smaller value needs more trees and
+         *   generalises better, e.g. 0.05.
+         */
+        @LowerBoundary{ boundary := 0.0; inclusive := false; }
+        @UpperBoundary{ boundary := 1.0; }
+        shrinkage : real;
+
+        /**
+         * The maximum depth of a tree.
+         */
+        @LowerBoundary{ boundary := 2; }
+        'max-depth' : int;
+
+        /**
+         * The maximum number of leaves of a tree.
+         */
+        @LowerBoundary{ boundary := 2; }
+        'max-nodes' : int;
+
+        /**
+         * The minimum number of training rows in a leaf. The bounds are quantiles of the rows
+         *   in a leaf, so a leaf needs enough rows for them, e.g. 5 or more.
+         */
+        @LowerBoundary{ boundary := 1; }
+        'node-size' : int;
+
+        /**
+         * The share of the training rows each tree is fitted on, drawn without replacement for
+         *   every tree. 1 uses all rows; a value below 1 (e.g. 0.7) makes the trees differ and
+         *   often generalises better.
+         */
+        @LowerBoundary{ boundary := 0.0; inclusive := false; }
+        @UpperBoundary{ boundary := 1.0; }
+        'sampling-fraction' : real;
+
+        /**
+         * Which rows the trees of the three models (prediction, lower and upper bound) are
+         *   fitted on with 'sampling-fraction' < 1: shared, tree t of every model sees the same
+         *   rows; independent, every model draws its own rows. With 'sampling-fraction' 1, every
+         *   tree sees all rows, and both give the same model.
+         */
+        'row-sampling' : enum 'row-sampling';
+
+        /**
+         * The probability that a new observation lies in the prediction interval, e.g. 0.9 for
+         *   the interval between the 0.05 and the 0.95 quantile.
+         */
+        @LowerBoundary{ boundary := 0.0; inclusive := false; }
+        @UpperBoundary{ boundary := 1.0; inclusive := false; }
+        coverage : real;
+    }
 }

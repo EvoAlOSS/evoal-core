@@ -12,11 +12,6 @@
 	<artifactId>surrogate.api</artifactId>
 	<name>EvoAl - Plugins - Surrogate - API</name>
 
-	<properties>
-		<!-- protoc and the Java runtime of the generated ONNX classes have the same version -->
-		<protobuf.version>4.36.2</protobuf.version>
-	</properties>
-
 	<dependencies>
 		<dependency>
 			<groupId>${project.groupId}</groupId>

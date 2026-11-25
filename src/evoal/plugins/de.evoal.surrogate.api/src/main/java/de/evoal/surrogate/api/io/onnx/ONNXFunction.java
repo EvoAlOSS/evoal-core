@@ -4,6 +4,7 @@ import java.nio.DoubleBuffer;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 import java.nio.LongBuffer;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -73,6 +74,21 @@ public class ONNXFunction extends ModelFunction {
     public void apply(final @NonNull TypedEObject in, final @NonNull TypedEObject out) {
         log.debug("Applying the ONNX model to {}.", in);
 
+        final Map<String, Object> values = run(in, output.stream().map(EStructuralFeature::getName).toList());
+        output.forEach(feature -> out.eSet(feature, values.get(feature.getName())));
+
+        log.debug("The ONNX model predicted {}.", out);
+    }
+
+    /**
+     * Runs the model once.
+     *
+     * @param in An object with the input features.
+     * @param outputs The names of the outputs of the model to read.
+     * @return The single value of each output, by name.
+     * @throws IllegalStateException if the model has no output of a name.
+     */
+    protected Map<String, Object> run(final @NonNull TypedEObject in, final @NonNull Collection<String> outputs) {
         final Map<String, OnnxTensor> tensors = new HashMap<>();
         try {
             final OrtEnvironment environment = OrtEnvironment.getEnvironment();
@@ -80,21 +96,22 @@ public class ONNXFunction extends ModelFunction {
                 tensors.put(feature.getName(), toTensor(environment, in, feature));
             }
 
+            final Map<String, Object> values = new HashMap<>();
             try(final OrtSession.Result results = session.run(tensors)) {
-                for(final EStructuralFeature feature : output) {
-                    final OnnxValue value = results.get(feature.getName())
-                                                   .orElseThrow(() -> new IllegalStateException("The ONNX model has no output '" + feature.getName() + "'."));
-                    out.eSet(feature, fromTensor(feature, value));
+                for(final String name : outputs) {
+                    final OnnxValue value = results.get(name)
+                                                   .orElseThrow(() -> new IllegalStateException("The ONNX model has no output '" + name + "'."));
+                    values.put(name, fromTensor(name, value));
                 }
             }
+
+            return values;
         } catch(final OrtException e) {
             throw new RuntimeException(e);
         } finally {
             // the tensors hold native memory
             tensors.values().forEach(OnnxTensor::close);
         }
-
-        log.debug("The ONNX model predicted {}.", out);
     }
 
     /**
@@ -124,8 +141,8 @@ public class ONNXFunction extends ModelFunction {
      * @return The single value of an output tensor of the model, whatever its shape (e.g.
      *   {@code [1]} or {@code [1, 1]}).
      */
-    private Object fromTensor(final EStructuralFeature feature, final OnnxValue value) {
-        final TensorInfo info = (TensorInfo) outputInfo.get(feature.getName()).getInfo();
+    private Object fromTensor(final String name, final OnnxValue value) {
+        final TensorInfo info = (TensorInfo) outputInfo.get(name).getInfo();
         final OnnxTensor tensor = (OnnxTensor) value;
 
         return switch(info.type) {

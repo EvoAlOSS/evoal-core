@@ -1,6 +1,8 @@
 package de.evoal.surrogate.adaption.interval.fitness;
 
 import java.util.Set;
+import java.util.function.ToDoubleBiFunction;
+import java.util.function.UnaryOperator;
 import java.util.stream.Collectors;
 
 import jakarta.enterprise.context.Dependent;
@@ -20,6 +22,7 @@ import de.evoal.surrogate.adaption.AdaptionStep;
 import de.evoal.surrogate.adaption.interval.model.PredictiveErrorData;
 import de.evoal.surrogate.api.function.ModelFunction;
 import de.evoal.surrogate.api.function.ModelFunctionData;
+import de.evoal.surrogate.api.function.PredictionInterval;
 import de.evoal.surrogate.api.function.PredictionPipeline;
 import de.evoal.surrogate.api.function.PredictiveStandardDeviation;
 import de.evoal.surrogate.api.io.ModelReader;
@@ -30,7 +33,9 @@ import de.evoal.core.api.math.EvoalMath;
  * Adapts the prediction of a surrogate by the width of its prediction interval (DL type
  *   {@code 'prediction-interval'}): {@code 2 · ŷ² / width}. The interval comes from
  * <ul>
- *   <li>the predictive standard deviation σ of a model that provides it (e.g. a Gaussian
+ *   <li>the prediction interval of a model that predicts one (e.g. gradient boosting), for
+ *     every output, with the coverage of the model;</li>
+ *   <li>otherwise the predictive standard deviation σ of a model that provides it (e.g. a Gaussian
  *     process): ŷ ± z · σ for every output, with z the {@link #CONFIDENCE} quantile of the
  *     standard normal distribution;</li>
  *   <li>otherwise the prediction error data of an SVR surrogate, calculated during training
@@ -45,7 +50,8 @@ public class PredictionIntervalStep extends AdaptionStep {
     private ReproducibilityProtocol reproducibility;
 
     /**
-     * Confidence of the prediction interval.
+     * Confidence of the prediction interval of a model with a predictive standard deviation and
+     *   of an SVR; a model that predicts its interval has its own coverage.
      */
     private static final double CONFIDENCE = 0.95;
 
@@ -77,27 +83,30 @@ public class PredictionIntervalStep extends AdaptionStep {
     }
 
     /**
-     * @throws IllegalStateException if the surrogate provides no predictive standard deviation
-     *   and is no SVR with prediction error data.
+     * @throws IllegalStateException if the surrogate predicts no interval, provides no
+     *   predictive standard deviation and is no SVR with prediction error data.
      */
     @Override
     protected Set<String> prepare() {
         final ModelFunctionData surrogate = surrogate();
         final ModelFunction function = surrogate.function();
 
+        if(function instanceof PredictionInterval interval) {
+            width = intervalWidth(function, interval, surrogate.pipeline());
+
+            return namesOf(function.getOutput());
+        }
+
         if(function instanceof PredictiveStandardDeviation deviation) {
             width = standardDeviationWidth(function, deviation, surrogate.pipeline());
 
-            return function.getOutput()
-                           .stream()
-                           .map(EStructuralFeature::getName)
-                           .collect(Collectors.toSet());
+            return namesOf(function.getOutput());
         }
 
         if(!(function instanceof KernelBasedSVRFunction svrFunction)) {
-            throw new IllegalStateException("The prediction-interval adaption requires a surrogate with a predictive standard deviation"
-                                            + " (e.g. a Gaussian process) or an SVR surrogate, but the surrogate is '"
-                                            + function.getClass().getName() + "'.");
+            throw new IllegalStateException("The prediction-interval adaption requires a surrogate with a prediction interval"
+                                            + " (e.g. gradient boosting), a predictive standard deviation (e.g. a Gaussian process)"
+                                            + " or an SVR surrogate, but the surrogate is '" + function.getClass().getName() + "'.");
         }
 
         final ModelReader reader = surrogate.reader()
@@ -115,6 +124,40 @@ public class PredictionIntervalStep extends AdaptionStep {
         final EStructuralFeature errorFeature = svrFunction.getOutput().getFirst();
 
         return Set.of(errorFeature.getName());
+    }
+
+    private static Set<String> namesOf(final Space output) {
+        return output.stream()
+                     .map(EStructuralFeature::getName)
+                     .collect(Collectors.toSet());
+    }
+
+    /**
+     * @return The width {@code |restore(upper) − restore(lower)|} of the model's interval, in
+     *   the original unit: the model predicts the bounds at the prepared candidate in its own
+     *   unit, and the steps after the prediction convert each bound. This is exact for every
+     *   monotone step.
+     */
+    static IntervalWidth intervalWidth(final ModelFunction function, final PredictionInterval interval, final PredictionPipeline pipeline) {
+        return intervalWidth(function.getOutput(), interval, pipeline::prepare, pipeline::restore);
+    }
+
+    /**
+     * @param output The outputs of the model.
+     * @param interval The interval of the model.
+     * @param prepare The steps before the prediction.
+     * @param restore The steps after the prediction, applied to one value of an output.
+     * @return The width {@code |restore(upper) − restore(lower)|} of the model's interval at the
+     *   prepared candidate.
+     */
+    static IntervalWidth intervalWidth(final Space output, final PredictionInterval interval, final UnaryOperator<TypedEObject> prepare,
+                                       final ToDoubleBiFunction<EStructuralFeature, Double> restore) {
+        return (candidate, objective) -> {
+            final EStructuralFeature feature = output.find(objective).orElseThrow();
+            final PredictionInterval.Interval bounds = interval.interval(prepare.apply(candidate), feature);
+
+            return Math.abs(restore.applyAsDouble(feature, bounds.upper()) - restore.applyAsDouble(feature, bounds.lower()));
+        };
     }
 
     /**

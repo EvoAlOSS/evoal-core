@@ -62,6 +62,7 @@ module de.evoal.surrogate.api {
     opens de.evoal.surrogate.main.gof to weld.core.impl;
     opens de.evoal.surrogate.main.gof.rmse to weld.core.impl;
     opens de.evoal.surrogate.main.gof.rsquare to weld.core.impl;
+    opens de.evoal.surrogate.main.gof.interval to weld.core.impl;
     opens de.evoal.surrogate.main.optimisation to weld.core.impl;
     opens de.evoal.surrogate.main.resampling to weld.core.impl;
 //    opens de.evoal.surrogate.main.optimisation.constraints.strategies.malus to weld.core.impl;

@@ -1,0 +1,141 @@
+import "definitions" from de.evoal.core.math;
+import "definitions" from 'de.evoal.pipeline.base';
+import "definitions" from 'de.evoal.pipeline.benchmarks';
+import "definitions" from 'de.evoal.pipeline.distributions';
+
+import "data" from surrogate;
+
+module 'training-data' {
+	/**
+	 * x:0 uniform between 0 and 0.3 and the Forrester function of it with normal noise, σ = 0.5.
+	 */
+	pipeline 'left' [
+		step {
+			component 'distribution-based-data' {
+				distributions := [
+					'uniform-distribution' { 'lower' := 0.0; 'upper' := 0.3; }
+				];
+			}
+
+			writes [data 'x:0'];
+		}
+		step {
+			component forrester {}
+
+			reads [data 'x:0'];
+			writes [data 'y:0'];
+		}
+		step {
+			component 'noise-data' {
+				distributions := [
+					'normal-distribution' { 'μ' := 0.0; 'σ' := 0.5; }
+				];
+			}
+
+			reads [data 'y:0'];
+			writes [data 'y:0'];
+		}
+	]
+
+	/**
+	 * x:0 uniform between 0.3 and 0.7 and the Forrester function of it with normal noise, σ = 1.5.
+	 */
+	pipeline 'middle' [
+		step {
+			component 'distribution-based-data' {
+				distributions := [
+					'uniform-distribution' { 'lower' := 0.3; 'upper' := 0.7; }
+				];
+			}
+
+			writes [data 'x:0'];
+		}
+		step {
+			component forrester {}
+
+			reads [data 'x:0'];
+			writes [data 'y:0'];
+		}
+		step {
+			component 'noise-data' {
+				distributions := [
+					'normal-distribution' { 'μ' := 0.0; 'σ' := 1.5; }
+				];
+			}
+
+			reads [data 'y:0'];
+			writes [data 'y:0'];
+		}
+	]
+
+	/**
+	 * x:0 uniform between 0.7 and 1 and the Forrester function of it with normal noise, σ = 3.0.
+	 */
+	pipeline 'right' [
+		step {
+			component 'distribution-based-data' {
+				distributions := [
+					'uniform-distribution' { 'lower' := 0.7; 'upper' := 1.0; }
+				];
+			}
+
+			writes [data 'x:0'];
+		}
+		step {
+			component forrester {}
+
+			reads [data 'x:0'];
+			writes [data 'y:0'];
+		}
+		step {
+			component 'noise-data' {
+				distributions := [
+					'normal-distribution' { 'μ' := 0.0; 'σ' := 3.0; }
+				];
+			}
+
+			reads [data 'y:0'];
+			writes [data 'y:0'];
+		}
+	]
+
+	/**
+	 * Test data: like 'right', but other points and other noise.
+	 */
+	pipeline 'right-test' [
+		step {
+			component 'distribution-based-data' {
+				distributions := [
+					'uniform-distribution' { 'lower' := 0.7; 'upper' := 1.0; }
+				];
+			}
+
+			writes [data 'x:0'];
+		}
+		step {
+			component forrester {}
+
+			reads [data 'x:0'];
+			writes [data 'y:0'];
+		}
+		step {
+			component 'noise-data' {
+				distributions := [
+					'normal-distribution' { 'μ' := 0.0; 'σ' := 3.0; }
+				];
+			}
+
+			reads [data 'y:0'];
+			writes [data 'y:0'];
+		}
+	]
+
+	// The noise grows with x:0 in three steps, so the prediction interval should be narrow on
+	// the left and wide on the right. The test data lies in the right segment.
+	begin
+		write "output/left.csv" with 150 samples from executing ['left'];
+		write "output/middle.csv" with 150 samples from executing ['middle'];
+		write "output/right.csv" with 150 samples from executing ['right'];
+		write "output/test.csv" with 200 samples from executing ['right-test'];
+	end
+}
