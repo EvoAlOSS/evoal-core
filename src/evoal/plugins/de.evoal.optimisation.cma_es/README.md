@@ -181,7 +181,9 @@ The diagonal model records no correlations. The statistics writer `'learned-link
    - `cma-es-bipop-restarts`: both regimes, budget cut-off;
    - `cma-es-diagonal-ipop-resample`: diagonal model, IPOP, resampling constraint check;
    - `cma-es-maximum-iterations`: IPOP with `'quadratic-iteration-limit'`; the four CMA-ES runs
-     end after 21, 18, 16 and 14 iterations.
+     end after 21, 18, 16 and 14 iterations;
+   - `cma-es-sep-iteration-limit`: diagonal model, IPOP with `'sep-iteration-limit'`; the four
+     CMA-ES runs end after 16, 14, 13 and 12 iterations.
 4. **COCO (statistical):** the comparison of the runtime distributions on BBOB with the archived
    CMA-ES entries is part of the COCO plugin of `evoal-benchmark-suites`.
 
