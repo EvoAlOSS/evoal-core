@@ -5,6 +5,7 @@ import de.evoal.models.core.ecore.TypedEObject;
 import de.evoal.core.api.ecore.io.EObjectReader;
 import de.evoal.core.api.utils.EvoalIOException;
 import de.evoal.core.api.utils.Requirements;
+import de.evoal.languages.model.interpreter.numeric.NumericConversions;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -91,7 +92,7 @@ public class JsonEObjectReader implements EObjectReader {
                     } else if(token == JsonToken.VALUE_TRUE) {
                         value = true;
                     } else if(token == JsonToken.VALUE_NUMBER_INT) {
-                        value = jsonParser.getValueAsInt();
+                        value = jsonParser.getNumberValue();
                     } else if(token != JsonToken.VALUE_NULL) {
                         throw new RuntimeException("Unsupported token type " + token);
                     }
@@ -102,7 +103,8 @@ public class JsonEObjectReader implements EObjectReader {
             if(value == null) {
                 log.debug("Field {} has no value.", name);
             } else if(columnToFeature.containsKey(name)) {
-                result.eSet(columnToFeature.get(name), value);
+                final EStructuralFeature feature = columnToFeature.get(name);
+                result.eSet(feature, integral(feature, value));
             } else {
                 log.debug("Skipping field {}.", name);
             }
@@ -111,6 +113,29 @@ public class JsonEObjectReader implements EObjectReader {
 
         assertEndArray();
         return result;
+    }
+
+    /**
+     * Converts a number for an {@code int} or {@code long} feature to the feature's type, so a
+     *   {@code long} value is read back as a {@code long} (#357). Other values are returned
+     *   unchanged.
+     *
+     * @throws IllegalArgumentException if the number does not fit into the feature's type.
+     */
+    private static Object integral(final EStructuralFeature feature, final Object value) {
+        final Class<?> type = feature.getEType().getInstanceClass();
+
+        try {
+            if(type == long.class || type == Long.class) {
+                return NumericConversions.toLong(value);
+            } else if(type == int.class || type == Integer.class) {
+                return NumericConversions.toInteger(value);
+            }
+        } catch (final IllegalArgumentException e) {
+            throw new IllegalArgumentException("Invalid value of feature '" + feature.getName() + "': " + e.getMessage(), e);
+        }
+
+        return value;
     }
 
     private void assertEndArray() throws IOException {

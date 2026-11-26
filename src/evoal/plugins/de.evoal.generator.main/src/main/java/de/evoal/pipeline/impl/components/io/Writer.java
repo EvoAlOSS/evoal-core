@@ -45,15 +45,25 @@ public class Writer extends PipelineComponentImpl {
         return object;
     }
 
+    /**
+     * Opens the file for the features of the step's {@code reads}, in their order.
+     *
+     * @throws InitializationException if the step reads no features (#357) or the file cannot
+     *   be opened.
+     */
     @Override
     public PipelineComponentImpl init(final EObject configuration) throws InitializationException {
         super.init(configuration);
+
+        final Space reads = getReads();
+        if(reads == null || reads.isEmpty()) {
+            throw new InitializationException("'writer' writes the features of its 'reads'; add reads [...] to the step.");
+        }
 
         final String filename = helper.lookup(configuration, "filename");
         final File file = new File(filename);
 
         log.info("Writing data to {}", file.getAbsolutePath());
-        final Space reads = getReads();
 
         try {
             writer = EObjectIOFactory.writer(file, reads);

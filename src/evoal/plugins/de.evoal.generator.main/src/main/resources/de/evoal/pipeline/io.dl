@@ -20,7 +20,8 @@ module 'de.evoal.pipeline.io' {
 	}
 
 	/**
-	 * Writes the specified data to a file.
+	 * Writes the features of the step's reads to a file, in the order of reads; the file
+	 *   extension selects the format (json, csv, arff). A step without reads is an error.
 	 */
 	type writer extends configuration {
 		/**
