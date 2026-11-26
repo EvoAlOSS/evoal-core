@@ -50,10 +50,14 @@ public class CorrelationEstimationTest {
         return new Space(eClass);
     }
 
+    /**
+     * Adds an attribute as {@code EClassProvider} creates it for a data description.
+     */
     private static void add(final EClass eClass, final String name, final EClassifier type) {
         final EAttribute feature = EcoreFactory.eINSTANCE.createEAttribute();
         feature.setName(name);
         feature.setEType(type);
+        feature.setUnsettable(true);
         eClass.getEStructuralFeatures().add(feature);
     }
 
@@ -185,5 +189,44 @@ public class CorrelationEstimationTest {
         feed(estimation, X, Y, z);
 
         Assertions.assertEquals(List.of(10, 9, 9), estimates().stream().map(e -> e.get("n")).toList());
+    }
+
+    @Test
+    public void aRowWithoutAValueIsLeftOutOnlyForItsPairs() throws InitializationException {
+        // given: the last row has no value for z, e.g. a missing value of an ARFF file (#355)
+        final CorrelationEstimation estimation = estimation(List.of("x", "y", "z"),
+                                                            List.of(ScaleType.QUOTIENT, ScaleType.QUOTIENT, ScaleType.QUOTIENT),
+                                                            0.0, Map.of());
+        final double[] z = {1, 3, 2, 5, 4, 7, 6, 9, 8};
+
+        // when
+        for(int i = 0; i < X.length; ++i) {
+            final TypedEObject row = space.newEObject();
+            row.eSet(feature("x"), X[i]);
+            row.eSet(feature("y"), Y[i]);
+            if(i < z.length) {
+                row.eSet(feature("z"), z[i]);
+            }
+            estimation.apply(row);
+        }
+        estimation.streamEnded();
+
+        // then
+        Assertions.assertEquals(List.of(10, 9, 9), estimates().stream().map(e -> e.get("n")).toList());
+    }
+
+    @Test
+    public void aValueOfZeroIsAValue() throws InitializationException {
+        // given (#355)
+        final double[] z = {0, 3, 2, 5, 4, 7, 6, 9, 8, 0};
+        final CorrelationEstimation estimation = estimation(List.of("x", "y", "z"),
+                                                            List.of(ScaleType.QUOTIENT, ScaleType.QUOTIENT, ScaleType.QUOTIENT),
+                                                            0.0, Map.of());
+
+        // when
+        feed(estimation, X, Y, z);
+
+        // then
+        Assertions.assertEquals(List.of(10, 10, 10), estimates().stream().map(e -> e.get("n")).toList());
     }
 }

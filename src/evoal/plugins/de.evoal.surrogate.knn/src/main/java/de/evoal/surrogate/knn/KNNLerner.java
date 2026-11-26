@@ -34,6 +34,21 @@ public class KNNLerner extends AbstractModelLearner {
 
     private final List<TypedEObject> trainingData = new ArrayList<>();
 
+    /**
+     * Creates a learner that is configured by {@link #init(EObject)}.
+     */
+    public KNNLerner() {
+    }
+
+    /**
+     * Creates a configured learner, e.g., for tests.
+     *
+     * @param k The number of neighbours.
+     */
+    KNNLerner(final int k) {
+        this.k = k;
+    }
+
     @Override
     public void add(final TypedEObject features) {
         trainingData.add(features);

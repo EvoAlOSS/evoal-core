@@ -9,6 +9,9 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import de.evoal.models.core.ecore.Space;
+import de.evoal.models.core.ecore.TypedEObject;
 import org.eclipse.emf.ecore.ENamedElement;
 
 import org.apache.commons.math3.util.Pair;
@@ -138,6 +141,54 @@ public class EClassProviderTest {
             // then
             final List<String> featureNames = featureNames(spaces.getSecond());
             Assertions.assertEquals(goalNames, featureNames);
+        }
+    }
+
+    @Nested
+    @DisplayName("given a data attribute (#355)")
+    class DataAttribute {
+        private final DataDescriptionModule module = DdlFactory.eINSTANCE.createDataDescriptionModule();
+
+        private TypedEObject row() {
+            module.getDescriptions().add(description("x:0"));
+
+            return new Space(provider.eClassFor(module)).newEObject();
+        }
+
+        @Test
+        public void aValueEqualToTheDefaultIsSet() {
+            // given
+            final TypedEObject row = row();
+            final EStructuralFeature x = row.eClass().getEStructuralFeature("x:0");
+
+            // when
+            row.eSet(x, 0.0);
+
+            // then
+            Assertions.assertTrue(row.eIsSet(x));
+        }
+
+        @Test
+        public void aValueThatNoOneSetIsMissing() {
+            // given
+            final TypedEObject row = row();
+
+            // then
+            Assertions.assertFalse(row.eIsSet(row.eClass().getEStructuralFeature("x:0")));
+        }
+
+        @Test
+        public void aCopyKeepsAValueEqualToTheDefault() {
+            // given
+            final TypedEObject row = row();
+            final EStructuralFeature x = row.eClass().getEStructuralFeature("x:0");
+            row.eSet(x, 0.0);
+
+            // when
+            final TypedEObject copy = new TypedEObject(row);
+
+            // then
+            Assertions.assertTrue(copy.eIsSet(x));
         }
     }
 }

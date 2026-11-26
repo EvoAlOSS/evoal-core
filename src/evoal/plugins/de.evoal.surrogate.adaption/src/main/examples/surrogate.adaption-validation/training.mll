@@ -8,8 +8,8 @@ import "definitions" from de.evoal.surrogate.adaption.density.ml;
 import "data" from surrogate;
 
 // The validation pipeline cuts the gap 0.7 <= x <= 0.8, with its two outliers, out of the
-// training data. The model learns from the 17 rows that are left, and the goodness of fit on
-// the training data and the density of the inputs describe the same 17 rows.
+// training data. The model learns from the 18 rows that are left, and the goodness of fit on
+// the training data and the density of the inputs describe the same 18 rows.
 module 'training' {
 	specify learning-task {
 		input features 'x:0'

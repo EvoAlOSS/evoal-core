@@ -7,22 +7,23 @@ learns from. The goodness of fit on the training data and the estimates of the s
 adaption (here the density of the inputs) describe exactly these rows, not the rows of the
 training files.
 
-`data.json` holds y = 2x + 1 with a noise of ±0.1 on the grid x = 0.05, 0.1, ..., 1, and two
+`data.json` holds y = 2x + 1 with a noise of ±0.1 on the grid x = 0, 0.05, ..., 1, and two
 outliers (y = 10 at x = 0.72 and 0.76). The validation pipeline cuts the gap
 0.7 ≤ x ≤ 0.8 out of the data with a `'condition-filter'`, so it drops the outliers and the
-grid points 0.7, 0.75 and 0.8. The linear regression learns from the 17 rows that are left.
+grid points 0.7, 0.75 and 0.8. The linear regression learns from the 18 rows that are left.
 
 The learning use case records the rows after `validation` with
 `'assessment-data' { 'data-set' := "training"; }`; the derived use case does this by itself.
 The goodness of fit on the training data and the density estimation use these rows:
 
-| Value | On the 17 rows after `validation` | On all 22 rows of `data.json` |
+| Value | On the 18 rows after `validation` | On all 23 rows of `data.json` |
 |---|---:|---:|
-| RMSE of the trained model | 0.0997 | 2.27 |
-| mean of x (`density-mu`) | 0.4853 | 0.5445 |
-| standard deviation of x (`density-sigma`) | 0.3040 | 0.2885 |
+| RMSE of the trained model | 0.0999 | 2.22 |
+| mean of x (`density-mu`) | 0.4583 | 0.5209 |
+| standard deviation of x (`density-sigma`) | 0.3163 | 0.3038 |
 
-The model file and the goodness-of-fit file hold the values of the left column.
+The model file and the goodness-of-fit file hold the values of the left column. The row at
+x = 0 counts like every other row: a value of 0 is a value.
 
 ## Files
 

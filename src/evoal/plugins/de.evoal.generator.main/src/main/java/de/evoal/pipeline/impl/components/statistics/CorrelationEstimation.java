@@ -106,7 +106,10 @@ public class CorrelationEstimation extends PipelineComponentImpl implements Pipe
     public @NonNull TypedEObject apply(final @NonNull TypedEObject object) {
         final double[] row = new double[features.size()];
         for(int i = 0; i < row.length; ++i) {
-            row[i] = valueOf(object.eGet(features.get(i)));
+            // an unset feature has no value (eGet would give its default, e.g. 0.0); a set 0.0
+            //   is a value, since the data attributes are unsettable (#355)
+            final EStructuralFeature feature = features.get(i);
+            row[i] = object.eIsSet(feature) ? valueOf(object.eGet(feature)) : Double.NaN;
         }
         rows.add(row);
 

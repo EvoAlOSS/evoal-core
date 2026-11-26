@@ -60,6 +60,9 @@ import de.evoal.core.api.utils.Requirements;
  * <ul>
  *   <li>The attribute has the name of the data description and an Ecore type
  *     that matches its representation (boolean, integer, real or string).</li>
+ *   <li>The attribute is unsettable, so {@code eIsSet} tells whether a value was
+ *     set, also for a value equal to the default (0, 0.0, false). An attribute
+ *     that no reader set has no value, e.g. a missing value in an ARFF file.</li>
  *   <li>The bounds from the {@code @LowerBoundary}/{@code @UpperBoundary}
  *     constraints of the data description are attached to the attribute
  *     (see {@link FeatureBoundaries}).</li>
@@ -270,6 +273,8 @@ public class EClassProvider {
             attr.setLowerBound(0);
             attr.setUpperBound(1);
             attr.setEType(toEType(ref));
+            // a set 0.0 counts as set; only a missing value is unset (#355)
+            attr.setUnsettable(true);
 
             // the boundaries are taken from the @LowerBoundary/@UpperBoundary constraints
             FeatureBoundaries.annotate(attr, BoundaryExtractor.extract(ref));

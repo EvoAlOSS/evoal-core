@@ -9,7 +9,9 @@ import de.evoal.core.api.utils.Requirements;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Stream;
 
 /**
@@ -17,6 +19,11 @@ import java.util.stream.Stream;
  *
  * Working with two EObjects is tricky as the EStructuralFeatures of these
  *   EStructuralFeatures are not equal (what we want).
+ * <p>
+ * If both spaces share one class, a row without a value for a feature of either space (an
+ *   unset feature, e.g. a missing value of an ARFF file) is left out; a supplier reports the
+ *   left-out rows once, when it is used first. A value equal to the default (0, 0.0, false) is
+ *   a value, since the data attributes are unsettable (#355).
  */
 @Slf4j
 public class EObjectPairStreamFactory {
@@ -24,19 +31,21 @@ public class EObjectPairStreamFactory {
         log.info("Creating supplier for {} and {}.", first, second);
 
         if(first.getEClass() == second.getEClass()) {
-            return new EObjectPairStreamSupplier() {
-                @Override
-                public Stream<EObjectPair> get() {
-                    return base.get()
-                            .filter(obj -> first.stream().allMatch(obj::eIsSet))
-                            .filter(obj -> second.stream().allMatch(obj::eIsSet))
-                            .map(obj -> new EObjectPair(obj, obj));
+            final List<EStructuralFeature> features = featuresOf(first, second);
+            final AtomicBoolean reported = new AtomicBoolean();
+
+            return () -> {
+                if(!reported.getAndSet(true)) {
+                    MissingValues.report(base, obj -> MissingValues.missing(obj, features));
                 }
+
+                return base.get()
+                           .filter(obj -> MissingValues.complete(obj, features))
+                           .map(obj -> new EObjectPair(obj, obj));
             };
         }
 
-        // no eIsSet filter as above: EMF reports a value equal to the default (e.g. 0.0) as
-        //   unset, which would drop such points
+        // the projection copies every value; a feature without a value gets its default
         return () -> base.get()
                          .map(point -> new EObjectPair(project(point, first), project(point, second)));
     }
@@ -45,13 +54,15 @@ public class EObjectPairStreamFactory {
         log.info("Creating supplier for {} and {}.", first, second);
 
         if(first.getEClass() == second.getEClass()) {
-            return new EObjectPairStreamSupplier() {
-                @Override
-                public Stream<EObjectPair> get() {
-                    return base.get()
-                            .filter(obj -> first.stream().allMatch(f -> obj.getFirst().eIsSet(f)))
-                            .filter(obj -> second.stream().allMatch(f -> obj.getSecond().eIsSet(f)));
+            final AtomicBoolean reported = new AtomicBoolean();
+
+            return () -> {
+                if(!reported.getAndSet(true)) {
+                    MissingValues.report(base, pair -> missing(pair, first, second));
                 }
+
+                return base.get()
+                           .filter(pair -> complete(pair, first, second));
             };
         }
         throw new UnsupportedOperationException();
@@ -61,20 +72,52 @@ public class EObjectPairStreamFactory {
         log.info("Creating supplier for {} and {}.", first, second);
 
         if(first.getEClass() == second.getEClass()) {
-            return new EObjectPairStreamSupplier() {
-                @Override
-                public Stream<EObjectPair> get() {
-                    return base.stream()
-                            .filter(obj -> first.stream().allMatch(obj.getFirst()::eIsSet))
-                            .filter(obj -> second.stream().allMatch(obj.getSecond()::eIsSet));
-                }
-            };
-        } else {
+            final AtomicBoolean reported = new AtomicBoolean();
 
+            return () -> {
+                if(!reported.getAndSet(true)) {
+                    MissingValues.report(base::stream, pair -> missing(pair, first, second));
+                }
+
+                return base.stream()
+                           .filter(pair -> complete(pair, first, second));
+            };
         }
 
-
         throw new UnsupportedOperationException();
+    }
+
+    /**
+     * @return The features of both spaces, each once, in the order of the spaces.
+     */
+    private static List<EStructuralFeature> featuresOf(final Space first, final Space second) {
+        final List<EStructuralFeature> features = new ArrayList<>(first);
+        second.stream()
+              .filter(feature -> !features.contains(feature))
+              .forEach(features::add);
+
+        return features;
+    }
+
+    /**
+     * @return {@code true} if the first object of the pair has a value for every feature of the
+     *   first space and the second object for every feature of the second space.
+     */
+    private static boolean complete(final EObjectPair pair, final Space first, final Space second) {
+        return MissingValues.complete(pair.getFirst(), first) && MissingValues.complete(pair.getSecond(), second);
+    }
+
+    /**
+     * @return The features of the pair without a value, those of the first object first.
+     */
+    private static List<EStructuralFeature> missing(final EObjectPair pair, final Space first, final Space second) {
+        final List<EStructuralFeature> missing = new ArrayList<>(MissingValues.missing(pair.getFirst(), first));
+        MissingValues.missing(pair.getSecond(), second)
+                     .stream()
+                     .filter(feature -> !missing.contains(feature))
+                     .forEach(missing::add);
+
+        return missing;
     }
 
     /**
