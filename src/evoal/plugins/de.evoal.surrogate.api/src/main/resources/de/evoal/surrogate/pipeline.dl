@@ -248,9 +248,11 @@ module 'de.evoal.surrogate.pipeline' {
 	 * the measure on the cross-validated predictions; for leave-one-out, rmse is the root of
 	 * the PRESS statistic (Allen 1974) divided by the number of rows. The mean over the parts
 	 * differs from it if the parts are small: R² and rrse of a part compare with the mean of
-	 * the part's rows, and an error measure averaged over parts is not the measure on all
-	 * predictions (Forman and Scholz 2010 show this for the F-measure and recommend computing
-	 * it from the counts of all folds). For the bootstrap, a row counts as often as it is out of bag.
+	 * the part's rows, and the mean of the parts' rmse is not the rmse of all predictions,
+	 * because rmse is the root of a mean (Forman and Scholz 2010 show this for the F-measure
+	 * and recommend computing it from the counts of all folds; a plain mean such as the error
+	 * rate gives the same value either way when the parts have equal size). For the bootstrap,
+	 * a row counts as often as it is out of bag.
 	 * The splits use the random stream <code>de.evoal.surrogate.pipeline.resample/&lt;scheme&gt;</code>
 	 * of the run (<code>core:seed</code>), so the same seed gives the same parts.
 	 */
