@@ -51,6 +51,10 @@ import java.util.stream.Stream;
  *   <li>Every resampling scheme is stated at most once, since its name is the name of its data
  *     set, and the feature of {@code 'given-blocks'} is neither an input nor an output
  *     feature.</li>
+ *   <li>A learning use case that calls {@code 'gof-calculator'} records the training rows
+ *     after {@code validation} with {@code 'assessment-data' { 'data-set' := "training"; }}:
+ *     the goodness of fit on the training data and the estimates of the surrogate adaption
+ *     use these rows, so they see the rows the model learned from.</li>
  * </ul>
  *
  * The effective use cases are logged.
@@ -78,6 +82,8 @@ public class UseCaseDerivation {
     private final static String MODEL_PREDICTION = "model-prediction";
     private final static String ASSESSMENT_DATA = "assessment-data";
     private final static String GIVEN_BLOCKS = "given-blocks";
+    private final static String GOF_CALCULATOR = "gof-calculator";
+    private final static String DATA_SET = "data-set";
 
     private final static String PREPARATION_STEP = "preparation-step";
     private final static String FEATURES = "features";
@@ -101,7 +107,8 @@ public class UseCaseDerivation {
      *
      * @param module The module to complete.
      * @throws IllegalStateException if a standard step states a feature outside the learning
-     *   task or the testing use case has no test data.
+     *   task, the testing use case has no test data, a resampling scheme is wrong, or the
+     *   learning use case assesses the training data without recording its rows.
      */
     public void derive(final @NonNull MachineLearningModule module) {
         log.info("Deriving the use cases of machine learning module '{}' from its learning task.", module.getName());
@@ -128,6 +135,7 @@ public class UseCaseDerivation {
         final List<String> errors = new ArrayList<>();
         steps.forEach(step -> check(module, step, errors));
         checkResampling(module, errors);
+        checkLearning(module, errors);
         if(!errors.isEmpty()) {
             errors.forEach(log::error);
             throw new IllegalStateException(String.join("\n", errors));
@@ -142,6 +150,7 @@ public class UseCaseDerivation {
      *     'execute'([
      *       step { component 'training-data-loader' {} },
      *       pipeline 'validation',
+     *       step { component 'assessment-data' { 'data-set' := "training"; } },
      *       pipeline 'preparation',
      *       step { component 'model-learner' {} }
      *     ]);
@@ -149,6 +158,8 @@ public class UseCaseDerivation {
      *     'store-model'();
      *   end;
      * </pre>
+     * The training rows are recorded before {@code preparation}: the goodness of fit predicts
+     *   through the prediction pipeline, which prepares the rows itself.
      */
     private Block defaultLearning(final MachineLearningModule module) {
         log.info("Adding the default learning use case.");
@@ -157,8 +168,19 @@ public class UseCaseDerivation {
         return useCase(module,
                        concreteStep(findType(surrogatePipeline, TRAINING_DATA_LOADER)),
                        pipelineStep(module.getValidation()),
+                       assessmentStep(surrogatePipeline, GoodnessOfFit.TRAINING),
                        pipelineStep(module.getPreparation()),
                        concreteStep(findType(surrogatePipeline, MODEL_LEARNER)));
+    }
+
+    /**
+     * @return {@code step { component 'assessment-data' { 'data-set' := "<dataSet>"; } }}.
+     */
+    private static ConcreteStep assessmentStep(final DefinitionModule surrogatePipeline, final String dataSet) {
+        final ConcreteStep step = concreteStep(findType(surrogatePipeline, ASSESSMENT_DATA));
+        setAttribute(step.getInstance(), DATA_SET, stringLiteral(dataSet));
+
+        return step;
     }
 
     /**
@@ -198,13 +220,10 @@ public class UseCaseDerivation {
         log.info("Adding the default testing use case for the test data {}.", module.getTask().getTestingData());
         final DefinitionModule surrogatePipeline = findDefinitionModule(module, SURROGATE_PIPELINE);
 
-        final ConcreteStep assessmentStep = concreteStep(findType(surrogatePipeline, ASSESSMENT_DATA));
-        setAttribute(assessmentStep.getInstance(), "data-set", stringLiteral(GoodnessOfFit.TEST));
-
         return useCase(module,
                        concreteStep(findType(surrogatePipeline, TEST_DATA_LOADER)),
                        pipelineStep(module.getValidation()),
-                       assessmentStep);
+                       assessmentStep(surrogatePipeline, GoodnessOfFit.TEST));
     }
 
     /**
@@ -267,6 +286,74 @@ public class UseCaseDerivation {
     }
 
     /**
+     * Checks that a learning use case that calls {@value #GOF_CALCULATOR} records the training
+     *   rows: a step {@code 'assessment-data' { 'data-set' := "training"; }}, in the use case or
+     *   in a pipeline it runs. Without it, the goodness of fit on the training data and the
+     *   estimates of the surrogate adaption have no rows.
+     */
+    private static void checkLearning(final MachineLearningModule module, final List<String> errors) {
+        final Block learning = module.getLearningUseCase();
+        if(learning == null || !callsGofCalculator(learning) || recordsTrainingRows(learning, new java.util.HashSet<>())) {
+            return;
+        }
+
+        errors.add("Module '" + module.getName() + "', use case 'learning': '" + GOF_CALCULATOR + "' assesses the training rows, but no step "
+                   + "records them; add step { component '" + ASSESSMENT_DATA + "' { '" + DATA_SET + "' := \"" + GoodnessOfFit.TRAINING
+                   + "\"; } } after pipeline 'validation'.");
+    }
+
+    private static boolean callsGofCalculator(final Block block) {
+        final List<EObject> elements = new ArrayList<>();
+        block.eAllContents().forEachRemaining(elements::add);
+
+        return elements.stream()
+                       .anyMatch(element -> element instanceof CallBuiltinFunction call
+                                            && call.getDefinition() != null
+                                            && GOF_CALCULATOR.equals(call.getDefinition().getName()));
+    }
+
+    /**
+     * @return Whether the element or a pipeline it runs contains a step that records the
+     *   training rows.
+     */
+    private static boolean recordsTrainingRows(final EObject element, final java.util.Set<PipelineDefinition> visited) {
+        final List<EObject> elements = new ArrayList<>();
+        element.eAllContents().forEachRemaining(elements::add);
+
+        for(final EObject current : elements) {
+            if(current instanceof ConcreteStep step
+                    && step.getInstance() != null
+                    && ASSESSMENT_DATA.equals(step.getInstance().getDefinition().getName())
+                    && GoodnessOfFit.TRAINING.equals(stringOf(step.getInstance().findAttribute(DATA_SET)))) {
+                return true;
+            }
+
+            if(current instanceof PipelineStep step
+                    && step.getDefinition() != null
+                    && visited.add(step.getDefinition())
+                    && recordsTrainingRows(step.getDefinition(), visited)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * @return The value of the attribute if it is a string literal, otherwise {@code null}.
+     */
+    private static String stringOf(final Attribute attribute) {
+        if(attribute == null) {
+            return null;
+        }
+
+        return ElementSwitch.elementOf(attribute.getValue())
+                            .filter(StringLiteral.class::isInstance)
+                            .map(literal -> ((StringLiteral) literal).getLiteral())
+                            .orElse(null);
+    }
+
+    /**
      * Builds {@code 'execute'([steps]); 'gof-calculator'(); 'store-model'();}.
      */
     private Block useCase(final MachineLearningModule module, final ReadExpression... steps) {
@@ -278,7 +365,7 @@ public class UseCaseDerivation {
 
         final Block block = ExecutionFactory.eINSTANCE.createBlock();
         block.getStatements().add(call(findFunction(pipelineBase, "execute"), array));
-        block.getStatements().add(call(findFunction(surrogatePipeline, "gof-calculator")));
+        block.getStatements().add(call(findFunction(surrogatePipeline, GOF_CALCULATOR)));
         block.getStatements().add(call(findFunction(surrogatePipeline, "store-model")));
 
         return block;

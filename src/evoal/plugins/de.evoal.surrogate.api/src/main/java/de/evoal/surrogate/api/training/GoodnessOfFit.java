@@ -48,8 +48,8 @@ public final class GoodnessOfFit {
     private String dataSet = TRAINING;
 
     /**
-     * The data of {@link #dataSet}, or {@code null} for the training data, which the
-     *   calculators load from the learning task.
+     * The data of {@link #dataSet}, or {@code null} as long as no step has recorded it (see
+     *   {@code 'assessment-data'}).
      */
     private EObjectPairStreamSupplier data = null;
 
@@ -117,7 +117,7 @@ public final class GoodnessOfFit {
     }
 
     /**
-     * @return The data of the assessed data set, or empty for the training data.
+     * @return The data of the assessed data set, or empty as long as no step has recorded it.
      */
     public Optional<EObjectPairStreamSupplier> data() {
         return Optional.ofNullable(data);

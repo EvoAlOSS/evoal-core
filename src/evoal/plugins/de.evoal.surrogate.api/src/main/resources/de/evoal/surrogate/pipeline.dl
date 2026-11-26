@@ -19,9 +19,8 @@ module 'de.evoal.surrogate.pipeline' {
 	}
 
 	/**
-	 * Source of the learning use case: reads the training data. The goodness of fit on the
-	 * training data and the estimates of the adaption use the same files and features.
-	 * In an MLL file, a step without <code>writes</code> writes the input and output features
+	 * Source of the learning use case: reads the training data. The resampling schemes read
+	 * the same files and features again. In an MLL file, a step without <code>writes</code> writes the input and output features
 	 * of the learning task, and left-out attributes are derived from the learning task.
 	 */
 	type 'training-data-loader' extends configuration {
@@ -198,9 +197,15 @@ module 'de.evoal.surrogate.pipeline' {
 	/**
 	 * Collects the data that reaches it as the data set that the next
 	 * <code>'gof-calculator'()</code> assesses: the goodness-of-fit measures predict the
-	 * outputs from the inputs of each data object and compare them with its outputs.
-	 * In an MLL file, a step without <code>reads</code> reads the input and output features
-	 * of the learning task.
+	 * outputs from the inputs of each data object and compare them with its outputs. The
+	 * learning use case records the training rows with it after <code>validation</code>
+	 * (<code>'data-set' := "training"</code>), so the goodness of fit on the training data and
+	 * the estimates of the adaption see the rows the model learned from; the testing use case
+	 * records the test rows (<code>"test"</code>). The step keeps copies of the rows and passes
+	 * them on unchanged, so later steps such as <code>preparation</code> do not change the
+	 * collected rows. In an MLL file, a step without <code>reads</code> reads the input and
+	 * output features of the learning task, and a learning use case that calls
+	 * <code>'gof-calculator'()</code> must contain the step with <code>"training"</code>.
 	 */
 	type 'assessment-data' extends Processor {
 		/**
@@ -211,9 +216,9 @@ module 'de.evoal.surrogate.pipeline' {
 	
 	/**
 	 * Runs the calculators of <code>specify gof</code>. The goodness-of-fit measures assess
-	 * the current data set: the training data while learning, the data collected by
-	 * <code>'assessment-data'</code> while testing. The other calculators describe the
-	 * training data and run only while learning.
+	 * the current data set, the rows that <code>'assessment-data'</code> collected last: the
+	 * training rows after <code>validation</code> while learning, the test rows while testing.
+	 * The other calculators describe the training rows and run only while learning.
 	 */
 	def void 'gof-calculator'();
 

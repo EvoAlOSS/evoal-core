@@ -150,5 +150,29 @@ public class GoodnessOfFitMeasureTest {
             // then
             Assertions.assertEquals(1, calculator.calls);
         }
+
+        @Test
+        public void aMeasureAssessesTheRecordedTrainingRowsOnly() {
+            // given: 'validation' dropped the row (3, 100); the recorded rows are those left
+            final List<TypedEObject> rows = List.of(point(1.0, 2.0), point(2.0, 5.0));
+            GoodnessOfFit.of(context).assess(GoodnessOfFit.TRAINING, () -> rows.stream().map(p -> new EObjectPair(p, p)));
+
+            // when
+            new RMSECalculator().call(new InterpreterState(context), new Object[0]);
+
+            // then: errors 0 and 1
+            Assertions.assertEquals(Map.of(GoodnessOfFit.TRAINING, Math.sqrt(0.5)), GoodnessOfFit.of(context).values().get(y).get(RMSE));
+        }
+
+        @Test
+        public void withoutRecordedRowsAMeasureNamesTheMissingStep() {
+            // when
+            final IllegalStateException e = Assertions.assertThrows(IllegalStateException.class,
+                                                                     () -> new RMSECalculator().call(new InterpreterState(context), new Object[0]));
+
+            // then
+            Assertions.assertTrue(e.getMessage().contains("No step has recorded the rows of the training data"), e.getMessage());
+            Assertions.assertTrue(e.getMessage().contains("step { component 'assessment-data' { 'data-set' := \"training\"; } }"), e.getMessage());
+        }
     }
 }

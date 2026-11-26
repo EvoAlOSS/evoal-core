@@ -39,7 +39,7 @@ public abstract class AbstractDensityEstimation extends SurrogateInformationCalc
     public Optional<Object> calculate(final InterpreterState context, final Object[] arguments) {
         Requirements.requireSize(arguments, 1);
 
-        trainingData = helper.loadTrainingDataPaired(context);
+        trainingData = assessedData();
 
         bandwidth = (Double)arguments[0];
 

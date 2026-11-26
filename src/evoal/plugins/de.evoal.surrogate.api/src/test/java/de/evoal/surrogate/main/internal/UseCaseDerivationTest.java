@@ -26,7 +26,7 @@ import java.util.List;
 
 /**
  * The derivation of the use cases of an MLL module and the settings of their standard steps
- *   from the learning task (#325).
+ *   from the learning task (#325), and the recording of the training rows (#347).
  */
 public class UseCaseDerivationTest {
     private static MachineLearningModule load(final String file) {
@@ -108,8 +108,19 @@ public class UseCaseDerivationTest {
                                             "de.evoal.surrogate.pipeline.gof-calculator",
                                             "de.evoal.surrogate.pipeline.store-model"),
                                     statements.stream().map(UseCaseDerivationTest::nameOf).toList());
-            Assertions.assertEquals(List.of("step training-data-loader", "pipeline validation", "pipeline preparation", "step model-learner"),
+            Assertions.assertEquals(List.of("step training-data-loader", "pipeline validation", "step assessment-data", "pipeline preparation",
+                                            "step model-learner"),
                                     executedSteps(statements).stream().map(UseCaseDerivationTest::describe).toList());
+        }
+
+        @Test
+        public void learningRecordsTheTrainingRowsAfterValidation() {
+            // when
+            final ConcreteStep assessment = (ConcreteStep) executedSteps(module.getLearningUseCase().getStatements()).get(2);
+
+            // then
+            Assertions.assertEquals("training", ((StringLiteral) assessment.getInstance().findAttribute("data-set").getValue()).getLiteral());
+            Assertions.assertEquals(List.of("x:0", "x:1", "y:0"), names(assessment.getReads()));
         }
 
         @Test
@@ -162,7 +173,7 @@ public class UseCaseDerivationTest {
         @Test
         public void theLearnerGetsTheModelTheFileAndTheFeaturesOfTheTask() {
             // when
-            final ConcreteStep learner = (ConcreteStep) executedSteps(module.getLearningUseCase().getStatements()).get(3);
+            final ConcreteStep learner = (ConcreteStep) executedSteps(module.getLearningUseCase().getStatements()).get(4);
             final Instance instance = learner.getInstance();
 
             // then
@@ -257,6 +268,41 @@ public class UseCaseDerivationTest {
     }
 
     @Nested
+    @DisplayName("given a written-out learning use case that assesses the training data")
+    class WrittenOutLearning {
+        @Test
+        public void withoutRecordingTheTrainingRowsItIsRejected() {
+            // when
+            final IllegalStateException e = Assertions.assertThrows(IllegalStateException.class,
+                                                                     () -> loadAndDerive("learning-without-training-rows.mll"));
+
+            // then
+            Assertions.assertTrue(e.getMessage().contains("Module 'learning-without-training-rows', use case 'learning': 'gof-calculator' assesses the "
+                                                          + "training rows, but no step records them; add step { component 'assessment-data' { "
+                                                          + "'data-set' := \"training\"; } } after pipeline 'validation'."), e.getMessage());
+        }
+
+        @Test
+        public void withTheRecordingStepItIsKept() {
+            // when
+            final MachineLearningModule module = loadAndDerive("without-test-data.mll");
+
+            // then
+            Assertions.assertEquals(List.of("step training-data-loader", "pipeline validation", "step assessment-data", "step model-learner"),
+                                    executedSteps(module.getLearningUseCase().getStatements()).stream().map(UseCaseDerivationTest::describe).toList());
+        }
+
+        @Test
+        public void withoutTheGofCalculatorNoRecordingIsNeeded() {
+            // when
+            final MachineLearningModule module = loadAndDerive("derived-settings.mll");
+
+            // then
+            Assertions.assertEquals(1, module.getLearningUseCase().getStatements().size());
+        }
+    }
+
+    @Nested
     @DisplayName("given a written-out use case")
     class PrintedUseCase {
         @Test
@@ -299,7 +345,8 @@ public class UseCaseDerivationTest {
         @Test
         public void theDefaultUseCasesPrepareTheData() {
             // then
-            Assertions.assertEquals(List.of("step training-data-loader", "pipeline validation", "pipeline preparation", "step model-learner"),
+            Assertions.assertEquals(List.of("step training-data-loader", "pipeline validation", "step assessment-data", "pipeline preparation",
+                                            "step model-learner"),
                                     executedSteps(module.getLearningUseCase().getStatements()).stream().map(UseCaseDerivationTest::describe).toList());
             Assertions.assertEquals("pipeline preparation", describe(module.getPredictionUseCase().getSteps().getFirst()));
         }

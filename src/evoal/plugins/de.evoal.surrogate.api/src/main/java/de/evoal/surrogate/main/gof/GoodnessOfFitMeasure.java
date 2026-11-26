@@ -1,6 +1,5 @@
 package de.evoal.surrogate.main.gof;
 
-import de.evoal.core.api.ecore.stream.EObjectPairStreamSupplier;
 import de.evoal.core.api.interpreter.InterpreterState;
 import de.evoal.surrogate.api.training.PredictedValues;
 import de.evoal.surrogate.api.training.SurrogateInformationCalculator;
@@ -30,11 +29,7 @@ public abstract class GoodnessOfFitMeasure extends SurrogateInformationCalculato
     public final Optional<Object> calculate(final InterpreterState context, final Object[] arguments) {
         final String dataSet = goodnessOfFit.dataSet();
         final Optional<Map<EStructuralFeature, PredictedValues>> predictions = goodnessOfFit.predictions();
-        final Map<EStructuralFeature, PredictedValues> values = predictions.orElseGet(() -> {
-            final EObjectPairStreamSupplier data = goodnessOfFit.data()
-                                                                .orElseGet(() -> helper.loadTrainingDataPaired(context));
-            return PredictedValues.collect(functionData, data);
-        });
+        final Map<EStructuralFeature, PredictedValues> values = predictions.orElseGet(() -> PredictedValues.collect(functionData, assessedData()));
 
         for(final Map.Entry<EStructuralFeature, PredictedValues> entry : values.entrySet()) {
             final String feature = entry.getKey().getName();

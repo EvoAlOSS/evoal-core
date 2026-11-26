@@ -100,21 +100,6 @@ public class TrainingTaskHelperTest {
     }
 
     @Test
-    public void theGoodnessOfFitUsesTheDataTheLoaderLoaded() throws IOException {
-        // given
-        final File stated = file("stated.json");
-        file("task.json");
-        helper.loadTrainingData(new InterpreterState(context), List.of(stated.getPath()), List.of(x, y)).count();
-
-        // when
-        helper.loadTrainingDataPaired(new InterpreterState(context)).get().count();
-
-        // then
-        verifyRead(stated, List.of(x, y), 2);
-        io.verify(() -> EObjectIOFactory.reader(Mockito.eq(new File(directory, "task.json")), Mockito.any()), Mockito.never());
-    }
-
-    @Test
     public void theTestDataLoaderReadsItsFilesWithItsFeatures() throws IOException {
         // given
         final File stated = file("test.json");

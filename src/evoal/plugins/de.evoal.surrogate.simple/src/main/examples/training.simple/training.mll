@@ -30,6 +30,7 @@ module 'training' {
 	// The use cases are derived from the learning task when they are left out. This module
 	// writes out the learning use case to show the derivation: the steps get their reads,
 	// writes and settings (files, features, model, model file) from the learning task.
+	// 'assessment-data' records the training rows after 'validation' for 'gof-calculator'.
 	use cases
 	  specify learning
 	  begin
@@ -38,6 +39,9 @@ module 'training' {
 	  			component 'training-data-loader' {}
 	  		},
 		  	pipeline 'validation',
+			step {
+				component 'assessment-data' { 'data-set' := "training"; }
+			},
 			pipeline 'preparation',
 			step {
 				component 'model-learner' {}

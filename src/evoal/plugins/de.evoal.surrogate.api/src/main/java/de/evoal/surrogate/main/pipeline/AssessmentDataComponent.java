@@ -19,8 +19,13 @@ import java.util.List;
 
 /**
  * Collects the data objects that reach it and, when the pipeline ends, makes them the data set
- *   that {@code 'gof-calculator'} assesses next. Every object is a pair of inputs and expected
- *   outputs; the measures predict the outputs from the inputs and compare.
+ *   that {@code 'gof-calculator'} assesses next: the test data in the testing use case, the
+ *   training rows after {@code validation} in the learning use case. Every object is a pair of
+ *   inputs and expected outputs; the measures predict the outputs from the inputs and compare.
+ * <p>
+ * The component stores copies and passes on the objects unchanged: later steps may change the
+ *   objects in place, e.g. the preparation steps of the learning use case, while the measures
+ *   predict through the prediction pipeline, which prepares the inputs itself.
  */
 @Dependent
 @Slf4j
@@ -35,9 +40,24 @@ public class AssessmentDataComponent extends PipelineComponentImpl {
     private String dataSet;
 
     /**
-     * The collected data objects, in the order of the pipeline.
+     * Copies of the collected data objects, in the order of the pipeline.
      */
     private final List<TypedEObject> data = new ArrayList<>();
+
+    /**
+     * Creates a component that is configured by {@link #init(EObject)}.
+     */
+    public AssessmentDataComponent() {
+    }
+
+    /**
+     * Creates a configured component, e.g., for tests.
+     *
+     * @param dataSet The name of the data set.
+     */
+    AssessmentDataComponent(final @NonNull String dataSet) {
+        this.dataSet = dataSet;
+    }
 
     @Override
     public PipelineComponentImpl init(final EObject configuration) throws InitializationException {
@@ -50,7 +70,7 @@ public class AssessmentDataComponent extends PipelineComponentImpl {
 
     @Override
     public @NonNull TypedEObject apply(final @NonNull TypedEObject object) {
-        data.add(object);
+        data.add(new TypedEObject(object));
 
         return object;
     }

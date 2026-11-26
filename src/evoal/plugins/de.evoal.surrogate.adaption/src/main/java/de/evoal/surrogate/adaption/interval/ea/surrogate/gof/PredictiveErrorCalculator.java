@@ -46,7 +46,7 @@ public class PredictiveErrorCalculator extends SurrogateInformationCalculator {
 
     @Override
     public Optional<Object> calculate(final InterpreterState context, final Object[] arguments) {
-        trainingStream = helper.loadTrainingDataPaired(context);
+        trainingStream = assessedData();
 
         final ModelFunction function = functionData.function();
 

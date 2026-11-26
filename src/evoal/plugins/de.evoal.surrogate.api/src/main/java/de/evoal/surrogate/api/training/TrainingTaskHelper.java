@@ -1,14 +1,11 @@
 package de.evoal.surrogate.api.training;
 
 import de.evoal.core.api.dynamic.EAnnotationHelper;
-import de.evoal.core.api.ecore.EObjectPair;
 import de.evoal.models.core.ecore.Space;
 import de.evoal.models.core.ecore.TypedEObject;
-import de.evoal.core.api.ecore.stream.EObjectPairStreamSupplier;
 import de.evoal.core.api.ecore.stream.FileBasedEObjectStreamSupplier;
 import de.evoal.core.api.utils.Requirements;
 import de.evoal.core.api.interpreter.InterpreterState;
-import de.evoal.languages.model.base.definitions.DataDescription;
 import de.evoal.languages.model.execution.ExecutionFactory;
 import de.evoal.languages.model.execution.NamedVariable;
 import de.evoal.languages.model.mll.TaskDescription;
@@ -63,27 +60,11 @@ public class TrainingTaskHelper {
     }
 
     /**
-     * Loads the training data: the files and features that {@code 'training-data-loader'}
-     *   loaded, or the training data of the learning task ({@code learning from [...]}) if no
-     *   loader ran.
-     *
-     * @param context The state of the interpreter, which holds the learning task.
-     * @return The data objects of all training files, file after file.
-     */
-    public Stream<TypedEObject> loadInputStreams(final InterpreterState context) {
-        if(context.root().getByName(TRAINING_DATA) instanceof TrainingData loaded) {
-            return load(context, loaded.files(), loaded.features());
-        }
-
-        final TaskDescription task = (TaskDescription)context.getByName("learning-task");
-
-        return loadData(context, task.getLearningData());
-    }
-
-    /**
-     * Loads the training data as {@link #loadInputStreams(InterpreterState)} does, with
-     *   additional features read from the same files, e.g. the feature that names the block of
-     *   a row in a block cross-validation.
+     * Loads the training data again, e.g. for the parts of a resampling scheme: the files and
+     *   features that {@code 'training-data-loader'} loaded, or the training data of the
+     *   learning task ({@code learning from [...]}) if no loader ran, with additional features
+     *   read from the same files, e.g. the feature that names the block of a row in a block
+     *   cross-validation. The rows have not passed {@code validation}.
      *
      * @param context The state of the interpreter, which holds the learning task.
      * @param additional Features to read in addition to the loaded ones.
@@ -152,21 +133,6 @@ public class TrainingTaskHelper {
         return loadFiles(collectInputFiles(files), context.getSpace().subSpace(features));
     }
 
-    private Stream<TypedEObject> loadData(final InterpreterState context, final List<String> files) {
-        final TaskDescription task = (TaskDescription)context.getByName("learning-task");
-
-        // collect data to load and mapping from specifications to features
-        final List<DataDescription> specifications =
-            Stream.concat(
-                    task.getInputs().stream(),
-                    task.getOutputs().stream())
-                    .toList();
-
-        final Space dataSpace = provider.subSpaceOf(context.getSpace(), specifications);
-
-        return loadFiles(collectInputFiles(files), dataSpace);
-    }
-
     private Stream<TypedEObject> loadFiles(final List<File> files, final Space space) {
         Stream<@NonNull TypedEObject> result = Stream.empty();
 
@@ -183,22 +149,5 @@ public class TrainingTaskHelper {
         Requirements.requireTrue(file.canRead());
 
         return new FileBasedEObjectStreamSupplier(file, space).get();
-    }
-
-    /**
-     * @param context The state of the interpreter.
-     * @return Pairs of each training data object with itself, loaded as
-     *   {@link #loadInputStreams(InterpreterState)} does.
-     */
-    public EObjectPairStreamSupplier loadTrainingDataPaired(final InterpreterState context) {
-        return new EObjectPairStreamSupplier() {
-
-            @Override
-            public Stream<EObjectPair> get() {
-                final Stream<TypedEObject> stream = loadInputStreams(context);
-
-                return stream.map(o -> new EObjectPair(o, o));
-            }
-        };
     }
 }

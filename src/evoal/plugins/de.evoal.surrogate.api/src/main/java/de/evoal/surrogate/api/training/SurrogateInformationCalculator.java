@@ -1,5 +1,6 @@
 package de.evoal.surrogate.api.training;
 
+import de.evoal.core.api.ecore.stream.EObjectPairStreamSupplier;
 import de.evoal.core.api.interpreter.InterpreterState;
 import de.evoal.core.api.cdi.EvoalBuiltinFunction;
 import de.evoal.languages.model.mll.TaskDescription;
@@ -52,4 +53,17 @@ public abstract class SurrogateInformationCalculator implements EvoalBuiltinFunc
     }
 
     public abstract Optional<Object> calculate(final InterpreterState context, final Object[] arguments);
+
+    /**
+     * @return The data of the assessed data set: the training rows after {@code validation}
+     *   while learning, the test data while testing.
+     * @throws IllegalStateException if no step has recorded the rows of the data set.
+     */
+    protected EObjectPairStreamSupplier assessedData() {
+        return goodnessOfFit.data()
+                            .orElseThrow(() -> new IllegalStateException("No step has recorded the rows of the " + goodnessOfFit.dataSet()
+                                                                         + " data that " + getClass().getSimpleName() + " needs; add step { component "
+                                                                         + "'assessment-data' { 'data-set' := \"" + goodnessOfFit.dataSet()
+                                                                         + "\"; } } after pipeline 'validation'."));
+    }
 }

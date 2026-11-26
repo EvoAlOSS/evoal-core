@@ -35,6 +35,9 @@ module 'written-testing' {
 			},
 			pipeline 'validation',
 			step {
+				component 'assessment-data' { 'data-set' := "training"; }
+			},
+			step {
 				component 'model-learner' {}
 				reads [data 'x:0', data 'y:0'];
 			}
