@@ -39,10 +39,19 @@ public class JsonPropertiesWriter implements EObjectWriter {
         return this;
     }
 
+    /**
+     * Writes the object as an array of {@code { "name": ..., "value": ... }} entries. A feature
+     *   without a value (unset, e.g. a missing value of an ARFF file) has no entry, so reading the
+     *   file leaves it unset again (#356).
+     */
     @Override
     public void add(final TypedEObject object) throws EvoalIOException {
         jsonGenerator.writeStartArray();
         for (final EStructuralFeature spec : object.eClass().getEAllStructuralFeatures()) {
+            if(!object.eIsSet(spec)) {
+                continue;
+            }
+
             jsonGenerator.writeStartObject();
             jsonGenerator.writeStringProperty("name", spec.getName());
 

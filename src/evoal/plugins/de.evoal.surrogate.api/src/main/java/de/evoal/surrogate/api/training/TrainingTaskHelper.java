@@ -143,11 +143,15 @@ public class TrainingTaskHelper {
         return result;
     }
 
+    /**
+     * Reads a file. A row without a value for a feature of the space (e.g. a missing value of an
+     *   ARFF file) is left out, with one warning for the file (#356).
+     */
     private Stream<TypedEObject> load(final File file, final Space space) {
         log.info("Reading data from {}", file.getAbsolutePath());
         Requirements.requireTrue(file.exists());
         Requirements.requireTrue(file.canRead());
 
-        return new FileBasedEObjectStreamSupplier(file, space).get();
+        return new FileBasedEObjectStreamSupplier(file, space).apply(space);
     }
 }

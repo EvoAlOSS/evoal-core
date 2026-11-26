@@ -12,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
+import org.apache.commons.csv.QuoteMode;
 import org.eclipse.emf.ecore.*;
 
 import jakarta.enterprise.context.Dependent;
@@ -29,6 +30,16 @@ import java.util.stream.Collectors;
 @Dependent
 @Named("csv-eObject-reader")
 public class CSVEObjectReader implements EObjectReader {
+    /**
+     * The format of the file: RFC 4180 with a header line. The strict quote mode makes the parser
+     *   return {@code null} for an unquoted empty cell, a cell without a value, while a quoted
+     *   {@code ""} stays an empty string (#356).
+     */
+    private static final CSVFormat FORMAT = CSVFormat.RFC4180.builder()
+                                                             .setHeader()
+                                                             .setQuoteMode(QuoteMode.ALL_NON_NULL)
+                                                             .get();
+
     private Space specification;
 
     private CSVParser parser;
@@ -42,7 +53,7 @@ public class CSVEObjectReader implements EObjectReader {
         this.specification = specification;
 
         try {
-            parser = CSVParser.parse(inputFile, StandardCharsets.UTF_8, CSVFormat.RFC4180.withHeader());
+            parser = CSVParser.parse(inputFile, StandardCharsets.UTF_8, FORMAT);
             iterator = parser.iterator();
         } catch (IOException e) {
             throw new EvoalIOException("Failed to parse CSV file " + inputFile, e);
@@ -83,6 +94,11 @@ public class CSVEObjectReader implements EObjectReader {
 
         for(final EStructuralFeature s : specification) {
             final String strValue = record.get(s.getName());
+
+            if(strValue == null) {
+                // a cell without a value: the feature stays unset
+                continue;
+            }
 
             final EClassifier type = s.getEType();
             Object value = strValue;

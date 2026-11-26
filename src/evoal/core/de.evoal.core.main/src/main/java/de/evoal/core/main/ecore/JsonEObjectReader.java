@@ -60,6 +60,10 @@ public class JsonEObjectReader implements EObjectReader {
         return this;
     }
 
+    /**
+     * Reads one object. A feature without an entry, or whose entry has no value or the value
+     *   {@code null}, stays unset: it has no value (#356).
+     */
     private TypedEObject readEObject() throws IOException {
         assertStartArray();
 
@@ -88,16 +92,16 @@ public class JsonEObjectReader implements EObjectReader {
                         value = true;
                     } else if(token == JsonToken.VALUE_NUMBER_INT) {
                         value = jsonParser.getValueAsInt();
-                    } else {
+                    } else if(token != JsonToken.VALUE_NULL) {
                         throw new RuntimeException("Unsupported token type " + token);
                     }
                 }
-
-
             }
             assertEndObject();
 
-            if(columnToFeature.containsKey(name)) {
+            if(value == null) {
+                log.debug("Field {} has no value.", name);
+            } else if(columnToFeature.containsKey(name)) {
                 result.eSet(columnToFeature.get(name), value);
             } else {
                 log.debug("Skipping field {}.", name);

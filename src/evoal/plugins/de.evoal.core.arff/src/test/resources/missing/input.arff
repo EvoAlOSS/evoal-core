@@ -1,0 +1,13 @@
+% Every feature of the specification, with a row of missing values and a row with 0 and
+% an empty string.
+@relation missing
+
+@attribute 'x:0' numeric
+@attribute n numeric
+@attribute b {false,true}
+@attribute s string
+
+@data
+0.0,3,true,'a b'
+?,?,?,?
+1.5,-2,false,''

@@ -6,6 +6,7 @@ import de.evoal.core.api.interpreter.InterpreterState;
 import de.evoal.languages.model.mll.MllFactory;
 import de.evoal.languages.model.mll.TaskDescription;
 import de.evoal.models.core.ecore.Space;
+import de.evoal.models.core.ecore.TypedEObject;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -25,7 +26,7 @@ import java.util.List;
 
 /**
  * Which data {@link TrainingTaskHelper} loads for the loaders and for the goodness of fit on
- *   the training data (#325).
+ *   the training data (#325), and which rows it leaves out (#356).
  */
 public class TrainingTaskHelperTest {
     @TempDir
@@ -45,6 +46,8 @@ public class TrainingTaskHelperTest {
         final EAttribute attribute = EcoreFactory.eINSTANCE.createEAttribute();
         attribute.setName(name);
         attribute.setEType(EcorePackage.Literals.EDOUBLE);
+        // as EClassProvider creates it for a data description (#355)
+        attribute.setUnsettable(true);
         type.getEStructuralFeatures().add(attribute);
 
         return attribute;
@@ -60,6 +63,7 @@ public class TrainingTaskHelperTest {
     @BeforeEach
     void setUp() {
         final EClass type = EcoreFactory.eINSTANCE.createEClass();
+        EcoreFactory.eINSTANCE.createEPackage().getEClassifiers().add(type);
         x = attribute(type, "x:0");
         y = attribute(type, "y:0");
 
@@ -109,6 +113,34 @@ public class TrainingTaskHelperTest {
 
         // then
         verifyRead(stated, List.of(x, y), 1);
+    }
+
+    @Test
+    public void aRowWithoutAValueForAFeatureIsLeftOut() throws Exception {
+        // given: (0, 1), (2, no value), (no value for x, 3)
+        final File stated = file("stated.json");
+        final TypedEObject zero = row(0.0, 1.0);
+        final TypedEObject noOutput = row(2.0, null);
+        final TypedEObject noInput = row(null, 3.0);
+
+        final EObjectReader reader = Mockito.mock(EObjectReader.class);
+        Mockito.when(reader.hasNext()).thenReturn(true, true, true, false);
+        Mockito.when(reader.next()).thenReturn(zero, noOutput, noInput);
+        io.when(() -> EObjectIOFactory.reader(Mockito.eq(stated), Mockito.any())).thenReturn(reader);
+
+        // when
+        final List<TypedEObject> rows = helper.loadTrainingData(context, List.of(stated.getPath()), List.of(x, y)).toList();
+
+        // then: the row with a 0 is kept (#355, #356)
+        Assertions.assertEquals(List.of(zero), rows);
+    }
+
+    private TypedEObject row(final Double xValue, final Double yValue) {
+        final TypedEObject row = context.getSpace().newEObject();
+        if(xValue != null) row.eSet(x, xValue);
+        if(yValue != null) row.eSet(y, yValue);
+
+        return row;
     }
 
     @Test

@@ -31,7 +31,8 @@ import java.io.File;
         name = "convert-arff-to-json",
         documentation = """
 Application to extract specific data (specified in a ddl file) from an arff
-file (input) and store it in an output file (output).
+file (input) and store it in an output file (output). The extension of the
+output file selects its format (json, csv). A missing value stays missing.
 """
 )
 public class ConvertArff implements MainClass {
@@ -51,6 +52,12 @@ public class ConvertArff implements MainClass {
     @Inject
     private EClassProvider dynamicEClassProvider;
 
+    /**
+     * Converts the file.
+     *
+     * @throws IllegalStateException if the conversion fails, so the application ends with an
+     *   error code.
+     */
     @Override
     public void run() {
         final Space specification = readSpecification();
@@ -63,7 +70,7 @@ public class ConvertArff implements MainClass {
                 writer.add(reader.next());
             }
         } catch(final Exception e) {
-            log.error("Failed to convert from {} to {}.", arffFile, jsonFile, e);
+            throw new IllegalStateException("Failed to convert " + arffFile + " to " + jsonFile + ".", e);
         }
     }
 
