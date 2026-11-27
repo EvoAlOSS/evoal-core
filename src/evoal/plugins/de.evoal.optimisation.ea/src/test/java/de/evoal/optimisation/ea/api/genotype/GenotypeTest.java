@@ -135,6 +135,126 @@ public class GenotypeTest {
     }
 
     @Nested
+    @DisplayName("given a bit chromosome whose integer n has 8 values in 16 bit patterns")
+    class Write {
+        /**
+         * The genes of n are the bits 4 to 7 of the chromosome.
+         */
+        private static final int FIRST_BIT_OF_N = 4;
+
+        /**
+         * @return A genome of the candidate whose bits of n are a pattern that is not the
+         *   encoding of n's value, but decodes to it.
+         */
+        private Genome nonCanonical(final Genotype genotype, final BinaryChromosome chromosome, final TypedEObject candidate) {
+            final BitGenes canonical = chromosome.encode(candidate);
+
+            for(int pattern = 0; pattern < 16; ++pattern) {
+                final BitGenes bits = canonical.copy();
+                for(int bit = 0; bit < 4; ++bit) {
+                    bits.set(FIRST_BIT_OF_N + bit, ((pattern >> (3 - bit)) & 1) == 1);
+                }
+
+                final TypedEObject decoded = space.newEObject();
+                chromosome.decode(bits, decoded);
+                if(decoded.eGet(n).equals(candidate.eGet(n)) && !bits.toString().equals(canonical.toString())) {
+                    return new Genome(List.of(bits));
+                }
+            }
+
+            throw new IllegalStateException("No second bit pattern for n = " + candidate.eGet(n));
+        }
+
+        private String bitsOfN(final Genome genome) {
+            return genome.chromosomes().get(0).toString().substring(FIRST_BIT_OF_N, FIRST_BIT_OF_N + 4);
+        }
+
+        @Test
+        public void anUnchangedGivenFeatureKeepsItsPattern() {
+            for(final boolean gray : new boolean[] {false, true}) {
+                // given
+                final BinaryChromosome chromosome = binary(4, gray);
+                final Genotype genotype = new Genotype(List.of(chromosome), space);
+                final Genome genome = nonCanonical(genotype, chromosome, candidate(0.5, 1, true));
+                final Genome before = genome.copy();
+
+                // when
+                genotype.write(genome, genotype.decode(genome), List.of(x, n, b));
+
+                // then
+                Assertions.assertTrue(genotype.isUnchanged(before, genome), "gray = " + gray);
+                Assertions.assertEquals(List.of(), genotype.changedFeatures(before, genome), "gray = " + gray);
+            }
+        }
+
+        @Test
+        public void aFeatureThatIsNotGivenKeepsItsPattern() {
+            for(final boolean gray : new boolean[] {false, true}) {
+                // given
+                final BinaryChromosome chromosome = binary(4, gray);
+                final Genotype genotype = new Genotype(List.of(chromosome), space);
+                final Genome genome = nonCanonical(genotype, chromosome, candidate(0.5, 1, true));
+                final Genome before = genome.copy();
+                final String patternOfN = bitsOfN(genome);
+                final TypedEObject values = genotype.decode(genome);
+                values.eSet(b, false);
+
+                // when
+                genotype.write(genome, values, List.of(b));
+
+                // then
+                Assertions.assertEquals(patternOfN, bitsOfN(genome), "gray = " + gray);
+                Assertions.assertEquals(List.of("b"), genotype.changedFeatures(before, genome), "gray = " + gray);
+                Assertions.assertEquals(false, genotype.decode(genome).eGet(b));
+            }
+        }
+
+        @Test
+        public void aChangedFeatureGetsItsEncoding() {
+            for(final boolean gray : new boolean[] {false, true}) {
+                // given
+                final BinaryChromosome chromosome = binary(4, gray);
+                final Genotype genotype = new Genotype(List.of(chromosome), space);
+                final Genome genome = nonCanonical(genotype, chromosome, candidate(0.5, 1, true));
+                final Genome before = genome.copy();
+                final TypedEObject values = genotype.decode(genome);
+                values.eSet(n, 3);
+
+                // when
+                genotype.write(genome, values, List.of(x, n, b));
+
+                // then
+                Assertions.assertEquals(bitsOfN(new Genome(List.of(chromosome.encode(candidate(0.5, 3, true))))), bitsOfN(genome),
+                                        "gray = " + gray);
+                Assertions.assertEquals(List.of("n"), genotype.changedFeatures(before, genome), "gray = " + gray);
+                Assertions.assertEquals(3, genotype.decode(genome).eGet(n));
+            }
+        }
+
+        @Test
+        public void separateChromosomesWriteTheirChangedValues() {
+            // given
+            final Genotype genotype = new Genotype(List.of(new DoubleChromosome(List.of(x), new double[] {-1.0}, new double[] {1.0}),
+                                                           new IntegerChromosome(List.of(n), new long[] {-3}, new long[] {4}),
+                                                           new BinaryChromosome(List.of(b), new BinaryChromosome.Kind[] {BinaryChromosome.Kind.BOOLEAN},
+                                                                                new double[] {0.0}, new double[] {0.0}, 1, false)),
+                                                   space);
+            final Genome genome = genotype.encode(candidate(0.25, -2, true));
+            final Genome before = genome.copy();
+
+            // when
+            genotype.write(genome, candidate(-0.5, -2, false), List.of(x, n, b));
+
+            // then
+            Assertions.assertEquals(List.of("x", "b"), genotype.changedFeatures(before, genome));
+            final TypedEObject decoded = genotype.decode(genome);
+            Assertions.assertEquals(-0.5, decoded.eGet(x));
+            Assertions.assertEquals(-2, decoded.eGet(n));
+            Assertions.assertEquals(false, decoded.eGet(b));
+        }
+    }
+
+    @Nested
     @DisplayName("given a value outside the boundaries [0, 10]")
     class Boundaries {
         @Test

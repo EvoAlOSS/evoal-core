@@ -3,6 +3,7 @@ package de.evoal.optimisation.ea.api.genotype;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -127,23 +128,42 @@ public final class Genotype {
     }
 
     /**
-     * Writes the values of features into a genome: the chromosomes that hold them are encoded
-     *   from the candidate again, and their genes are replaced in place.
+     * Writes the values of features into a genome, in place. Only the genes of the given
+     *   features whose decoded value differs from the value in {@code values} are replaced by
+     *   their encoding; the genes of all other features stay as they are. An encoding that
+     *   represents a value by several gene patterns (a bit chromosome with fewer integer
+     *   values than patterns) therefore keeps the pattern of an unchanged value.
      *
      * @param genome The genome; its genes are changed.
      * @param values A candidate with the values of the features.
-     * @param features The features whose values changed.
+     * @param features The features whose values may have changed.
      */
     public void write(final Genome genome, final TypedEObject values, final Collection<EStructuralFeature> features) {
-        final Set<Integer> changed = new TreeSet<>();
-        features.forEach(feature -> changed.add(chromosomeOf(feature)));
+        final Set<Integer> touched = new TreeSet<>();
+        features.forEach(feature -> touched.add(chromosomeOf(feature)));
 
-        for(final int c : changed) {
+        for(final int c : touched) {
+            final Chromosome chromosome = chromosomes.get(c);
             final Genes genes = genome.chromosomes().get(c);
-            final Genes encoded = chromosomes.get(c).encode(values);
 
+            final TypedEObject current = searchSpace.newEObject();
+            chromosome.decode(genes, current);
+
+            final Set<Integer> changed = new TreeSet<>();
+            for(int f = 0; f < chromosome.features().size(); ++f) {
+                final EStructuralFeature feature = chromosome.features().get(f);
+                if(features.contains(feature) && !Objects.equals(current.eGet(feature), values.eGet(feature))) {
+                    changed.add(f);
+                }
+            }
+
+            if(changed.isEmpty()) {
+                continue;
+            }
+
+            final Genes encoded = chromosome.encode(values);
             for(int gene = 0; gene < genes.size(); ++gene) {
-                if(!genes.equalAt(encoded, gene)) {
+                if(changed.contains(chromosome.featureOfGene(gene)) && !genes.equalAt(encoded, gene)) {
                     genes.exchange(encoded, gene);
                 }
             }
