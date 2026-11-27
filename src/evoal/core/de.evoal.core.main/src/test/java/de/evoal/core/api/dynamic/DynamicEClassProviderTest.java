@@ -345,4 +345,68 @@ public class DynamicEClassProviderTest {
 
         Assertions.assertFalse(object instanceof Configuration);
     }
+
+    /**
+     * @return A type {@code name} in a new module {@code module}, with the given super type.
+     */
+    private static ClassDefinition typeIn(final String module, final String name, final ClassDefinition superType) {
+        final DefinitionModule definitions = DlFactory.eINSTANCE.createDefinitionModule();
+        definitions.setName(module);
+        final ClassDefinition type = DefinitionsFactory.eINSTANCE.createClassDefinition();
+        type.setName(name);
+        type.setSuperType(superType);
+        definitions.getTypes().add(type);
+
+        return type;
+    }
+
+    @Test
+    public void aPackageCarriesTheLastSegmentOfItsModuleName() {
+        final EClass eClass = new DynamicEClassProvider().toEClass(typeIn("a.b.c", "type", null));
+
+        final org.eclipse.emf.ecore.EPackage c = eClass.getEPackage();
+        Assertions.assertEquals("c", c.getName());
+        Assertions.assertEquals("b", c.getESuperPackage().getName());
+        Assertions.assertEquals("a", c.getESuperPackage().getESuperPackage().getName());
+        Assertions.assertNull(c.getESuperPackage().getESuperPackage().getESuperPackage());
+
+        Assertions.assertEquals("a.b.c.type", DynamicEClassProvider.dlTypeOf(EcoreUtil.create(eClass)));
+    }
+
+    @Test
+    public void aTypeOfAModuleWithoutADotHasTheQualifiedName() {
+        final EClass eClass = new DynamicEClassProvider().toEClass(typeIn("mymodule", "type", null));
+
+        Assertions.assertEquals("mymodule", eClass.getEPackage().getName());
+        Assertions.assertNull(eClass.getEPackage().getESuperPackage());
+        Assertions.assertEquals("mymodule.type", DynamicEClassProvider.dlTypeOf(EcoreUtil.create(eClass)));
+    }
+
+    @Test
+    public void aTypeIsAnInstanceOfTheTypesOfItsSuperTypesInOtherModules() {
+        final ClassDefinition base = typeIn("base", "configuration", null);
+        final ClassDefinition component = typeIn("com.example.plugin", "component", base);
+        final DynamicEClassProvider provider = new DynamicEClassProvider();
+
+        final EObject object = EcoreUtil.create(provider.toEClass(component));
+
+        Assertions.assertEquals("com.example.plugin.component", DynamicEClassProvider.dlTypeOf(object));
+        Assertions.assertTrue(DynamicEClassProvider.isInstanceOf(object, "com.example.plugin.component"));
+        Assertions.assertTrue(DynamicEClassProvider.isInstanceOf(object, "base.configuration"));
+        Assertions.assertFalse(DynamicEClassProvider.isInstanceOf(object, "plugin.component"));
+        Assertions.assertFalse(DynamicEClassProvider.isInstanceOf(object, ".configuration"));
+    }
+
+    @Test
+    public void modulesWithACommonPrefixShareItsPackages() {
+        final DynamicEClassProvider provider = new DynamicEClassProvider();
+
+        final EClass first = provider.toEClass(typeIn("de.evoal.first", "type", null));
+        final EClass second = provider.toEClass(typeIn("de.evoal.second", "type", null));
+
+        Assertions.assertNotSame(first.getEPackage(), second.getEPackage());
+        Assertions.assertSame(first.getEPackage().getESuperPackage(), second.getEPackage().getESuperPackage());
+        Assertions.assertEquals("de.evoal.first.type", DynamicEClassProvider.dlTypeOf(EcoreUtil.create(first)));
+        Assertions.assertEquals("de.evoal.second.type", DynamicEClassProvider.dlTypeOf(EcoreUtil.create(second)));
+    }
 }

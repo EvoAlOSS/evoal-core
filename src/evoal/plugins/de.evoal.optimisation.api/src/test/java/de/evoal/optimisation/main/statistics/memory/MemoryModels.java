@@ -100,10 +100,8 @@ final class MemoryModels {
      * @return A configuration without attributes of the DL type {@code de.evoal.test.<name>}.
      */
     static Configuration configuration(final String name) {
-        final EPackage root = EcoreFactory.eINSTANCE.createEPackage();
         final EPackage module = EcoreFactory.eINSTANCE.createEPackage();
         module.setName("de.evoal.test");
-        root.getESubpackages().add(module);
 
         final EClass type = EcoreFactory.eINSTANCE.createEClass();
         type.setName(name);
@@ -118,10 +116,8 @@ final class MemoryModels {
      *   the attribute {@code scale}.
      */
     static Configuration distance(final double scale) {
-        final EPackage root = EcoreFactory.eINSTANCE.createEPackage();
         final EPackage module = EcoreFactory.eINSTANCE.createEPackage();
         module.setName("de.evoal.test");
-        root.getESubpackages().add(module);
 
         final EClass type = EcoreFactory.eINSTANCE.createEClass();
         type.setName("relative-distance");

@@ -86,12 +86,14 @@ public class FQNProvider {
 	}
 
 	/**
-	 * Returns the FQN of the passed EObject.
+	 * Returns the qualified name of the passed package: the names of its super packages and its
+	 *   own name, separated by dots. A package carries only the last segment of its name, as EMF
+	 *   names packages.
 	 */
 	public String get(final EPackage object) {
 		final EPackage superPackage = object.getESuperPackage();
-		
-		return superPackage == null ? "" : object.getName();
+
+		return superPackage == null ? object.getName() : get(superPackage) + "." + object.getName();
 	}
 }
 

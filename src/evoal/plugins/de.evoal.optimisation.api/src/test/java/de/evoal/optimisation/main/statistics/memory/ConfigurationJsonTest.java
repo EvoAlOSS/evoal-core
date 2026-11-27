@@ -53,10 +53,8 @@ public class ConfigurationJsonTest {
 
     @BeforeEach
     public void createModule() {
-        final EPackage root = EcoreFactory.eINSTANCE.createEPackage();
         module = EcoreFactory.eINSTANCE.createEPackage();
         module.setName("de.evoal.test");
-        root.getESubpackages().add(module);
     }
 
     private static EReference reference(final EClass type, final String name, final EClassifier eType,

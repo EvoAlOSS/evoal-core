@@ -286,6 +286,14 @@ public class DynamicEClassProvider {
         return fqName.get(configuration.eClass());
     }
 
+    /**
+     * Returns the package of a module, as EMF names packages: the package carries the last
+     *   segment of the module name and is nested in the package of the module name without it,
+     *   e.g. {@code de.evoal.core.base} is the package {@code base} in {@code core} in
+     *   {@code evoal} in {@code de}. So {@link FQNProvider#get(EPackage)} gives the module name.
+     *
+     * @param moduleName The full name of the module.
+     */
     private EPackage toEPackage(final String moduleName) {
         log.info("Fetching EPackage for module {}", moduleName);
         EPackage ePackage = ePackageCache.get(moduleName);
@@ -296,11 +304,12 @@ public class DynamicEClassProvider {
 
         log.info("  creating EPackage");
 
+        final int last = moduleName.lastIndexOf('.');
+
         ePackage = eFactory.createEPackage();
-        ePackage.setName(moduleName);
+        ePackage.setName(moduleName.substring(last + 1));
         ePackageCache.put(moduleName, ePackage);
 
-        final int last = moduleName.lastIndexOf('.');
         if(last != -1) {
             final String parentName = moduleName.substring(0, last);
 
