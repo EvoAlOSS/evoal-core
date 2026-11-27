@@ -1,0 +1,88 @@
+import "definitions" from 'de.evoal.core.constraints';
+
+/**
+ * Types for the tests of the mapping of DL types to classes.
+ */
+module 'de.evoal.core.test.models.annotated' {
+    /**
+     * The modes of a part.
+     */
+    ordinal enum mode ( slow, fast );
+
+    /**
+     * A part with annotated attributes.
+     */
+    type part {
+        /**
+         * A bounded real with a scale.
+         */
+        @Scale { scale := 'measurement-scale.cardinal'; }
+        @LowerBoundary { boundary := 0.0; }
+        @UpperBoundary { boundary := 1.0; inclusive := false; }
+        weight : real;
+
+        /**
+         * An integer without annotations.
+         */
+        count : int;
+
+        /**
+         * An enum with the scale of its enum.
+         */
+        speed : enum mode;
+
+        /**
+         * An optional bounded integer.
+         */
+        @LowerBoundary { boundary := 1; }
+        limit : optional int;
+    }
+
+    /**
+     * An assembly of parts.
+     */
+    type assembly {
+        /**
+         * The main part.
+         */
+        main : instance part;
+
+        /**
+         * A spare part.
+         */
+        spare : optional instance part;
+
+        /**
+         * Further parts.
+         */
+        @MinimumNumberOfElements { bound := 1; }
+        @MaximumNumberOfElements { bound := 3; }
+        parts : array instance part;
+
+        /**
+         * Numbers with an element count.
+         */
+        @MaximumNumberOfElements { bound := 2; }
+        numbers : array int;
+    }
+
+    /**
+     * Abstract base type of the shapes.
+     */
+    abstract type shape {}
+
+    /**
+     * A round shape.
+     */
+    type round extends shape {}
+
+    /**
+     * An angular shape.
+     */
+    type angular extends shape {}
+
+    /**
+     * A square shape.
+     */
+    type square extends angular {}
+}

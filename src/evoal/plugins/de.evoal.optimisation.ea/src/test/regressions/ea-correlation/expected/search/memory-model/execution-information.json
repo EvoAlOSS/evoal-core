@@ -30,7 +30,9 @@
     "attributes" : {
       "initialisation" : {
         "type" : "de.evoal.optimisation.core.random-population",
-        "attributes" : { }
+        "attributes" : {
+          "method" : null
+        }
       },
       "optimisation-function" : {
         "type" : "de.evoal.optimisation.core.problem-function",

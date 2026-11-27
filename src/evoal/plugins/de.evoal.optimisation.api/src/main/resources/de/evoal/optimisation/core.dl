@@ -600,10 +600,96 @@ module de.evoal.optimisation.core {
     abstract type 'initial-population' extends configuration {}
 
     /**
-     * Chooses the initial population randomly from the search space. The selection
-     *   process respects the boundaries defined at the data definition-level.
+     * Chooses the initial population randomly from the search space. A numeric value is drawn
+     *   uniformly within the boundaries of its data (or of its DL attribute), within the range
+     *   of its type if it has none; a boolean or an enum literal is drawn uniformly.
+     *   Structured data ('data 'x' of instance T') is a model: the population builds a random
+     *   tree of objects of T, its subtypes and the types of its attributes with the 'method'.
+     *   The concrete subtype of an abstract-typed attribute is drawn uniformly among the
+     *   subtypes of the loaded DL modules that fit the depth and size limits; the number of
+     *   elements of an array is drawn within its @MinimumNumberOfElements and
+     *   @MaximumNumberOfElements. A model must not contain attributes of the types string,
+     *   data, path, expression or literal, arrays without @MaximumNumberOfElements, or
+     *   multi-dimensional arrays.
      */
     type 'random-population' extends 'initial-population' {
+        /**
+         * How model candidates are built. Required if the search space contains structured
+         *   data; tabular search spaces do not use it.
+         */
+        method : optional instance 'tree-method';
+    }
+
+    /**
+     * Abstract base type of the methods that build random model candidates, i.e. trees of
+     *   objects. They are the initialisation methods of tree-based genetic programming (Koza
+     *   1992; Poli, Langdon and McPhee 2008, sec. 2.2), applied to models: the root object
+     *   has depth 0, every contained object one more than its container; the depth of a
+     *   model is the depth of its deepest object and its size the number of its objects.
+     *   Koza used ramped half-and-half with depths 2 to 6; there are no default values.
+     */
+    @Literature { keys := ["koza1992genetic", "poli2008field"]; }
+    abstract type 'tree-method' {
+        /**
+         * The largest number of objects of a model; no limit if it is not given.
+         */
+        @LowerBoundary { boundary := 1; }
+        'maximum-size' : optional int;
+
+        /**
+         * The probability that an optional attribute (also an 'optional instance') of a model
+         *   gets a value. Required if the model has optional attributes.
+         */
+        @LowerBoundary { boundary := 0.0; }
+        @UpperBoundary { boundary := 1.0; }
+        'optional-probability' : optional real;
+    }
+
+    /**
+     * Grow: every object, also one that ends a branch early, may be chosen as long as the
+     *   depth limit allows it, so the models vary in size and shape.
+     */
+    type grow extends 'tree-method' {
+        /**
+         * The depth limit of the models.
+         */
+        @LowerBoundary { boundary := 0; }
+        'maximum-depth' : int;
+    }
+
+    /**
+     * Full: as long as the depth limit can be reached, only objects that can reach it are
+     *   chosen, optional attributes are set and arrays get at least one element, so every
+     *   branch that can reach the limit does. A branch whose types cannot reach the limit
+     *   becomes as deep as possible. For the expressions of genetic programming, all leaves
+     *   are at the limit.
+     */
+    type full extends 'tree-method' {
+        /**
+         * The depth limit of the models.
+         */
+        @LowerBoundary { boundary := 0; }
+        'maximum-depth' : int;
+    }
+
+    /**
+     * Ramped half-and-half: the depth limits from 'minimum-depth' to 'maximum-depth' are used
+     *   in turn, and for each one half of the models are built with full and half with grow
+     *   (Koza 1992).
+     */
+    @MultiVariateConstraint { 'expression' := self.'minimum-depth' <= self.'maximum-depth'; }
+    type 'ramped-half-and-half' extends 'tree-method' {
+        /**
+         * The smallest depth limit.
+         */
+        @LowerBoundary { boundary := 0; }
+        'minimum-depth' : int;
+
+        /**
+         * The largest depth limit.
+         */
+        @LowerBoundary { boundary := 0; }
+        'maximum-depth' : int;
     }
 
     /**
@@ -670,7 +756,12 @@ module de.evoal.optimisation.core {
      * In the evaluation setup ({@code heuristic-search-evaluation}), the file
      *   starts with the columns <tt>repetition</tt> and, if target points are used,
      *   <tt>target</tt>. All runs append to the same file.
+     *
+     * The search space must not contain structured data: a model has no columns; the
+     *   memory model ('memory-model') writes it.
      */
+    @RequiresRepresentation { representations := ['representation.real', 'representation.integer', 'representation.boolean', 'representation.string'];
+                              features := path "/algorithm/problem/searchSpace"; }
     type 'best-candidate-per-iteration' extends 'statistics-writer' {
         /**
          * If set to <tt>true</tt>, every search space variable is prefixed with
@@ -711,7 +802,12 @@ module de.evoal.optimisation.core {
      * In the evaluation setup ({@code heuristic-search-evaluation}), the file
      *   starts with the columns <tt>repetition</tt> and, if target points are used,
      *   <tt>target</tt>. All runs append to the same file.
+     *
+     * The search space must not contain structured data: a model has no columns; the
+     *   memory model ('memory-model') writes it.
      */
+    @RequiresRepresentation { representations := ['representation.real', 'representation.integer', 'representation.boolean', 'representation.string'];
+                              features := path "/algorithm/problem/searchSpace"; }
     type 'best-candidate-so-far' extends 'statistics-writer' {
         /**
          * If set to <tt>true</tt>, every search space variable is prefixed with
@@ -747,7 +843,12 @@ module de.evoal.optimisation.core {
      * In the evaluation setup ({@code heuristic-search-evaluation}), the file
      *   starts with the columns <tt>repetition</tt> and, if target points are used,
      *   <tt>target</tt>. All runs append to the same file.
+     *
+     * The search space must not contain structured data: a model has no columns; the
+     *   memory model ('memory-model') writes it.
      */
+    @RequiresRepresentation { representations := ['representation.real', 'representation.integer', 'representation.boolean', 'representation.string'];
+                              features := path "/algorithm/problem/searchSpace"; }
     type 'candidates-per-iteration' extends 'statistics-writer' {
         /**
          * If set to <tt>true</tt>, every search space variable is prefixed with

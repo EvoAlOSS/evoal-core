@@ -330,7 +330,8 @@ Replacements come from the `'replacement-source'` of the check, `'random-populat
 default (#311: no fallback to the `'initialisation'` of the algorithm). Each check takes them
 from one stream of its source per run, so `'random-population'` continues to draw new
 candidates; the sources of given candidates (`'specify-candidates'`, `'candidates-from-file'`)
-repeat their candidates, which is logged as a warning.
+repeat their candidates, which is logged as a warning. A search space with structured data needs a
+`method` in every `'random-population'`, also in a replacement source, see [Model candidates](#model-candidates).
 
 Checks in this module:
 
@@ -346,6 +347,33 @@ A new check type extends `AbstractCandidateCheck` (reads `reaction` and
 `'replacement-source'`), is a `@Dependent` bean named after its DL type, and declares its
 check point, its supported reactions and `test(candidate)`, which returns why the
 candidate failed.
+
+## Model candidates
+
+Structured data in the search space (`data 'policy' of instance policy`) is a model: a tree of
+objects of the DL type, its subtypes and the types of its attributes. `EClassProvider` maps it to
+a containment reference of the space class; `DynamicEClassProvider` maps `instance T` and
+`array instance T` to containment references, the element counts (`@MinimumNumberOfElements`,
+`@MaximumNumberOfElements`) to the multiplicities, the boundaries to `FeatureBoundaries` and the
+scale (`@Scale`, the scale of an enum, else nominal) to `FeatureScales`.
+
+The package `de.evoal.optimisation.api.builder` builds random models; it uses only the reflective
+EMF API and `ModelTypeSource` (concrete subtypes, optional features), so other sources of
+classes than the DL can use it:
+
+- `ModelTypes` computes per concrete class the minimal depth and size of a tree (fixpoints over
+  the required containments) and the maximal depth (unbounded for recursive classes), and
+  collects the problems that keep a model from being built.
+- `ModelBuilder` builds a tree with a `TreeMethod` (`Grow`, `Full`, `RampedHalfAndHalf`; Koza
+  1992; Poli, Langdon and McPhee 2008, section 2.2) within the depth limit of its plan and the
+  size limit of the `BuildSettings`. `build(type, depth, plan, sizeLimit)` builds a subtree at a
+  depth of an existing model.
+- `ValueDrawer` draws the values of attributes; the tabular search spaces get exactly the draws
+  of the population before models, so their references did not change.
+
+`'random-population'` reports all problems of a model when its stream is created. The memory
+model writes a model as `{"type": "<DL type>", "values": {...}}`, the feature as type `model`
+with its `modelType`.
 
 ## Constraints
 

@@ -10,7 +10,15 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+
+import de.evoal.core.api.ecore.info.FeatureBoundaries;
+import de.evoal.core.api.ecore.info.FeatureScales;
+import de.evoal.core.junit.dsl.LanguageHelper;
+import de.evoal.languages.model.base.definitions.ScaleType;
 
 import de.evoal.languages.model.base.definitions.AttributeDefinition;
 import de.evoal.languages.model.base.definitions.ClassDefinition;
@@ -395,6 +403,113 @@ public class DynamicEClassProviderTest {
         Assertions.assertTrue(DynamicEClassProvider.isInstanceOf(object, "base.configuration"));
         Assertions.assertFalse(DynamicEClassProvider.isInstanceOf(object, "plugin.component"));
         Assertions.assertFalse(DynamicEClassProvider.isInstanceOf(object, ".configuration"));
+    }
+
+    @Nested
+    @DisplayName("given DL types with instances and annotated attributes")
+    class AnnotatedTypes {
+        private final DynamicEClassProvider provider = new DynamicEClassProvider();
+
+        private DefinitionModule module;
+
+        @BeforeEach
+        public void loadTypes() {
+            module = LanguageHelper.loadFromClasspath("de/evoal/core/test/models/annotated.dl");
+        }
+
+        private EClass classOf(final String name) {
+            final ClassDefinition type = module.getTypes()
+                                               .stream()
+                                               .filter(definition -> name.equals(definition.getName()))
+                                               .findFirst()
+                                               .orElseThrow();
+
+            return provider.toEClass(type);
+        }
+
+        @Test
+        public void instancesAreContainmentReferences() {
+            // when
+            final EClass assembly = classOf("assembly");
+
+            // then
+            final EReference main = Assertions.assertInstanceOf(EReference.class, assembly.getEStructuralFeature("main"));
+            Assertions.assertTrue(main.isContainment());
+            Assertions.assertEquals(1, main.getLowerBound());
+            Assertions.assertEquals(1, main.getUpperBound());
+            Assertions.assertEquals("part", main.getEReferenceType().getName());
+
+            final EReference spare = Assertions.assertInstanceOf(EReference.class, assembly.getEStructuralFeature("spare"));
+            Assertions.assertTrue(spare.isContainment());
+            Assertions.assertEquals(0, spare.getLowerBound());
+            Assertions.assertTrue(DynamicEClassProvider.isOptional(spare));
+            Assertions.assertFalse(DynamicEClassProvider.isOptional(main));
+        }
+
+        @Test
+        public void theNumberOfElementsIsTheMultiplicity() {
+            // when
+            final EClass assembly = classOf("assembly");
+
+            // then
+            final EReference parts = Assertions.assertInstanceOf(EReference.class, assembly.getEStructuralFeature("parts"));
+            Assertions.assertTrue(parts.isContainment());
+            Assertions.assertEquals(1, parts.getLowerBound());
+            Assertions.assertEquals(3, parts.getUpperBound());
+
+            final EStructuralFeature numbers = assembly.getEStructuralFeature("numbers");
+            Assertions.assertEquals(0, numbers.getLowerBound());
+            Assertions.assertEquals(2, numbers.getUpperBound());
+        }
+
+        @Test
+        public void containedObjectsAreCopiedWithTheirContainer() {
+            // given
+            final EClass assembly = classOf("assembly");
+            final EObject object = EcoreUtil.create(assembly);
+            final EObject part = EcoreUtil.create(classOf("part"));
+            object.eSet(assembly.getEStructuralFeature("main"), part);
+
+            // when
+            final EObject copy = EcoreUtil.copy(object);
+
+            // then
+            Assertions.assertSame(object, part.eContainer());
+            Assertions.assertNotSame(part, copy.eGet(assembly.getEStructuralFeature("main")));
+            Assertions.assertTrue(EcoreUtil.equals(object, copy));
+        }
+
+        @Test
+        public void boundariesAndScalesReachTheFeatures() {
+            // when
+            final EClass part = classOf("part");
+
+            // then
+            final FeatureBoundaries.Boundaries weight = new FeatureBoundaries().get(part.getEStructuralFeature("weight"));
+            Assertions.assertEquals(0.0, weight.lower().doubleValue());
+            Assertions.assertEquals(1.0, weight.upper().doubleValue());
+            Assertions.assertFalse(weight.UpperIncluded());
+
+            final FeatureBoundaries.Boundaries limit = new FeatureBoundaries().get(part.getEStructuralFeature("limit"));
+            Assertions.assertEquals(1, limit.lower().intValue());
+            Assertions.assertFalse(FeatureBoundaries.isBounded(part.getEStructuralFeature("count")));
+
+            Assertions.assertEquals(ScaleType.CARDINAL, FeatureScales.scaleOf(part.getEStructuralFeature("weight")));
+            Assertions.assertEquals(ScaleType.ORDINAL, FeatureScales.scaleOf(part.getEStructuralFeature("speed")));
+            Assertions.assertEquals(ScaleType.NOMINAL, FeatureScales.scaleOf(part.getEStructuralFeature("count")));
+        }
+
+        @Test
+        public void concreteSubclassesAreOrderedByQualifiedName() {
+            // when
+            final List<String> subclasses = provider.concreteSubclassesOf(classOf("shape"))
+                                                    .stream()
+                                                    .map(EClass::getName)
+                                                    .toList();
+
+            // then
+            Assertions.assertEquals(List.of("angular", "round", "square"), subclasses);
+        }
     }
 
     @Test

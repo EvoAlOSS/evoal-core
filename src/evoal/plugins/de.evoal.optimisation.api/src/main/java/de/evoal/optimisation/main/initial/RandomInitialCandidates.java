@@ -1,11 +1,9 @@
 package de.evoal.optimisation.main.initial;
 
-import de.evoal.core.api.ecore.misc.EClassifierHelper;
-import de.evoal.core.api.random.RandomService;
-import lombok.extern.slf4j.Slf4j;
-
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.function.Consumer;
 import java.util.random.RandomGenerator;
 import java.util.stream.Stream;
 
@@ -13,97 +11,256 @@ import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
-import org.eclipse.emf.ecore.EClassifier;
+import lombok.extern.slf4j.Slf4j;
+
+import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
+import de.evoal.core.api.dynamic.DynamicEClassProvider;
+import de.evoal.core.api.ecore.info.FeatureBoundaries;
+import de.evoal.core.api.random.RandomService;
 import de.evoal.models.core.ecore.Space;
 import de.evoal.models.core.ecore.TypedEObject;
-
-import de.evoal.core.api.ecore.info.FeatureBoundaries;
-import de.evoal.core.api.utils.Requirements;
-
+import de.evoal.optimisation.api.builder.BuildSettings;
+import de.evoal.optimisation.api.builder.ModelBuilder;
+import de.evoal.optimisation.api.builder.ModelTypeSource;
+import de.evoal.optimisation.api.builder.ModelTypes;
+import de.evoal.optimisation.api.builder.TreeMethod;
+import de.evoal.optimisation.api.builder.ValueDrawer;
 import de.evoal.optimisation.api.model.InitialCandidatesProvider;
 
+/**
+ * The random population ({@code 'random-population'}): every feature of the search space gets a
+ *   random value (see {@link ValueDrawer}), structured data a random model of its DL type
+ *   (see {@link ModelBuilder}) built with the {@code method}. The models are checked when the
+ *   stream of candidates is created; a model that cannot be built is reported with all its
+ *   problems.
+ */
 @Slf4j
 @Dependent
 @Named("de.evoal.optimisation.core.random-population")
 public class RandomInitialCandidates implements InitialCandidatesProvider {
+    /**
+     * The name of the random stream of the population.
+     */
+    private static final String STREAM = "de.evoal.optimisation.core.random-population";
 
     @Inject
     private FeatureBoundaries boundaries;
 
-    @Inject @Named("search-space")
-    private Space searchSpace;
+    /**
+     * Provides the DL types of the models; only used for search spaces with structured data.
+     */
+    @Inject
+    private DynamicEClassProvider dynamicClasses;
+
+    /**
+     * The settings of the builder of models; {@code null} if the configuration has no
+     *   {@code method}.
+     */
+    private BuildSettings settings;
 
     @Inject
     private RandomService randomService;
 
+    @Inject @Named("search-space")
+    private Space searchSpace;
+
     @Override
     public Stream<TypedEObject> create() {
         final AtomicInteger counter = new AtomicInteger();
-        final RandomGenerator randomness = randomService.random("de.evoal.optimisation.core.random-population");
+        final RandomGenerator randomness = randomService.random(STREAM);
+        final ValueDrawer values = new ValueDrawer(boundaries);
+        final ModelBuilder models = modelBuilder(values, randomness).orElse(null);
 
-        checkFeatureTypes();
-
-        Consumer<TypedEObject> randomCandidateProducer = (object) -> {};
-        for(final EStructuralFeature feature : searchSpace) {
-            randomCandidateProducer = randomCandidateProducer.andThen(producerFor(feature, randomness));
-        }
-
-        final Consumer<TypedEObject> producer = randomCandidateProducer;
         return Stream.generate(() -> {
-            log.info("Creating random initial candidate #{}.", counter.getAndIncrement());
-            final TypedEObject object =  searchSpace.newEObject();
+            final int index = counter.getAndIncrement();
+            log.info("Creating random initial candidate #{}.", index);
 
-            producer.accept(object);
+            final TypedEObject object = searchSpace.newEObject();
+            for(final EStructuralFeature feature : searchSpace) {
+                final Object value = valueOf(feature, index, values, models, randomness);
+                object.eSet(feature, value);
+            }
 
             return object;
         });
     }
 
-    /**
-     * Creates a producer that sets a random value within the boundaries of the feature.
-     */
-    private Consumer<TypedEObject> producerFor(final EStructuralFeature feature, final RandomGenerator randomness) {
-        final EClassifier classifier = feature.getEType();
+    @Override
+    public InitialCandidatesProvider init(final EObject configuration) {
+        final EObject method = (EObject) valueIfSet(configuration, "method");
+        settings = method == null ? null : toSettings(method);
 
-        if(EClassifierHelper.isBoolean(classifier)) {
-            return (object) -> object.eSet(feature, randomness.nextBoolean());
-        }
-
-        final FeatureBoundaries.Boundaries bounds = boundaries.get(feature);
-
-        if(EClassifierHelper.isDouble(classifier)) {
-            final double lower = bounds.lower().doubleValue();
-            final double upper = bounds.upper().doubleValue();
-
-            // interpolation does not overflow, even for the full range of double
-            return (object) -> {
-                final double ratio = randomness.nextDouble();
-                object.eSet(feature, ratio * upper + (1.0 - ratio) * lower);
-            };
-        }
-
-        // integer: the bounds are within the int range, so long arithmetic cannot overflow
-        final long lower = bounds.lower().longValue() + (bounds.lowerIncluded() ? 0 : 1);
-        final long upper = bounds.upper().longValue() - (bounds.UpperIncluded() ? 0 : 1);
-        Requirements.requireTrue(lower <= upper, "Feature '" + feature.getName() + "' has no valid value.");
-
-        return (object) -> object.eSet(feature, (int) randomness.nextLong(lower, upper + 1));
+        return this;
     }
 
     /**
-     * Only integer, real, and boolean data is supported.
+     * @return The value of the required integer attribute of the configuration.
      */
-    private void checkFeatureTypes() {
-        for(final EStructuralFeature feature : searchSpace) {
-            final EClassifier classifier = feature.getEType();
+    private static int valueOf(final EObject configuration, final String name) {
+        final EStructuralFeature feature = configuration.eClass().getEStructuralFeature(name);
 
-            Requirements.requireTrue(
-                    EClassifierHelper.isInteger(classifier) ||
-                            EClassifierHelper.isDouble(classifier) ||
-                            EClassifierHelper.isBoolean(classifier),
-                    "Representation type " + classifier.getName() + " of '" + feature.getName() + "' not supported");
+        return (Integer) configuration.eGet(feature);
+    }
+
+    /**
+     * @return The value of the attribute of the configuration; {@code null} if the attribute
+     *   is optional and not set.
+     */
+    private static Object valueIfSet(final EObject configuration, final String name) {
+        final EStructuralFeature feature = configuration.eClass().getEStructuralFeature(name);
+        if(feature == null || !configuration.eIsSet(feature)) {
+            return null;
+        }
+
+        return configuration.eGet(feature);
+    }
+
+    /**
+     * Checks the search space and, if it contains structured data, creates the builder.
+     *
+     * @throws IllegalArgumentException with all problems if a feature cannot get random values.
+     */
+    private Optional<ModelBuilder> modelBuilder(final ValueDrawer values, final RandomGenerator randomness) {
+        final List<String> problems = new ArrayList<>();
+        final List<EClass> roots = new ArrayList<>();
+
+        for(final EStructuralFeature feature : searchSpace) {
+            if(feature instanceof EReference model) {
+                roots.add(model.getEReferenceType());
+            } else {
+                values.problemOf((EAttribute) feature)
+                      .ifPresent(problems::add);
+            }
+        }
+
+        if(roots.isEmpty()) {
+            requireNoProblems(problems);
+
+            return Optional.empty();
+        }
+
+        if(settings == null) {
+            problems.add("the search space contains structured data, so 'random-population' needs a 'method'");
+            requireNoProblems(problems);
+        }
+
+        final ModelTypes types = new ModelTypes(new DlModelTypes(dynamicClasses), values, roots);
+        problems.addAll(types.problems());
+        problems.addAll(problemsOfSettings(types, roots));
+        requireNoProblems(problems);
+
+        return Optional.of(new ModelBuilder(types, values, settings, randomness));
+    }
+
+    /**
+     * @return The problems of the settings for the models: a missing optional probability, a
+     *   depth or size limit below what the roots need.
+     */
+    private List<String> problemsOfSettings(final ModelTypes types, final List<EClass> roots) {
+        final List<String> problems = new ArrayList<>();
+        if(settings.optionalProbability() == null && types.hasOptionalFeatures()) {
+            problems.add("the models have optional attributes, so the 'method' needs an 'optional-probability'");
+        }
+
+        final int smallestDepthLimit = settings.method().smallestDepthLimit();
+        for(final EClass root : roots) {
+            final int depth = types.minimumDepthOfType(root);
+            final long size = types.minimumSizeOfType(root);
+
+            final boolean isTooShallow = depth != ModelTypes.UNBOUNDED && depth > smallestDepthLimit;
+            if(isTooShallow) {
+                problems.add("a model of " + root.getName() + " needs a depth of at least " + depth
+                             + ", but the 'method' allows " + smallestDepthLimit);
+            }
+
+            final boolean isTooSmall = depth != ModelTypes.UNBOUNDED && size > settings.maximumSize();
+            if(isTooSmall) {
+                problems.add("a model of " + root.getName() + " needs at least " + size
+                             + " objects, but 'maximum-size' is " + settings.maximumSize());
+            }
+        }
+
+        return problems;
+    }
+
+    private static void requireNoProblems(final List<String> problems) {
+        if(problems.isEmpty()) {
+            return;
+        }
+
+        final String message = "'random-population' cannot create candidates: " + String.join("; ", problems) + ".";
+        log.error(message);
+
+        throw new IllegalArgumentException(message);
+    }
+
+    /**
+     * @return The settings of the builder from the configuration of the method.
+     */
+    private BuildSettings toSettings(final EObject method) {
+        final Integer maximumSize = (Integer) valueIfSet(method, "maximum-size");
+        final Double optionalProbability = (Double) valueIfSet(method, "optional-probability");
+        final long sizeLimit = maximumSize == null ? BuildSettings.NO_SIZE_LIMIT : maximumSize;
+        final TreeMethod treeMethod = toTreeMethod(method);
+
+        return new BuildSettings(treeMethod, sizeLimit, optionalProbability);
+    }
+
+    private TreeMethod toTreeMethod(final EObject method) {
+        final String type = DynamicEClassProvider.dlTypeOf(method);
+        final int maximumDepth = valueOf(method, "maximum-depth");
+
+        return switch(type) {
+            case "de.evoal.optimisation.core.grow" -> new TreeMethod.Grow(maximumDepth);
+            case "de.evoal.optimisation.core.full" -> new TreeMethod.Full(maximumDepth);
+            case "de.evoal.optimisation.core.ramped-half-and-half" -> {
+                final int minimumDepth = valueOf(method, "minimum-depth");
+                yield new TreeMethod.RampedHalfAndHalf(minimumDepth, maximumDepth);
+            }
+            default -> throw new IllegalArgumentException("Unknown tree method '" + type + "'.");
+        };
+    }
+
+    /**
+     * @return The random value of the feature: a model for structured data, else a value of the
+     *   attribute.
+     *
+     * @param models The builder of the models; {@code null} if the search space has no
+     *   structured data.
+     */
+    private static Object valueOf(final EStructuralFeature feature,
+                                  final int index,
+                                  final ValueDrawer values,
+                                  final ModelBuilder models,
+                                  final RandomGenerator randomness) {
+        if(feature instanceof EReference model) {
+            final EClass rootType = model.getEReferenceType();
+
+            return models.build(rootType, index);
+        }
+
+        return values.draw((EAttribute) feature, randomness);
+    }
+
+    /**
+     * The DL types answer which subtypes a type has and which attributes are optional.
+     *
+     * @param provider The provider of the classes of the DL types.
+     */
+    private record DlModelTypes(DynamicEClassProvider provider) implements ModelTypeSource {
+        @Override
+        public List<EClass> concreteSubtypesOf(final EClass type) {
+            return provider.concreteSubclassesOf(type);
+        }
+
+        @Override
+        public boolean isOptional(final EStructuralFeature feature) {
+            return DynamicEClassProvider.isOptional(feature);
         }
     }
 }

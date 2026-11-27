@@ -1,0 +1,166 @@
+import "definitions" from 'de.evoal.core.constraints';
+
+/**
+ * The policy types of the 2048 example (evoal-2048, model.dl), with the ranges and sizes of its
+ *   Javadoc as annotations: abstract types, arrays with multiplicities and bounded integers.
+ */
+module 'de.evoal.optimisation.test.models.policy' {
+    /**
+     * The policy: a list of entries and a default action.
+     */
+    type policy {
+        /**
+         * The entries, tried in order.
+         */
+        @MinimumNumberOfElements { bound := 1; }
+        @MaximumNumberOfElements { bound := 4; }
+        entries : array instance 'Entry';
+
+        /**
+         * The action if no entry matches.
+         */
+        @LowerBoundary { boundary := 0; }
+        @UpperBoundary { boundary := 3; }
+        action : int;
+    }
+
+    /**
+     * An entry: an action and its condition.
+     */
+    type 'Entry' {
+        /**
+         * The action if the condition holds.
+         */
+        @LowerBoundary { boundary := 0; }
+        @UpperBoundary { boundary := 3; }
+        action : int;
+
+        /**
+         * The condition.
+         */
+        condition : instance 'OrExpression';
+    }
+
+    /**
+     * A disjunction of conjunctions.
+     */
+    type 'OrExpression' {
+        /**
+         * The conjunctions.
+         */
+        @MinimumNumberOfElements { bound := 1; }
+        @MaximumNumberOfElements { bound := 2; }
+        subexpressions : array instance 'AndExpression';
+    }
+
+    /**
+     * A conjunction of comparisons.
+     */
+    type 'AndExpression' {
+        /**
+         * The comparisons.
+         */
+        @MinimumNumberOfElements { bound := 1; }
+        @MaximumNumberOfElements { bound := 2; }
+        comparisons : array instance 'Comparison';
+    }
+
+    /**
+     * Abstract base type of the comparisons.
+     */
+    abstract type 'Comparison' {}
+
+    /**
+     * A comparison of integers.
+     */
+    type 'IntegerComparison' extends 'Comparison' {
+        /**
+         * The operator.
+         */
+        operator : enum 'integer-operator';
+
+        /**
+         * The left operand.
+         */
+        leftOperand : instance 'IntegerFunctionCall';
+
+        /**
+         * The right operand.
+         */
+        rightOperand : instance 'IntegerFunctionCall';
+    }
+
+    /**
+     * The operators of integer comparisons.
+     */
+    ordinal enum 'integer-operator' ( less, greater );
+
+    /**
+     * Abstract base type of the calls that return an integer.
+     */
+    abstract type 'IntegerFunctionCall' {}
+
+    /**
+     * The score gain of a move.
+     */
+    type scoreGain extends 'IntegerFunctionCall' {
+        /**
+         * The direction of the move.
+         */
+        @LowerBoundary { boundary := 0; }
+        @UpperBoundary { boundary := 3; }
+        direction : int;
+    }
+
+    /**
+     * A comparison of booleans.
+     */
+    type 'BooleanComparison' extends 'Comparison' {
+        /**
+         * Whether the comparison is negated.
+         */
+        negated : boolean;
+
+        /**
+         * The left operand.
+         */
+        leftOperand : instance 'BooleanLiteral';
+
+        /**
+         * The right operand.
+         */
+        rightOperand : instance 'BooleanFunctionCall';
+    }
+
+    /**
+     * A boolean constant.
+     */
+    type 'BooleanLiteral' {
+        /**
+         * The value.
+         */
+        'value' : boolean;
+    }
+
+    /**
+     * Abstract base type of the calls that return a boolean.
+     */
+    abstract type 'BooleanFunctionCall' {}
+
+    /**
+     * Whether a move is possible.
+     */
+    type canMoveInDirection extends 'BooleanFunctionCall' {
+        /**
+         * The direction of the move.
+         */
+        @LowerBoundary { boundary := 0; }
+        @UpperBoundary { boundary := 3; }
+        direction : int;
+    }
+
+    /**
+     * Whether the largest tile is in a corner.
+     */
+    type isLargestInCorner extends 'BooleanFunctionCall' {}
+}

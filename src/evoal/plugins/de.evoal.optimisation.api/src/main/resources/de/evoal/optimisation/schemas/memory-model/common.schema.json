@@ -38,7 +38,7 @@
       ]
     },
     "value": {
-      "description": "Value of a feature. Arrays are nested JSON arrays; enum literals are written by name; null if the feature is unset. Non-finite numbers of real features are written as the strings 'NaN', 'Infinity' and '-Infinity' (see nonFiniteNumber).",
+      "description": "Value of a feature. Arrays are nested JSON arrays; enum literals are written by name; the value of a model feature is a model object; null if the feature is unset. Non-finite numbers of real features are written as the strings 'NaN', 'Infinity' and '-Infinity' (see nonFiniteNumber).",
       "oneOf": [
         {
           "type": "number"
@@ -57,8 +57,33 @@
           "items": {
             "$ref": "#/$defs/value"
           }
+        },
+        {
+          "$ref": "#/$defs/modelObject"
         }
       ]
+    },
+    "modelObject": {
+      "description": "An object of a model candidate: its DL type and the values of its attributes. A contained object (an attribute of type 'instance T' or 'array instance T') is a model object itself, so a model is written as a tree.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Fully qualified name of the DL type of the object, e.g. 'model.Entry'.",
+          "type": "string"
+        },
+        "values": {
+          "description": "Values of the attributes, keyed by attribute name.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/value"
+          }
+        }
+      },
+      "required": [
+        "type",
+        "values"
+      ],
+      "additionalProperties": false
     },
     "values": {
       "description": "Values of a space, keyed by feature name.",
@@ -94,12 +119,18 @@
           "$ref": "#/$defs/featureName"
         },
         "type": {
+          "description": "Representation of the data; 'model' for structured data ('data ... of instance T'), whose values are model objects.",
           "enum": [
             "boolean",
             "integer",
             "real",
-            "string"
+            "string",
+            "model"
           ]
+        },
+        "modelType": {
+          "description": "Fully qualified name of the DL type of the root of a model feature.",
+          "type": "string"
         },
         "scale": {
           "description": "Scale of the data description, if declared.",

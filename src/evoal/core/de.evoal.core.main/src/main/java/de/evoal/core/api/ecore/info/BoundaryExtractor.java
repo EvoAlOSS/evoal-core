@@ -4,16 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import de.evoal.languages.model.base.Module;
 import de.evoal.languages.model.base.definitions.AttributeDefinition;
-import de.evoal.languages.model.base.definitions.ClassDefinition;
 import de.evoal.languages.model.base.definitions.Constrained;
 import de.evoal.languages.model.base.definitions.DataDescription;
 import de.evoal.languages.model.base.definitions.TypedBaseDataDescription;
-import de.evoal.languages.model.base.expressions.Attribute;
 import de.evoal.languages.model.base.expressions.Expression;
 import de.evoal.languages.model.base.expressions.Instance;
-import de.evoal.languages.model.interpreter.ConstantEvaluator;
 import de.evoal.languages.model.interpreter.numeric.NumericConversions;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
@@ -24,7 +20,8 @@ import lombok.extern.slf4j.Slf4j;
  *   Constraints of the data description and of its data type are considered. Other
  *   constraints, e.g., statements like {@code value >= 0.0}, are ignored.
  *
- * The extractor works on the parsed model and is used while creating the space classes.
+ * The extractor works on the parsed model and is used while creating the space classes and
+ *   the classes of DL types.
  */
 @Slf4j
 public final class BoundaryExtractor {
@@ -68,20 +65,37 @@ public final class BoundaryExtractor {
             constraints.addAll(((Constrained) typed.getType()).getConstraints());
         }
 
+        return extract(constraints, "data '" + description.getName() + "'");
+    }
+
+    /**
+     * Extracts the boundaries of the given attribute of a DL type.
+     *
+     * @throws IllegalStateException if the boundaries contradict each other.
+     */
+    public static Extracted extract(final @NonNull AttributeDefinition attribute) {
+        return extract(attribute.getConstraints(), "attribute '" + attribute.getName() + "'");
+    }
+
+    /**
+     * Extracts the boundaries from the given constraints.
+     *
+     * @param constraints The constraints of the element.
+     * @param subject The element in messages, e.g. {@code data 'x'}.
+     * @throws IllegalStateException if the boundaries contradict each other.
+     */
+    private static Extracted extract(final List<? extends Expression> constraints, final String subject) {
         Optional<Bound> lower = Optional.empty();
         Optional<Bound> upper = Optional.empty();
 
-        for(final Expression constraint : constraints) {
-            if(!(constraint instanceof Instance instance) || !isBoundaryConstraint(instance)) {
-                continue;
-            }
+        for(final Instance instance : ConstraintAnnotations.annotationsOf(constraints, LOWER_BOUNDARY)) {
+            final Bound bound = toBound(instance, subject);
+            lower = Optional.of(lower.map(b -> tighterLower(b, bound)).orElse(bound));
+        }
 
-            final Bound bound = toBound(instance, description);
-            if(LOWER_BOUNDARY.equals(instance.getDefinition().getName())) {
-                lower = Optional.of(lower.map(b -> tighterLower(b, bound)).orElse(bound));
-            } else {
-                upper = Optional.of(upper.map(b -> tighterUpper(b, bound)).orElse(bound));
-            }
+        for(final Instance instance : ConstraintAnnotations.annotationsOf(constraints, UPPER_BOUNDARY)) {
+            final Bound bound = toBound(instance, subject);
+            upper = Optional.of(upper.map(b -> tighterUpper(b, bound)).orElse(bound));
         }
 
         if(lower.isPresent() && upper.isPresent()) {
@@ -89,62 +103,28 @@ public final class BoundaryExtractor {
             final Bound u = upper.get();
 
             if(l.value() > u.value() || (l.value() == u.value() && !(l.inclusive() && u.inclusive()))) {
-                throw new IllegalStateException("The boundaries of data '" + description.getName() + "' are contradicting: lower " + l + ", upper " + u + ".");
+                throw new IllegalStateException("The boundaries of " + subject + " are contradicting: lower " + l + ", upper " + u + ".");
             }
         }
 
         return new Extracted(lower, upper);
     }
 
-    private static boolean isBoundaryConstraint(final Instance instance) {
-        final ClassDefinition definition = instance.getDefinition();
-        if(definition == null) {
-            return false;
-        }
-
-        final String name = definition.getName();
-        if(!LOWER_BOUNDARY.equals(name) && !UPPER_BOUNDARY.equals(name)) {
-            return false;
-        }
-
-        return definition.eContainer() instanceof Module module && CONSTRAINTS_MODULE.equals(module.getName());
-    }
-
-    private static Bound toBound(final Instance instance, final DataDescription description) {
-        final Object boundary = evaluate(instance, "boundary");
+    private static Bound toBound(final Instance instance, final String subject) {
+        final Object boundary = ConstraintAnnotations.valueOf(instance, "boundary");
         if(boundary == null) {
-            throw new IllegalStateException("Boundary constraint of data '" + description.getName() + "' has no 'boundary'.");
+            throw new IllegalStateException("Boundary constraint of " + subject + " has no 'boundary'.");
         }
 
         final double value;
         try {
             value = NumericConversions.toDouble(boundary);
         } catch(final IllegalArgumentException e) {
-            throw new IllegalStateException("Boundary of data '" + description.getName() + "' is not a number: " + e.getMessage(), e);
+            throw new IllegalStateException("Boundary of " + subject + " is not a number: " + e.getMessage(), e);
         }
 
-        final Object inclusive = evaluate(instance, "inclusive");
+        final Object inclusive = ConstraintAnnotations.valueOf(instance, "inclusive");
         return new Bound(value, inclusive == null || Boolean.TRUE.equals(inclusive));
-    }
-
-    /**
-     * Evaluates the attribute of the instance or, if it is not specified, its default value.
-     */
-    private static Object evaluate(final Instance instance, final String name) {
-        final ConstantEvaluator evaluator = new ConstantEvaluator();
-
-        for(final Attribute attribute : instance.getAttributes()) {
-            if(name.equals(attribute.getDefinition().getName())) {
-                return evaluator.doSwitch(attribute.getValue());
-            }
-        }
-
-        final AttributeDefinition attribute = instance.getDefinition().findAttribute(name);
-        if(attribute != null && attribute.getInitialisation() != null) {
-            return evaluator.doSwitch(attribute.getInitialisation());
-        }
-
-        return null;
     }
 
     private static Bound tighterLower(final Bound a, final Bound b) {

@@ -191,4 +191,43 @@ public class EClassProviderTest {
             Assertions.assertTrue(copy.eIsSet(x));
         }
     }
+
+    @Nested
+    @DisplayName("given structured data next to base data")
+    class StructuredData {
+        private final DynamicEClassProvider dynamicClasses = new DynamicEClassProvider();
+
+        private final EClassProvider structuredProvider = new EClassProvider(dynamicClasses);
+
+        @Test
+        public void structuredDataIsAContainmentOfTheClassOfItsType() {
+            // given
+            final de.evoal.languages.model.dl.DefinitionModule types = de.evoal.languages.model.dl.DlFactory.eINSTANCE.createDefinitionModule();
+            types.setName("com.example.models");
+            final de.evoal.languages.model.base.definitions.ClassDefinition policy = DefinitionsFactory.eINSTANCE.createClassDefinition();
+            policy.setName("policy");
+            types.getTypes().add(policy);
+
+            final de.evoal.languages.model.base.definitions.StructuredDataDescription structured = DefinitionsFactory.eINSTANCE.createStructuredDataDescription();
+            structured.setName("policy");
+            structured.setType(policy);
+
+            final DataDescriptionModule module = DdlFactory.eINSTANCE.createDataDescriptionModule();
+            module.getDescriptions().add(description("x"));
+            module.getDescriptions().add(structured);
+
+            // when
+            final EClass eClass = structuredProvider.eClassFor(module);
+
+            // then
+            final EStructuralFeature x = eClass.getEStructuralFeature("x");
+            Assertions.assertInstanceOf(org.eclipse.emf.ecore.EAttribute.class, x);
+
+            final org.eclipse.emf.ecore.EReference reference = Assertions.assertInstanceOf(org.eclipse.emf.ecore.EReference.class,
+                                                                                          eClass.getEStructuralFeature("policy"));
+            Assertions.assertTrue(reference.isContainment());
+            Assertions.assertSame(dynamicClasses.toEClass(policy), reference.getEReferenceType());
+            Assertions.assertTrue(reference.isUnsettable());
+        }
+    }
 }

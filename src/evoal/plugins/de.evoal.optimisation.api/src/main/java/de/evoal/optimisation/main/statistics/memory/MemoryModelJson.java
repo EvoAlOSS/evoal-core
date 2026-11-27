@@ -23,9 +23,12 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
+import de.evoal.core.api.dynamic.DynamicArrays;
+import de.evoal.core.api.dynamic.DynamicEClassProvider;
 import de.evoal.core.api.dynamic.EAnnotationHelper;
 import de.evoal.core.api.ecore.info.FeatureBoundaries;
 import de.evoal.core.api.ecore.misc.EClassifierHelper;
@@ -387,7 +390,8 @@ public class MemoryModelJson {
     }
 
     /**
-     * @return The feature with its name, type, scale (if declared) and bounds (if declared).
+     * @return The feature with its name, type, scale (if declared) and bounds (if declared); a
+     *   model feature (structured data) also with the DL type of its root.
      */
     private ObjectNode toFeature(final EStructuralFeature feature) {
         final ObjectNode featureNode = NODES.objectNode();
@@ -395,6 +399,11 @@ public class MemoryModelJson {
 
         final String type = toFeatureType(feature);
         featureNode.put("type", type);
+
+        if(feature instanceof EReference reference) {
+            final EClass root = reference.getEReferenceType();
+            featureNode.put("modelType", DynamicEClassProvider.dlTypeOf(root));
+        }
 
         scaleOf(feature).ifPresent(scale -> featureNode.put("scale", scale));
         addBounds(featureNode, feature);
@@ -416,12 +425,15 @@ public class MemoryModelJson {
     }
 
     /**
-     * @return The type of the feature in the format: boolean, integer, real or string.
+     * @return The type of the feature in the format: boolean, integer, real, string, or model for
+     *   structured data.
      */
     private static String toFeatureType(final EStructuralFeature feature) {
         final EClassifier type = feature.getEType();
 
-        if(EClassifierHelper.isBoolean(type)) {
+        if(feature instanceof EReference) {
+            return "model";
+        } else if(EClassifierHelper.isBoolean(type)) {
             return "boolean";
         } else if(EClassifierHelper.isLongOrShorter(type)) {
             return "integer";
@@ -839,8 +851,33 @@ public class MemoryModelJson {
     }
 
     /**
+     * @return The object of a model as JSON: its DL type and the values of its features, keyed by
+     *   feature name; a contained object is written the same way (a tree). An array object of a
+     *   multi-dimensional array is written as the array of its elements.
+     */
+    private static JsonNode toModel(final EObject object) {
+        if(DynamicArrays.isArray(object)) {
+            final List<Object> elements = DynamicArrays.valuesOf(object);
+
+            return toArray(elements);
+        }
+
+        final ObjectNode valuesNode = NODES.objectNode();
+        object.eClass()
+              .getEAllStructuralFeatures()
+              .forEach(feature -> valuesNode.set(feature.getName(), toValue(object.eGet(feature))));
+
+        final ObjectNode modelNode = NODES.objectNode();
+        modelNode.put("type", DynamicEClassProvider.dlTypeOf(object));
+        modelNode.set("values", valuesNode);
+
+        return modelNode;
+    }
+
+    /**
      * @return The value as JSON: numbers (non-finite ones as strings), booleans, strings, enum
-     *   literals by name, collections as arrays, {@code null} if there is no value.
+     *   literals by name, collections as arrays, the objects of a model as trees (see
+     *   {@link #toModel}), {@code null} if there is no value.
      */
     private static JsonNode toValue(final Object value) {
         return switch(value) {
@@ -851,6 +888,7 @@ public class MemoryModelJson {
             case Enumerator literal -> NODES.stringNode(literal.getName());
             case Collection<?> collection -> toArray(collection);
             case Object[] array -> toArray(List.of(array));
+            case EObject object -> toModel(object);
             default -> throw new IllegalStateException("Unsupported value type " + value.getClass().getName() + ".");
         };
     }

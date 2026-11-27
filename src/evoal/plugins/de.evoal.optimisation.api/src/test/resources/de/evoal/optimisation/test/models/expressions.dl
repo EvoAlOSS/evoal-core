@@ -1,0 +1,68 @@
+import "definitions" from 'de.evoal.core.constraints';
+
+/**
+ * Recursive expressions for the tests of the random builder.
+ */
+module 'de.evoal.optimisation.test.models.expressions' {
+    /**
+     * Abstract base type of the expressions.
+     */
+    abstract type term {}
+
+    /**
+     * The sum of two expressions.
+     */
+    type plus extends term {
+        /**
+         * The left summand.
+         */
+        left : instance term;
+
+        /**
+         * The right summand.
+         */
+        right : instance term;
+    }
+
+    /**
+     * A constant.
+     */
+    type constant extends term {
+        /**
+         * The value.
+         */
+        @Scale { scale := 'measurement-scale.cardinal'; }
+        @LowerBoundary { boundary := -1.0; }
+        @UpperBoundary { boundary := 1.0; }
+        'value' : real;
+    }
+
+    /**
+     * A variable.
+     */
+    type variable extends term {
+        /**
+         * The index of the variable.
+         */
+        @LowerBoundary { boundary := 0; }
+        @UpperBoundary { boundary := 2; }
+        index : int;
+    }
+
+    /**
+     * An expression with an optional label.
+     */
+    type labelled extends term {
+        /**
+         * The expression.
+         */
+        inner : optional instance term;
+
+        /**
+         * The weight.
+         */
+        @LowerBoundary { boundary := 0; }
+        @UpperBoundary { boundary := 10; }
+        weight : optional int;
+    }
+}

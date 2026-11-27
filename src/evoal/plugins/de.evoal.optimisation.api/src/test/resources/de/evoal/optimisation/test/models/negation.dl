@@ -1,0 +1,16 @@
+import "definitions" from 'de.evoal.optimisation.test.models.expressions';
+
+/**
+ * A subtype of an expression in another module.
+ */
+module 'de.evoal.optimisation.test.models.negation' {
+    /**
+     * The negation of an expression.
+     */
+    type negation extends term {
+        /**
+         * The negated expression.
+         */
+        operand : instance term;
+    }
+}

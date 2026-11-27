@@ -33,7 +33,8 @@ module 'de.evoal.core.constraints' {
     }
 
     /**
-     * A lower bound for numeric values.
+     * A lower bound for numeric values. On a numeric attribute of a DL type it is also the
+     *   bound the random builder of model candidates draws within.
      */
     type LowerBoundary extends Constraint {
         /**
@@ -48,7 +49,8 @@ module 'de.evoal.core.constraints' {
     }
 
     /**
-     * An upper bound for numeric values.
+     * An upper bound for numeric values. On a numeric attribute of a DL type it is also the
+     *   bound the random builder of model candidates draws within.
      */
     type UpperBoundary extends Constraint {
         /**
@@ -95,7 +97,9 @@ module 'de.evoal.core.constraints' {
     def real min(path selection);
 
     /**
-     * Constraint that specifies a minimum number of elements for arrays.
+     * Constraint that specifies a minimum number of elements for arrays. On an attribute of a DL
+     *   type it is also the lower multiplicity of the attribute, which the random builder of
+     *   model candidates respects.
      */
     type MinimumNumberOfElements extends Constraint {
         /**
@@ -105,13 +109,29 @@ module 'de.evoal.core.constraints' {
     }
 
     /**
-     * Constraint that specifies a maximum number of elements for arrays.
+     * Constraint that specifies a maximum number of elements for arrays. On an attribute of a DL
+     *   type it is also the upper multiplicity of the attribute; the random builder of model
+     *   candidates needs it for every array of a model.
      */
     type MaximumNumberOfElements extends Constraint {
         /**
          * The maximum number of elements
          */
         bound : int;
+    }
+
+    /**
+     * The scale of measurement of a DL attribute, e.g.
+     *   {@code @Scale { scale := 'measurement-scale.cardinal'; }} on a real attribute whose
+     *   differences are meaningful. It plays the role the scale of DDL data plays: operators that
+     *   change the attribute in a model candidate depend on it. An attribute without @Scale is
+     *   nominal; an attribute of an enum type has the scale of its enum.
+     */
+    type Scale extends Constraint {
+        /**
+         * The scale of the attribute.
+         */
+        scale : enum 'measurement-scale';
     }
 
     /**

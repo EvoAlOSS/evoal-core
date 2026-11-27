@@ -46,6 +46,7 @@ module de.evoal.optimisation.api {
 //    exports de.evoal.optimisation.main.constraints.constraint.utils;
 
     exports de.evoal.optimisation.api.board;
+    exports de.evoal.optimisation.api.builder;
     exports de.evoal.optimisation.api.cdi;
     exports de.evoal.optimisation.api.checks;
     exports de.evoal.optimisation.api.constraints;

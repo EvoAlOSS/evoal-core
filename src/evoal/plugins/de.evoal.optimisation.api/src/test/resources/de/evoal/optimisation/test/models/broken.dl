@@ -1,0 +1,62 @@
+import "definitions" from 'de.evoal.core.constraints';
+
+/**
+ * Models that cannot be built.
+ */
+module 'de.evoal.optimisation.test.models.broken' {
+    /**
+     * A type with an attribute whose values cannot be drawn.
+     */
+    type named {
+        /**
+         * A name.
+         */
+        name : string;
+    }
+
+    /**
+     * A type with an array without upper bound.
+     */
+    type unbounded {
+        /**
+         * Values without a maximum number.
+         */
+        values : array real;
+    }
+
+    /**
+     * A type that always needs another object of itself.
+     */
+    type endless {
+        /**
+         * The next object.
+         */
+        next : instance endless;
+    }
+
+    /**
+     * An abstract type without concrete subtype.
+     */
+    abstract type nothing {}
+
+    /**
+     * A type with an attribute of an abstract type without subtype.
+     */
+    type holder {
+        /**
+         * The held object.
+         */
+        held : instance nothing;
+    }
+
+    /**
+     * A type with a multi-dimensional array.
+     */
+    type matrix {
+        /**
+         * The rows.
+         */
+        @MaximumNumberOfElements { bound := 2; }
+        rows : array array real;
+    }
+}

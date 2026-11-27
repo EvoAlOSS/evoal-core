@@ -20,7 +20,9 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -367,13 +369,31 @@ public class ValueConverter extends ExpressionsSwitch<Object> {
             return;
         }
 
+        final boolean isContainment = feature instanceof EReference reference && reference.isContainment();
+
         if(feature.isMany()) {
             final List<Object> values = (List<Object>) object.eGet(feature);
+            final List<?> converted = (List<?>) value;
             values.clear();
-            values.addAll((List<?>) value);
+            converted.stream()
+                     .map(element -> isContainment ? uncontained(element) : element)
+                     .forEach(values::add);
         } else {
-            object.eSet(feature, value);
+            object.eSet(feature, isContainment ? uncontained(value) : value);
         }
+    }
+
+    /**
+     * Returns an object that can be put into a containment feature: the object itself if no
+     *   other object contains it, else a copy. Adding a contained object to a containment feature
+     *   would move it out of its container, e.g. a value that two attributes share.
+     */
+    private static Object uncontained(final Object value) {
+        if(value instanceof EObject object && object.eContainer() != null) {
+            return EcoreUtil.copy(object);
+        }
+
+        return value;
     }
 
     @Override

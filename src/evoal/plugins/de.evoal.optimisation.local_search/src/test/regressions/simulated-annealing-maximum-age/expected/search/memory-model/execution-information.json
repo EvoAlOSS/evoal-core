@@ -71,7 +71,9 @@
           "reaction" : "replace",
           "replacement-source" : {
             "type" : "de.evoal.optimisation.core.random-population",
-            "attributes" : { }
+            "attributes" : {
+              "method" : null
+            }
           },
           "maximum-attempts" : 10,
           "iterations" : 3

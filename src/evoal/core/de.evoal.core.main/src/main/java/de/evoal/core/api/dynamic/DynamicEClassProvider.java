@@ -12,10 +12,23 @@ import de.evoal.models.core.cdi.ConfiguredBy;
 import de.evoal.models.core.utils.FQNProvider;
 import jakarta.enterprise.context.ApplicationScoped;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
+import java.util.OptionalInt;
+import java.util.TreeMap;
 import java.util.function.Supplier;
+
+import org.eclipse.emf.ecore.resource.Resource;
+
+import de.evoal.core.api.ecore.info.BoundaryExtractor;
+import de.evoal.core.api.ecore.info.ConstraintAnnotations;
+import de.evoal.core.api.ecore.info.FeatureBoundaries;
+import de.evoal.core.api.ecore.info.FeatureScales;
+import de.evoal.languages.model.base.definitions.ScaleType;
 
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
@@ -283,7 +296,17 @@ public class DynamicEClassProvider {
      * @return The fully-qualified name of its dynamic class.
      */
     public static String dlTypeOf(final @NonNull EObject configuration) {
-        return fqName.get(configuration.eClass());
+        return dlTypeOf(configuration.eClass());
+    }
+
+    /**
+     * Returns the fully-qualified DL type name of the given dynamic class.
+     *
+     * @param eClass The dynamic class of a DL type.
+     * @return The fully-qualified name of the class, e.g. {@code model.Entry}.
+     */
+    public static String dlTypeOf(final @NonNull EClass eClass) {
+        return fqName.get(eClass);
     }
 
     /**
@@ -340,14 +363,16 @@ public class DynamicEClassProvider {
 
         if(type instanceof ArrayType arrayType) {
             final EStructuralFeature result = createArrayFeature(definition.getName(), arrayType);
+            applyNumberOfElements(definition, result);
+            applyValueAnnotations(definition, result);
             attachMapping(definition, result, DynamicFactory.eINSTANCE::createAttributeMapping, DynamicPackage.eINSTANCE.getAttributeMapping_Source(), DynamicPackage.eINSTANCE.getAttributeMapping_Target());
             return result;
         }
 
         final EStructuralFeature result;
 
-        if(type instanceof ClassDefinition) {
-            result = eFactory.createEReference();
+        if(type instanceof ClassDefinitionReference) {
+            result = createInstanceReference();
         } else if(type instanceof ExpressionType || type instanceof PathType) {
             result = createExpressionReference();
         } else {
@@ -367,9 +392,74 @@ public class DynamicEClassProvider {
             result.setUpperBound(1);
         }
 
+        applyValueAnnotations(definition, result);
         attachMapping(definition, result, DynamicFactory.eINSTANCE::createAttributeMapping, DynamicPackage.eINSTANCE.getAttributeMapping_Source(), DynamicPackage.eINSTANCE.getAttributeMapping_Target());
 
         return result;
+    }
+
+    /**
+     * Sets the multiplicity of a multi-valued feature from the {@code @MinimumNumberOfElements}
+     *   and {@code @MaximumNumberOfElements} annotations of the attribute. Without them, the
+     *   feature keeps {@code [0..*]}.
+     */
+    private static void applyNumberOfElements(final AttributeDefinition definition, final EStructuralFeature feature) {
+        final OptionalInt minimum = ConstraintAnnotations.minimumNumberOfElements(definition);
+        final OptionalInt maximum = ConstraintAnnotations.maximumNumberOfElements(definition);
+
+        minimum.ifPresent(feature::setLowerBound);
+        maximum.ifPresent(feature::setUpperBound);
+    }
+
+    /**
+     * Stores the boundaries ({@code @LowerBoundary}, {@code @UpperBoundary}) of a numeric
+     *   attribute and the scale of every attribute with data values in annotations of the feature
+     *   (see {@link FeatureBoundaries} and {@link FeatureScales}). The scale is the one of
+     *   {@code @Scale}, else the scale of the attribute's enum, else nominal. Boundaries of other
+     *   attributes, e.g. of an {@code expression} that is computed per sample, stay checks of
+     *   the configuration.
+     */
+    private static void applyValueAnnotations(final AttributeDefinition definition, final EStructuralFeature feature) {
+        if(!(feature instanceof EAttribute attribute)) {
+            return;
+        }
+
+        if(NumericConversions.isNumeric(attribute.getEType())) {
+            final BoundaryExtractor.Extracted boundaries = BoundaryExtractor.extract(definition);
+            FeatureBoundaries.annotate(attribute, boundaries);
+        }
+
+        final ScaleType scale = ConstraintAnnotations.scaleOf(definition)
+                                                     .orElseGet(() -> enumScaleOf(definition.getType()));
+        FeatureScales.annotate(attribute, scale);
+    }
+
+    /**
+     * Creates the feature for a DL attribute of type {@code instance T}: a containment reference,
+     *   so the object is part of the tree of its owner (e.g. {@code eContainer},
+     *   {@code eAllContents} and {@code EcoreUtil.copy} include it).
+     */
+    private static EReference createInstanceReference() {
+        final EReference reference = eFactory.createEReference();
+        reference.setContainment(true);
+
+        return reference;
+    }
+
+    /**
+     * @return The declared scale of the enum of the type (also of an array of the enum), nominal
+     *   for every other type.
+     */
+    private static ScaleType enumScaleOf(final Type type) {
+        if(type instanceof ArrayType array) {
+            return enumScaleOf(array.getElements());
+        }
+
+        if(type instanceof EnumDefinitionReference reference && reference.getDefinition().getScale() != null) {
+            return reference.getDefinition().getScale();
+        }
+
+        return ScaleType.NOMINAL;
     }
 
     /**
@@ -441,6 +531,9 @@ public class DynamicEClassProvider {
             reference.setContainment(true);
             reference.setEType(toArrayClass(inner));
             result = reference;
+        } else if(type.getElements() instanceof ClassDefinitionReference) {
+            result = createInstanceReference();
+            result.setEType(toEClassifier(type.getElements()));
         } else if(type.getElements() instanceof ExpressionType || type.getElements() instanceof PathType) {
             result = createExpressionReference();
             result.setEType(toEClassifier(type.getElements()));
@@ -602,6 +695,115 @@ public class DynamicEClassProvider {
             return toEEnum(er.getDefinition());
         }
         throw new IllegalArgumentException("Unsupported type " + type);
+    }
+
+    /**
+     * Returns the classes of the concrete DL types that are the given type or extend it, e.g.
+     *   the comparisons a model can contain where its attribute has the abstract type
+     *   {@code Comparison}. The DL types come from the modules that were loaded together with
+     *   the type (the resource set of its module, i.e. the configuration and its imports), or
+     *   from the module of the type if it was not loaded from a file. They are ordered by their
+     *   qualified names, so the order does not depend on the loading order.
+     *
+     * @param type The class of a DL type.
+     * @return The classes of the concrete subtypes, including the type itself if it is
+     *   concrete; the class itself if it is no class of a DL type.
+     */
+    public List<EClass> concreteSubclassesOf(final @NonNull EClass type) {
+        final Optional<ClassDefinition> definition = toClassDefinition(type);
+        if(definition.isEmpty()) {
+            return List.of(type);
+        }
+
+        final ClassDefinition root = definition.get();
+        final Map<String, ClassDefinition> subtypes = new TreeMap<>();
+        for(final ClassDefinition candidate : loadedClassDefinitions(root)) {
+            final boolean isConcreteSubtype = !candidate.isAbstract() && isSubtypeOf(candidate, root);
+            if(isConcreteSubtype) {
+                subtypes.putIfAbsent(qualifiedNameOf(candidate), candidate);
+            }
+        }
+
+        return subtypes.values()
+                       .stream()
+                       .map(this::toEClass)
+                       .toList();
+    }
+
+    /**
+     * @return {@code true} if the feature belongs to a DL attribute declared {@code optional}.
+     */
+    public static boolean isOptional(final @NonNull EStructuralFeature feature) {
+        return feature.getEAnnotations()
+                      .stream()
+                      .filter(annotation -> DynamicPackage.eNS_URI.equals(annotation.getSource()))
+                      .flatMap(annotation -> annotation.getContents().stream())
+                      .filter(AttributeMapping.class::isInstance)
+                      .map(AttributeMapping.class::cast)
+                      .map(AttributeMapping::getSource)
+                      .anyMatch(attribute -> attribute != null && attribute.isOptional());
+    }
+
+    /**
+     * @return The DL type of a class created by this provider, or empty for any other class.
+     */
+    public static Optional<ClassDefinition> toClassDefinition(final @NonNull EClass type) {
+        return type.getEAnnotations()
+                   .stream()
+                   .filter(annotation -> DynamicPackage.eNS_URI.equals(annotation.getSource()))
+                   .flatMap(annotation -> annotation.getContents().stream())
+                   .filter(ClassMapping.class::isInstance)
+                   .map(ClassMapping.class::cast)
+                   .map(ClassMapping::getSource)
+                   .filter(Objects::nonNull)
+                   .findFirst();
+    }
+
+    /**
+     * @return The DL types of the modules loaded together with the type; the types of its own
+     *   module if it was not loaded from a resource.
+     */
+    private static List<ClassDefinition> loadedClassDefinitions(final ClassDefinition type) {
+        final Resource resource = type.eResource();
+        if(resource == null || resource.getResourceSet() == null) {
+            final Module module = (Module) type.eContainer();
+
+            return classDefinitionsIn(module);
+        }
+
+        final List<ClassDefinition> definitions = new ArrayList<>();
+        for(final Resource loaded : resource.getResourceSet().getResources()) {
+            loaded.getContents()
+                  .forEach(content -> definitions.addAll(classDefinitionsIn(content)));
+        }
+
+        return definitions;
+    }
+
+    private static List<ClassDefinition> classDefinitionsIn(final EObject root) {
+        final List<ClassDefinition> definitions = new ArrayList<>();
+        root.eAllContents()
+            .forEachRemaining(element -> {
+                if(element instanceof ClassDefinition definition) {
+                    definitions.add(definition);
+                }
+            });
+
+        return definitions;
+    }
+
+    private static boolean isSubtypeOf(final ClassDefinition candidate, final ClassDefinition type) {
+        for(ClassDefinition current = candidate; current != null; current = current.getSuperType()) {
+            if(current == type) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private static String qualifiedNameOf(final ClassDefinition definition) {
+        return ((Module) definition.eContainer()).getName() + "." + definition.getName();
     }
 
     public EObject getEObject(final EClass clazz) {
