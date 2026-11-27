@@ -227,6 +227,24 @@ public class EClassProvider {
         return Pair.create(searchSpace, optimisationSpace);
     }
 
+    /**
+     * Returns a class for data that a configuration names but that belongs to no space of the
+     *   problem, e.g. the columns of a reference table of a fitness function
+     *   ({@code data 'x0'}). Its attributes let the configuration refer to the data and a
+     *   reader read it. The class is not cached: the caller passes only data without a
+     *   feature, so no data gets two features.
+     *
+     * @param descriptions The data descriptions, in the order of their first use.
+     * @return The newly created class.
+     * @throws IllegalArgumentException if a data representation is not supported.
+     */
+    public EClass eClassForConfigurationData(final Collection<DataDescription> descriptions) {
+        log.info("Creating dynamic eclass for the configuration data {}.",
+                 descriptions.stream().map(DataDescription::getName).toList());
+
+        return eClassOf(new LinkedHashSet<>(descriptions));
+    }
+
     private static Stream<TypeDefinitionReference> toUsedDataStream(final Step step) {
         if(step instanceof ConcreteStep concrete) {
             return Stream.concat(concrete.getReads().stream(), concrete.getWrites().stream());

@@ -1,0 +1,30 @@
+import "definitions" from 'de.evoal.core.constraints';
+import "definitions" from 'de.evoal.optimisation.gp.genetic-programming';
+
+/**
+ * The terminals of the tests: two variables and a constant in [-10, 10].
+ */
+module 'de.evoal.optimisation.gp.test.terms' {
+    /**
+     * The first variable.
+     */
+    type x0 extends variable {}
+
+    /**
+     * The second variable.
+     */
+    type x1 extends variable {}
+
+    /**
+     * A constant.
+     */
+    type 'c' extends constant {
+        /**
+         * The value.
+         */
+        @Scale { scale := 'measurement-scale.cardinal'; }
+        @LowerBoundary { boundary := -10.0; }
+        @UpperBoundary { boundary := 10.0; }
+        'value' : real;
+    }
+}

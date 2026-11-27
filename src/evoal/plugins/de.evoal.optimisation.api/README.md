@@ -391,7 +391,8 @@ a new candidate (also the initial ones) and support all four reactions; `repair`
 `LimitRepairs` (repair strategy `minimal-subtree-repair` in the memory model) with
 `'repair-fallback'` after `'maximum-attempts'`. The deterministic fitness
 `'model-measures' { model; size; depth }` writes the size and the depth of a model into numeric
-objectives, e.g. for regressions or as a size objective.
+objectives, e.g. for regressions or as a size objective. Genetic programming for symbolic
+regression builds on these model candidates (plugin `de.evoal.optimisation.gp`).
 
 ## Constraints
 
@@ -491,6 +492,12 @@ input ──optimisation function──▶ objectives ──FitnessPipeline─�
   smaller is better**. Its `FitnessLayout` names the components; a component that belongs
   to an objective refers to its `Goal`.
 - The **optimisation value** is what the steps of an algorithm compare (`FitnessValue`).
+
+An optimisation function may name data that is neither searched nor optimised, e.g. the
+columns of a reference table (`data 'x0'` in `'symbolic-regression-fitness'`).
+`OptimisationConfigurationSetup` gives such data of the problem and the algorithm configuration
+a class of its own (`EClassProvider.eClassForConfigurationData`) before the configuration is
+converted, so the configuration refers to a feature with the name and type of the data.
 
 ### Order of the steps
 

@@ -101,6 +101,31 @@ public class EClassProviderTest {
     }
 
     @Nested
+    @DisplayName("given data that only a configuration names")
+    class ConfigurationData {
+        @Test
+        public void theDataGetFeaturesInTheOrderOfTheirUse() {
+            // given
+            final List<String> names = List.of("y0", "x0", "x1");
+            final List<DataDescription> descriptions = descriptions(names);
+            final boolean hadFeatures = descriptions.stream()
+                                                    .anyMatch(description -> EAnnotationHelper.findFeatureOf(description).isPresent());
+
+            // when
+            final EClass eClass = provider.eClassForConfigurationData(descriptions);
+
+            // then
+            Assertions.assertFalse(hadFeatures);
+            Assertions.assertEquals(names, featureNames(eClass));
+            for(final DataDescription description : descriptions) {
+                final EStructuralFeature feature = EAnnotationHelper.findFeatureOf(description).orElseThrow();
+                Assertions.assertSame(eClass, feature.getEContainingClass());
+                Assertions.assertEquals(description.getName(), feature.getName());
+            }
+        }
+    }
+
+    @Nested
     @DisplayName("given an optimisation problem with many search and optimisation variables")
     class ProblemWithManyVariables {
         private final List<String> searchNames = declaredNames("x:");

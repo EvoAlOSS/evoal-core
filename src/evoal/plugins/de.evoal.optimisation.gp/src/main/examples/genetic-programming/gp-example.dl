@@ -1,0 +1,27 @@
+import "definitions" from 'de.evoal.core.constraints';
+import "definitions" from 'de.evoal.optimisation.gp.genetic-programming';
+
+/**
+ * The terminal set of the example: the input variable x and an ephemeral random constant c.
+ *   The function set is the one of the module de.evoal.optimisation.gp.genetic-programming.
+ */
+module 'gp-example' {
+    /**
+     * The input variable, bound to the data 'x0' by the fitness. The type is not named x0:
+     *   this module and the data module share the name 'gp-example', so the names would clash.
+     */
+    type x extends variable {}
+
+    /**
+     * An ephemeral random constant in [-50, 50].
+     */
+    type 'c' extends constant {
+        /**
+         * The value, drawn when the tree is built and changed by the Gaussian mutation.
+         */
+        @Scale { scale := 'measurement-scale.cardinal'; }
+        @LowerBoundary { boundary := -50.0; }
+        @UpperBoundary { boundary := 50.0; }
+        'value' : real;
+    }
+}

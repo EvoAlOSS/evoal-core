@@ -20,6 +20,7 @@
 		<module>de.evoal.optimisation.api</module>
 		<module>de.evoal.optimisation.cma_es</module>
 		<module>de.evoal.optimisation.ea</module>
+		<module>de.evoal.optimisation.gp</module>
 		<module>de.evoal.optimisation.local_search</module>
 		<module>de.evoal.optimisation.pso</module>
 		<module>de.evoal.optimisation.random_search</module>

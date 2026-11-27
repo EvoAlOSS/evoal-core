@@ -1,0 +1,2344 @@
+{
+  "formatVersion" : "2027.4.0",
+  "number" : 4,
+  "individuals" : [ {
+    "id" : 193,
+    "input" : {
+      "regression-function" : {
+        "type" : "de.evoal.optimisation.gp.genetic-programming.minus",
+        "values" : {
+          "left" : {
+            "type" : "de.evoal.optimisation.gp.genetic-programming.multiply",
+            "values" : {
+              "left" : {
+                "type" : "de.evoal.optimisation.gp.genetic-programming.multiply",
+                "values" : {
+                  "left" : {
+                    "type" : "gp-example.c",
+                    "values" : {
+                      "value" : 21.23921122169331
+                    }
+                  },
+                  "right" : {
+                    "type" : "gp-example.x",
+                    "values" : { }
+                  }
+                }
+              },
+              "right" : {
+                "type" : "de.evoal.optimisation.gp.genetic-programming.plus",
+                "values" : {
+                  "left" : {
+                    "type" : "gp-example.c",
+                    "values" : {
+                      "value" : 30.60537060132586
+                    }
+                  },
+                  "right" : {
+                    "type" : "de.evoal.optimisation.gp.genetic-programming.protected-square-root",
+                    "values" : {
+                      "operand" : {
+                        "type" : "gp-example.x",
+                        "values" : { }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "right" : {
+            "type" : "de.evoal.optimisation.gp.genetic-programming.protected-division",
+            "values" : {
+              "left" : {
+                "type" : "de.evoal.optimisation.gp.genetic-programming.protected-square-root",
+                "values" : {
+                  "operand" : {
+                    "type" : "de.evoal.optimisation.gp.genetic-programming.plus",
+                    "values" : {
+                      "left" : {
+                        "type" : "de.evoal.optimisation.gp.genetic-programming.multiply",
+                        "values" : {
+                          "left" : {
+                            "type" : "gp-example.x",
+                            "values" : { }
+                          },
+                          "right" : {
+                            "type" : "de.evoal.optimisation.gp.genetic-programming.plus",
+                            "values" : {
+                              "left" : {
+                                "type" : "de.evoal.optimisation.gp.genetic-programming.protected-division",
+                                "values" : {
+                                  "left" : {
+                                    "type" : "gp-example.x",
+                                    "values" : { }
+                                  },
+                                  "right" : {
+                                    "type" : "gp-example.c",
+                                    "values" : {
+                                      "value" : -2.7145676473355067
+                                    }
+                                  }
+                                }
+                              },
+                              "right" : {
+                                "type" : "de.evoal.optimisation.gp.genetic-programming.protected-square-root",
+                                "values" : {
+                                  "operand" : {
+                                    "type" : "gp-example.x",
+                                    "values" : { }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "right" : {
+                        "type" : "de.evoal.optimisation.gp.genetic-programming.protected-square-root",
+                        "values" : {
+                          "operand" : {
+                            "type" : "gp-example.x",
+                            "values" : { }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "right" : {
+                "type" : "de.evoal.optimisation.gp.genetic-programming.protected-division",
+                "values" : {
+                  "left" : {
+                    "type" : "gp-example.c",
+                    "values" : {
+                      "value" : 22.793730480547268
+                    }
+                  },
+                  "right" : {
+                    "type" : "gp-example.c",
+                    "values" : {
+                      "value" : -19.21698743463311
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "output" : {
+      "error" : 1.2544100675536104E12
+    },
+    "fitness" : [ 1.2544100675536104E12 ],
+    "relationships" : [ {
+      "kind" : "recombination",
+      "targets" : [ 163, 149 ],
+      "partner" : 213,
+      "properties" : {
+        "operators" : [ "subtree-crossover" ],
+        "changed-features" : [ "regression-function" ]
+      }
+    } ]
+  }, {
+    "id" : 173,
+    "input" : {
+      "regression-function" : {
+        "type" : "de.evoal.optimisation.gp.genetic-programming.minus",
+        "values" : {
+          "left" : {
+            "type" : "de.evoal.optimisation.gp.genetic-programming.multiply",
+            "values" : {
+              "left" : {
+                "type" : "gp-example.x",
+                "values" : { }
+              },
+              "right" : {
+                "type" : "de.evoal.optimisation.gp.genetic-programming.plus",
+                "values" : {
+                  "left" : {
+                    "type" : "gp-example.c",
+                    "values" : {
+                      "value" : 30.60537060132586
+                    }
+                  },
+                  "right" : {
+                    "type" : "de.evoal.optimisation.gp.genetic-programming.protected-square-root",
+                    "values" : {
+                      "operand" : {
+                        "type" : "gp-example.x",
+                        "values" : { }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "right" : {
+            "type" : "de.evoal.optimisation.gp.genetic-programming.protected-division",
+            "values" : {
+              "left" : {
+                "type" : "de.evoal.optimisation.gp.genetic-programming.protected-square-root",
+                "values" : {
+                  "operand" : {
+                    "type" : "de.evoal.optimisation.gp.genetic-programming.plus",
+                    "values" : {
+                      "left" : {
+                        "type" : "de.evoal.optimisation.gp.genetic-programming.multiply",
+                        "values" : {
+                          "left" : {
+                            "type" : "gp-example.x",
+                            "values" : { }
+                          },
+                          "right" : {
+                            "type" : "de.evoal.optimisation.gp.genetic-programming.plus",
+                            "values" : {
+                              "left" : {
+                                "type" : "de.evoal.optimisation.gp.genetic-programming.protected-division",
+                                "values" : {
+                                  "left" : {
+                                    "type" : "gp-example.x",
+                                    "values" : { }
+                                  },
+                                  "right" : {
+                                    "type" : "gp-example.c",
+                                    "values" : {
+                                      "value" : -2.7145676473355067
+                                    }
+                                  }
+                                }
+                              },
+                              "right" : {
+                                "type" : "de.evoal.optimisation.gp.genetic-programming.protected-square-root",
+                                "values" : {
+                                  "operand" : {
+                                    "type" : "gp-example.x",
+                                    "values" : { }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "right" : {
+                        "type" : "de.evoal.optimisation.gp.genetic-programming.protected-square-root",
+                        "values" : {
+                          "operand" : {
+                            "type" : "gp-example.x",
+                            "values" : { }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "right" : {
+                "type" : "de.evoal.optimisation.gp.genetic-programming.protected-division",
+                "values" : {
+                  "left" : {
+                    "type" : "gp-example.c",
+                    "values" : {
+                      "value" : 22.793730480547268
+                    }
+                  },
+                  "right" : {
+                    "type" : "gp-example.c",
+                    "values" : {
+                      "value" : -19.21698743463311
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "output" : {
+      "error" : 1.254977000834822E12
+    },
+    "fitness" : [ 1.254977000834822E12 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 163 ]
+    } ]
+  }, {
+    "id" : 176,
+    "input" : {
+      "regression-function" : {
+        "type" : "de.evoal.optimisation.gp.genetic-programming.minus",
+        "values" : {
+          "left" : {
+            "type" : "de.evoal.optimisation.gp.genetic-programming.multiply",
+            "values" : {
+              "left" : {
+                "type" : "gp-example.x",
+                "values" : { }
+              },
+              "right" : {
+                "type" : "de.evoal.optimisation.gp.genetic-programming.plus",
+                "values" : {
+                  "left" : {
+                    "type" : "de.evoal.optimisation.gp.genetic-programming.protected-division",
+                    "values" : {
+                      "left" : {
+                        "type" : "gp-example.x",
+                        "values" : { }
+                      },
+                      "right" : {
+                        "type" : "de.evoal.optimisation.gp.genetic-programming.minus",
+                        "values" : {
+                          "left" : {
+                            "type" : "gp-example.x",
+                            "values" : { }
+                          },
+                          "right" : {
+                            "type" : "gp-example.x",
+                            "values" : { }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "right" : {
+                    "type" : "de.evoal.optimisation.gp.genetic-programming.protected-square-root",
+                    "values" : {
+                      "operand" : {
+                        "type" : "gp-example.x",
+                        "values" : { }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "right" : {
+            "type" : "de.evoal.optimisation.gp.genetic-programming.protected-division",
+            "values" : {
+              "left" : {
+                "type" : "de.evoal.optimisation.gp.genetic-programming.protected-square-root",
+                "values" : {
+                  "operand" : {
+                    "type" : "de.evoal.optimisation.gp.genetic-programming.plus",
+                    "values" : {
+                      "left" : {
+                        "type" : "de.evoal.optimisation.gp.genetic-programming.multiply",
+                        "values" : {
+                          "left" : {
+                            "type" : "gp-example.c",
+                            "values" : {
+                              "value" : 21.23921122169331
+                            }
+                          },
+                          "right" : {
+                            "type" : "de.evoal.optimisation.gp.genetic-programming.multiply",
+                            "values" : {
+                              "left" : {
+                                "type" : "gp-example.c",
+                                "values" : {
+                                  "value" : 21.23921122169331
+                                }
+                              },
+                              "right" : {
+                                "type" : "gp-example.x",
+                                "values" : { }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "right" : {
+                        "type" : "gp-example.x",
+                        "values" : { }
+                      }
+                    }
+                  }
+                }
+              },
+              "right" : {
+                "type" : "de.evoal.optimisation.gp.genetic-programming.protected-division",
+                "values" : {
+                  "left" : {
+                    "type" : "gp-example.c",
+                    "values" : {
+                      "value" : -18.591596924842055
+                    }
+                  },
+                  "right" : {
+                    "type" : "gp-example.x",
+                    "values" : { }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "output" : {
+      "error" : 1.2549773156607825E12
+    },
+    "fitness" : [ 1.2549773156607825E12 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 170 ]
+    } ]
+  }, {
+    "id" : 196,
+    "input" : {
+      "regression-function" : {
+        "type" : "de.evoal.optimisation.gp.genetic-programming.minus",
+        "values" : {
+          "left" : {
+            "type" : "de.evoal.optimisation.gp.genetic-programming.multiply",
+            "values" : {
+              "left" : {
+                "type" : "gp-example.x",
+                "values" : { }
+              },
+              "right" : {
+                "type" : "de.evoal.optimisation.gp.genetic-programming.plus",
+                "values" : {
+                  "left" : {
+                    "type" : "de.evoal.optimisation.gp.genetic-programming.protected-division",
+                    "values" : {
+                      "left" : {
+                        "type" : "gp-example.x",
+                        "values" : { }
+                      },
+                      "right" : {
+                        "type" : "de.evoal.optimisation.gp.genetic-programming.minus",
+                        "values" : {
+                          "left" : {
+                            "type" : "gp-example.x",
+                            "values" : { }
+                          },
+                          "right" : {
+                            "type" : "gp-example.x",
+                            "values" : { }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "right" : {
+                    "type" : "de.evoal.optimisation.gp.genetic-programming.protected-square-root",
+                    "values" : {
+                      "operand" : {
+                        "type" : "gp-example.x",
+                        "values" : { }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "right" : {
+            "type" : "de.evoal.optimisation.gp.genetic-programming.protected-division",
+            "values" : {
+              "left" : {
+                "type" : "de.evoal.optimisation.gp.genetic-programming.protected-square-root",
+                "values" : {
+                  "operand" : {
+                    "type" : "de.evoal.optimisation.gp.genetic-programming.plus",
+                    "values" : {
+                      "left" : {
+                        "type" : "de.evoal.optimisation.gp.genetic-programming.multiply",
+                        "values" : {
+                          "left" : {
+                            "type" : "gp-example.c",
+                            "values" : {
+                              "value" : 21.23921122169331
+                            }
+                          },
+                          "right" : {
+                            "type" : "de.evoal.optimisation.gp.genetic-programming.multiply",
+                            "values" : {
+                              "left" : {
+                                "type" : "gp-example.c",
+                                "values" : {
+                                  "value" : 21.23921122169331
+                                }
+                              },
+                              "right" : {
+                                "type" : "gp-example.x",
+                                "values" : { }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "right" : {
+                        "type" : "gp-example.x",
+                        "values" : { }
+                      }
+                    }
+                  }
+                }
+              },
+              "right" : {
+                "type" : "de.evoal.optimisation.gp.genetic-programming.protected-division",
+                "values" : {
+                  "left" : {
+                    "type" : "gp-example.c",
+                    "values" : {
+                      "value" : -18.591596924842055
+                    }
+                  },
+                  "right" : {
+                    "type" : "gp-example.x",
+                    "values" : { }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "output" : {
+      "error" : 1.2549773156607825E12
+    },
+    "fitness" : [ 1.2549773156607825E12 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 170 ]
+    } ]
+  }, {
+    "id" : 197,
+    "input" : {
+      "regression-function" : {
+        "type" : "de.evoal.optimisation.gp.genetic-programming.minus",
+        "values" : {
+          "left" : {
+            "type" : "de.evoal.optimisation.gp.genetic-programming.multiply",
+            "values" : {
+              "left" : {
+                "type" : "gp-example.x",
+                "values" : { }
+              },
+              "right" : {
+                "type" : "de.evoal.optimisation.gp.genetic-programming.plus",
+                "values" : {
+                  "left" : {
+                    "type" : "de.evoal.optimisation.gp.genetic-programming.protected-division",
+                    "values" : {
+                      "left" : {
+                        "type" : "gp-example.x",
+                        "values" : { }
+                      },
+                      "right" : {
+                        "type" : "de.evoal.optimisation.gp.genetic-programming.minus",
+                        "values" : {
+                          "left" : {
+                            "type" : "gp-example.x",
+                            "values" : { }
+                          },
+                          "right" : {
+                            "type" : "gp-example.x",
+                            "values" : { }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "right" : {
+                    "type" : "de.evoal.optimisation.gp.genetic-programming.protected-square-root",
+                    "values" : {
+                      "operand" : {
+                        "type" : "gp-example.x",
+                        "values" : { }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "right" : {
+            "type" : "de.evoal.optimisation.gp.genetic-programming.protected-division",
+            "values" : {
+              "left" : {
+                "type" : "de.evoal.optimisation.gp.genetic-programming.protected-square-root",
+                "values" : {
+                  "operand" : {
+                    "type" : "de.evoal.optimisation.gp.genetic-programming.plus",
+                    "values" : {
+                      "left" : {
+                        "type" : "de.evoal.optimisation.gp.genetic-programming.multiply",
+                        "values" : {
+                          "left" : {
+                            "type" : "gp-example.c",
+                            "values" : {
+                              "value" : 21.23921122169331
+                            }
+                          },
+                          "right" : {
+                            "type" : "de.evoal.optimisation.gp.genetic-programming.multiply",
+                            "values" : {
+                              "left" : {
+                                "type" : "gp-example.c",
+                                "values" : {
+                                  "value" : 21.23921122169331
+                                }
+                              },
+                              "right" : {
+                                "type" : "gp-example.x",
+                                "values" : { }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "right" : {
+                        "type" : "gp-example.x",
+                        "values" : { }
+                      }
+                    }
+                  }
+                }
+              },
+              "right" : {
+                "type" : "de.evoal.optimisation.gp.genetic-programming.protected-division",
+                "values" : {
+                  "left" : {
+                    "type" : "gp-example.c",
+                    "values" : {
+                      "value" : -18.591596924842055
+                    }
+                  },
+                  "right" : {
+                    "type" : "gp-example.x",
+                    "values" : { }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "output" : {
+      "error" : 1.2549773156607825E12
+    },
+    "fitness" : [ 1.2549773156607825E12 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 170 ]
+    } ]
+  }, {
+    "id" : 213,
+    "input" : {
+      "regression-function" : {
+        "type" : "de.evoal.optimisation.gp.genetic-programming.minus",
+        "values" : {
+          "left" : {
+            "type" : "de.evoal.optimisation.gp.genetic-programming.multiply",
+            "values" : {
+              "left" : {
+                "type" : "gp-example.x",
+                "values" : { }
+              },
+              "right" : {
+                "type" : "de.evoal.optimisation.gp.genetic-programming.plus",
+                "values" : {
+                  "left" : {
+                    "type" : "de.evoal.optimisation.gp.genetic-programming.protected-division",
+                    "values" : {
+                      "left" : {
+                        "type" : "gp-example.x",
+                        "values" : { }
+                      },
+                      "right" : {
+                        "type" : "de.evoal.optimisation.gp.genetic-programming.minus",
+                        "values" : {
+                          "left" : {
+                            "type" : "gp-example.x",
+                            "values" : { }
+                          },
+                          "right" : {
+                            "type" : "gp-example.x",
+                            "values" : { }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "right" : {
+                    "type" : "de.evoal.optimisation.gp.genetic-programming.protected-square-root",
+                    "values" : {
+                      "operand" : {
+                        "type" : "gp-example.x",
+                        "values" : { }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "right" : {
+            "type" : "de.evoal.optimisation.gp.genetic-programming.protected-division",
+            "values" : {
+              "left" : {
+                "type" : "de.evoal.optimisation.gp.genetic-programming.protected-square-root",
+                "values" : {
+                  "operand" : {
+                    "type" : "de.evoal.optimisation.gp.genetic-programming.plus",
+                    "values" : {
+                      "left" : {
+                        "type" : "de.evoal.optimisation.gp.genetic-programming.multiply",
+                        "values" : {
+                          "left" : {
+                            "type" : "gp-example.c",
+                            "values" : {
+                              "value" : 20.72535790409479
+                            }
+                          },
+                          "right" : {
+                            "type" : "gp-example.x",
+                            "values" : { }
+                          }
+                        }
+                      },
+                      "right" : {
+                        "type" : "de.evoal.optimisation.gp.genetic-programming.protected-square-root",
+                        "values" : {
+                          "operand" : {
+                            "type" : "gp-example.x",
+                            "values" : { }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "right" : {
+                "type" : "de.evoal.optimisation.gp.genetic-programming.protected-division",
+                "values" : {
+                  "left" : {
+                    "type" : "gp-example.c",
+                    "values" : {
+                      "value" : -14.900630495589567
+                    }
+                  },
+                  "right" : {
+                    "type" : "gp-example.x",
+                    "values" : { }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "output" : {
+      "error" : 1.2549879440276587E12
+    },
+    "fitness" : [ 1.2549879440276587E12 ],
+    "relationships" : [ {
+      "kind" : "recombination",
+      "targets" : [ 149, 163 ],
+      "partner" : 193,
+      "properties" : {
+        "operators" : [ "subtree-crossover", "gaussian-mutation" ],
+        "changed-features" : [ "regression-function" ]
+      }
+    } ]
+  }, {
+    "id" : 180,
+    "input" : {
+      "regression-function" : {
+        "type" : "de.evoal.optimisation.gp.genetic-programming.minus",
+        "values" : {
+          "left" : {
+            "type" : "de.evoal.optimisation.gp.genetic-programming.multiply",
+            "values" : {
+              "left" : {
+                "type" : "gp-example.x",
+                "values" : { }
+              },
+              "right" : {
+                "type" : "de.evoal.optimisation.gp.genetic-programming.plus",
+                "values" : {
+                  "left" : {
+                    "type" : "de.evoal.optimisation.gp.genetic-programming.protected-division",
+                    "values" : {
+                      "left" : {
+                        "type" : "gp-example.x",
+                        "values" : { }
+                      },
+                      "right" : {
+                        "type" : "de.evoal.optimisation.gp.genetic-programming.minus",
+                        "values" : {
+                          "left" : {
+                            "type" : "gp-example.x",
+                            "values" : { }
+                          },
+                          "right" : {
+                            "type" : "gp-example.x",
+                            "values" : { }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "right" : {
+                    "type" : "de.evoal.optimisation.gp.genetic-programming.protected-square-root",
+                    "values" : {
+                      "operand" : {
+                        "type" : "gp-example.x",
+                        "values" : { }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "right" : {
+            "type" : "de.evoal.optimisation.gp.genetic-programming.protected-division",
+            "values" : {
+              "left" : {
+                "type" : "de.evoal.optimisation.gp.genetic-programming.protected-square-root",
+                "values" : {
+                  "operand" : {
+                    "type" : "de.evoal.optimisation.gp.genetic-programming.plus",
+                    "values" : {
+                      "left" : {
+                        "type" : "de.evoal.optimisation.gp.genetic-programming.multiply",
+                        "values" : {
+                          "left" : {
+                            "type" : "gp-example.c",
+                            "values" : {
+                              "value" : 21.23921122169331
+                            }
+                          },
+                          "right" : {
+                            "type" : "gp-example.x",
+                            "values" : { }
+                          }
+                        }
+                      },
+                      "right" : {
+                        "type" : "de.evoal.optimisation.gp.genetic-programming.protected-square-root",
+                        "values" : {
+                          "operand" : {
+                            "type" : "gp-example.x",
+                            "values" : { }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "right" : {
+                "type" : "de.evoal.optimisation.gp.genetic-programming.protected-division",
+                "values" : {
+                  "left" : {
+                    "type" : "gp-example.c",
+                    "values" : {
+                      "value" : -18.591596924842055
+                    }
+                  },
+                  "right" : {
+                    "type" : "gp-example.x",
+                    "values" : { }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "output" : {
+      "error" : 1.2549886749256333E12
+    },
+    "fitness" : [ 1.2549886749256333E12 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 124 ]
+    } ]
+  }, {
+    "id" : 178,
+    "input" : {
+      "regression-function" : {
+        "type" : "de.evoal.optimisation.gp.genetic-programming.minus",
+        "values" : {
+          "left" : {
+            "type" : "de.evoal.optimisation.gp.genetic-programming.multiply",
+            "values" : {
+              "left" : {
+                "type" : "gp-example.x",
+                "values" : { }
+              },
+              "right" : {
+                "type" : "de.evoal.optimisation.gp.genetic-programming.plus",
+                "values" : {
+                  "left" : {
+                    "type" : "de.evoal.optimisation.gp.genetic-programming.protected-division",
+                    "values" : {
+                      "left" : {
+                        "type" : "gp-example.x",
+                        "values" : { }
+                      },
+                      "right" : {
+                        "type" : "de.evoal.optimisation.gp.genetic-programming.minus",
+                        "values" : {
+                          "left" : {
+                            "type" : "gp-example.x",
+                            "values" : { }
+                          },
+                          "right" : {
+                            "type" : "gp-example.x",
+                            "values" : { }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "right" : {
+                    "type" : "de.evoal.optimisation.gp.genetic-programming.protected-square-root",
+                    "values" : {
+                      "operand" : {
+                        "type" : "gp-example.x",
+                        "values" : { }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "right" : {
+            "type" : "de.evoal.optimisation.gp.genetic-programming.protected-division",
+            "values" : {
+              "left" : {
+                "type" : "de.evoal.optimisation.gp.genetic-programming.protected-square-root",
+                "values" : {
+                  "operand" : {
+                    "type" : "de.evoal.optimisation.gp.genetic-programming.plus",
+                    "values" : {
+                      "left" : {
+                        "type" : "de.evoal.optimisation.gp.genetic-programming.multiply",
+                        "values" : {
+                          "left" : {
+                            "type" : "gp-example.c",
+                            "values" : {
+                              "value" : 21.23921122169331
+                            }
+                          },
+                          "right" : {
+                            "type" : "gp-example.x",
+                            "values" : { }
+                          }
+                        }
+                      },
+                      "right" : {
+                        "type" : "de.evoal.optimisation.gp.genetic-programming.protected-square-root",
+                        "values" : {
+                          "operand" : {
+                            "type" : "gp-example.x",
+                            "values" : { }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "right" : {
+                "type" : "de.evoal.optimisation.gp.genetic-programming.protected-division",
+                "values" : {
+                  "left" : {
+                    "type" : "gp-example.c",
+                    "values" : {
+                      "value" : -18.591596924842055
+                    }
+                  },
+                  "right" : {
+                    "type" : "gp-example.x",
+                    "values" : { }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "output" : {
+      "error" : 1.2549886749256333E12
+    },
+    "fitness" : [ 1.2549886749256333E12 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 136 ]
+    } ]
+  }, {
+    "id" : 184,
+    "input" : {
+      "regression-function" : {
+        "type" : "de.evoal.optimisation.gp.genetic-programming.minus",
+        "values" : {
+          "left" : {
+            "type" : "de.evoal.optimisation.gp.genetic-programming.multiply",
+            "values" : {
+              "left" : {
+                "type" : "gp-example.x",
+                "values" : { }
+              },
+              "right" : {
+                "type" : "de.evoal.optimisation.gp.genetic-programming.plus",
+                "values" : {
+                  "left" : {
+                    "type" : "de.evoal.optimisation.gp.genetic-programming.protected-division",
+                    "values" : {
+                      "left" : {
+                        "type" : "gp-example.x",
+                        "values" : { }
+                      },
+                      "right" : {
+                        "type" : "de.evoal.optimisation.gp.genetic-programming.minus",
+                        "values" : {
+                          "left" : {
+                            "type" : "gp-example.x",
+                            "values" : { }
+                          },
+                          "right" : {
+                            "type" : "gp-example.x",
+                            "values" : { }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "right" : {
+                    "type" : "de.evoal.optimisation.gp.genetic-programming.protected-square-root",
+                    "values" : {
+                      "operand" : {
+                        "type" : "gp-example.x",
+                        "values" : { }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "right" : {
+            "type" : "de.evoal.optimisation.gp.genetic-programming.protected-division",
+            "values" : {
+              "left" : {
+                "type" : "de.evoal.optimisation.gp.genetic-programming.protected-square-root",
+                "values" : {
+                  "operand" : {
+                    "type" : "de.evoal.optimisation.gp.genetic-programming.plus",
+                    "values" : {
+                      "left" : {
+                        "type" : "de.evoal.optimisation.gp.genetic-programming.multiply",
+                        "values" : {
+                          "left" : {
+                            "type" : "gp-example.c",
+                            "values" : {
+                              "value" : 21.23921122169331
+                            }
+                          },
+                          "right" : {
+                            "type" : "gp-example.x",
+                            "values" : { }
+                          }
+                        }
+                      },
+                      "right" : {
+                        "type" : "de.evoal.optimisation.gp.genetic-programming.protected-square-root",
+                        "values" : {
+                          "operand" : {
+                            "type" : "gp-example.x",
+                            "values" : { }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "right" : {
+                "type" : "de.evoal.optimisation.gp.genetic-programming.protected-division",
+                "values" : {
+                  "left" : {
+                    "type" : "gp-example.c",
+                    "values" : {
+                      "value" : -18.591596924842055
+                    }
+                  },
+                  "right" : {
+                    "type" : "gp-example.x",
+                    "values" : { }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "output" : {
+      "error" : 1.2549886749256333E12
+    },
+    "fitness" : [ 1.2549886749256333E12 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 144 ]
+    } ]
+  }, {
+    "id" : 204,
+    "input" : {
+      "regression-function" : {
+        "type" : "de.evoal.optimisation.gp.genetic-programming.minus",
+        "values" : {
+          "left" : {
+            "type" : "de.evoal.optimisation.gp.genetic-programming.multiply",
+            "values" : {
+              "left" : {
+                "type" : "gp-example.x",
+                "values" : { }
+              },
+              "right" : {
+                "type" : "de.evoal.optimisation.gp.genetic-programming.plus",
+                "values" : {
+                  "left" : {
+                    "type" : "de.evoal.optimisation.gp.genetic-programming.protected-division",
+                    "values" : {
+                      "left" : {
+                        "type" : "gp-example.x",
+                        "values" : { }
+                      },
+                      "right" : {
+                        "type" : "de.evoal.optimisation.gp.genetic-programming.minus",
+                        "values" : {
+                          "left" : {
+                            "type" : "gp-example.x",
+                            "values" : { }
+                          },
+                          "right" : {
+                            "type" : "gp-example.x",
+                            "values" : { }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "right" : {
+                    "type" : "de.evoal.optimisation.gp.genetic-programming.protected-square-root",
+                    "values" : {
+                      "operand" : {
+                        "type" : "gp-example.x",
+                        "values" : { }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "right" : {
+            "type" : "de.evoal.optimisation.gp.genetic-programming.protected-division",
+            "values" : {
+              "left" : {
+                "type" : "de.evoal.optimisation.gp.genetic-programming.protected-square-root",
+                "values" : {
+                  "operand" : {
+                    "type" : "de.evoal.optimisation.gp.genetic-programming.plus",
+                    "values" : {
+                      "left" : {
+                        "type" : "de.evoal.optimisation.gp.genetic-programming.multiply",
+                        "values" : {
+                          "left" : {
+                            "type" : "gp-example.c",
+                            "values" : {
+                              "value" : 21.23921122169331
+                            }
+                          },
+                          "right" : {
+                            "type" : "gp-example.x",
+                            "values" : { }
+                          }
+                        }
+                      },
+                      "right" : {
+                        "type" : "de.evoal.optimisation.gp.genetic-programming.protected-square-root",
+                        "values" : {
+                          "operand" : {
+                            "type" : "gp-example.x",
+                            "values" : { }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "right" : {
+                "type" : "de.evoal.optimisation.gp.genetic-programming.protected-division",
+                "values" : {
+                  "left" : {
+                    "type" : "gp-example.c",
+                    "values" : {
+                      "value" : -18.591596924842055
+                    }
+                  },
+                  "right" : {
+                    "type" : "gp-example.x",
+                    "values" : { }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "output" : {
+      "error" : 1.2549886749256333E12
+    },
+    "fitness" : [ 1.2549886749256333E12 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 144 ]
+    } ]
+  }, {
+    "id" : 206,
+    "input" : {
+      "regression-function" : {
+        "type" : "de.evoal.optimisation.gp.genetic-programming.minus",
+        "values" : {
+          "left" : {
+            "type" : "de.evoal.optimisation.gp.genetic-programming.multiply",
+            "values" : {
+              "left" : {
+                "type" : "gp-example.x",
+                "values" : { }
+              },
+              "right" : {
+                "type" : "de.evoal.optimisation.gp.genetic-programming.plus",
+                "values" : {
+                  "left" : {
+                    "type" : "de.evoal.optimisation.gp.genetic-programming.protected-division",
+                    "values" : {
+                      "left" : {
+                        "type" : "gp-example.x",
+                        "values" : { }
+                      },
+                      "right" : {
+                        "type" : "de.evoal.optimisation.gp.genetic-programming.minus",
+                        "values" : {
+                          "left" : {
+                            "type" : "gp-example.x",
+                            "values" : { }
+                          },
+                          "right" : {
+                            "type" : "gp-example.x",
+                            "values" : { }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "right" : {
+                    "type" : "de.evoal.optimisation.gp.genetic-programming.protected-square-root",
+                    "values" : {
+                      "operand" : {
+                        "type" : "gp-example.x",
+                        "values" : { }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "right" : {
+            "type" : "de.evoal.optimisation.gp.genetic-programming.protected-division",
+            "values" : {
+              "left" : {
+                "type" : "de.evoal.optimisation.gp.genetic-programming.protected-square-root",
+                "values" : {
+                  "operand" : {
+                    "type" : "de.evoal.optimisation.gp.genetic-programming.plus",
+                    "values" : {
+                      "left" : {
+                        "type" : "de.evoal.optimisation.gp.genetic-programming.multiply",
+                        "values" : {
+                          "left" : {
+                            "type" : "gp-example.c",
+                            "values" : {
+                              "value" : 21.23921122169331
+                            }
+                          },
+                          "right" : {
+                            "type" : "gp-example.x",
+                            "values" : { }
+                          }
+                        }
+                      },
+                      "right" : {
+                        "type" : "de.evoal.optimisation.gp.genetic-programming.protected-square-root",
+                        "values" : {
+                          "operand" : {
+                            "type" : "gp-example.x",
+                            "values" : { }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "right" : {
+                "type" : "de.evoal.optimisation.gp.genetic-programming.protected-division",
+                "values" : {
+                  "left" : {
+                    "type" : "gp-example.c",
+                    "values" : {
+                      "value" : -18.591596924842055
+                    }
+                  },
+                  "right" : {
+                    "type" : "gp-example.x",
+                    "values" : { }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "output" : {
+      "error" : 1.2549886749256333E12
+    },
+    "fitness" : [ 1.2549886749256333E12 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 124 ]
+    } ]
+  }, {
+    "id" : 174,
+    "input" : {
+      "regression-function" : {
+        "type" : "de.evoal.optimisation.gp.genetic-programming.minus",
+        "values" : {
+          "left" : {
+            "type" : "de.evoal.optimisation.gp.genetic-programming.multiply",
+            "values" : {
+              "left" : {
+                "type" : "gp-example.x",
+                "values" : { }
+              },
+              "right" : {
+                "type" : "de.evoal.optimisation.gp.genetic-programming.plus",
+                "values" : {
+                  "left" : {
+                    "type" : "de.evoal.optimisation.gp.genetic-programming.protected-division",
+                    "values" : {
+                      "left" : {
+                        "type" : "gp-example.x",
+                        "values" : { }
+                      },
+                      "right" : {
+                        "type" : "de.evoal.optimisation.gp.genetic-programming.minus",
+                        "values" : {
+                          "left" : {
+                            "type" : "gp-example.x",
+                            "values" : { }
+                          },
+                          "right" : {
+                            "type" : "gp-example.x",
+                            "values" : { }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "right" : {
+                    "type" : "de.evoal.optimisation.gp.genetic-programming.protected-square-root",
+                    "values" : {
+                      "operand" : {
+                        "type" : "gp-example.x",
+                        "values" : { }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "right" : {
+            "type" : "de.evoal.optimisation.gp.genetic-programming.protected-division",
+            "values" : {
+              "left" : {
+                "type" : "de.evoal.optimisation.gp.genetic-programming.protected-square-root",
+                "values" : {
+                  "operand" : {
+                    "type" : "de.evoal.optimisation.gp.genetic-programming.plus",
+                    "values" : {
+                      "left" : {
+                        "type" : "de.evoal.optimisation.gp.genetic-programming.multiply",
+                        "values" : {
+                          "left" : {
+                            "type" : "gp-example.c",
+                            "values" : {
+                              "value" : 21.23921122169331
+                            }
+                          },
+                          "right" : {
+                            "type" : "gp-example.x",
+                            "values" : { }
+                          }
+                        }
+                      },
+                      "right" : {
+                        "type" : "de.evoal.optimisation.gp.genetic-programming.protected-square-root",
+                        "values" : {
+                          "operand" : {
+                            "type" : "de.evoal.optimisation.gp.genetic-programming.multiply",
+                            "values" : {
+                              "left" : {
+                                "type" : "gp-example.c",
+                                "values" : {
+                                  "value" : 21.23921122169331
+                                }
+                              },
+                              "right" : {
+                                "type" : "gp-example.x",
+                                "values" : { }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "right" : {
+                "type" : "de.evoal.optimisation.gp.genetic-programming.protected-division",
+                "values" : {
+                  "left" : {
+                    "type" : "gp-example.c",
+                    "values" : {
+                      "value" : -18.591596924842055
+                    }
+                  },
+                  "right" : {
+                    "type" : "gp-example.x",
+                    "values" : { }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "output" : {
+      "error" : 1.254988674954898E12
+    },
+    "fitness" : [ 1.254988674954898E12 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 149 ]
+    } ]
+  }, {
+    "id" : 220,
+    "input" : {
+      "regression-function" : {
+        "type" : "de.evoal.optimisation.gp.genetic-programming.minus",
+        "values" : {
+          "left" : {
+            "type" : "de.evoal.optimisation.gp.genetic-programming.multiply",
+            "values" : {
+              "left" : {
+                "type" : "gp-example.x",
+                "values" : { }
+              },
+              "right" : {
+                "type" : "de.evoal.optimisation.gp.genetic-programming.plus",
+                "values" : {
+                  "left" : {
+                    "type" : "de.evoal.optimisation.gp.genetic-programming.protected-division",
+                    "values" : {
+                      "left" : {
+                        "type" : "gp-example.x",
+                        "values" : { }
+                      },
+                      "right" : {
+                        "type" : "de.evoal.optimisation.gp.genetic-programming.minus",
+                        "values" : {
+                          "left" : {
+                            "type" : "gp-example.x",
+                            "values" : { }
+                          },
+                          "right" : {
+                            "type" : "gp-example.x",
+                            "values" : { }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "right" : {
+                    "type" : "de.evoal.optimisation.gp.genetic-programming.protected-square-root",
+                    "values" : {
+                      "operand" : {
+                        "type" : "gp-example.x",
+                        "values" : { }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "right" : {
+            "type" : "de.evoal.optimisation.gp.genetic-programming.protected-division",
+            "values" : {
+              "left" : {
+                "type" : "de.evoal.optimisation.gp.genetic-programming.protected-square-root",
+                "values" : {
+                  "operand" : {
+                    "type" : "de.evoal.optimisation.gp.genetic-programming.plus",
+                    "values" : {
+                      "left" : {
+                        "type" : "de.evoal.optimisation.gp.genetic-programming.multiply",
+                        "values" : {
+                          "left" : {
+                            "type" : "gp-example.c",
+                            "values" : {
+                              "value" : 21.3913331033068
+                            }
+                          },
+                          "right" : {
+                            "type" : "gp-example.x",
+                            "values" : { }
+                          }
+                        }
+                      },
+                      "right" : {
+                        "type" : "de.evoal.optimisation.gp.genetic-programming.protected-square-root",
+                        "values" : {
+                          "operand" : {
+                            "type" : "gp-example.x",
+                            "values" : { }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "right" : {
+                "type" : "de.evoal.optimisation.gp.genetic-programming.protected-division",
+                "values" : {
+                  "left" : {
+                    "type" : "gp-example.c",
+                    "values" : {
+                      "value" : -18.752974765059278
+                    }
+                  },
+                  "right" : {
+                    "type" : "gp-example.x",
+                    "values" : { }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "output" : {
+      "error" : 1.2549886908356714E12
+    },
+    "fitness" : [ 1.2549886908356714E12 ],
+    "relationships" : [ {
+      "kind" : "mutation",
+      "targets" : [ 124 ],
+      "properties" : {
+        "operators" : [ "gaussian-mutation" ],
+        "changed-features" : [ "regression-function" ]
+      }
+    } ]
+  }, {
+    "id" : 215,
+    "input" : {
+      "regression-function" : {
+        "type" : "de.evoal.optimisation.gp.genetic-programming.minus",
+        "values" : {
+          "left" : {
+            "type" : "de.evoal.optimisation.gp.genetic-programming.multiply",
+            "values" : {
+              "left" : {
+                "type" : "gp-example.x",
+                "values" : { }
+              },
+              "right" : {
+                "type" : "de.evoal.optimisation.gp.genetic-programming.plus",
+                "values" : {
+                  "left" : {
+                    "type" : "de.evoal.optimisation.gp.genetic-programming.protected-division",
+                    "values" : {
+                      "left" : {
+                        "type" : "gp-example.x",
+                        "values" : { }
+                      },
+                      "right" : {
+                        "type" : "de.evoal.optimisation.gp.genetic-programming.minus",
+                        "values" : {
+                          "left" : {
+                            "type" : "gp-example.x",
+                            "values" : { }
+                          },
+                          "right" : {
+                            "type" : "gp-example.x",
+                            "values" : { }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "right" : {
+                    "type" : "de.evoal.optimisation.gp.genetic-programming.protected-square-root",
+                    "values" : {
+                      "operand" : {
+                        "type" : "gp-example.x",
+                        "values" : { }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "right" : {
+            "type" : "de.evoal.optimisation.gp.genetic-programming.protected-division",
+            "values" : {
+              "left" : {
+                "type" : "de.evoal.optimisation.gp.genetic-programming.protected-square-root",
+                "values" : {
+                  "operand" : {
+                    "type" : "de.evoal.optimisation.gp.genetic-programming.plus",
+                    "values" : {
+                      "left" : {
+                        "type" : "de.evoal.optimisation.gp.genetic-programming.multiply",
+                        "values" : {
+                          "left" : {
+                            "type" : "gp-example.c",
+                            "values" : {
+                              "value" : 20.924140925297756
+                            }
+                          },
+                          "right" : {
+                            "type" : "gp-example.x",
+                            "values" : { }
+                          }
+                        }
+                      },
+                      "right" : {
+                        "type" : "de.evoal.optimisation.gp.genetic-programming.protected-square-root",
+                        "values" : {
+                          "operand" : {
+                            "type" : "gp-example.x",
+                            "values" : { }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "right" : {
+                "type" : "de.evoal.optimisation.gp.genetic-programming.protected-division",
+                "values" : {
+                  "left" : {
+                    "type" : "gp-example.c",
+                    "values" : {
+                      "value" : -20.027950327790595
+                    }
+                  },
+                  "right" : {
+                    "type" : "gp-example.x",
+                    "values" : { }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "output" : {
+      "error" : 1.2549889220847275E12
+    },
+    "fitness" : [ 1.2549889220847275E12 ],
+    "relationships" : [ {
+      "kind" : "mutation",
+      "targets" : [ 136 ],
+      "properties" : {
+        "operators" : [ "gaussian-mutation" ],
+        "changed-features" : [ "regression-function" ]
+      }
+    } ]
+  }, {
+    "id" : 187,
+    "input" : {
+      "regression-function" : {
+        "type" : "de.evoal.optimisation.gp.genetic-programming.minus",
+        "values" : {
+          "left" : {
+            "type" : "de.evoal.optimisation.gp.genetic-programming.multiply",
+            "values" : {
+              "left" : {
+                "type" : "gp-example.x",
+                "values" : { }
+              },
+              "right" : {
+                "type" : "de.evoal.optimisation.gp.genetic-programming.plus",
+                "values" : {
+                  "left" : {
+                    "type" : "de.evoal.optimisation.gp.genetic-programming.protected-division",
+                    "values" : {
+                      "left" : {
+                        "type" : "gp-example.x",
+                        "values" : { }
+                      },
+                      "right" : {
+                        "type" : "de.evoal.optimisation.gp.genetic-programming.minus",
+                        "values" : {
+                          "left" : {
+                            "type" : "gp-example.x",
+                            "values" : { }
+                          },
+                          "right" : {
+                            "type" : "gp-example.x",
+                            "values" : { }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "right" : {
+                    "type" : "de.evoal.optimisation.gp.genetic-programming.protected-square-root",
+                    "values" : {
+                      "operand" : {
+                        "type" : "gp-example.x",
+                        "values" : { }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "right" : {
+            "type" : "de.evoal.optimisation.gp.genetic-programming.protected-division",
+            "values" : {
+              "left" : {
+                "type" : "de.evoal.optimisation.gp.genetic-programming.protected-square-root",
+                "values" : {
+                  "operand" : {
+                    "type" : "de.evoal.optimisation.gp.genetic-programming.plus",
+                    "values" : {
+                      "left" : {
+                        "type" : "de.evoal.optimisation.gp.genetic-programming.plus",
+                        "values" : {
+                          "left" : {
+                            "type" : "gp-example.x",
+                            "values" : { }
+                          },
+                          "right" : {
+                            "type" : "gp-example.c",
+                            "values" : {
+                              "value" : 24.377917476268948
+                            }
+                          }
+                        }
+                      },
+                      "right" : {
+                        "type" : "de.evoal.optimisation.gp.genetic-programming.protected-square-root",
+                        "values" : {
+                          "operand" : {
+                            "type" : "gp-example.x",
+                            "values" : { }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "right" : {
+                "type" : "de.evoal.optimisation.gp.genetic-programming.protected-division",
+                "values" : {
+                  "left" : {
+                    "type" : "gp-example.c",
+                    "values" : {
+                      "value" : -18.591596924842055
+                    }
+                  },
+                  "right" : {
+                    "type" : "gp-example.x",
+                    "values" : { }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "output" : {
+      "error" : 1.2549911369152725E12
+    },
+    "fitness" : [ 1.2549911369152725E12 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 123 ]
+    } ]
+  }, {
+    "id" : 183,
+    "input" : {
+      "regression-function" : {
+        "type" : "de.evoal.optimisation.gp.genetic-programming.minus",
+        "values" : {
+          "left" : {
+            "type" : "de.evoal.optimisation.gp.genetic-programming.multiply",
+            "values" : {
+              "left" : {
+                "type" : "gp-example.x",
+                "values" : { }
+              },
+              "right" : {
+                "type" : "de.evoal.optimisation.gp.genetic-programming.plus",
+                "values" : {
+                  "left" : {
+                    "type" : "de.evoal.optimisation.gp.genetic-programming.protected-division",
+                    "values" : {
+                      "left" : {
+                        "type" : "gp-example.x",
+                        "values" : { }
+                      },
+                      "right" : {
+                        "type" : "de.evoal.optimisation.gp.genetic-programming.minus",
+                        "values" : {
+                          "left" : {
+                            "type" : "gp-example.x",
+                            "values" : { }
+                          },
+                          "right" : {
+                            "type" : "gp-example.x",
+                            "values" : { }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "right" : {
+                    "type" : "de.evoal.optimisation.gp.genetic-programming.protected-square-root",
+                    "values" : {
+                      "operand" : {
+                        "type" : "gp-example.x",
+                        "values" : { }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "right" : {
+            "type" : "de.evoal.optimisation.gp.genetic-programming.protected-division",
+            "values" : {
+              "left" : {
+                "type" : "de.evoal.optimisation.gp.genetic-programming.protected-square-root",
+                "values" : {
+                  "operand" : {
+                    "type" : "de.evoal.optimisation.gp.genetic-programming.plus",
+                    "values" : {
+                      "left" : {
+                        "type" : "de.evoal.optimisation.gp.genetic-programming.plus",
+                        "values" : {
+                          "left" : {
+                            "type" : "gp-example.x",
+                            "values" : { }
+                          },
+                          "right" : {
+                            "type" : "gp-example.c",
+                            "values" : {
+                              "value" : 24.377917476268948
+                            }
+                          }
+                        }
+                      },
+                      "right" : {
+                        "type" : "de.evoal.optimisation.gp.genetic-programming.protected-square-root",
+                        "values" : {
+                          "operand" : {
+                            "type" : "gp-example.x",
+                            "values" : { }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "right" : {
+                "type" : "de.evoal.optimisation.gp.genetic-programming.protected-division",
+                "values" : {
+                  "left" : {
+                    "type" : "gp-example.c",
+                    "values" : {
+                      "value" : -18.591596924842055
+                    }
+                  },
+                  "right" : {
+                    "type" : "gp-example.x",
+                    "values" : { }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "output" : {
+      "error" : 1.2549911369152725E12
+    },
+    "fitness" : [ 1.2549911369152725E12 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 143 ]
+    } ]
+  }, {
+    "id" : 175,
+    "input" : {
+      "regression-function" : {
+        "type" : "de.evoal.optimisation.gp.genetic-programming.plus",
+        "values" : {
+          "left" : {
+            "type" : "de.evoal.optimisation.gp.genetic-programming.multiply",
+            "values" : {
+              "left" : {
+                "type" : "gp-example.x",
+                "values" : { }
+              },
+              "right" : {
+                "type" : "de.evoal.optimisation.gp.genetic-programming.plus",
+                "values" : {
+                  "left" : {
+                    "type" : "de.evoal.optimisation.gp.genetic-programming.protected-division",
+                    "values" : {
+                      "left" : {
+                        "type" : "gp-example.x",
+                        "values" : { }
+                      },
+                      "right" : {
+                        "type" : "de.evoal.optimisation.gp.genetic-programming.minus",
+                        "values" : {
+                          "left" : {
+                            "type" : "gp-example.x",
+                            "values" : { }
+                          },
+                          "right" : {
+                            "type" : "gp-example.x",
+                            "values" : { }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "right" : {
+                    "type" : "de.evoal.optimisation.gp.genetic-programming.protected-square-root",
+                    "values" : {
+                      "operand" : {
+                        "type" : "gp-example.x",
+                        "values" : { }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "right" : {
+            "type" : "gp-example.x",
+            "values" : { }
+          }
+        }
+      }
+    },
+    "output" : {
+      "error" : 1.254991317310572E12
+    },
+    "fitness" : [ 1.254991317310572E12 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 154 ]
+    } ]
+  }, {
+    "id" : 179,
+    "input" : {
+      "regression-function" : {
+        "type" : "de.evoal.optimisation.gp.genetic-programming.minus",
+        "values" : {
+          "left" : {
+            "type" : "de.evoal.optimisation.gp.genetic-programming.multiply",
+            "values" : {
+              "left" : {
+                "type" : "gp-example.x",
+                "values" : { }
+              },
+              "right" : {
+                "type" : "de.evoal.optimisation.gp.genetic-programming.plus",
+                "values" : {
+                  "left" : {
+                    "type" : "de.evoal.optimisation.gp.genetic-programming.protected-division",
+                    "values" : {
+                      "left" : {
+                        "type" : "gp-example.x",
+                        "values" : { }
+                      },
+                      "right" : {
+                        "type" : "de.evoal.optimisation.gp.genetic-programming.minus",
+                        "values" : {
+                          "left" : {
+                            "type" : "gp-example.x",
+                            "values" : { }
+                          },
+                          "right" : {
+                            "type" : "gp-example.x",
+                            "values" : { }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "right" : {
+                    "type" : "de.evoal.optimisation.gp.genetic-programming.protected-square-root",
+                    "values" : {
+                      "operand" : {
+                        "type" : "gp-example.x",
+                        "values" : { }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "right" : {
+            "type" : "de.evoal.optimisation.gp.genetic-programming.protected-division",
+            "values" : {
+              "left" : {
+                "type" : "de.evoal.optimisation.gp.genetic-programming.protected-division",
+                "values" : {
+                  "left" : {
+                    "type" : "gp-example.x",
+                    "values" : { }
+                  },
+                  "right" : {
+                    "type" : "gp-example.x",
+                    "values" : { }
+                  }
+                }
+              },
+              "right" : {
+                "type" : "de.evoal.optimisation.gp.genetic-programming.protected-division",
+                "values" : {
+                  "left" : {
+                    "type" : "gp-example.c",
+                    "values" : {
+                      "value" : -18.591596924842055
+                    }
+                  },
+                  "right" : {
+                    "type" : "gp-example.x",
+                    "values" : { }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "output" : {
+      "error" : 1.2549917913601277E12
+    },
+    "fitness" : [ 1.2549917913601277E12 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 146 ]
+    } ]
+  }, {
+    "id" : 225,
+    "input" : {
+      "regression-function" : {
+        "type" : "de.evoal.optimisation.gp.genetic-programming.plus",
+        "values" : {
+          "left" : {
+            "type" : "de.evoal.optimisation.gp.genetic-programming.multiply",
+            "values" : {
+              "left" : {
+                "type" : "gp-example.x",
+                "values" : { }
+              },
+              "right" : {
+                "type" : "de.evoal.optimisation.gp.genetic-programming.plus",
+                "values" : {
+                  "left" : {
+                    "type" : "de.evoal.optimisation.gp.genetic-programming.protected-division",
+                    "values" : {
+                      "left" : {
+                        "type" : "gp-example.x",
+                        "values" : { }
+                      },
+                      "right" : {
+                        "type" : "de.evoal.optimisation.gp.genetic-programming.minus",
+                        "values" : {
+                          "left" : {
+                            "type" : "de.evoal.optimisation.gp.genetic-programming.multiply",
+                            "values" : {
+                              "left" : {
+                                "type" : "gp-example.c",
+                                "values" : {
+                                  "value" : 20.671261299139328
+                                }
+                              },
+                              "right" : {
+                                "type" : "gp-example.x",
+                                "values" : { }
+                              }
+                            }
+                          },
+                          "right" : {
+                            "type" : "gp-example.x",
+                            "values" : { }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "right" : {
+                    "type" : "de.evoal.optimisation.gp.genetic-programming.protected-square-root",
+                    "values" : {
+                      "operand" : {
+                        "type" : "gp-example.x",
+                        "values" : { }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "right" : {
+            "type" : "gp-example.x",
+            "values" : { }
+          }
+        }
+      }
+    },
+    "output" : {
+      "error" : 1.254991792838149E12
+    },
+    "fitness" : [ 1.254991792838149E12 ],
+    "relationships" : [ {
+      "kind" : "recombination",
+      "targets" : [ 154, 170 ],
+      "properties" : {
+        "operators" : [ "subtree-crossover", "gaussian-mutation" ],
+        "changed-features" : [ "regression-function" ],
+        "attempts" : 2
+      }
+    } ]
+  }, {
+    "id" : 226,
+    "input" : {
+      "regression-function" : {
+        "type" : "de.evoal.optimisation.gp.genetic-programming.minus",
+        "values" : {
+          "left" : {
+            "type" : "de.evoal.optimisation.gp.genetic-programming.multiply",
+            "values" : {
+              "left" : {
+                "type" : "gp-example.x",
+                "values" : { }
+              },
+              "right" : {
+                "type" : "de.evoal.optimisation.gp.genetic-programming.plus",
+                "values" : {
+                  "left" : {
+                    "type" : "de.evoal.optimisation.gp.genetic-programming.protected-division",
+                    "values" : {
+                      "left" : {
+                        "type" : "gp-example.x",
+                        "values" : { }
+                      },
+                      "right" : {
+                        "type" : "de.evoal.optimisation.gp.genetic-programming.minus",
+                        "values" : {
+                          "left" : {
+                            "type" : "gp-example.x",
+                            "values" : { }
+                          },
+                          "right" : {
+                            "type" : "gp-example.x",
+                            "values" : { }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "right" : {
+                    "type" : "de.evoal.optimisation.gp.genetic-programming.protected-square-root",
+                    "values" : {
+                      "operand" : {
+                        "type" : "gp-example.x",
+                        "values" : { }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "right" : {
+            "type" : "de.evoal.optimisation.gp.genetic-programming.protected-division",
+            "values" : {
+              "left" : {
+                "type" : "de.evoal.optimisation.gp.genetic-programming.protected-square-root",
+                "values" : {
+                  "operand" : {
+                    "type" : "de.evoal.optimisation.gp.genetic-programming.plus",
+                    "values" : {
+                      "left" : {
+                        "type" : "de.evoal.optimisation.gp.genetic-programming.multiply",
+                        "values" : {
+                          "left" : {
+                            "type" : "gp-example.c",
+                            "values" : {
+                              "value" : 21.23921122169331
+                            }
+                          },
+                          "right" : {
+                            "type" : "gp-example.x",
+                            "values" : { }
+                          }
+                        }
+                      },
+                      "right" : {
+                        "type" : "de.evoal.optimisation.gp.genetic-programming.protected-square-root",
+                        "values" : {
+                          "operand" : {
+                            "type" : "gp-example.x",
+                            "values" : { }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "right" : {
+                "type" : "de.evoal.optimisation.gp.genetic-programming.protected-division",
+                "values" : {
+                  "left" : {
+                    "type" : "gp-example.c",
+                    "values" : {
+                      "value" : 22.793730480547268
+                    }
+                  },
+                  "right" : {
+                    "type" : "gp-example.c",
+                    "values" : {
+                      "value" : -19.21698743463311
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "output" : {
+      "error" : 1.2549918182042969E12
+    },
+    "fitness" : [ 1.2549918182042969E12 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 128 ]
+    } ]
+  } ],
+  "steps" : [ ],
+  "ranks" : [ {
+    "number" : 0,
+    "members" : [ 193 ]
+  }, {
+    "number" : 1,
+    "members" : [ 173 ]
+  }, {
+    "number" : 2,
+    "members" : [ 176, 196, 197 ]
+  }, {
+    "number" : 3,
+    "members" : [ 213 ]
+  }, {
+    "number" : 4,
+    "members" : [ 180, 178, 184, 204, 206 ]
+  }, {
+    "number" : 5,
+    "members" : [ 174 ]
+  }, {
+    "number" : 6,
+    "members" : [ 220 ]
+  }, {
+    "number" : 7,
+    "members" : [ 215 ]
+  }, {
+    "number" : 8,
+    "members" : [ 187, 183 ]
+  }, {
+    "number" : 9,
+    "members" : [ 175 ]
+  }, {
+    "number" : 10,
+    "members" : [ 179 ]
+  }, {
+    "number" : 11,
+    "members" : [ 225 ]
+  }, {
+    "number" : 12,
+    "members" : [ 226 ]
+  } ],
+  "bestSoFar" : 193,
+  "metrics" : {
+    "evaluations.real" : 77,
+    "evaluations.surrogate" : 0
+  }
+}

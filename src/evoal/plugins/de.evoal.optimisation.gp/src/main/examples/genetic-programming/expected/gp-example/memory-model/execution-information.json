@@ -1,0 +1,235 @@
+{
+  "formatVersion" : "2027.4.0",
+  "problem" : {
+    "name" : "regression-function-search",
+    "goals" : [ {
+      "feature" : "error",
+      "direction" : "minimise"
+    } ],
+    "function" : {
+      "type" : "de.evoal.optimisation.core.unknown-function",
+      "attributes" : { }
+    }
+  },
+  "algorithm" : {
+    "type" : "de.evoal.optimisation.ea.optimisation.evolutionary-algorithm",
+    "attributes" : {
+      "initialisation" : {
+        "type" : "de.evoal.optimisation.core.random-population",
+        "attributes" : {
+          "method" : {
+            "type" : "de.evoal.optimisation.core.ramped-half-and-half",
+            "attributes" : {
+              "maximum-size" : 32,
+              "optional-probability" : null,
+              "minimum-depth" : 2,
+              "maximum-depth" : 5
+            }
+          }
+        }
+      },
+      "optimisation-function" : {
+        "type" : "de.evoal.optimisation.gp.genetic-programming.symbolic-regression-fitness",
+        "attributes" : {
+          "function" : "regression-function",
+          "input" : [ {
+            "type" : "de.evoal.optimisation.gp.genetic-programming.variable-binding",
+            "attributes" : {
+              "variable" : {
+                "type" : "gp-example.x",
+                "attributes" : { }
+              },
+              "data" : "x0"
+            }
+          } ],
+          "output" : "y0",
+          "reference" : "gp-example-function-data.csv",
+          "error" : "error",
+          "measure" : "sum-of-absolute-errors"
+        }
+      },
+      "comparator" : {
+        "type" : "de.evoal.optimisation.core.numeric-comparator",
+        "attributes" : { }
+      },
+      "stopping-criteria" : [ {
+        "type" : "de.evoal.optimisation.core.iteration-count",
+        "attributes" : {
+          "maximum-iterations" : 20
+        }
+      } ],
+      "fitness-pipeline" : [ ],
+      "candidate-checks" : [ {
+        "type" : "de.evoal.optimisation.core.maximum-size",
+        "attributes" : {
+          "reaction" : "resample",
+          "replacement-source" : {
+            "type" : "de.evoal.optimisation.core.random-population",
+            "attributes" : {
+              "method" : null
+            }
+          },
+          "maximum-attempts" : 10,
+          "size" : 64,
+          "repair-fallback" : "warn"
+        }
+      }, {
+        "type" : "de.evoal.optimisation.gp.genetic-programming.uses-variable",
+        "attributes" : {
+          "reaction" : "resample",
+          "replacement-source" : {
+            "type" : "de.evoal.optimisation.core.random-population",
+            "attributes" : {
+              "method" : null
+            }
+          },
+          "maximum-attempts" : 10,
+          "model" : "regression-function",
+          "count" : 1
+        }
+      } ],
+      "constraint-measure" : {
+        "type" : "de.evoal.optimisation.core.exact-measure",
+        "attributes" : {
+          "equality-tolerance" : 1.0E-4
+        }
+      },
+      "evaluation-strategy" : {
+        "type" : "de.evoal.optimisation.core.single-evaluation",
+        "attributes" : { }
+      },
+      "size-of-population" : 20,
+      "number-of-offspring" : 20,
+      "genotype" : {
+        "type" : "de.evoal.optimisation.ea.optimisation.genotype",
+        "attributes" : {
+          "chromosomes" : [ {
+            "type" : "de.evoal.optimisation.ea.optimisation.model-chromosome",
+            "attributes" : {
+              "features" : [ "regression-function" ],
+              "recombination" : [ {
+                "type" : "de.evoal.optimisation.ea.optimisation.subtree-crossover",
+                "attributes" : {
+                  "probability" : 0.9,
+                  "internal-node-probability" : 0.9
+                }
+              } ],
+              "mutation" : [ {
+                "type" : "de.evoal.optimisation.ea.optimisation.subtree-mutation",
+                "attributes" : {
+                  "probability" : 0.2,
+                  "gene-probability" : null,
+                  "method" : {
+                    "type" : "de.evoal.optimisation.core.grow",
+                    "attributes" : {
+                      "maximum-size" : 16,
+                      "optional-probability" : null,
+                      "maximum-depth" : 4
+                    }
+                  },
+                  "internal-node-probability" : null
+                }
+              }, {
+                "type" : "de.evoal.optimisation.ea.optimisation.gaussian-mutation",
+                "attributes" : {
+                  "probability" : 0.3,
+                  "gene-probability" : null,
+                  "sigma" : 0.02
+                }
+              } ]
+            }
+          } ]
+        }
+      },
+      "parent-selection" : {
+        "type" : "de.evoal.optimisation.ea.optimisation.tournament-selection",
+        "attributes" : {
+          "size" : 3
+        }
+      },
+      "replacement" : {
+        "type" : "de.evoal.optimisation.ea.optimisation.plus-replacement",
+        "attributes" : {
+          "selection" : {
+            "type" : "de.evoal.optimisation.ea.optimisation.elite-selection",
+            "attributes" : {
+              "count" : 20,
+              "rest" : {
+                "type" : "de.evoal.optimisation.ea.optimisation.random-selection",
+                "attributes" : { }
+              }
+            }
+          }
+        }
+      },
+      "boundary-handling" : "stick"
+    }
+  },
+  "documentation" : [ {
+    "type" : "de.evoal.optimisation.core.memory-model",
+    "attributes" : {
+      "steps" : false
+    }
+  } ],
+  "citations" : [ "berger2024evoal", "koza1992genetic", "poli2008field", "montana1995strongly", "muehlenbein1992how", "baeck1993optimal", "goldberg1991comparative", "schwefel1977numerische" ],
+  "searchSpace" : [ {
+    "name" : "regression-function",
+    "type" : "model",
+    "modelType" : "de.evoal.optimisation.gp.genetic-programming.expression"
+  } ],
+  "optimisationSpace" : [ {
+    "name" : "error",
+    "type" : "real",
+    "scale" : "quotient"
+  } ],
+  "fitness" : {
+    "components" : [ {
+      "name" : "error",
+      "goal" : "error"
+    } ],
+    "steps" : [ ]
+  },
+  "metricDefinitions" : [ {
+    "name" : "evaluations.real",
+    "kind" : "counter",
+    "valueType" : "integer",
+    "scope" : "iteration",
+    "description" : "Number of evaluations of the real optimisation function."
+  }, {
+    "name" : "evaluations.surrogate",
+    "kind" : "counter",
+    "valueType" : "integer",
+    "scope" : "iteration",
+    "description" : "Number of predictions of a surrogate model."
+  } ],
+  "propertyDefinitions" : [ {
+    "name" : "attempts",
+    "scope" : "relationship",
+    "valueType" : "integer",
+    "list" : false,
+    "description" : "The number of variations of a candidate that a candidate check resampled, or the number of attempts of the repair of a repaired candidate."
+  }, {
+    "name" : "attempts",
+    "scope" : "individual",
+    "valueType" : "integer",
+    "list" : false,
+    "description" : "Like the property of the relationship, for a candidate without predecessor."
+  }, {
+    "name" : "operators",
+    "scope" : "relationship",
+    "valueType" : "text",
+    "list" : true,
+    "description" : "The recombinations and mutations that changed the child, in their order."
+  }, {
+    "name" : "changed-features",
+    "scope" : "relationship",
+    "valueType" : "text",
+    "list" : true,
+    "description" : "The features whose genes differ from the parent whose place the child takes."
+  } ],
+  "setup" : {
+    "evoalVersion" : "${evoal.version}",
+    "seed" : "42",
+    "run" : 0
+  }
+}

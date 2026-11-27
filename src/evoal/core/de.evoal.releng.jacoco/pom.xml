@@ -45,6 +45,11 @@
         </dependency>
         <dependency>
             <groupId>${project.parent.groupId}</groupId>
+            <artifactId>optimisation.gp</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.parent.groupId}</groupId>
             <artifactId>optimisation.local_search</artifactId>
             <version>${project.parent.version}</version>
         </dependency>

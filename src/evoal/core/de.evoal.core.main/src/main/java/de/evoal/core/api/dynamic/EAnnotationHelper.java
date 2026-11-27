@@ -84,20 +84,28 @@ public class EAnnotationHelper {
     }
 
     public EStructuralFeature featureOf(final EClass clazz, final DataDescription description) {
-        final Optional<DefinitionMapping> feature =
-            description.getEAnnotations()
-                    .stream()
-                    .filter(a -> DynamicPackage.eNS_URI.equals(a.getSource()))
-                    .map(a -> a.getContents().stream().filter(DefinitionMapping.class::isInstance).findFirst())
-                    .filter(Optional::isPresent)
-                    .map(Optional::get)
-                    .map(DefinitionMapping.class::cast)
-                    .findFirst();
+        final Optional<EStructuralFeature> feature = findFeatureOf(description);
 
         if(feature.isPresent()) {
-            return feature.get().getTarget();
+            return feature.get();
         }
 
         throw new RuntimeException("No feature found for " + description);
+    }
+
+    /**
+     * @return The feature of the data description in a space class, empty if no space class
+     *   has one.
+     */
+    public static Optional<EStructuralFeature> findFeatureOf(final DataDescription description) {
+        return description.getEAnnotations()
+                          .stream()
+                          .filter(a -> DynamicPackage.eNS_URI.equals(a.getSource()))
+                          .map(a -> a.getContents().stream().filter(DefinitionMapping.class::isInstance).findFirst())
+                          .filter(Optional::isPresent)
+                          .map(Optional::get)
+                          .map(DefinitionMapping.class::cast)
+                          .map(DefinitionMapping::getTarget)
+                          .findFirst();
     }
 }

@@ -1,0 +1,32 @@
+import "definitions" from 'de.evoal.optimisation.gp.genetic-programming';
+
+/**
+ * Terminals and functions that cannot be evaluated: a constant without a real 'value' and a
+ *   function without an operation.
+ */
+module 'de.evoal.optimisation.gp.test.broken' {
+    /**
+     * A variable.
+     */
+    type x0 extends variable {}
+
+    /**
+     * A constant with an integer value.
+     */
+    type 'integer-constant' extends constant {
+        /**
+         * The value.
+         */
+        'value' : int;
+    }
+
+    /**
+     * A function that the library does not know.
+     */
+    type sine extends 'expression' {
+        /**
+         * The argument.
+         */
+        operand : instance 'expression';
+    }
+}

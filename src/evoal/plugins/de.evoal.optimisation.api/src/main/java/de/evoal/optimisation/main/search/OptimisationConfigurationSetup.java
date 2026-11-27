@@ -5,15 +5,23 @@ import jakarta.inject.Inject;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 import org.apache.commons.math3.util.Pair;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 
 import de.evoal.core.api.board.Blackboard;
+import de.evoal.core.api.dynamic.EAnnotationHelper;
 import de.evoal.core.api.dynamic.EClassProvider;
+import de.evoal.languages.model.base.definitions.DataDescription;
+import de.evoal.languages.model.base.expressions.TypeDefinitionReference;
 import de.evoal.languages.model.ol.AlgorithmInstance;
 import de.evoal.languages.model.ol.OLPackage;
 import de.evoal.languages.model.ol.ProblemInstance;
@@ -28,7 +36,8 @@ import de.evoal.optimisation.main.producer.OptimisationModuleLoader;
 
 /**
  * Prepares the optimisation configuration of an OL file for the search applications:
- *   it loads the file, sets up the search and optimisation space, transforms the OL
+ *   it loads the file, sets up the search and optimisation space and a class for the data
+ *   that only the configuration names (e.g. the columns of a reference table), transforms the OL
  *   model into the runtime model, binds the DDL modules imported by the OL module of the
  *   problem ({@link ImportedDataModules}), checks its constraint groups
  *   ({@link ConstraintGroupCheck}) and binds the runtime model to
@@ -72,6 +81,7 @@ public class OptimisationConfigurationSetup {
         final de.evoal.languages.model.ol.OptimisationModule configurationModel = loader.load(configurationFile);
         final ProblemInstance problem = problemOf(configurationModel);
         setupSpaces(problem);
+        setupConfigurationData(problem, configurationModel.getAlgorithm());
         board.bind(OptimisationBlackboardEntries.IMPORTED_DATA_MODULES, ImportedDataModules.of(problem));
 
         final Space merged = spaceProducer.optimisationSpace()
@@ -127,6 +137,46 @@ public class OptimisationConfigurationSetup {
         }
 
         return NodeModelUtils.getTokenText(nodes.getFirst());
+    }
+
+    /**
+     * Gives the data that the problem or the algorithm configuration names, but that is
+     *   neither searched nor optimised, a feature of its own class, e.g. the columns of a
+     *   reference table of a fitness function. Without a feature, the configuration could not
+     *   refer to the data.
+     */
+    private void setupConfigurationData(final ProblemInstance problem, final AlgorithmInstance algorithm) {
+        final Set<DataDescription> unmapped = new LinkedHashSet<>();
+        collectDataWithoutFeature(problem, unmapped);
+        collectDataWithoutFeature(algorithm, unmapped);
+
+        if(!unmapped.isEmpty()) {
+            eClassProvider.eClassForConfigurationData(unmapped);
+        }
+    }
+
+    /**
+     * Adds the data descriptions that the contents of the root name and that have no feature,
+     *   in the order of their occurrence.
+     */
+    private static void collectDataWithoutFeature(final EObject root, final Set<DataDescription> unmapped) {
+        EcoreUtil.<Object>getAllContents(root, true)
+                 .forEachRemaining(element -> dataWithoutFeature(element).ifPresent(unmapped::add));
+    }
+
+    /**
+     * @return The data description that the element names, if it is a data reference whose data
+     *   has no feature.
+     */
+    private static Optional<DataDescription> dataWithoutFeature(final Object element) {
+        if(!(element instanceof TypeDefinitionReference reference)
+           || !(reference.getDefinition() instanceof DataDescription description)) {
+            return Optional.empty();
+        }
+
+        final boolean hasFeature = EAnnotationHelper.findFeatureOf(description).isPresent();
+
+        return hasFeature ? Optional.empty() : Optional.of(description);
     }
 
     private void setupSpaces(final ProblemInstance problem) {

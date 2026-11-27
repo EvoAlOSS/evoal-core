@@ -86,7 +86,9 @@ The structural mutations change every model once and have no `'gene-probability'
 checks `'maximum-size'` and `'maximum-depth'` of `de.evoal.optimisation.api` test the new
 candidates and can repair them. The gene-exchange recombinations exchange whole models of a
 chromosome with several features; the blending recombinations and the correlation-aware
-operators do not apply to models.
+operators do not apply to models. Genetic programming for symbolic regression is a model search
+space with the expression types, the fitness and the check of the plugin
+`de.evoal.optimisation.gp` (example `genetic-programming` there).
 
 ## Operators and probabilities
 

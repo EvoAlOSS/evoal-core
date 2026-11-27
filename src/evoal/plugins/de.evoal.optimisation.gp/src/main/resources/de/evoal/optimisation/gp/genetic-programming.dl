@@ -1,0 +1,233 @@
+import "definitions" from 'de.evoal.core.constraints';
+import "definitions" from 'de.evoal.core.base';
+import "definitions" from de.evoal.optimisation.core;
+
+/**
+ * Genetic programming as a model: an expression is a tree of DL objects, the structured search
+ *   data of a problem ('data f of instance expression'). 'random-population' builds the trees
+ *   (grow, full, ramped half-and-half), the operators of a 'model-chromosome' change them and
+ *   'maximum-size' and 'maximum-depth' limit them. This module adds the primitives of
+ *   symbolic regression, its fitness and a check.
+ *
+ * The primitives form the function set and the terminal set (Poli, Langdon and McPhee 2008,
+ *   sec. 3.1). The module declares the functions and the abstract terminal types 'variable'
+ *   and 'constant'; the terminals belong to the problem, so its own DL module declares them as
+ *   subtypes:
+ *
+ *   type x0 extends variable {}
+ *   type 'c' extends constant {
+ *       @Scale { scale := 'measurement-scale.cardinal'; }
+ *       @LowerBoundary { boundary := -50.0; }
+ *       @UpperBoundary { boundary := 50.0; }
+ *       'value' : real;
+ *   }
+ *
+ * A tree may contain every concrete subtype of 'expression' of the loaded modules; the builder
+ *   draws them uniformly.
+ */
+module de.evoal.optimisation.gp.'genetic-programming' {
+    /**
+     * Abstract base type of the nodes of an expression.
+     */
+    abstract type 'expression' {}
+
+    /**
+     * The sum of two expressions.
+     */
+    type plus extends 'expression' {
+        /**
+         * The first summand.
+         */
+        left : instance 'expression';
+
+        /**
+         * The second summand.
+         */
+        right : instance 'expression';
+    }
+
+    /**
+     * The difference of two expressions.
+     */
+    type minus extends 'expression' {
+        /**
+         * The minuend.
+         */
+        left : instance 'expression';
+
+        /**
+         * The subtrahend.
+         */
+        right : instance 'expression';
+    }
+
+    /**
+     * The product of two expressions.
+     */
+    type multiply extends 'expression' {
+        /**
+         * The first factor.
+         */
+        left : instance 'expression';
+
+        /**
+         * The second factor.
+         */
+        right : instance 'expression';
+    }
+
+    /**
+     * The quotient of two expressions; 1 if the denominator is 0 (protected division, Poli,
+     *   Langdon and McPhee 2008, sec. 3.2.1, after Koza 1992).
+     */
+    @Literature { keys := ["poli2008field"]; }
+    type 'protected-division' extends 'expression' {
+        /**
+         * The numerator.
+         */
+        left : instance 'expression';
+
+        /**
+         * The denominator.
+         */
+        right : instance 'expression';
+    }
+
+    /**
+     * The square root of the absolute value of an expression. Poli, Langdon and McPhee (2008,
+     *   sec. 3.2.1) name protected square roots without defining one; the absolute value is
+     *   EvoAl's choice.
+     */
+    @Literature { keys := ["poli2008field"]; }
+    type 'protected-square-root' extends 'expression' {
+        /**
+         * The radicand.
+         */
+        operand : instance 'expression';
+    }
+
+    /**
+     * The absolute value of the base raised to the exponent, |left|^right; 1 if the result is
+     *   not finite (EvoAl's own, after protected division).
+     */
+    type 'protected-power' extends 'expression' {
+        /**
+         * The base.
+         */
+        left : instance 'expression';
+
+        /**
+         * The exponent.
+         */
+        right : instance 'expression';
+    }
+
+    /**
+     * Abstract base type of the input variables of an expression, a terminal. The problem
+     *   declares one subtype without attributes per variable; 'symbolic-regression-fitness'
+     *   binds each of them to an input data.
+     */
+    abstract type variable extends 'expression' {}
+
+    /**
+     * Abstract base type of the constants of an expression, a terminal. The problem declares
+     *   the subtypes; each has exactly one real attribute 'value' with its boundaries and
+     *   scale. A constant is an ephemeral random constant: its value is drawn when the tree is
+     *   built and changed only by mutation (Poli, Langdon and McPhee 2008, sec. 3.1). A fixed
+     *   constant (e.g. pi) has equal boundaries.
+     */
+    @Literature { keys := ["poli2008field"]; }
+    abstract type constant extends 'expression' {}
+
+    /**
+     * Binds a variable type to the data that holds its value, a column of the reference table
+     *   of 'symbolic-regression-fitness'.
+     */
+    type 'variable-binding' {
+        /**
+         * An instance of the variable type, e.g. x0 {}.
+         */
+        variable : instance variable;
+
+        /**
+         * The data that holds the value of the variable.
+         */
+        'data' : data;
+    }
+
+    /**
+     * The error measure of a regression over the n rows of a reference table, with the
+     *   targets y and the predictions f(x).
+     *   'sum-of-absolute-errors': the sum of |y - f(x)| (the fitness of the symbolic regression
+     *     example of Poli, Langdon and McPhee 2008, sec. 4.1).
+     *   'mean-squared-error': the sum of (y - f(x))^2 divided by n.
+     */
+    nominal enum 'regression-error' ( 'sum-of-absolute-errors', 'mean-squared-error' );
+
+    /**
+     * The error of an expression on a reference table (symbolic regression): the expression is
+     *   evaluated on every row with the values of its variables and compared with the target
+     *   by the error 'measure'. The 'error' gets the value; the problem minimises it. A
+     *   non-finite prediction gives a non-finite error, which the comparators rank worst
+     *   when the error is minimised.
+     *
+     * When the function is loaded, it checks that every concrete subtype of 'expression' of
+     *   the loaded modules is a function of this module, a variable or a constant, that every
+     *   concrete variable type has exactly one binding, that every constant type has exactly
+     *   one real attribute 'value', and that the reference table has a value of every bound
+     *   data and of the 'output' in every row. The function is deterministic.
+     */
+    @Literature { keys := ["koza1992genetic", "poli2008field"]; }
+    type 'symbolic-regression-fitness' extends 'fitness-function' {
+        /**
+         * The structured search data with the expression ('data f of instance expression').
+         */
+        function : data;
+
+        /**
+         * The bindings of the variable types to the data with their values.
+         */
+        @MinimumNumberOfElements { bound := 1; }
+        input : array instance 'variable-binding';
+
+        /**
+         * The data with the target value of a row.
+         */
+        output : data;
+
+        /**
+         * The reference table, a file with the bound data and the 'output' as columns, named
+         *   by the data (e.g. a CSV file with the header "x0,y0").
+         */
+        reference : string;
+
+        /**
+         * The numeric optimisation data that gets the error.
+         */
+        error : data;
+
+        /**
+         * The error measure.
+         */
+        measure : enum 'regression-error';
+    }
+
+    /**
+     * Fails a new candidate (including the initial candidates) whose expression uses fewer
+     *   than 'count' different variable types, e.g. a constant expression.
+     *
+     * Check point: new candidates. Reactions: 'warn', 'replace', 'resample'.
+     */
+    type 'uses-variable' extends 'candidate-check' {
+        /**
+         * The structured search data with the expression.
+         */
+        model : data;
+
+        /**
+         * The smallest number of different variable types the expression uses.
+         */
+        @LowerBoundary { boundary := 1; }
+        count : int := 1;
+    }
+}
