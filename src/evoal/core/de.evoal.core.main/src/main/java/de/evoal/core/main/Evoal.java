@@ -23,7 +23,6 @@ import de.evoal.core.main.provenance.RunRecordWriter;
 import org.apache.deltaspike.core.util.metadata.AnnotationInstanceProvider;
 import org.slf4j.bridge.SLF4JBridgeHandler;
 
-import java.lang.reflect.Field;
 import java.util.*;
 
 /**
@@ -116,28 +115,16 @@ public final class Evoal {
         System.out.println();
 
         final Set<Bean<BlackboardEntries>> entriesBeans = BeanProvider.getBeanDefinitions(BlackboardEntries.class, true, true);
-        final Map<String, List<Commandline>> parameters = new HashMap<>();
-
-        for(final Bean<BlackboardEntries> bean : entriesBeans) {
-            final Class<?> clazz = bean.getBeanClass();
-            for(final Field field : clazz.getDeclaredFields()) {
-                if(!field.isAnnotationPresent(Commandline.class)) {
-                    continue;
-                }
-
-                final Commandline annotation = field.getAnnotation(Commandline.class);
-
-                for(final String main : annotation.main()) {
-                    parameters.putIfAbsent(main, new LinkedList<>());
-
-                    final List<Commandline> annotations = parameters.get(main);
-                    annotations.add(annotation);
-
-                }
-            }
-        }
+        final Map<String, List<Commandline>> parameters =
+                CommandlineParameters.byApplication(entriesBeans.stream().<Class<?>>map(Bean::getBeanClass).toList());
 
         final Set<Bean<MainClass>> beans = BeanProvider.getBeanDefinitions(MainClass.class, true, true);
+        final Set<String> applications = new HashSet<>();
+        beans.forEach(bean -> applications.add(bean.getBeanClass().getAnnotation(Application.class).name()));
+        CommandlineParameters.unknownApplications(parameters, applications)
+                             .forEach((application, names) ->
+                                     log.error("The parameters {} name the application '{}', which is not installed.", names, application));
+
         for(final Bean<MainClass> bean : beans) {
             System.out.println();
             System.out.println("--------------------------------------------------------------------------------");
@@ -153,7 +140,7 @@ public final class Evoal {
             }
         }
 
-        final List<Commandline> annotations = parameters.getOrDefault("", new LinkedList<>());
+        final List<Commandline> annotations = parameters.getOrDefault(CommandlineParameters.GENERAL, new LinkedList<>());
         if(annotations != null) {
             System.out.println();
             System.out.println("--------------------------------------------------------------------------------");

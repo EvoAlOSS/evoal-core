@@ -52,12 +52,17 @@ import java.util.Set;
 @Slf4j
 @ApplicationScoped
 @Application(
-        name = "surrogate-training",
+        name = SurrogateMain.NAME,
         documentation = """
 Application for training a surrogate function based on a given MLL file.
 """
 )
 public class SurrogateMain implements MainClass {
+    /**
+     * The name of the application, the value of {@code -Bcore:main}.
+     */
+    public static final String NAME = "surrogate-training";
+
     /**
      * The packages of the pipeline runtime model that the literature walker enters: the
      *   pipelines are variables of the program, and calls refer to them in expressions.

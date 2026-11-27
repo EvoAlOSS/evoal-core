@@ -40,16 +40,21 @@ import de.evoal.pipeline.impl.internal.GeneratorDSLConverter;
  */
 @ApplicationScoped
 @Application(
-		name = "de.evoal.pipeline.pipeline-runner",
+		name = PipelineRunner.NAME,
 		documentation = """
 Application for running a data pipeline. Pipelines can be used to generate
 training data, pre-process real-world training data, or to predict data using
 a learned model.
 """
 )
-@Named("de.evoal.pipeline.pipeline-runner")
+@Named(PipelineRunner.NAME)
 @Slf4j
 public class PipelineRunner implements MainClass {
+	/**
+	 * The name of the application, the value of {@code -Bcore:main}.
+	 */
+	public static final String NAME = "de.evoal.pipeline.pipeline-runner";
+
 	/**
 	 * The packages of the pipeline runtime model that the literature walker enters: the
 	 *   pipelines are variables of the program, and calls refer to them in expressions.

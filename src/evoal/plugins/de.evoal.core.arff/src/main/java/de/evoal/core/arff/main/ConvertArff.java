@@ -28,7 +28,7 @@ import java.io.File;
 @Slf4j
 @ApplicationScoped
 @Application(
-        name = "convert-arff-to-json",
+        name = ConvertArff.NAME,
         documentation = """
 Application to extract specific data (specified in a ddl file) from an arff
 file (input) and store it in an output file (output). The extension of the
@@ -36,6 +36,11 @@ output file selects its format (json, csv). A missing value stays missing.
 """
 )
 public class ConvertArff implements MainClass {
+    /**
+     * The name of the application, the value of {@code -Bcore:main}.
+     */
+    public static final String NAME = "convert-arff-to-json";
+
 
     @Inject
     @BlackboardValue(ArffBlackboardEntries.ARFF_INPUT)

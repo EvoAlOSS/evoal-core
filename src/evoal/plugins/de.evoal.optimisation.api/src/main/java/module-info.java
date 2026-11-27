@@ -68,6 +68,8 @@ module de.evoal.optimisation.api {
     // data generation checks the DDL constraints with the ConstraintCompiler
     exports de.evoal.optimisation.main.constraints;
     exports de.evoal.optimisation.main.fitness;
+    // the surrogate parameters name the search applications in their @Commandline
+    exports de.evoal.optimisation.main.search to de.evoal.surrogate.api;
 //    exports de.evoal.optimisation.main.constraints.constraint.strategies.constraint;
 //    exports de.evoal.optimisation.main.constraints.constraint.strategies.calculations;
 

@@ -21,7 +21,7 @@ import de.evoal.optimisation.api.run.SearchRunner;
  *   statistics contain no {@code run} or {@code target} columns.
  */
 @Application(
-        name = "heuristic-search",
+        name = HeuristicSearchMain.NAME,
         documentation = """
 This application starts a heuristic search for an optimal solution based on a
 problem specification.
@@ -29,6 +29,11 @@ problem specification.
 @ApplicationScoped
 @Slf4j
 public class HeuristicSearchMain implements MainClass {
+    /**
+     * The name of the application, the value of {@code -Bcore:main}.
+     */
+    public static final String NAME = "heuristic-search";
+
     @Inject
     private Blackboard board;
 

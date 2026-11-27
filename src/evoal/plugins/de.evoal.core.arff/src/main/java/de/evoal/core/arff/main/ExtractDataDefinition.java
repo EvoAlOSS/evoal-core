@@ -21,10 +21,15 @@ import java.nio.file.Files;
  */
 @ApplicationScoped
 @Application(
-        name = "extract-data-definition-from-arff",
+        name = ExtractDataDefinition.NAME,
         documentation = "Application to automatically create a data definition file (output) based on an arff file (input)."
 )
 public class ExtractDataDefinition implements MainClass {
+    /**
+     * The name of the application, the value of {@code -Bcore:main}.
+     */
+    public static final String NAME = "extract-data-definition-from-arff";
+
 
     @Inject
     @BlackboardValue(ArffBlackboardEntries.ARFF_INPUT)

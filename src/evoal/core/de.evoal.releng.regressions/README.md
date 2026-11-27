@@ -88,6 +88,10 @@ mvn -f src/evoal/pom.xml -Pregressions verify
 
 The runner prints the duration of every run (`Regression <name> (run-<n>) took <s> s.`).
 
+The profile also runs `HelpIT`: it starts `bin/evoal-print-help.sh` of the release and checks
+that every application lists the parameters it reads, and that no `@Commandline` names an
+application that is not installed.
+
 In the pipeline (see `REGRESSION_OPTS` in `.gitlab-ci.yml`), 2 runs start at the same
 time with 4 evaluation threads each, and every JVM is limited to 4 CPUs
 (`-XX:ActiveProcessorCount=4`): the jobs have a quota of 8 CPUs, and a JVM that sees more

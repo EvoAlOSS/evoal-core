@@ -6,15 +6,15 @@ fi
 
 source $EVOAL_HOME/bin/paths.env
 
-if [ "$#" -lt 7 ]; then
-    echo "Usage: $0 <execution-folder> <ol-file> <mll-file> <pre-trained.pson> <training-points.json> <output> <constraint-folder> [EvoAl parameters]"
+if [ "$#" -lt 6 ]; then
+    echo "Usage: $0 <execution-folder> <ol-file> <mll-file> <pre-trained.pson> <training-points.json> <output> [EvoAl parameters]"
     exit 1
 fi
 
 cd "$1" || exit 1
 
 POSITIONAL_ARGUMENTS=( "$@" )
-POSITIONAL_ARGUMENTS=("${POSITIONAL_ARGUMENTS[@]:7}")
+POSITIONAL_ARGUMENTS=("${POSITIONAL_ARGUMENTS[@]:6}")
 
 declare -a LOCAL_JVM_ARGUMENTS=()
 
@@ -49,5 +49,4 @@ java ${LOCAL_JVM_ARGUMENTS[@]} \
      "-Bsurrogate:configuration-file=$3" \
      "-Bsurrogate:pre-trained=$4" \
      "-Bsurrogate:training-data-file=$5"\
-     "-Boptimisation:evaluation-output-folder=$6" \
-     "-Boptimisation:constraint-folder=$7"
+     "-Boptimisation:evaluation-output-folder=$6"

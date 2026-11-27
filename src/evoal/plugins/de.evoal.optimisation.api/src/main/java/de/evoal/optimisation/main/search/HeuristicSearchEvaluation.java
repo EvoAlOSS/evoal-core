@@ -25,7 +25,7 @@ import java.util.List;
 
 @Slf4j
 @Application(
-        name = "heuristic-search-evaluation",
+        name = HeuristicSearchEvaluation.NAME,
         documentation = """
 Prepares evaluation of a heuristic search by running it multiple times.
 Furthermore, it is possible to use a target file to run it for multiple
@@ -37,6 +37,11 @@ proper empirical evaluation.
 )
 @ApplicationScoped
 public class HeuristicSearchEvaluation implements MainClass {
+    /**
+     * The name of the application, the value of {@code -Bcore:main}.
+     */
+    public static final String NAME = "heuristic-search-evaluation";
+
     @Inject
     private Blackboard board;
 
