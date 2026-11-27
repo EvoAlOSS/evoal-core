@@ -30,7 +30,8 @@ import de.evoal.optimisation.ea.main.statistics.LinkageStatistics;
  *     use, and then changes the chromosome of the use;</li>
  *   <li>a mutation is applied to a child with its probability, one draw per child and use,
  *     and then changes every gene of the chromosome of the use with the gene probability
- *     (default 1 / n, n the number of genes of the chromosome);</li>
+ *     (default 1 / n, n the number of genes of the chromosome, for a model the number of
+ *     attribute values the mutation applies to, see {@link MutationOperator#geneCount});</li>
  *   <li>the uses are applied in the order of the {@link OperatorPlan}; after every use, the
  *     boundary handling brings the genes back into their boundaries.</li>
  * </ul>
@@ -253,7 +254,7 @@ final class Variation {
 
             final int c = use.chromosome();
             final Genes chromosomeGenes = child.genome.chromosomes().get(c);
-            final double geneProbability = mutation.geneProbability().orElse(1.0 / chromosomeGenes.size());
+            final double geneProbability = mutation.geneProbability().orElse(1.0 / Math.max(1, mutation.geneCount(chromosomeGenes)));
 
             final Genome before = child.genome.copy();
             mutation.mutate(chromosomeGenes, geneProbability, random);

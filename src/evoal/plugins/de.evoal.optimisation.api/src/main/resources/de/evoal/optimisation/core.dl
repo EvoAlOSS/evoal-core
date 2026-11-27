@@ -411,6 +411,67 @@ module de.evoal.optimisation.core {
     type 'projection-repair' extends 'constraint-repair' {}
 
     /**
+     * Fails a new candidate (including the initial candidates) with a model of more objects
+     *   than 'size'; every structured data of the search space is tested. A random model may
+     *   exceed the 'maximum-size' of its 'method' if no subtype fits both the depth and the
+     *   size limit, and the operators of a 'model-chromosome' do not keep a size limit.
+     *
+     * The reaction 'repair' replaces parts of the model by minimal subtrees of their places
+     *   ("minimal-subtree repair", EvoAl's own): as long as the model is too large, the
+     *   removal of an array element above its @MinimumNumberOfElements or the replacement of a
+     *   subtree by a minimal one is applied; if a change saves at least the excess, the one that
+     *   saves the least, otherwise the one that saves the most. The literature on size limits
+     *   returns a parent instead, which fills the population with programs close to the limit,
+     *   or retries the operation, as 'resample' does (Poli, Langdon and McPhee 2008, sec.
+     *   11.3.2). 'replace' needs a 'replacement-source' with a 'method'.
+     *
+     * Check point: new candidates. Reactions: 'warn', 'replace', 'resample', 'repair'.
+     */
+    @Literature { keys := ["poli2008field"]; }
+    type 'maximum-size' extends 'candidate-check' {
+        /**
+         * The largest number of objects of a model.
+         */
+        @LowerBoundary { boundary := 1; }
+        size : int;
+
+        /**
+         * The reaction if the model still exceeds the limit after 'maximum-attempts' repairs;
+         *   'repair' is not allowed.
+         */
+        'repair-fallback' : enum 'check-reaction' := 'check-reaction.warn';
+    }
+
+    /**
+     * Fails a new candidate (including the initial candidates) with a model deeper than
+     *   'depth'; the root of a model has depth 0, every contained object one more than its
+     *   container. Every structured data of the search space is tested; the operators of a
+     *   'model-chromosome' do not keep a depth limit.
+     *
+     * The reaction 'repair' replaces the parts that are too deep by minimal subtrees
+     *   ("minimal-subtree repair", EvoAl's own): in pre-order, an object whose subtree is too
+     *   deep stays if a tree of its type fits the limit, and its contents are repaired;
+     *   otherwise it is replaced by a minimal subtree that fits. Koza (1992) returns a parent
+     *   instead (see 'maximum-size'). 'replace' needs a 'replacement-source' with a 'method'.
+     *
+     * Check point: new candidates. Reactions: 'warn', 'replace', 'resample', 'repair'.
+     */
+    @Literature { keys := ["koza1992genetic", "poli2008field"]; }
+    type 'maximum-depth' extends 'candidate-check' {
+        /**
+         * The largest depth of an object of a model.
+         */
+        @LowerBoundary { boundary := 0; }
+        depth : int;
+
+        /**
+         * The reaction if the model still exceeds the limit after 'maximum-attempts' repairs;
+         *   'repair' is not allowed.
+         */
+        'repair-fallback' : enum 'check-reaction' := 'check-reaction.warn';
+    }
+
+    /**
      * Abstract base type for the steps of the fitness pipeline. A step computes a new
      *   fitness of a candidate from the fitness of the previous step.
      */
@@ -592,6 +653,30 @@ module de.evoal.optimisation.core {
          */
         @LowerBoundary { boundary := 0.0; inclusive := false; }
         'standard-deviation' : real;
+    }
+
+    /**
+     * The size and the depth of a model as objectives: the size is the number of objects of
+     *   the model, the depth the depth of its deepest object (the root has depth 0). The
+     *   function is deterministic, e.g. for regressions of model search spaces or as a size
+     *   objective next to others.
+     */
+    type 'model-measures' extends 'fitness-function' {
+        /**
+         * The structured search data whose model is measured.
+         */
+        model : data;
+
+        /**
+         * The numeric optimisation data that gets the size; at least one of 'size' and 'depth'
+         *   is required.
+         */
+        size : optional data;
+
+        /**
+         * The numeric optimisation data that gets the depth.
+         */
+        depth : optional data;
     }
 
     /**

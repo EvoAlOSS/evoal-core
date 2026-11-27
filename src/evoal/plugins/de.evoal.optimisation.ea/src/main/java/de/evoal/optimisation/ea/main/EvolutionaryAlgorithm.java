@@ -183,7 +183,7 @@ public class EvolutionaryAlgorithm extends TemplateAlgorithm {
         final EEnumLiteral handling = helper.lookup(configuration, "boundary-handling");
         boundaryHandling = BoundaryHandling.of(handling.getName());
 
-        final List<ConfiguredChromosome> chromosomes = genotypes.create(helper.<EObject>lookup(configuration, "genotype"));
+        final List<ConfiguredChromosome> chromosomes = genotypes.create(helper.<EObject>lookup(configuration, "genotype"), boundaryHandling);
         genotype = new Genotype(chromosomes.stream().map(ConfiguredChromosome::chromosome).toList(), genotypes.searchSpace());
         log.info("Genotype: {}.", genotype);
 

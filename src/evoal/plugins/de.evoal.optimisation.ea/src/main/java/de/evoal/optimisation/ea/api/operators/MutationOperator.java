@@ -4,7 +4,9 @@ import java.util.OptionalDouble;
 import java.util.random.RandomGenerator;
 
 import de.evoal.models.core.cdi.EvoalComponent;
+import de.evoal.models.core.exceptions.InitializationException;
 
+import de.evoal.optimisation.ea.api.genotype.Chromosome;
 import de.evoal.optimisation.ea.api.genotype.Genes;
 
 /**
@@ -14,8 +16,27 @@ import de.evoal.optimisation.ea.api.genotype.Genes;
  */
 public interface MutationOperator extends EvoalComponent<MutationOperator> {
     /**
+     * Checks when the configuration is loaded that the mutation can change the chromosome, e.g.
+     *   that a model has attributes the mutation applies to.
+     *
+     * @param chromosome The chromosome the mutation belongs to.
+     * @throws InitializationException if the mutation cannot change the chromosome.
+     */
+    default void check(final Chromosome chromosome) throws InitializationException {
+    }
+
+    /**
+     * @param genes The genes of a chromosome of a child.
+     * @return The number n of the default gene probability 1 / n: the number of genes, for the
+     *   genes of a model the number of attribute values the mutation applies to.
+     */
+    default int geneCount(final Genes genes) {
+        return genes.size();
+    }
+
+    /**
      * @return The configured probability that a gene is changed; empty for the default 1 / n,
-     *   n the number of genes of the chromosome.
+     *   n the {@link #geneCount gene count} of the chromosome.
      */
     OptionalDouble geneProbability();
 

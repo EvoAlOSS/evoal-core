@@ -12,12 +12,15 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import de.evoal.languages.model.base.definitions.BaseDataDescription;
 import de.evoal.languages.model.base.definitions.DataDescription;
 import de.evoal.languages.model.base.definitions.ScaleType;
+import de.evoal.languages.model.base.definitions.StructuredDataDescription;
 import de.evoal.models.core.exceptions.InitializationException;
 
 /**
  * Checks {@code @RequiresScale}: every selected data has at least the {@code minimum} scale
  *   (nominal < ordinal < cardinal < quotient). Data without a scale is nominal, the default of
- *   the DDL; typed data has the scale of its type.
+ *   the DDL; typed data has the scale of its type. Structured data (a model) meets every
+ *   requirement: its attributes have their own scales, which the components that change them
+ *   check.
  */
 @Dependent
 @Named("de.evoal.core.constraints.RequiresScale")
@@ -52,6 +55,10 @@ public class RequiresScaleChecker extends FeatureRequirementChecker {
 
     @Override
     protected Optional<String> problemOf(final DataDescription data) {
+        if(data instanceof StructuredDataDescription) {
+            return Optional.empty();
+        }
+
         final ScaleType scale = scaleOf(data);
         if(scale.getValue() >= minimum.getValue()) {
             return Optional.empty();

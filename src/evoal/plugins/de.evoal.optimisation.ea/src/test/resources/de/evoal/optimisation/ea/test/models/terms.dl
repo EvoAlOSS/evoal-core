@@ -1,0 +1,74 @@
+import "definitions" from 'de.evoal.core.constraints';
+
+/**
+ * Recursive terms for the tests of the model operators: a cardinal real, an ordinal integer and
+ *   arrays of objects and of integers.
+ */
+module 'de.evoal.optimisation.ea.test.models.terms' {
+    /**
+     * Abstract base type of the terms.
+     */
+    abstract type term {}
+
+    /**
+     * The sum of two terms.
+     */
+    type plus extends term {
+        /**
+         * The left summand.
+         */
+        left : instance term;
+
+        /**
+         * The right summand.
+         */
+        right : instance term;
+    }
+
+    /**
+     * A constant.
+     */
+    type constant extends term {
+        /**
+         * The value.
+         */
+        @Scale { scale := 'measurement-scale.cardinal'; }
+        @LowerBoundary { boundary := -1.0; }
+        @UpperBoundary { boundary := 1.0; }
+        'value' : real;
+    }
+
+    /**
+     * A variable.
+     */
+    type variable extends term {
+        /**
+         * The number of the variable.
+         */
+        @Scale { scale := 'measurement-scale.ordinal'; }
+        @LowerBoundary { boundary := 0; }
+        @UpperBoundary { boundary := 2; }
+        index : int;
+    }
+
+    /**
+     * A weighted sum of terms.
+     */
+    type sum extends term {
+        /**
+         * The summands.
+         */
+        @MinimumNumberOfElements { bound := 1; }
+        @MaximumNumberOfElements { bound := 3; }
+        operands : array instance term;
+
+        /**
+         * The weights.
+         */
+        @MinimumNumberOfElements { bound := 0; }
+        @MaximumNumberOfElements { bound := 3; }
+        @LowerBoundary { boundary := 0; }
+        @UpperBoundary { boundary := 5; }
+        weights : array int;
+    }
+}

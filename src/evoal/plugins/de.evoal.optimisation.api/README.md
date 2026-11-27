@@ -371,9 +371,27 @@ classes than the DL can use it:
 - `ValueDrawer` draws the values of attributes; the tabular search spaces get exactly the draws
   of the population before models, so their references did not change.
 
-`'random-population'` reports all problems of a model when its stream is created. The memory
-model writes a model as `{"type": "<DL type>", "values": {...}}`, the feature as type `model`
-with its `modelType`.
+- `ModelTrees` measures a tree (size, depth of an object, height) and replaces a subtree in its
+  place; `AttributeSlots` lists the attribute values of a model in a fixed order (objects in
+  pre-order, attributes in their order, one slot per array element, no slot for an unset optional
+  attribute), the genes of the value mutations of the EA.
+- `ModelBuilder.minimal` and `buildMinimal(type, depth, depthLimit)` build the smallest tree of a
+  place; `LimitRepairs` repairs a model that exceeds a depth or size limit with them
+  (minimal-subtree repair, EvoAl's own; the literature returns a parent or retries the operation,
+  Poli, Langdon and McPhee 2008, sec. 11.3.2).
+
+`ModelCandidates` (package `api.models`) is the DL front-end that the components share: the model
+features of the search space, their `ModelTypes`, the `ValueDrawer` and the `BuildSettings` of a
+configured `'tree-method'`. `'random-population'` reports all problems of a model when its stream
+is created. The memory model writes a model as `{"type": "<DL type>", "values": {...}}`, the
+feature as type `model` with its `modelType`.
+
+The candidate checks `'maximum-size' { size }` and `'maximum-depth' { depth }` test every model of
+a new candidate (also the initial ones) and support all four reactions; `repair` applies
+`LimitRepairs` (repair strategy `minimal-subtree-repair` in the memory model) with
+`'repair-fallback'` after `'maximum-attempts'`. The deterministic fitness
+`'model-measures' { model; size; depth }` writes the size and the depth of a model into numeric
+objectives, e.g. for regressions or as a size objective.
 
 ## Constraints
 

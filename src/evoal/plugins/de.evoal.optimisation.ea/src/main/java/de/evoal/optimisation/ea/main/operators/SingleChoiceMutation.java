@@ -15,6 +15,7 @@ import de.evoal.core.api.languages.AttributeEvaluator;
 import de.evoal.core.api.utils.AttributeHelper;
 import de.evoal.models.core.exceptions.InitializationException;
 
+import de.evoal.optimisation.ea.api.genotype.Chromosome;
 import de.evoal.optimisation.ea.api.genotype.Genes;
 import de.evoal.optimisation.ea.api.operators.AbstractMutation;
 import de.evoal.optimisation.ea.api.operators.MutationOperator;
@@ -64,6 +65,16 @@ public class SingleChoiceMutation extends AbstractMutation {
             this.weights = checkWeights(weights, children.size());
         } catch(final InitializationException e) {
             throw new IllegalArgumentException(e.getMessage(), e);
+        }
+    }
+
+    /**
+     * Every child has to be able to change the chromosome.
+     */
+    @Override
+    public void check(final Chromosome chromosome) throws InitializationException {
+        for(final MutationOperator child : children) {
+            child.check(chromosome);
         }
     }
 

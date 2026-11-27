@@ -1,0 +1,20 @@
+import "definitions" from de.evoal.optimisation.core;
+import "definitions" from de.evoal.optimisation.ea.optimisation;
+
+/**
+ * A domain operator of a plugin for the tests: the rotation of the 2048 policies.
+ */
+module 'de.evoal.optimisation.ea.test.rotation' {
+    /**
+     * Rotates a policy: all values of the named int attributes, the directions of a move,
+     *   change by the same r in {1, 2, 3}, modulo 4.
+     */
+    @Requires { selection := path "(..)+[model-chromosome]"; }
+    type 'policy-rotation' extends mutation {
+        /**
+         * The names of the rotated attributes.
+         */
+        @MinimumNumberOfElements { bound := 1; }
+        attributes : array string;
+    }
+}

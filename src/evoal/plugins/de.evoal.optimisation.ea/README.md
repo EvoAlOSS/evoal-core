@@ -35,11 +35,58 @@ A `Genotype` maps every search variable to exactly one chromosome
 | `'integer-chromosome'` | `IntegerGenes`, one per feature | integer |
 | `'bit-chromosome'` | `BitGenes`: 1 bit per boolean, `precision` bits per real or integer, standard binary code | boolean, integer, real |
 | `'gray-chromosome'` | like `'bit-chromosome'`, real and integer features in Gray code | boolean, integer, real |
+| `'model-chromosome'` | `ModelGenes`, one model (the root of its tree) per feature | structured data (`data 'x' of instance T`) |
 
 `genotype` is required: the configuration states every chromosome, its features and its
-operators (#311). Every search variable that is not boolean needs a lower and an upper
-boundary. After every operator, `'boundary-handling'` (`stick`, `bounce`, `wrap`) brings
+operators (#311). Every search variable that is not boolean or structured needs a lower and an
+upper boundary. After every operator, `'boundary-handling'` (`stick`, `bounce`, `wrap`) brings
 values outside the boundaries back.
+
+## Models
+
+A `'model-chromosome'` holds a copy of the tree of every structured feature; decoding and
+encoding copy the trees, so genes and candidates share no objects. `ModelGenes` compares models
+with `EcoreUtil.equals` and exchanges whole models, so the genotype, the variation, the lineage
+(`changed-features` names the model feature) and the memory model treat a model like one gene.
+All genes of a chromosome share a `ModelGenes.Context`: the type tables (`ModelTypes`), the
+value drawer, the boundaries, the boundary handling and the root types. `GenotypeFactory`
+rejects a model chromosome whose features are not structured, whose models cannot be built (the
+problems of `'random-population'`) or whose types have an int or real attribute without both
+boundaries.
+
+The value mutations change the attribute values of the models (`AttributeSlots` of
+`de.evoal.optimisation.api.builder`): objects in pre-order, per object its attributes in their
+order, one slot per element of a multi-valued attribute; an unset optional attribute is no
+slot. A mutation names the attributes it applies to (`AbstractMutation.modelAttributes`), the
+default gene probability 1 / n counts these slots of the child (`MutationOperator.geneCount`),
+and `check` rejects a mutation that applies to no attribute of the model types:
+
+| Mutation | Attributes of a model |
+|---|---|
+| `'random-reset-mutation'` | boolean, int, real, enum (drawn as by `'random-population'`) |
+| `'gaussian-mutation'`, `'polynomial-mutation'` | real, scale at least cardinal |
+| `'creep-mutation'` | int and enum, scale at least ordinal; an enum moves along its literals, the boundary handling keeps it among them |
+| `'bit-flip-mutation'` | boolean |
+
+An attribute without `@Scale` is nominal. The structural operators (`main.operators.model`,
+`@Requires` a model chromosome) change the trees; a node is chosen uniformly or, with
+`'internal-node-probability'` p, an inner node with p and a leaf with 1 - p (`NodeSelection`;
+Koza's 90/10 rule, Poli, Langdon and McPhee 2008, sec. 2.4):
+
+| Operator | What it does |
+|---|---|
+| `'subtree-crossover'` | exchanges a subtree of every model between the two children; each node fits the place of the other (Montana's strong typing, extended to subtypes), roots are not exchanged, element counts stay |
+| `'subtree-mutation' { method }` | replaces a node (the root included) by a new tree of its place's type; the depth limit of `method` counts from the root, its `'maximum-size'` limits the whole model |
+| `'array-size-mutation' { method }` | one resizable array per model gets one element more or less within its multiplicity; `method` builds new objects |
+| `'array-reorder-mutation'` | swaps two elements of one array per model |
+
+The structural mutations change every model once and have no `'gene-probability'`
+(`AbstractModelMutation`, also the base class for domain operators of plugins, e.g. the
+`PolicyRotation` test component). The operators keep no size or depth limit: the candidate
+checks `'maximum-size'` and `'maximum-depth'` of `de.evoal.optimisation.api` test the new
+candidates and can repair them. The gene-exchange recombinations exchange whole models of a
+chromosome with several features; the blending recombinations and the correlation-aware
+operators do not apply to models.
 
 ## Operators and probabilities
 
@@ -86,10 +133,11 @@ so a run gives the same result with any number of evaluation threads.
 |---|---|---|
 | `'single-point-crossover'`, `'multi-point-crossover'`, `'uniform-crossover'` | all | nominal |
 | `'sbx-crossover'`, `'line-crossover'`, `'arithmetic-crossover'`, `'blx-alpha-crossover'` | double | cardinal |
-| `'random-reset-mutation'` | double, integer | nominal |
-| `'gaussian-mutation'`, `'polynomial-mutation'` | double | cardinal |
-| `'bit-flip-mutation'` | bit, Gray | nominal |
-| `'creep-mutation'` | integer | ordinal |
+| `'random-reset-mutation'` | double, integer, model | nominal |
+| `'gaussian-mutation'`, `'polynomial-mutation'` | double, model | cardinal |
+| `'bit-flip-mutation'` | bit, Gray, model | nominal |
+| `'creep-mutation'` | integer, model | ordinal |
+| `'subtree-crossover'`, `'subtree-mutation'`, `'array-size-mutation'`, `'array-reorder-mutation'` | model | nominal |
 | `'single-choice-mutation'` | all its children have in common | the strongest of its children |
 | `'correlation-aware-mutation'`, `'linkage-crossover'` | those of the wrapped operator | the one of the wrapped operator |
 
@@ -293,14 +341,26 @@ The surrogate plugins have examples that search on a trained model with the EA
   feasible pairs by fitness, the early stop and the limit of sweeps, the frequency of a decision
   by fitness (binomial), the selection of the first candidates with their `stochastic-rank`,
   and the defaults of the DL.
+- `ModelOperatorsTest`: the value mutations on models (only their attributes, the binomial
+  number of changed values, boundaries, the ordinal enum), subtree crossover (fitting places,
+  no object lost), subtree mutation (depth limit, root included), array size and reorder, the
+  90/10 node choice and the `PolicyRotation` plugin operator; `ModelVariationTest`: a model
+  and a double chromosome in the `Variation`.
 - Regressions in `src/test/regressions`: the three replacements, a mixed genotype,
   `'maximum-age'`, the real-valued operators, NSGA-II, the correlation-aware operators
   (`ea-correlation`), building blocks with linkage statistics (`ea-building-blocks`) and
-  stochastic ranking in a (10, 40) comma replacement (`ea-stochastic-ranking`), each with the
-  memory model.
+  stochastic ranking in a (10, 40) comma replacement (`ea-stochastic-ranking`), 2048 policies
+  with all model operators and the size and depth checks with repair (`ea-model`), each with
+  the memory model.
 
 ## References
 
+- J. R. Koza: Genetic Programming: On the Programming of Computers by Means of Natural
+  Selection. MIT Press, 1992.
+- R. Poli, W. B. Langdon, N. F. McPhee: A Field Guide to Genetic Programming. lulu.com, 2008
+  (subtree crossover and mutation, sec. 2.4; size and depth limits, sec. 11.3.2).
+- D. J. Montana: Strongly typed genetic programming. Evolutionary Computation 3(2), 1995,
+  pp. 199-230 (typed crossover and mutation, sec. 2.1).
 - J. E. Baker: Adaptive selection methods for genetic algorithms. Proc. 1st International
   Conference on Genetic Algorithms, 1985, pp. 101-111.
 - J. E. Baker: Reducing bias and inefficiency in the selection algorithm. Proc. 2nd

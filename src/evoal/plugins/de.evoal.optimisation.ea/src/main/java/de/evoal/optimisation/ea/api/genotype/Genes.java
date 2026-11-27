@@ -4,7 +4,7 @@ package de.evoal.optimisation.ea.api.genotype;
  * The genes of one chromosome of a candidate. The operators change them in place; every
  *   candidate has its own copy.
  */
-public sealed interface Genes permits RealGenes, IntegerGenes, BitGenes {
+public sealed interface Genes permits RealGenes, IntegerGenes, BitGenes, ModelGenes {
     /**
      * @return A copy with the same values.
      */

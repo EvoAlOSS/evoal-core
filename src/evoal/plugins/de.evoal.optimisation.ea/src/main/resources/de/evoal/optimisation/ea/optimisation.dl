@@ -13,7 +13,8 @@ module de.evoal.optimisation.ea.optimisation {
     nominal enum 'boundary-handling' ( wrap, bounce, stick );
 
     /**
-     * An evolutionary algorithm (EA) on tabular search spaces. Every generation:
+     * An evolutionary algorithm (EA) on tabular search spaces and on models (structured data,
+     *   see 'model-chromosome'). Every generation:
      *
      * <ol>
      *   <li>the 'parent-selection' selects 2 * ceil(n / 2) parents of the population
@@ -29,7 +30,8 @@ module de.evoal.optimisation.ea.optimisation {
      *   <li>the 'candidate-checks' of the population test it.</li>
      * </ol>
      *
-     * Every search variable that is not boolean needs a lower and an upper boundary.
+     * Every search variable that is not boolean or structured needs a lower and an upper
+     *   boundary.
      */
     @RequiresBoundaries { lower := true; upper := true; features := path "/algorithm/problem/searchSpace"; }
     type 'evolutionary-algorithm' extends algorithm {
@@ -79,7 +81,7 @@ module de.evoal.optimisation.ea.optimisation {
     /**
      * Abstract base type of the chromosomes. A chromosome lists its recombinations and
      *   mutations. Its type is the representation of its genes ('double-chromosome',
-     *   'integer-chromosome', 'bit-chromosome', 'gray-chromosome'). An operator states the
+     *   'integer-chromosome', 'bit-chromosome', 'gray-chromosome', 'model-chromosome'). An operator states the
      *   chromosomes it applies to with @Requires on the type of its chromosome, e.g.
      *   path "(..)+[double-chromosome]", and the weakest scale of the features with
      *   @RequiresScale on path "(..)+[chromosome]/features"; an operator of a chromosome that
@@ -151,6 +153,27 @@ module de.evoal.optimisation.ea.optimisation {
         @UpperBoundary { boundary := 52; }
         precision : int := 16;
     }
+
+    /**
+     * Structured data (models, 'data 'x' of instance T'), one gene each: the tree of objects of
+     *   the model. A genotype may combine it with the other chromosomes. The value mutations
+     *   ('random-reset-mutation', 'gaussian-mutation', 'polynomial-mutation', 'creep-mutation',
+     *   'bit-flip-mutation') change the attribute values of the models: the objects in pre-order
+     *   (the root, then the contained objects in the order of the attributes and their elements),
+     *   per object its attributes in their order, one gene per element of an array; an optional
+     *   attribute without value is no gene. Each mutation changes only the attributes of the
+     *   types and scales it applies to (an attribute without @Scale is nominal), and the default
+     *   'gene-probability' 1 / n counts these values of the child. The structural operators
+     *   ('subtree-crossover', 'subtree-mutation', 'array-size-mutation',
+     *   'array-reorder-mutation') change the trees; plugins can add their own. The gene-exchange
+     *   recombinations exchange whole models if the chromosome has several features.
+     *
+     * The models must be buildable as for 'random-population', and every int and real attribute
+     *   of their types needs a lower and an upper boundary; the 'boundary-handling' keeps the
+     *   values within them. The operators keep no size or depth limit: 'maximum-size' and
+     *   'maximum-depth' check the candidates.
+     */
+    type 'model-chromosome' extends chromosome {}
 
     /**
      * Abstract base type of the recombinations. A recombination of a chromosome is applied
@@ -301,16 +324,18 @@ module de.evoal.optimisation.ea.optimisation {
 
     /**
      * Random reset mutation: a mutated gene gets a value drawn uniformly from the
-     *   boundaries of its feature.
+     *   boundaries of its feature. On a 'model-chromosome' it changes every boolean, int, real
+     *   and enum attribute, drawn as by 'random-population'.
      */
-    @Requires { selection := path "(..)+[double-chromosome] | (..)+[integer-chromosome]"; }
+    @Requires { selection := path "(..)+[double-chromosome] | (..)+[integer-chromosome] | (..)+[model-chromosome]"; }
     type 'random-reset-mutation' extends mutation {}
 
     /**
      * Gaussian mutation: a normally distributed value with mean 0 and the standard
-     *   deviation 'sigma' times the range of the feature is added to a mutated gene.
+     *   deviation 'sigma' times the range of the feature is added to a mutated gene. On a
+     *   'model-chromosome' it changes the real attributes of at least cardinal scale.
      */
-    @Requires { selection := path "(..)+[double-chromosome]"; }
+    @Requires { selection := path "(..)+[double-chromosome] | (..)+[model-chromosome]"; }
     @RequiresScale { minimum := 'measurement-scale.cardinal'; features := path "(..)+[chromosome]/features"; }
     type 'gaussian-mutation' extends mutation {
         /**
@@ -321,18 +346,20 @@ module de.evoal.optimisation.ea.optimisation {
     }
 
     /**
-     * Bit-flip mutation: a mutated bit is inverted.
+     * Bit-flip mutation: a mutated bit is inverted. On a 'model-chromosome' it inverts the
+     *   boolean attributes.
      */
-    @Requires { selection := path "(..)+[bit-chromosome] | (..)+[gray-chromosome]"; }
+    @Requires { selection := path "(..)+[bit-chromosome] | (..)+[gray-chromosome] | (..)+[model-chromosome]"; }
     type 'bit-flip-mutation' extends mutation {}
 
     /**
      * Polynomial mutation in the bounded form of the NSGA-II reference implementation,
      *   revision 1.1.6 (Deb et al. 2002): a mutated gene is moved
      *   by a perturbation of the polynomial distribution with 'distribution-index'; a
-     *   larger index gives smaller changes.
+     *   larger index gives smaller changes. On a 'model-chromosome' it changes the real
+     *   attributes of at least cardinal scale.
      */
-    @Requires { selection := path "(..)+[double-chromosome]"; }
+    @Requires { selection := path "(..)+[double-chromosome] | (..)+[model-chromosome]"; }
     @RequiresScale { minimum := 'measurement-scale.cardinal'; features := path "(..)+[chromosome]/features"; }
     @Literature { keys := ["deb2002fast"]; }
     type 'polynomial-mutation' extends mutation {
@@ -345,9 +372,11 @@ module de.evoal.optimisation.ea.optimisation {
 
     /**
      * Creep mutation: a mutated gene changes by a value drawn uniformly from -step, ...,
-     *   -1, 1, ..., step.
+     *   -1, 1, ..., step. On a 'model-chromosome' it changes the int and enum attributes of at
+     *   least ordinal scale; an enum value moves by the change in the order of its literals,
+     *   and the 'boundary-handling' keeps it among them.
      */
-    @Requires { selection := path "(..)+[integer-chromosome]"; }
+    @Requires { selection := path "(..)+[integer-chromosome] | (..)+[model-chromosome]"; }
     @RequiresScale { minimum := 'measurement-scale.ordinal'; features := path "(..)+[chromosome]/features"; }
     type 'creep-mutation' extends mutation {
         /**
@@ -356,6 +385,80 @@ module de.evoal.optimisation.ea.optimisation {
         @LowerBoundary { boundary := 1; }
         step : int := 1;
     }
+
+    /**
+     * Subtree crossover: the two children exchange a subtree of every model (Koza 1992; Poli,
+     *   Langdon and McPhee 2008, sec. 2.4, in the variant with two offspring), restricted to
+     *   subtrees of fitting types as in strongly typed genetic programming (Montana 1995, sec.
+     *   2.1). Montana's second subtree returns the same type as the first; a model has subtypes,
+     *   so here each node fits the place of the other, i.e. its type is the type of the other's
+     *   attribute or one of its subtypes. A node of the first child is drawn among the nodes that
+     *   have such a partner in the second child (Montana draws it among all nodes and returns
+     *   the parents if it has none), then its partner. The roots are not exchanged. The subtrees
+     *   take each other's positions, so the number of elements of every array stays; a model
+     *   without a fitting pair stays unchanged.
+     */
+    @Requires { selection := path "(..)+[model-chromosome]"; }
+    @Literature { keys := ["koza1992genetic", "poli2008field", "montana1995strongly"]; }
+    type 'subtree-crossover' extends recombination {
+        /**
+         * The probability that a node is drawn among the inner nodes (objects that contain
+         *   objects) instead of the leaves; uniform among all nodes if it is not set. Koza
+         *   (1992) used 0.9.
+         */
+        @LowerBoundary { boundary := 0.0; }
+        @UpperBoundary { boundary := 1.0; }
+        'internal-node-probability' : optional real;
+    }
+
+    /**
+     * Subtree mutation: a node of every model, the root included, is replaced by a new random
+     *   tree of the type of its place, built with 'method' (Poli, Langdon and McPhee 2008,
+     *   sec. 2.4; typed as in Montana 1995, sec. 2.1). The depth limit of the method counts from the root of the model, its
+     *   'maximum-size' limits the whole model. The mutation changes every model once, so it has
+     *   no 'gene-probability'.
+     */
+    @Requires { selection := path "(..)+[model-chromosome]"; }
+    @Literature { keys := ["koza1992genetic", "poli2008field", "montana1995strongly"]; }
+    type 'subtree-mutation' extends mutation {
+        /**
+         * How the new subtrees are built; its plans are used in turn, one per subtree.
+         */
+        method : instance 'tree-method';
+
+        /**
+         * The probability that the node is drawn among the inner nodes instead of the leaves;
+         *   uniform among all nodes if it is not set.
+         */
+        @LowerBoundary { boundary := 0.0; }
+        @UpperBoundary { boundary := 1.0; }
+        'internal-node-probability' : optional real;
+    }
+
+    /**
+     * Array size mutation: an array of every model whose number of elements can change is
+     *   chosen uniformly and gets one element more or less: at its @MinimumNumberOfElements one
+     *   more, at its @MaximumNumberOfElements one less, otherwise each with probability 1/2. A
+     *   new element is inserted at a uniformly drawn position, as a value drawn as by
+     *   'random-population' or as a new tree built with 'method'; a uniformly drawn element is
+     *   removed. The mutation changes every model once, so it has no 'gene-probability'.
+     */
+    @Requires { selection := path "(..)+[model-chromosome]"; }
+    type 'array-size-mutation' extends mutation {
+        /**
+         * How new elements of arrays of objects are built; required if the models have such
+         *   arrays whose size can change.
+         */
+        method : optional instance 'tree-method';
+    }
+
+    /**
+     * Array reorder mutation: an array of every model with at least two elements is chosen
+     *   uniformly, and the elements at two different, uniformly drawn positions are exchanged.
+     *   The mutation changes every model once, so it has no 'gene-probability'.
+     */
+    @Requires { selection := path "(..)+[model-chromosome]"; }
+    type 'array-reorder-mutation' extends mutation {}
 
     /**
      * Single-choice mutation (specific to EvoAl): if it fires ('probability', one draw per

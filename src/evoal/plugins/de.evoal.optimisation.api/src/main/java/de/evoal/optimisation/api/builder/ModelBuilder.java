@@ -109,6 +109,39 @@ public final class ModelBuilder {
         return buildObject(chosen, depth, plan, budget);
     }
 
+    /**
+     * Creates a builder of minimal trees ({@link #buildMinimal}): no optional feature gets a
+     *   value and arrays get only their required elements.
+     *
+     * @param types The classes of the models and their tables.
+     * @param values Draws the values of the attributes.
+     * @param randomness The source of the random numbers.
+     */
+    public static ModelBuilder minimal(final @NonNull ModelTypes types,
+                                       final @NonNull ValueDrawer values,
+                                       final @NonNull RandomGenerator randomness) {
+        final BuildSettings settings = new BuildSettings(new TreeMethod.Grow(0), BuildSettings.NO_SIZE_LIMIT, 0.0);
+
+        return new ModelBuilder(types, values, settings, randomness);
+    }
+
+    /**
+     * Builds a tree of the smallest size that fits the depth limit, e.g. to repair a model that
+     *   exceeds a limit. The subtype is drawn uniformly among the smallest ones that fit the
+     *   depth limit; only required features get values (with the optional probability 0 of
+     *   {@link #minimal}).
+     *
+     * @param type The type of the root of the tree.
+     * @param depth The depth of the root of the tree in its model.
+     * @param depthLimit The largest depth of an object, counted from the root of the model.
+     * @return The root of the tree.
+     */
+    public EObject buildMinimal(final @NonNull EClass type, final int depth, final int depthLimit) {
+        final Plan plan = new Plan(Shape.GROW, depthLimit);
+
+        return build(type, depth, plan, types.minimumSizeOfType(type));
+    }
+
     private static <T> boolean hasSingleChoice(final List<T> choices) {
         return choices.size() == 1;
     }

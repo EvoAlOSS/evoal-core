@@ -9,7 +9,7 @@ import de.evoal.models.core.ecore.TypedEObject;
 /**
  * Maps some features of the search space to genes and back.
  */
-public abstract sealed class Chromosome permits DoubleChromosome, IntegerChromosome, BinaryChromosome {
+public abstract sealed class Chromosome permits DoubleChromosome, IntegerChromosome, BinaryChromosome, ModelChromosome {
     /**
      * The features, in the order of their genes.
      */

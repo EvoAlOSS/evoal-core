@@ -21,7 +21,8 @@ import de.evoal.optimisation.ea.main.genotype.GenotypeFactory.ConfiguredChromoso
  * Decides which recombinations and mutations change which chromosomes: every chromosome uses
  *   the recombinations and mutations it lists, in their order. That they apply to it is
  *   checked when the configuration is loaded (the requirements of their DL types, e.g.
- *   {@code @Requires} and {@code @RequiresScale}). The uses follow the order of the
+ *   {@code @Requires} and {@code @RequiresScale}) and by the operators themselves
+ *   ({@link MutationOperator#check}, {@link RecombinationOperator#check}). The uses follow the order of the
  *   chromosomes. A chromosome without recombinations and mutations never
  *   changes, which is logged as a warning.
  *
@@ -54,6 +55,13 @@ public record OperatorPlan(List<OperatorUse<RecombinationOperator>> recombinatio
         final List<OperatorUse<RecombinationOperator>> recombinations = plan(chromosomes, helper, "recombination",
                                                                              RecombinationOperator.class);
         final List<OperatorUse<MutationOperator>> mutations = plan(chromosomes, helper, "mutation", MutationOperator.class);
+        for(final OperatorUse<RecombinationOperator> use : recombinations) {
+            use.operator().check(chromosomes.get(use.chromosome()).chromosome());
+        }
+        for(final OperatorUse<MutationOperator> use : mutations) {
+            use.operator().check(chromosomes.get(use.chromosome()).chromosome());
+        }
+
         final OperatorPlan plan = new OperatorPlan(recombinations, mutations);
 
         for(final int c : plan.unchangedChromosomes(chromosomes.size())) {

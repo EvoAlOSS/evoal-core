@@ -7,8 +7,11 @@ import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
+import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
 import de.evoal.core.api.dynamic.DynamicEClassProvider;
@@ -19,11 +22,16 @@ import de.evoal.core.api.utils.AttributeHelper;
 import de.evoal.models.core.ecore.Space;
 import de.evoal.models.core.exceptions.InitializationException;
 
+import de.evoal.optimisation.api.builder.ModelTypes;
+import de.evoal.optimisation.api.models.ModelCandidates;
 import de.evoal.optimisation.ea.api.genotype.BinaryChromosome;
+import de.evoal.optimisation.ea.api.genotype.BoundaryHandling;
 import de.evoal.optimisation.ea.api.genotype.Chromosome;
 import de.evoal.optimisation.ea.api.genotype.DoubleChromosome;
 import de.evoal.optimisation.ea.api.genotype.Genotype;
 import de.evoal.optimisation.ea.api.genotype.IntegerChromosome;
+import de.evoal.optimisation.ea.api.genotype.ModelChromosome;
+import de.evoal.optimisation.ea.api.genotype.ModelGenes;
 
 /**
  * Creates the {@link Genotype} of the algorithm from the configured {@code genotype}.
@@ -39,6 +47,12 @@ public class GenotypeFactory {
     @Inject
     private AttributeHelper helper;
 
+    /**
+     * The models of the search space and their tables.
+     */
+    @Inject
+    private ModelCandidates models;
+
     @Inject @Named("search-space")
     private Space searchSpace;
 
@@ -53,14 +67,19 @@ public class GenotypeFactory {
 
     /**
      * @param genotype The configured {@code genotype}.
+     * @param handling The boundary handling of the algorithm; a model chromosome keeps it for
+     *   the values its mutations move.
      * @return The chromosomes.
      * @throws InitializationException if a chromosome cannot represent its features. That the
      *   search variables are bounded and that every chromosome has features of its
      *   representations is checked when the configuration is loaded ({@code @RequiresBoundaries}
      *   of {@code 'evolutionary-algorithm'}, {@code @RequiresRepresentation} of the chromosomes).
+     *   A model chromosome is checked here: its features have to be structured data, the models
+     *   must be buildable, and every integer and real attribute of their types needs a lower
+     *   and an upper boundary.
      */
-    public List<ConfiguredChromosome> create(final EObject genotype) throws InitializationException {
-        final List<ConfiguredChromosome> chromosomes = configured(genotype);
+    public List<ConfiguredChromosome> create(final EObject genotype, final BoundaryHandling handling) throws InitializationException {
+        final List<ConfiguredChromosome> chromosomes = configured(genotype, handling);
 
         try {
             new Genotype(chromosomes.stream().map(ConfiguredChromosome::chromosome).toList(), searchSpace);
@@ -71,7 +90,7 @@ public class GenotypeFactory {
         return chromosomes;
     }
 
-    private List<ConfiguredChromosome> configured(final EObject genotype) throws InitializationException {
+    private List<ConfiguredChromosome> configured(final EObject genotype, final BoundaryHandling handling) throws InitializationException {
         final List<EObject> configurations = helper.lookup(genotype, "chromosomes");
         final List<ConfiguredChromosome> chromosomes = new ArrayList<>();
 
@@ -90,6 +109,7 @@ public class GenotypeFactory {
                 case "integer-chromosome" -> integerChromosome(features);
                 case "bit-chromosome" -> binaryChromosome(features, attributes.attributeToInteger(configuration, "precision"), false);
                 case "gray-chromosome" -> binaryChromosome(features, attributes.attributeToInteger(configuration, "precision"), true);
+                case "model-chromosome" -> modelChromosome(features, handling);
                 default -> throw new InitializationException("Unknown chromosome type '" + type + "'.");
             };
 
@@ -133,6 +153,42 @@ public class GenotypeFactory {
         } catch(final IllegalArgumentException e) {
             throw new InitializationException(e.getMessage());
         }
+    }
+
+    private ModelChromosome modelChromosome(final List<EStructuralFeature> features, final BoundaryHandling handling)
+            throws InitializationException {
+        final List<String> problems = new ArrayList<>();
+        final List<EClass> rootTypes = new ArrayList<>();
+        for(final EStructuralFeature feature : features) {
+            if(feature instanceof EReference model) {
+                rootTypes.add(model.getEReferenceType());
+            } else {
+                problems.add("'" + feature.getName() + "' is no structured data");
+            }
+        }
+
+        final ModelTypes types = models.types();
+        if(problems.isEmpty()) {
+            problems.addAll(types.problems());
+            for(final EClass eClass : types.classes()) {
+                for(final EAttribute attribute : eClass.getEAllAttributes()) {
+                    final boolean isNumeric = EClassifierHelper.isInteger(attribute.getEType()) || EClassifierHelper.isDouble(attribute.getEType());
+                    if(isNumeric && !FeatureBoundaries.isBounded(attribute)) {
+                        problems.add("'" + eClass.getName() + "." + attribute.getName() + "' needs a lower and an upper boundary");
+                    }
+                }
+            }
+        }
+
+        if(!problems.isEmpty()) {
+            throw new InitializationException("The 'model-chromosome' of " + features.stream().map(EStructuralFeature::getName).toList()
+                                              + " cannot represent its models: " + String.join("; ", problems.stream().distinct().toList())
+                                              + ".");
+        }
+
+        final ModelGenes.Context context = new ModelGenes.Context(types, models.values(), boundaries, handling, rootTypes);
+
+        return new ModelChromosome(features, context);
     }
 
     private DoubleChromosome doubleChromosome(final List<EStructuralFeature> features) throws InitializationException {

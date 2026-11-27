@@ -1,0 +1,1735 @@
+{
+  "formatVersion" : "2027.4.0",
+  "number" : 2,
+  "individuals" : [ {
+    "id" : 89,
+    "input" : {
+      "policy" : {
+        "type" : "policies.policy",
+        "values" : {
+          "entries" : [ {
+            "type" : "policies.Entry",
+            "values" : {
+              "action" : 3,
+              "condition" : {
+                "type" : "policies.OrExpression",
+                "values" : {
+                  "subexpressions" : [ {
+                    "type" : "policies.AndExpression",
+                    "values" : {
+                      "comparisons" : [ {
+                        "type" : "policies.BooleanComparison",
+                        "values" : {
+                          "negated" : false,
+                          "leftOperand" : {
+                            "type" : "policies.BooleanLiteral",
+                            "values" : {
+                              "value" : false
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "policies.canMoveInDirection",
+                            "values" : {
+                              "direction" : 3
+                            }
+                          }
+                        }
+                      }, {
+                        "type" : "policies.BooleanComparison",
+                        "values" : {
+                          "negated" : false,
+                          "leftOperand" : {
+                            "type" : "policies.BooleanLiteral",
+                            "values" : {
+                              "value" : false
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "policies.isLargestInCorner",
+                            "values" : { }
+                          }
+                        }
+                      } ]
+                    }
+                  } ]
+                }
+              }
+            }
+          }, {
+            "type" : "policies.Entry",
+            "values" : {
+              "action" : 0,
+              "condition" : {
+                "type" : "policies.OrExpression",
+                "values" : {
+                  "subexpressions" : [ {
+                    "type" : "policies.AndExpression",
+                    "values" : {
+                      "comparisons" : [ {
+                        "type" : "policies.IntegerComparison",
+                        "values" : {
+                          "operator" : "less",
+                          "leftOperand" : {
+                            "type" : "policies.scoreGain",
+                            "values" : {
+                              "direction" : 0
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "policies.scoreGain",
+                            "values" : {
+                              "direction" : 3
+                            }
+                          }
+                        }
+                      }, {
+                        "type" : "policies.IntegerComparison",
+                        "values" : {
+                          "operator" : "less",
+                          "leftOperand" : {
+                            "type" : "policies.scoreGain",
+                            "values" : {
+                              "direction" : 3
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "policies.scoreGain",
+                            "values" : {
+                              "direction" : 2
+                            }
+                          }
+                        }
+                      } ]
+                    }
+                  } ]
+                }
+              }
+            }
+          }, {
+            "type" : "policies.Entry",
+            "values" : {
+              "action" : 3,
+              "condition" : {
+                "type" : "policies.OrExpression",
+                "values" : {
+                  "subexpressions" : [ {
+                    "type" : "policies.AndExpression",
+                    "values" : {
+                      "comparisons" : [ {
+                        "type" : "policies.BooleanComparison",
+                        "values" : {
+                          "negated" : false,
+                          "leftOperand" : {
+                            "type" : "policies.BooleanLiteral",
+                            "values" : {
+                              "value" : true
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "policies.canMoveInDirection",
+                            "values" : {
+                              "direction" : 3
+                            }
+                          }
+                        }
+                      } ]
+                    }
+                  } ]
+                }
+              }
+            }
+          } ],
+          "action" : 2
+        }
+      },
+      "weight" : 1.0
+    },
+    "output" : {
+      "size" : 25
+    },
+    "fitness" : [ -25.0 ],
+    "relationships" : [ {
+      "kind" : "recombination",
+      "targets" : [ 48, 38 ],
+      "properties" : {
+        "operators" : [ "subtree-crossover", "subtree-mutation", "array-reorder-mutation" ],
+        "changed-features" : [ "policy" ],
+        "repair" : "minimal-subtree-repair",
+        "attempts" : 1
+      }
+    } ]
+  }, {
+    "id" : 60,
+    "input" : {
+      "policy" : {
+        "type" : "policies.policy",
+        "values" : {
+          "entries" : [ {
+            "type" : "policies.Entry",
+            "values" : {
+              "action" : 0,
+              "condition" : {
+                "type" : "policies.OrExpression",
+                "values" : {
+                  "subexpressions" : [ {
+                    "type" : "policies.AndExpression",
+                    "values" : {
+                      "comparisons" : [ {
+                        "type" : "policies.BooleanComparison",
+                        "values" : {
+                          "negated" : false,
+                          "leftOperand" : {
+                            "type" : "policies.BooleanLiteral",
+                            "values" : {
+                              "value" : true
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "policies.isLargestInCorner",
+                            "values" : { }
+                          }
+                        }
+                      } ]
+                    }
+                  }, {
+                    "type" : "policies.AndExpression",
+                    "values" : {
+                      "comparisons" : [ {
+                        "type" : "policies.IntegerComparison",
+                        "values" : {
+                          "operator" : "greater",
+                          "leftOperand" : {
+                            "type" : "policies.scoreGain",
+                            "values" : {
+                              "direction" : 3
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "policies.scoreGain",
+                            "values" : {
+                              "direction" : 2
+                            }
+                          }
+                        }
+                      }, {
+                        "type" : "policies.IntegerComparison",
+                        "values" : {
+                          "operator" : "less",
+                          "leftOperand" : {
+                            "type" : "policies.scoreGain",
+                            "values" : {
+                              "direction" : 0
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "policies.scoreGain",
+                            "values" : {
+                              "direction" : 0
+                            }
+                          }
+                        }
+                      } ]
+                    }
+                  } ]
+                }
+              }
+            }
+          }, {
+            "type" : "policies.Entry",
+            "values" : {
+              "action" : 3,
+              "condition" : {
+                "type" : "policies.OrExpression",
+                "values" : {
+                  "subexpressions" : [ {
+                    "type" : "policies.AndExpression",
+                    "values" : {
+                      "comparisons" : [ {
+                        "type" : "policies.BooleanComparison",
+                        "values" : {
+                          "negated" : false,
+                          "leftOperand" : {
+                            "type" : "policies.BooleanLiteral",
+                            "values" : {
+                              "value" : false
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "policies.canMoveInDirection",
+                            "values" : {
+                              "direction" : 3
+                            }
+                          }
+                        }
+                      }, {
+                        "type" : "policies.BooleanComparison",
+                        "values" : {
+                          "negated" : false,
+                          "leftOperand" : {
+                            "type" : "policies.BooleanLiteral",
+                            "values" : {
+                              "value" : false
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "policies.isLargestInCorner",
+                            "values" : { }
+                          }
+                        }
+                      } ]
+                    }
+                  } ]
+                }
+              }
+            }
+          } ],
+          "action" : 0
+        }
+      },
+      "weight" : 0.0
+    },
+    "output" : {
+      "size" : 23
+    },
+    "fitness" : [ -23.0 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 38 ]
+    } ]
+  }, {
+    "id" : 55,
+    "input" : {
+      "policy" : {
+        "type" : "policies.policy",
+        "values" : {
+          "entries" : [ {
+            "type" : "policies.Entry",
+            "values" : {
+              "action" : 0,
+              "condition" : {
+                "type" : "policies.OrExpression",
+                "values" : {
+                  "subexpressions" : [ {
+                    "type" : "policies.AndExpression",
+                    "values" : {
+                      "comparisons" : [ {
+                        "type" : "policies.BooleanComparison",
+                        "values" : {
+                          "negated" : false,
+                          "leftOperand" : {
+                            "type" : "policies.BooleanLiteral",
+                            "values" : {
+                              "value" : true
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "policies.isLargestInCorner",
+                            "values" : { }
+                          }
+                        }
+                      } ]
+                    }
+                  }, {
+                    "type" : "policies.AndExpression",
+                    "values" : {
+                      "comparisons" : [ {
+                        "type" : "policies.IntegerComparison",
+                        "values" : {
+                          "operator" : "less",
+                          "leftOperand" : {
+                            "type" : "policies.scoreGain",
+                            "values" : {
+                              "direction" : 3
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "policies.scoreGain",
+                            "values" : {
+                              "direction" : 3
+                            }
+                          }
+                        }
+                      } ]
+                    }
+                  } ]
+                }
+              }
+            }
+          }, {
+            "type" : "policies.Entry",
+            "values" : {
+              "action" : 0,
+              "condition" : {
+                "type" : "policies.OrExpression",
+                "values" : {
+                  "subexpressions" : [ {
+                    "type" : "policies.AndExpression",
+                    "values" : {
+                      "comparisons" : [ {
+                        "type" : "policies.BooleanComparison",
+                        "values" : {
+                          "negated" : true,
+                          "leftOperand" : {
+                            "type" : "policies.BooleanLiteral",
+                            "values" : {
+                              "value" : true
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "policies.isLargestInCorner",
+                            "values" : { }
+                          }
+                        }
+                      } ]
+                    }
+                  } ]
+                }
+              }
+            }
+          }, {
+            "type" : "policies.Entry",
+            "values" : {
+              "action" : 3,
+              "condition" : {
+                "type" : "policies.OrExpression",
+                "values" : {
+                  "subexpressions" : [ {
+                    "type" : "policies.AndExpression",
+                    "values" : {
+                      "comparisons" : [ {
+                        "type" : "policies.BooleanComparison",
+                        "values" : {
+                          "negated" : false,
+                          "leftOperand" : {
+                            "type" : "policies.BooleanLiteral",
+                            "values" : {
+                              "value" : true
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "policies.canMoveInDirection",
+                            "values" : {
+                              "direction" : 3
+                            }
+                          }
+                        }
+                      } ]
+                    }
+                  } ]
+                }
+              }
+            }
+          } ],
+          "action" : 2
+        }
+      },
+      "weight" : 1.0
+    },
+    "output" : {
+      "size" : 23
+    },
+    "fitness" : [ -23.0 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 48 ]
+    } ]
+  }, {
+    "id" : 54,
+    "input" : {
+      "policy" : {
+        "type" : "policies.policy",
+        "values" : {
+          "entries" : [ {
+            "type" : "policies.Entry",
+            "values" : {
+              "action" : 1,
+              "condition" : {
+                "type" : "policies.OrExpression",
+                "values" : {
+                  "subexpressions" : [ {
+                    "type" : "policies.AndExpression",
+                    "values" : {
+                      "comparisons" : [ {
+                        "type" : "policies.IntegerComparison",
+                        "values" : {
+                          "operator" : "less",
+                          "leftOperand" : {
+                            "type" : "policies.scoreGain",
+                            "values" : {
+                              "direction" : 1
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "policies.scoreGain",
+                            "values" : {
+                              "direction" : 0
+                            }
+                          }
+                        }
+                      }, {
+                        "type" : "policies.IntegerComparison",
+                        "values" : {
+                          "operator" : "greater",
+                          "leftOperand" : {
+                            "type" : "policies.scoreGain",
+                            "values" : {
+                              "direction" : 3
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "policies.scoreGain",
+                            "values" : {
+                              "direction" : 1
+                            }
+                          }
+                        }
+                      } ]
+                    }
+                  } ]
+                }
+              }
+            }
+          }, {
+            "type" : "policies.Entry",
+            "values" : {
+              "action" : 1,
+              "condition" : {
+                "type" : "policies.OrExpression",
+                "values" : {
+                  "subexpressions" : [ {
+                    "type" : "policies.AndExpression",
+                    "values" : {
+                      "comparisons" : [ {
+                        "type" : "policies.IntegerComparison",
+                        "values" : {
+                          "operator" : "less",
+                          "leftOperand" : {
+                            "type" : "policies.scoreGain",
+                            "values" : {
+                              "direction" : 3
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "policies.scoreGain",
+                            "values" : {
+                              "direction" : 3
+                            }
+                          }
+                        }
+                      }, {
+                        "type" : "policies.IntegerComparison",
+                        "values" : {
+                          "operator" : "less",
+                          "leftOperand" : {
+                            "type" : "policies.scoreGain",
+                            "values" : {
+                              "direction" : 0
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "policies.scoreGain",
+                            "values" : {
+                              "direction" : 2
+                            }
+                          }
+                        }
+                      } ]
+                    }
+                  }, {
+                    "type" : "policies.AndExpression",
+                    "values" : {
+                      "comparisons" : [ {
+                        "type" : "policies.BooleanComparison",
+                        "values" : {
+                          "negated" : true,
+                          "leftOperand" : {
+                            "type" : "policies.BooleanLiteral",
+                            "values" : {
+                              "value" : true
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "policies.canMoveInDirection",
+                            "values" : {
+                              "direction" : 2
+                            }
+                          }
+                        }
+                      } ]
+                    }
+                  } ]
+                }
+              }
+            }
+          } ],
+          "action" : 2
+        }
+      },
+      "weight" : 1.0
+    },
+    "output" : {
+      "size" : 23
+    },
+    "fitness" : [ -23.0 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 49 ]
+    } ]
+  }, {
+    "id" : 77,
+    "input" : {
+      "policy" : {
+        "type" : "policies.policy",
+        "values" : {
+          "entries" : [ {
+            "type" : "policies.Entry",
+            "values" : {
+              "action" : 1,
+              "condition" : {
+                "type" : "policies.OrExpression",
+                "values" : {
+                  "subexpressions" : [ {
+                    "type" : "policies.AndExpression",
+                    "values" : {
+                      "comparisons" : [ {
+                        "type" : "policies.IntegerComparison",
+                        "values" : {
+                          "operator" : "less",
+                          "leftOperand" : {
+                            "type" : "policies.scoreGain",
+                            "values" : {
+                              "direction" : 3
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "policies.scoreGain",
+                            "values" : {
+                              "direction" : 3
+                            }
+                          }
+                        }
+                      }, {
+                        "type" : "policies.IntegerComparison",
+                        "values" : {
+                          "operator" : "less",
+                          "leftOperand" : {
+                            "type" : "policies.scoreGain",
+                            "values" : {
+                              "direction" : 0
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "policies.scoreGain",
+                            "values" : {
+                              "direction" : 2
+                            }
+                          }
+                        }
+                      } ]
+                    }
+                  }, {
+                    "type" : "policies.AndExpression",
+                    "values" : {
+                      "comparisons" : [ {
+                        "type" : "policies.BooleanComparison",
+                        "values" : {
+                          "negated" : true,
+                          "leftOperand" : {
+                            "type" : "policies.BooleanLiteral",
+                            "values" : {
+                              "value" : false
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "policies.canMoveInDirection",
+                            "values" : {
+                              "direction" : 3
+                            }
+                          }
+                        }
+                      }, {
+                        "type" : "policies.BooleanComparison",
+                        "values" : {
+                          "negated" : false,
+                          "leftOperand" : {
+                            "type" : "policies.BooleanLiteral",
+                            "values" : {
+                              "value" : true
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "policies.isLargestInCorner",
+                            "values" : { }
+                          }
+                        }
+                      } ]
+                    }
+                  } ]
+                }
+              }
+            }
+          }, {
+            "type" : "policies.Entry",
+            "values" : {
+              "action" : 1,
+              "condition" : {
+                "type" : "policies.OrExpression",
+                "values" : {
+                  "subexpressions" : [ {
+                    "type" : "policies.AndExpression",
+                    "values" : {
+                      "comparisons" : [ {
+                        "type" : "policies.BooleanComparison",
+                        "values" : {
+                          "negated" : true,
+                          "leftOperand" : {
+                            "type" : "policies.BooleanLiteral",
+                            "values" : {
+                              "value" : true
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "policies.canMoveInDirection",
+                            "values" : {
+                              "direction" : 1
+                            }
+                          }
+                        }
+                      } ]
+                    }
+                  } ]
+                }
+              }
+            }
+          } ],
+          "action" : 2
+        }
+      },
+      "weight" : 0.8748787839821388
+    },
+    "output" : {
+      "size" : 23
+    },
+    "fitness" : [ -23.0 ],
+    "relationships" : [ {
+      "kind" : "recombination",
+      "targets" : [ 18, 49 ],
+      "partner" : 78,
+      "properties" : {
+        "operators" : [ "subtree-crossover", "array-size-mutation", "bit-flip-mutation", "gaussian-mutation" ],
+        "changed-features" : [ "policy", "weight" ]
+      }
+    } ]
+  }, {
+    "id" : 78,
+    "input" : {
+      "policy" : {
+        "type" : "policies.policy",
+        "values" : {
+          "entries" : [ {
+            "type" : "policies.Entry",
+            "values" : {
+              "action" : 1,
+              "condition" : {
+                "type" : "policies.OrExpression",
+                "values" : {
+                  "subexpressions" : [ {
+                    "type" : "policies.AndExpression",
+                    "values" : {
+                      "comparisons" : [ {
+                        "type" : "policies.IntegerComparison",
+                        "values" : {
+                          "operator" : "less",
+                          "leftOperand" : {
+                            "type" : "policies.scoreGain",
+                            "values" : {
+                              "direction" : 1
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "policies.scoreGain",
+                            "values" : {
+                              "direction" : 0
+                            }
+                          }
+                        }
+                      }, {
+                        "type" : "policies.IntegerComparison",
+                        "values" : {
+                          "operator" : "greater",
+                          "leftOperand" : {
+                            "type" : "policies.scoreGain",
+                            "values" : {
+                              "direction" : 1
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "policies.scoreGain",
+                            "values" : {
+                              "direction" : 1
+                            }
+                          }
+                        }
+                      } ]
+                    }
+                  } ]
+                }
+              }
+            }
+          }, {
+            "type" : "policies.Entry",
+            "values" : {
+              "action" : 1,
+              "condition" : {
+                "type" : "policies.OrExpression",
+                "values" : {
+                  "subexpressions" : [ {
+                    "type" : "policies.AndExpression",
+                    "values" : {
+                      "comparisons" : [ {
+                        "type" : "policies.IntegerComparison",
+                        "values" : {
+                          "operator" : "less",
+                          "leftOperand" : {
+                            "type" : "policies.scoreGain",
+                            "values" : {
+                              "direction" : 3
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "policies.scoreGain",
+                            "values" : {
+                              "direction" : 2
+                            }
+                          }
+                        }
+                      }, {
+                        "type" : "policies.BooleanComparison",
+                        "values" : {
+                          "negated" : false,
+                          "leftOperand" : {
+                            "type" : "policies.BooleanLiteral",
+                            "values" : {
+                              "value" : false
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "policies.canMoveInDirection",
+                            "values" : {
+                              "direction" : 0
+                            }
+                          }
+                        }
+                      } ]
+                    }
+                  }, {
+                    "type" : "policies.AndExpression",
+                    "values" : {
+                      "comparisons" : [ {
+                        "type" : "policies.BooleanComparison",
+                        "values" : {
+                          "negated" : true,
+                          "leftOperand" : {
+                            "type" : "policies.BooleanLiteral",
+                            "values" : {
+                              "value" : true
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "policies.canMoveInDirection",
+                            "values" : {
+                              "direction" : 2
+                            }
+                          }
+                        }
+                      } ]
+                    }
+                  } ]
+                }
+              }
+            }
+          } ],
+          "action" : 2
+        }
+      },
+      "weight" : 1.0
+    },
+    "output" : {
+      "size" : 23
+    },
+    "fitness" : [ -23.0 ],
+    "relationships" : [ {
+      "kind" : "recombination",
+      "targets" : [ 49, 18 ],
+      "partner" : 77,
+      "properties" : {
+        "operators" : [ "subtree-crossover", "random-reset-mutation" ],
+        "changed-features" : [ "policy" ]
+      }
+    } ]
+  }, {
+    "id" : 88,
+    "input" : {
+      "policy" : {
+        "type" : "policies.policy",
+        "values" : {
+          "entries" : [ {
+            "type" : "policies.Entry",
+            "values" : {
+              "action" : 0,
+              "condition" : {
+                "type" : "policies.OrExpression",
+                "values" : {
+                  "subexpressions" : [ {
+                    "type" : "policies.AndExpression",
+                    "values" : {
+                      "comparisons" : [ {
+                        "type" : "policies.BooleanComparison",
+                        "values" : {
+                          "negated" : false,
+                          "leftOperand" : {
+                            "type" : "policies.BooleanLiteral",
+                            "values" : {
+                              "value" : true
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "policies.isLargestInCorner",
+                            "values" : { }
+                          }
+                        }
+                      } ]
+                    }
+                  }, {
+                    "type" : "policies.AndExpression",
+                    "values" : {
+                      "comparisons" : [ {
+                        "type" : "policies.IntegerComparison",
+                        "values" : {
+                          "operator" : "less",
+                          "leftOperand" : {
+                            "type" : "policies.scoreGain",
+                            "values" : {
+                              "direction" : 3
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "policies.scoreGain",
+                            "values" : {
+                              "direction" : 0
+                            }
+                          }
+                        }
+                      } ]
+                    }
+                  } ]
+                }
+              }
+            }
+          }, {
+            "type" : "policies.Entry",
+            "values" : {
+              "action" : 0,
+              "condition" : {
+                "type" : "policies.OrExpression",
+                "values" : {
+                  "subexpressions" : [ {
+                    "type" : "policies.AndExpression",
+                    "values" : {
+                      "comparisons" : [ {
+                        "type" : "policies.BooleanComparison",
+                        "values" : {
+                          "negated" : true,
+                          "leftOperand" : {
+                            "type" : "policies.BooleanLiteral",
+                            "values" : {
+                              "value" : false
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "policies.canMoveInDirection",
+                            "values" : {
+                              "direction" : 0
+                            }
+                          }
+                        }
+                      } ]
+                    }
+                  } ]
+                }
+              }
+            }
+          }, {
+            "type" : "policies.Entry",
+            "values" : {
+              "action" : 1,
+              "condition" : {
+                "type" : "policies.OrExpression",
+                "values" : {
+                  "subexpressions" : [ {
+                    "type" : "policies.AndExpression",
+                    "values" : {
+                      "comparisons" : [ {
+                        "type" : "policies.BooleanComparison",
+                        "values" : {
+                          "negated" : false,
+                          "leftOperand" : {
+                            "type" : "policies.BooleanLiteral",
+                            "values" : {
+                              "value" : false
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "policies.isLargestInCorner",
+                            "values" : { }
+                          }
+                        }
+                      } ]
+                    }
+                  } ]
+                }
+              }
+            }
+          } ],
+          "action" : 2
+        }
+      },
+      "weight" : 0.9300624687269954
+    },
+    "output" : {
+      "size" : 23
+    },
+    "fitness" : [ -23.0 ],
+    "relationships" : [ {
+      "kind" : "recombination",
+      "targets" : [ 48, 18 ],
+      "partner" : 80,
+      "properties" : {
+        "operators" : [ "subtree-crossover", "subtree-mutation", "array-size-mutation", "random-reset-mutation", "gaussian-mutation" ],
+        "changed-features" : [ "policy", "weight" ],
+        "repair" : "minimal-subtree-repair",
+        "attempts" : 1
+      }
+    } ]
+  }, {
+    "id" : 80,
+    "input" : {
+      "policy" : {
+        "type" : "policies.policy",
+        "values" : {
+          "entries" : [ {
+            "type" : "policies.Entry",
+            "values" : {
+              "action" : 1,
+              "condition" : {
+                "type" : "policies.OrExpression",
+                "values" : {
+                  "subexpressions" : [ {
+                    "type" : "policies.AndExpression",
+                    "values" : {
+                      "comparisons" : [ {
+                        "type" : "policies.BooleanComparison",
+                        "values" : {
+                          "negated" : false,
+                          "leftOperand" : {
+                            "type" : "policies.BooleanLiteral",
+                            "values" : {
+                              "value" : true
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "policies.canMoveInDirection",
+                            "values" : {
+                              "direction" : 1
+                            }
+                          }
+                        }
+                      } ]
+                    }
+                  } ]
+                }
+              }
+            }
+          }, {
+            "type" : "policies.Entry",
+            "values" : {
+              "action" : 1,
+              "condition" : {
+                "type" : "policies.OrExpression",
+                "values" : {
+                  "subexpressions" : [ {
+                    "type" : "policies.AndExpression",
+                    "values" : {
+                      "comparisons" : [ {
+                        "type" : "policies.IntegerComparison",
+                        "values" : {
+                          "operator" : "less",
+                          "leftOperand" : {
+                            "type" : "policies.scoreGain",
+                            "values" : {
+                              "direction" : 3
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "policies.scoreGain",
+                            "values" : {
+                              "direction" : 2
+                            }
+                          }
+                        }
+                      }, {
+                        "type" : "policies.BooleanComparison",
+                        "values" : {
+                          "negated" : false,
+                          "leftOperand" : {
+                            "type" : "policies.BooleanLiteral",
+                            "values" : {
+                              "value" : false
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "policies.canMoveInDirection",
+                            "values" : {
+                              "direction" : 0
+                            }
+                          }
+                        }
+                      } ]
+                    }
+                  }, {
+                    "type" : "policies.AndExpression",
+                    "values" : {
+                      "comparisons" : [ {
+                        "type" : "policies.IntegerComparison",
+                        "values" : {
+                          "operator" : "greater",
+                          "leftOperand" : {
+                            "type" : "policies.scoreGain",
+                            "values" : {
+                              "direction" : 2
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "policies.scoreGain",
+                            "values" : {
+                              "direction" : 1
+                            }
+                          }
+                        }
+                      }, {
+                        "type" : "policies.BooleanComparison",
+                        "values" : {
+                          "negated" : true,
+                          "leftOperand" : {
+                            "type" : "policies.BooleanLiteral",
+                            "values" : {
+                              "value" : true
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "policies.isLargestInCorner",
+                            "values" : { }
+                          }
+                        }
+                      } ]
+                    }
+                  } ]
+                }
+              }
+            }
+          } ],
+          "action" : 2
+        }
+      },
+      "weight" : 0.9083118016084563
+    },
+    "output" : {
+      "size" : 23
+    },
+    "fitness" : [ -23.0 ],
+    "relationships" : [ {
+      "kind" : "recombination",
+      "targets" : [ 18, 48 ],
+      "partner" : 88,
+      "properties" : {
+        "operators" : [ "subtree-crossover", "array-size-mutation", "array-reorder-mutation", "creep-mutation", "gaussian-mutation" ],
+        "changed-features" : [ "policy", "weight" ]
+      }
+    } ]
+  }, {
+    "id" : 73,
+    "input" : {
+      "policy" : {
+        "type" : "policies.policy",
+        "values" : {
+          "entries" : [ {
+            "type" : "policies.Entry",
+            "values" : {
+              "action" : 1,
+              "condition" : {
+                "type" : "policies.OrExpression",
+                "values" : {
+                  "subexpressions" : [ {
+                    "type" : "policies.AndExpression",
+                    "values" : {
+                      "comparisons" : [ {
+                        "type" : "policies.IntegerComparison",
+                        "values" : {
+                          "operator" : "less",
+                          "leftOperand" : {
+                            "type" : "policies.scoreGain",
+                            "values" : {
+                              "direction" : 1
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "policies.scoreGain",
+                            "values" : {
+                              "direction" : 0
+                            }
+                          }
+                        }
+                      }, {
+                        "type" : "policies.IntegerComparison",
+                        "values" : {
+                          "operator" : "greater",
+                          "leftOperand" : {
+                            "type" : "policies.scoreGain",
+                            "values" : {
+                              "direction" : 3
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "policies.scoreGain",
+                            "values" : {
+                              "direction" : 1
+                            }
+                          }
+                        }
+                      } ]
+                    }
+                  } ]
+                }
+              }
+            }
+          }, {
+            "type" : "policies.Entry",
+            "values" : {
+              "action" : 1,
+              "condition" : {
+                "type" : "policies.OrExpression",
+                "values" : {
+                  "subexpressions" : [ {
+                    "type" : "policies.AndExpression",
+                    "values" : {
+                      "comparisons" : [ {
+                        "type" : "policies.IntegerComparison",
+                        "values" : {
+                          "operator" : "greater",
+                          "leftOperand" : {
+                            "type" : "policies.scoreGain",
+                            "values" : {
+                              "direction" : 1
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "policies.scoreGain",
+                            "values" : {
+                              "direction" : 0
+                            }
+                          }
+                        }
+                      }, {
+                        "type" : "policies.IntegerComparison",
+                        "values" : {
+                          "operator" : "less",
+                          "leftOperand" : {
+                            "type" : "policies.scoreGain",
+                            "values" : {
+                              "direction" : 0
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "policies.scoreGain",
+                            "values" : {
+                              "direction" : 2
+                            }
+                          }
+                        }
+                      } ]
+                    }
+                  }, {
+                    "type" : "policies.AndExpression",
+                    "values" : {
+                      "comparisons" : [ {
+                        "type" : "policies.BooleanComparison",
+                        "values" : {
+                          "negated" : true,
+                          "leftOperand" : {
+                            "type" : "policies.BooleanLiteral",
+                            "values" : {
+                              "value" : true
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "policies.canMoveInDirection",
+                            "values" : {
+                              "direction" : 2
+                            }
+                          }
+                        }
+                      } ]
+                    }
+                  } ]
+                }
+              }
+            }
+          } ],
+          "action" : 2
+        }
+      },
+      "weight" : 1.0
+    },
+    "output" : {
+      "size" : 23
+    },
+    "fitness" : [ -23.0 ],
+    "relationships" : [ {
+      "kind" : "recombination",
+      "targets" : [ 49, 36 ],
+      "properties" : {
+        "operators" : [ "subtree-crossover" ],
+        "changed-features" : [ "policy" ]
+      }
+    } ]
+  }, {
+    "id" : 86,
+    "input" : {
+      "policy" : {
+        "type" : "policies.policy",
+        "values" : {
+          "entries" : [ {
+            "type" : "policies.Entry",
+            "values" : {
+              "action" : 0,
+              "condition" : {
+                "type" : "policies.OrExpression",
+                "values" : {
+                  "subexpressions" : [ {
+                    "type" : "policies.AndExpression",
+                    "values" : {
+                      "comparisons" : [ {
+                        "type" : "policies.BooleanComparison",
+                        "values" : {
+                          "negated" : false,
+                          "leftOperand" : {
+                            "type" : "policies.BooleanLiteral",
+                            "values" : {
+                              "value" : true
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "policies.isLargestInCorner",
+                            "values" : { }
+                          }
+                        }
+                      } ]
+                    }
+                  }, {
+                    "type" : "policies.AndExpression",
+                    "values" : {
+                      "comparisons" : [ {
+                        "type" : "policies.IntegerComparison",
+                        "values" : {
+                          "operator" : "less",
+                          "leftOperand" : {
+                            "type" : "policies.scoreGain",
+                            "values" : {
+                              "direction" : 3
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "policies.scoreGain",
+                            "values" : {
+                              "direction" : 2
+                            }
+                          }
+                        }
+                      }, {
+                        "type" : "policies.IntegerComparison",
+                        "values" : {
+                          "operator" : "less",
+                          "leftOperand" : {
+                            "type" : "policies.scoreGain",
+                            "values" : {
+                              "direction" : 2
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "policies.scoreGain",
+                            "values" : {
+                              "direction" : 1
+                            }
+                          }
+                        }
+                      } ]
+                    }
+                  } ]
+                }
+              }
+            }
+          }, {
+            "type" : "policies.Entry",
+            "values" : {
+              "action" : 3,
+              "condition" : {
+                "type" : "policies.OrExpression",
+                "values" : {
+                  "subexpressions" : [ {
+                    "type" : "policies.AndExpression",
+                    "values" : {
+                      "comparisons" : [ {
+                        "type" : "policies.BooleanComparison",
+                        "values" : {
+                          "negated" : true,
+                          "leftOperand" : {
+                            "type" : "policies.BooleanLiteral",
+                            "values" : {
+                              "value" : false
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "policies.canMoveInDirection",
+                            "values" : {
+                              "direction" : 3
+                            }
+                          }
+                        }
+                      }, {
+                        "type" : "policies.IntegerComparison",
+                        "values" : {
+                          "operator" : "less",
+                          "leftOperand" : {
+                            "type" : "policies.scoreGain",
+                            "values" : {
+                              "direction" : 3
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "policies.scoreGain",
+                            "values" : {
+                              "direction" : 2
+                            }
+                          }
+                        }
+                      } ]
+                    }
+                  } ]
+                }
+              }
+            }
+          } ],
+          "action" : 0
+        }
+      },
+      "weight" : 0.0
+    },
+    "output" : {
+      "size" : 23
+    },
+    "fitness" : [ -23.0 ],
+    "relationships" : [ {
+      "kind" : "recombination",
+      "targets" : [ 38, 18 ],
+      "partner" : 87,
+      "properties" : {
+        "operators" : [ "subtree-crossover", "random-reset-mutation" ],
+        "changed-features" : [ "policy" ]
+      }
+    } ]
+  }, {
+    "id" : 87,
+    "input" : {
+      "policy" : {
+        "type" : "policies.policy",
+        "values" : {
+          "entries" : [ {
+            "type" : "policies.Entry",
+            "values" : {
+              "action" : 1,
+              "condition" : {
+                "type" : "policies.OrExpression",
+                "values" : {
+                  "subexpressions" : [ {
+                    "type" : "policies.AndExpression",
+                    "values" : {
+                      "comparisons" : [ {
+                        "type" : "policies.BooleanComparison",
+                        "values" : {
+                          "negated" : false,
+                          "leftOperand" : {
+                            "type" : "policies.BooleanLiteral",
+                            "values" : {
+                              "value" : false
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "policies.isLargestInCorner",
+                            "values" : { }
+                          }
+                        }
+                      }, {
+                        "type" : "policies.BooleanComparison",
+                        "values" : {
+                          "negated" : false,
+                          "leftOperand" : {
+                            "type" : "policies.BooleanLiteral",
+                            "values" : {
+                              "value" : false
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "policies.canMoveInDirection",
+                            "values" : {
+                              "direction" : 0
+                            }
+                          }
+                        }
+                      } ]
+                    }
+                  }, {
+                    "type" : "policies.AndExpression",
+                    "values" : {
+                      "comparisons" : [ {
+                        "type" : "policies.BooleanComparison",
+                        "values" : {
+                          "negated" : true,
+                          "leftOperand" : {
+                            "type" : "policies.BooleanLiteral",
+                            "values" : {
+                              "value" : false
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "policies.canMoveInDirection",
+                            "values" : {
+                              "direction" : 3
+                            }
+                          }
+                        }
+                      } ]
+                    }
+                  } ]
+                }
+              }
+            }
+          }, {
+            "type" : "policies.Entry",
+            "values" : {
+              "action" : 1,
+              "condition" : {
+                "type" : "policies.OrExpression",
+                "values" : {
+                  "subexpressions" : [ {
+                    "type" : "policies.AndExpression",
+                    "values" : {
+                      "comparisons" : [ {
+                        "type" : "policies.BooleanComparison",
+                        "values" : {
+                          "negated" : false,
+                          "leftOperand" : {
+                            "type" : "policies.BooleanLiteral",
+                            "values" : {
+                              "value" : false
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "policies.canMoveInDirection",
+                            "values" : {
+                              "direction" : 0
+                            }
+                          }
+                        }
+                      }, {
+                        "type" : "policies.BooleanComparison",
+                        "values" : {
+                          "negated" : false,
+                          "leftOperand" : {
+                            "type" : "policies.BooleanLiteral",
+                            "values" : {
+                              "value" : true
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "policies.canMoveInDirection",
+                            "values" : {
+                              "direction" : 1
+                            }
+                          }
+                        }
+                      } ]
+                    }
+                  } ]
+                }
+              }
+            }
+          } ],
+          "action" : 2
+        }
+      },
+      "weight" : 0.7445603947609091
+    },
+    "output" : {
+      "size" : 23
+    },
+    "fitness" : [ -23.0 ],
+    "relationships" : [ {
+      "kind" : "recombination",
+      "targets" : [ 18, 38 ],
+      "partner" : 86,
+      "properties" : {
+        "operators" : [ "subtree-crossover", "array-size-mutation", "gaussian-mutation" ],
+        "changed-features" : [ "policy", "weight" ]
+      }
+    } ]
+  }, {
+    "id" : 90,
+    "input" : {
+      "policy" : {
+        "type" : "policies.policy",
+        "values" : {
+          "entries" : [ {
+            "type" : "policies.Entry",
+            "values" : {
+              "action" : 3,
+              "condition" : {
+                "type" : "policies.OrExpression",
+                "values" : {
+                  "subexpressions" : [ {
+                    "type" : "policies.AndExpression",
+                    "values" : {
+                      "comparisons" : [ {
+                        "type" : "policies.IntegerComparison",
+                        "values" : {
+                          "operator" : "less",
+                          "leftOperand" : {
+                            "type" : "policies.scoreGain",
+                            "values" : {
+                              "direction" : 3
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "policies.scoreGain",
+                            "values" : {
+                              "direction" : 1
+                            }
+                          }
+                        }
+                      } ]
+                    }
+                  } ]
+                }
+              }
+            }
+          }, {
+            "type" : "policies.Entry",
+            "values" : {
+              "action" : 0,
+              "condition" : {
+                "type" : "policies.OrExpression",
+                "values" : {
+                  "subexpressions" : [ {
+                    "type" : "policies.AndExpression",
+                    "values" : {
+                      "comparisons" : [ {
+                        "type" : "policies.BooleanComparison",
+                        "values" : {
+                          "negated" : false,
+                          "leftOperand" : {
+                            "type" : "policies.BooleanLiteral",
+                            "values" : {
+                              "value" : true
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "policies.isLargestInCorner",
+                            "values" : { }
+                          }
+                        }
+                      }, {
+                        "type" : "policies.IntegerComparison",
+                        "values" : {
+                          "operator" : "less",
+                          "leftOperand" : {
+                            "type" : "policies.scoreGain",
+                            "values" : {
+                              "direction" : 0
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "policies.scoreGain",
+                            "values" : {
+                              "direction" : 0
+                            }
+                          }
+                        }
+                      } ]
+                    }
+                  }, {
+                    "type" : "policies.AndExpression",
+                    "values" : {
+                      "comparisons" : [ {
+                        "type" : "policies.IntegerComparison",
+                        "values" : {
+                          "operator" : "less",
+                          "leftOperand" : {
+                            "type" : "policies.scoreGain",
+                            "values" : {
+                              "direction" : 0
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "policies.scoreGain",
+                            "values" : {
+                              "direction" : 0
+                            }
+                          }
+                        }
+                      } ]
+                    }
+                  } ]
+                }
+              }
+            }
+          } ],
+          "action" : 1
+        }
+      },
+      "weight" : 0.058441081579668985
+    },
+    "output" : {
+      "size" : 20
+    },
+    "fitness" : [ -20.0 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 21 ]
+    } ]
+  } ],
+  "steps" : [ ],
+  "ranks" : [ {
+    "number" : 0,
+    "members" : [ 89 ]
+  }, {
+    "number" : 1,
+    "members" : [ 60, 55, 54, 77, 78, 88, 80, 73, 86, 87 ]
+  }, {
+    "number" : 2,
+    "members" : [ 90 ]
+  } ],
+  "bestSoFar" : 89,
+  "metrics" : {
+    "evaluations.real" : 36,
+    "evaluations.surrogate" : 0
+  }
+}

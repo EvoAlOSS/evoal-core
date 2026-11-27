@@ -12,13 +12,16 @@ import de.evoal.core.api.ecore.info.BoundaryExtractor;
 import de.evoal.languages.model.base.definitions.BaseDataDescription;
 import de.evoal.languages.model.base.definitions.DataDescription;
 import de.evoal.languages.model.base.definitions.RepresentationType;
+import de.evoal.languages.model.base.definitions.StructuredDataDescription;
 import de.evoal.models.core.exceptions.InitializationException;
 
 /**
  * Checks {@code @RequiresBoundaries}: every selected data has a lower and/or an upper boundary
  *   ({@code @LowerBoundary}, {@code @UpperBoundary} of the data or of its type, see
  *   {@link BoundaryExtractor}). The range of the representation does not count, except for
- *   boolean data, which is always bounded.
+ *   boolean data, which is always bounded. Structured data (a model) meets every
+ *   requirement: its attributes have their own boundaries, which the components that change
+ *   them check.
  */
 @Dependent
 @Named("de.evoal.core.constraints.RequiresBoundaries")
@@ -81,6 +84,12 @@ public class RequiresBoundariesChecker extends FeatureRequirementChecker {
 
     @Override
     protected Optional<String> problemOf(final DataDescription data) {
+        // a model has no boundaries itself; its attributes have their own, which the components
+        // that change them check
+        if(data instanceof StructuredDataDescription) {
+            return Optional.empty();
+        }
+
         // boolean data has only two values, false and true
         if(data instanceof BaseDataDescription base && base.getRepresentation() == RepresentationType.BOOLEAN) {
             return Optional.empty();

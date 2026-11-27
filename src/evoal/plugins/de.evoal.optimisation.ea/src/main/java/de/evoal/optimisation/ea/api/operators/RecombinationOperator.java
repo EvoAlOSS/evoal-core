@@ -3,7 +3,9 @@ package de.evoal.optimisation.ea.api.operators;
 import java.util.random.RandomGenerator;
 
 import de.evoal.models.core.cdi.EvoalComponent;
+import de.evoal.models.core.exceptions.InitializationException;
 
+import de.evoal.optimisation.ea.api.genotype.Chromosome;
 import de.evoal.optimisation.ea.api.genotype.Genes;
 
 /**
@@ -12,6 +14,15 @@ import de.evoal.optimisation.ea.api.genotype.Genes;
  *   by the algorithm with {@link #probability()}.
  */
 public interface RecombinationOperator extends EvoalComponent<RecombinationOperator> {
+    /**
+     * Checks when the configuration is loaded that the recombination can change the chromosome.
+     *
+     * @param chromosome The chromosome the recombination belongs to.
+     * @throws InitializationException if the recombination cannot change the chromosome.
+     */
+    default void check(final Chromosome chromosome) throws InitializationException {
+    }
+
     /**
      * @return The name of the DL type, e.g., {@code single-point-crossover}.
      */

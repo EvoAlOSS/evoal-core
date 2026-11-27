@@ -22,7 +22,12 @@ public enum Representation {
     /**
      * Bits; real and integer features in Gray code ({@link BitGenes}).
      */
-    GRAY("gray");
+    GRAY("gray"),
+
+    /**
+     * One model per structured feature ({@link ModelGenes}).
+     */
+    MODEL("model");
 
     /**
      * The name of the literal in the DL.

@@ -31,6 +31,8 @@ import de.evoal.languages.model.dl.DefinitionModule;
 import de.evoal.models.core.ecore.Space;
 import de.evoal.models.core.ecore.TypedEObject;
 
+import de.evoal.optimisation.api.models.ModelCandidates;
+
 public class RandomInitialCandidatesTest {
     private final EClass eClass = EcoreFactory.eINSTANCE.createEClass();
 
@@ -53,9 +55,14 @@ public class RandomInitialCandidatesTest {
     }
 
     private RandomInitialCandidates provider(final long seed) throws Exception {
+        return provider(seed, new DynamicEClassProvider());
+    }
+
+    private RandomInitialCandidates provider(final long seed, final DynamicEClassProvider dynamicClasses) throws Exception {
         final RandomInitialCandidates provider = new RandomInitialCandidates();
-        inject(provider, "searchSpace", new Space(eClass));
-        inject(provider, "boundaries", new FeatureBoundaries());
+        final Space space = new Space(eClass);
+        inject(provider, "searchSpace", space);
+        inject(provider, "models", new ModelCandidates(space, new FeatureBoundaries(), dynamicClasses));
         inject(provider, "randomService", RandomService.withSeed(seed));
         return provider;
     }
@@ -169,8 +176,7 @@ public class RandomInitialCandidatesTest {
          * @return The population configured with grow and the depth limit, or without method.
          */
         private RandomInitialCandidates population(final Integer maximumDepth) throws Exception {
-            final RandomInitialCandidates provider = provider(42);
-            inject(provider, "dynamicClasses", dynamicClasses);
+            final RandomInitialCandidates provider = provider(42, dynamicClasses);
 
             final EObject configuration = EcoreUtil.create(randomPopulation);
             if(maximumDepth != null) {

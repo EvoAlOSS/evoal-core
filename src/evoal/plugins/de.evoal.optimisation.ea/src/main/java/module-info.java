@@ -3,6 +3,7 @@ module de.evoal.optimisation.ea {
     requires de.evoal.core.main;
     requires de.evoal.languages.models;
     requires de.evoal.languages.model.base;
+    requires de.evoal.languages.model.interpreter;
     requires de.evoal.optimisation.api;
 
     // CDI related dependencies
@@ -29,6 +30,7 @@ module de.evoal.optimisation.ea {
     opens de.evoal.optimisation.ea.main.comparator to weld.core.impl;
     opens de.evoal.optimisation.ea.main.genotype to weld.core.impl;
     opens de.evoal.optimisation.ea.main.operators to weld.core.impl;
+    opens de.evoal.optimisation.ea.main.operators.model to weld.core.impl;
     opens de.evoal.optimisation.ea.main.replacement to weld.core.impl;
     opens de.evoal.optimisation.ea.main.selection to weld.core.impl;
     opens de.evoal.optimisation.ea.main.statistics to weld.core.impl;

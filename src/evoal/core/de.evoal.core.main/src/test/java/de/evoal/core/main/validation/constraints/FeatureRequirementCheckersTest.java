@@ -8,8 +8,10 @@ import org.junit.jupiter.api.Test;
 import de.evoal.core.api.languages.base.ElementSwitch;
 import de.evoal.core.api.validation.constraints.ConstraintCheck;
 import de.evoal.core.junit.dsl.LanguageHelper;
+import de.evoal.languages.model.base.definitions.DefinitionsFactory;
 import de.evoal.languages.model.base.definitions.RepresentationType;
 import de.evoal.languages.model.base.definitions.ScaleType;
+import de.evoal.languages.model.base.definitions.StructuredDataDescription;
 import de.evoal.languages.model.base.expressions.Instance;
 import de.evoal.languages.model.ol.OptimisationModule;
 
@@ -83,5 +85,15 @@ public class FeatureRequirementCheckersTest {
     public void anEmptySelectionMeetsEveryRequirement() {
         Assertions.assertInstanceOf(ConstraintCheck.Satisfied.class,
                                     new RequiresBoundariesChecker("../unknown", true, true).check(mover));
+    }
+
+    @Test
+    public void structuredDataMeetsBoundaryAndScaleRequirements() {
+        // a model has no boundaries and no scale itself; its attributes are checked where they change
+        final StructuredDataDescription model = DefinitionsFactory.eINSTANCE.createStructuredDataDescription();
+        model.setName("policy");
+
+        Assertions.assertTrue(new RequiresBoundariesChecker(SEARCH_VARIABLES, true, true).problemOf(model).isEmpty());
+        Assertions.assertTrue(new RequiresScaleChecker(SEARCH_VARIABLES, ScaleType.QUOTIENT).problemOf(model).isEmpty());
     }
 }
