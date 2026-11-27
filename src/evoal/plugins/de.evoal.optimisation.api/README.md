@@ -33,13 +33,13 @@ swarm optimisation are written the same way.
 
 `OptimisationRun.execute(criterion, procedure)` runs one optimisation:
 
-1. starts the `@RunScoped` context and the run events (`RunStarted`),
+1. starts the run events (`RunStarted`),
 2. iteration 0: `IterationStarted(0)`, `procedure.initialise(events)`, then records the
    population (`IterationFinished(0)`),
 3. while the procedure did not stop, the budget is not exhausted and the termination
    criterion agrees: `IterationStarted(n)`, `procedure.iterate(n)`, record the population
    (`IterationFinished(n)`),
-4. `RunFinished`, then ends the context.
+4. `RunFinished`.
 
 Recording an iteration means: every member of the population becomes an
 `IndividualRecord` with the next id, its objectives (`output`) and its fitness (`fitness`,
@@ -62,11 +62,48 @@ An algorithm therefore does not number iterations, check the criterion, assign i
 build the memory model or call the statistics writers.
 
 Before a run, `SearchRunner` writes the literature of the configuration (`RunLiterature`,
-`citations.bib` in the output folder) and names `<output folder>/provenance` as the folder of
-the run's provenance (`RunRecord` of core, written by core's main class when the application
+`citations.bib` in the output folder of the run) and names `<output folder>/provenance` as the
+folder of the run's provenance (`RunRecord` of core, written by core's main class when the application
 finished). `RunLiterature` walks the configuration with `ConfigurationLiterature` of core; a
 `LiteratureContributor` (e.g. `SurrogateLiterature` for the model file of a surrogate) adds what
 a configuration loads.
+
+## Evaluations and runs
+
+The applications that search (`heuristic-search`, `heuristic-search-evaluation`, the COCO
+experiment of the benchmark suites) drive their runs with the `SearchRunner`:
+
+```java
+final OptimisationModule configuration = runner.setUp(olFile);
+runner.evaluate(outputFolder, () -> {
+    for(int i = 0; i < repetitions; ++i) {
+        runner.run(configuration, new RunParameters(i, outputFolder, position, target));
+    }
+});
+```
+
+- `evaluate(outputFolder, body)` opens an **evaluation** (`@EvaluationScoped`, core): the
+  state that the runs of an application share, e.g. the CSV files that every run appends to
+  (`CsvStrategy`) and the columns of the `WriterContext`. The folder is the
+  `CurrentEvaluation`. When the body ends, the evaluation-scoped beans are destroyed, so
+  the CSV files are closed. `heuristic-search` is an evaluation with one run.
+- `run(configuration, parameters)` opens a **run** (`@RunScoped`, core) of the evaluation;
+  without an open evaluation it fails. The `RunParameters` state the number of the run (it
+  determines the random numbers), its output folder, its position in the evaluation setup
+  and its target point; the components of the run read them from `CurrentRun`.
+- Every run has its own run-scoped beans, so their state starts anew without a reset:
+  `ExecutionRecorder`, `EvaluationService`, `EvaluationExecutor`, `IndividualIDGenerator`,
+  `RunEventDispatcher`, `ConstraintEvaluation`, `ProblemCorrelations`, the metric
+  contributors and the named random streams (`RandomService.random`). A component with
+  state per run is `@RunScoped` as well.
+- The scopes belong to the run, not to a thread. The `EvaluationExecutor` takes the scopes
+  of the run to its threads (`ScopeControl.capture()`), so an evaluation or a particle move
+  on another thread sees the beans of its run; a run-scoped bean that these threads use has
+  to be thread-safe.
+
+The `ExecutionRecorder` of a run starts in the definition phase: when it is created, every
+`MetricContributor` defines its metrics (`contributeDefinitions`), ordered by the name of
+its class.
 
 ## Writing an algorithm
 
@@ -588,7 +625,7 @@ listener selects the events it needs with a `switch` over the event types.
 - Before the listeners receive an `IterationFinished`, the dispatcher records the
   iteration metrics. This is not a listener because the termination criteria read the
   metrics.
-- Events outside a run are ignored.
+- Events that are published while the kernel does not dispatch them are ignored.
 
 The kernel registers the listeners of a run when it starts. Today that is the
 `StatisticsWriterListener`, which adapts the configured statistics writers

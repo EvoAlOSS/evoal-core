@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
 
-import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.annotation.PostConstruct;
 import jakarta.inject.Inject;
 
 import lombok.extern.slf4j.Slf4j;
@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
 
 import de.evoal.core.api.board.Blackboard;
 import de.evoal.core.api.cdi.BeanFactory;
+import de.evoal.core.api.cdi.RunScoped;
 import de.evoal.core.api.utils.AttributeHelper;
 import de.evoal.models.core.ecore.TypedEObject;
 import de.evoal.models.v202704.optimisation.memory.Iteration;
@@ -42,12 +43,12 @@ import de.evoal.optimisation.main.constraints.ConstraintCompiler;
  *   evaluation is not measured again, but a repaired candidate is measured after every
  *   attempt.
  * <p>
- * At the start of every run, the constraints and the measure are read from the
- *   optimisation configuration. If the problem has constraints, the metric and the
- *   properties {@code violation-<n>} of the individuals are defined; without constraints,
- *   nothing is defined and every record is {@link ViolationRecord#NONE}.
+ * Every run has its own constraint evaluation, which reads the constraints and the measure
+ *   from the optimisation configuration when it is created. If the problem has constraints,
+ *   the metric and the properties {@code violation-<n>} of the individuals are defined;
+ *   without constraints, nothing is defined and every record is {@link ViolationRecord#NONE}.
  */
-@ApplicationScoped
+@RunScoped
 @Slf4j
 public class ConstraintEvaluation implements MetricContributor {
     /**
@@ -62,12 +63,12 @@ public class ConstraintEvaluation implements MetricContributor {
     private ConstraintCompiler compiler;
 
     /**
-     * The constraints of the current run.
+     * The constraints of the run.
      */
     private Constraints constraints = Constraints.NONE;
 
     /**
-     * The number of measured constraints in the current run.
+     * The number of measured constraints in the run.
      */
     private final AtomicLong evaluations = new AtomicLong();
 
@@ -75,12 +76,12 @@ public class ConstraintEvaluation implements MetricContributor {
     private AttributeHelper helper;
 
     /**
-     * The measure of the current run; {@code null} if the problem has no constraints.
+     * The measure of the run; {@code null} if the problem has no constraints.
      */
     private ConstraintMeasure measure;
 
     /**
-     * @return The constraints of the current run.
+     * @return The constraints of the run.
      */
     public Constraints constraints() {
         return constraints;
@@ -203,11 +204,13 @@ public class ConstraintEvaluation implements MetricContributor {
         evaluations.set(0);
     }
 
-    @Override
-    public void startRun(final ExecutionRecorder recorder) {
+    /**
+     * Reads the constraints of the problem and the measure of the algorithm from the
+     *   optimisation configuration.
+     */
+    @PostConstruct
+    public void initialise() {
         final EObject configuration = board.getOrNull(OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION);
-        evaluations.set(0);
-
         if(configuration == null) {
             setUp(Constraints.NONE, null);
 
@@ -228,7 +231,18 @@ public class ConstraintEvaluation implements MetricContributor {
                                                                              measureConfiguration);
         setUp(problemConstraints, problemMeasure);
 
-        define(recorder);
         log.info("Measuring {} constraints with {}.", constraints.size(), measure);
+    }
+
+    /**
+     * Defines the metric and the properties of the constraints, if the problem has any.
+     */
+    @Override
+    public void contributeDefinitions(final ExecutionRecorder recorder) {
+        if(constraints.isEmpty()) {
+            return;
+        }
+
+        define(recorder);
     }
 }

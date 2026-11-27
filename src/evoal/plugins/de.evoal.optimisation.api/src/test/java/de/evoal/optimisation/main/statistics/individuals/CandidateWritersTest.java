@@ -31,6 +31,7 @@ import de.evoal.models.v202704.optimisation.memory.Iteration;
 import de.evoal.models.v202704.optimisation.memory.MemoryFactory;
 import de.evoal.models.v202704.optimisation.memory.Rank;
 
+import de.evoal.optimisation.api.run.CurrentEvaluation;
 import de.evoal.optimisation.api.statistics.io.WriterStrategy;
 import de.evoal.optimisation.api.statistics.writer.AbstractCandidateStatisticsWriter;
 import de.evoal.optimisation.api.statistics.writer.WriterContext;
@@ -75,7 +76,7 @@ public class CandidateWritersTest {
     @BeforeEach
     public void injectDependencies() throws Exception {
         final File folder = outputFolder.toFile();
-        inject(CsvStrategy.class, strategy, "outputFolder", folder);
+        inject(CsvStrategy.class, strategy, "evaluation", CurrentEvaluation.of(folder));
         inject(WriterStrategy.class, strategy, "context", new WriterContext());
 
         Mockito.when(evaluator.attributeToBoolean(ArgumentMatchers.any(), ArgumentMatchers.eq("prefix-data")))

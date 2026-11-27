@@ -2,15 +2,16 @@ package de.evoal.optimisation.api.model;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-import jakarta.enterprise.context.ApplicationScoped;
+import de.evoal.core.api.cdi.RunScoped;
 
 /**
  * Creates the unique identifiers of the individuals in the memory model
  *   ({@link de.evoal.models.v202704.optimisation.memory.Individual#getId()}).
- *   The identifiers form a sequence starting at 0 in every run, so a run gets the same
- *   identifiers whether it is executed alone or after other runs.
+ *   The identifiers form a sequence starting at 0 in every run (every run has its own
+ *   generator), so a run gets the same identifiers whether it is executed alone or after other
+ *   runs.
  */
-@ApplicationScoped
+@RunScoped
 public class IndividualIDGenerator {
     /**
      * The next identifier.
@@ -22,12 +23,5 @@ public class IndividualIDGenerator {
      */
     public int nextId() {
         return next.getAndIncrement();
-    }
-
-    /**
-     * Starts a new run: the next identifier is 0 again.
-     */
-    public void startRun() {
-        next.set(0);
     }
 }

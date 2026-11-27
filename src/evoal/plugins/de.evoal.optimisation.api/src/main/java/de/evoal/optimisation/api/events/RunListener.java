@@ -2,7 +2,7 @@ package de.evoal.optimisation.api.events;
 
 /**
  * Receives the events of the runs it is registered for
- *   ({@link RunEventDispatcher#startRun(java.util.List)}). A listener must not change the
+ *   ({@link RunEventDispatcher#dispatchTo(java.util.List)}). A listener must not change the
  *   data of an event.
  */
 @FunctionalInterface

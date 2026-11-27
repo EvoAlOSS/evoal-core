@@ -11,7 +11,7 @@ import de.evoal.optimisation.api.statistics.writer.WriterContext;
  * Base class for the serialisation backends of statistics writers. A strategy
  *   creates the writers for named outputs and owns them: it decides where and in
  *   which format the data is stored, and it closes the writers when the
- *   application ends.
+ *   evaluation ends (it is {@link de.evoal.core.api.cdi.EvaluationScoped}).
  * <p>
  * Writers with the same name share one output. This allows the runs of an
  *   evaluation to append to the same output (distinguished by the columns of

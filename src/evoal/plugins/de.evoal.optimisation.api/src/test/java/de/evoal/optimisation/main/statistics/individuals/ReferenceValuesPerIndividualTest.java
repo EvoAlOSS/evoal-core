@@ -42,6 +42,7 @@ import de.evoal.models.v202704.optimisation.memory.Rank;
 
 import de.evoal.optimisation.api.execution.ExecutionRecorder;
 import de.evoal.optimisation.api.execution.MetricContributor;
+import de.evoal.optimisation.api.run.CurrentEvaluation;
 import de.evoal.optimisation.api.statistics.io.WriterStrategy;
 import de.evoal.optimisation.api.statistics.writer.WriterContext;
 import de.evoal.optimisation.main.statistics.io.csv.CsvStrategy;
@@ -96,17 +97,17 @@ public class ReferenceValuesPerIndividualTest {
     @SuppressWarnings("unchecked")
     public void injectDependencies() throws Exception {
         final File folder = outputFolder.toFile();
-        inject(CsvStrategy.class, strategy, "outputFolder", folder);
+        inject(CsvStrategy.class, strategy, "evaluation", CurrentEvaluation.of(folder));
         inject(WriterStrategy.class, strategy, "context", new WriterContext());
 
         final Instance<MetricContributor> contributors = Mockito.mock(Instance.class, Mockito.CALLS_REAL_METHODS);
-        Mockito.doAnswer(invocation -> List.<MetricContributor>of(evaluations).iterator())
+        Mockito.doAnswer(invocation -> List.<MetricContributor>of().iterator())
                .when(contributors)
                .iterator();
         inject(ExecutionRecorder.class, recorder, "contributors", contributors);
         inject(ExecutionRecorder.class, recorder, "reproducibility", new ReproducibilityProtocol());
 
-        recorder.startRun();
+        inject(ReferenceEvaluations.class, evaluations, "recorder", recorder);
     }
 
     private Iteration iteration(final int number, final Rank... ranks) {

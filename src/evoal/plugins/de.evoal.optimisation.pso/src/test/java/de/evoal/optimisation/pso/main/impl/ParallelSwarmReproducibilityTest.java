@@ -217,7 +217,6 @@ public class ParallelSwarmReproducibilityTest {
      */
     private RunResult runWithThreads(final int numberOfThreads) throws Exception {
         final RandomService randomService = RandomService.withSeed(42);
-        randomService.startRun(0);
 
         final DelayedFunction function = new DelayedFunction(randomService);
         final EvaluationExecutor executor = EvaluationExecutor.withThreads(numberOfThreads);
@@ -263,6 +262,7 @@ public class ParallelSwarmReproducibilityTest {
         inject(service, EvaluationService.class, "randomService", randomService);
         inject(service, EvaluationService.class, "executor", executor);
         inject(service, EvaluationService.class, "events", new RunEventDispatcher(recorder));
+        inject(service, EvaluationService.class, "recorder", recorder);
 
         @SuppressWarnings("unchecked")
         final Instance<MetricContributor> contributors = Mockito.mock(Instance.class, Mockito.CALLS_REAL_METHODS);
@@ -272,7 +272,7 @@ public class ParallelSwarmReproducibilityTest {
         inject(recorder, ExecutionRecorder.class, "contributors", contributors);
         inject(recorder, ExecutionRecorder.class, "reproducibility", new ReproducibilityProtocol());
 
-        recorder.startRun();
+        recorder.defineContributions();
         service.limit(EvaluationSource.REAL, BUDGET, ExhaustionPolicy.CUT_OFF);
         recorder.beginExecution();
 

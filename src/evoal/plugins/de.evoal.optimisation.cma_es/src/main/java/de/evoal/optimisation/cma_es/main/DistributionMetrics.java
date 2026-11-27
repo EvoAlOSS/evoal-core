@@ -2,11 +2,10 @@ package de.evoal.optimisation.cma_es.main;
 
 import java.util.List;
 
-import jakarta.enterprise.context.ApplicationScoped;
-
 import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
+import de.evoal.core.api.cdi.RunScoped;
 import de.evoal.models.v202704.optimisation.memory.Iteration;
 import de.evoal.models.v202704.optimisation.memory.MemoryFactory;
 import de.evoal.models.v202704.optimisation.memory.MetricDefinition;
@@ -45,7 +44,7 @@ import de.evoal.optimisation.cma_es.main.distribution.Distribution;
  * </ul>
  * CMA-ES defines the metrics ({@link #define}); otherwise the bean records nothing.
  */
-@ApplicationScoped
+@RunScoped
 public class DistributionMetrics implements MetricContributor {
     /**
      * The name of the metric of the axis ratio.
@@ -312,14 +311,6 @@ public class DistributionMetrics implements MetricContributor {
     synchronized void show(final Distribution current, final int restartNumber) {
         distribution = current;
         restart = restartNumber;
-    }
-
-    @Override
-    public synchronized void startRun(final ExecutionRecorder recorder) {
-        recording = false;
-        distribution = null;
-        features = List.of();
-        groups = List.of();
     }
 
     /**

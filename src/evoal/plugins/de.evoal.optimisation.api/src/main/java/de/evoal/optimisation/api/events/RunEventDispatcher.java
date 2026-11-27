@@ -2,9 +2,9 @@ package de.evoal.optimisation.api.events;
 
 import java.util.List;
 
-import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
+import de.evoal.core.api.cdi.RunScoped;
 import de.evoal.optimisation.api.execution.ExecutionRecorder;
 
 /**
@@ -16,13 +16,14 @@ import de.evoal.optimisation.api.execution.ExecutionRecorder;
  *   not a listener, because the stopping criteria read them and listeners must not change
  *   the search.
  * <p>
- * Events published outside a run, e.g. by an algorithm that does not use the dispatcher,
- *   are ignored.
+ * Every run has its own dispatcher. Events published while the kernel does not dispatch
+ *   them, e.g. by an algorithm that does not use the kernel, are ignored.
  */
-@ApplicationScoped
+@RunScoped
 public class RunEventDispatcher {
     /**
-     * The listeners of the current run in the order of registration, empty outside a run.
+     * The listeners of the run in the order of registration, empty while the events are not
+     *   dispatched.
      */
     private List<RunListener> listeners = List.of();
 
@@ -32,7 +33,7 @@ public class RunEventDispatcher {
     private final ExecutionRecorder recorder;
 
     /**
-     * Whether a run is active.
+     * Whether the events are dispatched.
      */
     private boolean running;
 
@@ -52,9 +53,9 @@ public class RunEventDispatcher {
     }
 
     /**
-     * Ends the current run; later events are ignored until the next run starts.
+     * Stops dispatching at the end of the run; later events are ignored.
      */
-    public void finishRun() {
+    public void stopDispatching() {
         running = false;
         listeners = List.of();
     }
@@ -81,11 +82,11 @@ public class RunEventDispatcher {
     }
 
     /**
-     * Starts a run with its listeners. The listeners of a previous run are removed.
+     * Starts dispatching the events of the run to its listeners.
      *
      * @param listeners The listeners of the run in the order they receive the events.
      */
-    public void startRun(final List<RunListener> listeners) {
+    public void dispatchTo(final List<RunListener> listeners) {
         this.listeners = List.copyOf(listeners);
         running = true;
     }

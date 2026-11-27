@@ -13,11 +13,12 @@ import de.evoal.core.api.cdi.MainClass;
 import de.evoal.models.v202704.optimisation.model.OptimisationModule;
 
 import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
+import de.evoal.optimisation.api.run.RunParameters;
 import de.evoal.optimisation.api.run.SearchRunner;
 
 /**
- * Runs a single heuristic search for the problem and algorithm of an OL file.
- *   Unlike {@link HeuristicSearchEvaluation}, there is only one run, so the
+ * Runs a single heuristic search for the problem and algorithm of an OL file: an
+ *   evaluation with one run (run 0). Unlike {@link HeuristicSearchEvaluation}, the
  *   statistics contain no {@code run} or {@code target} columns.
  */
 @Application(
@@ -50,10 +51,7 @@ public class HeuristicSearchMain implements MainClass {
         final File configurationFile = new File(heuristicFileName);
         final File outputBaseDir = HeuristicSearchUtils.calculateOutputBaseDir(outputRoot, configurationFile);
 
-        board.bind(OptimisationBlackboardEntries.EVALUATION_OUTPUT_FOLDER, outputBaseDir);
-        board.bind(OptimisationBlackboardEntries.EVALUATION_RUN, "0");
-
         final OptimisationModule configuration = runner.setUp(heuristicFileName);
-        runner.run(configuration, 0, null);
+        runner.evaluate(outputBaseDir, () -> runner.run(configuration, RunParameters.single(0, outputBaseDir)));
     }
 }

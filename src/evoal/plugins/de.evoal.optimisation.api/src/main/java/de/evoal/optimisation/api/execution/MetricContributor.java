@@ -4,9 +4,10 @@ import de.evoal.models.v202704.optimisation.memory.Iteration;
 
 /**
  * A component that records metrics in the iterations of an execution. The
- *   {@link ExecutionRecorder} calls all contributors that are CDI beans. Since the
- *   recorder looks them up on every call, contributors have to be
- *   {@code @ApplicationScoped}.
+ *   {@link ExecutionRecorder} calls all contributors that are CDI beans. A contributor keeps
+ *   the state of one run, so contributors are {@link de.evoal.core.api.cdi.RunScoped}: every
+ *   run gets new contributors, and the recorder of the run calls the contributors of the
+ *   same run.
  */
 public interface MetricContributor {
     /**
@@ -17,10 +18,12 @@ public interface MetricContributor {
     void contributeTo(Iteration iteration);
 
     /**
-     * Starts a new run: resets the contributor's state and defines its metrics
-     *   ({@link ExecutionRecorder#define}). The recorder is in its definition phase.
+     * Defines the contributor's metrics ({@link ExecutionRecorder#define}) when the recorder
+     *   of the run is created. The recorder is in its definition phase. Contributors whose
+     *   metrics depend on the algorithm define them later, while the algorithm is created.
      *
-     * @param recorder The recorder of the new run.
+     * @param recorder The recorder of the run.
      */
-    void startRun(ExecutionRecorder recorder);
+    default void contributeDefinitions(final ExecutionRecorder recorder) {
+    }
 }

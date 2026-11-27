@@ -18,6 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 import de.evoal.core.api.board.Blackboard;
 import de.evoal.core.api.board.CoreBlackboardEntries;
 import de.evoal.core.api.cdi.RunScoped;
+import de.evoal.core.api.cdi.ScopeControl;
 
 /**
  * The threads that evaluate the candidates of a run in parallel. The algorithms also use them
@@ -29,13 +30,22 @@ import de.evoal.core.api.cdi.RunScoped;
  *   of a run do not depend on the number of threads.
  * <p>
  * The threads are platform daemon threads named {@code evoal-evaluation-<n>}. They are
- *   created on the first submission and stopped at the end of the run.
+ *   created on the first submission and stopped at the end of the run. A task runs in the
+ *   scopes of the code that submitted it ({@link ScopeControl#capture()}), so it sees the
+ *   run-scoped beans of its run.
  */
 @RunScoped
 @Slf4j
 public class EvaluationExecutor {
     @Inject
     private Blackboard board;
+
+    /**
+     * Takes the scopes of the run to the threads, {@code null} for an executor with a fixed
+     *   number of threads.
+     */
+    @Inject
+    private ScopeControl scopes;
 
     /**
      * The number of threads, read on first use.
@@ -94,7 +104,8 @@ public class EvaluationExecutor {
 
     /**
      * Runs the tasks and waits until all of them have ended. With one thread, the tasks run
-     *   one after another on the calling thread, otherwise on the threads of the run.
+     *   one after another on the calling thread, otherwise on the threads of the run, in the
+     *   scopes of the calling code.
      *
      * @param tasks The independent tasks.
      * @return The results of the tasks, in the order of the tasks.
@@ -108,8 +119,9 @@ public class EvaluationExecutor {
         if(tasks.size() <= 1 || threads() <= 1) {
             tasks.forEach(task -> results.add(Result.of(task)));
         } else {
+            final ScopeControl.Bindings bindings = scopes == null ? null : scopes.capture();
             final List<Future<Result<T>>> futures = new ArrayList<>(tasks.size());
-            tasks.forEach(task -> futures.add(submit(() -> Result.of(task))));
+            tasks.forEach(task -> futures.add(submit(() -> bindings == null ? Result.of(task) : bindings.call(() -> Result.of(task)))));
             futures.forEach(future -> results.add(await(future)));
         }
 

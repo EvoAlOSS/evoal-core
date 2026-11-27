@@ -51,8 +51,9 @@ import de.evoal.optimisation.api.fitness.FitnessPipeline;
 import de.evoal.optimisation.api.fitness.Goals;
 import de.evoal.optimisation.api.model.IndividualIDGenerator;
 import de.evoal.optimisation.api.model.InitialCandidatesProvider;
+import de.evoal.optimisation.api.run.CurrentRun;
 import de.evoal.optimisation.api.run.OptimisationRun;
-import de.evoal.optimisation.api.run.RunScope;
+import de.evoal.optimisation.api.run.RunParameters;
 import de.evoal.optimisation.api.steps.EvaluateCandidates;
 import de.evoal.optimisation.api.steps.ReplacePopulation;
 import de.evoal.optimisation.api.steps.SampleCandidates;
@@ -192,13 +193,13 @@ public class ParallelEvaluationReproducibilityTest {
      */
     private RunResult runWithThreads(final int numberOfThreads) throws Exception {
         final RandomService randomService = RandomService.withSeed(42);
-        randomService.startRun(0);
 
         final DelayedFunction function = new DelayedFunction(randomService);
         final ExecutionRecorder recorder = new ExecutionRecorder();
         final EvaluationService evaluationService = evaluationService(recorder, function, randomService);
         final EvaluationExecutor executor = EvaluationExecutor.withThreads(numberOfThreads);
         inject(evaluationService, "executor", executor);
+        inject(evaluationService, "recorder", recorder);
         inject(recorder, "contributors", contributors(evaluationService));
         inject(recorder, "reproducibility", new ReproducibilityProtocol());
 
@@ -206,7 +207,7 @@ public class ParallelEvaluationReproducibilityTest {
         final Goals goals = MemoryModels.goals(problem);
         final FitnessPipeline pipeline = new FitnessPipeline(goals, List.of());
 
-        recorder.startRun();
+        recorder.defineContributions();
         evaluationService.limit(EvaluationSource.REAL, BUDGET, ExhaustionPolicy.CUT_OFF);
         recorder.defineFitness(pipeline.layout());
         recorder.beginExecution();
@@ -217,7 +218,7 @@ public class ParallelEvaluationReproducibilityTest {
         final RunEventDispatcher events = new RunEventDispatcher(recorder);
         inject(evaluationService, "events", events);
 
-        final OptimisationRun kernel = new OptimisationRun(events, idGenerator, recorder, new NoRunScope(), writer);
+        final OptimisationRun kernel = new OptimisationRun(events, idGenerator, recorder, writer);
         final Evaluator evaluator = new Evaluator(evaluationService, pipeline, new NumericOptimisationComparator());
         final List<Step> steps = List.of(new SampleCandidates(new RandomPoints(randomService), SAMPLES_PER_ITERATION),
                                          new EvaluateCandidates(evaluator),
@@ -282,7 +283,7 @@ public class ParallelEvaluationReproducibilityTest {
         inject(writer, "evaluator", Mockito.mock(AttributeEvaluator.class));
         inject(writer, "goals", goals);
         inject(writer, "literature", MemoryModelWriterTest.literature(List.of()));
-        inject(writer, "outputFolder", outputFolder.toFile());
+        inject(writer, "currentRun", CurrentRun.of(RunParameters.single(0, outputFolder.toFile())));
         inject(writer, "problem", problem);
         inject(writer, "randomService", randomService);
         inject(writer, "recorder", recorder);
@@ -313,19 +314,6 @@ public class ParallelEvaluationReproducibilityTest {
         }
 
         return content;
-    }
-
-    /**
-     * The run scope is not needed: the test creates the run-scoped parts itself.
-     */
-    private static final class NoRunScope implements RunScope {
-        @Override
-        public void start() {
-        }
-
-        @Override
-        public void stop() {
-        }
     }
 
     @Test

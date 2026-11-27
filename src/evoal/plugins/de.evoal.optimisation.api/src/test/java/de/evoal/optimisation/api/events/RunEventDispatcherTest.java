@@ -36,8 +36,8 @@ public class RunEventDispatcherTest {
     }
 
     @Nested
-    @DisplayName("given no started run")
-    class NoRun {
+    @DisplayName("given no dispatching")
+    class NoDispatching {
         @Test
         public void eventsAreIgnored() {
             // when
@@ -49,11 +49,11 @@ public class RunEventDispatcherTest {
     }
 
     @Nested
-    @DisplayName("given a started run")
-    class StartedRun {
+    @DisplayName("given dispatched events")
+    class DispatchedEvents {
         @BeforeEach
-        public void startRun() {
-            dispatcher.startRun(List.of(listener("first"), listener("second")));
+        public void dispatch() {
+            dispatcher.dispatchTo(List.of(listener("first"), listener("second")));
         }
 
         @Test
@@ -78,7 +78,7 @@ public class RunEventDispatcherTest {
         public void theMetricsAreRecordedBeforeTheListenersReceiveTheIteration() {
             // given
             final RunListener listener = Mockito.mock(RunListener.class);
-            dispatcher.startRun(List.of(listener));
+            dispatcher.dispatchTo(List.of(listener));
             final IterationFinished event = new IterationFinished(iteration());
 
             // when
@@ -102,9 +102,9 @@ public class RunEventDispatcherTest {
         }
 
         @Test
-        public void aFinishedRunIgnoresLaterEvents() {
+        public void laterEventsAreIgnoredWhenTheDispatchingStops() {
             // given
-            dispatcher.finishRun();
+            dispatcher.stopDispatching();
 
             // when
             dispatcher.publish(new IterationStarted(1));
@@ -114,9 +114,9 @@ public class RunEventDispatcherTest {
         }
 
         @Test
-        public void aNewRunReplacesTheListeners() {
+        public void dispatchingAgainReplacesTheListeners() {
             // given
-            dispatcher.startRun(List.of(listener("next")));
+            dispatcher.dispatchTo(List.of(listener("next")));
 
             // when
             dispatcher.publish(new IterationStarted(0));
@@ -131,7 +131,7 @@ public class RunEventDispatcherTest {
             final RunListener failing = event -> {
                 throw new IllegalStateException("listener failed");
             };
-            dispatcher.startRun(List.of(failing, listener("later")));
+            dispatcher.dispatchTo(List.of(failing, listener("later")));
 
             // when / then
             Assertions.assertThrows(IllegalStateException.class,

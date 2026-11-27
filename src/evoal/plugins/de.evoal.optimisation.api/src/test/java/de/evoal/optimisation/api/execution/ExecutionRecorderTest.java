@@ -17,7 +17,6 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import de.evoal.core.api.reproducibility.ReproducibilityProtocol;
-import de.evoal.models.v202704.optimisation.memory.Execution;
 import de.evoal.models.v202704.optimisation.memory.FitnessComponentDefinition;
 import de.evoal.models.v202704.optimisation.memory.Iteration;
 import de.evoal.models.v202704.optimisation.memory.MemoryFactory;
@@ -99,7 +98,7 @@ public class ExecutionRecorderTest {
         }
 
         @Override
-        public void startRun(final ExecutionRecorder recorder) {
+        public void contributeDefinitions(final ExecutionRecorder recorder) {
             this.recorder = recorder;
             recorder.define(definition("counter", MetricScope.ITERATION));
             recorder.define(definition("limit", MetricScope.EXECUTION));
@@ -107,20 +106,35 @@ public class ExecutionRecorderTest {
     }
 
     @Nested
-    @DisplayName("given no started run")
-    class NoRun {
+    @DisplayName("given a new recorder")
+    class NewRecorder {
         @Test
-        public void metricsCannotBeDefined() {
+        public void itIsInItsDefinitionPhase() {
             // given
-            final MetricDefinition definition = definition("late", MetricScope.ITERATION);
+            final MetricDefinition definition = definition("early", MetricScope.ITERATION);
 
-            // when, then
-            Assertions.assertThrows(IllegalStateException.class, () -> recorder.define(definition));
+            // when
+            recorder.define(definition);
+
+            // then
+            Assertions.assertTrue(recorder.findDefinition("early").isPresent());
         }
 
         @Test
-        public void theExecutionCannotBegin() {
-            Assertions.assertThrows(IllegalStateException.class, recorder::beginExecution);
+        public void theContributorsDefineTheirMetricsWhenTheContainerCreatesIt() {
+            // given
+            Assertions.assertFalse(recorder.findDefinition("counter").isPresent());
+
+            // when
+            recorder.defineContributions();
+
+            // then
+            Assertions.assertTrue(recorder.findDefinition("counter").isPresent());
+        }
+
+        @Test
+        public void everyRecorderHasItsOwnExecution() {
+            Assertions.assertNotSame(recorder.getExecution(), new ExecutionRecorder().getExecution());
         }
     }
 
@@ -128,8 +142,8 @@ public class ExecutionRecorderTest {
     @DisplayName("given a run in its definition phase")
     class DefinitionPhase {
         @BeforeEach
-        public void startRun() {
-            recorder.startRun();
+        public void defineContributions() {
+            recorder.defineContributions();
         }
 
         @Test
@@ -138,18 +152,6 @@ public class ExecutionRecorderTest {
             Assertions.assertSame(recorder, contributor.recorder);
             Assertions.assertTrue(recorder.findDefinition("counter").isPresent());
             Assertions.assertTrue(recorder.findDefinition("limit").isPresent());
-        }
-
-        @Test
-        public void aNewRunHasANewExecution() {
-            // given
-            final Execution previous = recorder.getExecution();
-
-            // when
-            recorder.startRun();
-
-            // then
-            Assertions.assertNotSame(previous, recorder.getExecution());
         }
 
         @Test
@@ -221,7 +223,7 @@ public class ExecutionRecorderTest {
         @Test
         public void theNotesAreRecordedWhenTheExecutionBegins() {
             // given
-            recorder.startRun();
+            recorder.defineContributions();
             protocol.reportNativeLibraries("prediction-interval");
 
             // when
@@ -239,7 +241,7 @@ public class ExecutionRecorderTest {
         @Test
         public void withoutNotesNothingIsRecorded() {
             // when
-            recorder.startRun();
+            recorder.defineContributions();
             recorder.beginExecution();
 
             // then
@@ -252,7 +254,7 @@ public class ExecutionRecorderTest {
     class ExecutionPhase {
         @BeforeEach
         public void beginExecution() {
-            recorder.startRun();
+            recorder.defineContributions();
             recorder.beginExecution();
         }
 
@@ -321,7 +323,7 @@ public class ExecutionRecorderTest {
     class FinishedRun {
         @BeforeEach
         public void finishRun() {
-            recorder.startRun();
+            recorder.defineContributions();
             recorder.beginExecution();
             recorder.finishRun();
         }
@@ -346,7 +348,7 @@ public class ExecutionRecorderTest {
     class Properties {
         @BeforeEach
         public void defineProperties() {
-            recorder.startRun();
+            recorder.defineContributions();
             recorder.defineProperty("reason", PropertyScope.RELATIONSHIP, PropertyValueType.TEXT, false, "Why.");
             recorder.defineProperty("sizes", PropertyScope.INDIVIDUAL, PropertyValueType.INTEGER, true, "Sizes.");
         }

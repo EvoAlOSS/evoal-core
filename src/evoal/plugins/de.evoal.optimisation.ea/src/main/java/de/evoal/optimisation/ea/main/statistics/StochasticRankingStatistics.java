@@ -1,7 +1,6 @@
 package de.evoal.optimisation.ea.main.statistics;
 
-import jakarta.enterprise.context.ApplicationScoped;
-
+import de.evoal.core.api.cdi.RunScoped;
 import de.evoal.models.v202704.optimisation.memory.Iteration;
 import de.evoal.models.v202704.optimisation.memory.MemoryFactory;
 import de.evoal.models.v202704.optimisation.memory.MetricDefinition;
@@ -25,7 +24,7 @@ import de.evoal.optimisation.ea.api.selection.StochasticRanking;
  * The evolutionary algorithm defines the metrics ({@link #define}) when its configuration
  *   uses the selection; otherwise the bean records nothing.
  */
-@ApplicationScoped
+@RunScoped
 public class StochasticRankingStatistics implements MetricContributor {
     /**
      * The metric with the number of sweeps.
@@ -103,11 +102,5 @@ public class StochasticRankingStatistics implements MetricContributor {
         sweeps = 0;
         fitnessComparisons = 0;
         penaltyComparisons = 0;
-    }
-
-    @Override
-    public synchronized void startRun(final ExecutionRecorder recorder) {
-        recording = false;
-        reset();
     }
 }

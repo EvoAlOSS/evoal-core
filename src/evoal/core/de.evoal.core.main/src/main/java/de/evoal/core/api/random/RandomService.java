@@ -13,6 +13,7 @@ import jakarta.inject.Inject;
 
 import de.evoal.core.api.board.Blackboard;
 import de.evoal.core.api.board.CoreBlackboardEntries;
+import de.evoal.core.api.cdi.ScopeControl;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 
@@ -33,9 +34,11 @@ import lombok.extern.slf4j.Slf4j;
  *   numbers of the other components.
  *
  * <h2>Runs</h2>
- * Algorithms that execute several runs (e.g., repeated evaluations) call
- *   {@link #startRun(long)} before each run. Each run gets different, but reproducible,
- *   random numbers.
+ * Within a run ({@link ScopeControl#inRun}), the generators are derived from the number of
+ *   the run and belong to the run ({@link RunStreams}): each run gets different, but
+ *   reproducible, random numbers, and a run gets the same numbers whether it is executed
+ *   alone or after other runs. Outside a run, e.g., in applications without runs, the
+ *   generators are derived from run 0 and belong to the application.
  *
  * <h2>Task streams</h2>
  * Random numbers drawn during an evaluation (e.g., by a random or noisy optimisation
@@ -65,6 +68,18 @@ public class RandomService {
     private Blackboard board;
 
     /**
+     * The open scopes, {@code null} for a service with a fixed seed.
+     */
+    @Inject
+    private ScopeControl scopes;
+
+    /**
+     * The generators of the current run, {@code null} for a service with a fixed seed.
+     */
+    @Inject
+    private RunStreams runStreams;
+
+    /**
      * The generator algorithm. Its output is specified, i.e., independent of the JDK version.
      */
     private static final RandomGeneratorFactory<RandomGenerator> FACTORY = RandomGeneratorFactory.of("L64X128MixRandom");
@@ -75,12 +90,7 @@ public class RandomService {
     private long seed;
 
     /**
-     * The current run.
-     */
-    private volatile long run;
-
-    /**
-     * The generators of the current run.
+     * The generators outside a run.
      */
     private final Map<String, RandomGenerator> generators = new ConcurrentHashMap<>();
 
@@ -91,7 +101,7 @@ public class RandomService {
     }
 
     /**
-     * Creates a service with a fixed seed, e.g., for testing.
+     * Creates a service with a fixed seed and without runs, e.g., for testing.
      */
     public static RandomService withSeed(final long seed) {
         final RandomService service = new RandomService();
@@ -127,33 +137,26 @@ public class RandomService {
     }
 
     /**
-     * @return The current run.
+     * @return The number of the current run, 0 outside a run.
      */
     public long getRun() {
-        return run;
-    }
-
-    /**
-     * Starts a new run. Generators requested afterwards are derived from the run number.
-     *
-     * @param run The number of the run, unique within the execution.
-     */
-    public void startRun(final long run) {
-        this.run = run;
-        generators.clear();
-
-        log.info("Starting run {} (seed {}).", run, seed);
+        return isInRun() ? scopes.runNumber() : 0;
     }
 
     /**
      * Returns the generator for the given name. Within a run, the same name always returns
-     *   the same generator instance.
+     *   the same generator instance; outside a run, the application always gets the same one.
      *
      * @param name A stable name, e.g., the CDI name of the component, optionally followed by a key
      *   such as {@code "/particle-3"}.
      */
     public RandomGenerator random(final @NonNull String name) {
-        return generators.computeIfAbsent(name, n -> FACTORY.create(seedFor(n)));
+        if(isInRun()) {
+            final long run = scopes.runNumber();
+            return runStreams.get(name, n -> FACTORY.create(derive(seed, run, n)));
+        }
+
+        return generators.computeIfAbsent(name, n -> FACTORY.create(derive(seed, 0, n)));
     }
 
     /**
@@ -176,7 +179,14 @@ public class RandomService {
      * Returns the seed for the given name, e.g., for libraries that need a seed instead of a generator.
      */
     public long seedFor(final @NonNull String name) {
-        return derive(seed, run, name);
+        return derive(seed, getRun(), name);
+    }
+
+    /**
+     * @return {@code true} iff a run is open for the current code.
+     */
+    private boolean isInRun() {
+        return scopes != null && scopes.isRunActive();
     }
 
     /**

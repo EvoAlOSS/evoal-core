@@ -34,6 +34,7 @@ import de.evoal.models.v202704.optimisation.memory.UnorderedIterationStep;
 import de.evoal.optimisation.api.evaluation.EvaluationBudgetExhaustedException;
 import de.evoal.optimisation.api.evaluation.EvaluationSource;
 import de.evoal.optimisation.api.events.RunEventDispatcher;
+import de.evoal.optimisation.api.events.RunFinished;
 import de.evoal.optimisation.api.execution.ExecutionRecorder;
 import de.evoal.optimisation.api.fitness.Evaluation;
 import de.evoal.optimisation.api.fitness.Fitness;
@@ -60,6 +61,11 @@ public class OptimisationRunTest {
      */
     private final ExecutionRecorder recorder = Mockito.mock(ExecutionRecorder.class);
 
+    /**
+     * The dispatcher of the kernel.
+     */
+    private final RunEventDispatcher events = new RunEventDispatcher(Mockito.mock(ExecutionRecorder.class));
+
     private final OptimisationRun kernel = kernel();
 
     /**
@@ -75,18 +81,6 @@ public class OptimisationRunTest {
     private boolean readsSteps = true;
 
     private OptimisationRun kernel() {
-        final RunEventDispatcher events = new RunEventDispatcher(Mockito.mock(ExecutionRecorder.class));
-        final RunScope scope = new RunScope() {
-            @Override
-            public void start() {
-                protocol.add("scope started");
-            }
-
-            @Override
-            public void stop() {
-                protocol.add("scope stopped");
-            }
-        };
         final StatisticsWriter statistics = new StatisticsWriter() {
             @Override
             public void start() {
@@ -115,7 +109,7 @@ public class OptimisationRunTest {
             }
         };
 
-        return new OptimisationRun(events, new IndividualIDGenerator(), recorder, scope, statistics);
+        return new OptimisationRun(events, new IndividualIDGenerator(), recorder, statistics);
     }
 
     @BeforeEach
@@ -182,21 +176,19 @@ public class OptimisationRunTest {
         });
 
         @Test
-        public void theRunHappensInTheScopeAndTheWritersReceiveEveryIteration() {
+        public void theWritersReceiveEveryIteration() {
             // when
             kernel.execute(criterion, procedure);
 
             // then
-            final List<String> expected = List.of("scope started",
-                                                  "statistics started",
+            final List<String> expected = List.of("statistics started",
                                                   "initialise",
                                                   "iteration 0",
                                                   "iterate 1",
                                                   "iteration 1",
                                                   "iterate 2",
                                                   "iteration 2",
-                                                  "statistics written",
-                                                  "scope stopped");
+                                                  "statistics written");
             Assertions.assertEquals(expected, protocol);
         }
 
@@ -414,7 +406,7 @@ public class OptimisationRunTest {
     @DisplayName("given an invalid lineage")
     class InvalidLineage {
         @Test
-        public void aPredecessorOutsideThePreviousPopulationIsRejectedAndTheScopeIsStopped() {
+        public void aPredecessorOutsideThePreviousPopulationIsRejectedAndTheEventsAreNoLongerDispatched() {
             // given
             final Candidate unknown = member(5, Lineage.NONE);
             final FakeProcedure procedure = new FakeProcedure((number, previous) -> {
@@ -424,9 +416,9 @@ public class OptimisationRunTest {
 
             // when
             Assertions.assertThrows(IllegalStateException.class, () -> kernel.execute(criterion, procedure));
+            events.publish(new RunFinished(null));
 
             // then
-            Assertions.assertEquals("scope stopped", protocol.getLast());
             Assertions.assertFalse(protocol.contains("statistics written"));
         }
     }

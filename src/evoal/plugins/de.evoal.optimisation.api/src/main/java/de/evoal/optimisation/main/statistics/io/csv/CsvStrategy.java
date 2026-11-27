@@ -6,25 +6,24 @@ import java.util.List;
 import java.util.Map;
 
 import jakarta.annotation.PreDestroy;
-import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
-import de.evoal.core.api.cdi.BlackboardValue;
+import de.evoal.core.api.cdi.EvaluationScoped;
 
-import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
+import de.evoal.optimisation.api.run.CurrentEvaluation;
 import de.evoal.optimisation.api.statistics.io.Writer;
 import de.evoal.optimisation.api.statistics.io.WriterException;
 import de.evoal.optimisation.api.statistics.io.WriterStrategy;
 import de.evoal.optimisation.api.statistics.writer.Column;
 
 /**
- * Writes every named output into the CSV file {@code <name>.csv} in the
- *   evaluation output folder. The files stay open for the whole application,
- *   so the runs of an evaluation append to the same files. They are closed when
- *   the CDI container shuts down.
+ * Writes every named output into the CSV file {@code <name>.csv} in the output folder of
+ *   the evaluation ({@link CurrentEvaluation}). The files stay open for the whole
+ *   evaluation, so its runs append to the same files. They are closed when the evaluation
+ *   ends.
  */
-@ApplicationScoped
+@EvaluationScoped
 @Named("csv")
 public class CsvStrategy extends WriterStrategy {
     /**
@@ -33,10 +32,10 @@ public class CsvStrategy extends WriterStrategy {
     private final Map<String, List<Column>> headers = new HashMap<>();
 
     /**
-     * The folder the CSV files are written to.
+     * Provides the folder the CSV files are written to.
      */
-    @Inject @BlackboardValue(OptimisationBlackboardEntries.EVALUATION_OUTPUT_FOLDER)
-    private File outputFolder;
+    @Inject
+    private CurrentEvaluation evaluation;
 
     /**
      * The open writers by output name.
@@ -44,7 +43,7 @@ public class CsvStrategy extends WriterStrategy {
     private final Map<String, CsvWriter> writers = new HashMap<>();
 
     /**
-     * Closes all files when the application ends.
+     * Closes all files when the evaluation ends.
      */
     @PreDestroy
     public void closeAll() {
@@ -62,7 +61,7 @@ public class CsvStrategy extends WriterStrategy {
             return existingWriter;
         }
 
-        final File csvFile = new File(outputFolder, name + ".csv");
+        final File csvFile = new File(evaluation.outputFolder(), name + ".csv");
         final File parentFolder = csvFile.getParentFile();
         parentFolder.mkdirs();
 

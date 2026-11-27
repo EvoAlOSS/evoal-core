@@ -59,7 +59,7 @@ public class EvaluationServiceTest {
 
     private final EvaluationService service = new EvaluationService();
 
-    private final RandomService randomService = RandomService.withSeed(42);
+    private final RandomService randomService = Mockito.spy(RandomService.withSeed(42));
 
     private final RunEventDispatcher events = new RunEventDispatcher(recorder);
 
@@ -80,15 +80,19 @@ public class EvaluationServiceTest {
         final Field eventsField = EvaluationService.class.getDeclaredField("events");
         eventsField.setAccessible(true);
         eventsField.set(service, events);
-        events.startRun(List.of(listener));
+        events.dispatchTo(List.of(listener));
 
         final Field randomField = EvaluationService.class.getDeclaredField("randomService");
         randomField.setAccessible(true);
         randomField.set(service, randomService);
 
+        final Field recorderField = EvaluationService.class.getDeclaredField("recorder");
+        recorderField.setAccessible(true);
+        recorderField.set(service, recorder);
+
         useThreads(1);
 
-        // the recorder starts the service in every run
+        // the recorder lets the service define its counters
         @SuppressWarnings("unchecked")
         final Instance<MetricContributor> contributors = Mockito.mock(Instance.class, Mockito.CALLS_REAL_METHODS);
         Mockito.doAnswer(invocation -> List.<MetricContributor>of(service).iterator())
@@ -127,7 +131,7 @@ public class EvaluationServiceTest {
                                               "algorithm.optimisation-function"))
                .thenReturn(function);
 
-        recorder.startRun();
+        recorder.defineContributions();
         execution = recorder.getExecution();
     }
 
@@ -206,7 +210,7 @@ public class EvaluationServiceTest {
                .thenReturn(function);
         Mockito.when(function.evaluate(ArgumentMatchers.any())).thenReturn(output);
 
-        recorder.startRun();
+        recorder.defineContributions();
         execution = recorder.getExecution();
     }
 
@@ -300,28 +304,12 @@ public class EvaluationServiceTest {
         }
 
         @Test
-        public void aNewRunStartsWithZeroEvaluations() {
-            // given
+        public void createsTheFunctionOnce() {
+            // when
             evaluateTimes(2);
 
-            // when
-            recorder.startRun();
-
             // then
-            Assertions.assertEquals(0, service.numberOfEvaluations(EvaluationSource.REAL));
-        }
-
-        @Test
-        public void aNewRunCreatesTheFunctionAgain() {
-            // given
-            evaluateTimes(1);
-            recorder.startRun();
-
-            // when
-            evaluateTimes(1);
-
-            // then
-            Mockito.verify(componentProducer, Mockito.times(2))
+            Mockito.verify(componentProducer, Mockito.times(1))
                    .create(OptimisationFunction.class,
                            OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION,
                            "algorithm.optimisation-function");
@@ -335,15 +323,13 @@ public class EvaluationServiceTest {
                 tasks.add(EvaluationTask.current().orElseThrow());
                 return output;
             });
-            randomService.startRun(3);
+            Mockito.doReturn(3L).when(randomService).getRun();
 
             // when
             evaluateTimes(2);
-            recorder.startRun();
-            evaluateTimes(1);
 
             // then
-            Assertions.assertEquals(List.of(new EvaluationTask(3, 0), new EvaluationTask(3, 1), new EvaluationTask(3, 0)), tasks);
+            Assertions.assertEquals(List.of(new EvaluationTask(3, 0), new EvaluationTask(3, 1)), tasks);
             Assertions.assertTrue(EvaluationTask.current().isEmpty());
         }
     }
@@ -436,19 +422,6 @@ public class EvaluationServiceTest {
         }
 
         @Test
-        public void aNewRunHasNoLimit() {
-            // given
-            evaluateTimes(2);
-            recorder.startRun();
-
-            // when
-            evaluateTimes(3);
-
-            // then
-            Assertions.assertEquals(3, service.numberOfEvaluations(EvaluationSource.REAL));
-        }
-
-        @Test
         public void evaluatesUpToTheBudget() {
             // when
             evaluateTimes(2);
@@ -491,16 +464,6 @@ public class EvaluationServiceTest {
 
             // then
             Assertions.assertEquals(3, service.numberOfEvaluations(EvaluationSource.REAL));
-        }
-    }
-
-    @Nested
-    @DisplayName("given no started run")
-    class NoRun {
-        @Test
-        public void rejectsEvaluations() {
-            // when, then
-            Assertions.assertThrows(IllegalStateException.class, () -> service.evaluate(candidate));
         }
     }
 

@@ -7,13 +7,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.annotation.PostConstruct;
+
 import jakarta.enterprise.inject.Any;
 import jakarta.enterprise.inject.Instance;
 import jakarta.inject.Inject;
 
 import lombok.Getter;
 
+import de.evoal.core.api.cdi.RunScoped;
 import de.evoal.core.api.reproducibility.ReproducibilityProtocol;
 
 import de.evoal.models.v202704.optimisation.memory.Execution;
@@ -40,12 +42,13 @@ import de.evoal.optimisation.api.fitness.Goal;
  * <p>
  * A run passes through three phases, and the recorder rejects calls in the wrong phase:
  * <ol>
- *   <li>{@link #startRun()} opens the <em>definition phase</em>. The applications call it
- *     before they create the algorithm. The {@link MetricContributor}s and the components
- *     of the algorithm (e.g., stopping criteria) define all metrics
- *     ({@link #define(MetricDefinition)}) and properties
- *     ({@link #defineProperty(PropertyDefinition)}). The applications define the components
- *     of the fitness ({@link #defineFitness(FitnessLayout)}).</li>
+ *   <li>Every run has its own recorder, which starts in the <em>definition phase</em>: when
+ *     it is created, the {@link MetricContributor}s define their metrics
+ *     ({@link #defineContributions()}). The components of the algorithm (e.g., stopping
+ *     criteria) define their metrics ({@link #define(MetricDefinition)}) and properties
+ *     ({@link #defineProperty(PropertyDefinition)}) while the algorithm is created. The
+ *     applications define the components of the fitness
+ *     ({@link #defineFitness(FitnessLayout)}).</li>
  *   <li>{@link #beginExecution()} closes the definitions and records the notes of the
  *     {@link ReproducibilityProtocol}. The applications call it after
  *     they created the algorithm and before they run it. From now on, the definitions are
@@ -56,7 +59,7 @@ import de.evoal.optimisation.api.fitness.Goal;
  * Execution metrics ({@link #recordExecutionMetric(String, Number)}) can be recorded until
  *   the run is finished.
  */
-@ApplicationScoped
+@RunScoped
 public class ExecutionRecorder {
     /**
      * All components that record metrics.
@@ -71,15 +74,10 @@ public class ExecutionRecorder {
     private ReproducibilityProtocol reproducibility;
 
     /**
-     * The position of the current run in the evaluation setup, {@code null} for a single run.
-     */
-    private EvaluationPosition evaluationPosition;
-
-    /**
-     * The execution of the current run.
+     * The execution of the run.
      */
     @Getter
-    private Execution execution = MemoryFactory.eINSTANCE.createExecution();
+    private final Execution execution = MemoryFactory.eINSTANCE.createExecution();
 
     /**
      * The property definitions of the current run by scope and name, so that
@@ -89,9 +87,22 @@ public class ExecutionRecorder {
     private final Map<PropertyScope, Map<String, PropertyDefinition>> propertyDefinitions = new EnumMap<>(PropertyScope.class);
 
     /**
-     * The phase of the current run.
+     * The phase of the run.
      */
-    private Phase phase = Phase.NO_RUN;
+    private Phase phase = Phase.DEFINITION;
+
+    /**
+     * Lets all contributors define their metrics, ordered by the name of their class. The
+     *   container calls it when it creates the recorder of a run.
+     *
+     * @throws IllegalStateException if the run is not in the definition phase.
+     */
+    @PostConstruct
+    public void defineContributions() {
+        requirePhase(Phase.DEFINITION, "define the metrics of the contributors");
+
+        orderedContributors().forEach(contributor -> contributor.contributeDefinitions(this));
+    }
 
     /**
      * Closes the definitions of the current run and starts its execution.
@@ -275,13 +286,6 @@ public class ExecutionRecorder {
     }
 
     /**
-     * @return The position of the current run in the evaluation setup, empty for a single run.
-     */
-    public Optional<EvaluationPosition> getEvaluationPosition() {
-        return Optional.ofNullable(evaluationPosition);
-    }
-
-    /**
      * @return The contributors, ordered by the name of their class. CDI does not define the
      *   order of the beans, so the order of the metric definitions and values in the memory
      *   model would otherwise change from run to run.
@@ -353,29 +357,6 @@ public class ExecutionRecorder {
     }
 
     /**
-     * Starts a single run (not part of the evaluation setup), see {@link #startRun(EvaluationPosition)}.
-     */
-    public void startRun() {
-        startRun(null);
-    }
-
-    /**
-     * Starts a new run with a new execution and opens its definition phase. All
-     *   contributors reset their state and define their metrics.
-     *
-     * @param evaluationPosition The position of the run in the evaluation setup, {@code null}
-     *   for a single run.
-     */
-    public void startRun(final EvaluationPosition evaluationPosition) {
-        this.evaluationPosition = evaluationPosition;
-        execution = MemoryFactory.eINSTANCE.createExecution();
-        propertyDefinitions.clear();
-        phase = Phase.DEFINITION;
-
-        orderedContributors().forEach(contributor -> contributor.startRun(this));
-    }
-
-    /**
      * @return The definition of the fitness component for the memory model.
      */
     private static FitnessComponentDefinition toDefinition(final FitnessComponent component) {
@@ -392,11 +373,6 @@ public class ExecutionRecorder {
      * The phases of a run.
      */
     private enum Phase {
-        /**
-         * No run has been started yet.
-         */
-        NO_RUN,
-
         /**
          * The metrics are being defined.
          */

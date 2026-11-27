@@ -2,8 +2,7 @@ package de.evoal.optimisation.ea.main.statistics;
 
 import java.util.List;
 
-import jakarta.enterprise.context.ApplicationScoped;
-
+import de.evoal.core.api.cdi.RunScoped;
 import de.evoal.models.core.ecore.TypedEObject;
 import de.evoal.models.v202704.optimisation.memory.Iteration;
 import de.evoal.models.v202704.optimisation.memory.MemoryFactory;
@@ -43,7 +42,7 @@ import de.evoal.optimisation.ea.main.correlation.Linkage;
  *   the methods are synchronised so that the application-scoped bean stays consistent if
  *   recombinations ever run in parallel.
  */
-@ApplicationScoped
+@RunScoped
 public class LinkageStatistics implements MetricContributor {
     /**
      * The prefix of the metric with the number of counted children.
@@ -184,11 +183,5 @@ public class LinkageStatistics implements MetricContributor {
         children = new long[groups.size()];
         preserved = new long[groups.size()];
         preservedBefore = new long[groups.size()];
-    }
-
-    @Override
-    public synchronized void startRun(final ExecutionRecorder recorder) {
-        groups = List.of();
-        reset();
     }
 }

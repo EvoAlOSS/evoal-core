@@ -38,7 +38,7 @@ public class TemplateTest {
 
     @BeforeEach
     public void listen() {
-        events.startRun(List.of(event -> {
+        events.dispatchTo(List.of(event -> {
             if(event instanceof StepExecuted(var iteration, var step)) {
                 published.add(iteration + ": " + step.getDescription());
             }

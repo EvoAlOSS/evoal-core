@@ -14,13 +14,14 @@ public class IndividualIDGeneratorTest {
     }
 
     @Test
-    public void everyRunStartsAtZero() {
-        final IndividualIDGenerator generator = new IndividualIDGenerator();
-        generator.nextId();
-        generator.nextId();
+    public void aNewGeneratorStartsAtZero() {
+        // every run has its own generator
+        final IndividualIDGenerator first = new IndividualIDGenerator();
+        first.nextId();
+        first.nextId();
 
-        generator.startRun();
+        final IndividualIDGenerator second = new IndividualIDGenerator();
 
-        Assertions.assertEquals(0, generator.nextId());
+        Assertions.assertEquals(0, second.nextId());
     }
 }

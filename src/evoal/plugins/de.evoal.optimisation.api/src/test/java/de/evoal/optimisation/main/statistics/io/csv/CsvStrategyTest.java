@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import de.evoal.optimisation.api.run.CurrentEvaluation;
 import de.evoal.optimisation.api.statistics.io.Writer;
 import de.evoal.optimisation.api.statistics.io.WriterStrategy;
 import de.evoal.optimisation.api.statistics.writer.Column;
@@ -43,7 +44,7 @@ public class CsvStrategyTest {
     @BeforeEach
     public void injectDependencies() throws Exception {
         final File folder = outputFolder.toFile();
-        inject(CsvStrategy.class, "outputFolder", folder);
+        inject(CsvStrategy.class, "evaluation", CurrentEvaluation.of(folder));
         inject(WriterStrategy.class, "context", context);
     }
 

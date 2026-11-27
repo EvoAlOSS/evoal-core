@@ -1,6 +1,5 @@
 package de.evoal.optimisation.main.statistics.memory;
 
-import java.io.File;
 import java.lang.module.ModuleDescriptor;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -17,7 +16,6 @@ import tools.jackson.databind.node.ObjectNode;
 
 import org.eclipse.emf.ecore.EObject;
 
-import de.evoal.core.api.cdi.BlackboardValue;
 import de.evoal.core.api.cdi.ConfigurationValue;
 import de.evoal.core.api.dynamic.EAnnotationHelper;
 import de.evoal.core.api.languages.AttributeEvaluator;
@@ -35,13 +33,15 @@ import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
 import de.evoal.optimisation.api.execution.EvaluationPosition;
 import de.evoal.optimisation.api.execution.ExecutionRecorder;
 import de.evoal.optimisation.api.fitness.Goals;
+import de.evoal.optimisation.api.run.CurrentRun;
 import de.evoal.optimisation.api.run.RunLiterature;
 import de.evoal.optimisation.api.statistics.writer.StatisticsWriter;
 
 /**
  * Writes the memory model of a run as JSON files (DL type {@code memory-model}) into the
- *   folder {@value #FOLDER_NAME} of the output folder, or into its subfolder of the run in
- *   the evaluation setup ({@link EvaluationPosition#relativeFolder()}).
+ *   folder {@value #FOLDER_NAME} of the output folder of the run ({@link CurrentRun}), or
+ *   into its subfolder of the run in the evaluation setup
+ *   ({@link EvaluationPosition#relativeFolder()}).
  * <p>
  * The EvoAl version is the version of this module; all EvoAl modules share one version.
  * <p>
@@ -143,11 +143,10 @@ public class MemoryModelWriter implements StatisticsWriter {
     private int numberOfIterations;
 
     /**
-     * The output folder of the application.
+     * Provides the number, the output folder and the position of the run.
      */
     @Inject
-    @BlackboardValue(OptimisationBlackboardEntries.EVALUATION_OUTPUT_FOLDER)
-    private File outputFolder;
+    private CurrentRun currentRun;
 
     /**
      * The optimisation problem.
@@ -170,7 +169,7 @@ public class MemoryModelWriter implements StatisticsWriter {
     private RandomService randomService;
 
     /**
-     * Provides the execution and the position of the run.
+     * Provides the execution of the run.
      */
     @Inject
     private ExecutionRecorder recorder;
@@ -260,9 +259,10 @@ public class MemoryModelWriter implements StatisticsWriter {
      * @return The folder of the current run.
      */
     private Path runFolder() {
-        final Path baseFolder = outputFolder.toPath()
-                                            .resolve(FOLDER_NAME);
-        final Optional<EvaluationPosition> position = recorder.getEvaluationPosition();
+        final Path baseFolder = currentRun.outputFolder()
+                                          .toPath()
+                                          .resolve(FOLDER_NAME);
+        final Optional<EvaluationPosition> position = currentRun.position();
 
         return position.map(EvaluationPosition::relativeFolder)
                        .map(baseFolder::resolve)
@@ -350,9 +350,9 @@ public class MemoryModelWriter implements StatisticsWriter {
     private RunSetup toSetup() {
         final String version = versionOfModule();
         final long seed = randomService.getSeed();
-        final long run = randomService.getRun();
-        final EvaluationPosition position = recorder.getEvaluationPosition()
-                                                    .orElse(null);
+        final long run = currentRun.number();
+        final EvaluationPosition position = currentRun.position()
+                                                      .orElse(null);
 
         return new RunSetup(version, seed, run, position);
     }

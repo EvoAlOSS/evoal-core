@@ -1,8 +1,9 @@
 package de.evoal.optimisation.main.statistics.individuals;
 
-import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 
-import de.evoal.models.v202704.optimisation.memory.Iteration;
+import de.evoal.core.api.cdi.RunScoped;
+
 import de.evoal.models.v202704.optimisation.memory.MemoryFactory;
 import de.evoal.models.v202704.optimisation.memory.MetricDefinition;
 import de.evoal.models.v202704.optimisation.memory.MetricKind;
@@ -10,7 +11,6 @@ import de.evoal.models.v202704.optimisation.memory.MetricScope;
 import de.evoal.models.v202704.optimisation.memory.MetricValueType;
 
 import de.evoal.optimisation.api.execution.ExecutionRecorder;
-import de.evoal.optimisation.api.execution.MetricContributor;
 
 /**
  * Counts the evaluations of the reference functions of the
@@ -20,31 +20,26 @@ import de.evoal.optimisation.api.execution.MetricContributor;
  * The metric is only defined in runs that use such a writer ({@link #register()}), so runs
  *   without one keep their metric definitions. All writers of a run share the counter. It is
  *   an execution metric because the writers see an iteration only after its metrics are
- *   recorded: an iteration metric would lag one iteration behind.
+ *   recorded: an iteration metric would lag one iteration behind. Every run has its own
+ *   counter.
  */
-@ApplicationScoped
-public class ReferenceEvaluations implements MetricContributor {
+@RunScoped
+public class ReferenceEvaluations {
     /**
      * The name of the execution metric.
      */
     public static final String METRIC_NAME = "evaluations.reference";
 
     /**
-     * The number of reference evaluations in the current run.
+     * The number of reference evaluations in the run.
      */
     private long numberOfEvaluations;
 
     /**
-     * The recorder of the current run. {@code null} before the first run.
+     * The recorder of the run.
      */
+    @Inject
     private ExecutionRecorder recorder;
-
-    /**
-     * Records nothing: the counter is an execution metric.
-     */
-    @Override
-    public void contributeTo(final Iteration iteration) {
-    }
 
     /**
      * Records that a writer evaluated its reference function once more, also if the
@@ -60,24 +55,19 @@ public class ReferenceEvaluations implements MetricContributor {
     }
 
     /**
-     * @return The number of reference evaluations in the current run.
+     * @return The number of reference evaluations in the run.
      */
     public long numberOfEvaluations() {
         return numberOfEvaluations;
     }
 
     /**
-     * Defines the metric in the current run, if no writer has defined it yet, and records its
-     *   initial value 0. A writer calls it while it is created, i.e. in the definition phase.
+     * Defines the metric in the run, if no writer has defined it yet, and records its initial
+     *   value 0. A writer calls it while it is created, i.e. in the definition phase.
      *
-     * @throws IllegalStateException if no run has been started or the run is not in its
-     *   definition phase.
+     * @throws IllegalStateException if the run is not in its definition phase.
      */
     public void register() {
-        if(recorder == null) {
-            throw new IllegalStateException("No run has been started. Call ExecutionRecorder.startRun() first.");
-        }
-
         final boolean alreadyDefined = recorder.findDefinition(METRIC_NAME).isPresent();
         if(alreadyDefined) {
             return;
@@ -88,23 +78,14 @@ public class ReferenceEvaluations implements MetricContributor {
     }
 
     /**
-     * @throws IllegalStateException if the metric is not defined in the current run.
+     * @throws IllegalStateException if the metric is not defined in the run.
      */
     private void requireRegistration() {
-        final boolean isRegistered = recorder != null && recorder.findDefinition(METRIC_NAME).isPresent();
+        final boolean isRegistered = recorder.findDefinition(METRIC_NAME).isPresent();
 
         if(!isRegistered) {
-            throw new IllegalStateException("The metric '" + METRIC_NAME + "' is not defined in the current run.");
+            throw new IllegalStateException("The metric '" + METRIC_NAME + "' is not defined in the run.");
         }
-    }
-
-    /**
-     * Resets the counter. The metric is defined by the first writer of the run.
-     */
-    @Override
-    public void startRun(final ExecutionRecorder recorder) {
-        this.recorder = recorder;
-        numberOfEvaluations = 0;
     }
 
     /**

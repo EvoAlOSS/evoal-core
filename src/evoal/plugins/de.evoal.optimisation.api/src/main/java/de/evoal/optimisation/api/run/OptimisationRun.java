@@ -52,8 +52,9 @@ import de.evoal.optimisation.api.statistics.writer.StatisticsWriterListener;
  *   The best individual so far is the first member whose
  *   optimisation value is better than the values of all earlier ones.
  * <p>
- * The run happens in the {@link de.evoal.core.api.cdi.RunScoped} context, and the
- *   configured statistics writers receive the events of the run.
+ * The run happens in the {@link de.evoal.core.api.cdi.RunScoped} scope that the
+ *   {@link SearchRunner} opened, and the configured statistics writers receive the events of
+ *   the run.
  */
 @Dependent
 @Slf4j
@@ -72,11 +73,6 @@ public class OptimisationRun {
      * Provides the execution of the run.
      */
     private final ExecutionRecorder recorder;
-
-    /**
-     * Controls the context of the run.
-     */
-    private final RunScope scope;
 
     /**
      * The configured statistics writers.
@@ -107,19 +103,16 @@ public class OptimisationRun {
      * @param events Publishes the events of the run.
      * @param idGenerator Creates the ids of the individuals.
      * @param recorder Provides the execution of the run.
-     * @param scope Controls the context of the run.
      * @param statistics The configured statistics writers.
      */
     @Inject
     public OptimisationRun(final RunEventDispatcher events,
                            final IndividualIDGenerator idGenerator,
                            final ExecutionRecorder recorder,
-                           final RunScope scope,
                            final @Component StatisticsWriter statistics) {
         this.events = events;
         this.idGenerator = idGenerator;
         this.recorder = recorder;
-        this.scope = scope;
         this.statistics = statistics;
     }
 
@@ -130,17 +123,15 @@ public class OptimisationRun {
      * @param procedure The algorithm-specific part of the run.
      */
     public void execute(final TerminationCriterion criterion, final SearchProcedure procedure) {
-        scope.start();
+        bestIndividual = null;
+        bestValue = null;
+        previousIndividuals = new IdentityHashMap<>();
 
+        final List<RunListener> listeners = List.of(new StatisticsWriterListener(statistics));
+        withSteps = listeners.stream().anyMatch(RunListener::readsSteps);
+
+        events.dispatchTo(listeners);
         try {
-            bestIndividual = null;
-            bestValue = null;
-            previousIndividuals = new IdentityHashMap<>();
-
-            final List<RunListener> listeners = List.of(new StatisticsWriterListener(statistics));
-            withSteps = listeners.stream().anyMatch(RunListener::readsSteps);
-
-            events.startRun(listeners);
             events.publish(new RunStarted(recorder.getExecution()));
 
             int number = 0;
@@ -176,8 +167,7 @@ public class OptimisationRun {
 
             events.publish(new RunFinished(recorder.getExecution()));
         } finally {
-            events.finishRun();
-            scope.stop();
+            events.stopDispatching();
         }
     }
 

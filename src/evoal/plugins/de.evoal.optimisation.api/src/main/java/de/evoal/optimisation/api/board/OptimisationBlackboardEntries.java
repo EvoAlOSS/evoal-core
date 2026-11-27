@@ -20,16 +20,13 @@ public class OptimisationBlackboardEntries implements BlackboardEntries {
     public static final String EVALUATION_ITERATIONS = "optimisation:evaluation-iterations";
 
     /**
-     * The actual output folder for the evaluation.
+     * The output folder given on the command line. The applications derive the output folders
+     *   of their evaluations and runs from it; the components of a run read the folder of the
+     *   run from {@link de.evoal.optimisation.api.run.CurrentRun}.
      */
     @Commandline(main = {HeuristicSearchMain.NAME, HeuristicSearchEvaluation.NAME}, name = "optimisation:evaluation-output-folder",
                  doc = "Folder for the output; the statistics of a run go to <folder>/<name of the OL file without extension>.")
     public static final String EVALUATION_OUTPUT_FOLDER = "optimisation:evaluation-output-folder";
-
-    /**
-     * The evaluation run number.
-     */
-    public static final String EVALUATION_RUN = "optimisation:evaluation-run";
 
     /**
      * The DDL modules that the OL module of the problem imports (a list of
@@ -56,10 +53,4 @@ public class OptimisationBlackboardEntries implements BlackboardEntries {
     @Commandline(main = HeuristicSearchEvaluation.NAME, name = "optimisation:target-points-file",
                  doc = "Optional data file (e.g., json or csv) with one target per row: values of the search and optimisation features; the search is run for every target.")
     public static final String TARGET_POINTS_FILE = "optimisation:target-points-file";
-
-
-    /**
-     * The target properties to search for.
-     */
-    public static final String TARGET_PROPERTIES = "optimisation:target-properties";
 }

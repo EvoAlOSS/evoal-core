@@ -12,11 +12,11 @@ import java.util.concurrent.Callable;
 
 import org.eclipse.emf.ecore.EClass;
 
-import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
 import lombok.extern.slf4j.Slf4j;
 
+import de.evoal.core.api.cdi.RunScoped;
 import de.evoal.core.api.ecore.misc.ConcurrentEClassAccess;
 import de.evoal.core.api.random.EvaluationTask;
 import de.evoal.core.api.random.RandomService;
@@ -70,22 +70,23 @@ import de.evoal.optimisation.api.execution.MetricContributor;
  *   number of threads. The fitness pipeline and the comparator are not part of the service
  *   and stay on the thread of the algorithm.
  * <p>
- * The counters and limits are reset in every run ({@link ExecutionRecorder#startRun()}).
- *   The service itself is not thread-safe: only the thread of the algorithm calls it.
+ * Every run has its own service, so the counters, the indices and the limits start anew in
+ *   every run. The service itself is not thread-safe: only the thread of the algorithm calls
+ *   it.
  */
-@ApplicationScoped
+@RunScoped
 @Slf4j
 public class EvaluationService implements MetricContributor {
     @Inject
     private OptimisationComponentProducer componentProducer;
 
     /**
-     * The number of evaluations per source in the current run.
+     * The number of evaluations per source in the run.
      */
     private final Map<EvaluationSource, Long> counters = new EnumMap<>(EvaluationSource.class);
 
     /**
-     * The index of the next evaluation in the current run.
+     * The index of the next evaluation in the run.
      */
     private long nextIndex;
 
@@ -97,7 +98,7 @@ public class EvaluationService implements MetricContributor {
     private EvaluationExecutor executor;
 
     /**
-     * Whether the classes of the current run have been prepared for parallel evaluations.
+     * Whether the classes of the run have been prepared for parallel evaluations.
      */
     private boolean preparedForThreads;
 
@@ -119,19 +120,20 @@ public class EvaluationService implements MetricContributor {
     private RunEventDispatcher events;
 
     /**
-     * The optimisation function of the current run. It is created on first use in a run, so
+     * The optimisation function of the run. It is created on first use in a run, so
      *   that applications whose algorithms do not use the service do not create it.
      */
     private OptimisationFunction function;
 
     /**
-     * The limits of the current run, by source.
+     * The limits of the run, by source.
      */
     private final Map<EvaluationSource, Limit> limits = new EnumMap<>(EvaluationSource.class);
 
     /**
-     * The recorder of the current run. {@code null} before the first run.
+     * The recorder of the run.
      */
+    @Inject
     private ExecutionRecorder recorder;
 
     @Override
@@ -144,21 +146,18 @@ public class EvaluationService implements MetricContributor {
     }
 
     /**
-     * The optimisation function of the current run, e.g. for fitness steps that need the
+     * The optimisation function of the run, e.g. for fitness steps that need the
      *   surrogate model the candidates are evaluated with. It is created on the first call
      *   in a run and shared with the evaluations.
      *
-     * @return The optimisation function of the current run.
-     * @throws IllegalStateException if no run has been started.
+     * @return The optimisation function of the run.
      */
     public OptimisationFunction optimisationFunction() {
-        requireStartedRun();
-
         return currentFunction();
     }
 
     /**
-     * @return The optimisation function of the current run.
+     * @return The optimisation function of the run.
      */
     private OptimisationFunction currentFunction() {
         if(function == null) {
@@ -202,8 +201,6 @@ public class EvaluationService implements MetricContributor {
      *   exceptions of it.
      */
     public List<TypedEObject> evaluateAll(final List<TypedEObject> candidates) {
-        requireStartedRun();
-
         final OptimisationFunction currentFunction = currentFunction();
         final EvaluationSource source = EvaluationSource.of(currentFunction);
 
@@ -220,11 +217,8 @@ public class EvaluationService implements MetricContributor {
      *
      * @return The remaining evaluations, or empty if the source of the current function has no
      *   limit with the policy {@link ExhaustionPolicy#CUT_OFF}.
-     * @throws IllegalStateException if no run has been started.
      */
     public OptionalLong remainingEvaluations() {
-        requireStartedRun();
-
         final EvaluationSource source = EvaluationSource.of(currentFunction());
         final Limit limit = limits.get(source);
         if(limit == null || limit.policy() != ExhaustionPolicy.CUT_OFF) {
@@ -361,7 +355,7 @@ public class EvaluationService implements MetricContributor {
     }
 
     /**
-     * Limits the number of evaluations of a source in the current run. The limit is
+     * Limits the number of evaluations of a source in the run. The limit is
      *   recorded as the execution metric {@code evaluations.<source>.budget}, so it has
      *   to be set in the definition phase of the run (while the algorithm is created).
      *   Setting the same limit again has no effect, since the stopping criteria can be
@@ -374,8 +368,6 @@ public class EvaluationService implements MetricContributor {
      * @throws IllegalStateException if the run is not in its definition phase.
      */
     public void limit(final EvaluationSource source, final long maximum, final ExhaustionPolicy policy) {
-        requireStartedRun();
-
         final Limit limit = new Limit(maximum, policy);
         final Limit existingLimit = limits.get(source);
 
@@ -402,7 +394,7 @@ public class EvaluationService implements MetricContributor {
 
     /**
      * @param source The source.
-     * @return The number of evaluations of the source in the current run.
+     * @return The number of evaluations of the source in the run.
      */
     public long numberOfEvaluations(final EvaluationSource source) {
         return counters.getOrDefault(source, 0L);
@@ -424,22 +416,11 @@ public class EvaluationService implements MetricContributor {
         }
     }
 
-    private void requireStartedRun() {
-        if(recorder == null) {
-            throw new IllegalStateException("No run has been started. Call ExecutionRecorder.startRun() first.");
-        }
-    }
-
+    /**
+     * Defines the counters of the sources.
+     */
     @Override
-    public void startRun(final ExecutionRecorder recorder) {
-        this.recorder = recorder;
-        counters.clear();
-        limits.clear();
-        function = null;
-        nextIndex = 0;
-        preparedForThreads = false;
-        reportedSequentialEvaluation = false;
-
+    public void contributeDefinitions(final ExecutionRecorder recorder) {
         for(final EvaluationSource source : EvaluationSource.values()) {
             final MetricDefinition definition = toMetricDefinition(source.getMetricName(),
                                                                    MetricKind.COUNTER,

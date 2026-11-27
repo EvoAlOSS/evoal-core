@@ -8,6 +8,7 @@ import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
 import de.evoal.core.api.cdi.*;
 import de.evoal.optimisation.api.cdi.TargetPointLoader;
 import de.evoal.optimisation.api.execution.EvaluationPosition;
+import de.evoal.optimisation.api.run.RunParameters;
 import de.evoal.optimisation.api.run.SearchRunner;
 
 import jakarta.enterprise.context.ApplicationScoped;
@@ -22,6 +23,8 @@ import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import java.io.File;
 import java.util.List;
+
+import org.eclipse.emf.ecore.EObject;
 
 @Slf4j
 @Application(
@@ -103,7 +106,7 @@ public class HeuristicSearchEvaluation implements MainClass {
         }
 
         final long startTime = System.currentTimeMillis();
-        process();
+        runner.evaluate(outputBaseDir, this::process);
         final long endTime = System.currentTimeMillis();
 
         System.err.println("Calculation of heuristic search took in average " + (endTime - startTime)/iterations + " ms.");
@@ -112,14 +115,12 @@ public class HeuristicSearchEvaluation implements MainClass {
     private void process() {
         repetitionColumn = HeuristicSearchUtils.addColumn(context, "repetition", ColumnType.Integer, 0);
 
-        board.bind(OptimisationBlackboardEntries.EVALUATION_OUTPUT_FOLDER, outputBaseDir);
-
         if(targets != null) {
             targetColumn = HeuristicSearchUtils.addColumn(context, "target", ColumnType.Integer, 0);
 
             targets.forEach(this::processTarget);
         } else {
-            processOptimisation();
+            processOptimisation(null);
         }
     }
 
@@ -136,25 +137,24 @@ public class HeuristicSearchEvaluation implements MainClass {
 
         context.bindColumn(targetColumn, targetIndex);
 
-        board.bind(OptimisationBlackboardEntries.TARGET_PROPERTIES, target.getSecond());
-
         log.info("Evaluating with target {} -> {}.", targetIndex, target);
 
-        processOptimisation();
+        processOptimisation(target.getSecond());
     }
 
-    private void processOptimisation() {
-        final int runLength = calculateFigures(iterations);
-
-        board.bind(OptimisationBlackboardEntries.EVALUATION_OUTPUT_FOLDER, outputBaseDir);
-
+    /**
+     * Runs the repetitions of the search.
+     *
+     * @param targetProperties The values of the target point, {@code null} without a target
+     *   file.
+     */
+    private void processOptimisation(final EObject targetProperties) {
         for (int i = 0; i < iterations; ++i) {
             log.info("Running {}/{}", i, iterations);
-            final String run = convertToString(i, runLength);
-            board.bind(OptimisationBlackboardEntries.EVALUATION_RUN, run);
             context.bindColumn(repetitionColumn, i);
 
-            runner.run(algorithmConfiguration, runCounter++, toEvaluationPosition(i));
+            final RunParameters parameters = new RunParameters(runCounter++, outputBaseDir, toEvaluationPosition(i), targetProperties);
+            runner.run(algorithmConfiguration, parameters);
         }
     }
 
@@ -168,14 +168,6 @@ public class HeuristicSearchEvaluation implements MainClass {
         }
 
         return EvaluationPosition.withTarget(repetition, iterations, currentTarget, targets.size());
-    }
-
-    private String convertToString(final int targetIndex, final int length) {
-        return String.format("%0" + Math.max(length, 1) + "d", targetIndex);
-    }
-
-    private int calculateFigures(final int number) {
-        return Integer.toString(number).length() - 1;
     }
 }
 

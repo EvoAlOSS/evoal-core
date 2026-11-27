@@ -20,6 +20,7 @@ import de.evoal.optimisation.api.fitness.FitnessPipeline;
 import de.evoal.optimisation.api.fitness.FitnessStep;
 import de.evoal.optimisation.api.fitness.Goals;
 import de.evoal.optimisation.api.fitness.TargetDistance;
+import de.evoal.optimisation.api.run.CurrentRun;
 
 /**
  * Creates the {@link FitnessPipeline} of the current optimisation configuration: the goals
@@ -34,9 +35,16 @@ public class FitnessPipelineProducer {
     private AttributeHelper helper;
 
     /**
+     * Provides the target point of the run.
+     */
+    @Inject
+    private CurrentRun currentRun;
+
+    /**
      * Creates the goals of the current problem. The target of a goal {@code towards target}
-     *   is the current target point of the evaluation. The goals are created for every
-     *   injection, i.e. for every run, so they follow the evaluation's target points.
+     *   is the target point of the run ({@link CurrentRun#target()}). The goals are created
+     *   for every injection, i.e. for every run, so they follow the evaluation's target
+     *   points.
      *
      * @return The goals of the current problem.
      */
@@ -45,7 +53,7 @@ public class FitnessPipelineProducer {
     public Goals createGoals() {
         final EObject configuration = board.get(OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION);
         final Problem problem = helper.lookup(configuration, "problem");
-        final EObject targetPoint = board.getOrNull(OptimisationBlackboardEntries.TARGET_PROPERTIES);
+        final EObject targetPoint = currentRun.target().orElse(null);
 
         return Goals.of(problem, targetPoint, FitnessPipelineProducer::createDistance);
     }

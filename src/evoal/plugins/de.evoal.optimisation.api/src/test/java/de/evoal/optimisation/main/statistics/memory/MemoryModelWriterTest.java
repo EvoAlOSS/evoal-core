@@ -47,7 +47,9 @@ import de.evoal.optimisation.api.execution.MetricContributor;
 import de.evoal.optimisation.api.fitness.FitnessLayout;
 import de.evoal.optimisation.api.fitness.Goal;
 import de.evoal.optimisation.api.fitness.Goals;
+import de.evoal.optimisation.api.run.CurrentRun;
 import de.evoal.optimisation.api.run.RunLiterature;
+import de.evoal.optimisation.api.run.RunParameters;
 import de.evoal.optimisation.main.fitness.RelativeDistance;
 
 public class MemoryModelWriterTest {
@@ -67,6 +69,11 @@ public class MemoryModelWriterTest {
                         .toList();
         }
     }
+
+    /**
+     * The position of the run, stated by {@link #startRun}.
+     */
+    private EvaluationPosition position;
 
     @BeforeEach
     public void createRecorder() throws Exception {
@@ -89,7 +96,7 @@ public class MemoryModelWriterTest {
      *   {@link MemoryModels#execution()}.
      */
     private void startRun(final EvaluationPosition position) {
-        recorder.startRun(position);
+        this.position = position;
 
         final Execution metrics = MemoryModels.execution();
         List.copyOf(metrics.getMetricDefinitions())
@@ -129,7 +136,7 @@ public class MemoryModelWriterTest {
         inject(writer, "evaluator", Mockito.mock(AttributeEvaluator.class));
         inject(writer, "goals", MemoryModels.goals(MemoryModels.problem()));
         inject(writer, "literature", literature(List.of("berger2024evoal", "harik1996learning")));
-        inject(writer, "outputFolder", output);
+        inject(writer, "currentRun", CurrentRun.of(new RunParameters(0, output, position, null)));
         inject(writer, "problem", MemoryModels.problem());
         inject(writer, "problemWriters", List.of(MemoryModels.configuration("memory-model")));
         inject(writer, "randomService", RandomService.withSeed(42));

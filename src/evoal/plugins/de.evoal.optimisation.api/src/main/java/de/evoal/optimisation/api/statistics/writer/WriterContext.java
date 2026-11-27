@@ -1,12 +1,14 @@
 package de.evoal.optimisation.api.statistics.writer;
 
-import jakarta.enterprise.context.ApplicationScoped;
 import java.util.*;
 
+import de.evoal.core.api.cdi.EvaluationScoped;
+
 /**
- * Writer context for injecting columns into a writer.
+ * Writer context for injecting columns into a writer: the columns that the application adds
+ *   to the outputs of an evaluation, e.g., the repetition and the target point of a run.
  */
-@ApplicationScoped
+@EvaluationScoped
 public class WriterContext {
     /**
      * List of columns to prepend to a newly created writer.
