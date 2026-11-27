@@ -23,6 +23,12 @@ import de.evoal.optimisation.api.checks.CandidateCheckProducer;
 import de.evoal.optimisation.api.checks.CheckPoint;
 import de.evoal.optimisation.api.checks.CheckReaction;
 import de.evoal.optimisation.api.checks.ConfiguredCheck;
+import de.evoal.optimisation.api.evaluation.ConfiguredEvaluationStrategy;
+import de.evoal.optimisation.api.evaluation.EvaluationStrategy;
+import de.evoal.optimisation.api.evaluation.SampleAggregation;
+import de.evoal.optimisation.api.fitness.Evaluator;
+import de.evoal.optimisation.main.evaluation.ReEvaluation;
+import de.evoal.optimisation.main.evaluation.Resampling;
 
 public class TemplateAlgorithmTest {
     /**
@@ -107,6 +113,100 @@ public class TemplateAlgorithmTest {
             // then
             Assertions.assertTrue(exception.getMessage().contains("replace"), exception.getMessage());
             Assertions.assertFalse(algorithm.configured);
+        }
+    }
+
+    /**
+     * @return A strategy of the run whose objectives {@code invalid} cannot be aggregated.
+     */
+    private static ConfiguredEvaluationStrategy strategyOfRun(final EvaluationStrategy strategy, final List<String> invalid) {
+        final ConfiguredEvaluationStrategy configured = Mockito.mock(ConfiguredEvaluationStrategy.class);
+        Mockito.when(configured.strategy()).thenReturn(strategy);
+        Mockito.when(configured.objectivesThatCannotBeAggregated()).thenReturn(invalid);
+
+        return configured;
+    }
+
+    @Nested
+    @DisplayName("given an evaluation strategy")
+    class EvaluationStrategies {
+        @Test
+        public void resamplingIsSupportedByEveryAlgorithm() throws Exception {
+            // given
+            final SamplingAlgorithm algorithm = algorithmWith(check(CheckReaction.WARN));
+            inject(algorithm, "evaluationStrategy", strategyOfRun(new Resampling(2, SampleAggregation.MEAN), List.of()));
+
+            // when
+            algorithm.init(Mockito.mock(EObject.class));
+
+            // then
+            Assertions.assertTrue(algorithm.configured);
+            Assertions.assertEquals(List.of(), algorithm.reEvaluation(Mockito.mock(Evaluator.class)));
+        }
+
+        @Test
+        public void reEvaluationIsRejectedByAnAlgorithmWithoutCarriedOverMembers() throws Exception {
+            // given
+            final SamplingAlgorithm algorithm = algorithmWith(check(CheckReaction.WARN));
+            inject(algorithm, "evaluationStrategy", strategyOfRun(new ReEvaluation(1, SampleAggregation.MEAN), List.of()));
+
+            // when
+            final InitializationException exception = Assertions.assertThrows(InitializationException.class,
+                                                                              () -> algorithm.init(Mockito.mock(EObject.class)));
+
+            // then
+            Assertions.assertTrue(exception.getMessage().contains("re-evaluation"), exception.getMessage());
+        }
+
+        @Test
+        public void anAlgorithmThatSupportsReEvaluationGetsTheStep() throws Exception {
+            // given
+            final ReEvaluatingAlgorithm algorithm = new ReEvaluatingAlgorithm();
+            inject(algorithm, "checkProducer", Mockito.mock(CandidateCheckProducer.class));
+            inject(algorithm, "producer", Mockito.mock(TerminationCriterionProducer.class));
+            inject(algorithm, "evaluationStrategy", strategyOfRun(new ReEvaluation(1, SampleAggregation.MEAN), List.of()));
+
+            // when
+            algorithm.init(Mockito.mock(EObject.class));
+
+            // then
+            final List<Step> steps = algorithm.reEvaluation(Mockito.mock(Evaluator.class));
+            Assertions.assertEquals(1, steps.size());
+            Assertions.assertInstanceOf(ReEvaluatePopulation.class, steps.getFirst());
+        }
+
+        @Test
+        public void objectivesThatAreNotRealValuedCannotBeAggregated() throws Exception {
+            // given
+            final SamplingAlgorithm algorithm = algorithmWith(check(CheckReaction.WARN));
+            inject(algorithm, "evaluationStrategy", strategyOfRun(new Resampling(2, SampleAggregation.MEAN), List.of("score")));
+
+            // when
+            final InitializationException exception = Assertions.assertThrows(InitializationException.class,
+                                                                              () -> algorithm.init(Mockito.mock(EObject.class)));
+
+            // then
+            Assertions.assertTrue(exception.getMessage().contains("score"), exception.getMessage());
+            Assertions.assertFalse(algorithm.configured);
+        }
+    }
+
+    /**
+     * An algorithm that carries its members over and supports re-evaluation.
+     */
+    private static final class ReEvaluatingAlgorithm extends TemplateAlgorithm {
+        @Override
+        protected boolean supportsReEvaluation() {
+            return true;
+        }
+
+        @Override
+        protected void configure(final EObject configuration) {
+        }
+
+        @Override
+        protected Template template() {
+            return new Template(List.of(), List.of());
         }
     }
 }

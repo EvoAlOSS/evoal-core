@@ -60,6 +60,11 @@ import de.evoal.optimisation.api.steps.SampleCandidates;
 import de.evoal.optimisation.api.steps.Step;
 import de.evoal.optimisation.api.steps.Template;
 import de.evoal.optimisation.main.comparator.NumericOptimisationComparator;
+import de.evoal.optimisation.api.evaluation.ConfiguredEvaluationStrategy;
+import de.evoal.optimisation.api.evaluation.EvaluationStrategy;
+import de.evoal.optimisation.api.evaluation.SampleAggregation;
+import de.evoal.optimisation.main.evaluation.Resampling;
+import de.evoal.optimisation.main.evaluation.SingleEvaluation;
 
 /**
  * The memory model of a run does not depend on the number of threads that evaluate the
@@ -192,6 +197,13 @@ public class ParallelEvaluationReproducibilityTest {
      * Runs the random search with the number of threads.
      */
     private RunResult runWithThreads(final int numberOfThreads) throws Exception {
+        return runWithThreads(numberOfThreads, SingleEvaluation.INSTANCE);
+    }
+
+    /**
+     * Runs the random search with the number of threads and the evaluation strategy.
+     */
+    private RunResult runWithThreads(final int numberOfThreads, final EvaluationStrategy strategy) throws Exception {
         final RandomService randomService = RandomService.withSeed(42);
 
         final DelayedFunction function = new DelayedFunction(randomService);
@@ -208,18 +220,19 @@ public class ParallelEvaluationReproducibilityTest {
         final FitnessPipeline pipeline = new FitnessPipeline(goals, List.of());
 
         recorder.defineContributions();
+        ConfiguredEvaluationStrategy.defineProperties(recorder, strategy);
         evaluationService.limit(EvaluationSource.REAL, BUDGET, ExhaustionPolicy.CUT_OFF);
         recorder.defineFitness(pipeline.layout());
         recorder.beginExecution();
 
-        final Path outputFolder = outputRoot.resolve("threads-" + numberOfThreads);
+        final Path outputFolder = outputRoot.resolve("threads-" + numberOfThreads + "-" + strategy.samplesOfNewCandidates());
         final MemoryModelWriter writer = writer(recorder, problem, goals, outputFolder, randomService);
         final IndividualIDGenerator idGenerator = new IndividualIDGenerator();
         final RunEventDispatcher events = new RunEventDispatcher(recorder);
         inject(evaluationService, "events", events);
 
         final OptimisationRun kernel = new OptimisationRun(events, idGenerator, recorder, writer);
-        final Evaluator evaluator = new Evaluator(evaluationService, pipeline, new NumericOptimisationComparator());
+        final Evaluator evaluator = new Evaluator(evaluationService, pipeline, new NumericOptimisationComparator(), strategy);
         final List<Step> steps = List.of(new SampleCandidates(new RandomPoints(randomService), SAMPLES_PER_ITERATION),
                                          new EvaluateCandidates(evaluator),
                                          new ReplacePopulation());
@@ -330,6 +343,25 @@ public class ParallelEvaluationReproducibilityTest {
                                                    "iteration-3.json",
                                                    "iteration-4.json");
         Assertions.assertEquals(expectedFiles, List.copyOf(result.files().keySet()));
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = { 2, 8 })
+    public void theSamplesOfAResamplingDoNotDependOnTheThreads(final int numberOfThreads) throws Exception {
+        // given
+        final EvaluationStrategy resampling = new Resampling(3, SampleAggregation.MEAN);
+        final RunResult sequential = runWithThreads(1, resampling);
+
+        // when
+        final RunResult parallel = runWithThreads(numberOfThreads, resampling);
+
+        // then
+        Assertions.assertTrue(parallel.threads().size() > 1, "evaluated on " + parallel.threads());
+        Assertions.assertEquals(sequential.files().keySet(), parallel.files().keySet());
+        for(final String file : sequential.files().keySet()) {
+            Assertions.assertEquals(sequential.files().get(file), parallel.files().get(file), file);
+        }
+        Assertions.assertTrue(sequential.files().get("iteration-0.json").contains("objective-standard-deviations"));
     }
 
     @ParameterizedTest

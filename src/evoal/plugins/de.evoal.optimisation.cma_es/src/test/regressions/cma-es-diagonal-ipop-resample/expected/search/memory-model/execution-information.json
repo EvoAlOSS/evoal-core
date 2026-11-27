@@ -65,6 +65,10 @@
           "equality-tolerance" : 1.0E-4
         }
       },
+      "evaluation-strategy" : {
+        "type" : "de.evoal.optimisation.core.single-evaluation",
+        "attributes" : { }
+      },
       "initial-step-size" : 1.0,
       "population-size" : null,
       "parent-number" : null,

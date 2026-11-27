@@ -95,6 +95,10 @@
           "equality-tolerance" : 1.0E-4
         }
       },
+      "evaluation-strategy" : {
+        "type" : "de.evoal.optimisation.core.single-evaluation",
+        "attributes" : { }
+      },
       "neighbour-choosing-strategy" : {
         "type" : "de.evoal.optimisation.local_search.optimisation.manual-strategy",
         "attributes" : {

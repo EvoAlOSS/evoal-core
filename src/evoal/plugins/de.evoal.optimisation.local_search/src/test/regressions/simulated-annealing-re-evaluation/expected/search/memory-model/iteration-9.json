@@ -1,0 +1,36 @@
+{
+  "formatVersion" : "2027.4.0",
+  "number" : 9,
+  "individuals" : [ {
+    "id" : 17,
+    "input" : {
+      "x:0" : 1.1,
+      "x:1" : 1.2
+    },
+    "output" : {
+      "y:0" : 0.17023622975418537
+    },
+    "fitness" : [ 0.17023622975418537 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 15 ],
+      "properties" : {
+        "re-evaluated" : true
+      }
+    } ],
+    "properties" : {
+      "samples" : 4,
+      "objective-standard-deviations" : [ 0.42875250940247683 ]
+    }
+  } ],
+  "steps" : [ ],
+  "ranks" : [ {
+    "number" : 0,
+    "members" : [ 17 ]
+  } ],
+  "bestSoFar" : 2,
+  "metrics" : {
+    "evaluations.real" : 19,
+    "evaluations.surrogate" : 0
+  }
+}

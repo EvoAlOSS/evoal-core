@@ -220,7 +220,8 @@ final class IterationRecording {
     }
 
     /**
-     * @return The record of the occurrence with its id, values, fitness, properties and
+     * @return The record of the occurrence with its id, values, fitness, properties, samples
+     *   ({@link de.evoal.optimisation.api.fitness.ObjectiveSamples#toProperties()}) and
      *   degrees of constraint violation, without relationships. A candidate that was not
      *   evaluated, e.g., because the evaluation budget ran out, has no output.
      * @throws IllegalStateException if a property is not defined or does not match its
@@ -241,6 +242,14 @@ final class IterationRecording {
         }
 
         candidate.properties().forEach((name, value) -> {
+            recorder.requireProperty(name, PropertyScope.INDIVIDUAL, value);
+            individual.getProperties().put(name, value);
+        });
+
+        final Map<String, Object> samples = candidate.isEvaluated()
+                ? candidate.evaluation().samples().toProperties()
+                : Map.of();
+        samples.forEach((name, value) -> {
             recorder.requireProperty(name, PropertyScope.INDIVIDUAL, value);
             individual.getProperties().put(name, value);
         });

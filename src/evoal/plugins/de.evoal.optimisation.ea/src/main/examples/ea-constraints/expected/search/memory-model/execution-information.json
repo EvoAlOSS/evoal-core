@@ -78,6 +78,10 @@
           "equality-tolerance" : 1.0E-4
         }
       },
+      "evaluation-strategy" : {
+        "type" : "de.evoal.optimisation.core.single-evaluation",
+        "attributes" : { }
+      },
       "size-of-population" : 20,
       "number-of-offspring" : 20,
       "genotype" : {

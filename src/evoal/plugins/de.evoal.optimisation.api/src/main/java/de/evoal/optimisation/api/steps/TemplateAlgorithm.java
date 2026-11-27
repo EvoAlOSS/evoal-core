@@ -20,6 +20,8 @@ import de.evoal.optimisation.api.checks.CheckPopulation;
 import de.evoal.optimisation.api.checks.CheckReaction;
 import de.evoal.optimisation.api.checks.ConfiguredCheck;
 import de.evoal.optimisation.api.checks.Resampler;
+import de.evoal.optimisation.api.evaluation.ConfiguredEvaluationStrategy;
+import de.evoal.optimisation.api.evaluation.EvaluationStrategy;
 import de.evoal.optimisation.api.fitness.Evaluator;
 import de.evoal.optimisation.api.model.OptimisationAlgorithm;
 import de.evoal.optimisation.api.run.OptimisationRun;
@@ -36,6 +38,13 @@ import de.evoal.optimisation.api.run.OptimisationRun;
  *   A configured check whose check point the algorithm does not offer is rejected, as is a
  *   check that reacts with a reaction the algorithm does not support ({@link #reactions()}),
  *   also as the fallback of a repair.
+ * <p>
+ * Every algorithm supports the evaluation strategies {@code 'single-evaluation'} and
+ *   {@code 'resampling'}, which the {@link Evaluator} implements. An algorithm that carries
+ *   members over into the next iteration states that it supports {@code 're-evaluation'}
+ *   ({@link #supportsReEvaluation()}) and places the step of {@link #reEvaluation(Evaluator)}
+ *   at the start of its iterations. A strategy with several samples needs real-valued
+ *   objectives.
  */
 public abstract class TemplateAlgorithm implements OptimisationAlgorithm {
     /**
@@ -61,16 +70,25 @@ public abstract class TemplateAlgorithm implements OptimisationAlgorithm {
     private TerminationCriterionProducer producer;
 
     /**
+     * The evaluation strategy of the run; {@code null} for an algorithm that is created
+     *   without a container.
+     */
+    @Inject
+    private ConfiguredEvaluationStrategy evaluationStrategy;
+
+    /**
      * Creates the termination criterion and the candidate checks, then lets the subclass read
      *   its configuration.
      *
-     * @throws InitializationException if a candidate check cannot be used with the algorithm.
+     * @throws InitializationException if a candidate check or the evaluation strategy cannot
+     *   be used with the algorithm.
      */
     @Override
     public final OptimisationAlgorithm init(final EObject configuration) throws InitializationException {
         criterion = producer.create(configuration);
         checks = checkProducer.create(configuration, checkPoints(), resamples());
         rejectUnsupportedReactions();
+        rejectUnsupportedEvaluationStrategy();
         configure(configuration);
         return this;
     }
@@ -154,6 +172,48 @@ public abstract class TemplateAlgorithm implements OptimisationAlgorithm {
      */
     protected boolean resamples() {
         return false;
+    }
+
+    /**
+     * @return Whether the algorithm carries members over into the next iteration and places
+     *   the step of {@link #reEvaluation(Evaluator)}, so it supports the evaluation strategy
+     *   {@code 're-evaluation'}; {@code false} by default.
+     */
+    protected boolean supportsReEvaluation() {
+        return false;
+    }
+
+    /**
+     * @param evaluator Evaluates the members.
+     * @return The step that evaluates the members of the population once more, empty if the
+     *   evaluation strategy does not re-evaluate. A new step for every template.
+     */
+    protected final List<Step> reEvaluation(final Evaluator evaluator) {
+        final boolean reEvaluates = evaluationStrategy != null && evaluationStrategy.strategy().reEvaluates();
+
+        return reEvaluates ? List.of(new ReEvaluatePopulation(evaluator)) : List.of();
+    }
+
+    /**
+     * @throws InitializationException if the algorithm does not support re-evaluation that the
+     *   strategy needs, or if the strategy aggregates objectives that are not real-valued.
+     */
+    private void rejectUnsupportedEvaluationStrategy() throws InitializationException {
+        if(evaluationStrategy == null) {
+            return;
+        }
+
+        final EvaluationStrategy strategy = evaluationStrategy.strategy();
+        if(strategy.reEvaluates() && !supportsReEvaluation()) {
+            throw new InitializationException("The algorithm does not support the evaluation strategy 're-evaluation':"
+                                              + " it does not carry members over into the next iteration.");
+        }
+
+        final List<String> objectives = evaluationStrategy.objectivesThatCannotBeAggregated();
+        if(!objectives.isEmpty()) {
+            throw new InitializationException("The evaluation strategy aggregates the samples of the objectives, but "
+                                              + objectives + " are not real-valued.");
+        }
     }
 
     /**

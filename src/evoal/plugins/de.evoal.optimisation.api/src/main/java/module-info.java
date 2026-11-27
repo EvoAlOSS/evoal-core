@@ -96,6 +96,7 @@ module de.evoal.optimisation.api {
     opens de.evoal.optimisation.main.checks to weld.core.impl;
     opens de.evoal.optimisation.main.comparator to weld.core.impl;
     opens de.evoal.optimisation.main.constraints to weld.core.impl;
+    opens de.evoal.optimisation.main.evaluation to weld.core.impl;
 //    opens de.evoal.optimisation.main.constraints.constraint to weld.core.impl;
 //    opens de.evoal.optimisation.main.constraints.constraint.strategies.calculations to weld.core.impl;
 //    opens de.evoal.optimisation.main.constraints.constraint.strategies.constraint to weld.core.impl;

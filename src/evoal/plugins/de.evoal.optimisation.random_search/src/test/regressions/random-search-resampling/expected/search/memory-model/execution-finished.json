@@ -1,0 +1,8 @@
+{
+  "formatVersion" : "2027.4.0",
+  "numberOfIterations" : 4,
+  "best" : [ 42 ],
+  "metrics" : {
+    "evaluations.real.budget" : 100
+  }
+}

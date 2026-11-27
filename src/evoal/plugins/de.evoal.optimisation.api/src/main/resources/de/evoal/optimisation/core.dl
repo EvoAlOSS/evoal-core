@@ -152,6 +152,84 @@ module de.evoal.optimisation.core {
          *   is reported as a warning.
          */
         'constraint-measure' : instance 'constraint-measure' := 'exact-measure' {};
+
+        /**
+         * How often a candidate is evaluated. A deterministic optimisation function needs one
+         *   evaluation per candidate ('single-evaluation'). For a non-deterministic one, e.g.
+         *   a game or a simulation, 'resampling' and 're-evaluation' evaluate a candidate
+         *   several times and aggregate its objectives, so a lucky evaluation does not
+         *   decide the search. An algorithm that does not support the configured strategy
+         *   rejects the configuration.
+         */
+        'evaluation-strategy' : instance 'evaluation-strategy' := 'single-evaluation' {};
+    }
+
+    /**
+     * Abstract base type of the evaluation strategies: how often the optimisation function
+     *   is called for a candidate. Every call counts as one evaluation of the budget. A
+     *   strategy with several samples aggregates the objectives of a candidate before the
+     *   fitness pipeline, so the constraints, the pipeline, the comparator and the stopping
+     *   criteria see the aggregated objectives. Re-evaluation and averaging over several
+     *   samples are the usual remedies for noisy objectives in evolutionary optimisation
+     *   (Jin and Branke 2005).
+     */
+    abstract type 'evaluation-strategy' extends configuration {}
+
+    /**
+     * Every candidate is evaluated once; the objectives are the result of this evaluation.
+     */
+    type 'single-evaluation' extends 'evaluation-strategy' {}
+
+    /**
+     * How the samples of a candidate are aggregated, per objective: 'mean' is their
+     *   arithmetic mean, 'median' the middle sample (the mean of the two middle samples for
+     *   an even number). Both need real-valued objectives.
+     */
+    nominal enum 'sample-aggregation' ( 'mean', 'median' );
+
+    /**
+     * Every new candidate is evaluated several times, and its objectives are aggregated
+     *   ("explicit averaging", Jin and Branke 2005). The memory model records
+     *   the number of samples ({@code samples}) and the sample standard deviation of every
+     *   objective ({@code objective-standard-deviations}).
+     */
+    @Literature { keys := ["jin2005evolutionary"]; }
+    type 'resampling' extends 'evaluation-strategy' {
+        /**
+         * The number of evaluations of a candidate.
+         */
+        @LowerBoundary { boundary := 2; }
+        samples : int;
+
+        /**
+         * How the samples are aggregated.
+         */
+        aggregation : enum 'sample-aggregation' := 'sample-aggregation.mean';
+    }
+
+    /**
+     * Every new candidate is evaluated 'samples' times; at the start of every iteration,
+     *   every member of the population is evaluated once more, and its objectives are the
+     *   aggregate of all its samples so far (Jin and Branke 2005). A value
+     *   that was lucky once therefore does not keep a candidate in the population. Only
+     *   algorithms that carry candidates over into the next iteration (evolutionary
+     *   algorithm, local search) support it. The memory model records the number of samples
+     *   and the sample standard deviations as for 'resampling'; the relationship of a
+     *   re-evaluated member to its previous individual has the property
+     *   {@code re-evaluated}.
+     */
+    @Literature { keys := ["jin2005evolutionary"]; }
+    type 're-evaluation' extends 'evaluation-strategy' {
+        /**
+         * The number of evaluations of a new candidate.
+         */
+        @LowerBoundary { boundary := 1; }
+        samples : int := 1;
+
+        /**
+         * How the samples are aggregated.
+         */
+        aggregation : enum 'sample-aggregation' := 'sample-aggregation.mean';
     }
 
     /**
@@ -480,6 +558,40 @@ module de.evoal.optimisation.core {
     }
 
     type 'problem-function' extends 'fitness-function' {
+    }
+
+    /**
+     * The kind of noise of a 'noisy-function': 'additive' adds e to every objective v
+     *   (v + e), 'multiplicative' scales it (v * (1 + e)); e is drawn from a normal
+     *   distribution with mean 0 and the 'standard-deviation' of the function.
+     */
+    nominal enum 'noise-model' ( 'additive', 'multiplicative' );
+
+    /**
+     * An optimisation function with noise: evaluates the wrapped function and adds Gaussian
+     *   noise to every objective, drawn from the task stream of the evaluation, so the noise
+     *   of an evaluation does not depend on the other evaluations or the threads. Noisy
+     *   variants of the benchmark functions test algorithms for uncertain environments (Jin
+     *   and Branke 2005), e.g. with an 'evaluation-strategy'. The objectives have to be
+     *   real-valued.
+     */
+    @Literature { keys := ["jin2005evolutionary"]; }
+    type 'noisy-function' extends 'fitness-function' {
+        /**
+         * The function whose objectives get the noise.
+         */
+        function : instance 'optimisation-function';
+
+        /**
+         * How the noise changes an objective.
+         */
+        noise : enum 'noise-model' := 'noise-model.additive';
+
+        /**
+         * The standard deviation of the noise.
+         */
+        @LowerBoundary { boundary := 0.0; inclusive := false; }
+        'standard-deviation' : real;
     }
 
     /**

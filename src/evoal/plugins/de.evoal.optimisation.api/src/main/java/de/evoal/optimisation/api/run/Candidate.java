@@ -183,6 +183,23 @@ public final class Candidate {
     }
 
     /**
+     * @param evaluation The evaluation that also holds the further samples of the candidate.
+     * @param relationship The property of the relationship that marks the re-evaluation.
+     * @return The candidate evaluated once more, e.g., a member of the population with the
+     *   strategy {@code 're-evaluation'}: the same input, lineage (with the property set to
+     *   {@code true}), age, measured violations and properties, with the new evaluation.
+     */
+    public Candidate reEvaluated(final @NonNull Evaluation evaluation, final @NonNull String relationship) {
+        final Lineage stepLineageOfCopy = stepLineage == null ? null : stepLineage.withProperty(relationship, true);
+        final Candidate candidate = new Candidate(input, lineage.withProperty(relationship, true), stepLineageOfCopy, age);
+        candidate.evaluation = evaluation;
+        candidate.measuredViolations = measuredViolations;
+        candidate.properties.putAll(properties);
+
+        return candidate;
+    }
+
+    /**
      * Sets the result of the evaluation.
      *
      * @param evaluation The evaluation of the candidate.

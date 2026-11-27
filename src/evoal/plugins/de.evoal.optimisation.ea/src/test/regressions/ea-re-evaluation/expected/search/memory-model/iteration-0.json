@@ -1,0 +1,404 @@
+{
+  "formatVersion" : "2027.4.0",
+  "number" : 0,
+  "individuals" : [ {
+    "id" : 0,
+    "input" : {
+      "x:0" : 4.817049500152026,
+      "x:1" : 3.7450109504342075,
+      "x:2" : 3.896479442898308
+    },
+    "output" : {
+      "y:0" : 67.76783062180535
+    },
+    "fitness" : [ 67.76783062180535 ],
+    "relationships" : [ ],
+    "properties" : {
+      "samples" : 2,
+      "objective-standard-deviations" : [ 3.418654492079174 ]
+    }
+  }, {
+    "id" : 1,
+    "input" : {
+      "x:0" : 1.109097128351447,
+      "x:1" : -2.166818463858662,
+      "x:2" : -3.926179057877802
+    },
+    "output" : {
+      "y:0" : 28.871923049898356
+    },
+    "fitness" : [ 28.871923049898356 ],
+    "relationships" : [ ],
+    "properties" : {
+      "samples" : 2,
+      "objective-standard-deviations" : [ 0.7428985077420507 ]
+    }
+  }, {
+    "id" : 2,
+    "input" : {
+      "x:0" : -3.627650447822327,
+      "x:1" : 4.130542048405071,
+      "x:2" : 3.2805462271241757
+    },
+    "output" : {
+      "y:0" : 74.40902755010347
+    },
+    "fitness" : [ 74.40902755010347 ],
+    "relationships" : [ ],
+    "properties" : {
+      "samples" : 2,
+      "objective-standard-deviations" : [ 2.5295115021820993 ]
+    }
+  }, {
+    "id" : 3,
+    "input" : {
+      "x:0" : 4.070960599830588,
+      "x:1" : -2.8080957218967626,
+      "x:2" : 3.9499643357893572
+    },
+    "output" : {
+      "y:0" : 48.14730713470715
+    },
+    "fitness" : [ 48.14730713470715 ],
+    "relationships" : [ ],
+    "properties" : {
+      "samples" : 2,
+      "objective-standard-deviations" : [ 0.42339598978909054 ]
+    }
+  }, {
+    "id" : 4,
+    "input" : {
+      "x:0" : 1.3469786699587123,
+      "x:1" : -1.8994207834850236,
+      "x:2" : 2.066409516359723
+    },
+    "output" : {
+      "y:0" : 27.455125200162772
+    },
+    "fitness" : [ 27.455125200162772 ],
+    "relationships" : [ ],
+    "properties" : {
+      "samples" : 2,
+      "objective-standard-deviations" : [ 0.8320033610902134 ]
+    }
+  }, {
+    "id" : 5,
+    "input" : {
+      "x:0" : 1.6915921404383027,
+      "x:1" : 5.117827887089809,
+      "x:2" : -4.04619739025508
+    },
+    "output" : {
+      "y:0" : 64.37170957050458
+    },
+    "fitness" : [ 64.37170957050458 ],
+    "relationships" : [ ],
+    "properties" : {
+      "samples" : 2,
+      "objective-standard-deviations" : [ 3.0276377537820056 ]
+    }
+  }, {
+    "id" : 6,
+    "input" : {
+      "x:0" : 4.612580695979697,
+      "x:1" : -4.22900392608891,
+      "x:2" : 1.9199756602879268
+    },
+    "output" : {
+      "y:0" : 71.89140908807008
+    },
+    "fitness" : [ 71.89140908807008 ],
+    "relationships" : [ ],
+    "properties" : {
+      "samples" : 2,
+      "objective-standard-deviations" : [ 0.9563101964169435 ]
+    }
+  }, {
+    "id" : 7,
+    "input" : {
+      "x:0" : -2.2865476063139365,
+      "x:1" : 0.5114531213054905,
+      "x:2" : -2.06554421743468
+    },
+    "output" : {
+      "y:0" : 42.82329263505563
+    },
+    "fitness" : [ 42.82329263505563 ],
+    "relationships" : [ ],
+    "properties" : {
+      "samples" : 2,
+      "objective-standard-deviations" : [ 2.550291835171004 ]
+    }
+  }, {
+    "id" : 8,
+    "input" : {
+      "x:0" : 4.288432894241769,
+      "x:1" : 4.740222130417425,
+      "x:2" : 4.47586770886604
+    },
+    "output" : {
+      "y:0" : 105.54089686316786
+    },
+    "fitness" : [ 105.54089686316786 ],
+    "relationships" : [ ],
+    "properties" : {
+      "samples" : 2,
+      "objective-standard-deviations" : [ 0.8107273559246774 ]
+    }
+  }, {
+    "id" : 9,
+    "input" : {
+      "x:0" : -3.141681517902024,
+      "x:1" : -3.1039300504198546,
+      "x:2" : -2.642045406402363
+    },
+    "output" : {
+      "y:0" : 49.69712173431016
+    },
+    "fitness" : [ 49.69712173431016 ],
+    "relationships" : [ ],
+    "properties" : {
+      "samples" : 2,
+      "objective-standard-deviations" : [ 0.47988049728929694 ]
+    }
+  }, {
+    "id" : 10,
+    "input" : {
+      "x:0" : 1.0276856484796868,
+      "x:1" : -1.6565595821698071,
+      "x:2" : -0.27285109637333704
+    },
+    "output" : {
+      "y:0" : 32.232921963573276
+    },
+    "fitness" : [ 32.232921963573276 ],
+    "relationships" : [ ],
+    "properties" : {
+      "samples" : 2,
+      "objective-standard-deviations" : [ 0.42421030787078623 ]
+    }
+  }, {
+    "id" : 11,
+    "input" : {
+      "x:0" : -0.25157673242358936,
+      "x:1" : -4.942115933422767,
+      "x:2" : 0.13755543415348015
+    },
+    "output" : {
+      "y:0" : 40.32949380518404
+    },
+    "fitness" : [ 40.32949380518404 ],
+    "relationships" : [ ],
+    "properties" : {
+      "samples" : 2,
+      "objective-standard-deviations" : [ 1.1479584508331788 ]
+    }
+  }, {
+    "id" : 12,
+    "input" : {
+      "x:0" : -2.863041964898641,
+      "x:1" : 4.458964179875012,
+      "x:2" : 4.627644105891956
+    },
+    "output" : {
+      "y:0" : 87.16847405297474
+    },
+    "fitness" : [ 87.16847405297474 ],
+    "relationships" : [ ],
+    "properties" : {
+      "samples" : 2,
+      "objective-standard-deviations" : [ 0.09592421782617148 ]
+    }
+  }, {
+    "id" : 13,
+    "input" : {
+      "x:0" : -4.004873845060495,
+      "x:1" : 1.5147959365466581,
+      "x:2" : 0.41870856201992623
+    },
+    "output" : {
+      "y:0" : 56.51545238468715
+    },
+    "fitness" : [ 56.51545238468715 ],
+    "relationships" : [ ],
+    "properties" : {
+      "samples" : 2,
+      "objective-standard-deviations" : [ 0.8469102583481452 ]
+    }
+  }, {
+    "id" : 14,
+    "input" : {
+      "x:0" : 2.2544786035679394,
+      "x:1" : 2.3000502135999525,
+      "x:2" : -3.0631978002072637
+    },
+    "output" : {
+      "y:0" : 44.211758540684954
+    },
+    "fitness" : [ 44.211758540684954 ],
+    "relationships" : [ ],
+    "properties" : {
+      "samples" : 2,
+      "objective-standard-deviations" : [ 1.1331156049628757 ]
+    }
+  }, {
+    "id" : 15,
+    "input" : {
+      "x:0" : 1.0397993324912704,
+      "x:1" : -4.52156332462419,
+      "x:2" : -2.567804883639078
+    },
+    "output" : {
+      "y:0" : 68.80214157910707
+    },
+    "fitness" : [ 68.80214157910707 ],
+    "relationships" : [ ],
+    "properties" : {
+      "samples" : 2,
+      "objective-standard-deviations" : [ 1.6679884365060385 ]
+    }
+  }, {
+    "id" : 16,
+    "input" : {
+      "x:0" : -3.333108020751562,
+      "x:1" : -1.3171152067601204,
+      "x:2" : 2.109469395603149
+    },
+    "output" : {
+      "y:0" : 49.537204381051865
+    },
+    "fitness" : [ 49.537204381051865 ],
+    "relationships" : [ ],
+    "properties" : {
+      "samples" : 2,
+      "objective-standard-deviations" : [ 2.034076498984193 ]
+    }
+  }, {
+    "id" : 17,
+    "input" : {
+      "x:0" : -1.324214104297903,
+      "x:1" : -0.01623810386464708,
+      "x:2" : 4.306196867801099
+    },
+    "output" : {
+      "y:0" : 50.47443101785532
+    },
+    "fitness" : [ 50.47443101785532 ],
+    "relationships" : [ ],
+    "properties" : {
+      "samples" : 2,
+      "objective-standard-deviations" : [ 1.2844072125289634 ]
+    }
+  }, {
+    "id" : 18,
+    "input" : {
+      "x:0" : -2.8191993388320578,
+      "x:1" : -3.1549283036573574,
+      "x:2" : 4.439717063255151
+    },
+    "output" : {
+      "y:0" : 68.96060058923473
+    },
+    "fitness" : [ 68.96060058923473 ],
+    "relationships" : [ ],
+    "properties" : {
+      "samples" : 2,
+      "objective-standard-deviations" : [ 1.4824301230433308 ]
+    }
+  }, {
+    "id" : 19,
+    "input" : {
+      "x:0" : 1.2805322558672891,
+      "x:1" : -2.940635022741243,
+      "x:2" : 3.98171477824174
+    },
+    "output" : {
+      "y:0" : 36.86559516384098
+    },
+    "fitness" : [ 36.86559516384098 ],
+    "relationships" : [ ],
+    "properties" : {
+      "samples" : 2,
+      "objective-standard-deviations" : [ 0.737593953487433 ]
+    }
+  } ],
+  "steps" : [ {
+    "kind" : "unordered",
+    "description" : "Initialization: sample 20 candidates",
+    "individuals" : [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19 ]
+  }, {
+    "kind" : "unordered",
+    "description" : "FitnessCalculation: evaluate the candidates",
+    "individuals" : [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19 ]
+  }, {
+    "kind" : "unordered",
+    "description" : "Acceptance: replace the population by the candidates",
+    "individuals" : [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19 ]
+  } ],
+  "ranks" : [ {
+    "number" : 0,
+    "members" : [ 4 ]
+  }, {
+    "number" : 1,
+    "members" : [ 1 ]
+  }, {
+    "number" : 2,
+    "members" : [ 10 ]
+  }, {
+    "number" : 3,
+    "members" : [ 19 ]
+  }, {
+    "number" : 4,
+    "members" : [ 11 ]
+  }, {
+    "number" : 5,
+    "members" : [ 7 ]
+  }, {
+    "number" : 6,
+    "members" : [ 14 ]
+  }, {
+    "number" : 7,
+    "members" : [ 3 ]
+  }, {
+    "number" : 8,
+    "members" : [ 16 ]
+  }, {
+    "number" : 9,
+    "members" : [ 9 ]
+  }, {
+    "number" : 10,
+    "members" : [ 17 ]
+  }, {
+    "number" : 11,
+    "members" : [ 13 ]
+  }, {
+    "number" : 12,
+    "members" : [ 5 ]
+  }, {
+    "number" : 13,
+    "members" : [ 0 ]
+  }, {
+    "number" : 14,
+    "members" : [ 15 ]
+  }, {
+    "number" : 15,
+    "members" : [ 18 ]
+  }, {
+    "number" : 16,
+    "members" : [ 6 ]
+  }, {
+    "number" : 17,
+    "members" : [ 2 ]
+  }, {
+    "number" : 18,
+    "members" : [ 12 ]
+  }, {
+    "number" : 19,
+    "members" : [ 8 ]
+  } ],
+  "bestSoFar" : 4,
+  "metrics" : {
+    "evaluations.real" : 40,
+    "evaluations.surrogate" : 0
+  }
+}

@@ -1,7 +1,7 @@
 # Optimisation API: steps, run kernel, fitness pipeline and run events
 
 This module holds what all optimisation algorithms share. This README describes the
-six parts an algorithm, step, function or listener author works with:
+seven parts an algorithm, step, function or listener author works with:
 
 - the **step model** (`de.evoal.optimisation.api.steps`): an algorithm is a template of
   steps after the unified meta-algorithm model (Berger, Plump, Drechsler:
@@ -12,6 +12,8 @@ six parts an algorithm, step, function or listener author works with:
   a candidate into the fitness the comparator compares,
 - the **constraints** (`de.evoal.optimisation.api.constraints`): how the constraints of
   the DDL are measured and handled,
+- **noisy evaluation** (`de.evoal.optimisation.api.evaluation`): how often a candidate of
+  a non-deterministic function is evaluated and how its samples are aggregated,
 - **parallel evaluation** (`de.evoal.optimisation.api.evaluation`): how the candidates of
   a batch are evaluated on several threads without changing the result,
 - the **run events** (`de.evoal.optimisation.api.events`): what a run publishes to its
@@ -521,6 +523,53 @@ A comparator creates a `FitnessValue` from the objectives and the fitness. Its
 `distanceFrom` (used by simulated annealing and threshold accepting) is the sum of the
 absolute differences of the compared components. The evolutionary algorithm does not use
 the pipeline yet; it is rebuilt on it.
+
+## Noisy evaluation
+
+A non-deterministic optimisation function (a game, a simulation, `'random-fitness'`,
+`'noisy-function'`) returns another value for every evaluation of the same candidate. The
+`'evaluation-strategy'` of the algorithm decides how often a candidate is evaluated:
+
+| DL type | Behaviour | Algorithms |
+|---|---|---|
+| `'single-evaluation'` (default) | every candidate once | all |
+| `'resampling' { samples; aggregation; }` | every new candidate `samples` times (at least 2) | all |
+| `'re-evaluation' { samples; aggregation; }` | every new candidate `samples` times (default 1); every member of the population once more at the start of every iteration | those that carry members over: EA, local search |
+
+- **One implementation.** The `Evaluator` makes the calls; an algorithm does not implement
+  a strategy itself. For re-evaluation, an algorithm states `supportsReEvaluation()` and
+  places the step of `TemplateAlgorithm.reEvaluation(evaluator)`
+  (`ReEvaluatePopulation`) at the start of its iteration; the EA and the local search do.
+  `TemplateAlgorithm.init` rejects a strategy the algorithm does not support.
+- **Samples and their aggregate.** The `Evaluation` holds the results of all evaluations of
+  the candidate (`ObjectiveSamples`). Its `output` is the aggregate, per objective the
+  `mean` or the `median` (`'sample-aggregation'`) of the samples; a re-evaluated member
+  aggregates all its samples so far. The constraints, the fitness pipeline, the comparator
+  and the stopping criteria see the aggregate. Aggregating needs real-valued objectives;
+  `TemplateAlgorithm.init` rejects other objectives.
+- **Budget and random numbers.** Every sample is one evaluation of the budget and has its
+  own evaluation index, so its task stream (`RandomService.taskRandom`) is independent and
+  the result does not depend on the threads. A cut-off budget covers only whole candidates:
+  the samples of a candidate are never split.
+- **Memory model.** With a strategy other than `'single-evaluation'`
+  (`ConfiguredEvaluationStrategy`), every individual has the property `samples` and, from two
+  samples on, `objective-standard-deviations` (the sample standard deviation of every
+  objective, in their order). A re-evaluated member is a new individual in every iteration,
+  related to its previous individual by an identity relationship with the property
+  `re-evaluated`. Every sample is published as an `IndividualEvaluated`.
+- **Best individual so far.** The kernel chooses it by the aggregate of the iteration; a
+  member whose aggregate gets worse later stays the best of the iteration in which it was the
+  best.
+
+`'noisy-function' { function; noise; 'standard-deviation'; }` wraps an optimisation function
+and adds Gaussian noise from the task stream to every objective, `additive` (v + e) or
+`multiplicative` (v (1 + e)), e.g. to test the strategies on a benchmark. Regressions:
+`random-search-resampling`, `ea-re-evaluation`, `simulated-annealing-re-evaluation`; example:
+`ea-noisy-evaluation` (EA plugin).
+
+Reference: Y. Jin, J. Branke: Evolutionary Optimization in Uncertain Environments — A Survey.
+IEEE Transactions on Evolutionary Computation 9(3), 2005, pp. 303–317,
+doi:10.1109/TEVC.2005.846356.
 
 ## Parallel evaluation
 

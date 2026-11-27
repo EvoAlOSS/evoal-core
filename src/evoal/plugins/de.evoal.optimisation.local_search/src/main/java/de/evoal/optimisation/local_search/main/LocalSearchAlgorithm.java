@@ -76,6 +76,15 @@ public class LocalSearchAlgorithm extends TemplateAlgorithm {
     }
 
     /**
+     * @return {@code true}: the current candidate is carried over and evaluated once more at
+     *   the start of every iteration with the strategy {@code 're-evaluation'}.
+     */
+    @Override
+    protected boolean supportsReEvaluation() {
+        return true;
+    }
+
+    /**
      * @return The population: the current candidate is checked at the end of every
      *   iteration.
      */
@@ -91,10 +100,11 @@ public class LocalSearchAlgorithm extends TemplateAlgorithm {
                                                   new ReplacePopulation());
 
         final AcceptNeighbour acceptance = new AcceptNeighbour(acceptingStrategy);
-        final List<Step> iteration = new ArrayList<>(List.of(new OfferNeighbours(strategy, acceptingStrategy),
-                                                              EvaluateCandidates.untilAccepted(evaluator, acceptance::isAcceptable),
-                                                              acceptance,
-                                                              new AdjustAcceptingStrategy(acceptingStrategy)));
+        final List<Step> iteration = new ArrayList<>(reEvaluation(evaluator));
+        iteration.addAll(List.of(new OfferNeighbours(strategy, acceptingStrategy),
+                                 EvaluateCandidates.untilAccepted(evaluator, acceptance::isAcceptable),
+                                 acceptance,
+                                 new AdjustAcceptingStrategy(acceptingStrategy)));
         iteration.addAll(populationChecks(evaluator));
 
         return new Template(initialisation, iteration);

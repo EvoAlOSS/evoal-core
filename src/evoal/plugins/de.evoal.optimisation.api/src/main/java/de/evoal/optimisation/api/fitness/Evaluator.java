@@ -15,9 +15,12 @@ import de.evoal.models.v202704.optimisation.execution.OptimisationValue;
 import de.evoal.optimisation.api.constraints.ConstraintEvaluation;
 import de.evoal.optimisation.api.constraints.PartialViolationRecord;
 import de.evoal.optimisation.api.constraints.ViolationRecord;
+import de.evoal.optimisation.api.evaluation.ConfiguredEvaluationStrategy;
 import de.evoal.optimisation.api.evaluation.EvaluationBudgetExhaustedException;
 import de.evoal.optimisation.api.evaluation.EvaluationService;
+import de.evoal.optimisation.api.evaluation.EvaluationStrategy;
 import de.evoal.optimisation.api.model.OptimisationValueComparator;
+import de.evoal.optimisation.main.evaluation.SingleEvaluation;
 
 /**
  * Evaluates a candidate: the {@link EvaluationService} computes the objectives, the
@@ -25,9 +28,16 @@ import de.evoal.optimisation.api.model.OptimisationValueComparator;
  *   and the comparator the optimisation value. Every algorithm evaluates its candidates with
  *   an evaluator, so the four always belong together.
  * <p>
+ * The {@link EvaluationStrategy} of the run decides how often the optimisation function is
+ *   called for a new candidate: with several samples, the objectives of the candidate are
+ *   aggregated ({@link ObjectiveSamples}) before the constraints, the pipeline and the
+ *   comparator see them. The samples of a candidate are consecutive evaluations, so each has
+ *   its own task stream, and every sample counts against the budget.
+ * <p>
  * {@link #evaluateAll(List)} computes the objectives of a batch in parallel
- *   ({@link EvaluationService#evaluateAll(List)}); the violation records, the fitness and the
- *   optimisation values are computed afterwards on the calling thread, in input order.
+ *   ({@link EvaluationService#evaluateAll(List)}); the aggregates, violation records, the
+ *   fitness and the optimisation values are computed afterwards on the calling thread, in
+ *   input order.
  */
 @Dependent
 public class Evaluator {
@@ -57,13 +67,25 @@ public class Evaluator {
     private FitnessPipeline pipeline;
 
     /**
+     * Provides the evaluation strategy of the run; {@code null} for an evaluator that is
+     *   created from its parts.
+     */
+    @Inject
+    private ConfiguredEvaluationStrategy configuredStrategy;
+
+    /**
+     * The evaluation strategy of an evaluator that is created from its parts.
+     */
+    private EvaluationStrategy givenStrategy = SingleEvaluation.INSTANCE;
+
+    /**
      * Creates an evaluator whose parts are injected.
      */
     public Evaluator() {
     }
 
     /**
-     * Creates an evaluator from its parts.
+     * Creates an evaluator from its parts that evaluates every candidate once.
      *
      * @param evaluationService Evaluates and counts the candidates.
      * @param pipeline Computes the fitness from the objectives.
@@ -78,7 +100,7 @@ public class Evaluator {
     }
 
     /**
-     * Creates an evaluator from its parts.
+     * Creates an evaluator from its parts that evaluates every candidate once.
      *
      * @param evaluationService Evaluates and counts the candidates.
      * @param constraintEvaluation Measures the constraints.
@@ -91,6 +113,29 @@ public class Evaluator {
                      final OptimisationValueComparator comparator) {
         this(evaluationService, pipeline, comparator);
         this.constraintEvaluation = constraintEvaluation;
+    }
+
+    /**
+     * Creates an evaluator from its parts with an evaluation strategy, e.g., for tests.
+     *
+     * @param evaluationService Evaluates and counts the candidates.
+     * @param pipeline Computes the fitness from the objectives.
+     * @param comparator Computes the optimisation value from the objectives and the fitness.
+     * @param strategy How often a candidate is evaluated.
+     */
+    public Evaluator(final EvaluationService evaluationService,
+                     final FitnessPipeline pipeline,
+                     final OptimisationValueComparator comparator,
+                     final EvaluationStrategy strategy) {
+        this(evaluationService, pipeline, comparator);
+        this.givenStrategy = strategy;
+    }
+
+    /**
+     * @return The evaluation strategy: the one of the run, or the given one.
+     */
+    public EvaluationStrategy strategy() {
+        return configuredStrategy == null ? givenStrategy : configuredStrategy.strategy();
     }
 
     /**
@@ -113,18 +158,22 @@ public class Evaluator {
      *   not measured again.
      * @return The objectives, the violation record, the fitness and the optimisation value.
      * @throws de.evoal.optimisation.api.evaluation.EvaluationBudgetExhaustedException if the
-     *   evaluation budget is exhausted.
+     *   evaluation budget does not cover all samples of the candidate.
      */
     public Evaluation evaluate(final TypedEObject input, final PartialViolationRecord known) {
-        final TypedEObject output = evaluationService.evaluate(input);
+        final int samples = strategy().samplesOfNewCandidates();
+        final List<TypedEObject> outputs = samples == 1
+                ? List.of(evaluationService.evaluate(input))
+                : evaluationService.evaluateAll(Collections.nCopies(samples, input));
 
-        return toEvaluation(input, output, known);
+        return toEvaluation(input, samplesOf(outputs), known);
     }
 
     /**
      * Evaluates a batch of candidates. If a budget with the policy {@code cut-off} does not
-     *   cover all candidates, the first candidates that it covers are evaluated and the result
-     *   contains the exhaustion, so the evaluations equal the ones of a sequential run.
+     *   cover all candidates, the first candidates whose samples it covers completely are
+     *   evaluated and the result contains the exhaustion, so the evaluations equal the ones
+     *   of a sequential run.
      *
      * @param inputs The candidates (points of the search space).
      * @return The evaluations of the first candidates and the exhaustion of the budget, if any.
@@ -153,19 +202,52 @@ public class Evaluator {
                                                + " partial violation records.");
         }
 
-        final OptionalLong remaining = evaluationService.remainingEvaluations();
-        final int covered = (int) Math.min(inputs.size(), remaining.orElse(Long.MAX_VALUE));
+        final int samples = strategy().samplesOfNewCandidates();
+        final int covered = coveredCandidates(inputs.size(), samples);
+
+        final List<TypedEObject> evaluated = inputs.subList(0, covered);
+        final List<TypedEObject> outputs = evaluationService.evaluateAll(repeated(evaluated, samples));
+
+        final List<Evaluation> evaluations = new ArrayList<>(covered);
+        for(int i = 0; i < covered; ++i) {
+            final List<TypedEObject> samplesOfCandidate = outputs.subList(i * samples, (i + 1) * samples);
+            evaluations.add(toEvaluation(evaluated.get(i), samplesOf(samplesOfCandidate), known.get(i)));
+        }
+
+        final List<TypedEObject> beyondBudget = inputs.subList(covered, inputs.size());
+        final EvaluationBudgetExhaustedException exhaustion = beyondBudget.isEmpty() ? null : exhaustionFor(repeated(beyondBudget, samples));
+
+        return new BatchEvaluation(evaluations, exhaustion);
+    }
+
+    /**
+     * Evaluates every candidate once more and aggregates all its samples, e.g., the members
+     *   of the population with the strategy {@code 're-evaluation'}. If a budget with the
+     *   policy {@code cut-off} does not cover all candidates, the first candidates that it
+     *   covers are evaluated and the result contains the exhaustion.
+     *
+     * @param inputs The candidates (points of the search space).
+     * @param previous The evaluations of the candidates so far, in the order of the
+     *   candidates; their samples have an aggregation.
+     * @return The new evaluations of the first candidates and the exhaustion of the budget,
+     *   if any.
+     * @throws IllegalArgumentException if the lists differ in size.
+     */
+    public BatchEvaluation reEvaluateAll(final List<TypedEObject> inputs, final List<Evaluation> previous) {
+        if(inputs.size() != previous.size()) {
+            throw new IllegalArgumentException("The batch has " + inputs.size() + " candidates, but " + previous.size()
+                                               + " previous evaluations.");
+        }
+
+        final int covered = coveredCandidates(inputs.size(), 1);
 
         final List<TypedEObject> evaluated = inputs.subList(0, covered);
         final List<TypedEObject> outputs = evaluationService.evaluateAll(evaluated);
 
         final List<Evaluation> evaluations = new ArrayList<>(covered);
         for(int i = 0; i < covered; ++i) {
-            final TypedEObject input = evaluated.get(i);
-            final TypedEObject output = outputs.get(i);
-            final Evaluation evaluation = toEvaluation(input, output, known.get(i));
-
-            evaluations.add(evaluation);
+            final ObjectiveSamples samples = previous.get(i).samples().with(List.of(outputs.get(i)));
+            evaluations.add(toEvaluation(evaluated.get(i), samples, PartialViolationRecord.EMPTY));
         }
 
         final List<TypedEObject> beyondBudget = inputs.subList(covered, inputs.size());
@@ -175,8 +257,42 @@ public class Evaluator {
     }
 
     /**
-     * @return The exhaustion that the service reports for the candidates beyond the budget. The
-     *   service rejects them before evaluating any of them.
+     * @return The number of candidates whose samples the remaining budget covers completely.
+     */
+    private int coveredCandidates(final int numberOfCandidates, final int samples) {
+        final OptionalLong remaining = evaluationService.remainingEvaluations();
+
+        return (int) Math.min(numberOfCandidates, remaining.orElse(Long.MAX_VALUE) / samples);
+    }
+
+    /**
+     * @return Every input {@code samples} times in a row.
+     */
+    private static List<TypedEObject> repeated(final List<TypedEObject> inputs, final int samples) {
+        if(samples == 1) {
+            return inputs;
+        }
+
+        final List<TypedEObject> repeated = new ArrayList<>(inputs.size() * samples);
+        for(final TypedEObject input : inputs) {
+            repeated.addAll(Collections.nCopies(samples, input));
+        }
+
+        return repeated;
+    }
+
+    /**
+     * @return The samples of a candidate with the outputs of its evaluations.
+     */
+    private ObjectiveSamples samplesOf(final List<TypedEObject> outputs) {
+        final EvaluationStrategy strategy = strategy();
+
+        return strategy.samples() ? ObjectiveSamples.of(outputs, strategy.aggregation()) : ObjectiveSamples.single(outputs.getFirst());
+    }
+
+    /**
+     * @return The exhaustion that the service reports for the evaluations beyond the budget.
+     *   The service rejects them before making any of them.
      */
     private EvaluationBudgetExhaustedException exhaustionFor(final List<TypedEObject> beyondBudget) {
         try {
@@ -189,16 +305,18 @@ public class Evaluator {
     }
 
     /**
-     * @return The evaluation of a candidate whose objectives are computed.
+     * @return The evaluation of a candidate whose objectives are computed: the aggregate of
+     *   its samples is the output.
      */
-    private Evaluation toEvaluation(final TypedEObject input, final TypedEObject output,
+    private Evaluation toEvaluation(final TypedEObject input, final ObjectiveSamples samples,
                                     final PartialViolationRecord known) {
+        final TypedEObject output = samples.aggregate();
         final ViolationRecord violations = constraintEvaluation == null
                 ? ViolationRecord.NONE
                 : constraintEvaluation.measure(input, output, known);
         final Fitness fitness = pipeline.apply(input, output, violations);
         final OptimisationValue value = comparator.toValue(output, fitness, violations);
 
-        return new Evaluation(output, fitness, value, violations);
+        return new Evaluation(output, fitness, value, violations, samples);
     }
 }

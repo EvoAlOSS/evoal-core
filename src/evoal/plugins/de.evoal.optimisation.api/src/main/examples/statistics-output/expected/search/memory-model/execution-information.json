@@ -54,6 +54,10 @@
           "equality-tolerance" : 1.0E-4
         }
       },
+      "evaluation-strategy" : {
+        "type" : "de.evoal.optimisation.core.single-evaluation",
+        "attributes" : { }
+      },
       "swarm" : {
         "type" : "de.evoal.optimisation.pso.optimisation.default-swarm",
         "attributes" : { }

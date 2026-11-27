@@ -1,0 +1,192 @@
+{
+  "formatVersion" : "2027.4.0",
+  "number" : 1,
+  "individuals" : [ {
+    "id" : 15,
+    "input" : {
+      "x:0" : 1.0276856484796868,
+      "x:1" : -1.6565595821698071
+    },
+    "output" : {
+      "y:0" : 11.03241404159929
+    },
+    "fitness" : [ 11.03241404159929 ],
+    "relationships" : [ ],
+    "properties" : {
+      "samples" : 3,
+      "objective-standard-deviations" : [ 3.6686070589920363 ]
+    }
+  }, {
+    "id" : 16,
+    "input" : {
+      "x:0" : -0.27285109637333704,
+      "x:1" : -0.25157673242358936
+    },
+    "output" : {
+      "y:0" : 19.51916161815611
+    },
+    "fitness" : [ 19.51916161815611 ],
+    "relationships" : [ ],
+    "properties" : {
+      "samples" : 3,
+      "objective-standard-deviations" : [ 2.3173546720556613 ]
+    }
+  }, {
+    "id" : 10,
+    "input" : {
+      "x:0" : 1.9199756602879268,
+      "x:1" : -2.2865476063139365
+    },
+    "output" : {
+      "y:0" : 22.827336731763854
+    },
+    "fitness" : [ 22.827336731763854 ],
+    "relationships" : [ ],
+    "properties" : {
+      "samples" : 3,
+      "objective-standard-deviations" : [ 3.618902111118463 ]
+    }
+  }, {
+    "id" : 17,
+    "input" : {
+      "x:0" : -4.942115933422767,
+      "x:1" : 0.13755543415348015
+    },
+    "output" : {
+      "y:0" : 25.16667052497461
+    },
+    "fitness" : [ 25.16667052497461 ],
+    "relationships" : [ ],
+    "properties" : {
+      "samples" : 3,
+      "objective-standard-deviations" : [ 7.89294305108775 ]
+    }
+  }, {
+    "id" : 11,
+    "input" : {
+      "x:0" : 0.5114531213054905,
+      "x:1" : -2.06554421743468
+    },
+    "output" : {
+      "y:0" : 31.233869863293638
+    },
+    "fitness" : [ 31.233869863293638 ],
+    "relationships" : [ ],
+    "properties" : {
+      "samples" : 3,
+      "objective-standard-deviations" : [ 2.31245019882607 ]
+    }
+  }, {
+    "id" : 14,
+    "input" : {
+      "x:0" : -3.1039300504198546,
+      "x:1" : -2.642045406402363
+    },
+    "output" : {
+      "y:0" : 38.76240721840972
+    },
+    "fitness" : [ 38.76240721840972 ],
+    "relationships" : [ ],
+    "properties" : {
+      "samples" : 3,
+      "objective-standard-deviations" : [ 5.166149892605714 ]
+    }
+  }, {
+    "id" : 13,
+    "input" : {
+      "x:0" : 4.47586770886604,
+      "x:1" : -3.141681517902024
+    },
+    "output" : {
+      "y:0" : 41.59551892644653
+    },
+    "fitness" : [ 41.59551892644653 ],
+    "relationships" : [ ],
+    "properties" : {
+      "samples" : 3,
+      "objective-standard-deviations" : [ 11.160582504467717 ]
+    }
+  }, {
+    "id" : 18,
+    "input" : {
+      "x:0" : -2.863041964898641,
+      "x:1" : 4.458964179875012
+    },
+    "output" : {
+      "y:0" : 51.7279127563738
+    },
+    "fitness" : [ 51.7279127563738 ],
+    "relationships" : [ ],
+    "properties" : {
+      "samples" : 3,
+      "objective-standard-deviations" : [ 10.474910442363425 ]
+    }
+  }, {
+    "id" : 19,
+    "input" : {
+      "x:0" : 4.627644105891956,
+      "x:1" : -4.004873845060495
+    },
+    "output" : {
+      "y:0" : 60.54744078012189
+    },
+    "fitness" : [ 60.54744078012189 ],
+    "relationships" : [ ],
+    "properties" : {
+      "samples" : 3,
+      "objective-standard-deviations" : [ 6.899836637127376 ]
+    }
+  }, {
+    "id" : 12,
+    "input" : {
+      "x:0" : 4.288432894241769,
+      "x:1" : 4.740222130417425
+    },
+    "output" : {
+      "y:0" : 69.26490830882084
+    },
+    "fitness" : [ 69.26490830882084 ],
+    "relationships" : [ ],
+    "properties" : {
+      "samples" : 3,
+      "objective-standard-deviations" : [ 13.913406189640517 ]
+    }
+  } ],
+  "steps" : [ ],
+  "ranks" : [ {
+    "number" : 0,
+    "members" : [ 15 ]
+  }, {
+    "number" : 1,
+    "members" : [ 16 ]
+  }, {
+    "number" : 2,
+    "members" : [ 10 ]
+  }, {
+    "number" : 3,
+    "members" : [ 17 ]
+  }, {
+    "number" : 4,
+    "members" : [ 11 ]
+  }, {
+    "number" : 5,
+    "members" : [ 14 ]
+  }, {
+    "number" : 6,
+    "members" : [ 13 ]
+  }, {
+    "number" : 7,
+    "members" : [ 18 ]
+  }, {
+    "number" : 8,
+    "members" : [ 19 ]
+  }, {
+    "number" : 9,
+    "members" : [ 12 ]
+  } ],
+  "bestSoFar" : 15,
+  "metrics" : {
+    "evaluations.real" : 60,
+    "evaluations.surrogate" : 0
+  }
+}

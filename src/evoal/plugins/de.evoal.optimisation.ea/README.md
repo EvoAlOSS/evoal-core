@@ -264,6 +264,9 @@ In `src/main/examples`, each with a README:
   `'correlation-aware-mutation'`, `'linkage-crossover'` and `'correlation-statistics'`.
 - `ea-constraints`: two constraint groups, one repaired by `'projection-repair'` before the
   evaluation, one penalised by `'constraint-penalty'`; `'constraint-statistics'`.
+- `ea-noisy-evaluation`: a noisy benchmark (`'noisy-function'`), once with a single
+  evaluation per candidate and once with `'re-evaluation'`, compared with the values without
+  noise (`'reference-values-per-individual'`).
 
 The surrogate plugins have examples that search on a trained model with the EA
 (`surrogate.simple`, `surrogate.svr`, `surrogate.gaussianprocess`, `surrogate.onnx.simple`,

@@ -152,6 +152,15 @@ public class EvolutionaryAlgorithm extends TemplateAlgorithm {
 
     private static final String COMMA = "comma-replacement";
 
+    /**
+     * @return {@code true}: the members of the population are carried over and evaluated once
+     *   more at the start of every generation with the strategy {@code 're-evaluation'}.
+     */
+    @Override
+    protected boolean supportsReEvaluation() {
+        return true;
+    }
+
     @Override
     protected Set<CheckPoint> checkPoints() {
         return Set.of(CheckPoint.NEW_CANDIDATES, CheckPoint.POPULATION);
@@ -316,7 +325,7 @@ public class EvolutionaryAlgorithm extends TemplateAlgorithm {
             initialisationSteps.add(GenerationSteps.sortIntoFronts(constraintGroup));
         }
 
-        final List<Step> generation = new ArrayList<>();
+        final List<Step> generation = new ArrayList<>(reEvaluation(evaluator));
         generation.add(GenerationSteps.selectParents(parentSelection, offspring, order,
                                                      randomService.random(OperatorPlan.STREAM + "/parent-selection")));
         generation.add(GenerationSteps.recombine(variation, offspring));
