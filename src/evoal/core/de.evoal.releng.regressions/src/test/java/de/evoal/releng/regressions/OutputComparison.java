@@ -95,6 +95,16 @@ public final class OutputComparison {
     }
 
     /**
+     * @param folder The output folder of a run.
+     * @return {@code true} if the folder contains a file outside the {@value #PROVENANCE}
+     *   folders, i.e. a file that is compared or written as a reference. A missing folder has
+     *   no output.
+     */
+    public static boolean hasOutput(final Path folder) {
+        return !filesIn(folder).isEmpty();
+    }
+
+    /**
      * Replaces the references with the output of a run.
      *
      * @param expectedFolder The folder with the references, replaced completely.

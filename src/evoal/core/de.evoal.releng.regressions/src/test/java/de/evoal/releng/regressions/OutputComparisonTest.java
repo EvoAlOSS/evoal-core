@@ -88,6 +88,42 @@ public class OutputComparisonTest {
     }
 
     @Nested
+    @DisplayName("a run has output (#358)")
+    class HasOutput {
+        @Test
+        public void aMissingFolderHasNoOutput() {
+            Assertions.assertFalse(OutputComparison.hasOutput(actualFolder));
+        }
+
+        @Test
+        public void anEmptyFolderHasNoOutput() throws IOException {
+            // given
+            Files.createDirectories(actualFolder.resolve("search"));
+
+            // then
+            Assertions.assertFalse(OutputComparison.hasOutput(actualFolder));
+        }
+
+        @Test
+        public void aFolderWithOnlyTheProvenanceHasNoOutput() throws IOException {
+            // given
+            write(actualFolder, "search/provenance/environment.json", "{}");
+
+            // then
+            Assertions.assertFalse(OutputComparison.hasOutput(actualFolder));
+        }
+
+        @Test
+        public void aFolderWithAFileHasOutput() throws IOException {
+            // given
+            write(actualFolder, CANDIDATES, "individual-id;x:0");
+
+            // then
+            Assertions.assertTrue(OutputComparison.hasOutput(actualFolder));
+        }
+    }
+
+    @Nested
     @DisplayName("given an output with a changed value")
     class ChangedValue {
         @BeforeEach

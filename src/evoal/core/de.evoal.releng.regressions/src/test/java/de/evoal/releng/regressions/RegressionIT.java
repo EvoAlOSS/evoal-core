@@ -113,8 +113,9 @@ public class RegressionIT {
     }
 
     /**
-     * Compares the output with the references, or rewrites them in update mode. A smoke
-     *   test runs once and is not compared.
+     * Compares the output with the references, or rewrites them in update mode. A run with
+     *   references that writes no output fails in both modes and leaves the references
+     *   unchanged (#358). A smoke test runs once and is not compared.
      */
     private void check(final Regression regression) throws InterruptedException {
         final Path workingFolder = workingFolderOf(regression);
@@ -126,6 +127,9 @@ public class RegressionIT {
 
         final Path outputFolder = runRepeatedly(regression, workingFolder);
         final Path expectedFolder = regression.expectedFolder();
+
+        Assertions.assertTrue(OutputComparison.hasOutput(outputFolder), () -> "The regression " + regression
+                + " wrote no output to " + outputFolder + "; " + expectedFolder + " is left unchanged.");
 
         if(update) {
             OutputComparison.replace(expectedFolder, outputFolder);

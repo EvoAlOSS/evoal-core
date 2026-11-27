@@ -54,7 +54,9 @@ users run them, with `EVOAL_HOME` set to the release, `EVOAL_SEED=42`,
 `output/`. The log of all scripts is `run.log`.
 
 - An example with `expected/` is compared with its references, named
-  `<plugin>/examples/<name>`.
+  `<plugin>/examples/<name>`. Like a regression configuration, it fails if its
+  `output/` has no file outside `provenance/`, also in update mode, which then
+  leaves `expected/` unchanged.
 - An example without `expected/` is a smoke test: all scripts must finish with
   exit code 0; the output is not compared and the example runs only once.
 
