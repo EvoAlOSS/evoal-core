@@ -3,8 +3,9 @@
 This plugin provides the evolutionary algorithm (EA) `'evolutionary-algorithm'` of the DL
 module `de.evoal.optimisation.ea.optimisation`. It runs on the step model of
 `de.evoal.optimisation.api` (see the README there), like random search, local search and
-particle swarm optimisation. It replaces the Jenetics-based EA, whose code is kept in
-`de.evoal.optimisation.ea.jenetics` until it is deleted.
+particle swarm optimisation. It replaces the Jenetics-based EA of EvoAl 2026.4.0 and earlier:
+model candidates and their operators take the place of the MDO types (see "Models"), and
+genetic programming is a model search space with the library of `de.evoal.optimisation.gp`.
 
 ## A generation
 

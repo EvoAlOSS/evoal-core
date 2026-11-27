@@ -28,7 +28,6 @@
         <jackson.version>3.1.2</jackson.version>
         <jacoco.version>0.8.14</jacoco.version>
         <json-schema-validator.version>3.0.5</json-schema-validator.version>
-        <jenetics.version>7.1.0</jenetics.version>
         <lombok.version>1.18.42</lombok.version>
         <!-- protoc and the Java runtime of the generated ONNX classes (surrogate.api) have the same version -->
         <protobuf.version>4.36.2</protobuf.version>
