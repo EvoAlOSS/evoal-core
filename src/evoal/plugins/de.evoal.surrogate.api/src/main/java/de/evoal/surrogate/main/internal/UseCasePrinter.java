@@ -117,9 +117,9 @@ class UseCasePrinter {
         } else if(expression instanceof StringLiteral literal) {
             return "\"" + literal.getLiteral() + "\"";
         } else if(expression instanceof IntegerLiteral literal) {
-            return Integer.toString(literal.getLiteral());
+            return Integer.toString(literal.getLiteral()) + symbol(literal.getFactor());
         } else if(expression instanceof RealLiteral literal) {
-            return Double.toString(literal.getLiteral());
+            return Double.toString(literal.getLiteral()) + symbol(literal.getFactor());
         } else if(expression instanceof BooleanLiteral literal) {
             return Boolean.toString(literal.isLiteral());
         } else if(expression instanceof Expression wrapped) {
@@ -144,6 +144,36 @@ class UseCasePrinter {
         return expressions.stream()
                           .map(e -> expression(depth, e))
                           .collect(Collectors.joining(", "));
+    }
+
+    /**
+     * @return The symbol of a metric prefix as written in the languages, e.g. {@code µ} for
+     *   {@link Factor#MICRO}, or an empty string for {@link Factor#NONE}.
+     */
+    static String symbol(final Factor factor) {
+        return switch(factor) {
+            case YOTTA -> "Y";
+            case ZETTA -> "Z";
+            case EXA -> "E";
+            case PETA -> "P";
+            case TERA -> "T";
+            case GIGA -> "G";
+            case MEGA -> "M";
+            case KILO -> "k";
+            case HECTO -> "h";
+            case DEKA -> "da";
+            case NONE -> "";
+            case DECI -> "d";
+            case CENTI -> "c";
+            case MILLI -> "m";
+            case MICRO -> "µ";
+            case NANO -> "n";
+            case PIKO -> "p";
+            case FEMTO -> "f";
+            case ATTO -> "a";
+            case ZEPTO -> "z";
+            case YOCTO -> "y";
+        };
     }
 
     private static String name(final String name) {

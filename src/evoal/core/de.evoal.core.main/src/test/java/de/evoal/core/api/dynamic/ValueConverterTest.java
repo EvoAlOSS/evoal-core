@@ -26,6 +26,7 @@ import org.junit.jupiter.api.Test;
 import de.evoal.languages.model.base.expressions.Array;
 import de.evoal.languages.model.base.expressions.ExpressionsFactory;
 import de.evoal.languages.model.base.expressions.ExpressionsPackage;
+import de.evoal.languages.model.base.expressions.Factor;
 import de.evoal.languages.model.base.expressions.IntegerLiteral;
 import de.evoal.languages.model.base.expressions.MultiplyDivideModuloExpression;
 import de.evoal.languages.model.base.expressions.MultiplyDivideModuloOperator;
@@ -54,6 +55,28 @@ public class ValueConverterTest {
                 .convert(integer(1));
 
         Assertions.assertEquals(1.0, value);
+    }
+
+    @Test
+    public void integerWithPrefixIsScaledForRealAttribute() {
+        final IntegerLiteral literal = integer(100);
+        literal.setFactor(Factor.MICRO);
+
+        final Object value = new ValueConverter()
+                .setTargetType(attribute(EcorePackage.Literals.EDOUBLE))
+                .convert(literal);
+
+        Assertions.assertEquals(1.0E-4, value);
+    }
+
+    @Test
+    public void integerWithPrefixThatIsNoWholeNumberIsRejectedForIntegerAttribute() {
+        final IntegerLiteral literal = integer(1500);
+        literal.setFactor(Factor.MILLI);
+
+        final ValueConverter converter = new ValueConverter().setTargetType(attribute(EcorePackage.Literals.EINT));
+
+        Assertions.assertThrows(IllegalArgumentException.class, () -> converter.convert(literal));
     }
 
     @Test

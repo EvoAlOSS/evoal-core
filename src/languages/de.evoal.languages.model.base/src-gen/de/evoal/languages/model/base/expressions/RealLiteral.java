@@ -45,6 +45,9 @@ public interface RealLiteral extends NumberLiteral {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The value of the literal scaled exactly by its factor.
+	 * <!-- end-model-doc -->
 	 * @model kind="operation" required="true"
 	 * @generated
 	 */

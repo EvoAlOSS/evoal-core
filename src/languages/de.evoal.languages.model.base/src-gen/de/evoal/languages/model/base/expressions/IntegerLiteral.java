@@ -45,9 +45,12 @@ public interface IntegerLiteral extends NumberLiteral {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model kind="operation" required="true"
+	 * <!-- begin-model-doc -->
+	 * The value of the literal scaled by its factor: an integer if the scaled value is a whole number in the range of int (e.g. 5k, 3000m), a real number otherwise (e.g. 100µ, 1500m, 5G).
+	 * <!-- end-model-doc -->
+	 * @model kind="operation" dataType="de.evoal.languages.model.base.expressions.Number" required="true"
 	 * @generated
 	 */
-	Integer getValue();
+	Number getValue();
 
 } // IntegerLiteral

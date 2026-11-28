@@ -100,7 +100,8 @@ public class RealLiteralImpl extends NumberLiteralImpl implements RealLiteral {
 	 */
 	@Override
 	public Double getValue() {
-		return literal * Math.pow(10, super.getFactor().getValue());
+		// scale exactly, e.g. 100.0µ is 1.0E-4 and not 9.999999999999999E-5
+		return java.math.BigDecimal.valueOf(literal).scaleByPowerOfTen(getFactor().getValue()).doubleValue();
 		
 	}
 

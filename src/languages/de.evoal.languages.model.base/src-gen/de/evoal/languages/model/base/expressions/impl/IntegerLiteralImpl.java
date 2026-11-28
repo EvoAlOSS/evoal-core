@@ -99,8 +99,16 @@ public class IntegerLiteralImpl extends NumberLiteralImpl implements IntegerLite
 	 * @generated
 	 */
 	@Override
-	public Integer getValue() {
-		return (int)(literal * Math.pow(10, super.getFactor().getValue()));
+	public Number getValue() {
+		// scale exactly, e.g. 100µ is 1.0E-4 and 3000m is 3
+		final java.math.BigDecimal value = java.math.BigDecimal.valueOf(literal).scaleByPowerOfTen(getFactor().getValue());
+		try {
+		  // a whole number in the range of int stays an integer
+		  return value.intValueExact();
+		} catch(final ArithmeticException e) {
+		  // a fraction or a number beyond the range of int becomes a real number
+		  return value.doubleValue();
+		}
 		
 	}
 

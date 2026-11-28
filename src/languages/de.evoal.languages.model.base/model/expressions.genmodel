@@ -105,11 +105,11 @@
     <genClasses ecoreClass="expressions.ecore#//IntegerLiteral">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute expressions.ecore#//IntegerLiteral/literal"/>
       <genOperations ecoreOperation="expressions.ecore#//IntegerLiteral/getValue"
-          body="return (int)(literal * Math.pow(10, super.getFactor().getValue()));&#xA;"/>
+          body="// scale exactly, e.g. 100&#xB5; is 1.0E-4 and 3000m is 3&#xA;final java.math.BigDecimal value = java.math.BigDecimal.valueOf(literal).scaleByPowerOfTen(getFactor().getValue());&#xA;try {&#xA;  // a whole number in the range of int stays an integer&#xA;  return value.intValueExact();&#xA;} catch(final ArithmeticException e) {&#xA;  // a fraction or a number beyond the range of int becomes a real number&#xA;  return value.doubleValue();&#xA;}&#xA;"/>
     </genClasses>
     <genClasses ecoreClass="expressions.ecore#//RealLiteral">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute expressions.ecore#//RealLiteral/literal"/>
-      <genOperations ecoreOperation="expressions.ecore#//RealLiteral/getValue" body="return literal * Math.pow(10, super.getFactor().getValue());&#xA;"/>
+      <genOperations ecoreOperation="expressions.ecore#//RealLiteral/getValue" body="// scale exactly, e.g. 100.0&#xB5; is 1.0E-4 and not 9.999999999999999E-5&#xA;return java.math.BigDecimal.valueOf(literal).scaleByPowerOfTen(getFactor().getValue()).doubleValue();&#xA;"/>
     </genClasses>
     <genClasses ecoreClass="expressions.ecore#//StringLiteral">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute expressions.ecore#//StringLiteral/literal"/>
