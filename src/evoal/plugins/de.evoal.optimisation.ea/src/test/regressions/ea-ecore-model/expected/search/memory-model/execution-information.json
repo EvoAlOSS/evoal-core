@@ -1,0 +1,273 @@
+{
+  "formatVersion" : "2027.4.0",
+  "problem" : {
+    "name" : "policies",
+    "goals" : [ {
+      "feature" : "size",
+      "direction" : "maximise"
+    } ],
+    "function" : {
+      "type" : "de.evoal.optimisation.core.unknown-function",
+      "attributes" : { }
+    }
+  },
+  "algorithm" : {
+    "type" : "de.evoal.optimisation.ea.optimisation.evolutionary-algorithm",
+    "attributes" : {
+      "initialisation" : {
+        "type" : "de.evoal.optimisation.core.random-population",
+        "attributes" : {
+          "method" : {
+            "type" : "de.evoal.optimisation.core.ramped-half-and-half",
+            "attributes" : {
+              "maximum-size" : 20,
+              "optional-probability" : 0.5,
+              "minimum-depth" : 5,
+              "maximum-depth" : 6
+            }
+          }
+        }
+      },
+      "optimisation-function" : {
+        "type" : "de.evoal.optimisation.core.model-measures",
+        "attributes" : {
+          "model" : "policy",
+          "size" : "size",
+          "depth" : null
+        }
+      },
+      "comparator" : {
+        "type" : "de.evoal.optimisation.core.numeric-comparator",
+        "attributes" : { }
+      },
+      "stopping-criteria" : [ {
+        "type" : "de.evoal.optimisation.core.iteration-count",
+        "attributes" : {
+          "maximum-iterations" : 10
+        }
+      } ],
+      "fitness-pipeline" : [ ],
+      "candidate-checks" : [ {
+        "type" : "de.evoal.optimisation.core.maximum-size",
+        "attributes" : {
+          "reaction" : "repair",
+          "replacement-source" : {
+            "type" : "de.evoal.optimisation.core.random-population",
+            "attributes" : {
+              "method" : null
+            }
+          },
+          "maximum-attempts" : 2,
+          "size" : 25,
+          "repair-fallback" : "warn"
+        }
+      }, {
+        "type" : "de.evoal.optimisation.core.maximum-depth",
+        "attributes" : {
+          "reaction" : "repair",
+          "replacement-source" : {
+            "type" : "de.evoal.optimisation.core.random-population",
+            "attributes" : {
+              "method" : null
+            }
+          },
+          "maximum-attempts" : 10,
+          "depth" : 6,
+          "repair-fallback" : "warn"
+        }
+      } ],
+      "constraint-measure" : {
+        "type" : "de.evoal.optimisation.core.exact-measure",
+        "attributes" : {
+          "equality-tolerance" : 1.0E-4
+        }
+      },
+      "evaluation-strategy" : {
+        "type" : "de.evoal.optimisation.core.single-evaluation",
+        "attributes" : { }
+      },
+      "size-of-population" : 12,
+      "number-of-offspring" : 12,
+      "genotype" : {
+        "type" : "de.evoal.optimisation.ea.optimisation.genotype",
+        "attributes" : {
+          "chromosomes" : [ {
+            "type" : "de.evoal.optimisation.ea.optimisation.model-chromosome",
+            "attributes" : {
+              "features" : [ "policy" ],
+              "recombination" : [ {
+                "type" : "de.evoal.optimisation.ea.optimisation.subtree-crossover",
+                "attributes" : {
+                  "probability" : 0.8,
+                  "internal-node-probability" : 0.9
+                }
+              } ],
+              "mutation" : [ {
+                "type" : "de.evoal.optimisation.ea.optimisation.subtree-mutation",
+                "attributes" : {
+                  "probability" : 0.3,
+                  "gene-probability" : null,
+                  "method" : {
+                    "type" : "de.evoal.optimisation.core.grow",
+                    "attributes" : {
+                      "maximum-size" : 30,
+                      "optional-probability" : 0.5,
+                      "maximum-depth" : 5
+                    }
+                  },
+                  "internal-node-probability" : null
+                }
+              }, {
+                "type" : "de.evoal.optimisation.ea.optimisation.array-size-mutation",
+                "attributes" : {
+                  "probability" : 0.3,
+                  "gene-probability" : null,
+                  "method" : {
+                    "type" : "de.evoal.optimisation.core.grow",
+                    "attributes" : {
+                      "maximum-size" : 30,
+                      "optional-probability" : 0.5,
+                      "maximum-depth" : 5
+                    }
+                  }
+                }
+              }, {
+                "type" : "de.evoal.optimisation.ea.optimisation.array-reorder-mutation",
+                "attributes" : {
+                  "probability" : 0.2,
+                  "gene-probability" : null
+                }
+              }, {
+                "type" : "de.evoal.optimisation.ea.optimisation.random-reset-mutation",
+                "attributes" : {
+                  "probability" : 0.5,
+                  "gene-probability" : null
+                }
+              }, {
+                "type" : "de.evoal.optimisation.ea.optimisation.creep-mutation",
+                "attributes" : {
+                  "probability" : 0.3,
+                  "gene-probability" : null,
+                  "step" : 1
+                }
+              }, {
+                "type" : "de.evoal.optimisation.ea.optimisation.bit-flip-mutation",
+                "attributes" : {
+                  "probability" : 0.3,
+                  "gene-probability" : null
+                }
+              } ]
+            }
+          } ]
+        }
+      },
+      "parent-selection" : {
+        "type" : "de.evoal.optimisation.ea.optimisation.tournament-selection",
+        "attributes" : {
+          "size" : 2
+        }
+      },
+      "replacement" : {
+        "type" : "de.evoal.optimisation.ea.optimisation.plus-replacement",
+        "attributes" : {
+          "selection" : {
+            "type" : "de.evoal.optimisation.ea.optimisation.elite-selection",
+            "attributes" : {
+              "count" : 12,
+              "rest" : {
+                "type" : "de.evoal.optimisation.ea.optimisation.random-selection",
+                "attributes" : { }
+              }
+            }
+          }
+        }
+      },
+      "boundary-handling" : "stick"
+    }
+  },
+  "documentation" : [ {
+    "type" : "de.evoal.optimisation.core.memory-model",
+    "attributes" : {
+      "steps" : false
+    }
+  }, {
+    "type" : "de.evoal.optimisation.core.model-xmi",
+    "attributes" : {
+      "feature" : "policy",
+      "candidates" : "best-so-far"
+    }
+  } ],
+  "citations" : [ "berger2024evoal", "koza1992genetic", "poli2008field", "montana1995strongly", "muehlenbein1992how", "baeck1993optimal", "goldberg1991comparative", "schwefel1977numerische" ],
+  "searchSpace" : [ {
+    "name" : "policy",
+    "type" : "model",
+    "modelType" : "http://evoal.de/test/policy#//Policy"
+  } ],
+  "optimisationSpace" : [ {
+    "name" : "size",
+    "type" : "integer",
+    "scale" : "quotient"
+  } ],
+  "fitness" : {
+    "components" : [ {
+      "name" : "size",
+      "goal" : "size"
+    } ],
+    "steps" : [ ]
+  },
+  "metricDefinitions" : [ {
+    "name" : "evaluations.real",
+    "kind" : "counter",
+    "valueType" : "integer",
+    "scope" : "iteration",
+    "description" : "Number of evaluations of the real optimisation function."
+  }, {
+    "name" : "evaluations.surrogate",
+    "kind" : "counter",
+    "valueType" : "integer",
+    "scope" : "iteration",
+    "description" : "Number of predictions of a surrogate model."
+  } ],
+  "propertyDefinitions" : [ {
+    "name" : "attempts",
+    "scope" : "relationship",
+    "valueType" : "integer",
+    "list" : false,
+    "description" : "The number of variations of a candidate that a candidate check resampled, or the number of attempts of the repair of a repaired candidate."
+  }, {
+    "name" : "attempts",
+    "scope" : "individual",
+    "valueType" : "integer",
+    "list" : false,
+    "description" : "Like the property of the relationship, for a candidate without predecessor."
+  }, {
+    "name" : "repair",
+    "scope" : "relationship",
+    "valueType" : "text",
+    "list" : false,
+    "description" : "The repair strategy that repaired the candidate after a failed candidate check."
+  }, {
+    "name" : "repair",
+    "scope" : "individual",
+    "valueType" : "text",
+    "list" : false,
+    "description" : "Like the property of the relationship, for a candidate without predecessor."
+  }, {
+    "name" : "operators",
+    "scope" : "relationship",
+    "valueType" : "text",
+    "list" : true,
+    "description" : "The recombinations and mutations that changed the child, in their order."
+  }, {
+    "name" : "changed-features",
+    "scope" : "relationship",
+    "valueType" : "text",
+    "list" : true,
+    "description" : "The features whose genes differ from the parent whose place the child takes."
+  } ],
+  "setup" : {
+    "evoalVersion" : "${evoal.version}",
+    "seed" : "42",
+    "run" : 0
+  }
+}

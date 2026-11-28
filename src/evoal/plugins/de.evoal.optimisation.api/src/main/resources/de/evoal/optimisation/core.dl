@@ -1100,6 +1100,45 @@ module de.evoal.optimisation.core {
     }
 
     /**
+     * The candidates whose models 'model-xmi' writes:
+     *   - all: every surviving candidate of every iteration;
+     *   - best-per-iteration: the best candidates of every iteration (several for several
+     *     objectives);
+     *   - best-so-far: the best candidate so far, written only when it changes, so the last file
+     *     is the result of the run.
+     */
+    nominal enum 'model-candidates' ( 'all', 'best-per-iteration', 'best-so-far' );
+
+    /**
+     * Writes the models of structured search data whose class comes from an Ecore metamodel
+     *   (@EcoreType) as XMI files, which other EMF tools read with the metamodel. A file holds
+     *   only the model of one candidate (its root and everything it contains), nothing else: the
+     *   fitness, the iteration and the id are in the memory model and the CSV writers, and the
+     *   file name links them:
+     *
+     *   <tt>models/&lt;data&gt;/&lt;iteration&gt;-&lt;individual id&gt;.xmi</tt>
+     *
+     *   in the output folder of the run (in the evaluation setup in the subfolder of the run, as
+     *   for 'memory-model'). The folder is deleted when the run starts. The files have no
+     *   schema location: a reader registers the packages of the metamodel by their namespace
+     *   URIs. Attributes whose value is their default are left out, as EMF does.
+     *
+     * Models of DL types have no metamodel file and are rejected when the configuration is
+     *   loaded; the memory model writes them.
+     */
+    type 'model-xmi' extends 'statistics-writer' {
+        /**
+         * The structured search data whose models are written.
+         */
+        feature : data;
+
+        /**
+         * The candidates whose models are written.
+         */
+        candidates : enum 'model-candidates';
+    }
+
+    /**
      * Does not write any statistics. Can be used to disable statistics output.
      */
     type none extends 'statistics-writer' {}

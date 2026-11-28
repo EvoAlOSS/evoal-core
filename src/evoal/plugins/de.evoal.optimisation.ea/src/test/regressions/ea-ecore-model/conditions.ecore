@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="conditions" nsURI="http://evoal.de/test/conditions" nsPrefix="conditions">
+  <eClassifiers xsi:type="ecore:EClass" name="OrExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subexpressions" lowerBound="1" upperBound="2"
+        eType="#//AndExpression" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AndExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="comparisons" lowerBound="1" upperBound="2"
+        eType="#//Comparison" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Comparison" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="IntegerComparison" eSuperTypes="#//Comparison">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" lowerBound="1" eType="#//IntegerOperator"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="leftOperand" lowerBound="1" eType="#//IntegerFunctionCall"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rightOperand" lowerBound="1" eType="#//IntegerFunctionCall"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="IntegerOperator">
+    <eLiterals name="less"/>
+    <eLiterals name="greater" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IntegerFunctionCall" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ScoreGain" eSuperTypes="#//IntegerFunctionCall">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="direction" lowerBound="1" eType="#//Direction">
+      <eAnnotations source="https://evoal.de/v202704/models/core/scale">
+        <details key="scale" value="ordinal"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BooleanComparison" eSuperTypes="#//Comparison">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="negated" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="leftOperand" eType="#//BooleanLiteral"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rightOperand" lowerBound="1" eType="#//BooleanFunctionCall"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BooleanLiteral">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject"
+        unsettable="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BooleanFunctionCall" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CanMoveInDirection" eSuperTypes="#//BooleanFunctionCall">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="direction" lowerBound="1" eType="#//Direction"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IsLargestInCorner" eSuperTypes="#//BooleanFunctionCall"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Direction" instanceClassName="int">
+    <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+      <details key="baseType" value="NonNegative"/>
+      <details key="maxExclusive" value="4"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="NonNegative" instanceClassName="int">
+    <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+      <details key="baseType" value="http://www.eclipse.org/emf/2003/XMLType#int"/>
+      <details key="minInclusive" value="0"/>
+    </eAnnotations>
+  </eClassifiers>
+</ecore:EPackage>

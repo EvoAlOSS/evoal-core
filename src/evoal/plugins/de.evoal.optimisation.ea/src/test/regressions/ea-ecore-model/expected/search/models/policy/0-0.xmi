@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<policy:Policy xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:conditions="http://evoal.de/test/conditions" xmlns:policy="http://evoal.de/test/policy">
+  <entries>
+    <condition>
+      <subexpressions>
+        <comparisons xsi:type="conditions:BooleanComparison">
+          <leftOperand value="true"/>
+          <rightOperand xsi:type="conditions:CanMoveInDirection" direction="2"/>
+        </comparisons>
+      </subexpressions>
+      <subexpressions>
+        <comparisons xsi:type="conditions:IntegerComparison">
+          <leftOperand xsi:type="conditions:ScoreGain" direction="3"/>
+          <rightOperand xsi:type="conditions:ScoreGain" direction="1"/>
+        </comparisons>
+      </subexpressions>
+    </condition>
+  </entries>
+  <entries action="1">
+    <condition>
+      <subexpressions>
+        <comparisons xsi:type="conditions:BooleanComparison">
+          <leftOperand/>
+          <rightOperand xsi:type="conditions:CanMoveInDirection" direction="1"/>
+        </comparisons>
+      </subexpressions>
+      <subexpressions>
+        <comparisons xsi:type="conditions:BooleanComparison">
+          <rightOperand xsi:type="conditions:CanMoveInDirection" direction="1"/>
+        </comparisons>
+      </subexpressions>
+    </condition>
+  </entries>
+</policy:Policy>

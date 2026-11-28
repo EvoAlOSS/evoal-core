@@ -1,0 +1,1826 @@
+{
+  "formatVersion" : "2027.4.0",
+  "number" : 9,
+  "individuals" : [ {
+    "id" : 338,
+    "input" : {
+      "policy" : {
+        "type" : "http://evoal.de/test/policy#//Policy",
+        "values" : {
+          "entries" : [ {
+            "type" : "http://evoal.de/test/policy#//Entry",
+            "values" : {
+              "action" : 3,
+              "condition" : {
+                "type" : "http://evoal.de/test/conditions#//OrExpression",
+                "values" : {
+                  "subexpressions" : [ {
+                    "type" : "http://evoal.de/test/conditions#//AndExpression",
+                    "values" : {
+                      "comparisons" : [ {
+                        "type" : "http://evoal.de/test/conditions#//IntegerComparison",
+                        "values" : {
+                          "operator" : "greater",
+                          "leftOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//ScoreGain",
+                            "values" : {
+                              "direction" : 0
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//ScoreGain",
+                            "values" : {
+                              "direction" : 3
+                            }
+                          }
+                        }
+                      }, {
+                        "type" : "http://evoal.de/test/conditions#//IntegerComparison",
+                        "values" : {
+                          "operator" : "less",
+                          "leftOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//ScoreGain",
+                            "values" : {
+                              "direction" : 0
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//ScoreGain",
+                            "values" : {
+                              "direction" : 3
+                            }
+                          }
+                        }
+                      } ]
+                    }
+                  } ]
+                }
+              }
+            }
+          }, {
+            "type" : "http://evoal.de/test/policy#//Entry",
+            "values" : {
+              "action" : 1,
+              "condition" : {
+                "type" : "http://evoal.de/test/conditions#//OrExpression",
+                "values" : {
+                  "subexpressions" : [ {
+                    "type" : "http://evoal.de/test/conditions#//AndExpression",
+                    "values" : {
+                      "comparisons" : [ {
+                        "type" : "http://evoal.de/test/conditions#//BooleanComparison",
+                        "values" : {
+                          "negated" : false,
+                          "leftOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//BooleanLiteral",
+                            "values" : {
+                              "value" : null
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//CanMoveInDirection",
+                            "values" : {
+                              "direction" : 0
+                            }
+                          }
+                        }
+                      } ]
+                    }
+                  }, {
+                    "type" : "http://evoal.de/test/conditions#//AndExpression",
+                    "values" : {
+                      "comparisons" : [ {
+                        "type" : "http://evoal.de/test/conditions#//BooleanComparison",
+                        "values" : {
+                          "negated" : false,
+                          "leftOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//BooleanLiteral",
+                            "values" : {
+                              "value" : null
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//IsLargestInCorner",
+                            "values" : { }
+                          }
+                        }
+                      } ]
+                    }
+                  } ]
+                }
+              }
+            }
+          }, {
+            "type" : "http://evoal.de/test/policy#//Entry",
+            "values" : {
+              "action" : 2,
+              "condition" : {
+                "type" : "http://evoal.de/test/conditions#//OrExpression",
+                "values" : {
+                  "subexpressions" : [ {
+                    "type" : "http://evoal.de/test/conditions#//AndExpression",
+                    "values" : {
+                      "comparisons" : [ {
+                        "type" : "http://evoal.de/test/conditions#//BooleanComparison",
+                        "values" : {
+                          "negated" : false,
+                          "leftOperand" : null,
+                          "rightOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//IsLargestInCorner",
+                            "values" : { }
+                          }
+                        }
+                      } ]
+                    }
+                  } ]
+                }
+              }
+            }
+          } ],
+          "action" : 0
+        }
+      }
+    },
+    "output" : {
+      "size" : 25
+    },
+    "fitness" : [ -25.0 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 294 ]
+    } ]
+  }, {
+    "id" : 333,
+    "input" : {
+      "policy" : {
+        "type" : "http://evoal.de/test/policy#//Policy",
+        "values" : {
+          "entries" : [ {
+            "type" : "http://evoal.de/test/policy#//Entry",
+            "values" : {
+              "action" : 2,
+              "condition" : {
+                "type" : "http://evoal.de/test/conditions#//OrExpression",
+                "values" : {
+                  "subexpressions" : [ {
+                    "type" : "http://evoal.de/test/conditions#//AndExpression",
+                    "values" : {
+                      "comparisons" : [ {
+                        "type" : "http://evoal.de/test/conditions#//BooleanComparison",
+                        "values" : {
+                          "negated" : true,
+                          "leftOperand" : null,
+                          "rightOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//CanMoveInDirection",
+                            "values" : {
+                              "direction" : 3
+                            }
+                          }
+                        }
+                      }, {
+                        "type" : "http://evoal.de/test/conditions#//BooleanComparison",
+                        "values" : {
+                          "negated" : false,
+                          "leftOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//BooleanLiteral",
+                            "values" : {
+                              "value" : true
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//CanMoveInDirection",
+                            "values" : {
+                              "direction" : 2
+                            }
+                          }
+                        }
+                      } ]
+                    }
+                  }, {
+                    "type" : "http://evoal.de/test/conditions#//AndExpression",
+                    "values" : {
+                      "comparisons" : [ {
+                        "type" : "http://evoal.de/test/conditions#//IntegerComparison",
+                        "values" : {
+                          "operator" : "greater",
+                          "leftOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//ScoreGain",
+                            "values" : {
+                              "direction" : 1
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//ScoreGain",
+                            "values" : {
+                              "direction" : 1
+                            }
+                          }
+                        }
+                      }, {
+                        "type" : "http://evoal.de/test/conditions#//IntegerComparison",
+                        "values" : {
+                          "operator" : "less",
+                          "leftOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//ScoreGain",
+                            "values" : {
+                              "direction" : 2
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//ScoreGain",
+                            "values" : {
+                              "direction" : 0
+                            }
+                          }
+                        }
+                      } ]
+                    }
+                  } ]
+                }
+              }
+            }
+          }, {
+            "type" : "http://evoal.de/test/policy#//Entry",
+            "values" : {
+              "action" : 2,
+              "condition" : {
+                "type" : "http://evoal.de/test/conditions#//OrExpression",
+                "values" : {
+                  "subexpressions" : [ {
+                    "type" : "http://evoal.de/test/conditions#//AndExpression",
+                    "values" : {
+                      "comparisons" : [ {
+                        "type" : "http://evoal.de/test/conditions#//IntegerComparison",
+                        "values" : {
+                          "operator" : "greater",
+                          "leftOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//ScoreGain",
+                            "values" : {
+                              "direction" : 0
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//ScoreGain",
+                            "values" : {
+                              "direction" : 0
+                            }
+                          }
+                        }
+                      }, {
+                        "type" : "http://evoal.de/test/conditions#//BooleanComparison",
+                        "values" : {
+                          "negated" : false,
+                          "leftOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//BooleanLiteral",
+                            "values" : {
+                              "value" : true
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//CanMoveInDirection",
+                            "values" : {
+                              "direction" : 1
+                            }
+                          }
+                        }
+                      } ]
+                    }
+                  } ]
+                }
+              }
+            }
+          } ],
+          "action" : 2
+        }
+      }
+    },
+    "output" : {
+      "size" : 25
+    },
+    "fitness" : [ -25.0 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 299 ]
+    } ]
+  }, {
+    "id" : 337,
+    "input" : {
+      "policy" : {
+        "type" : "http://evoal.de/test/policy#//Policy",
+        "values" : {
+          "entries" : [ {
+            "type" : "http://evoal.de/test/policy#//Entry",
+            "values" : {
+              "action" : 0,
+              "condition" : {
+                "type" : "http://evoal.de/test/conditions#//OrExpression",
+                "values" : {
+                  "subexpressions" : [ {
+                    "type" : "http://evoal.de/test/conditions#//AndExpression",
+                    "values" : {
+                      "comparisons" : [ {
+                        "type" : "http://evoal.de/test/conditions#//BooleanComparison",
+                        "values" : {
+                          "negated" : false,
+                          "leftOperand" : null,
+                          "rightOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//CanMoveInDirection",
+                            "values" : {
+                              "direction" : 0
+                            }
+                          }
+                        }
+                      } ]
+                    }
+                  }, {
+                    "type" : "http://evoal.de/test/conditions#//AndExpression",
+                    "values" : {
+                      "comparisons" : [ {
+                        "type" : "http://evoal.de/test/conditions#//IntegerComparison",
+                        "values" : {
+                          "operator" : "less",
+                          "leftOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//ScoreGain",
+                            "values" : {
+                              "direction" : 2
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//ScoreGain",
+                            "values" : {
+                              "direction" : 0
+                            }
+                          }
+                        }
+                      }, {
+                        "type" : "http://evoal.de/test/conditions#//BooleanComparison",
+                        "values" : {
+                          "negated" : true,
+                          "leftOperand" : null,
+                          "rightOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//CanMoveInDirection",
+                            "values" : {
+                              "direction" : 1
+                            }
+                          }
+                        }
+                      } ]
+                    }
+                  } ]
+                }
+              }
+            }
+          }, {
+            "type" : "http://evoal.de/test/policy#//Entry",
+            "values" : {
+              "action" : 0,
+              "condition" : {
+                "type" : "http://evoal.de/test/conditions#//OrExpression",
+                "values" : {
+                  "subexpressions" : [ {
+                    "type" : "http://evoal.de/test/conditions#//AndExpression",
+                    "values" : {
+                      "comparisons" : [ {
+                        "type" : "http://evoal.de/test/conditions#//BooleanComparison",
+                        "values" : {
+                          "negated" : true,
+                          "leftOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//BooleanLiteral",
+                            "values" : {
+                              "value" : null
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//IsLargestInCorner",
+                            "values" : { }
+                          }
+                        }
+                      } ]
+                    }
+                  }, {
+                    "type" : "http://evoal.de/test/conditions#//AndExpression",
+                    "values" : {
+                      "comparisons" : [ {
+                        "type" : "http://evoal.de/test/conditions#//IntegerComparison",
+                        "values" : {
+                          "operator" : "greater",
+                          "leftOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//ScoreGain",
+                            "values" : {
+                              "direction" : 2
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//ScoreGain",
+                            "values" : {
+                              "direction" : 0
+                            }
+                          }
+                        }
+                      }, {
+                        "type" : "http://evoal.de/test/conditions#//IntegerComparison",
+                        "values" : {
+                          "operator" : "greater",
+                          "leftOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//ScoreGain",
+                            "values" : {
+                              "direction" : 3
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//ScoreGain",
+                            "values" : {
+                              "direction" : 3
+                            }
+                          }
+                        }
+                      } ]
+                    }
+                  } ]
+                }
+              }
+            }
+          } ],
+          "action" : 0
+        }
+      }
+    },
+    "output" : {
+      "size" : 25
+    },
+    "fitness" : [ -25.0 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 327 ]
+    } ]
+  }, {
+    "id" : 334,
+    "input" : {
+      "policy" : {
+        "type" : "http://evoal.de/test/policy#//Policy",
+        "values" : {
+          "entries" : [ {
+            "type" : "http://evoal.de/test/policy#//Entry",
+            "values" : {
+              "action" : 0,
+              "condition" : {
+                "type" : "http://evoal.de/test/conditions#//OrExpression",
+                "values" : {
+                  "subexpressions" : [ {
+                    "type" : "http://evoal.de/test/conditions#//AndExpression",
+                    "values" : {
+                      "comparisons" : [ {
+                        "type" : "http://evoal.de/test/conditions#//IntegerComparison",
+                        "values" : {
+                          "operator" : "greater",
+                          "leftOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//ScoreGain",
+                            "values" : {
+                              "direction" : 2
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//ScoreGain",
+                            "values" : {
+                              "direction" : 0
+                            }
+                          }
+                        }
+                      }, {
+                        "type" : "http://evoal.de/test/conditions#//IntegerComparison",
+                        "values" : {
+                          "operator" : "greater",
+                          "leftOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//ScoreGain",
+                            "values" : {
+                              "direction" : 2
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//ScoreGain",
+                            "values" : {
+                              "direction" : 2
+                            }
+                          }
+                        }
+                      } ]
+                    }
+                  } ]
+                }
+              }
+            }
+          }, {
+            "type" : "http://evoal.de/test/policy#//Entry",
+            "values" : {
+              "action" : 0,
+              "condition" : {
+                "type" : "http://evoal.de/test/conditions#//OrExpression",
+                "values" : {
+                  "subexpressions" : [ {
+                    "type" : "http://evoal.de/test/conditions#//AndExpression",
+                    "values" : {
+                      "comparisons" : [ {
+                        "type" : "http://evoal.de/test/conditions#//BooleanComparison",
+                        "values" : {
+                          "negated" : false,
+                          "leftOperand" : null,
+                          "rightOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//CanMoveInDirection",
+                            "values" : {
+                              "direction" : 3
+                            }
+                          }
+                        }
+                      }, {
+                        "type" : "http://evoal.de/test/conditions#//BooleanComparison",
+                        "values" : {
+                          "negated" : false,
+                          "leftOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//BooleanLiteral",
+                            "values" : {
+                              "value" : true
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//CanMoveInDirection",
+                            "values" : {
+                              "direction" : 2
+                            }
+                          }
+                        }
+                      } ]
+                    }
+                  }, {
+                    "type" : "http://evoal.de/test/conditions#//AndExpression",
+                    "values" : {
+                      "comparisons" : [ {
+                        "type" : "http://evoal.de/test/conditions#//IntegerComparison",
+                        "values" : {
+                          "operator" : "greater",
+                          "leftOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//ScoreGain",
+                            "values" : {
+                              "direction" : 1
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//ScoreGain",
+                            "values" : {
+                              "direction" : 1
+                            }
+                          }
+                        }
+                      }, {
+                        "type" : "http://evoal.de/test/conditions#//IntegerComparison",
+                        "values" : {
+                          "operator" : "less",
+                          "leftOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//ScoreGain",
+                            "values" : {
+                              "direction" : 1
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//ScoreGain",
+                            "values" : {
+                              "direction" : 0
+                            }
+                          }
+                        }
+                      } ]
+                    }
+                  } ]
+                }
+              }
+            }
+          } ],
+          "action" : 2
+        }
+      }
+    },
+    "output" : {
+      "size" : 25
+    },
+    "fitness" : [ -25.0 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 328 ]
+    } ]
+  }, {
+    "id" : 370,
+    "input" : {
+      "policy" : {
+        "type" : "http://evoal.de/test/policy#//Policy",
+        "values" : {
+          "entries" : [ {
+            "type" : "http://evoal.de/test/policy#//Entry",
+            "values" : {
+              "action" : 3,
+              "condition" : {
+                "type" : "http://evoal.de/test/conditions#//OrExpression",
+                "values" : {
+                  "subexpressions" : [ {
+                    "type" : "http://evoal.de/test/conditions#//AndExpression",
+                    "values" : {
+                      "comparisons" : [ {
+                        "type" : "http://evoal.de/test/conditions#//IntegerComparison",
+                        "values" : {
+                          "operator" : "greater",
+                          "leftOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//ScoreGain",
+                            "values" : {
+                              "direction" : 0
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//ScoreGain",
+                            "values" : {
+                              "direction" : 3
+                            }
+                          }
+                        }
+                      }, {
+                        "type" : "http://evoal.de/test/conditions#//IntegerComparison",
+                        "values" : {
+                          "operator" : "less",
+                          "leftOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//ScoreGain",
+                            "values" : {
+                              "direction" : 0
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//ScoreGain",
+                            "values" : {
+                              "direction" : 3
+                            }
+                          }
+                        }
+                      } ]
+                    }
+                  } ]
+                }
+              }
+            }
+          }, {
+            "type" : "http://evoal.de/test/policy#//Entry",
+            "values" : {
+              "action" : 1,
+              "condition" : {
+                "type" : "http://evoal.de/test/conditions#//OrExpression",
+                "values" : {
+                  "subexpressions" : [ {
+                    "type" : "http://evoal.de/test/conditions#//AndExpression",
+                    "values" : {
+                      "comparisons" : [ {
+                        "type" : "http://evoal.de/test/conditions#//BooleanComparison",
+                        "values" : {
+                          "negated" : false,
+                          "leftOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//BooleanLiteral",
+                            "values" : {
+                              "value" : true
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//CanMoveInDirection",
+                            "values" : {
+                              "direction" : 2
+                            }
+                          }
+                        }
+                      } ]
+                    }
+                  }, {
+                    "type" : "http://evoal.de/test/conditions#//AndExpression",
+                    "values" : {
+                      "comparisons" : [ {
+                        "type" : "http://evoal.de/test/conditions#//BooleanComparison",
+                        "values" : {
+                          "negated" : false,
+                          "leftOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//BooleanLiteral",
+                            "values" : {
+                              "value" : null
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//IsLargestInCorner",
+                            "values" : { }
+                          }
+                        }
+                      } ]
+                    }
+                  } ]
+                }
+              }
+            }
+          }, {
+            "type" : "http://evoal.de/test/policy#//Entry",
+            "values" : {
+              "action" : 2,
+              "condition" : {
+                "type" : "http://evoal.de/test/conditions#//OrExpression",
+                "values" : {
+                  "subexpressions" : [ {
+                    "type" : "http://evoal.de/test/conditions#//AndExpression",
+                    "values" : {
+                      "comparisons" : [ {
+                        "type" : "http://evoal.de/test/conditions#//BooleanComparison",
+                        "values" : {
+                          "negated" : false,
+                          "leftOperand" : null,
+                          "rightOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//IsLargestInCorner",
+                            "values" : { }
+                          }
+                        }
+                      } ]
+                    }
+                  } ]
+                }
+              }
+            }
+          } ],
+          "action" : 0
+        }
+      }
+    },
+    "output" : {
+      "size" : 25
+    },
+    "fitness" : [ -25.0 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 291 ]
+    } ]
+  }, {
+    "id" : 332,
+    "input" : {
+      "policy" : {
+        "type" : "http://evoal.de/test/policy#//Policy",
+        "values" : {
+          "entries" : [ {
+            "type" : "http://evoal.de/test/policy#//Entry",
+            "values" : {
+              "action" : 0,
+              "condition" : {
+                "type" : "http://evoal.de/test/conditions#//OrExpression",
+                "values" : {
+                  "subexpressions" : [ {
+                    "type" : "http://evoal.de/test/conditions#//AndExpression",
+                    "values" : {
+                      "comparisons" : [ {
+                        "type" : "http://evoal.de/test/conditions#//IntegerComparison",
+                        "values" : {
+                          "operator" : "less",
+                          "leftOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//ScoreGain",
+                            "values" : {
+                              "direction" : 3
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//ScoreGain",
+                            "values" : {
+                              "direction" : 0
+                            }
+                          }
+                        }
+                      } ]
+                    }
+                  }, {
+                    "type" : "http://evoal.de/test/conditions#//AndExpression",
+                    "values" : {
+                      "comparisons" : [ {
+                        "type" : "http://evoal.de/test/conditions#//IntegerComparison",
+                        "values" : {
+                          "operator" : "greater",
+                          "leftOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//ScoreGain",
+                            "values" : {
+                              "direction" : 1
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//ScoreGain",
+                            "values" : {
+                              "direction" : 2
+                            }
+                          }
+                        }
+                      } ]
+                    }
+                  } ]
+                }
+              }
+            }
+          }, {
+            "type" : "http://evoal.de/test/policy#//Entry",
+            "values" : {
+              "action" : 0,
+              "condition" : {
+                "type" : "http://evoal.de/test/conditions#//OrExpression",
+                "values" : {
+                  "subexpressions" : [ {
+                    "type" : "http://evoal.de/test/conditions#//AndExpression",
+                    "values" : {
+                      "comparisons" : [ {
+                        "type" : "http://evoal.de/test/conditions#//BooleanComparison",
+                        "values" : {
+                          "negated" : false,
+                          "leftOperand" : null,
+                          "rightOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//CanMoveInDirection",
+                            "values" : {
+                              "direction" : 0
+                            }
+                          }
+                        }
+                      }, {
+                        "type" : "http://evoal.de/test/conditions#//BooleanComparison",
+                        "values" : {
+                          "negated" : true,
+                          "leftOperand" : null,
+                          "rightOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//IsLargestInCorner",
+                            "values" : { }
+                          }
+                        }
+                      } ]
+                    }
+                  }, {
+                    "type" : "http://evoal.de/test/conditions#//AndExpression",
+                    "values" : {
+                      "comparisons" : [ {
+                        "type" : "http://evoal.de/test/conditions#//IntegerComparison",
+                        "values" : {
+                          "operator" : "greater",
+                          "leftOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//ScoreGain",
+                            "values" : {
+                              "direction" : 3
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//ScoreGain",
+                            "values" : {
+                              "direction" : 3
+                            }
+                          }
+                        }
+                      }, {
+                        "type" : "http://evoal.de/test/conditions#//IntegerComparison",
+                        "values" : {
+                          "operator" : "greater",
+                          "leftOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//ScoreGain",
+                            "values" : {
+                              "direction" : 1
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//ScoreGain",
+                            "values" : {
+                              "direction" : 3
+                            }
+                          }
+                        }
+                      } ]
+                    }
+                  } ]
+                }
+              }
+            }
+          } ],
+          "action" : 3
+        }
+      }
+    },
+    "output" : {
+      "size" : 25
+    },
+    "fitness" : [ -25.0 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 293 ]
+    } ]
+  }, {
+    "id" : 371,
+    "input" : {
+      "policy" : {
+        "type" : "http://evoal.de/test/policy#//Policy",
+        "values" : {
+          "entries" : [ {
+            "type" : "http://evoal.de/test/policy#//Entry",
+            "values" : {
+              "action" : 0,
+              "condition" : {
+                "type" : "http://evoal.de/test/conditions#//OrExpression",
+                "values" : {
+                  "subexpressions" : [ {
+                    "type" : "http://evoal.de/test/conditions#//AndExpression",
+                    "values" : {
+                      "comparisons" : [ {
+                        "type" : "http://evoal.de/test/conditions#//BooleanComparison",
+                        "values" : {
+                          "negated" : false,
+                          "leftOperand" : null,
+                          "rightOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//IsLargestInCorner",
+                            "values" : { }
+                          }
+                        }
+                      } ]
+                    }
+                  }, {
+                    "type" : "http://evoal.de/test/conditions#//AndExpression",
+                    "values" : {
+                      "comparisons" : [ {
+                        "type" : "http://evoal.de/test/conditions#//IntegerComparison",
+                        "values" : {
+                          "operator" : "greater",
+                          "leftOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//ScoreGain",
+                            "values" : {
+                              "direction" : 2
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//ScoreGain",
+                            "values" : {
+                              "direction" : 0
+                            }
+                          }
+                        }
+                      }, {
+                        "type" : "http://evoal.de/test/conditions#//IntegerComparison",
+                        "values" : {
+                          "operator" : "greater",
+                          "leftOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//ScoreGain",
+                            "values" : {
+                              "direction" : 3
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//ScoreGain",
+                            "values" : {
+                              "direction" : 3
+                            }
+                          }
+                        }
+                      } ]
+                    }
+                  } ]
+                }
+              }
+            }
+          }, {
+            "type" : "http://evoal.de/test/policy#//Entry",
+            "values" : {
+              "action" : 0,
+              "condition" : {
+                "type" : "http://evoal.de/test/conditions#//OrExpression",
+                "values" : {
+                  "subexpressions" : [ {
+                    "type" : "http://evoal.de/test/conditions#//AndExpression",
+                    "values" : {
+                      "comparisons" : [ {
+                        "type" : "http://evoal.de/test/conditions#//BooleanComparison",
+                        "values" : {
+                          "negated" : false,
+                          "leftOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//BooleanLiteral",
+                            "values" : {
+                              "value" : true
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//CanMoveInDirection",
+                            "values" : {
+                              "direction" : 2
+                            }
+                          }
+                        }
+                      } ]
+                    }
+                  }, {
+                    "type" : "http://evoal.de/test/conditions#//AndExpression",
+                    "values" : {
+                      "comparisons" : [ {
+                        "type" : "http://evoal.de/test/conditions#//IntegerComparison",
+                        "values" : {
+                          "operator" : "less",
+                          "leftOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//ScoreGain",
+                            "values" : {
+                              "direction" : 1
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//ScoreGain",
+                            "values" : {
+                              "direction" : 0
+                            }
+                          }
+                        }
+                      }, {
+                        "type" : "http://evoal.de/test/conditions#//BooleanComparison",
+                        "values" : {
+                          "negated" : true,
+                          "leftOperand" : null,
+                          "rightOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//CanMoveInDirection",
+                            "values" : {
+                              "direction" : 1
+                            }
+                          }
+                        }
+                      } ]
+                    }
+                  } ]
+                }
+              }
+            }
+          } ],
+          "action" : 0
+        }
+      }
+    },
+    "output" : {
+      "size" : 25
+    },
+    "fitness" : [ -25.0 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 300 ]
+    } ]
+  }, {
+    "id" : 336,
+    "input" : {
+      "policy" : {
+        "type" : "http://evoal.de/test/policy#//Policy",
+        "values" : {
+          "entries" : [ {
+            "type" : "http://evoal.de/test/policy#//Entry",
+            "values" : {
+              "action" : 0,
+              "condition" : {
+                "type" : "http://evoal.de/test/conditions#//OrExpression",
+                "values" : {
+                  "subexpressions" : [ {
+                    "type" : "http://evoal.de/test/conditions#//AndExpression",
+                    "values" : {
+                      "comparisons" : [ {
+                        "type" : "http://evoal.de/test/conditions#//BooleanComparison",
+                        "values" : {
+                          "negated" : true,
+                          "leftOperand" : null,
+                          "rightOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//CanMoveInDirection",
+                            "values" : {
+                              "direction" : 0
+                            }
+                          }
+                        }
+                      } ]
+                    }
+                  }, {
+                    "type" : "http://evoal.de/test/conditions#//AndExpression",
+                    "values" : {
+                      "comparisons" : [ {
+                        "type" : "http://evoal.de/test/conditions#//IntegerComparison",
+                        "values" : {
+                          "operator" : "less",
+                          "leftOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//ScoreGain",
+                            "values" : {
+                              "direction" : 2
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//ScoreGain",
+                            "values" : {
+                              "direction" : 0
+                            }
+                          }
+                        }
+                      }, {
+                        "type" : "http://evoal.de/test/conditions#//BooleanComparison",
+                        "values" : {
+                          "negated" : false,
+                          "leftOperand" : null,
+                          "rightOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//CanMoveInDirection",
+                            "values" : {
+                              "direction" : 1
+                            }
+                          }
+                        }
+                      } ]
+                    }
+                  } ]
+                }
+              }
+            }
+          }, {
+            "type" : "http://evoal.de/test/policy#//Entry",
+            "values" : {
+              "action" : 0,
+              "condition" : {
+                "type" : "http://evoal.de/test/conditions#//OrExpression",
+                "values" : {
+                  "subexpressions" : [ {
+                    "type" : "http://evoal.de/test/conditions#//AndExpression",
+                    "values" : {
+                      "comparisons" : [ {
+                        "type" : "http://evoal.de/test/conditions#//BooleanComparison",
+                        "values" : {
+                          "negated" : false,
+                          "leftOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//BooleanLiteral",
+                            "values" : {
+                              "value" : null
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//IsLargestInCorner",
+                            "values" : { }
+                          }
+                        }
+                      } ]
+                    }
+                  }, {
+                    "type" : "http://evoal.de/test/conditions#//AndExpression",
+                    "values" : {
+                      "comparisons" : [ {
+                        "type" : "http://evoal.de/test/conditions#//IntegerComparison",
+                        "values" : {
+                          "operator" : "greater",
+                          "leftOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//ScoreGain",
+                            "values" : {
+                              "direction" : 2
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//ScoreGain",
+                            "values" : {
+                              "direction" : 0
+                            }
+                          }
+                        }
+                      }, {
+                        "type" : "http://evoal.de/test/conditions#//IntegerComparison",
+                        "values" : {
+                          "operator" : "greater",
+                          "leftOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//ScoreGain",
+                            "values" : {
+                              "direction" : 3
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//ScoreGain",
+                            "values" : {
+                              "direction" : 3
+                            }
+                          }
+                        }
+                      } ]
+                    }
+                  } ]
+                }
+              }
+            }
+          } ],
+          "action" : 0
+        }
+      }
+    },
+    "output" : {
+      "size" : 25
+    },
+    "fitness" : [ -25.0 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 329 ]
+    } ]
+  }, {
+    "id" : 372,
+    "input" : {
+      "policy" : {
+        "type" : "http://evoal.de/test/policy#//Policy",
+        "values" : {
+          "entries" : [ {
+            "type" : "http://evoal.de/test/policy#//Entry",
+            "values" : {
+              "action" : 0,
+              "condition" : {
+                "type" : "http://evoal.de/test/conditions#//OrExpression",
+                "values" : {
+                  "subexpressions" : [ {
+                    "type" : "http://evoal.de/test/conditions#//AndExpression",
+                    "values" : {
+                      "comparisons" : [ {
+                        "type" : "http://evoal.de/test/conditions#//BooleanComparison",
+                        "values" : {
+                          "negated" : false,
+                          "leftOperand" : null,
+                          "rightOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//CanMoveInDirection",
+                            "values" : {
+                              "direction" : 0
+                            }
+                          }
+                        }
+                      } ]
+                    }
+                  }, {
+                    "type" : "http://evoal.de/test/conditions#//AndExpression",
+                    "values" : {
+                      "comparisons" : [ {
+                        "type" : "http://evoal.de/test/conditions#//IntegerComparison",
+                        "values" : {
+                          "operator" : "less",
+                          "leftOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//ScoreGain",
+                            "values" : {
+                              "direction" : 2
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//ScoreGain",
+                            "values" : {
+                              "direction" : 1
+                            }
+                          }
+                        }
+                      }, {
+                        "type" : "http://evoal.de/test/conditions#//BooleanComparison",
+                        "values" : {
+                          "negated" : true,
+                          "leftOperand" : null,
+                          "rightOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//CanMoveInDirection",
+                            "values" : {
+                              "direction" : 1
+                            }
+                          }
+                        }
+                      } ]
+                    }
+                  } ]
+                }
+              }
+            }
+          }, {
+            "type" : "http://evoal.de/test/policy#//Entry",
+            "values" : {
+              "action" : 0,
+              "condition" : {
+                "type" : "http://evoal.de/test/conditions#//OrExpression",
+                "values" : {
+                  "subexpressions" : [ {
+                    "type" : "http://evoal.de/test/conditions#//AndExpression",
+                    "values" : {
+                      "comparisons" : [ {
+                        "type" : "http://evoal.de/test/conditions#//BooleanComparison",
+                        "values" : {
+                          "negated" : false,
+                          "leftOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//BooleanLiteral",
+                            "values" : {
+                              "value" : null
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//CanMoveInDirection",
+                            "values" : {
+                              "direction" : 2
+                            }
+                          }
+                        }
+                      }, {
+                        "type" : "http://evoal.de/test/conditions#//IntegerComparison",
+                        "values" : {
+                          "operator" : "less",
+                          "leftOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//ScoreGain",
+                            "values" : {
+                              "direction" : 2
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//ScoreGain",
+                            "values" : {
+                              "direction" : 1
+                            }
+                          }
+                        }
+                      } ]
+                    }
+                  }, {
+                    "type" : "http://evoal.de/test/conditions#//AndExpression",
+                    "values" : {
+                      "comparisons" : [ {
+                        "type" : "http://evoal.de/test/conditions#//IntegerComparison",
+                        "values" : {
+                          "operator" : "less",
+                          "leftOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//ScoreGain",
+                            "values" : {
+                              "direction" : 0
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//ScoreGain",
+                            "values" : {
+                              "direction" : 3
+                            }
+                          }
+                        }
+                      } ]
+                    }
+                  } ]
+                }
+              }
+            }
+          } ],
+          "action" : 0
+        }
+      }
+    },
+    "output" : {
+      "size" : 25
+    },
+    "fitness" : [ -25.0 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 295 ]
+    } ]
+  }, {
+    "id" : 373,
+    "input" : {
+      "policy" : {
+        "type" : "http://evoal.de/test/policy#//Policy",
+        "values" : {
+          "entries" : [ {
+            "type" : "http://evoal.de/test/policy#//Entry",
+            "values" : {
+              "action" : 0,
+              "condition" : {
+                "type" : "http://evoal.de/test/conditions#//OrExpression",
+                "values" : {
+                  "subexpressions" : [ {
+                    "type" : "http://evoal.de/test/conditions#//AndExpression",
+                    "values" : {
+                      "comparisons" : [ {
+                        "type" : "http://evoal.de/test/conditions#//BooleanComparison",
+                        "values" : {
+                          "negated" : false,
+                          "leftOperand" : null,
+                          "rightOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//CanMoveInDirection",
+                            "values" : {
+                              "direction" : 0
+                            }
+                          }
+                        }
+                      } ]
+                    }
+                  }, {
+                    "type" : "http://evoal.de/test/conditions#//AndExpression",
+                    "values" : {
+                      "comparisons" : [ {
+                        "type" : "http://evoal.de/test/conditions#//IntegerComparison",
+                        "values" : {
+                          "operator" : "less",
+                          "leftOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//ScoreGain",
+                            "values" : {
+                              "direction" : 2
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//ScoreGain",
+                            "values" : {
+                              "direction" : 0
+                            }
+                          }
+                        }
+                      }, {
+                        "type" : "http://evoal.de/test/conditions#//BooleanComparison",
+                        "values" : {
+                          "negated" : true,
+                          "leftOperand" : null,
+                          "rightOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//CanMoveInDirection",
+                            "values" : {
+                              "direction" : 1
+                            }
+                          }
+                        }
+                      } ]
+                    }
+                  } ]
+                }
+              }
+            }
+          }, {
+            "type" : "http://evoal.de/test/policy#//Entry",
+            "values" : {
+              "action" : 0,
+              "condition" : {
+                "type" : "http://evoal.de/test/conditions#//OrExpression",
+                "values" : {
+                  "subexpressions" : [ {
+                    "type" : "http://evoal.de/test/conditions#//AndExpression",
+                    "values" : {
+                      "comparisons" : [ {
+                        "type" : "http://evoal.de/test/conditions#//BooleanComparison",
+                        "values" : {
+                          "negated" : true,
+                          "leftOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//BooleanLiteral",
+                            "values" : {
+                              "value" : null
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//IsLargestInCorner",
+                            "values" : { }
+                          }
+                        }
+                      } ]
+                    }
+                  }, {
+                    "type" : "http://evoal.de/test/conditions#//AndExpression",
+                    "values" : {
+                      "comparisons" : [ {
+                        "type" : "http://evoal.de/test/conditions#//IntegerComparison",
+                        "values" : {
+                          "operator" : "greater",
+                          "leftOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//ScoreGain",
+                            "values" : {
+                              "direction" : 2
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//ScoreGain",
+                            "values" : {
+                              "direction" : 0
+                            }
+                          }
+                        }
+                      }, {
+                        "type" : "http://evoal.de/test/conditions#//IntegerComparison",
+                        "values" : {
+                          "operator" : "greater",
+                          "leftOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//ScoreGain",
+                            "values" : {
+                              "direction" : 3
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//ScoreGain",
+                            "values" : {
+                              "direction" : 3
+                            }
+                          }
+                        }
+                      } ]
+                    }
+                  } ]
+                }
+              }
+            }
+          } ],
+          "action" : 0
+        }
+      }
+    },
+    "output" : {
+      "size" : 25
+    },
+    "fitness" : [ -25.0 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 330 ]
+    } ]
+  }, {
+    "id" : 335,
+    "input" : {
+      "policy" : {
+        "type" : "http://evoal.de/test/policy#//Policy",
+        "values" : {
+          "entries" : [ {
+            "type" : "http://evoal.de/test/policy#//Entry",
+            "values" : {
+              "action" : 0,
+              "condition" : {
+                "type" : "http://evoal.de/test/conditions#//OrExpression",
+                "values" : {
+                  "subexpressions" : [ {
+                    "type" : "http://evoal.de/test/conditions#//AndExpression",
+                    "values" : {
+                      "comparisons" : [ {
+                        "type" : "http://evoal.de/test/conditions#//IntegerComparison",
+                        "values" : {
+                          "operator" : "greater",
+                          "leftOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//ScoreGain",
+                            "values" : {
+                              "direction" : 2
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//ScoreGain",
+                            "values" : {
+                              "direction" : 0
+                            }
+                          }
+                        }
+                      }, {
+                        "type" : "http://evoal.de/test/conditions#//IntegerComparison",
+                        "values" : {
+                          "operator" : "greater",
+                          "leftOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//ScoreGain",
+                            "values" : {
+                              "direction" : 2
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//ScoreGain",
+                            "values" : {
+                              "direction" : 2
+                            }
+                          }
+                        }
+                      } ]
+                    }
+                  } ]
+                }
+              }
+            }
+          }, {
+            "type" : "http://evoal.de/test/policy#//Entry",
+            "values" : {
+              "action" : 0,
+              "condition" : {
+                "type" : "http://evoal.de/test/conditions#//OrExpression",
+                "values" : {
+                  "subexpressions" : [ {
+                    "type" : "http://evoal.de/test/conditions#//AndExpression",
+                    "values" : {
+                      "comparisons" : [ {
+                        "type" : "http://evoal.de/test/conditions#//BooleanComparison",
+                        "values" : {
+                          "negated" : true,
+                          "leftOperand" : null,
+                          "rightOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//CanMoveInDirection",
+                            "values" : {
+                              "direction" : 3
+                            }
+                          }
+                        }
+                      }, {
+                        "type" : "http://evoal.de/test/conditions#//BooleanComparison",
+                        "values" : {
+                          "negated" : false,
+                          "leftOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//BooleanLiteral",
+                            "values" : {
+                              "value" : false
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//CanMoveInDirection",
+                            "values" : {
+                              "direction" : 2
+                            }
+                          }
+                        }
+                      } ]
+                    }
+                  }, {
+                    "type" : "http://evoal.de/test/conditions#//AndExpression",
+                    "values" : {
+                      "comparisons" : [ {
+                        "type" : "http://evoal.de/test/conditions#//IntegerComparison",
+                        "values" : {
+                          "operator" : "greater",
+                          "leftOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//ScoreGain",
+                            "values" : {
+                              "direction" : 1
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//ScoreGain",
+                            "values" : {
+                              "direction" : 1
+                            }
+                          }
+                        }
+                      }, {
+                        "type" : "http://evoal.de/test/conditions#//IntegerComparison",
+                        "values" : {
+                          "operator" : "less",
+                          "leftOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//ScoreGain",
+                            "values" : {
+                              "direction" : 1
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//ScoreGain",
+                            "values" : {
+                              "direction" : 0
+                            }
+                          }
+                        }
+                      } ]
+                    }
+                  } ]
+                }
+              }
+            }
+          } ],
+          "action" : 2
+        }
+      }
+    },
+    "output" : {
+      "size" : 25
+    },
+    "fitness" : [ -25.0 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 298 ]
+    } ]
+  }, {
+    "id" : 374,
+    "input" : {
+      "policy" : {
+        "type" : "http://evoal.de/test/policy#//Policy",
+        "values" : {
+          "entries" : [ {
+            "type" : "http://evoal.de/test/policy#//Entry",
+            "values" : {
+              "action" : 1,
+              "condition" : {
+                "type" : "http://evoal.de/test/conditions#//OrExpression",
+                "values" : {
+                  "subexpressions" : [ {
+                    "type" : "http://evoal.de/test/conditions#//AndExpression",
+                    "values" : {
+                      "comparisons" : [ {
+                        "type" : "http://evoal.de/test/conditions#//BooleanComparison",
+                        "values" : {
+                          "negated" : true,
+                          "leftOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//BooleanLiteral",
+                            "values" : {
+                              "value" : null
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//IsLargestInCorner",
+                            "values" : { }
+                          }
+                        }
+                      } ]
+                    }
+                  }, {
+                    "type" : "http://evoal.de/test/conditions#//AndExpression",
+                    "values" : {
+                      "comparisons" : [ {
+                        "type" : "http://evoal.de/test/conditions#//IntegerComparison",
+                        "values" : {
+                          "operator" : "greater",
+                          "leftOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//ScoreGain",
+                            "values" : {
+                              "direction" : 3
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//ScoreGain",
+                            "values" : {
+                              "direction" : 3
+                            }
+                          }
+                        }
+                      } ]
+                    }
+                  } ]
+                }
+              }
+            }
+          }, {
+            "type" : "http://evoal.de/test/policy#//Entry",
+            "values" : {
+              "action" : 3,
+              "condition" : {
+                "type" : "http://evoal.de/test/conditions#//OrExpression",
+                "values" : {
+                  "subexpressions" : [ {
+                    "type" : "http://evoal.de/test/conditions#//AndExpression",
+                    "values" : {
+                      "comparisons" : [ {
+                        "type" : "http://evoal.de/test/conditions#//IntegerComparison",
+                        "values" : {
+                          "operator" : "less",
+                          "leftOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//ScoreGain",
+                            "values" : {
+                              "direction" : 0
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//ScoreGain",
+                            "values" : {
+                              "direction" : 3
+                            }
+                          }
+                        }
+                      } ]
+                    }
+                  } ]
+                }
+              }
+            }
+          }, {
+            "type" : "http://evoal.de/test/policy#//Entry",
+            "values" : {
+              "action" : 2,
+              "condition" : {
+                "type" : "http://evoal.de/test/conditions#//OrExpression",
+                "values" : {
+                  "subexpressions" : [ {
+                    "type" : "http://evoal.de/test/conditions#//AndExpression",
+                    "values" : {
+                      "comparisons" : [ {
+                        "type" : "http://evoal.de/test/conditions#//IntegerComparison",
+                        "values" : {
+                          "operator" : "greater",
+                          "leftOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//ScoreGain",
+                            "values" : {
+                              "direction" : 0
+                            }
+                          },
+                          "rightOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//ScoreGain",
+                            "values" : {
+                              "direction" : 0
+                            }
+                          }
+                        }
+                      }, {
+                        "type" : "http://evoal.de/test/conditions#//BooleanComparison",
+                        "values" : {
+                          "negated" : false,
+                          "leftOperand" : null,
+                          "rightOperand" : {
+                            "type" : "http://evoal.de/test/conditions#//IsLargestInCorner",
+                            "values" : { }
+                          }
+                        }
+                      } ]
+                    }
+                  } ]
+                }
+              }
+            }
+          } ],
+          "action" : 1
+        }
+      }
+    },
+    "output" : {
+      "size" : 25
+    },
+    "fitness" : [ -25.0 ],
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 331 ]
+    } ]
+  } ],
+  "steps" : [ ],
+  "ranks" : [ {
+    "number" : 0,
+    "members" : [ 338, 333, 337, 334, 370, 332, 371, 336, 372, 373, 335, 374 ]
+  } ],
+  "bestSoFar" : 83,
+  "metrics" : {
+    "evaluations.real" : 118,
+    "evaluations.surrogate" : 0
+  }
+}

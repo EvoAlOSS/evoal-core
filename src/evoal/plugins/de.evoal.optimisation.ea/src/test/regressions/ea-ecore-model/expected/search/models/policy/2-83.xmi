@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<policy:Policy xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:conditions="http://evoal.de/test/conditions" xmlns:policy="http://evoal.de/test/policy">
+  <entries action="3">
+    <condition>
+      <subexpressions>
+        <comparisons xsi:type="conditions:IntegerComparison" operator="greater">
+          <leftOperand xsi:type="conditions:ScoreGain"/>
+          <rightOperand xsi:type="conditions:ScoreGain" direction="3"/>
+        </comparisons>
+        <comparisons xsi:type="conditions:IntegerComparison">
+          <leftOperand xsi:type="conditions:ScoreGain"/>
+          <rightOperand xsi:type="conditions:ScoreGain" direction="3"/>
+        </comparisons>
+      </subexpressions>
+    </condition>
+  </entries>
+  <entries action="1">
+    <condition>
+      <subexpressions>
+        <comparisons xsi:type="conditions:BooleanComparison">
+          <leftOperand/>
+          <rightOperand xsi:type="conditions:CanMoveInDirection"/>
+        </comparisons>
+      </subexpressions>
+      <subexpressions>
+        <comparisons xsi:type="conditions:BooleanComparison">
+          <leftOperand/>
+          <rightOperand xsi:type="conditions:IsLargestInCorner"/>
+        </comparisons>
+      </subexpressions>
+    </condition>
+  </entries>
+  <entries action="2">
+    <condition>
+      <subexpressions>
+        <comparisons xsi:type="conditions:BooleanComparison">
+          <rightOperand xsi:type="conditions:IsLargestInCorner"/>
+        </comparisons>
+      </subexpressions>
+    </condition>
+  </entries>
+</policy:Policy>

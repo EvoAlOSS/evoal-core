@@ -22,6 +22,7 @@ module de.evoal.optimisation.api {
 
     requires org.eclipse.emf.common;
     requires org.eclipse.emf.ecore;
+    requires org.eclipse.emf.ecore.xmi;
     requires org.eclipse.xtext;
 
     requires de.evoal.languages.model.base;
@@ -116,6 +117,7 @@ module de.evoal.optimisation.api {
     opens de.evoal.optimisation.main.statistics.individuals to weld.core.impl;
     opens de.evoal.optimisation.main.statistics.memory to weld.core.impl;
     opens de.evoal.optimisation.main.statistics.metrics to weld.core.impl;
+    opens de.evoal.optimisation.main.statistics.models to weld.core.impl;
     opens de.evoal.optimisation.main.statistics.io.csv to weld.core.impl;
     opens de.evoal.optimisation.main.statistics.nop to weld.core.impl;
     opens de.evoal.optimisation.main.stopping to weld.core.impl;

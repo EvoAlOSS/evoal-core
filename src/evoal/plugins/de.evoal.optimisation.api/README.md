@@ -425,6 +425,18 @@ module policy {
   undrawable and are reported.
 - The scale is the annotation `https://evoal.de/v202704/models/core/scale` (detail `scale`, e.g.
   `ordinal`) on the attribute, else nominal.
+- The statistics writer `'model-xmi' { feature := data 'policy'; candidates := … }` writes the
+  models as XMI of their metamodel, one file per candidate:
+  `models/<data>/<iteration>-<individual id>.xmi` in the output folder of the run (in the
+  evaluation setup in the run's subfolder). `candidates` is `'model-candidates.all'` (every
+  survivor of every iteration), `best-per-iteration` (the best rank) or `best-so-far` (written
+  only when it changes, so the last file is the result). A file holds only the model (a copy of
+  it, so the candidate keeps its model): no fitness, iteration or id, which the memory model and
+  the file name give. The files are UTF-8 with `\n` line ends and without `schemaLocation`, so
+  they are the same on every machine; a reader registers the metamodel's packages by `nsURI`.
+  Models of DL types have no metamodel file and are rejected when the configuration is loaded.
+  The regression `optimisation.ea ea-ecore-model` runs the EA on the 2048 policy types as
+  `policy.ecore` and `conditions.ecore`.
 
 The candidate checks `'maximum-size' { size }` and `'maximum-depth' { depth }` test every model of
 a new candidate (also the initial ones) and support all four reactions; `repair` applies
