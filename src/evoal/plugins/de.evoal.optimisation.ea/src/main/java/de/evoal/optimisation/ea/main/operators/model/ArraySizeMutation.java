@@ -16,6 +16,7 @@ import de.evoal.core.api.languages.AttributeEvaluator;
 import de.evoal.models.core.exceptions.InitializationException;
 
 import de.evoal.optimisation.api.builder.BuildSettings;
+import de.evoal.optimisation.api.builder.ModelFeatures;
 import de.evoal.optimisation.api.builder.ModelTrees;
 import de.evoal.optimisation.api.builder.ModelTypes;
 import de.evoal.optimisation.api.models.ModelCandidates;
@@ -72,7 +73,7 @@ public class ArraySizeMutation extends AbstractModelMutation {
         final boolean hasResizableContainment = context.types()
                                                        .classes()
                                                        .stream()
-                                                       .flatMap(eClass -> eClass.getEAllContainments().stream())
+                                                       .flatMap(eClass -> ModelFeatures.containmentsOf(eClass).stream())
                                                        .anyMatch(containment -> isResizable(containment, context.types()));
         if(hasResizableContainment && subtrees == null) {
             throw new InitializationException("The models have arrays of objects whose size can change, so the '" + name()

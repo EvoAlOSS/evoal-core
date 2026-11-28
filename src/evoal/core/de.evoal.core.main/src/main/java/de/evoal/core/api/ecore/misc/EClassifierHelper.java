@@ -1,48 +1,37 @@
 package de.evoal.core.api.ecore.misc;
 
 import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecore.EDataType;
+import org.eclipse.emf.ecore.EEnum;
 
+/**
+ * Tells the kind of value a data type holds. A data type is recognised by its instance class, so
+ *   the Ecore types ({@code EInt}, {@code EIntegerObject}, ...) and data types of a metamodel
+ *   that restrict them (e.g. a {@code Direction} with instance class {@code int} and the facets
+ *   {@code minInclusive 0} and {@code maxInclusive 3}) are treated alike. Enums and classes are
+ *   none of these kinds.
+ */
 public final class EClassifierHelper {
-    private final static EClassifier eBoolean = EcorePackage.eINSTANCE.getEBoolean();
-    private final static EClassifier eBooleanObject = EcorePackage.eINSTANCE.getEBooleanObject();
-    private final static EClassifier eByte = EcorePackage.eINSTANCE.getEByte();
-    private final static EClassifier eByteObject = EcorePackage.eINSTANCE.getEByteObject();
-    private final static EClassifier eChar = EcorePackage.eINSTANCE.getEChar();
-    private final static EClassifier eCharObject = EcorePackage.eINSTANCE.getECharacterObject();
-    private final static EClassifier eDouble = EcorePackage.eINSTANCE.getEDouble();
-    private final static EClassifier eDoubleObject = EcorePackage.eINSTANCE.getEDoubleObject();
-    private final static EClassifier eFloat = EcorePackage.eINSTANCE.getEFloat();
-    private final static EClassifier eFloatObject = EcorePackage.eINSTANCE.getEFloatObject();
-    private final static EClassifier eInt = EcorePackage.eINSTANCE.getEInt();
-    private final static EClassifier eIntObject = EcorePackage.eINSTANCE.getEIntegerObject();
-    private final static EClassifier eLong = EcorePackage.eINSTANCE.getELong();
-    private final static EClassifier eLongObject = EcorePackage.eINSTANCE.getELongObject();
-    private final static EClassifier eShort = EcorePackage.eINSTANCE.getEShort();
-    private final static EClassifier eShortObject = EcorePackage.eINSTANCE.getEShortObject();
-    private final static EClassifier eString = EcorePackage.eINSTANCE.getEString();
-
-
     private EClassifierHelper() {}
 
     public static boolean isBoolean(final EClassifier type) {
-        return type.equals(eBoolean) || type.equals(eBooleanObject);
+        return hasInstanceClass(type, boolean.class, Boolean.class);
     }
 
     public static boolean isByte(final EClassifier type) {
-        return type.equals(eByte) || type.equals(eByteObject);
+        return hasInstanceClass(type, byte.class, Byte.class);
     }
 
     public static boolean isDouble(final EClassifier type) {
-        return type.equals(eDouble) || type.equals(eDoubleObject);
+        return hasInstanceClass(type, double.class, Double.class);
     }
 
     public static boolean isFloat(final EClassifier type) {
-        return type.equals(eFloat) || type.equals(eFloatObject);
+        return hasInstanceClass(type, float.class, Float.class);
     }
 
     public static boolean isInteger(final EClassifier type) {
-        return type.equals(eInt) || type.equals(eIntObject);
+        return hasInstanceClass(type, int.class, Integer.class);
     }
 
     public static boolean isIntegerOrShorter(final EClassifier type) {
@@ -51,11 +40,11 @@ public final class EClassifierHelper {
     }
 
     public static boolean isLong(final EClassifier type) {
-        return type.equals(eLong) || type.equals(eLongObject) ;
+        return hasInstanceClass(type, long.class, Long.class);
     }
 
     public static boolean isLongOrShorter(final EClassifier type) {
-        return type.equals(eLong) || isIntegerOrShorter(type);
+        return isLong(type) || isIntegerOrShorter(type);
     }
 
     public static boolean isNumeric(final EClassifier type) {
@@ -67,7 +56,7 @@ public final class EClassifierHelper {
     }
 
     public static boolean isShort(final EClassifier type) {
-        return type.equals(eShort) || type.equals(eShortObject);
+        return hasInstanceClass(type, short.class, Short.class);
     }
 
     public static boolean isShortOrShorter(final EClassifier type) {
@@ -75,6 +64,20 @@ public final class EClassifierHelper {
     }
 
     public static boolean isString(final EClassifier type) {
-        return type.equals(eString);
+        return hasInstanceClass(type, String.class, String.class);
+    }
+
+    /**
+     * @return {@code true} if the type is a data type (no enum) whose instance class is the
+     *   primitive class or its wrapper.
+     */
+    private static boolean hasInstanceClass(final EClassifier type, final Class<?> primitive, final Class<?> wrapper) {
+        if(!(type instanceof EDataType) || type instanceof EEnum) {
+            return false;
+        }
+
+        final Class<?> instanceClass = type.getInstanceClass();
+
+        return instanceClass == primitive || instanceClass == wrapper;
     }
 }

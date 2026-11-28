@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="policy" nsURI="http://evoal.de/test/policy" nsPrefix="policy">
+  <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+    <details key="documentation" value="The policy types of the 2048 example as an Ecore metamodel; the conditions are in conditions.ecore."/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="Policy">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="entries" lowerBound="1" upperBound="4"
+        eType="#//Entry" containment="true" eOpposite="#//Entry/policy"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="action" lowerBound="1" eType="#//Action"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="numberOfEntries" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        changeable="false" volatile="true" transient="true" derived="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Entry">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="policy" eType="#//Policy" eOpposite="#//Policy/entries"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="action" lowerBound="1" eType="#//Action"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="condition" lowerBound="1" eType="ecore:EClass conditions.ecore#//OrExpression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="Action" instanceClassName="int">
+    <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+      <details key="baseType" value="http://www.eclipse.org/emf/2003/XMLType#int"/>
+      <details key="minInclusive" value="0"/>
+      <details key="maxInclusive" value="3"/>
+    </eAnnotations>
+  </eClassifiers>
+</ecore:EPackage>

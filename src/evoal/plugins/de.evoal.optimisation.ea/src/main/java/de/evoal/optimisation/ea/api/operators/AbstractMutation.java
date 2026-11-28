@@ -16,6 +16,7 @@ import de.evoal.core.api.languages.AttributeEvaluator;
 import de.evoal.models.core.exceptions.InitializationException;
 
 import de.evoal.optimisation.api.builder.AttributeSlots.Slot;
+import de.evoal.optimisation.api.builder.ModelFeatures;
 import de.evoal.optimisation.ea.api.genotype.Chromosome;
 import de.evoal.optimisation.ea.api.genotype.Genes;
 import de.evoal.optimisation.ea.api.genotype.ModelChromosome;
@@ -88,7 +89,7 @@ public abstract class AbstractMutation implements MutationOperator {
                                              .types()
                                              .classes()
                                              .stream()
-                                             .flatMap(eClass -> eClass.getEAllAttributes().stream())
+                                             .flatMap(eClass -> ModelFeatures.attributesOf(eClass).stream())
                                              .anyMatch(applies.get());
         if(!changesAnything) {
             throw new InitializationException("The '" + name() + "' of " + chromosome + " would never change anything: "

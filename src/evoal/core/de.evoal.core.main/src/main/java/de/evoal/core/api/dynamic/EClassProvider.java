@@ -51,6 +51,7 @@ import de.evoal.core.api.cdi.BeanFactory;
 import de.evoal.core.api.ecore.info.BoundaryExtractor;
 import de.evoal.core.api.ecore.info.FeatureBoundaries;
 import de.evoal.core.api.ecore.info.FeatureScales;
+import de.evoal.core.api.ecore.models.EcoreModels;
 import de.evoal.core.api.utils.Requirements;
 
 /**
@@ -68,7 +69,9 @@ import de.evoal.core.api.utils.Requirements;
  *   <li>The attribute has the name of the data description and an Ecore type
  *     that matches its representation (boolean, integer, real or string).
  *     Structured data ({@code data 'x' of instance T}) becomes a containment
- *     reference to the class of the DL type instead; its value is a model.</li>
+ *     reference to the class of the DL type instead; its value is a model. With an
+ *     {@code @EcoreType} annotation, the class comes from an Ecore metamodel instead
+ *     (see {@link EcoreModels}).</li>
  *   <li>The attribute is unsettable, so {@code eIsSet} tells whether a value was
  *     set, also for a value equal to the default (0, 0.0, false). An attribute
  *     that no reader set has no value, e.g. a missing value in an ARFF file.</li>
@@ -103,6 +106,13 @@ public class EClassProvider {
     private DynamicEClassProvider dynamicClasses;
 
     /**
+     * Loads the classes of structured data with an {@code @EcoreType} annotation; looked up
+     *   through CDI when it is needed and was not given.
+     */
+    @Inject
+    private EcoreModels ecoreModels;
+
+    /**
      * Keeping track of already mapped classes.
      */
     private final Map<Object, EClass> eClassCache = new HashMap<>();
@@ -118,6 +128,15 @@ public class EClassProvider {
      */
     public EClassProvider(final DynamicEClassProvider dynamicClasses) {
         this.dynamicClasses = dynamicClasses;
+    }
+
+    /**
+     * @param dynamicClasses Creates the classes of the DL types of structured data.
+     * @param ecoreModels Loads the classes of structured data with an {@code @EcoreType} annotation.
+     */
+    public EClassProvider(final DynamicEClassProvider dynamicClasses, final EcoreModels ecoreModels) {
+        this.dynamicClasses = dynamicClasses;
+        this.ecoreModels = ecoreModels;
     }
 
     /**
@@ -368,13 +387,16 @@ public class EClassProvider {
      * Creates the unnamed feature of a data description: an attribute for base data, with the
      *   boundaries of its {@code @LowerBoundary}/{@code @UpperBoundary} constraints and its scale;
      *   a containment reference to the class of the DL type for structured data
-     *   ({@code data 'x' of instance T}), whose value is a model.
+     *   ({@code data 'x' of instance T}), whose value is a model; with an {@code @EcoreType}
+     *   annotation, the class is the one it names in an Ecore metamodel.
      */
     private EStructuralFeature toFeature(final DataDescription description) {
         if(description instanceof StructuredDataDescription structured) {
             final EReference reference = factory.createEReference();
             reference.setContainment(true);
-            reference.setEType(dynamicClasses().toEClass(structured.getType()));
+            reference.setEType(EcoreModels.hasEcoreType(structured)
+                               ? ecoreModels().classOf(structured)
+                               : dynamicClasses().toEClass(structured.getType()));
 
             return reference;
         }
@@ -397,6 +419,17 @@ public class EClassProvider {
         }
 
         return dynamicClasses;
+    }
+
+    /**
+     * @return The loader of the classes of Ecore metamodels; looked up if it was not given.
+     */
+    private EcoreModels ecoreModels() {
+        if(ecoreModels == null) {
+            ecoreModels = BeanFactory.create(EcoreModels.class);
+        }
+
+        return ecoreModels;
     }
 
     private EClassifier toEType(final DataDescription descr) {

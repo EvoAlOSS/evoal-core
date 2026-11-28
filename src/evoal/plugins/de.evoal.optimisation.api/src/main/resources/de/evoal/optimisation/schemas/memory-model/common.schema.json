@@ -64,11 +64,11 @@
       ]
     },
     "modelObject": {
-      "description": "An object of a model candidate: its DL type and the values of its attributes. A contained object (an attribute of type 'instance T' or 'array instance T') is a model object itself, so a model is written as a tree.",
+      "description": "An object of a model candidate: its type and the values of its attributes. A contained object (an attribute of type 'instance T' or 'array instance T', a containment of an Ecore class) is a model object itself, so a model is written as a tree.",
       "type": "object",
       "properties": {
         "type": {
-          "description": "Fully qualified name of the DL type of the object, e.g. 'model.Entry'.",
+          "description": "Type of the object: the fully qualified name of its DL type, e.g. 'model.Entry', or <nsURI>#//<class> for a class of an Ecore metamodel, e.g. 'http://evoal.de/examples/policy#//Entry'.",
           "type": "string"
         },
         "values": {
@@ -129,7 +129,7 @@
           ]
         },
         "modelType": {
-          "description": "Fully qualified name of the DL type of the root of a model feature.",
+          "description": "Type of the root of a model feature: the fully qualified name of a DL type, or <nsURI>#//<class> for a class of an Ecore metamodel.",
           "type": "string"
         },
         "scale": {

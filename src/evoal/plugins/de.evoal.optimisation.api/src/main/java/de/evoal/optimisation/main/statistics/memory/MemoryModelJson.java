@@ -28,9 +28,9 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import de.evoal.core.api.dynamic.DynamicArrays;
-import de.evoal.core.api.dynamic.DynamicEClassProvider;
 import de.evoal.core.api.dynamic.EAnnotationHelper;
 import de.evoal.core.api.ecore.info.FeatureBoundaries;
+import de.evoal.core.api.ecore.models.EcoreModels;
 import de.evoal.core.api.ecore.misc.EClassifierHelper;
 import de.evoal.core.api.utils.TypedEObjects;
 import de.evoal.languages.model.base.definitions.BaseDataDescription;
@@ -57,6 +57,7 @@ import de.evoal.models.v202704.optimisation.memory.UnorderedIterationStep;
 import de.evoal.models.v202704.optimisation.model.Problem;
 import de.evoal.models.v202704.optimisation.model.TargetGoal;
 
+import de.evoal.optimisation.api.builder.ModelFeatures;
 import de.evoal.optimisation.api.execution.EvaluationPosition;
 import de.evoal.optimisation.api.fitness.Goal;
 import de.evoal.optimisation.api.fitness.Goals;
@@ -391,7 +392,8 @@ public class MemoryModelJson {
 
     /**
      * @return The feature with its name, type, scale (if declared) and bounds (if declared); a
-     *   model feature (structured data) also with the DL type of its root.
+     *   model feature (structured data) also with the type name of its root
+     *   ({@link EcoreModels#typeNameOf}).
      */
     private ObjectNode toFeature(final EStructuralFeature feature) {
         final ObjectNode featureNode = NODES.objectNode();
@@ -402,7 +404,7 @@ public class MemoryModelJson {
 
         if(feature instanceof EReference reference) {
             final EClass root = reference.getEReferenceType();
-            featureNode.put("modelType", DynamicEClassProvider.dlTypeOf(root));
+            featureNode.put("modelType", EcoreModels.typeNameOf(root));
         }
 
         scaleOf(feature).ifPresent(scale -> featureNode.put("scale", scale));
@@ -851,9 +853,11 @@ public class MemoryModelJson {
     }
 
     /**
-     * @return The object of a model as JSON: its DL type and the values of its features, keyed by
-     *   feature name; a contained object is written the same way (a tree). An array object of a
-     *   multi-dimensional array is written as the array of its elements.
+     * @return The object of a model as JSON: the name of its type ({@link EcoreModels#typeNameOf},
+     *   the DL type or {@code <nsURI>#//<class>} for a class of a metamodel) and the values of its
+     *   features ({@link ModelFeatures}), keyed by feature name; a contained object is written the
+     *   same way (a tree). An array object of a multi-dimensional array is written as the array of
+     *   its elements.
      */
     private static JsonNode toModel(final EObject object) {
         if(DynamicArrays.isArray(object)) {
@@ -863,12 +867,11 @@ public class MemoryModelJson {
         }
 
         final ObjectNode valuesNode = NODES.objectNode();
-        object.eClass()
-              .getEAllStructuralFeatures()
-              .forEach(feature -> valuesNode.set(feature.getName(), toValue(object.eGet(feature))));
+        ModelFeatures.of(object.eClass())
+                     .forEach(feature -> valuesNode.set(feature.getName(), toValue(object.eGet(feature))));
 
         final ObjectNode modelNode = NODES.objectNode();
-        modelNode.put("type", DynamicEClassProvider.dlTypeOf(object));
+        modelNode.put("type", EcoreModels.typeNameOf(object.eClass()));
         modelNode.set("values", valuesNode);
 
         return modelNode;

@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 
 import de.evoal.core.api.dynamic.DynamicEClassProvider;
 import de.evoal.core.api.ecore.info.FeatureBoundaries;
+import de.evoal.core.api.ecore.models.EcoreModels;
 import de.evoal.models.core.ecore.Space;
 
 import de.evoal.optimisation.api.builder.BuildSettings;
@@ -24,9 +25,11 @@ import de.evoal.optimisation.api.builder.TreeMethod;
 import de.evoal.optimisation.api.builder.ValueDrawer;
 
 /**
- * The DL front-end of the model candidates of the search space: the structured data of the
+ * The front-end of the model candidates of the search space: the structured data of the
  *   search space ({@code data 'x' of instance T}, a containment of the space class), the tables
- *   of their DL types and the builder settings of a configured {@code 'tree-method'}. The
+ *   of their classes and the builder settings of a configured {@code 'tree-method'}. A class is
+ *   the class of a DL type or, for data with {@code @EcoreType}, a class of an Ecore metamodel
+ *   ({@link EcoreModelTypes}); the tables ask the front-end of each class. The
  *   components that create or change models ({@code 'random-population'}, the operators of a
  *   {@code 'model-chromosome'}, {@code 'maximum-size'} and {@code 'maximum-depth'}) share it.
  */
@@ -37,6 +40,9 @@ public class ModelCandidates {
 
     @Inject
     private DynamicEClassProvider dynamicClasses;
+
+    @Inject
+    private EcoreModels ecoreModels;
 
     @Inject @Named("search-space")
     private Space searchSpace;
@@ -60,9 +66,23 @@ public class ModelCandidates {
      * @param dynamicClasses The classes of the DL types.
      */
     public ModelCandidates(final Space searchSpace, final FeatureBoundaries boundaries, final DynamicEClassProvider dynamicClasses) {
+        this(searchSpace, boundaries, dynamicClasses, new EcoreModels(List.of()));
+    }
+
+    /**
+     * Creates the front-end without CDI, e.g., for tests.
+     *
+     * @param searchSpace The search space.
+     * @param boundaries The boundaries of the attributes.
+     * @param dynamicClasses The classes of the DL types.
+     * @param ecoreModels The classes of the Ecore metamodels.
+     */
+    public ModelCandidates(final Space searchSpace, final FeatureBoundaries boundaries,
+                           final DynamicEClassProvider dynamicClasses, final EcoreModels ecoreModels) {
         this.searchSpace = searchSpace;
         this.boundaries = boundaries;
         this.dynamicClasses = dynamicClasses;
+        this.ecoreModels = ecoreModels;
     }
 
     /**
@@ -87,14 +107,14 @@ public class ModelCandidates {
     }
 
     /**
-     * @return The tables of the DL types of all models of the search space.
+     * @return The tables of the classes of all models of the search space.
      */
     public ModelTypes types() {
         if(types == null) {
             final List<EClass> roots = modelFeatures().stream()
                                                       .map(EReference::getEReferenceType)
                                                       .toList();
-            types = new ModelTypes(new DlModelTypes(dynamicClasses), values(), roots);
+            types = new ModelTypes(new ClassModelTypes(new DlModelTypes(dynamicClasses), new EcoreModelTypes(ecoreModels)), values(), roots);
         }
 
         return types;
@@ -188,6 +208,29 @@ public class ModelCandidates {
         }
 
         return configuration.eGet(feature);
+    }
+
+    /**
+     * Asks the front-end of each class: the DL front-end for a class of a DL type, the Ecore
+     *   front-end for every other class.
+     *
+     * @param dl The front-end of the DL types.
+     * @param ecore The front-end of the Ecore metamodels.
+     */
+    private record ClassModelTypes(ModelTypeSource dl, ModelTypeSource ecore) implements ModelTypeSource {
+        @Override
+        public List<EClass> concreteSubtypesOf(final EClass type) {
+            return sourceOf(type).concreteSubtypesOf(type);
+        }
+
+        @Override
+        public boolean isOptional(final EStructuralFeature feature) {
+            return sourceOf(feature.getEContainingClass()).isOptional(feature);
+        }
+
+        private ModelTypeSource sourceOf(final EClass eClass) {
+            return DynamicEClassProvider.toClassDefinition(eClass).isPresent() ? dl : ecore;
+        }
     }
 
     /**

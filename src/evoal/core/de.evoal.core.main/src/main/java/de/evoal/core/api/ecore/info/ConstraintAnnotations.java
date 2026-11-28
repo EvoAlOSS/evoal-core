@@ -51,10 +51,24 @@ public final class ConstraintAnnotations {
      */
     public static List<Instance> annotationsOf(final @NonNull List<? extends Expression> constraints,
                                                final @NonNull String typeName) {
+        return annotationsOf(constraints, BoundaryExtractor.CONSTRAINTS_MODULE, typeName);
+    }
+
+    /**
+     * @return The annotations of the given DL type of the given module among the constraints, in
+     *   their order.
+     *
+     * @param constraints The constraints of an element, e.g. of a data description.
+     * @param moduleName The module of the annotation type, e.g. {@code de.evoal.core.ecore}.
+     * @param typeName The name of the annotation type, e.g. {@code EcoreType}.
+     */
+    public static List<Instance> annotationsOf(final @NonNull List<? extends Expression> constraints,
+                                               final @NonNull String moduleName,
+                                               final @NonNull String typeName) {
         return constraints.stream()
                           .filter(Instance.class::isInstance)
                           .map(Instance.class::cast)
-                          .filter(instance -> isConstraintType(instance, typeName))
+                          .filter(instance -> isConstraintType(instance, moduleName, typeName))
                           .toList();
     }
 
@@ -134,14 +148,14 @@ public final class ConstraintAnnotations {
         return NumericConversions.toInteger(bound);
     }
 
-    private static boolean isConstraintType(final Instance instance, final String typeName) {
+    private static boolean isConstraintType(final Instance instance, final String moduleName, final String typeName) {
         final ClassDefinition definition = instance.getDefinition();
         if(definition == null || !typeName.equals(definition.getName())) {
             return false;
         }
 
         return definition.eContainer() instanceof Module module
-            && BoundaryExtractor.CONSTRAINTS_MODULE.equals(module.getName());
+            && moduleName.equals(module.getName());
     }
 
     private static ScaleType toScale(final Instance annotation) {

@@ -22,6 +22,7 @@ import de.evoal.core.api.utils.AttributeHelper;
 import de.evoal.models.core.ecore.Space;
 import de.evoal.models.core.exceptions.InitializationException;
 
+import de.evoal.optimisation.api.builder.ModelFeatures;
 import de.evoal.optimisation.api.builder.ModelTypes;
 import de.evoal.optimisation.api.models.ModelCandidates;
 import de.evoal.optimisation.ea.api.genotype.BinaryChromosome;
@@ -171,7 +172,7 @@ public class GenotypeFactory {
         if(problems.isEmpty()) {
             problems.addAll(types.problems());
             for(final EClass eClass : types.classes()) {
-                for(final EAttribute attribute : eClass.getEAllAttributes()) {
+                for(final EAttribute attribute : ModelFeatures.attributesOf(eClass)) {
                     final boolean isNumeric = EClassifierHelper.isInteger(attribute.getEType()) || EClassifierHelper.isDouble(attribute.getEType());
                     if(isNumeric && !FeatureBoundaries.isBounded(attribute)) {
                         problems.add("'" + eClass.getName() + "." + attribute.getName() + "' needs a lower and an upper boundary");

@@ -380,11 +380,51 @@ classes than the DL can use it:
   (minimal-subtree repair, EvoAl's own; the literature returns a parent or retries the operation,
   Poli, Langdon and McPhee 2008, sec. 11.3.2).
 
-`ModelCandidates` (package `api.models`) is the DL front-end that the components share: the model
+`ModelCandidates` (package `api.models`) is the front-end that the components share: the model
 features of the search space, their `ModelTypes`, the `ValueDrawer` and the `BuildSettings` of a
-configured `'tree-method'`. `'random-population'` reports all problems of a model when its stream
-is created. The memory model writes a model as `{"type": "<DL type>", "values": {...}}`, the
-feature as type `model` with its `modelType`.
+configured `'tree-method'`. It asks the DL front-end for the classes of DL types and
+`EcoreModelTypes` for the classes of Ecore metamodels (below). `'random-population'` reports all
+problems of a model when its stream is created. The memory model writes a model as
+`{"type": "<type>", "values": {...}}` (the DL type, or `<nsURI>#//<class>` for a class of a
+metamodel), the feature as type `model` with its `modelType`.
+
+`ModelFeatures` gives the features of a class that the builder, the operators, the checks and the
+memory model fill and change: every feature except the reference to the container (the opposite
+of a containment), derived, volatile and transient features and features that cannot be changed.
+DL classes have none of these, so their models see every feature.
+
+### Models of Ecore metamodels
+
+Structured data can take its class from `.ecore` files instead of a DL type (#370):
+
+```
+import "definitions" from 'de.evoal.core.ecore';
+
+module policy {
+    data:
+        @EcoreType { files := [ "policy.ecore", "conditions.ecore" ]; root := "policy.ecore#//Policy"; }
+        data 'policy' of instance 'ecore-model';
+}
+```
+
+- `EcoreModels` (core, `api.ecore.models`) loads all files of an application into one resource
+  set (dynamic EMF, packages registered by `nsURI` in the resource set only). A relative file is
+  looked up beside the DDL file, then in the working directory. Every reference between the files
+  must resolve, and the files must not refer to files that are not listed.
+- A plugin brings generated code for a metamodel as a CDI bean `EcorePackages`; a listed file
+  with the `nsURI` of a generated package is then only compared with it (classes, features,
+  types and multiplicities by name), and the models consist of the generated classes.
+- Multiplicities and enums are the ones of the metamodel. The concrete subtypes of a class come
+  from all loaded files, ordered by their type names. A single-valued containment with lower
+  bound 0 is optional; an attribute only with lower bound 0 and `unsettable` (Ecore's default
+  lower bound is 0, so the bound alone would make almost every attribute optional).
+- Number boundaries come from the `ExtendedMetaData` facets `minInclusive`, `maxInclusive`,
+  `minExclusive` and `maxExclusive` of the attribute's data type, along its base types for a side
+  without facet. Data types count by their instance class (`EClassifierHelper`), so a restricted
+  `int` type is drawn and mutated like `EInt`. Strings, `ELong`, `EFloat` and the like stay
+  undrawable and are reported.
+- The scale is the annotation `https://evoal.de/v202704/models/core/scale` (detail `scale`, e.g.
+  `ordinal`) on the attribute, else nominal.
 
 The candidate checks `'maximum-size' { size }` and `'maximum-depth' { depth }` test every model of
 a new candidate (also the initial ones) and support all four reactions; `repair` applies

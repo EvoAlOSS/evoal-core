@@ -126,7 +126,7 @@ public final class ModelTypes {
      */
     public boolean hasOptionalFeatures() {
         return classes.stream()
-                      .flatMap(eClass -> eClass.getEAllStructuralFeatures().stream())
+                      .flatMap(eClass -> ModelFeatures.of(eClass).stream())
                       .anyMatch(this::isOptional);
     }
 
@@ -253,7 +253,7 @@ public final class ModelTypes {
     }
 
     private void checkFeatures(final EClass eClass) {
-        for(final EStructuralFeature feature : eClass.getEAllStructuralFeatures()) {
+        for(final EStructuralFeature feature : ModelFeatures.of(eClass)) {
             problemOf(eClass, feature).ifPresent(problems::add);
         }
     }
@@ -286,7 +286,7 @@ public final class ModelTypes {
      * @return The types of the containments of the class whose targets are model classes.
      */
     private List<EClass> containedTypesOf(final EClass eClass) {
-        return eClass.getEAllStructuralFeatures()
+        return ModelFeatures.of(eClass)
                      .stream()
                      .filter(ModelTypes::isContainment)
                      .map(EReference.class::cast)
@@ -329,7 +329,7 @@ public final class ModelTypes {
      */
     private int requiredDepthOf(final EClass eClass) {
         int depth = 0;
-        for(final EStructuralFeature feature : eClass.getEAllStructuralFeatures()) {
+        for(final EStructuralFeature feature : ModelFeatures.of(eClass)) {
             final boolean isRequiredContainment = isContainment(feature) && minimumCount(feature) > 0;
             if(!isRequiredContainment) {
                 continue;
@@ -353,7 +353,7 @@ public final class ModelTypes {
      */
     private long requiredSizeOf(final EClass eClass) {
         long size = 1;
-        for(final EStructuralFeature feature : eClass.getEAllStructuralFeatures()) {
+        for(final EStructuralFeature feature : ModelFeatures.of(eClass)) {
             final boolean isRequiredContainment = isContainment(feature) && minimumCount(feature) > 0;
             if(!isRequiredContainment) {
                 continue;
@@ -390,7 +390,7 @@ public final class ModelTypes {
         }
 
         int depth = 0;
-        for(final EStructuralFeature feature : eClass.getEAllStructuralFeatures()) {
+        for(final EStructuralFeature feature : ModelFeatures.of(eClass)) {
             final boolean canHoldObjects = isContainment(feature) && maximumCount(feature) > 0;
             if(!canHoldObjects) {
                 continue;

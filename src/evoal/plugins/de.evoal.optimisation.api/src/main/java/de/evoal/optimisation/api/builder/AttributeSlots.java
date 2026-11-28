@@ -13,7 +13,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 /**
  * The attribute values of a model candidate in a fixed order, the "genes" of a model for the value
  *   mutations: the objects in pre-order ({@link ModelTrees#objects}), per object its attributes in
- *   the order of {@code getEAllStructuralFeatures}, one slot per element of a multi-valued
+ *   the order of {@link ModelFeatures}, one slot per element of a multi-valued
  *   attribute. An optional attribute without value is no slot; giving it a value changes the
  *   structure of the model.
  */
@@ -67,7 +67,7 @@ public final class AttributeSlots {
         final List<Slot> slots = new ArrayList<>();
 
         for(final EObject object : ModelTrees.objects(root)) {
-            for(final EStructuralFeature feature : object.eClass().getEAllStructuralFeatures()) {
+            for(final EStructuralFeature feature : ModelFeatures.of(object.eClass())) {
                 if(!(feature instanceof EAttribute attribute)) {
                     continue;
                 }

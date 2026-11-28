@@ -61,6 +61,7 @@ module de.evoal.core.main {
     exports de.evoal.core.api.ecore.info;
     exports de.evoal.core.api.ecore.io;
     exports de.evoal.core.api.ecore.misc;
+    exports de.evoal.core.api.ecore.models;
     exports de.evoal.core.api.ecore.stream;
     exports de.evoal.core.api.utils;
     exports de.evoal.core.api.random;
@@ -79,6 +80,7 @@ module de.evoal.core.main {
     opens de.evoal.core.api.ecore to weld.core.impl;
     opens de.evoal.core.api.ecore.info to weld.core.impl;
     opens de.evoal.core.api.ecore.io to weld.core.impl;
+    opens de.evoal.core.api.ecore.models to weld.core.impl;
     opens de.evoal.core.api.ecore.stream to weld.core.impl;
     opens de.evoal.core.api.languages to weld.core.impl;
     opens de.evoal.core.api.utils to weld.core.impl;

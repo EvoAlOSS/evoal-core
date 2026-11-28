@@ -1,0 +1,50 @@
+import "definitions" from 'de.evoal.core.constraints';
+
+/**
+ * Structured data whose class comes from an Ecore metamodel (.ecore file) instead of a DL type,
+ *   e.g. a search space that holds models of an existing metamodel:
+ *
+ * <pre>
+ * import "definitions" from 'de.evoal.core.ecore';
+ *
+ * module policy {
+ *     data:
+ *         @EcoreType { files := [ "policy.ecore", "conditions.ecore" ]; root := "policy.ecore#//Policy"; }
+ *         data 'policy' of instance 'ecore-model';
+ * }
+ * </pre>
+ */
+module 'de.evoal.core.ecore' {
+    /**
+     * The type of structured data whose class is named by @EcoreType. The data holds a model of
+     *   that class; 'ecore-model' itself has no instances.
+     */
+    abstract type 'ecore-model' {}
+
+    /**
+     * Names the class of structured data of type 'ecore-model'.
+     *
+     * All files of an application are loaded together: a class can extend classes of other files,
+     *   and the concrete subclasses of an abstract class come from all loaded files. A plugin can
+     *   bring generated code for a metamodel; a listed file with the namespace URI of a generated
+     *   package is then only checked against it, and the models consist of the generated classes.
+     *
+     * Number boundaries come from the facets 'minInclusive', 'maxInclusive', 'minExclusive' and
+     *   'maxExclusive' of the attribute's data type (ExtendedMetaData), the scale of an attribute
+     *   from the annotation 'https://evoal.de/v202704/models/core/scale' with the detail 'scale'
+     *   (a literal of 'measurement-scale'); an attribute without it is nominal.
+     */
+    type EcoreType extends Constraint {
+        /**
+         * Every .ecore file of the application. A relative path is resolved against the folder
+         *   of the DDL file first, then against the working directory.
+         */
+        files : array string;
+
+        /**
+         * The class of the data as '<file>#//<class>', e.g. "policy.ecore#//Policy"; the file is
+         *   one of 'files', written the same way. A class of a subpackage is '<file>#//<package>/<class>'.
+         */
+        root : string;
+    }
+}

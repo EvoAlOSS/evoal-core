@@ -6,6 +6,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
+import de.evoal.optimisation.api.builder.ModelFeatures;
 import de.evoal.optimisation.api.builder.ModelTrees;
 
 /**
@@ -17,12 +18,12 @@ import de.evoal.optimisation.api.builder.ModelTrees;
 record ModelArray(EObject object, EStructuralFeature feature) {
     /**
      * @return The arrays of the model, objects in pre-order, per object its multi-valued features
-     *   in the order of {@code getEAllStructuralFeatures}.
+     *   in the order of {@link ModelFeatures}.
      */
     static List<ModelArray> of(final EObject root) {
         final List<ModelArray> arrays = new ArrayList<>();
         for(final EObject object : ModelTrees.objects(root)) {
-            for(final EStructuralFeature feature : object.eClass().getEAllStructuralFeatures()) {
+            for(final EStructuralFeature feature : ModelFeatures.of(object.eClass())) {
                 if(feature.isMany()) {
                     arrays.add(new ModelArray(object, feature));
                 }

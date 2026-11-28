@@ -23,7 +23,8 @@ import de.evoal.optimisation.api.builder.TreeMethod.Shape;
  *   limit of the {@link BuildSettings}. The root has depth 0, a contained object one more than its
  *   container; the size is the number of objects.
  * <p>
- * The features of an object are filled in the order of {@code getEAllStructuralFeatures}:
+ * The features of an object ({@link ModelFeatures}) are filled in the order of
+ *   {@code getEAllStructuralFeatures}:
  * <ul>
  *   <li>an attribute gets a value of the {@link ValueDrawer}, a multi-valued one a number of
  *     values drawn uniformly within its multiplicity;</li>
@@ -217,7 +218,7 @@ public final class ModelBuilder {
         final EObject object = EcoreUtil.create(concrete);
         budget.use();
 
-        for(final EStructuralFeature feature : concrete.getEAllStructuralFeatures()) {
+        for(final EStructuralFeature feature : ModelFeatures.of(concrete)) {
             if(feature instanceof EAttribute attribute) {
                 buildAttribute(object, attribute);
             } else {
