@@ -21,5 +21,5 @@
 ## Contact Person
 (Link a person/ people, that can answer questions about this issue, e.g. yourself)
 
-/label ~"issue-type::dicussion" ~"workflow::code-quality"
+/label ~"issue-type::code-quality"
 /cc @berber

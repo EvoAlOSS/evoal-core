@@ -8,6 +8,6 @@
 
 ## What is your question or problem
 
-/label ~"issue-type::help-request" ~"workflow::discussion"
+/label ~"issue-type::help-request"
 /cc @berber @cplump
 
